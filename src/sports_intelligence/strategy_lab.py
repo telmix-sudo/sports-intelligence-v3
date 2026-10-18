@@ -286,6 +286,11 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
             record["pnl_eur"] = pnl
             record["brier"] = round(brier(p, index), 6)
             record["log_loss"] = round(log_loss(p, index), 6)
+            market = record.get("no_vig")
+            if market and len(market) == 3 and sum(market) > 0:
+                normalized_market = [value / sum(market) for value in market]
+                record["market_brier"] = round(brier(normalized_market, index), 6)
+                record["market_log_loss"] = round(log_loss(normalized_market, index), 6)
             counts["settled_this_run"] += 1
         save_jsonl(path, rows)
         wins = sum(r.get("status") == "SETTLED" and r.get("pnl_eur", 0) > 0 for r in rows)
@@ -302,6 +307,7 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
             wealth += completed["pnl_eur"]
             peak = max(peak, wealth)
             worst_drawdown = max(worst_drawdown, (peak - wealth) / peak)
+        comparable = [r for r in settled if r.get("market_brier") is not None]
         accounts[name] = {
             "bankroll_initial_eur": INITIAL_BANKROLL_EUR,
             "bankroll_eur": round(INITIAL_BANKROLL_EUR + pnl, 4),
@@ -315,6 +321,9 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
             "max_settled_drawdown_percent": round(worst_drawdown * 100, 4),
             "brier": round(sum(r["brier"] for r in settled) / len(settled), 6) if settled else None,
             "log_loss": round(sum(r["log_loss"] for r in settled) / len(settled), 6) if settled else None,
+            "benchmark_n": len(comparable),
+            "market_brier": round(sum(r["market_brier"] for r in comparable) / len(comparable), 6) if comparable else None,
+            "market_log_loss": round(sum(r["market_log_loss"] for r in comparable) / len(comparable), 6) if comparable else None,
             "status": "EXPERIMENTAL_PAPER_ONLY",
         }
     return accounts, counts
