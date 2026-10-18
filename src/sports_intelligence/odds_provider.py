@@ -20,10 +20,23 @@ from .metrics import no_vig
 
 UTC = dt.timezone.utc
 ODDS_KEY_MAP = {
-    "epl": "soccer_epl", "nfl": "americanfootball_nfl",
-    "nba": "basketball_nba", "nhl": "icehockey_nhl", "mlb": "baseball_mlb"
+    "epl": "soccer_epl",
+    "la_liga": "soccer_spain_la_liga",
+    "bundesliga": "soccer_germany_bundesliga",
+    "serie_a": "soccer_italy_serie_a",
+    "ligue_1": "soccer_france_ligue_one",
+    "nfl": "americanfootball_nfl",
+    "nba": "basketball_nba",
+    "nhl": "icehockey_nhl",
+    "mlb": "baseball_mlb",
 }
-# Five sports, twice daily: <=10 credits/day; ~300/month, below a 500-credit free plan.
+# 5 European leagues at 08 UTC; 4 North-American sports + refreshed EPL at 20 UTC.
+# <= 10 budgeted requests per day, ~= 300 per 30-day month.
+SPORTS_PER_POLL = {
+    8: ("epl", "la_liga", "bundesliga", "serie_a", "ligue_1"),
+    20: ("epl", "nfl", "nba", "nhl", "mlb"),
+}
+# 5 sports per poll at 08 and 20 UTC: <=10 credits/day, ~300/month.
 POLL_HOURS_UTC = (8, 20)
 MAX_CALLS_PER_DAY = 10
 MAX_SNAPSHOT_AGE_HOURS = 13
@@ -67,7 +80,7 @@ def parse_utc(text: str) -> dt.datetime:
 def quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict | None:
     if event["status"] != "pre" or parse_utc(event["start_utc"]) <= at:
         return None
-    is_three_way = event["sport"] == "epl"
+    is_three_way = event["sport"] in {"epl", "la_liga", "bundesliga", "serie_a", "ligue_1"}
     matched = []
     for row in rows:
         try:
@@ -134,7 +147,8 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
     diagnostics = {"configured": bool(secret), "calls_this_run": 0,
                    "cached_sports": [], "quotes_matched": 0, "errors": []}
     if secret and now.hour in POLL_HOURS_UTC:
-        for sport, sport_key in ODDS_KEY_MAP.items():
+        for sport in SPORTS_PER_POLL.get(now.hour, ()):
+            sport_key = ODDS_KEY_MAP[sport]
             if record["calls_today"] >= MAX_CALLS_PER_DAY:
                 break
             snap = record["snapshots"].get(sport)
