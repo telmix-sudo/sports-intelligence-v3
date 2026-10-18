@@ -38,12 +38,13 @@ jobs:
           PYTHONPATH: src
           PYTHONUNBUFFERED: "1"
           ENABLE_ATP_RESEARCH: "0"
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python -m sports_intelligence.cli --mode scan
       - name: Persist honest scan report and zero-stake observations
         run: |
           git config user.name "sports-intelligence-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports/latest.json data/forecasts_v3.jsonl 2>/dev/null || git add reports/latest.json
+          git add reports/latest.json data/ 2>/dev/null || git add reports/latest.json
           if ! git diff --cached --quiet; then
             git commit -m "data: record prospective research scan [skip ci]"
             git push origin HEAD:main
