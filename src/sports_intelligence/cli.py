@@ -80,6 +80,11 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
     settled = settle_observations(frozen, events, path)
     complete = [x for x in frozen if x.get("status") == "SETTLED"]
     v1_audit = audit_ledger(root / "data" / "ledger_v1.csv") if (root / "data" / "ledger_v1.csv").exists() else None
+    metrics = football.get("metrics") or {}
+    gate = ("NO_MODEL" if not metrics else
+            "UNVALIDATED_AGAINST_MARKET"
+            if metrics.get("improvement_brier", -1) < 0 or metrics.get("improvement_log_loss", -1) < 0
+            else "EXPERIMENTAL_NEEDS_PROSPECTIVE_CONFIRMATION")
     report = {
         "generated_at_utc": now.isoformat(),
         "v1_audit": v1_audit,
@@ -99,7 +104,7 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
         "event_sources": coverage,
         "odds_sources": odds_coverage,
         "candidates": sorted(candidates, key=lambda c: -c.get("best_model_edge_pp", -999))[:50],
-        "model_gate": "UNVALIDATED_AGAINST_MARKET" if football.get("metrics", {}).get("improvement_brier", 0) < 0 else "EXPERIMENTAL",
+        "model_gate": gate,
         "integrity": ["No automatic paper stake until model risk bounds and quote timestamps validated",
                       "Free ESPN odds may be unavailable or lack quote timestamps",
                       "Only events with start time strictly after snapshot are eligible",
