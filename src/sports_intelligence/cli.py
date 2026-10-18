@@ -112,6 +112,31 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
     reports.mkdir(exist_ok=True, parents=True)
     output = reports / "latest.json"
     output.write_text(json.dumps(report, indent=2, ensure_ascii=False, default=str) + "\n", encoding="utf8")
+    archive = reports / "runs" / (now.date().isoformat() + ".jsonl")
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    archived_row = {"time": now.isoformat(), "events": len(candidates),
+                    "sources_ok": coverage["sources_ok"], "sources_failed": coverage["sources_failed"],
+                    "odds_quotes": odds_coverage["quotes_matched"], "odds_status": odds_coverage["status"],
+                    "observations_new": added, "observations_settled": settled,
+                    "football_model": football.get("selected_model"),
+                    "football_brier": football.get("metrics", {}).get("brier"),
+                    "model_gate": report["model_gate"]}
+    with archive.open("a", encoding="utf8") as history:
+        history.write(json.dumps(archived_row, ensure_ascii=False) + "\n")
+    state_path = root / "data" / "state.json"
+    if state_path.exists():
+        state = json.loads(state_path.read_text(encoding="utf8"))
+        state["v3"] = {
+            "last_successful_snapshot_utc": now.isoformat(),
+            "fixtures_next_48h": len(candidates),
+            "market_quotes_available": odds_coverage["quotes_matched"],
+            "model_gate": report["model_gate"],
+            "observations_open": report["observations_open"],
+            "observations_settled": report["observations_settled"],
+            "papers_with_stake": 0,
+            "open_exposure_eur": 0
+        }
+        state_path.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n", encoding="utf8")
     return report
 
 
