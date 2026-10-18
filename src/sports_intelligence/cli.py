@@ -79,7 +79,7 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
         "prospective_event_count": len(candidates),
         "market_coverage": {"with_complete_odds": sum(bool(c.get("market")) for c in candidates),
                              "with_model": sum(bool(c.get("model_probabilities")) for c in candidates)},
-        "footbal_elo": football,
+        "football_elo": football,
         "tennis_elo": tennis,
         "event_sources": coverage,
         "candidates": sorted(candidates, key=lambda c: -c.get("best_model_edge_pp", -999))[:50],
@@ -116,7 +116,7 @@ def main() -> None:
                           "observations_added": report["observations_new_this_run"],
                           "source_success": report["event_sources"]["sources_ok"],
                           "source_failures": report["event_sources"]["sources_failed"],
-                          "football_status": report["footbal_elo"]["status"]}, ensure_ascii=False))
+                          "football_status": report["football_elo"]["status"]}, ensure_ascii=False))
 
 
 if __name__ == "__main__":
