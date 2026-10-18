@@ -6,6 +6,7 @@ on:
     paths:
       - "src/**"
       - "tests/**"
+      - "docs/*.html"
       - ".github/workflows/**"
   pull_request:
 
@@ -29,3 +30,18 @@ jobs:
         env:
           PYTHONPATH: src
         run: python -m sports_intelligence.cli --help
+      - name: Validate inline dashboard JavaScript
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          for page in (Path("docs/index.html"), Path("docs/strategies.html")):
+              html = page.read_text(encoding="utf8")
+              script = re.search(r"<script[^>]*>(.*?)</script>", html, flags=re.S|re.I)
+              if script is None:
+                  raise RuntimeError(f"Dashboard JS missing: {page}")
+              Path(f"/tmp/v3-{page.stem}.js").write_text(script.group(1), encoding="utf8")
+              print(f"Extracted dashboard script from {page}")
+          PY
+          node --check /tmp/v3-index.js
+          node --check /tmp/v3-strategies.js
