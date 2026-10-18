@@ -97,7 +97,7 @@ class PersistentWalletTests(unittest.TestCase):
             }
             _, added = open_accounts(root, models, [e], NOW)
             self.assertEqual(added, {}, "Flag alone is not a timestamp")
-            e["quote"]["best_book_updates"] = ["2026-10-18T11:30:00+00:00"] * 3
+            e["quote"]["best_book_updates"] = ["2026-10-18T07:30:00+00:00"] * 3
             _, added = open_accounts(root, models, [e], NOW)
             self.assertNotIn("DISAGREEMENT_VETO", added, "Veto requires fresh odds <4h")
             self.assertNotIn("MARKET_ANCHORED", added, "Market anchored requires fresh quotes <6h")
