@@ -11,6 +11,7 @@ from .feeds import fetch_text, football_csv_urls
 from .football import backtest_football, parse_matches as football_matches
 from .scanner import capture_scoreboards, classify, freeze_observations, parse_iso, settle_observations
 from .odds_provider import annotate_odds
+from .poisson import backtest_poisson
 from .tennis import backtest_tennis, parse_matches as tennis_matches
 
 UTC = dt.timezone.utc
@@ -30,8 +31,17 @@ def historical_football(now: dt.datetime) -> tuple[object | None, dict]:
     if len(matches) < 120:
         return None, {"status": "UNAVAILABLE", "matched_rows": len(matches), "sources": sources,
                       "reason": "Insufficient verifiable historical matches; no model probabilities."}
-    model, metrics = backtest_football(matches)
-    return model, {"status": "EXPERIMENTAL", "sources": sources, "metrics": metrics}
+    elo, elo_metrics = backtest_football(matches)
+    poisson, poisson_metrics = backtest_poisson(matches)
+    # This is model comparison, not independent OOS validation of a selected winner.
+    choose_poisson = poisson_metrics["log_loss"] < elo_metrics["log_loss"]
+    model = poisson if choose_poisson else elo
+    metrics = poisson_metrics if choose_poisson else elo_metrics
+    return model, {"status": "EXPERIMENTAL", "sources": sources,
+                   "selected_model": "POISSON-SHRINK-0.3" if choose_poisson else "ELO-FOOTBALL-0.3",
+                   "selection_caveat": "Selection compared on the historical evaluation set; NOT independently validated.",
+                   "metrics": metrics,
+                   "alternative_metrics": elo_metrics if choose_poisson else poisson_metrics}
 
 
 def historical_tennis(now: dt.datetime) -> dict:
