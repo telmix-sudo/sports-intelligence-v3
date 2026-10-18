@@ -6,10 +6,10 @@ Sistema de investigação desportiva **exclusivamente em paper trading**. Modelo
 
 - GitHub Actions: [scanner programado de hora a hora](https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/scanner.yml) e [testes automáticos](https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/ci.yml).
 - [Relatório mais recente](reports/latest.json) e [histórico de execução](reports/runs/).
-- [Painel principal publicado](https://telmix-sudo.github.io/sports-intelligence-v3/) e [comparador de cinco carteiras](https://telmix-sudo.github.io/sports-intelligence-v3/strategies.html).
+- [Painel principal publicado](https://telmix-sudo.github.io/sports-intelligence-v3/) e [comparador de oito carteiras](https://telmix-sudo.github.io/sports-intelligence-v3/strategies.html).
 - Calendário de 9 competições com fonte ESPN e controlo de estados/timezones.
 - O scanner regular usa agora resultados OpenFootball (domínio público/CC0) para EPL. O histórico anterior Football-Data foi descontinuado na recolha automatizada devido às restrições de utilização do fornecedor.
-- [Laboratório paralelo](reports/strategy_lab_latest.json), agendado duas vezes por dia: cinco modelos e cinco carteiras fictícias isoladas em cinco ligas europeias.
+- [Laboratório paralelo](reports/strategy_lab_latest.json), agendado duas vezes por dia: oito estratégias (cinco anteriores e três próprias) e oito carteiras fictícias isoladas em cinco ligas europeias.
 - Importação ATP Jeff Sackmann opcional, **desativada por defeito** devido à licença CC BY-NC-SA.
 - Registo prospetivo V3 em [data/forecasts_v3.jsonl](data/forecasts_v3.jsonl), criado quando existirem observações admissíveis.
 - Se faltarem odds, dados ou modelo fiável, o sistema **não inventa oportunidades**.
@@ -22,7 +22,7 @@ V1: 5 papers, 4 vitórias e 1 derrota; P/L contabilístico +0,1644 € a partir 
 
 V2.1: tarefa ChatGPT separada, com três observações NFL iniciais. **Ainda não sincroniza automaticamente** a sua evolução com o GitHub. Não misturar métricas V2.1 e V3.
 
-V3: scanner geral e cinco contas de estratégias em paper independente. No laboratório, pequenas stakes **puramente fictícias** só podem surgir se houver hora do jogo, odds válidas antes do início, edge suficiente e regras de risco. **Não há autorização para apostas com dinheiro real.**
+V3: scanner geral e oito contas de estratégias em paper independente. No laboratório, pequenas stakes **puramente fictícias** só podem surgir se houver hora do jogo, odds válidas antes do início, edge suficiente e regras de risco. **Não há autorização para apostas com dinheiro real.**
 
 ## Odds e conta de API (já configurada no GitHub)
 
@@ -83,3 +83,9 @@ tests/               testes cronológicos, de risco, odds e integridade
 ```
 
 Para informação detalhada consulte [investigação e estratégias paralelas](docs/strategy_research.md), [configuração V3](config/system_v3.md) e [auditoria das limitações](docs/data_quality.md).
+
+## Evolução do laboratório sem reiniciar bancas
+
+Em 18/10/2026 foram adicionadas três estratégias próprias: **CONSENSUS_SHRUNK**, **DISAGREEMENT_VETO** e **MARKET_ANCHORED**. Cada estratégia entra com exatamente **1.000 € fictícios**, apenas no dia da criação. As cinco carteiras iniciais **mantêm o seu saldo e o ledger**, incluindo lucros e perdas anteriores.
+
+O mecanismo de integridade em `strategy_registry.py` compara, antes de cada execução, o saldo anteriormente publicado com as transações da respetiva estratégia; qualquer discrepância interrompe a atualização para não apagar dinheiro fictício. Consultar a [metodologia e parâmetros das três estratégias próprias](docs/original_strategies.md) e o [painel de acompanhamento das oito carteiras](https://telmix-sudo.github.io/sports-intelligence-v3/strategies.html).
