@@ -1,6 +1,57 @@
 {
-  "asof_utc": "2026-10-18T12:34:17.387525+00:00",
-  "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V1",
+  "asof_utc": "2026-10-18T13:16:29.281097+00:00",
+  "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V2",
+  "registered_strategies": {
+    "ELO_STANDARD": {
+      "created_utc": "2026-10-18T12:34:17.387525+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "legacy_existing_account",
+      "strategy_version": "legacy-1.0.0"
+    },
+    "ELO_DYNAMIC": {
+      "created_utc": "2026-10-18T12:34:17.387525+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "legacy_existing_account",
+      "strategy_version": "legacy-1.0.0"
+    },
+    "POISSON_SHRINK": {
+      "created_utc": "2026-10-18T12:34:17.387525+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "legacy_existing_account",
+      "strategy_version": "legacy-1.0.0"
+    },
+    "DIXON_COLES_LOW": {
+      "created_utc": "2026-10-18T12:34:17.387525+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "legacy_existing_account",
+      "strategy_version": "legacy-1.0.0"
+    },
+    "ELO_POISSON_BLEND": {
+      "created_utc": "2026-10-18T12:34:17.387525+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "legacy_existing_account",
+      "strategy_version": "legacy-1.0.0"
+    },
+    "CONSENSUS_SHRUNK": {
+      "created_utc": "2026-10-18T13:16:29.281097+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "original_v3_strategy",
+      "strategy_version": "1.0.0"
+    },
+    "DISAGREEMENT_VETO": {
+      "created_utc": "2026-10-18T13:16:29.281097+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "original_v3_strategy",
+      "strategy_version": "1.0.0"
+    },
+    "MARKET_ANCHORED": {
+      "created_utc": "2026-10-18T13:16:29.281097+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "original_v3_strategy",
+      "strategy_version": "1.0.0"
+    }
+  },
+  "policy": "Existing balances and settled records persist; only brand-new strategies start with EUR 1000.",
   "sports_tested": [
     "bundesliga",
     "epl",
@@ -13,7 +64,10 @@
     "ELO_DYNAMIC",
     "POISSON_SHRINK",
     "DIXON_COLES_LOW",
-    "ELO_POISSON_BLEND"
+    "ELO_POISSON_BLEND",
+    "CONSENSUS_SHRUNK",
+    "DISAGREEMENT_VETO",
+    "MARKET_ANCHORED"
   ],
   "initial_bank_per_strategy_eur": 1000.0,
   "historical": {
@@ -24,6 +78,7 @@
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
       "by_league": {
         "epl": {
@@ -60,6 +115,7 @@
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
       "by_league": {
         "epl": {
@@ -96,6 +152,7 @@
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
       "by_league": {
         "epl": {
@@ -132,6 +189,7 @@
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
       "by_league": {
         "epl": {
@@ -168,6 +226,7 @@
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
       "by_league": {
         "epl": {
@@ -196,6 +255,117 @@
           "log_loss": 0.990511
         }
       }
+    },
+    "CONSENSUS_SHRUNK": {
+      "n": 3733,
+      "brier": 0.594615,
+      "log_loss": 0.996698,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 810,
+          "brier": 0.607983,
+          "log_loss": 1.01439
+        },
+        "la_liga": {
+          "n": 819,
+          "brier": 0.58659,
+          "log_loss": 0.987692
+        },
+        "bundesliga": {
+          "n": 648,
+          "brier": 0.593594,
+          "log_loss": 0.995911
+        },
+        "serie_a": {
+          "n": 800,
+          "brier": 0.59162,
+          "log_loss": 0.991005
+        },
+        "ligue_1": {
+          "n": 656,
+          "brier": 0.592788,
+          "log_loss": 0.993817
+        }
+      }
+    },
+    "DISAGREEMENT_VETO": {
+      "n": 2665,
+      "brier": 0.583524,
+      "log_loss": 0.980131,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "historical_scope": "CONDITIONAL_SUBSET_NOT_COMPARABLE_DIRECTLY",
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 533,
+          "brier": 0.600008,
+          "log_loss": 1.001556
+        },
+        "la_liga": {
+          "n": 607,
+          "brier": 0.576814,
+          "log_loss": 0.975411
+        },
+        "bundesliga": {
+          "n": 420,
+          "brier": 0.591155,
+          "log_loss": 0.989897
+        },
+        "serie_a": {
+          "n": 625,
+          "brier": 0.573965,
+          "log_loss": 0.963968
+        },
+        "ligue_1": {
+          "n": 480,
+          "brier": 0.579473,
+          "log_loss": 0.97481
+        }
+      }
+    },
+    "MARKET_ANCHORED": {
+      "n": 0,
+      "brier": null,
+      "log_loss": null,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "historical_scope": "UNAVAILABLE_NEEDS_POINT_IN_TIME_MARKET",
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "la_liga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "bundesliga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "serie_a": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "ligue_1": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        }
+      }
     }
   },
   "accounts": {
@@ -210,8 +380,13 @@
       "settled": 0,
       "open": 0,
       "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
       "brier": null,
       "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "ELO_DYNAMIC": {
@@ -225,8 +400,13 @@
       "settled": 0,
       "open": 0,
       "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
       "brier": null,
       "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "POISSON_SHRINK": {
@@ -240,8 +420,13 @@
       "settled": 0,
       "open": 0,
       "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
       "brier": null,
       "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "DIXON_COLES_LOW": {
@@ -255,8 +440,13 @@
       "settled": 0,
       "open": 0,
       "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
       "brier": null,
       "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "ELO_POISSON_BLEND": {
@@ -270,8 +460,73 @@
       "settled": 0,
       "open": 0,
       "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
       "brier": null,
       "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "CONSENSUS_SHRUNK": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
+      "brier": null,
+      "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "DISAGREEMENT_VETO": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
+      "brier": null,
+      "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "MARKET_ANCHORED": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
+      "brier": null,
+      "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     }
   },
