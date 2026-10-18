@@ -145,7 +145,10 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
             diagnostics["calls_this_run"] += 1
             try:
                 rows = requester(sport_key, secret)
-                record["snapshots"][sport] = {"fetched_at": now.isoformat(), "events": rows}
+                limited = {event["id"]: q for event in events if event["sport"] == sport
+                           if (q := quotes_for_event(event, rows, now)) is not None}
+                # Never redistribute a provider's bulk feed in our public repository.
+                record["snapshots"][sport] = {"fetched_at": now.isoformat(), "quotes": limited}
             except Exception as exc:
                 diagnostics["errors"].append({"sport": sport, "reason": type(exc).__name__ + ": " + str(exc)[:100]})
         cache_path.parent.mkdir(parents=True, exist_ok=True)
@@ -159,7 +162,10 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
                 continue
             if now < parse_utc(snap["fetched_at"]):
                 continue
-            quote = quotes_for_event(event, snap["events"], now)
+            quote = snap["quotes"].get(event["id"])
+            if quote and any((now - parse_utc(timestamp)).total_seconds() > MAX_BOOK_QUOTE_AGE_HOURS * 3600
+                             for timestamp in quote["best_book_updates"]):
+                quote = None
             if quote:
                 event["quote"] = quote
                 diagnostics["quotes_matched"] += 1
