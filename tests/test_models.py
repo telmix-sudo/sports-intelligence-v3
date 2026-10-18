@@ -32,8 +32,8 @@ class FootballTests(unittest.TestCase):
     def test_date_grouped_prequential(self):
         matches = parse_matches(FOOTBALL_CSV)
         model, report = backtest_football(matches, warmup=2)
-        self.assertEqual(report["n"], 1)
-        self.assertEqual(report["benchmark_n"], 1)
+        self.assertEqual(report["n"], 2)
+        self.assertEqual(report["benchmark_n"], 2)
         self.assertEqual(report["training_matches"], 4)
         self.assertAlmostEqual(sum(model.predict("Arsenal", "Liverpool")), 1)
         self.assertEqual(model.played["arsenal"], 3)
