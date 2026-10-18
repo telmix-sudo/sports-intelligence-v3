@@ -1,0 +1,51 @@
+name: Verify Pages and Odds API
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/check-integrations.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check live published dashboard
+        run: |
+          python - <<'PY'
+          import urllib.request
+          url = "https://telmix-sudo.github.io/sports-intelligence-v3/"
+          with urllib.request.urlopen(url, timeout=12) as response:
+              page = response.read(100000).decode("utf-8", "replace")
+              code = response.status
+          if code != 200 or "Sports Intelligence" not in page:
+              raise SystemExit("Pages unexpectedly unavailable or wrong content")
+          print("PAGES_OK: HTTP 200 and expected dashboard markup")
+          PY
+      - name: Check configured odds source (single low-cost call)
+        env:
+          PYTHONPATH: src
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: |
+          python - <<'PY'
+          import os
+          from sports_intelligence.odds_provider import _request_odds
+          key = os.environ.get("ODDS_API_KEY", "").strip()
+          if not key:
+              raise SystemExit("ODDS_API_KEY_MISSING: add repository Actions secret")
+          try:
+              events = _request_odds("soccer_epl", key)
+          except Exception as exc:
+              # Never expose a credential-bearing URL or response body.
+              raise SystemExit("ODDS_PROVIDER_FAILED: " + type(exc).__name__ + ": " + str(exc)[:80]) from None
+          print("ODDS_API_OK: EPL feed authenticated, " + str(len(events)) + " event objects returned")
+          PY
