@@ -367,7 +367,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 "strategy": name, "event_id": e["id"], "sport": e["sport"],
                 "home": e["home"], "away": e["away"], "start_utc": e["start_utc"],
                 "forecast_utc": now.isoformat(), "market": "1X2",
-                "probabilities": [round(x, 7) for x in p],
+                "probabilities": list(p),
                 "no_vig": quote["no_vig"], "odds": quote["decimal"],
                 "selection_index": choice, "edge_pp": round(diffs[choice]*100, 4),
                 "price_source": quote.get("provider"),
