@@ -22,6 +22,12 @@
     nav{display:flex;gap:16px;flex-wrap:wrap}.footnote{max-width:800px;font-size:.85rem;color:var(--soft)}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     button{font:inherit;background:transparent;color:var(--accent);border:1px solid var(--line);padding:8px 12px;border-radius:10px;cursor:pointer}
+    input,select{font:inherit;background:#0e1a2b;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:40px}
+    .tools{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0;align-items:center}
+    .tools input{min-width:190px;flex:1}
+    .footnote.warn{color:var(--warn)}.status-line{margin:12px 0 0;color:var(--soft);font-size:.85rem}
+    .activity{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+    .activity span{font-size:.85rem;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#0e1a2b}
     @media(max-width:700px){header,main,footer{padding:15px}td,th{padding:9px 8px}}
   </style>
 </head>
@@ -29,10 +35,16 @@
 <header>
   <div><div class="sub">INVESTIGAÇÃO QUANTITATIVA · PAPER TRADING</div><h1>Sports Intelligence <span style="color:var(--accent)">V3</span></h1>
   <div id="updated" class="sub">A carregar relatório…</div></div>
-  <nav><a href="./strategies.html">Comparar 5 estratégias</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/roadmap.md">Desenvolvimento</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3">Código</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions">Execuções</a><button id="refresh" type="button">Atualizar</button></nav>
+  <nav><a href="./strategies.html">Comparar 8 estratégias</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/roadmap.md">Desenvolvimento</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3">Código</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions">Execuções</a><button id="refresh" type="button">Atualizar</button></nav>
 </header>
 <main>
   <div id="status" class="pill" role="status" aria-live="polite">A consultar relatório confirmado…</div>
+  <div class="status-line" id="refresh-status">O painel consulta automaticamente os relatórios guardados, de 5 em 5 minutos. Não é um feed em direto.</div>
+  <div class="activity" aria-label="Atividade do scanner">
+    <span id="last-scan">Última execução: a verificar</span>
+    <span id="available-models">Eventos com probabilidade própria: —</span>
+    <span id="new-observations">Novas observações: —</span>
+  </div>
   <section class="grid" aria-label="Indicadores"><div class="card"><div class="sub">Eventos pré-jogo</div><div class="value" id="events">—</div></div>
     <div class="card"><div class="sub">Fontes verificadas</div><div class="value" id="sources">—</div></div>
     <div class="card"><div class="sub">Odds completas</div><div class="value" id="odds">—</div></div>
@@ -49,6 +61,9 @@
   </section>
   <section class="tablebox"><h2>Cobertura por modalidade</h2><div id="coverage" class="grid" aria-live="polite"></div></section>
   <section class="tablebox"><h2>Eventos e estimativas experimentais</h2><p class="sub">Estes valores não são recomendações. Sem odd atual e modelo validado não há oportunidade.</p>
+    <div class="tools"><label for="event-search" class="sub">Pesquisar:</label><input id="event-search" type="search" placeholder="Equipa, competição, evento..." autocomplete="off">
+    <label for="sport-filter" class="sub">Modalidade:</label><select id="sport-filter"><option value="">Todas</option></select>
+    <span class="sub" id="filter-count">—</span></div>
     <table><thead><tr><th>Competição</th><th>Evento</th><th>Início (Lisboa)</th><th>Probabilidades modelo</th><th>Estado</th></tr></thead><tbody id="games"><tr><td colspan="5">A carregar…</td></tr></tbody></table>
   </section>
   <section class="tablebox"><h2>Auditoria e integridade</h2><p id="integrity" class="sub">—</p>
@@ -61,6 +76,21 @@ const ROOT="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3
 const $=id=>document.getElementById(id);
 const num=(x,d=3)=>typeof x==="number"?x.toLocaleString("pt-PT",{minimumFractionDigits:d,maximumFractionDigits:d}):"—";
 const kickoff=s=>{try{return new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}).format(new Date(s))}catch{return "—"}};
+let currentGames=[];
+function renderGames(){
+  const text=$("event-search").value.toLocaleLowerCase("pt-PT").trim();
+  const filter=$("sport-filter").value;
+  const rows=currentGames.filter(x=>(!filter||x.sport===filter)&&(!text||[x.sport,x.home,x.away,x.reason].join(" ").toLocaleLowerCase("pt-PT").includes(text)));
+  $("filter-count").textContent=rows.length+" / "+currentGames.length+" eventos";
+  const tbody=$("games");tbody.replaceChildren();
+  if(!rows.length){const tr=document.createElement("tr");const cel=td(currentGames.length?"Sem eventos com estes filtros.":"Sem eventos pré-jogo disponíveis.");cel.colSpan=5;tr.append(cel);tbody.append(tr)}
+  for(const e of rows){
+    const tr=document.createElement("tr");
+    const ps=e.model_probabilities?.map(v=>(v*100).toFixed(1)+"%").join(" / ")||"sem modelo";
+    for(const part of [e.sport,(e.home||"")+" – "+(e.away||""),kickoff(e.start_utc),ps,e.reason||e.classification])tr.append(td(part));
+    tbody.append(tr);
+  }
+}
 function td(value){const el=document.createElement("td");el.textContent=String(value??"—");return el}
 async function load(){
   $("status").textContent="A consultar relatório…";
@@ -69,6 +99,12 @@ async function load(){
     if(!res.ok)throw Error("HTTP "+res.status);
     const x=await res.json();
     $("updated").textContent="Última execução: "+kickoff(x.generated_at_utc)+" (Lisboa)";
+    const mins=Math.max(0,Math.round((Date.now()-new Date(x.generated_at_utc).getTime())/60000));
+    const age=mins<60?mins+" min":Math.floor(mins/60)+" h "+mins%60+" min";
+    $("last-scan").textContent="Dados do scanner: há "+age;
+    $("refresh-status").textContent="Relatório consultado às "+new Intl.DateTimeFormat("pt-PT",{timeStyle:"short",timeZone:"Europe/Lisbon"}).format(new Date())+"; verificação automática a cada 5 minutos. "+(mins>150?"Atenção: o scanner não publicou novos dados há mais de 2h30.":"O painel só muda quando há dados novos, não a cada consulta.");
+    $("available-models").textContent="Eventos com probabilidade própria: "+num(x.market_coverage?.with_model,0);
+    $("new-observations").textContent="Novas observações nesta execução: "+num(x.observations_new_this_run,0);
     $("events").textContent=num(x.prospective_event_count,0);
     $("sources").textContent=num(x.event_sources?.sources_ok,0)+"/"+num(x.event_sources?.sources_checked,0);
     $("odds").textContent=num(x.market_coverage?.with_complete_odds,0);
@@ -87,20 +123,21 @@ async function load(){
       const bar=document.createElement("div");bar.className="progress";const fill=document.createElement("span");
       fill.style.width=(n/max*100)+"%";bar.append(fill);node.append(label,bar);region.append(node);
     }
-    const tbody=$("games");tbody.replaceChildren();
-    const rows=(x.candidates||[]).slice(0,35);
-    if(!rows.length){const tr=document.createElement("tr");const cel=td("Sem eventos pré-jogo disponíveis.");cel.colSpan=5;tr.append(cel);tbody.append(tr)}
-    for(const e of rows){
-      const tr=document.createElement("tr");
-      const ps=e.model_probabilities?.map(v=>(v*100).toFixed(1)+"%").join(" / ")||"sem modelo";
-      for(const part of [e.sport,(e.home||"")+" – "+(e.away||""),kickoff(e.start_utc),ps,e.reason||e.classification])tr.append(td(part));
-      tbody.append(tr);
-    }
+    currentGames=(x.candidates||[]).slice(0,100);
+    const menu=$("sport-filter"), old=menu.value;
+    menu.replaceChildren(new Option("Todas",""));
+    for(const sport of [...new Set(currentGames.map(x=>x.sport))].sort())menu.add(new Option(sport.toUpperCase(),sport));
+    menu.value=old;
+    renderGames();
     $("integrity").textContent="Fonte de odds: "+(x.odds_sources?.status||"desconhecida")+" · chamadas quota hoje: "+(x.odds_sources?.calls_today??0)+" · falhas de fontes: "+(x.event_sources?.sources_failed??0);
     $("status").textContent=(x.model_gate||"INVESTIGAÇÃO")+" · scanner apenas paper";
-  }catch(e){$("status").textContent="Relatório indisponível: "+e.message+". Consulta GitHub Actions."; $("games").replaceChildren()}
+  }catch(e){$("status").textContent="Relatório indisponível: "+e.message+". Consulta GitHub Actions."; $("refresh-status").textContent="Sem atualização do relatório. Os valores anteriores não devem ser considerados atuais."}
 }
 $("refresh").addEventListener("click",load);
+$("event-search").addEventListener("input",renderGames);
+$("sport-filter").addEventListener("change",renderGames);
 load();
+setInterval(()=>{if(!document.hidden)load()},300000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
 </script>
 </body></html>
