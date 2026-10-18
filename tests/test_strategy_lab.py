@@ -101,6 +101,40 @@ class StrategyLabTests(unittest.TestCase):
             self.assertFalse(added)
             self.assertEqual(sum(x["new_entries"] for x in counts.values()), 0)
 
+    def test_frozen_odds_open_isolated_paper_and_settle(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            models = {"epl": make_models()}
+            for m in models["epl"].values():
+                if m is not None:
+                    m.played.update({"arsenal": 20, "chelsea": 20})
+            models["epl"]["ELO_STANDARD"].ratings.update({"arsenal": 1700, "chelsea": 1450})
+            models["epl"]["ELO_DYNAMIC"].ratings.update({"arsenal": 1700, "chelsea": 1450})
+            prices = [2.0, 3.7, 4.5]
+            from sports_intelligence.metrics import no_vig
+            event = {"id": "epl:101", "sport": "epl", "home": "Arsenal", "away": "Chelsea",
+                     "start_utc": "2026-10-18T18:00:00+00:00", "status": "pre",
+                     "quote": {"market": "1X2", "decimal": prices,
+                               "no_vig": list(no_vig(prices)),
+                               "quote_timestamp_available": True,
+                               "provider": "synthetic bookmaker",
+                               "bookmakers": ["A", "A", "A"],
+                               "best_book_updates": ["2026-10-18T09:30:00+00:00"] * 3}}
+            _, entries = open_accounts(root, models, [event], DAY)
+            self.assertEqual(entries.get("ELO_STANDARD"), 1)
+            ledger = root / "data" / "strategy_ledgers" / "elo_standard.jsonl"
+            row = json.loads(ledger.read_text().splitlines()[0])
+            self.assertEqual(row["stake_eur"], 5.0)
+            self.assertEqual(row["forecast_utc"], DAY.isoformat())
+            self.assertEqual(row["selection_index"], 0)
+            _, repeated = open_accounts(root, models, [event], DAY)
+            self.assertEqual(repeated, {})
+            accounts, settled = build_accounts(
+                root, {"epl:101": {"outcome": 0}},
+                dt.datetime(2026, 10, 19, tzinfo=UTC))
+            self.assertEqual(accounts["ELO_STANDARD"]["bankroll_eur"], 1005.0)
+            self.assertEqual(settled["settled_this_run"] >= 1, True)
+
     def test_end_to_end_offline_reproduces_honest_state(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
