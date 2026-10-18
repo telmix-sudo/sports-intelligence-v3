@@ -294,6 +294,14 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
         exposure = sum(r["stake_eur"] for r in rows if r.get("status") == "OPEN")
         stake_total = sum(r["stake_eur"] for r in rows if r.get("status") == "SETTLED")
         settled = [r for r in rows if r.get("status") == "SETTLED"]
+        # Realised-only drawdown; pending positions are excluded until settlement.
+        settled_by_start = sorted(settled, key=lambda r: (r.get("start_utc", ""), r["id"]))
+        wealth = peak = INITIAL_BANKROLL_EUR
+        worst_drawdown = 0.
+        for completed in settled_by_start:
+            wealth += completed["pnl_eur"]
+            peak = max(peak, wealth)
+            worst_drawdown = max(worst_drawdown, (peak - wealth) / peak)
         accounts[name] = {
             "bankroll_initial_eur": INITIAL_BANKROLL_EUR,
             "bankroll_eur": round(INITIAL_BANKROLL_EUR + pnl, 4),
@@ -303,6 +311,8 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
             "settled": len(settled),
             "open": sum(r.get("status") == "OPEN" for r in rows),
             "yield_percent": round(100 * pnl / stake_total, 4) if stake_total else None,
+            "return_on_initial_bank_percent": round(100 * pnl / INITIAL_BANKROLL_EUR, 4),
+            "max_settled_drawdown_percent": round(worst_drawdown * 100, 4),
             "brier": round(sum(r["brier"] for r in settled) / len(settled), 6) if settled else None,
             "log_loss": round(sum(r["log_loss"] for r in settled) / len(settled), 6) if settled else None,
             "status": "EXPERIMENTAL_PAPER_ONLY",
