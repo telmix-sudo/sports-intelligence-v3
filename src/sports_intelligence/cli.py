@@ -12,6 +12,7 @@ from .football import backtest_football, parse_matches as football_matches
 from .scanner import capture_scoreboards, classify, freeze_observations, parse_iso, settle_observations
 from .odds_provider import annotate_odds
 from .poisson import backtest_poisson
+from .audit import audit_ledger
 from .tennis import backtest_tennis, parse_matches as tennis_matches
 
 UTC = dt.timezone.utc
@@ -78,8 +79,10 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
     frozen, added = freeze_observations(candidates, path, now)
     settled = settle_observations(frozen, events, path)
     complete = [x for x in frozen if x.get("status") == "SETTLED"]
+    v1_audit = audit_ledger(root / "data" / "ledger_v1.csv") if (root / "data" / "ledger_v1.csv").exists() else None
     report = {
         "generated_at_utc": now.isoformat(),
+        "v1_audit": v1_audit,
         "version": "0.3.0",
         "mode": "PAPER_RESEARCH_ONLY",
         "live_bets_allowed": False,
