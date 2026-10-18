@@ -7,28 +7,24 @@ import json
 import os
 from pathlib import Path
 
-from .feeds import fetch_text, football_csv_urls
-from .football import backtest_football, parse_matches as football_matches
+from .feeds import fetch_text
+from .football import backtest_football
 from .scanner import capture_scoreboards, classify, freeze_observations, parse_iso, settle_observations
 from .odds_provider import annotate_odds
 from .poisson import backtest_poisson
 from .audit import audit_ledger
+from .strategy_lab import collect_openfootball
 from .tennis import backtest_tennis, parse_matches as tennis_matches
 
 UTC = dt.timezone.utc
 
 
 def historical_football(now: dt.datetime) -> tuple[object | None, dict]:
-    matches = []
-    sources = []
-    for url in football_csv_urls():
-        try:
-            text, source = fetch_text(url)
-            data = football_matches(text, cutoff=now.date())
-            sources.append(dict(source, matches=len(data), ok=bool(data)))
-            matches.extend(data)
-        except Exception as exc:
-            sources.append({"url": url, "ok": False, "error": str(exc)[:170]})
+    # OpenFootball (CC0) replaces Football-Data.co.uk, whose current site terms
+    # prohibit automated bot/AI scraping. Do not reintroduce that source here.
+    grouped, provenance = collect_openfootball(now.date(), leagues={"epl": "en.1"})
+    matches = grouped["epl"]
+    sources = provenance["sources"]
     if len(matches) < 120:
         return None, {"status": "UNAVAILABLE", "matched_rows": len(matches), "sources": sources,
                       "reason": "Insufficient verifiable historical matches; no model probabilities."}
