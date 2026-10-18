@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0c1421">
+  <title>Sports Intelligence | Painel V3</title>
+  <style>
+    :root {color-scheme:dark; --bg:#0c1421;--panel:#121f30;--line:#293747;--soft:#92a4b7;--text:#eff5fa;--accent:#4fd1a2;--warn:#ffc46a;--error:#f58282;}
+    * {box-sizing:border-box} body{background:var(--bg);color:var(--text);font:15px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}
+    header,main,footer{max-width:1140px;margin:auto;padding:24px} header{padding-top:36px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+    h1{font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.035em;margin:0} h2{font-size:1.13rem;margin:0 0 14px}
+    .muted,.sub{color:var(--soft)}.sub{font-size:.9rem} a{color:var(--accent)}.pill{border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:.82rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:20px 0 28px}
+    .card,.tablebox{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:20px}
+    .value{font-size:1.9rem;font-weight:750;letter-spacing:-.03em}.card .sub{margin-top:2px}
+    .critical{color:var(--warn)} .good{color:var(--accent)} .bad{color:var(--error)}
+    .tablebox{margin-bottom:22px;overflow-x:auto} table{border-collapse:collapse;width:100%;white-space:nowrap;text-align:left}
+    td,th{padding:11px 12px;border-bottom:1px solid var(--line)} th{color:var(--soft);font-weight:600;font-size:.85rem}
+    .progress{height:8px;border-radius:8px;background:#263547;overflow:hidden;margin:4px 0}
+    .progress span{display:block;height:100%;background:var(--accent)}
+    nav{display:flex;gap:16px;flex-wrap:wrap}.footnote{max-width:800px;font-size:.85rem;color:var(--soft)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    button{font:inherit;background:transparent;color:var(--accent);border:1px solid var(--line);padding:8px 12px;border-radius:10px;cursor:pointer}
+    @media(max-width:700px){header,main,footer{padding:15px}td,th{padding:9px 8px}}
+  </style>
+</head>
+<body>
+<header>
+  <div><div class="sub">INVESTIGAÇÃO QUANTITATIVA · PAPER TRADING</div><h1>Sports Intelligence <span style="color:var(--accent)">V3</span></h1>
+  <div id="updated" class="sub">A carregar relatório…</div></div>
+  <nav><a href="https://github.com/telmix-sudo/sports-intelligence-v3">Código</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions">Execuções</a><button id="refresh" type="button">Atualizar</button></nav>
+</header>
+<main>
+  <div id="status" class="pill" role="status" aria-live="polite">A consultar relatório confirmado…</div>
+  <section class="grid" aria-label="Indicadores"><div class="card"><div class="sub">Eventos pré-jogo</div><div class="value" id="events">—</div></div>
+    <div class="card"><div class="sub">Fontes verificadas</div><div class="value" id="sources">—</div></div>
+    <div class="card"><div class="sub">Odds completas</div><div class="value" id="odds">—</div></div>
+    <div class="card"><div class="sub">Papers com stake V3</div><div class="value" id="papers">—</div></div>
+  </section>
+  <section class="tablebox"><h2>Validação histórica — Futebol</h2><p class="sub" id="model">—</p>
+    <div class="grid">
+      <div><div class="sub">Brier modelo</div><div class="value" id="brier">—</div></div>
+      <div><div class="sub">Brier mercado (benchmark)</div><div class="value" id="marketbrier">—</div></div>
+      <div><div class="sub">Log Loss modelo</div><div class="value" id="logloss">—</div></div>
+      <div><div class="sub">Log Loss mercado</div><div class="value" id="marketloss">—</div></div>
+    </div>
+    <p id="warning" class="critical">Ainda não existem evidências de vantagem estatística validada.</p>
+  </section>
+  <section class="tablebox"><h2>Cobertura por modalidade</h2><div id="coverage" class="grid" aria-live="polite"></div></section>
+  <section class="tablebox"><h2>Eventos e estimativas experimentais</h2><p class="sub">Estes valores não são recomendações. Sem odd atual e modelo validado não há oportunidade.</p>
+    <table><thead><tr><th>Competição</th><th>Evento</th><th>Início (Lisboa)</th><th>Probabilidades modelo</th><th>Estado</th></tr></thead><tbody id="games"><tr><td colspan="5">A carregar…</td></tr></tbody></table>
+  </section>
+  <section class="tablebox"><h2>Auditoria e integridade</h2><p id="integrity" class="sub">—</p>
+    <p class="footnote">Sem apostas reais. A banca histórica V1 e o motor ChatGPT V2.1 são registos separados. O GitHub Actions executa a V3; odds do fornecedor só são usadas se existir chave API guardada em GitHub Secrets. Não existem garantias de lucro.</p>
+  </section>
+</main><footer class="sub">Sports Intelligence · Evidência antes de ação · <a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/data_quality.md">Qualidade dos dados</a></footer>
+<script>
+"use strict";
+const ROOT="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/reports/latest.json";
+const $=id=>document.getElementById(id);
+const num=(x,d=3)=>typeof x==="number"?x.toLocaleString("pt-PT",{minimumFractionDigits:d,maximumFractionDigits:d}):"—";
+const kickoff=s=>{try{return new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}).format(new Date(s))}catch{return "—"}};
+function td(value){const el=document.createElement("td");el.textContent=String(value??"—");return el}
+async function load(){
+  $("status").textContent="A consultar relatório…";
+  try{
+    const res=await fetch(ROOT+"?ts="+Date.now(),{cache:"no-store"});
+    if(!res.ok)throw Error("HTTP "+res.status);
+    const x=await res.json();
+    $("updated").textContent="Última execução: "+kickoff(x.generated_at_utc)+" (Lisboa)";
+    $("events").textContent=num(x.prospective_event_count,0);
+    $("sources").textContent=num(x.event_sources?.sources_ok,0)+"/"+num(x.event_sources?.sources_checked,0);
+    $("odds").textContent=num(x.market_coverage?.with_complete_odds,0);
+    $("papers").textContent=num(x.v3_papers_with_stake,0);
+    const m=x.football_elo?.metrics||{};
+    $("model").textContent=(x.football_elo?.selected_model||"indisponível")+" · "+num(m.n,0)+" previsões cronológicas avaliadas · "+(x.football_elo?.status||"sem dados");
+    $("brier").textContent=num(m.brier,4);$("marketbrier").textContent=num(m.benchmark_brier,4);
+    $("logloss").textContent=num(m.log_loss,4);$("marketloss").textContent=num(m.benchmark_log_loss,4);
+    const gate=x.model_gate||"SEM_VALIDAÇÃO";
+    $("warning").textContent=gate==="UNVALIDATED_AGAINST_MARKET"?"Modelo selecionado ainda é pior do que o benchmark do mercado no teste histórico. Sem posições com stake.":"Modelo experimental: não equivale a vantagem comprovada.";
+    const sports=x.event_sources?.by_sport||{};const max=Math.max(1,...Object.values(sports));
+    const region=$("coverage");region.replaceChildren();
+    for(const [name,n] of Object.entries(sports)){
+      const node=document.createElement("div");const label=document.createElement("div");
+      label.className="sub";label.textContent=name.toUpperCase()+" · "+n+" eventos";
+      const bar=document.createElement("div");bar.className="progress";const fill=document.createElement("span");
+      fill.style.width=(n/max*100)+"%";bar.append(fill);node.append(label,bar);region.append(node);
+    }
+    const tbody=$("games");tbody.replaceChildren();
+    const rows=(x.candidates||[]).slice(0,35);
+    if(!rows.length){const tr=document.createElement("tr");const cel=td("Sem eventos pré-jogo disponíveis.");cel.colSpan=5;tr.append(cel);tbody.append(tr)}
+    for(const e of rows){
+      const tr=document.createElement("tr");
+      const ps=e.model_probabilities?.map(v=>(v*100).toFixed(1)+"%").join(" / ")||"sem modelo";
+      for(const part of [e.sport,(e.home||"")+" – "+(e.away||""),kickoff(e.start_utc),ps,e.reason||e.classification])tr.append(td(part));
+      tbody.append(tr);
+    }
+    $("integrity").textContent="Fonte de odds: "+(x.odds_sources?.status||"desconhecida")+" · chamadas quota hoje: "+(x.odds_sources?.calls_today??0)+" · falhas de fontes: "+(x.event_sources?.sources_failed??0);
+    $("status").textContent=(x.model_gate||"INVESTIGAÇÃO")+" · scanner apenas paper";
+  }catch(e){$("status").textContent="Relatório indisponível: "+e.message+". Consulta GitHub Actions."; $("games").replaceChildren()}
+}
+$("refresh").addEventListener("click",load);
+load();
+</script>
+</body></html>
