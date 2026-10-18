@@ -354,7 +354,8 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
     return accounts, counts
 
 
-def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime) -> tuple[dict, dict]:
+def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime,
+                  registry: dict | None = None) -> tuple[dict, dict]:
     """Optional experimental paper entries; each account independently limits exposure.
 
     Only model probabilities and pre-game timestamped quotes are eligible.
@@ -365,6 +366,9 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
     for name in STRATEGIES:
         path = root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")
         rows = read_jsonl(path)
+        if registry and now < parse_iso(registry[name]["created_utc"]):
+            account_stats[name] = {"new_entries": 0, "total_records": len(rows)}
+            continue
         bank = INITIAL_BANKROLL_EUR + sum(r.get("pnl_eur", 0) for r in rows if r.get("status") == "SETTLED")
         exposure = sum(r["stake_eur"] for r in rows if r.get("status") == "OPEN")
         today_count = sum(r["forecast_utc"][:10] == now.date().isoformat() for r in rows)
@@ -379,17 +383,42 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 continue
             if len(quote.get("decimal", [])) != 3 or len(quote.get("no_vig", [])) != 3:
                 continue
+            # Never accept a feed merely claiming to have timestamps. Demand
+            # all three actual bookmaker selection quote timestamps.
+            timestamps = quote.get("best_book_updates")
+            if not isinstance(timestamps, list) or len(timestamps) != 3:
+                continue
+            try:
+                age_hours = [(now - parse_iso(t)).total_seconds()/3600 for t in timestamps]
+                prices = [float(x) for x in quote["decimal"]]
+                market = [float(x) for x in quote["no_vig"]]
+                if (any(not math.isfinite(x) or x <= 1 for x in prices) or
+                    any(not math.isfinite(x) or x <= 0 for x in market) or
+                    abs(sum(market) - 1) > .001 or
+                    any(age < 0 or age > 12 for age in age_hours)):
+                    continue
+            except (ValueError, TypeError):
+                continue
             league_models = models[e["sport"]]
             home, away = team_name(e["home"]), team_name(e["away"])
             base = league_models["ELO_STANDARD"]
             if base.played.get(home, 0) < 8 or base.played.get(away, 0) < 8:
                 continue
-            p = predictions(league_models, home, away)[name]
-            diffs = [a-b for a,b in zip(p, quote["no_vig"])]
-            choice = max(range(3), key=lambda i: diffs[i])
-            if diffs[choice] < EDGE_MINIMUM or p[choice] * quote["decimal"][choice] - 1 < EV_MINIMUM:
+            all_forecasts = predictions(league_models, home, away, market)
+            p = all_forecasts[name]
+            if p is None:
                 continue
-            if any((now - parse_iso(t)).total_seconds() > 12*3600 for t in quote.get("best_book_updates", [])):
+            diffs = [a-b for a,b in zip(p, market)]
+            choice = max(range(3), key=lambda i: diffs[i])
+            ev = p[choice] * prices[choice] - 1
+            if name in RULES:
+                if not accepts_candidate(
+                    name, choice, all_forecasts,
+                    min(base.played.get(home, 0), base.played.get(away, 0)),
+                    diffs[choice], ev, max(age_hours),
+                    int(quote.get("bookmaker_count") or 0)):
+                    continue
+            elif diffs[choice] < EDGE_MINIMUM or ev < EV_MINIMUM:
                 continue
             stake = round(min(bank * PAPER_STAKE_FRACTION,
                              max(0., bank * MAX_PAPER_EXPOSURE_FRACTION - exposure)), 2)
@@ -409,6 +438,9 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 "book_quote_updates_utc": quote.get("best_book_updates"),
                 "stake_eur": stake, "status": "OPEN",
                 "model_status": "EXPERIMENTAL_UNCALIBRATED",
+                "strategy_version": RULES.get(name, {}).get("version", "legacy-1.0.0"),
+                "strategy_registered_utc": registry[name]["created_utc"] if registry else None,
+                "selection_expected_value": round(ev, 7),
                 "sizing_note": "0.5% virtual bank, max 2% exposure; hypothetical quote may not have been executable",
             }
             rows.append(r)
@@ -426,6 +458,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     if now.tzinfo is None:
         raise ValueError("now must be timezone aware")
     now = now.astimezone(UTC)
+    registry = ensure_registry(root, now, STRATEGIES)
+    verify_prior_accounts(root, registry)
     matches, provenance = collect_openfootball(now.date(), fetcher)
     models, historical = historical_comparison(matches)
     # Includes yesterday/today/future fixtures; only completed final statuses settle.
@@ -463,11 +497,13 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         except Exception:
             pass
     before, settle_counts = build_accounts(root, finals, now)
-    additions, entry_counts = open_accounts(root, models, events, now)
+    additions, entry_counts = open_accounts(root, models, events, now, registry=registry)
     after, _ = build_accounts(root, {}, now)
     report = {
         "asof_utc": now.isoformat(),
-        "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V1",
+        "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V2",
+        "registered_strategies": registry,
+        "policy": "Existing balances and settled records persist; only brand-new strategies start with EUR 1000.",
         "sports_tested": sorted(matches),
         "strategy_names": list(STRATEGIES),
         "initial_bank_per_strategy_eur": INITIAL_BANKROLL_EUR,
