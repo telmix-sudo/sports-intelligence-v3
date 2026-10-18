@@ -10,6 +10,7 @@ from pathlib import Path
 from .feeds import fetch_text, football_csv_urls
 from .football import backtest_football, parse_matches as football_matches
 from .scanner import capture_scoreboards, classify, freeze_observations, parse_iso, settle_observations
+from .odds_provider import annotate_odds
 from .tennis import backtest_tennis, parse_matches as tennis_matches
 
 UTC = dt.timezone.utc
@@ -61,6 +62,7 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
     tennis = historical_tennis(now)
     kwargs = {"fetcher": fetcher} if fetcher else {}
     events, coverage = capture_scoreboards(now, **kwargs)
+    odds_coverage = annotate_odds(events, root, now)
     candidates = [x for x in (classify(ev, football_model, now) for ev in events) if x]
     path = root / "data" / "forecasts_v3.jsonl"
     frozen, added = freeze_observations(candidates, path, now)
@@ -82,7 +84,9 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
         "football_elo": football,
         "tennis_elo": tennis,
         "event_sources": coverage,
+        "odds_sources": odds_coverage,
         "candidates": sorted(candidates, key=lambda c: -c.get("best_model_edge_pp", -999))[:50],
+        "model_gate": "UNVALIDATED_AGAINST_MARKET" if football.get("metrics", {}).get("improvement_brier", 0) < 0 else "EXPERIMENTAL",
         "integrity": ["No automatic paper stake until model risk bounds and quote timestamps validated",
                       "Free ESPN odds may be unavailable or lack quote timestamps",
                       "Only events with start time strictly after snapshot are eligible",
