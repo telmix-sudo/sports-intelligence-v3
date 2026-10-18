@@ -374,7 +374,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             exposure += stake
         save_jsonl(path, rows)
         account_stats[name] = {"new_entries": added[name], "total_records": len(rows)}
-    return account_stats, dict(added)
+    return account_stats, {name: count for name, count in added.items() if count > 0}
 
 
 def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
