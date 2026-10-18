@@ -1,0 +1,519 @@
+{
+  "asof_utc": "2026-10-18T12:34:17.387525+00:00",
+  "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V1",
+  "sports_tested": [
+    "bundesliga",
+    "epl",
+    "la_liga",
+    "ligue_1",
+    "serie_a"
+  ],
+  "strategy_names": [
+    "ELO_STANDARD",
+    "ELO_DYNAMIC",
+    "POISSON_SHRINK",
+    "DIXON_COLES_LOW",
+    "ELO_POISSON_BLEND"
+  ],
+  "initial_bank_per_strategy_eur": 1000.0,
+  "historical": {
+    "ELO_STANDARD": {
+      "n": 3733,
+      "brier": 0.595012,
+      "log_loss": 0.997004,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 810,
+          "brier": 0.60576,
+          "log_loss": 1.009495
+        },
+        "la_liga": {
+          "n": 819,
+          "brier": 0.591215,
+          "log_loss": 0.996604
+        },
+        "bundesliga": {
+          "n": 648,
+          "brier": 0.593532,
+          "log_loss": 0.995319
+        },
+        "serie_a": {
+          "n": 800,
+          "brier": 0.590539,
+          "log_loss": 0.987646
+        },
+        "ligue_1": {
+          "n": 656,
+          "brier": 0.593398,
+          "log_loss": 0.995158
+        }
+      }
+    },
+    "ELO_DYNAMIC": {
+      "n": 3733,
+      "brier": 0.595178,
+      "log_loss": 0.998822,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 810,
+          "brier": 0.605364,
+          "log_loss": 1.010336
+        },
+        "la_liga": {
+          "n": 819,
+          "brier": 0.592591,
+          "log_loss": 1.001666
+        },
+        "bundesliga": {
+          "n": 648,
+          "brier": 0.593617,
+          "log_loss": 0.996162
+        },
+        "serie_a": {
+          "n": 800,
+          "brier": 0.589901,
+          "log_loss": 0.986848
+        },
+        "ligue_1": {
+          "n": 656,
+          "brier": 0.593809,
+          "log_loss": 0.998282
+        }
+      }
+    },
+    "POISSON_SHRINK": {
+      "n": 3733,
+      "brier": 0.59503,
+      "log_loss": 0.997603,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 810,
+          "brier": 0.616715,
+          "log_loss": 1.028149
+        },
+        "la_liga": {
+          "n": 819,
+          "brier": 0.581772,
+          "log_loss": 0.980265
+        },
+        "bundesliga": {
+          "n": 648,
+          "brier": 0.593757,
+          "log_loss": 0.997452
+        },
+        "serie_a": {
+          "n": 800,
+          "brier": 0.589774,
+          "log_loss": 0.988408
+        },
+        "ligue_1": {
+          "n": 656,
+          "brier": 0.592478,
+          "log_loss": 0.992891
+        }
+      }
+    },
+    "DIXON_COLES_LOW": {
+      "n": 3733,
+      "brier": 0.594666,
+      "log_loss": 0.996871,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 810,
+          "brier": 0.615505,
+          "log_loss": 1.026364
+        },
+        "la_liga": {
+          "n": 819,
+          "brier": 0.581993,
+          "log_loss": 0.980648
+        },
+        "bundesliga": {
+          "n": 648,
+          "brier": 0.592963,
+          "log_loss": 0.996042
+        },
+        "serie_a": {
+          "n": 800,
+          "brier": 0.588984,
+          "log_loss": 0.986497
+        },
+        "ligue_1": {
+          "n": 656,
+          "brier": 0.593364,
+          "log_loss": 0.994178
+        }
+      }
+    },
+    "ELO_POISSON_BLEND": {
+      "n": 3733,
+      "brier": 0.592463,
+      "log_loss": 0.993447,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 810,
+          "brier": 0.60797,
+          "log_loss": 1.013865
+        },
+        "la_liga": {
+          "n": 819,
+          "brier": 0.584183,
+          "log_loss": 0.984955
+        },
+        "bundesliga": {
+          "n": 648,
+          "brier": 0.590596,
+          "log_loss": 0.991823
+        },
+        "serie_a": {
+          "n": 800,
+          "brier": 0.58823,
+          "log_loss": 0.985191
+        },
+        "ligue_1": {
+          "n": 656,
+          "brier": 0.590661,
+          "log_loss": 0.990511
+        }
+      }
+    }
+  },
+  "accounts": {
+    "ELO_STANDARD": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "brier": null,
+      "log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "ELO_DYNAMIC": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "brier": null,
+      "log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "POISSON_SHRINK": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "brier": null,
+      "log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "DIXON_COLES_LOW": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "brier": null,
+      "log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "ELO_POISSON_BLEND": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "brier": null,
+      "log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    }
+  },
+  "provenance": {
+    "license": "OpenFootball CC0/public domain",
+    "attribution": "https://github.com/openfootball/football.json",
+    "sources": [
+      {
+        "league": "epl",
+        "season": "2021-22",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/en.1.json",
+        "sha256": "fbdfd426fa18fa2f8630b77de87c082734da495ac4668d6d72f29f76b73b9564"
+      },
+      {
+        "league": "epl",
+        "season": "2022-23",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/en.1.json",
+        "sha256": "8d09f0f9846981626cdfec48903e1f21e7c79aabe6f92535c9e092e8e79b808b"
+      },
+      {
+        "league": "epl",
+        "season": "2023-24",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/en.1.json",
+        "sha256": "03e13eafbf78dfe00d7e89dd3bf6643986eb6e8fd86c7664aeb8c5bc0bed88d0"
+      },
+      {
+        "league": "epl",
+        "season": "2024-25",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/en.1.json",
+        "sha256": "c3d18f552d83382cd4b6b21127adbbfe38e7f8618ddc979fb5404f2df07d0a75"
+      },
+      {
+        "league": "epl",
+        "season": "2025-26",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/en.1.json",
+        "sha256": "d6070bdf731546ccf97767f062e8af4bd26dd309dee69f6092025bf9c78f43c1"
+      },
+      {
+        "league": "epl",
+        "season": "2026-27",
+        "count": 50,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.1.json",
+        "sha256": "bb91f0ab3e8359df163bb9ec98549bfed85e200dd4c32f3bd606b5890d932dd2"
+      },
+      {
+        "league": "la_liga",
+        "season": "2021-22",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/es.1.json",
+        "sha256": "7beb67dd49d7132bf9f7baea540342439b97ed4a7b21ffb90d3231a402c54d02"
+      },
+      {
+        "league": "la_liga",
+        "season": "2022-23",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/es.1.json",
+        "sha256": "0204c66c919c2cd5cc3d1ba26be4f68592e4e173843162a9e6755182ccf83778"
+      },
+      {
+        "league": "la_liga",
+        "season": "2023-24",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/es.1.json",
+        "sha256": "e4c1e1a958f224ba3c815c898982ab495b9577315cc58ee7a5e7b532960f738b"
+      },
+      {
+        "league": "la_liga",
+        "season": "2024-25",
+        "count": 370,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/es.1.json",
+        "sha256": "da5bfa1b3634e1039d9e71aec50bdc847f8761189e3de235a4e730e0dc64ca38"
+      },
+      {
+        "league": "la_liga",
+        "season": "2025-26",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/es.1.json",
+        "sha256": "b40397d8e62c640138548d57a1a9f76150549213d2a07fcbbb90ed0eabc6ccea"
+      },
+      {
+        "league": "la_liga",
+        "season": "2026-27",
+        "count": 69,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/es.1.json",
+        "sha256": "4b1a9906e3f2b279a1f25497a38f2f58e21ec19ea726b882fa646da7c07bc0e0"
+      },
+      {
+        "league": "bundesliga",
+        "season": "2021-22",
+        "count": 306,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/de.1.json",
+        "sha256": "f1b9901cffb6b073f389e730213b5f8efe6a9a73b2f86058794f2d0f1dcc54dc"
+      },
+      {
+        "league": "bundesliga",
+        "season": "2022-23",
+        "count": 306,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/de.1.json",
+        "sha256": "b0c052dc75836dfc6b0d3781d35b828851db7377c9f6ccb39643dbbe1964f3bd"
+      },
+      {
+        "league": "bundesliga",
+        "season": "2023-24",
+        "count": 306,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/de.1.json",
+        "sha256": "d104edde48a5e254545eac3d3ed379a09801e1ebcef5c6480e28bc36fcfa202d"
+      },
+      {
+        "league": "bundesliga",
+        "season": "2024-25",
+        "count": 306,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/de.1.json",
+        "sha256": "f473d6595e6c29ebedc08b09177aed6a6b2ff0fa8378b82f51dea469139f44c3"
+      },
+      {
+        "league": "bundesliga",
+        "season": "2025-26",
+        "count": 306,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/de.1.json",
+        "sha256": "17d0999db6281e6365823acdbce41a4f01dd469eac63e1f897e4e47c02906672"
+      },
+      {
+        "league": "bundesliga",
+        "season": "2026-27",
+        "count": 36,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/de.1.json",
+        "sha256": "07fab65d4a1de8ce4c8472da9ccf4d1d2b145ecd5abdc5b6d4250a5c119d7681"
+      },
+      {
+        "league": "serie_a",
+        "season": "2021-22",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/it.1.json",
+        "sha256": "a3e94b23cac768e4191e99312f4d48471c4000c5c2fe766b0325cee935754061"
+      },
+      {
+        "league": "serie_a",
+        "season": "2022-23",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/it.1.json",
+        "sha256": "d775fdd375af6998233fbfcd5b33d176cb9d016a981682626c5ce2f95b0c2f88"
+      },
+      {
+        "league": "serie_a",
+        "season": "2023-24",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/it.1.json",
+        "sha256": "47734fc8d2ec34c5529ca814c97d1c86ecddc4a2c8095506d9b12f29cb283308"
+      },
+      {
+        "league": "serie_a",
+        "season": "2024-25",
+        "count": 370,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/it.1.json",
+        "sha256": "7d9bb936de3ccaeec54d57371512a58a5eeb21277e7d5f0882911a834d22b659"
+      },
+      {
+        "league": "serie_a",
+        "season": "2025-26",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/it.1.json",
+        "sha256": "28f7773dea86345aeb0cbb4aff2f90231033f7ed855219e70fdd1cf45d4d7e7f"
+      },
+      {
+        "league": "serie_a",
+        "season": "2026-27",
+        "count": 50,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/it.1.json",
+        "sha256": "721a6c220fecb8208287e41401fa2fce652cd23765ce58a39bf98cdaa3d528ad"
+      },
+      {
+        "league": "ligue_1",
+        "season": "2021-22",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/fr.1.json",
+        "sha256": "8abb493061d32faaf413c403b440c043723d9743a9e69d6472bf5410e2d4e039"
+      },
+      {
+        "league": "ligue_1",
+        "season": "2022-23",
+        "count": 380,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/fr.1.json",
+        "sha256": "6301ac1ba1fa0f5b72345759711beac3b3be3c989725cc1c6ef9307ffef692c7"
+      },
+      {
+        "league": "ligue_1",
+        "season": "2023-24",
+        "count": 306,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/fr.1.json",
+        "sha256": "fa328cecf4c12232ac77a5d477059eebe16b68b3712ec87800b89efda8ddfb70"
+      },
+      {
+        "league": "ligue_1",
+        "season": "2024-25",
+        "count": 306,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/fr.1.json",
+        "sha256": "90e9974afe6597452622387ad218f6b0011a5f91f1b426f05152f5b9c105e355"
+      },
+      {
+        "league": "ligue_1",
+        "season": "2025-26",
+        "count": 305,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/fr.1.json",
+        "sha256": "3e9403445dd96f4bb7f740de22d4ea7e3ea7d640777a12eab621ae4d4dbf3bc7"
+      },
+      {
+        "league": "ligue_1",
+        "season": "2026-27",
+        "count": 45,
+        "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/fr.1.json",
+        "sha256": "f875275f835e378fc8c4e7d48c7a2f327e7d426237bd057fe652fd47f30b5a4f"
+      }
+    ],
+    "failures": [],
+    "matches_per_league": {
+      "epl": 1950,
+      "la_liga": 1959,
+      "bundesliga": 1566,
+      "serie_a": 1940,
+      "ligue_1": 1722
+    }
+  },
+  "sources": {
+    "fixtures": 20,
+    "failures": 0
+  },
+  "events_seen": 44,
+  "new_paper_entries": {},
+  "newly_settled": 0,
+  "restrictions": [
+    "No real bets; outcomes do not imply profit guarantee.",
+    "Historical comparison has NO historic book prices; historical ROI deliberately missing.",
+    "Model ranking selected on same research data is NOT independently validated.",
+    "Unverified external returns not imported.",
+    "Money wagered is virtual and book execution/liquidity not confirmed.",
+    "Current matchup name mismatches are rejected, not guessed.",
+    "No odds: no paper wager.",
+    "Strategy portfolios are correlated; never sum as independent diversification."
+  ]
+}
