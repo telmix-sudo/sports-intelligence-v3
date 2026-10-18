@@ -1,0 +1,812 @@
+{
+  "generated_at_utc": "2026-10-18T11:36:53.159314+00:00",
+  "version": "0.3.0",
+  "mode": "PAPER_RESEARCH_ONLY",
+  "live_bets_allowed": false,
+  "v3_papers_with_stake": 0,
+  "observations_open": 0,
+  "observations_settled": 0,
+  "observations_new_this_run": 0,
+  "observations_settled_this_run": 0,
+  "prospective_event_count": 43,
+  "market_coverage": {
+    "with_complete_odds": 0,
+    "with_model": 4
+  },
+  "football_elo": {
+    "status": "EXPERIMENTAL",
+    "sources": [
+      {
+        "url": "https://www.football-data.co.uk/mmz4281/2324/E0.csv",
+        "sha256": "b2e057b0ed959f198b0f63d2391c01239f3608e6de5db68edab3f88e04d07ff3",
+        "fetched_at_utc": "2026-10-18T11:36:54.246041+00:00",
+        "matches": 380,
+        "ok": true
+      },
+      {
+        "url": "https://www.football-data.co.uk/mmz4281/2425/E0.csv",
+        "sha256": "d0c8ce4a96d886cf60cf101f570f4a3893844226f91c7bd769eb568c49edbfa4",
+        "fetched_at_utc": "2026-10-18T11:36:55.306235+00:00",
+        "matches": 380,
+        "ok": true
+      },
+      {
+        "url": "https://www.football-data.co.uk/mmz4281/2526/E0.csv",
+        "sha256": "3e3a8352f9ada6789c508d6ca184424421fed56a30400904a4a327c583407e62",
+        "fetched_at_utc": "2026-10-18T11:36:56.574141+00:00",
+        "matches": 380,
+        "ok": true
+      },
+      {
+        "url": "https://www.football-data.co.uk/mmz4281/2627/E0.csv",
+        "sha256": "6731e95dd7120f5c7dc9f37650cc11ccccda8e7e0a3626830263c2cd77daa787",
+        "fetched_at_utc": "2026-10-18T11:36:57.381564+00:00",
+        "matches": 60,
+        "ok": true
+      }
+    ],
+    "metrics": {
+      "n": 1100,
+      "brier": 0.604171,
+      "log_loss": 1.008746,
+      "benchmark_n": 1100,
+      "benchmark_brier": 0.583851,
+      "benchmark_log_loss": 0.978441,
+      "improvement_brier": -0.020321,
+      "improvement_log_loss": -0.030304,
+      "training_matches": 1200,
+      "warmup_matches": 100,
+      "method": "prequential_walk_forward_date_grouped",
+      "parameters": {
+        "k": 20.0,
+        "home_advantage": 65.0,
+        "draw_probability": 0.26
+      },
+      "model_status": "EXPERIMENTAL",
+      "caveat": "Historical odds may be closing prices; never use as odds available at an earlier cutoff."
+    }
+  },
+  "tennis_elo": {
+    "status": "DISABLED",
+    "reason": "CC BY-NC-SA licensing: opt-in research only"
+  },
+  "event_sources": {
+    "sources_checked": 36,
+    "sources_ok": 36,
+    "sources_failed": 0,
+    "errors": [],
+    "provenance": [
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20261017&limit=300",
+        "sha256": "ecbd1831cfb00ec3e28becf97f0deb54c2415da45a6285a9708dac969f3ddfc3",
+        "fetched_at_utc": "2026-10-18T11:36:57.538777+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20261018&limit=300",
+        "sha256": "5e186e2706c83615f1dc66c49793fa502034e83799dffc544810ee2c24b8b28a",
+        "fetched_at_utc": "2026-10-18T11:36:57.638847+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20261019&limit=300",
+        "sha256": "96b74af52475617f3d69e5c187657a118c5473ed5a6c7bd70a89327c9f9d944e",
+        "fetched_at_utc": "2026-10-18T11:36:57.693513+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20261020&limit=300",
+        "sha256": "57e18c687bf21abd795e68e9cdcd961cbeba98d5c583cc5a81e60abbeb8f544a",
+        "fetched_at_utc": "2026-10-18T11:36:57.746770+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard?dates=20261017&limit=300",
+        "sha256": "1d2c4991a0d32129a2950cee9bb11e1eb8f87b472959e71bcb564d66510c693f",
+        "fetched_at_utc": "2026-10-18T11:36:57.833741+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard?dates=20261018&limit=300",
+        "sha256": "65a034f7c25c21550d008be82c5b7015d5834c80f6936d5fcdf17d489565b92d",
+        "fetched_at_utc": "2026-10-18T11:36:57.888472+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard?dates=20261019&limit=300",
+        "sha256": "a62ba70c17e047257abf2697cd9727c98031c8b03ca25b148ebad3614b95b5bf",
+        "fetched_at_utc": "2026-10-18T11:36:57.966714+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard?dates=20261020&limit=300",
+        "sha256": "cad7f065bd0bbf8cb7867f69da06af4601af32c207eda26a0c8d868007f9d68f",
+        "fetched_at_utc": "2026-10-18T11:36:58.062093+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard?dates=20261017&limit=300",
+        "sha256": "3900b404515aa56b6c1214544a0850b5ac1bf460161f00a39484e2038072f28d",
+        "fetched_at_utc": "2026-10-18T11:36:58.139624+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard?dates=20261018&limit=300",
+        "sha256": "e9e3a8ec09da81701cdd09fd170624ef21c6106005f2b5edf0e2b50a6a12730f",
+        "fetched_at_utc": "2026-10-18T11:36:58.230884+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard?dates=20261019&limit=300",
+        "sha256": "5024345334f53ad151b1400af0ba34b0d56deb5f7d6859a5380d3639547cd788",
+        "fetched_at_utc": "2026-10-18T11:36:58.297228+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard?dates=20261020&limit=300",
+        "sha256": "5024345334f53ad151b1400af0ba34b0d56deb5f7d6859a5380d3639547cd788",
+        "fetched_at_utc": "2026-10-18T11:36:58.345777+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20261017&limit=300",
+        "sha256": "7fe355811747f2107f44cc6e776824dd3a72011efece6bae8588da534be48760",
+        "fetched_at_utc": "2026-10-18T11:36:58.406757+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20261018&limit=300",
+        "sha256": "386f1b11ef772e0b2a70c0220c70c209fa3c727070b34939bd73f218fd21d2ee",
+        "fetched_at_utc": "2026-10-18T11:36:58.467170+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20261019&limit=300",
+        "sha256": "a0193253bf97e7fc79a6e4f5fc1f6378ab70508418f6fddd911023ecbeb3b7d6",
+        "fetched_at_utc": "2026-10-18T11:36:58.530571+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20261020&limit=300",
+        "sha256": "2048ebfe872d9a0cca6236e6397c9e0a3044969672cee3a2dfa21cf34c450d5b",
+        "fetched_at_utc": "2026-10-18T11:36:58.610331+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard?dates=20261017&limit=300",
+        "sha256": "db34f6843573cd2b341169d96439e107e921cdcfc926e1d1207808f6dad72143",
+        "fetched_at_utc": "2026-10-18T11:36:58.676496+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard?dates=20261018&limit=300",
+        "sha256": "be2248aed17e32964e99009e5593a67a5100a91afd039b481373c521bf0425b1",
+        "fetched_at_utc": "2026-10-18T11:36:58.761025+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard?dates=20261019&limit=300",
+        "sha256": "080c474de21b3b88edb5e409b43ada4627317e7e19905d7474802bad4493c425",
+        "fetched_at_utc": "2026-10-18T11:36:58.810371+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard?dates=20261020&limit=300",
+        "sha256": "080c474de21b3b88edb5e409b43ada4627317e7e19905d7474802bad4493c425",
+        "fetched_at_utc": "2026-10-18T11:36:58.948476+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261017&limit=300",
+        "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
+        "fetched_at_utc": "2026-10-18T11:36:59.086040+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018&limit=300",
+        "sha256": "eb320d3523b4f2368d278db3ce22407594da28e313c9661491946b884596c8c8",
+        "fetched_at_utc": "2026-10-18T11:36:59.193505+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261019&limit=300",
+        "sha256": "e7b4a9ce18e17d72425f5784433b2522312465d968aa5bcce80a3d4675f5f252",
+        "fetched_at_utc": "2026-10-18T11:36:59.260933+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261020&limit=300",
+        "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
+        "fetched_at_utc": "2026-10-18T11:36:59.303902+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261017&limit=300",
+        "sha256": "6a1532f16b602824ba404b907070a6ce584a3f6d3a3b9fd5a2a0ac90b13da0c2",
+        "fetched_at_utc": "2026-10-18T11:36:59.375034+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261018&limit=300",
+        "sha256": "6a1532f16b602824ba404b907070a6ce584a3f6d3a3b9fd5a2a0ac90b13da0c2",
+        "fetched_at_utc": "2026-10-18T11:36:59.429980+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261019&limit=300",
+        "sha256": "6a1532f16b602824ba404b907070a6ce584a3f6d3a3b9fd5a2a0ac90b13da0c2",
+        "fetched_at_utc": "2026-10-18T11:36:59.483096+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261020&limit=300",
+        "sha256": "27706562fd2d89ff0fda10b137185a97140df8c9bbd5b8d0a757247d89174eb1",
+        "fetched_at_utc": "2026-10-18T11:36:59.539195+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261017&limit=300",
+        "sha256": "7db1c3a90fbb1817fd5ceb9c32a58661831d3c0794028844668cc2d0c89ac797",
+        "fetched_at_utc": "2026-10-18T11:36:59.617124+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261018&limit=300",
+        "sha256": "e7d0500ca1aa3ac9b94c012c666a9493515075fdf459496d0a7b8cdad0011a92",
+        "fetched_at_utc": "2026-10-18T11:36:59.690474+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261019&limit=300",
+        "sha256": "d7ea148f7ab00e2f1aa6c17dffdd738dd70637c5b1895a5d8ee45d02f1ea051e",
+        "fetched_at_utc": "2026-10-18T11:36:59.759652+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261020&limit=300",
+        "sha256": "301ad3340aaca1b1e1dfdad2d5a70ade8c8b2fc007575db48ddbaea6d898a26d",
+        "fetched_at_utc": "2026-10-18T11:36:59.819692+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard?dates=20261017&limit=300",
+        "sha256": "7fb161052a7c2223e5e6551c4dfad5c6f0dc471c8c5a600c44c20b2e4a3e2989",
+        "fetched_at_utc": "2026-10-18T11:36:59.879978+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard?dates=20261018&limit=300",
+        "sha256": "98279d0b0c9f4919f9c1ac35280b4ccdbfc3f91d9df5c6b0df3963af51951843",
+        "fetched_at_utc": "2026-10-18T11:36:59.932199+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard?dates=20261019&limit=300",
+        "sha256": "14df4dfa791829301c48411be226c8d52eeb20c76ae8bc51fb0e11851ff61eea",
+        "fetched_at_utc": "2026-10-18T11:36:59.978080+00:00"
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard?dates=20261020&limit=300",
+        "sha256": "0294da7155ae00ca2fe62d13b954aca7395de737cb3d2535f951396408341174",
+        "fetched_at_utc": "2026-10-18T11:37:00.049081+00:00"
+      }
+    ],
+    "by_sport": {
+      "epl": 10,
+      "la_liga": 9,
+      "bundesliga": 8,
+      "serie_a": 9,
+      "ligue_1": 8,
+      "nfl": 13,
+      "nba": 3,
+      "nhl": 31,
+      "mlb": 4
+    }
+  },
+  "candidates": [
+    {
+      "id": "epl:401879263",
+      "sport": "epl",
+      "home": "AFC Bournemouth",
+      "away": "Sunderland",
+      "start_utc": "2026-10-18T13:00:00+00:00",
+      "model_version": "ELO-FOOTBALL-0.3",
+      "model_probabilities": [
+        0.4856212,
+        0.26,
+        0.2543788
+      ],
+      "market": null,
+      "classification": "EXPERIMENTAL",
+      "reason": "No complete fresh 1X2 odds"
+    },
+    {
+      "id": "epl:401879261",
+      "sport": "epl",
+      "home": "Brighton & Hove Albion",
+      "away": "Crystal Palace",
+      "start_utc": "2026-10-18T13:00:00+00:00",
+      "model_version": "ELO-FOOTBALL-0.3",
+      "model_probabilities": [
+        0.5218487,
+        0.26,
+        0.2181513
+      ],
+      "market": null,
+      "classification": "EXPERIMENTAL",
+      "reason": "No complete fresh 1X2 odds"
+    },
+    {
+      "id": "epl:401879260",
+      "sport": "epl",
+      "home": "Leeds United",
+      "away": "Manchester United",
+      "start_utc": "2026-10-18T13:00:00+00:00",
+      "model_version": "ELO-FOOTBALL-0.3",
+      "model_probabilities": [
+        0.3769359,
+        0.26,
+        0.3630641
+      ],
+      "market": null,
+      "classification": "EXPERIMENTAL",
+      "reason": "No complete fresh 1X2 odds"
+    },
+    {
+      "id": "epl:401878769",
+      "sport": "epl",
+      "home": "Nottingham Forest",
+      "away": "Arsenal",
+      "start_utc": "2026-10-18T15:30:00+00:00",
+      "model_version": "ELO-FOOTBALL-0.3",
+      "model_probabilities": [
+        0.1546686,
+        0.26,
+        0.5853314
+      ],
+      "market": null,
+      "classification": "EXPERIMENTAL",
+      "reason": "No complete fresh 1X2 odds"
+    },
+    {
+      "id": "epl:401879257",
+      "sport": "epl",
+      "home": "Tottenham Hotspur",
+      "away": "Coventry City",
+      "start_utc": "2026-10-19T19:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "Insufficient historical matches for teams"
+    },
+    {
+      "id": "la_liga:401882840",
+      "sport": "la_liga",
+      "home": "Osasuna",
+      "away": "Racing Santander",
+      "start_utc": "2026-10-18T12:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "la_liga:401882845",
+      "sport": "la_liga",
+      "home": "Celta Vigo",
+      "away": "Alavés",
+      "start_utc": "2026-10-18T14:15:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "la_liga:401882841",
+      "sport": "la_liga",
+      "home": "Málaga",
+      "away": "Real Sociedad",
+      "start_utc": "2026-10-18T16:30:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "la_liga:401882839",
+      "sport": "la_liga",
+      "home": "Real Madrid",
+      "away": "Sevilla",
+      "start_utc": "2026-10-18T19:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "la_liga:401882842",
+      "sport": "la_liga",
+      "home": "Getafe",
+      "away": "Rayo Vallecano",
+      "start_utc": "2026-10-19T19:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "bundesliga:401884771",
+      "sport": "bundesliga",
+      "home": "Bayer Leverkusen",
+      "away": "SC Freiburg",
+      "start_utc": "2026-10-18T13:30:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "bundesliga:401884768",
+      "sport": "bundesliga",
+      "home": "Borussia Mönchengladbach",
+      "away": "TSG Hoffenheim",
+      "start_utc": "2026-10-18T15:30:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "serie_a:401874774",
+      "sport": "serie_a",
+      "home": "Fiorentina",
+      "away": "Como",
+      "start_utc": "2026-10-18T13:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "serie_a:401874978",
+      "sport": "serie_a",
+      "home": "AC Milan",
+      "away": "Atalanta",
+      "start_utc": "2026-10-18T16:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "serie_a:401874765",
+      "sport": "serie_a",
+      "home": "Juventus",
+      "away": "Lazio",
+      "start_utc": "2026-10-18T18:45:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "serie_a:401874762",
+      "sport": "serie_a",
+      "home": "Monza",
+      "away": "Cagliari",
+      "start_utc": "2026-10-19T16:30:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "serie_a:401874784",
+      "sport": "serie_a",
+      "home": "Parma",
+      "away": "Torino",
+      "start_utc": "2026-10-19T18:45:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "ligue_1:401876439",
+      "sport": "ligue_1",
+      "home": "Angers",
+      "away": "Marseille",
+      "start_utc": "2026-10-18T13:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "ligue_1:401876438",
+      "sport": "ligue_1",
+      "home": "Le Havre AC",
+      "away": "AJ Auxerre",
+      "start_utc": "2026-10-18T15:15:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "ligue_1:401876435",
+      "sport": "ligue_1",
+      "home": "Lorient",
+      "away": "AS Monaco",
+      "start_utc": "2026-10-18T15:15:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "ligue_1:401876433",
+      "sport": "ligue_1",
+      "home": "Paris FC",
+      "away": "Stade Rennais",
+      "start_utc": "2026-10-18T15:15:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "ligue_1:401876434",
+      "sport": "ligue_1",
+      "home": "Lyon",
+      "away": "Nice",
+      "start_utc": "2026-10-18T18:45:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401872996",
+      "sport": "nfl",
+      "home": "Jacksonville Jaguars",
+      "away": "Houston Texans",
+      "start_utc": "2026-10-18T13:30:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401872999",
+      "sport": "nfl",
+      "home": "Atlanta Falcons",
+      "away": "Chicago Bears",
+      "start_utc": "2026-10-18T17:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401872997",
+      "sport": "nfl",
+      "home": "Cleveland Browns",
+      "away": "Baltimore Ravens",
+      "start_utc": "2026-10-18T17:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401873003",
+      "sport": "nfl",
+      "home": "Indianapolis Colts",
+      "away": "Tennessee Titans",
+      "start_utc": "2026-10-18T17:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401873001",
+      "sport": "nfl",
+      "home": "New England Patriots",
+      "away": "New York Jets",
+      "start_utc": "2026-10-18T17:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401873000",
+      "sport": "nfl",
+      "home": "New York Giants",
+      "away": "New Orleans Saints",
+      "start_utc": "2026-10-18T17:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401872998",
+      "sport": "nfl",
+      "home": "Philadelphia Eagles",
+      "away": "Carolina Panthers",
+      "start_utc": "2026-10-18T17:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401873002",
+      "sport": "nfl",
+      "home": "Tampa Bay Buccaneers",
+      "away": "Pittsburgh Steelers",
+      "start_utc": "2026-10-18T17:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401873004",
+      "sport": "nfl",
+      "home": "Los Angeles Rams",
+      "away": "Arizona Cardinals",
+      "start_utc": "2026-10-18T20:05:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401873006",
+      "sport": "nfl",
+      "home": "Kansas City Chiefs",
+      "away": "Los Angeles Chargers",
+      "start_utc": "2026-10-18T20:25:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401873005",
+      "sport": "nfl",
+      "home": "Las Vegas Raiders",
+      "away": "Buffalo Bills",
+      "start_utc": "2026-10-18T20:25:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401873007",
+      "sport": "nfl",
+      "home": "Green Bay Packers",
+      "away": "Dallas Cowboys",
+      "start_utc": "2026-10-19T00:20:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nfl:401873008",
+      "sport": "nfl",
+      "home": "San Francisco 49ers",
+      "away": "Washington Commanders",
+      "start_utc": "2026-10-20T00:15:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nhl:401892533",
+      "sport": "nhl",
+      "home": "Minnesota Wild",
+      "away": "Columbus Blue Jackets",
+      "start_utc": "2026-10-18T22:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nhl:401892534",
+      "sport": "nhl",
+      "home": "Calgary Flames",
+      "away": "Carolina Hurricanes",
+      "start_utc": "2026-10-19T00:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nhl:401892535",
+      "sport": "nhl",
+      "home": "New York Rangers",
+      "away": "Anaheim Ducks",
+      "start_utc": "2026-10-19T23:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nhl:401892536",
+      "sport": "nhl",
+      "home": "Philadelphia Flyers",
+      "away": "Colorado Avalanche",
+      "start_utc": "2026-10-19T23:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nhl:401892537",
+      "sport": "nhl",
+      "home": "Toronto Maple Leafs",
+      "away": "San Jose Sharks",
+      "start_utc": "2026-10-19T23:30:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "nhl:401892538",
+      "sport": "nhl",
+      "home": "Utah Mammoth",
+      "away": "Pittsburgh Penguins",
+      "start_utc": "2026-10-20T01:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "mlb:401930515",
+      "sport": "mlb",
+      "home": "Cleveland Guardians",
+      "away": "Tampa Bay Rays",
+      "start_utc": "2026-10-18T21:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    },
+    {
+      "id": "mlb:401908028",
+      "sport": "mlb",
+      "home": "Tampa Bay Rays",
+      "away": "Cleveland Guardians",
+      "start_utc": "2026-10-20T00:00:00+00:00",
+      "model_version": null,
+      "model_probabilities": null,
+      "market": null,
+      "classification": "FIXTURE_ONLY",
+      "reason": "No calibrated model for sport"
+    }
+  ],
+  "integrity": [
+    "No automatic paper stake until model risk bounds and quote timestamps validated",
+    "Free ESPN odds may be unavailable or lack quote timestamps",
+    "Only events with start time strictly after snapshot are eligible",
+    "No reconstruction of earlier inactive periods"
+  ]
+}
