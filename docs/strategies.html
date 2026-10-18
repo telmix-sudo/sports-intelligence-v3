@@ -1,0 +1,46 @@
+<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sports Intelligence V3 · Laboratório</title>
+<style>
+:root{color-scheme:dark;--bg:#0c1421;--panel:#152238;--border:#344359;--text:#edf3fa;--soft:#a3b1c2;--mint:#4fd1a2;--orange:#ffca83}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}header,main,footer{max-width:1200px;margin:auto;padding:22px}h1{letter-spacing:-.03em;font-size:clamp(1.7rem,4vw,2.5rem);margin:0}h2{font-size:1.22rem}a{color:var(--mint)}.muted{color:var(--soft)}.badge{color:var(--orange);font-size:.82rem}.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}.card strong{font-size:1.65rem;display:block}.card h3{font-size:1rem;margin:0 0 12px}.small{font-size:.85rem}.space{margin:24px 0}.table{overflow-x:auto;border:1px solid var(--border);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:820px}th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}th{background:var(--panel);color:var(--soft);font-size:.84rem}button{background:none;color:var(--mint);border:1px solid var(--border);padding:10px 14px;border-radius:10px;cursor:pointer;font:inherit}.warn{color:var(--orange)}.number{font-variant-numeric:tabular-nums;font-weight:650}footer{font-size:.85rem;color:var(--soft)}
+</style></head><body>
+<header class="bar"><div><div class="badge">EXPERIMENTAÇÃO · DINHEIRO 100% FICTÍCIO</div><h1>Laboratório de estratégias V3</h1><p class="muted" id="updated">A carregar o relatório...</p></div><nav><a href="./">Painel principal</a> &nbsp; <a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/strategy-lab.yml">Execuções</a> &nbsp; <button id="refresh">Atualizar</button></nav></header>
+<main>
+<section class="card space"><h2>Como interpretar os resultados</h2><p>As cinco estratégias têm <strong style="display:inline;font-size:inherit">1.000 € fictícios</strong> cada e relatórios independentes. Os testes históricos com OpenFootball avaliam Brier Score e Log Loss, não lucro retrospetivo: não existem odds históricas cronológicas neste conjunto. Valores mais baixos são melhores. Comparar cinco métodos num mesmo período não valida nenhum deles fora da amostra.</p><p id="status" class="warn" role="status">A procurar relatório...</p></section>
+<section class="grid space" id="wallets" aria-label="Carteiras virtuais"></section>
+<section class="space"><h2>Backtest cronológico</h2><p class="muted">Cinco ligas; previsões feitas antes de conhecer os resultados do próprio dia. Referência trivial = probabilidade 1/3 para cada resultado (não representa o mercado).</p><div class="table"><table><thead><tr><th>Estratégia</th><th>Jogos avaliados</th><th>Brier</th><th>Log Loss</th><th>Brier uniforme</th><th>ROI histórico</th></tr></thead><tbody id="backtests"><tr><td colspan="6">A carregar…</td></tr></tbody></table></div></section>
+<section class="space"><h2>Fonte e qualidade</h2><div class="card"><div id="sources" class="muted">—</div><p class="muted small">As carteiras simulam preços observados, mas não verificam a execução real em bookmaker nem oferecem garantias. Estratégias podem selecionar os mesmos jogos; por isso não somamos as carteiras como posições independentes.</p><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/strategy_research.md">Metodologia, fontes científicas e próximas estratégias</a></p></div></section>
+</main><footer>Sports Intelligence · Sem apostas reais · Fontes públicas e cálculos reproduzíveis</footer>
+<script>
+"use strict";
+const url="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/reports/strategy_lab_latest.json";
+const el=id=>document.getElementById(id);
+const fmt=(x,places=2)=>Number.isFinite(x)?x.toLocaleString("pt-PT",{minimumFractionDigits:places,maximumFractionDigits:places}):"—";
+const label=id=>id.split("_").join(" ");
+function cell(v){const td=document.createElement("td");td.textContent=String(v??"—");return td}
+function card(name,a){
+const node=document.createElement("article");node.className="card";
+const title=document.createElement("h3");title.textContent=label(name);
+const value=document.createElement("strong");value.textContent=fmt(a.bankroll_eur)+" €";
+const meta=document.createElement("div");meta.className="muted small";meta.textContent="P/L "+fmt(a.pnl_eur)+" € · abertas "+a.open+" · liquidadas "+a.settled;
+const yieldEl=document.createElement("div");yieldEl.className="small";yieldEl.textContent="Yield: "+(a.yield_percent===null?"sem apostas liquidadas":fmt(a.yield_percent)+"%");
+node.append(title,value,meta,yieldEl);return node}
+async function load(){
+el("status").textContent="A verificar estado...";
+try{
+const response=await fetch(url+"?t="+Date.now(),{cache:"no-store"});
+if(!response.ok)throw Error("HTTP "+response.status);
+const x=await response.json();
+el("updated").textContent="Atualizado em "+new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(x.asof_utc))+" (Lisboa)";
+el("wallets").replaceChildren(...Object.entries(x.accounts||{}).map(([n,a])=>card(n,a)));
+const target=el("backtests");target.replaceChildren();
+for(const [name,m] of Object.entries(x.historical||{})){
+const tr=document.createElement("tr");
+for(const value of [label(name),m.n,fmt(m.brier,4),fmt(m.log_loss,4),fmt(m.uniform_brier,4),"não disponível"])tr.append(cell(value));
+target.append(tr);
+}
+const src=x.provenance||{};
+el("sources").textContent="Jogos históricos por liga: "+Object.entries(src.matches_per_league||{}).map(([k,n])=>k+": "+n).join(" · ")+" | Falhas de fontes: "+(src.failures?.length??0)+" | Eventos no scanner: "+(x.events_seen??0);
+el("status").textContent="Experimento ativo. Novos papers nesta execução: "+Object.values(x.new_paper_entries||{}).reduce((a,b)=>a+b,0)+". Liquidados: "+(x.newly_settled??0)+".";
+}catch(err){el("status").textContent="Sem relatório disponível: "+err.message+". Consulta GitHub Actions."}
+}
+el("refresh").addEventListener("click",load);load();
+</script></body></html>
