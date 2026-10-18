@@ -12,6 +12,8 @@ from sports_intelligence.strategy_lab import (
     build_accounts, open_accounts, make_models, predictions, run_strategy_lab,
     INITIAL_BANKROLL_EUR, dc_adjusted,
 )
+from sports_intelligence.custom_strategies import ORIGINAL_NAMES, CUSTOM_NAMES, RULES
+from sports_intelligence.strategy_registry import ensure_registry, verify_prior_accounts
 
 UTC = dt.timezone.utc
 DAY = dt.datetime(2026, 10, 18, 10, tzinfo=UTC)
@@ -45,13 +47,19 @@ class StrategyLabTests(unittest.TestCase):
         self.assertEqual(len(provenance["sources"]), 1)
         self.assertEqual(len(provenance["failures"]), 1)
 
-    def test_five_models_proper_distributions(self):
+    def test_eight_models_and_market_only_when_price_exists(self):
         models = make_models()
         probabilities = predictions(models, "Arsenal", "Chelsea")
         self.assertEqual(set(probabilities), set(STRATEGIES))
+        self.assertIsNone(probabilities["MARKET_ANCHORED"])
         for values in probabilities.values():
+            if values is None:
+                continue
             self.assertAlmostEqual(sum(values), 1, places=9)
             self.assertTrue(all(0 <= value <= 1 for value in values))
+        anchored = predictions(models, "Arsenal", "Chelsea",
+                               market_no_vig=[0.4, 0.30, 0.30])["MARKET_ANCHORED"]
+        self.assertAlmostEqual(sum(anchored), 1.0)
 
     def test_separate_research_scoreboard_without_odds_does_not_fake_roi(self):
         game = {"date": dt.date(2025, 9, 1), "league": "epl",
@@ -147,7 +155,7 @@ class StrategyLabTests(unittest.TestCase):
                 loader.return_value = ({"epl": openfootball_matches(PAYLOAD, "epl", DAY.date())},
                                        {"matches_per_league": {"epl": 2}, "sources": [], "failures": []})
                 report = run_strategy_lab(root, DAY, discover=discover)
-            self.assertEqual(len(report["accounts"]), 5)
+            self.assertEqual(len(report["accounts"]), len(STRATEGIES))
             self.assertTrue((root / "reports" / "strategy_lab_latest.json").is_file())
             self.assertTrue((root / "data" / "strategy_accounts_v3.json").is_file())
             self.assertEqual(report["new_paper_entries"], {})
