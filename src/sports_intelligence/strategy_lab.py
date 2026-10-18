@@ -19,6 +19,11 @@ from .football import FootballElo, canonical
 from .poisson import FootballPoisson
 from .metrics import brier, log_loss, no_vig
 from .scanner import capture_scoreboards, unpack_scoreboard, parse_iso
+from .custom_strategies import (
+    ORIGINAL_NAMES, CUSTOM_NAMES, ALL_NAMES, RULES,
+    experimental_forecasts, accepts_candidate,
+)
+from .strategy_registry import ensure_registry, verify_prior_accounts
 
 UTC = dt.timezone.utc
 PORTUGAL = ZoneInfo("Europe/Lisbon")
@@ -31,7 +36,7 @@ LEAGUE_CODES = {
     "ligue_1": "fr.1",
 }
 SEASONS = tuple(f"{y}-{(y+1)%100:02d}" for y in range(2021, 2027))
-STRATEGIES = ("ELO_STANDARD", "ELO_DYNAMIC", "POISSON_SHRINK", "DIXON_COLES_LOW", "ELO_POISSON_BLEND")
+STRATEGIES = ALL_NAMES
 INITIAL_BANKROLL_EUR = 1000.0
 EVALUATION_FROM = dt.date(2024, 8, 1)
 WARMUP = 100
@@ -122,6 +127,7 @@ def make_models() -> dict:
         "POISSON_SHRINK": FootballPoisson(prior_games=8),
         "DIXON_COLES_LOW": FootballPoisson(prior_games=8),
         "ELO_POISSON_BLEND": None,
+        **{name: None for name in CUSTOM_NAMES},
     }
 
 
@@ -162,13 +168,16 @@ def dc_adjusted(poisson: FootballPoisson, home: str, away: str,
     return tuple(x / total for x in values)
 
 
-def predictions(models: dict, home: str, away: str) -> dict:
+def predictions(models: dict, home: str, away: str,
+                market_no_vig=None) -> dict:
     elo = models["ELO_STANDARD"].predict(home, away)
     quick = models["ELO_DYNAMIC"].predict(home, away)
     poisson = models["POISSON_SHRINK"].predict(home, away)
     dc = dc_adjusted(models["DIXON_COLES_LOW"], home, away)
     ensemble = tuple((a + b) / 2 for a, b in zip(elo, poisson))
-    return dict(zip(STRATEGIES, (elo, quick, poisson, dc, ensemble)))
+    base = dict(zip(ORIGINAL_NAMES, (elo, quick, poisson, dc, ensemble)))
+    base.update(experimental_forecasts(base, market_no_vig))
+    return base
 
 
 def update_all(models: dict, match: dict) -> None:
@@ -198,6 +207,17 @@ def historical_comparison(matches_by_league: dict) -> tuple[dict, dict]:
                 row_preds = predictions(models, m["home"], m["away"])
                 # 1/3 null benchmark is not a market benchmark. Keep separate.
                 for name, p in row_preds.items():
+                    if p is None:
+                        continue  # market anchored has NO historical price, do not fabricate one
+                    if name == "DISAGREEMENT_VETO":
+                        votes = [row_preds[k] for k in
+                                 ("ELO_STANDARD", "ELO_DYNAMIC", "POISSON_SHRINK", "DIXON_COLES_LOW")]
+                        choice = max(range(3), key=lambda i: p[i])
+                        if (min(models["ELO_STANDARD"].played.get(m["home"], 0),
+                                models["ELO_STANDARD"].played.get(m["away"], 0)) < 16 or
+                            sum(max(range(3), key=lambda i: v[i]) == choice for v in votes) < 3 or
+                            max(v[choice] for v in votes) - min(v[choice] for v in votes) > .12):
+                            continue
                     stat = tracked[name]
                     stat["n"] += 1
                     stat["brier_sum"] += brier(p, o)
@@ -225,6 +245,11 @@ def historical_comparison(matches_by_league: dict) -> tuple[dict, dict]:
             "uniform_brier": round(2/3, 6),
             "uniform_log_loss": round(math.log(3), 6),
             "historical_roi": None,
+            "historical_scope": ("UNAVAILABLE_NEEDS_POINT_IN_TIME_MARKET"
+                                 if name == "MARKET_ANCHORED" else
+                                 "CONDITIONAL_SUBSET_NOT_COMPARABLE_DIRECTLY"
+                                 if name == "DISAGREEMENT_VETO" else
+                                 "FULL_RESEARCH_SAMPLE"),
             "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
             "by_league": {league: {"n": s[name]["n"],
                                 "brier": round(s[name]["brier_sum"] / s[name]["n"], 6) if s[name]["n"] else None,
