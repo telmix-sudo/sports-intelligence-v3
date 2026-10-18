@@ -9,6 +9,31 @@ from sports_intelligence.cli import run
 
 
 class PipelineTests(unittest.TestCase):
+    def test_no_bookmaker_odds_stays_unvalidated(self):
+        now = dt.datetime(2026, 10, 18, 10, tzinfo=dt.timezone.utc)
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            metrics = {"n": 140, "benchmark_n": 0,
+                       "improvement_brier": None, "improvement_log_loss": None,
+                       "brier": 0.61, "log_loss": 1.01}
+            status = {"status": "EXPERIMENTAL", "metrics": metrics,
+                      "selected_model": "ELO-FOOTBALL-0.3"}
+            source = {"sources_checked": 1, "sources_ok": 1, "sources_failed": 0,
+                      "by_sport": {"epl": 0}, "errors": [], "provenance": []}
+            odds = {"status": "MISSING_KEY_NO_ODDS_API_CALLS",
+                    "quotes_matched": 0, "calls_today": 0}
+            with (patch("sports_intelligence.cli.historical_football",
+                        return_value=(None, status)),
+                  patch("sports_intelligence.cli.historical_tennis",
+                        return_value={"status": "DISABLED"}),
+                  patch("sports_intelligence.cli.capture_scoreboards",
+                        return_value=([], source)),
+                  patch("sports_intelligence.cli.annotate_odds",
+                        return_value=odds)):
+                report = run(root, now)
+            self.assertEqual(report["model_gate"], "NO_TIMED_MARKET_BENCHMARK")
+            self.assertEqual(report["v3_papers_with_stake"], 0)
+
     def test_report_archives_and_state_with_no_data(self):
         now = dt.datetime(2026, 10, 18, 10, tzinfo=dt.timezone.utc)
         with tempfile.TemporaryDirectory() as tmp:
