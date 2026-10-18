@@ -2,7 +2,7 @@
 <style>
 :root{color-scheme:dark;--bg:#0c1421;--panel:#152238;--border:#344359;--text:#edf3fa;--soft:#a3b1c2;--mint:#4fd1a2;--orange:#ffca83}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}header,main,footer{max-width:1200px;margin:auto;padding:22px}h1{letter-spacing:-.03em;font-size:clamp(1.7rem,4vw,2.5rem);margin:0}h2{font-size:1.22rem}a{color:var(--mint)}.muted{color:var(--soft)}.badge{color:var(--orange);font-size:.82rem}.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}.card strong{font-size:1.65rem;display:block}.card h3{font-size:1rem;margin:0 0 12px}.small{font-size:.85rem}.space{margin:24px 0}.table{overflow-x:auto;border:1px solid var(--border);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:820px}th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}th{background:var(--panel);color:var(--soft);font-size:.84rem}button{background:none;color:var(--mint);border:1px solid var(--border);padding:10px 14px;border-radius:10px;cursor:pointer;font:inherit}.warn{color:var(--orange)}.number{font-variant-numeric:tabular-nums;font-weight:650}footer{font-size:.85rem;color:var(--soft)}
 </style></head><body>
-<header class="bar"><div><div class="badge">EXPERIMENTAÇÃO · DINHEIRO 100% FICTÍCIO</div><h1>Laboratório de estratégias V3</h1><p class="muted" id="updated">A carregar o relatório...</p></div><nav><a href="./">Painel principal</a> &nbsp; <a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/strategy-lab.yml">Execuções</a> &nbsp; <button id="refresh">Atualizar</button></nav></header>
+<header class="bar"><div><div class="badge">EXPERIMENTAÇÃO · DINHEIRO 100% FICTÍCIO</div><h1>Laboratório de estratégias V3</h1><p class="muted" id="updated">A carregar o relatório...</p><p class="muted small" id="freshness">Consulta automática de 5 em 5 minutos; relatórios novos são publicados pelo GitHub Actions, não em tempo real.</p></div><nav><a href="./">Painel principal</a> &nbsp; <a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/strategy-lab.yml">Execuções</a> &nbsp; <button id="refresh">Atualizar</button></nav></header>
 <main>
 <section class="card space"><h2>Como interpretar os resultados</h2><p>Cada estratégia nova começa com <strong style="display:inline;font-size:inherit">1.000 € fictícios</strong>. As carteiras existentes preservam os seus saldos, lucros, perdas e previsões quando entra uma estratégia nova. Os testes históricos com OpenFootball avaliam Brier Score e Log Loss, não lucro retrospetivo: não existem odds históricas cronológicas neste conjunto. Valores mais baixos são melhores. Comparar cinco métodos num mesmo período não valida nenhum deles fora da amostra.</p><p id="status" class="warn" role="status">A procurar relatório...</p></section>
 <section class="grid space" id="wallets" aria-label="Carteiras virtuais"></section>
@@ -29,7 +29,9 @@ try{
 const response=await fetch(url+"?t="+Date.now(),{cache:"no-store"});
 if(!response.ok)throw Error("HTTP "+response.status);
 const x=await response.json();
-el("updated").textContent="Atualizado em "+new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(x.asof_utc))+" (Lisboa)";
+el("updated").textContent="Último relatório: "+new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(x.asof_utc))+" (Lisboa)";
+const elapsed=Math.max(0,Math.round((Date.now()-new Date(x.asof_utc).getTime())/60000));
+el("freshness").textContent="Verificado agora; relatório publicado há "+(elapsed<60?elapsed+" min":Math.floor(elapsed/60)+" h "+elapsed%60+" min")+". A verificação automática ocorre a cada 5 minutos e não provoca novas apostas nem consultas à API de odds. "+(elapsed>24*60?"Atenção: laboratório sem novo relatório há mais de um dia.":"As oito carteiras só mudam quando existe uma nova operação ou liquidação.");
 el("wallets").replaceChildren(...Object.entries(x.accounts||{}).map(([n,a])=>card(n,a,x.registered_strategies?.[n])));
 const target=el("backtests");target.replaceChildren();
 for(const [name,m] of Object.entries(x.historical||{})){
@@ -42,5 +44,8 @@ el("sources").textContent="Jogos históricos por liga: "+Object.entries(src.matc
 el("status").textContent="Experimento ativo. Novos papers nesta execução: "+Object.values(x.new_paper_entries||{}).reduce((a,b)=>a+b,0)+". Liquidados: "+(x.newly_settled??0)+".";
 }catch(err){el("status").textContent="Sem relatório disponível: "+err.message+". Consulta GitHub Actions."}
 }
-el("refresh").addEventListener("click",load);load();
+el("refresh").addEventListener("click",load);
+load();
+setInterval(()=>{if(!document.hidden)load()},300000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
 </script></body></html>
