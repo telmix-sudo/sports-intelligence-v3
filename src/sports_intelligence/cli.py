@@ -77,10 +77,17 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
     complete = [x for x in frozen if x.get("status") == "SETTLED"]
     v1_audit = audit_ledger(root / "data" / "ledger_v1.csv") if (root / "data" / "ledger_v1.csv").exists() else None
     metrics = football.get("metrics") or {}
-    gate = ("NO_MODEL" if not metrics else
-            "UNVALIDATED_AGAINST_MARKET"
-            if metrics.get("improvement_brier", -1) < 0 or metrics.get("improvement_log_loss", -1) < 0
-            else "EXPERIMENTAL_NEEDS_PROSPECTIVE_CONFIRMATION")
+    # Public-domain scores have no point-in-time bookmaker odds; None is not proof of value.
+    if not metrics:
+        gate = "NO_MODEL"
+    elif metrics.get("benchmark_n", 0) == 0:
+        gate = "NO_TIMED_MARKET_BENCHMARK"
+    elif metrics.get("improvement_brier") is None or metrics.get("improvement_log_loss") is None:
+        gate = "INCOMPLETE_MARKET_BENCHMARK"
+    elif metrics["improvement_brier"] < 0 or metrics["improvement_log_loss"] < 0:
+        gate = "UNVALIDATED_AGAINST_MARKET"
+    else:
+        gate = "EXPERIMENTAL_NEEDS_PROSPECTIVE_CONFIRMATION"
     report = {
         "generated_at_utc": now.isoformat(),
         "v1_audit": v1_audit,
