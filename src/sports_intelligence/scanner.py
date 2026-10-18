@@ -13,6 +13,7 @@ from pathlib import Path
 
 from .feeds import SCOREBOARDS, fetch_espn
 from .football import FootballElo, canonical
+from .poisson import FootballPoisson
 from .metrics import american_to_decimal, brier, log_loss, no_vig
 
 UTC = dt.timezone.utc
@@ -114,7 +115,7 @@ def capture_scoreboards(now: dt.datetime, fetcher=fetch_espn, sports: dict | Non
     return list(all_events.values()), report
 
 
-def classify(event: dict, model: FootballElo | None, now: dt.datetime) -> dict | None:
+def classify(event: dict, model: FootballElo | FootballPoisson | None, now: dt.datetime) -> dict | None:
     kickoff = parse_iso(event["start_utc"])
     if not (now < kickoff <= now + dt.timedelta(hours=48)) or event["status"] != "pre":
         return None
@@ -128,7 +129,7 @@ def classify(event: dict, model: FootballElo | None, now: dt.datetime) -> dict |
         home, away = canonical(event["home"]), canonical(event["away"])
         if model.played.get(home, 0) >= 8 and model.played.get(away, 0) >= 8:
             record["model_probabilities"] = [round(p, 7) for p in model.predict(home, away)]
-            record["model_version"] = "ELO-FOOTBALL-0.3"
+            record["model_version"] = "POISSON-SHRINK-0.3" if isinstance(model, FootballPoisson) else "ELO-FOOTBALL-0.3"
             record["classification"] = "EXPERIMENTAL"
             record["reason"] = "No complete fresh 1X2 odds" if not event["quote"] else "Paper criteria not validated"
         else:
@@ -172,6 +173,9 @@ def freeze_observations(candidates: list[dict], file: Path, now: dt.datetime,
                   "market_no_vig": c["market"]["no_vig"],
                   "decimal_odds": c["market"]["decimal"],
                   "provider": c["market"]["provider"],
+                  "bookmakers": c["market"].get("bookmakers"),
+                  "book_quote_times_utc": c["market"].get("best_book_updates"),
+                  "quote_timestamp_available": c["market"].get("quote_timestamp_available", False),
                   "uncertainty_method": "heuristic_8pp_not_statistical_interval",
                   "stake_eur": 0, "status": "OPEN"}
         existing.append(record)
