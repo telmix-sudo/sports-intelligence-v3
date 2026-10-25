@@ -355,7 +355,7 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
 
 
 def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime,
-                  registry: dict | None = None) -> tuple[dict, dict]:
+                  registry: dict | None = None, diagnostics: dict | None = None) -> tuple[dict, dict]:
     """Optional experimental paper entries; each account independently limits exposure.
 
     Only model probabilities and pre-game timestamped quotes are eligible.
@@ -454,7 +454,9 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             exposure += stake
         save_jsonl(path, rows)
         account_stats[name] = {"new_entries": added[name], "total_records": len(rows)}
-    return account_stats, {name: count for name, count in added.items() if count > 0}, dict(rejected)
+    if diagnostics is not None:
+        diagnostics.update(rejected)
+    return account_stats, {name: count for name, count in added.items() if count > 0}
 
 
 def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
@@ -501,7 +503,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         except Exception:
             pass
     before, settle_counts = build_accounts(root, finals, now)
-    additions, entry_counts, rejected = open_accounts(root, models, events, now, registry=registry)
+    rejected = {}
+    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected)
     after, _ = build_accounts(root, {}, now)
     report = {
         "asof_utc": now.isoformat(),
