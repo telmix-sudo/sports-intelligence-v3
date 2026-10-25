@@ -500,8 +500,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             for record in unpack_scoreboard(result, league, now):
                 if record["completed"] and record["final"]:
                     finals[record["id"]] = record["final"]
-        except Exception:
-            pass
+        except Exception as exc:
+            print("Settlement lookup failed", league, day.isoformat(), type(exc).__name__, flush=True)
     before, settle_counts = build_accounts(root, finals, now)
     rejected = {}
     additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected)
