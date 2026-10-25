@@ -502,6 +502,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
                     finals[record["id"]] = record["final"]
         except Exception as exc:
             print("Settlement lookup failed", league, day.isoformat(), type(exc).__name__, flush=True)
+    missing_final_ids = sorted({row["event_id"] for name in STRATEGIES for row in read_jsonl(root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")) if row.get("status") == "OPEN" and parse_iso(row["start_utc"]) <= now and row["event_id"] not in finals})
     before, settle_counts = build_accounts(root, finals, now)
     rejected = {}
     additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected)
@@ -521,6 +522,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "events_seen": len(events), "new_paper_entries": entry_counts,
         "entry_diagnostics": {"rejections": rejected, "new_entries": sum(entry_counts.values()), "unit": "strategy-event evaluations"},
         "newly_settled": settle_counts["settled_this_run"],
+        "missing_final_event_ids": missing_final_ids,
         "restrictions": [
             "No real bets; outcomes do not imply profit guarantee.",
             "Historical comparison has NO historic book prices; historical ROI deliberately missing.",
