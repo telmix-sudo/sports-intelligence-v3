@@ -56,7 +56,7 @@ async function showPositions(name){
   const endpoint="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/data/strategy_ledgers/"+filename;
   const response=await fetch(endpoint+"?t="+Date.now(),{cache:"no-store"});
   if(!response.ok)throw Error("HTTP "+response.status);
-  const rows=(await response.text()).split(/\\r?\\n/).filter(Boolean).map(line=>JSON.parse(line));
+  const rows=(await response.text()).split(/\r?\n/).filter(Boolean).map(line=>JSON.parse(line));
   rows.sort((a,b)=>(a.status==="OPEN"?0:1)-(b.status==="OPEN"?0:1)||String(a.start_utc).localeCompare(String(b.start_utc)));
   const open=rows.filter(r=>r.status==="OPEN").length,settled=rows.filter(r=>r.status==="SETTLED").length;
   el("positionsSummary").textContent=open+" abertas · "+settled+" liquidadas · valores exclusivamente fictícios. Fim previsto = início + 2 horas; não é a hora oficial de conclusão. A liquidação depende do próximo processamento e do resultado confirmado.";
