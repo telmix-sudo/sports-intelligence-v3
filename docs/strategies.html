@@ -1,6 +1,6 @@
 <!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sports Intelligence V3 · Laboratório</title>
 <style>
-:root{color-scheme:dark;--bg:#0c1421;--panel:#152238;--border:#344359;--text:#edf3fa;--soft:#a3b1c2;--mint:#4fd1a2;--orange:#ffca83}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}header,main,footer{max-width:1200px;margin:auto;padding:22px}h1{letter-spacing:-.03em;font-size:clamp(1.7rem,4vw,2.5rem);margin:0}h2{font-size:1.22rem}a{color:var(--mint)}.muted{color:var(--soft)}.badge{color:var(--orange);font-size:.82rem}.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}.card strong{font-size:1.65rem;display:block}.card h3{font-size:1rem;margin:0 0 12px}.small{font-size:.85rem}.space{margin:24px 0}.table{overflow-x:auto;border:1px solid var(--border);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:820px}th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}th{background:var(--panel);color:var(--soft);font-size:.84rem}button{background:none;color:var(--mint);border:1px solid var(--border);padding:10px 14px;border-radius:10px;cursor:pointer;font:inherit}.warn{color:var(--orange)}.number{font-variant-numeric:tabular-nums;font-weight:650}footer{font-size:.85rem;color:var(--soft)}
+:root{color-scheme:dark;--bg:#0c1421;--panel:#152238;--border:#344359;--text:#edf3fa;--soft:#a3b1c2;--mint:#4fd1a2;--orange:#ffca83}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}header,main,footer{max-width:1200px;margin:auto;padding:22px}h1{letter-spacing:-.03em;font-size:clamp(1.7rem,4vw,2.5rem);margin:0}h2{font-size:1.22rem}a{color:var(--mint)}.muted{color:var(--soft)}.badge{color:var(--orange);font-size:.82rem}.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}.card strong{font-size:1.65rem;display:block}.card h3{font-size:1rem;margin:0 0 12px}.small{font-size:.85rem}.space{margin:24px 0}.table{overflow-x:auto;border:1px solid var(--border);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:820px}th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}th{background:var(--panel);color:var(--soft);font-size:.84rem}button{background:none;color:var(--mint);border:1px solid var(--border);padding:10px 14px;border-radius:10px;cursor:pointer;font:inherit}.warn{color:var(--orange)}.number{font-variant-numeric:tabular-nums;font-weight:650}footer{font-size:.85rem;color:var(--soft)}.position-btn{margin-top:12px;width:100%;text-align:center}.position-btn:focus-visible{outline:3px solid var(--mint)}dialog{width:min(960px,95vw);max-height:88vh;overflow:auto;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:16px;padding:22px}dialog::backdrop{background:#000b}.position{margin:14px 0;padding:16px;border:1px solid var(--border);border-radius:12px;background:var(--panel)}.position h3{margin:0 0 10px}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}.facts div{padding:9px;background:#0c1421;border-radius:8px}.facts small{display:block;color:var(--soft)}.facts b{display:block}.positive{color:var(--mint)}.negative{color:#ff9a9a}.dialogtop{display:flex;justify-content:space-between;align-items:center;gap:12px}
 </style></head><body>
 <header class="bar"><div><div class="badge">EXPERIMENTAÇÃO · DINHEIRO 100% FICTÍCIO</div><h1>Laboratório de estratégias V3</h1><p class="muted" id="updated">A carregar o relatório...</p><p class="muted small" id="freshness">Consulta automática de 5 em 5 minutos; relatórios novos são publicados pelo GitHub Actions, não em tempo real.</p></div><nav><a href="./">Painel principal</a> &nbsp; <a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/strategy-lab.yml">Execuções</a> &nbsp; <button id="refresh">Atualizar</button></nav></header>
 <main>
@@ -8,13 +8,62 @@
 <section class="grid space" id="wallets" aria-label="Carteiras virtuais"></section>
 <section class="space"><h2>Backtest cronológico</h2><p class="muted">Cinco ligas; previsões feitas antes de conhecer os resultados do próprio dia. Referência trivial = probabilidade 1/3 para cada resultado (não representa o mercado).</p><div class="table"><table><thead><tr><th>Estratégia</th><th>Jogos avaliados</th><th>Brier</th><th>Log Loss</th><th>Brier uniforme</th><th>ROI histórico</th></tr></thead><tbody id="backtests"><tr><td colspan="6">A carregar…</td></tr></tbody></table></div></section>
 <section class="space"><h2>Fonte e qualidade</h2><div class="card"><div id="sources" class="muted">—</div><p class="muted small">As carteiras simulam preços observados, mas não verificam a execução real em bookmaker nem oferecem garantias. Estratégias podem selecionar os mesmos jogos; por isso não somamos as carteiras como posições independentes.</p><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/original_strategies.md">Metodologia, fontes científicas e próximas estratégias</a></p></div></section>
-</main><footer>Sports Intelligence · Sem apostas reais · Fontes públicas e cálculos reproduzíveis</footer>
+</main><dialog id="positionsDialog" aria-labelledby="positionsTitle"><div class="dialogtop"><h2 id="positionsTitle">Posições</h2><button id="closePositions" aria-label="Fechar quadro">Fechar ×</button></div><p class="muted" id="positionsSummary"></p><div id="positionsContent"></div></dialog><footer>Sports Intelligence · Sem apostas reais · Fontes públicas e cálculos reproduzíveis</footer>
 <script>
 "use strict";
 const url="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/reports/strategy_lab_latest.json";
 const el=id=>document.getElementById(id);
 const fmt=(x,places=2)=>Number.isFinite(x)?x.toLocaleString("pt-PT",{minimumFractionDigits:places,maximumFractionDigits:places}):"—";
 const label=id=>id.split("_").join(" ");
+const money=x=>fmt(Number(x))+" €";
+const datePT=x=>x?new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(x)):"—";
+const dialog=el("positionsDialog");
+el("closePositions").addEventListener("click",()=>dialog.close());
+function fact(parent,key,value,klass=""){const div=document.createElement("div"),small=document.createElement("small"),b=document.createElement("b");small.textContent=key;b.textContent=value;b.className=klass;div.append(small,b);parent.append(div)}
+function positionView(r){
+ const article=document.createElement("article");article.className="position";
+ const title=document.createElement("h3");title.textContent=(r.home||"?")+" — "+(r.away||"?");
+ const sub=document.createElement("p");sub.className="muted small";
+ sub.textContent="ID "+(r.id||"—")+" · "+(r.sport||"Futebol")+" · "+(r.market||"1X2")+" · "+(r.status==="SETTLED"?"Liquidada":"Aberta");
+ const facts=document.createElement("div");facts.className="facts";
+ const idx=Number(r.selection_index),selections=[r.home,"Empate",r.away];
+ const odd=Number(r.odds?.[idx]),stake=Number(r.stake_eur);
+ const valid=Number.isFinite(odd)&&odd>1&&Number.isFinite(stake)&&stake>=0;
+ fact(facts,"Seleção",selections[idx]||"—");
+ fact(facts,"Odd",Number.isFinite(odd)?fmt(odd,3):"—");
+ fact(facts,"Stake fictícia",Number.isFinite(stake)?money(stake):"—");
+ fact(facts,"Retorno bruto se ganhar",valid?money(stake*odd):"—","positive");
+ fact(facts,"Lucro líquido se ganhar",valid?"+"+money(stake*(odd-1)):"—","positive");
+ fact(facts,"Perda se perder",Number.isFinite(stake)?"−"+money(stake):"—","negative");
+ fact(facts,"Início (Portugal)",datePT(r.start_utc));
+ const end=r.start_utc?new Date(new Date(r.start_utc).getTime()+120*60000).toISOString():null;
+ fact(facts,"Fim estimado",datePT(end)+" (aprox.)");
+ fact(facts,"Previsão registada",datePT(r.forecast_utc));
+ fact(facts,"Probabilidade do modelo",Number.isFinite(Number(r.probabilities?.[idx]))?fmt(Number(r.probabilities[idx])*100,1)+"%":"—");
+ fact(facts,"Edge estimado",Number.isFinite(Number(r.edge_pp))?fmt(Number(r.edge_pp),2)+" pp":"—");
+ fact(facts,"Casa / fornecedor",(r.bookmakers?.[idx]||"Não indicada")+" · "+(r.price_source||"—"));
+ fact(facts,"Hora da odd",datePT(r.book_quote_updates_utc?.[idx]));
+ if(r.status==="SETTLED"){fact(facts,"Resultado final",r.observed_outcome===idx?"Ganhou":"Perdeu");fact(facts,"P/L realizado",money(Number(r.pnl_eur)),Number(r.pnl_eur)>=0?"positive":"negative");fact(facts,"Liquidação",datePT(r.settlement_utc))}
+ article.append(title,sub,facts);return article;
+}
+async function showPositions(name){
+ el("positionsTitle").textContent="Posições · "+label(name);
+ el("positionsSummary").textContent="A carregar o registo da carteira…";
+ el("positionsContent").replaceChildren();
+ dialog.showModal();
+ try{
+  const filename=name.toLowerCase()+".jsonl";
+  const endpoint="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/data/strategy_ledgers/"+filename;
+  const response=await fetch(endpoint+"?t="+Date.now(),{cache:"no-store"});
+  if(!response.ok)throw Error("HTTP "+response.status);
+  const rows=(await response.text()).split(/\\r?\\n/).filter(Boolean).map(line=>JSON.parse(line));
+  rows.sort((a,b)=>(a.status==="OPEN"?0:1)-(b.status==="OPEN"?0:1)||String(a.start_utc).localeCompare(String(b.start_utc)));
+  const open=rows.filter(r=>r.status==="OPEN").length,settled=rows.filter(r=>r.status==="SETTLED").length;
+  el("positionsSummary").textContent=open+" abertas · "+settled+" liquidadas · valores exclusivamente fictícios. Fim previsto = início + 2 horas; não é a hora oficial de conclusão. A liquidação depende do próximo processamento e do resultado confirmado.";
+  if(!rows.length){el("positionsContent").textContent="Ainda não existem posições registadas nesta carteira.";return}
+  el("positionsContent").replaceChildren(...rows.map(positionView));
+ }catch(err){el("positionsSummary").textContent="Não foi possível carregar as posições.";el("positionsContent").textContent="Erro: "+err.message}
+}
 function cell(v){const td=document.createElement("td");td.textContent=String(v??"—");return td}
 function card(name,a,reg){
 const node=document.createElement("article");node.className="card";
@@ -22,7 +71,7 @@ const title=document.createElement("h3");title.textContent=label(name);
 const value=document.createElement("strong");value.textContent=fmt(a.bankroll_eur)+" €";
 const meta=document.createElement("div");meta.className="muted small";meta.textContent="P/L "+fmt(a.pnl_eur)+" € · abertas "+a.open+" · liquidadas "+a.settled;
 const yieldEl=document.createElement("div");yieldEl.className="small";yieldEl.textContent="Yield: "+(a.yield_percent===null?"sem apostas liquidadas":fmt(a.yield_percent)+"%");
-const stamp=document.createElement("div");stamp.className="small muted";stamp.textContent="Criada: "+(reg?.created_utc ? new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(reg.created_utc)) : "data anterior não registada");node.append(title,value,meta,yieldEl,stamp);return node}
+const stamp=document.createElement("div");stamp.className="small muted";stamp.textContent="Criada: "+(reg?.created_utc ? new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(reg.created_utc)) : "data anterior não registada");const openButton=document.createElement("button");openButton.className="position-btn";openButton.textContent="Ver posições ("+a.open+" abertas · "+a.settled+" liquidadas)";openButton.addEventListener("click",()=>showPositions(name));node.append(title,value,meta,yieldEl,stamp,openButton);return node}
 async function load(){
 el("status").textContent="A verificar estado...";
 try{
