@@ -88,13 +88,34 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
         gate = "UNVALIDATED_AGAINST_MARKET"
     else:
         gate = "EXPERIMENTAL_NEEDS_PROSPECTIVE_CONFIRMATION"
+    # Read-only cross-reference: the independent strategy lab can have open papers
+    # even when the main V3 scanner deliberately has no stake-enabled strategy.
+    # Never add these balances together: the portfolios may share the same fixtures.
+    lab_snapshot = {"status": "UNAVAILABLE", "open_papers_by_strategy": {}}
+    lab_file = root / "reports" / "strategy_lab_latest.json"
+    if lab_file.exists():
+        try:
+            lab = json.loads(lab_file.read_text(encoding="utf8"))
+            accounts = lab.get("accounts", {})
+            if not isinstance(accounts, dict):
+                raise ValueError("Invalid lab accounts")
+            lab_asof = parse_iso(lab["asof_utc"])
+            lab_snapshot = {
+                "status": "AVAILABLE" if dt.timedelta(0) <= now - lab_asof <= dt.timedelta(hours=24) else "STALE",
+                "asof_utc": lab_asof.isoformat(),
+                "open_papers_by_strategy": {name: int(a.get("open", 0)) for name, a in accounts.items()},
+                "settled_papers_by_strategy": {name: int(a.get("settled", 0)) for name, a in accounts.items()},
+                "note": "Independent portfolios: overlapping events, do not sum as unique bets or combine bankrolls.",
+            }
+        except (ValueError, KeyError, TypeError, OverflowError):
+            lab_snapshot = {"status": "INVALID_REPORT", "open_papers_by_strategy": {}}
     report = {
         "generated_at_utc": now.isoformat(),
         "v1_audit": v1_audit,
         "version": "0.3.0",
         "mode": "PAPER_RESEARCH_ONLY",
         "live_bets_allowed": False,
-        "v3_papers_with_stake": 0,
+        "v3_papers_with_stake": 0,  # Main scanner only; see independent strategy_lab_snapshot.\n        "strategy_lab_snapshot": lab_snapshot,
         "observations_open": sum(1 for x in frozen if x["status"] == "OPEN"),
         "observations_settled": len(complete),
         "observations_new_this_run": added,
