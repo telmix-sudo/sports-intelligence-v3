@@ -30,14 +30,15 @@ ODDS_KEY_MAP = {
     "nhl": "icehockey_nhl",
     "mlb": "baseball_mlb",
 }
-# 5 European leagues at 08 UTC; 4 North-American sports + refreshed EPL at 20 UTC.
-# <= 10 budgeted requests per day, ~= 300 per 30-day month.
+# Ten daily requests split across four time windows, nearer to kick-off.
+# Preserve the same maximum API quota; no extra paid requests.
 SPORTS_PER_POLL = {
-    8: ("epl", "la_liga", "bundesliga", "serie_a", "ligue_1"),
-    20: ("epl", "nfl", "nba", "nhl", "mlb"),
+    2: ("nba", "nhl"),
+    8: ("epl", "la_liga", "bundesliga"),
+    14: ("serie_a", "ligue_1", "epl"),
+    20: ("nfl", "mlb"),
 }
-# 5 sports per poll at 08 and 20 UTC: <=10 credits/day, ~300/month.
-POLL_HOURS_UTC = (8, 20)
+POLL_HOURS_UTC = tuple(SPORTS_PER_POLL)
 MAX_CALLS_PER_DAY = 10
 MAX_SNAPSHOT_AGE_HOURS = 13
 MAX_BOOK_QUOTE_AGE_HOURS = 12
