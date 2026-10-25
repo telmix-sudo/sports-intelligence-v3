@@ -363,6 +363,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
     """
     account_stats = {}
     added = defaultdict(int)
+    rejected = defaultdict(int)
     for name in STRATEGIES:
         path = root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")
         rows = read_jsonl(path)
@@ -380,6 +381,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 continue
             quote = e.get("quote")
             if not quote or not quote.get("quote_timestamp_available") or quote.get("market") != "1X2":
+                rejected["missing_timestamped_odds"] += 1
                 continue
             if len(quote.get("decimal", [])) != 3 or len(quote.get("no_vig", [])) != 3:
                 continue
@@ -403,6 +405,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             home, away = team_name(e["home"]), team_name(e["away"])
             base = league_models["ELO_STANDARD"]
             if base.played.get(home, 0) < 8 or base.played.get(away, 0) < 8:
+                rejected["insufficient_history"] += 1
                 continue
             all_forecasts = predictions(league_models, home, away, market)
             p = all_forecasts[name]
@@ -419,6 +422,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                     int(quote.get("bookmaker_count") or 0)):
                     continue
             elif diffs[choice] < EDGE_MINIMUM or ev < EV_MINIMUM:
+                rejected["insufficient_edge_or_ev"] += 1
                 continue
             stake = round(min(bank * PAPER_STAKE_FRACTION,
                              max(0., bank * MAX_PAPER_EXPOSURE_FRACTION - exposure)), 2)
@@ -450,7 +454,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             exposure += stake
         save_jsonl(path, rows)
         account_stats[name] = {"new_entries": added[name], "total_records": len(rows)}
-    return account_stats, {name: count for name, count in added.items() if count > 0}
+    return account_stats, {name: count for name, count in added.items() if count > 0}, dict(rejected)
 
 
 def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
@@ -497,7 +501,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         except Exception:
             pass
     before, settle_counts = build_accounts(root, finals, now)
-    additions, entry_counts = open_accounts(root, models, events, now, registry=registry)
+    additions, entry_counts, rejected = open_accounts(root, models, events, now, registry=registry)
     after, _ = build_accounts(root, {}, now)
     report = {
         "asof_utc": now.isoformat(),
@@ -512,6 +516,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "provenance": provenance,
         "sources": {"fixtures": coverage["sources_ok"], "failures": coverage["sources_failed"]},
         "events_seen": len(events), "new_paper_entries": entry_counts,
+        "entry_diagnostics": {"rejections": rejected, "new_entries": sum(entry_counts.values()), "unit": "strategy-event evaluations"},
         "newly_settled": settle_counts["settled_this_run"],
         "restrictions": [
             "No real bets; outcomes do not imply profit guarantee.",
