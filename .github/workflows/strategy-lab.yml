@@ -3,7 +3,7 @@ name: Sports Intelligence V3 - Parallel Strategy Lab
 
 on:
   schedule:
-    - cron: "42 8,20 * * *"
+    - cron: "42 2,8,14,20 * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -30,7 +30,7 @@ jobs:
         env:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -v
-      - name: Run five isolated strategy portfolios with CC0 data
+      - name: Run eight isolated strategy portfolios with CC0 data
         env:
           PYTHONPATH: src
           PYTHONUNBUFFERED: "1"
