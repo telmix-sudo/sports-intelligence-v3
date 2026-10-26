@@ -63,6 +63,26 @@ class OddsProviderTests(unittest.TestCase):
             self.assertEqual(again["calls_this_run"], 0)
             self.assertLessEqual(summary["calls_today"], MAX_CALLS_PER_DAY)
 
+    def test_delayed_cron_reuses_slot_without_double_charging(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            calls = []
+            def fake(sport, key):
+                calls.append(sport)
+                return ROWS
+            late = NOW.replace(hour=9, minute=10)
+            result = annotate_odds([dict(EVENT)], root, late,
+                                   secret="TEST_ONLY", requester=fake)
+            self.assertEqual(result["calls_this_run"], len(SPORTS_PER_POLL[8]))
+            again = annotate_odds([dict(EVENT)], root, late.replace(minute=40),
+                                  secret="TEST_ONLY", requester=fake)
+            self.assertEqual(again["calls_this_run"], 0)
+            afternoon = annotate_odds([dict(EVENT)], root,
+                                      late.replace(hour=15, minute=5),
+                                      secret="TEST_ONLY", requester=fake)
+            self.assertEqual(afternoon["calls_this_run"], len(SPORTS_PER_POLL[14]))
+            self.assertLessEqual(afternoon["calls_today"], MAX_CALLS_PER_DAY)
+
     def test_no_key_no_calls(self):
         with tempfile.TemporaryDirectory() as tmp:
             result = annotate_odds([dict(EVENT)], Path(tmp), NOW, secret="", requester=lambda x, y: self.fail("unexpected request"))
