@@ -135,7 +135,8 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
     now = now.astimezone(UTC)
     secret = os.getenv("ODDS_API_KEY", "") if secret is None else secret
     cache_path = root / "data" / "odds_cache_v3.json"
-    record = {"day": now.date().isoformat(), "calls_today": 0, "snapshots": {}}
+    record = {"day": now.date().isoformat(), "calls_today": 0,
+              "snapshots": {}, "polled_windows": []}
     if cache_path.exists():
         try:
             loaded = json.loads(cache_path.read_text(encoding="utf8"))
@@ -143,17 +144,22 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
                 record["snapshots"] = loaded["snapshots"]
             if loaded.get("day") == record["day"]:
                 record["calls_today"] = max(0, int(loaded.get("calls_today", 0)))
+                record["polled_windows"] = loaded.get("polled_windows", [])
         except (ValueError, KeyError, TypeError):
             pass
     diagnostics = {"configured": bool(secret), "calls_this_run": 0,
                    "cached_sports": [], "quotes_matched": 0, "errors": []}
-    if secret and now.hour in POLL_HOURS_UTC:
-        for sport in SPORTS_PER_POLL.get(now.hour, ()):
+    # GitHub scheduled jobs can start hours late. Use the most recent elapsed
+    # slot, not equality with the actual start hour. Record its completion so
+    # retries within the slot never consume duplicate API credits.
+    slot = max((hour for hour in POLL_HOURS_UTC if hour <= now.hour), default=None)
+    if secret and slot is not None and slot not in record["polled_windows"]:
+        for sport in SPORTS_PER_POLL[slot]:
             sport_key = ODDS_KEY_MAP[sport]
             if record["calls_today"] >= MAX_CALLS_PER_DAY:
                 break
             snap = record["snapshots"].get(sport)
-            if snap and snap.get("fetched_at", "")[:13] == now.isoformat()[:13]:
+            if snap and snap.get("fetched_at", "")[:10] == record["day"] and parse_utc(snap["fetched_at"]).hour >= slot:
                 continue
             # Count even failed calls conservatively to protect free quota.
             record["calls_today"] += 1
@@ -166,6 +172,7 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
                 record["snapshots"][sport] = {"fetched_at": now.isoformat(), "quotes": limited}
             except Exception as exc:
                 diagnostics["errors"].append({"sport": sport, "reason": type(exc).__name__ + ": " + str(exc)[:100]})
+        record["polled_windows"].append(slot)
         cache_path.parent.mkdir(parents=True, exist_ok=True)
         cache_path.write_text(json.dumps(record, ensure_ascii=False, sort_keys=True), encoding="utf8")
     for event in events:
