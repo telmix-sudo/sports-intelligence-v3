@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from sports_intelligence.odds_provider import annotate_odds, quotes_for_event
+from sports_intelligence.odds_provider import annotate_odds, quotes_for_event, SPORTS_PER_POLL, MAX_CALLS_PER_DAY
 
 
 UTC = dt.timezone.utc
@@ -52,15 +52,16 @@ class OddsProviderTests(unittest.TestCase):
                 return ROWS
             events = [dict(EVENT)]
             summary = annotate_odds(events, path, NOW, secret="DO_NOT_PERSIST", requester=fake)
-            self.assertEqual(len(called), 5)
+            self.assertEqual(len(called), len(SPORTS_PER_POLL[NOW.hour]))
             self.assertEqual(summary["quotes_matched"], 1)
             self.assertTrue(events[0]["quote"])
             disk = (path / "data" / "odds_cache_v3.json").read_text()
             self.assertNotIn("DO_NOT_PERSIST", disk)
             self.assertNotIn("commence_time", disk, "Bulk API response cannot be redistributed")
             again = annotate_odds([dict(EVENT)], path, NOW, secret="DO_NOT_PERSIST", requester=fake)
-            self.assertEqual(len(called), 5, "No repeated calls inside same hour")
+            self.assertEqual(len(called), len(SPORTS_PER_POLL[NOW.hour]), "No repeated calls inside same hour")
             self.assertEqual(again["calls_this_run"], 0)
+            self.assertLessEqual(summary["calls_today"], MAX_CALLS_PER_DAY)
 
     def test_no_key_no_calls(self):
         with tempfile.TemporaryDirectory() as tmp:
