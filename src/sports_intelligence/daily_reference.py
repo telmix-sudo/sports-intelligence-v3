@@ -70,6 +70,10 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
     from .strategy_lab import read_jsonl, save_jsonl
     ledger = root / "data" / "strategy_ledgers" / (NAME.lower()+".jsonl")
     records = read_jsonl(ledger)
+    # Ensure the new account is inspectable in the public portfolio dashboard
+    # even if it has yet to make a single paper entry.
+    if not ledger.exists():
+        save_jsonl(ledger, [])
     started = parse_iso(registry[NAME]["created_utc"])
     daily = [r for r in records if local_day(parse_iso(r["forecast_utc"])) == day]
     diagnostics = {"local_date": day, "target": 1, "opened_today": len(daily),
