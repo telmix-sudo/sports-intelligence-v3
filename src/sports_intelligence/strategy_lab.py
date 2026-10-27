@@ -20,10 +20,11 @@ from .poisson import FootballPoisson
 from .metrics import brier, log_loss, no_vig
 from .scanner import capture_scoreboards, unpack_scoreboard, parse_iso
 from .custom_strategies import (
-    ORIGINAL_NAMES, CUSTOM_NAMES, ALL_NAMES, RULES,
+    ORIGINAL_NAMES, CUSTOM_NAMES, ALL_NAMES, REFERENCE_NAMES, RULES,
     experimental_forecasts, accepts_candidate,
 )
 from .strategy_registry import ensure_registry, verify_prior_accounts
+from .daily_reference import select_daily_reference
 
 UTC = dt.timezone.utc
 PORTUGAL = ZoneInfo("Europe/Lisbon")
@@ -127,7 +128,7 @@ def make_models() -> dict:
         "POISSON_SHRINK": FootballPoisson(prior_games=8),
         "DIXON_COLES_LOW": FootballPoisson(prior_games=8),
         "ELO_POISSON_BLEND": None,
-        **{name: None for name in CUSTOM_NAMES},
+        **{name: None for name in CUSTOM_NAMES + REFERENCE_NAMES},
     }
 
 
@@ -299,10 +300,22 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
                 continue
             index = outcome["outcome"]
             selected = record["selection_index"]
-            success = score_settlement(selected, index)
             p = record["probabilities"]
-            if len(p) != 3 or len(record["odds"]) != 3:
+            if (len(p) not in (2, 3) or len(p) != len(record["odds"])
+                or selected not in range(len(p))):
                 continue
+            # Moneyline has no draw selection: a drawn NFL result voids the
+            # paper bet rather than converting it into a phantom loss.
+            if len(p) == 2 and index == 1:
+                record["status"] = "VOID"
+                record["settlement_utc"] = now.isoformat()
+                record["observed_outcome"] = index
+                record["pnl_eur"] = 0.0
+                counts["settled_this_run"] += 1
+                continue
+            if len(p) == 2:
+                index = 0 if index == 0 else 1
+            success = score_settlement(selected, index)
             stake = record["stake_eur"]
             pnl = round((record["odds"][selected] - 1) * stake if success else -stake, 4)
             record["status"] = "SETTLED"
@@ -367,6 +380,9 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
     for name in STRATEGIES:
         path = root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")
         rows = read_jsonl(path)
+        if name in REFERENCE_NAMES:
+            account_stats[name] = {"new_entries": 0, "total_records": len(rows)}
+            continue
         if registry and now < parse_iso(registry[name]["created_utc"]):
             account_stats[name] = {"new_entries": 0, "total_records": len(rows)}
             continue
@@ -469,7 +485,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     matches, provenance = collect_openfootball(now.date(), fetcher)
     models, historical = historical_comparison(matches)
     # Includes yesterday/today/future fixtures; only completed final statuses settle.
-    events, coverage = discover(now, sports={league:SCOREBOARDS[league] for league in LEAGUE_CODES},
+    events, coverage = discover(now, sports=SCOREBOARDS,
                                 future_days=2, need_yesterday=True)
     archive_path = root / "data" / "odds_cache_v3.json"
     if archive_path.exists():
@@ -506,10 +522,15 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     before, settle_counts = build_accounts(root, finals, now)
     rejected = {}
     additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected)
+    daily_reference = select_daily_reference(root, events, now, registry)
+    if daily_reference["new_entries"]:
+        entry_counts["MARKET_DAILY_REFERENCE"] = daily_reference["new_entries"]
     after, _ = build_accounts(root, {}, now)
     report = {
         "asof_utc": now.isoformat(),
-        "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V2",
+        "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
+        "daily_reference": daily_reference,
+        "daily_target_policy": "One genuine pre-game virtual reference if eligible; otherwise report missed target, never fabricate odds.",
         "registered_strategies": registry,
         "policy": "Existing balances and settled records persist; only brand-new strategies start with EUR 1000.",
         "sports_tested": sorted(matches),
@@ -531,6 +552,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             "Money wagered is virtual and book execution/liquidity not confirmed.",
             "Current matchup name mismatches are rejected, not guessed.",
             "No odds: no paper wager.",
+            "Market daily reference is NON-VALUE control, not an edge or investment recommendation.",
             "Strategy portfolios are correlated; never sum as independent diversification.",
         ],
     }
