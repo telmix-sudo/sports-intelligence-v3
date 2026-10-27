@@ -1,16 +1,19 @@
 {
-  "asof_utc": "2026-10-27T00:51:04.118396+00:00",
+  "asof_utc": "2026-10-27T06:51:06.621648+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-10-27",
     "target": 1,
-    "opened_today": 0,
-    "new_entries": 0,
+    "opened_today": 1,
+    "new_entries": 1,
     "reference": true,
     "not_a_value_signal": true,
-    "status": "NO_ELIGIBLE_QUOTE",
-    "reason": "No upcoming event with authentic, timely 1X2/ML odds from at least two bookmakers",
-    "eligible_events": 0
+    "status": "COMPLETED",
+    "reason": "Genuine pre-game odds reference",
+    "eligible_events": 16,
+    "event_id": "nhl:401892585",
+    "sport": "nhl",
+    "kickoff_utc": "2026-10-27T23:00:00+00:00"
   },
   "daily_target_policy": "One genuine pre-game virtual reference if eligible; otherwise report missed target, never fabricate odds.",
   "registered_strategies": {
@@ -588,13 +591,13 @@
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 1000.0,
-      "open_exposure_eur": 0,
+      "open_exposure_eur": 5.0,
       "pnl_eur": 0,
       "total_staked_settled_eur": 0,
       "paper_wins": 0,
       "paper_losses": 0,
       "settled": 0,
-      "open": 0,
+      "open": 1,
       "yield_percent": null,
       "return_on_initial_bank_percent": 0.0,
       "max_settled_drawdown_percent": 0.0,
@@ -835,12 +838,14 @@
     "failures": 0
   },
   "events_seen": 74,
-  "new_paper_entries": {},
+  "new_paper_entries": {
+    "MARKET_DAILY_REFERENCE": 1
+  },
   "entry_diagnostics": {
     "rejections": {
       "missing_timestamped_odds": 64
     },
-    "new_entries": 0,
+    "new_entries": 1,
     "unit": "strategy-event evaluations"
   },
   "newly_settled": 0,
