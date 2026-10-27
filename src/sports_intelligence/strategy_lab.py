@@ -20,7 +20,7 @@ from .poisson import FootballPoisson
 from .metrics import brier, log_loss, no_vig
 from .scanner import capture_scoreboards, unpack_scoreboard, parse_iso
 from .custom_strategies import (
-    ORIGINAL_NAMES, CUSTOM_NAMES, ALL_NAMES, REFERENCE_NAMES, RULES,
+    ORIGINAL_NAMES, CUSTOM_NAMES, ALL_NAMES, REFERENCE_NAMES, FREQUENCY_NAMES, RULES,
     experimental_forecasts, accepts_candidate,
 )
 from .strategy_registry import ensure_registry, verify_prior_accounts
@@ -128,7 +128,7 @@ def make_models() -> dict:
         "POISSON_SHRINK": FootballPoisson(prior_games=8),
         "DIXON_COLES_LOW": FootballPoisson(prior_games=8),
         "ELO_POISSON_BLEND": None,
-        **{name: None for name in CUSTOM_NAMES + REFERENCE_NAMES},
+        **{name: None for name in CUSTOM_NAMES + REFERENCE_NAMES + FREQUENCY_NAMES},
     }
 
 
@@ -380,7 +380,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
     for name in STRATEGIES:
         path = root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")
         rows = read_jsonl(path)
-        if name in REFERENCE_NAMES:
+        if name in REFERENCE_NAMES or name in FREQUENCY_NAMES:
             account_stats[name] = {"new_entries": 0, "total_records": len(rows)}
             continue
         if registry and now < parse_iso(registry[name]["created_utc"]):
@@ -522,6 +522,9 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     before, settle_counts = build_accounts(root, finals, now)
     rejected = {}
     additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected)
+    from .frequency_paper import run_frequency_strategies
+    frequency_results = run_frequency_strategies(root, models, events, now, registry)
+    entry_counts.update({k:v['new_entries'] for k,v in frequency_results.items() if v['new_entries']})
     daily_reference = select_daily_reference(root, events, now, registry)
     if daily_reference["new_entries"]:
         entry_counts["MARKET_DAILY_REFERENCE"] = daily_reference["new_entries"]
@@ -530,6 +533,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "asof_utc": now.isoformat(),
         "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
         "daily_reference": daily_reference,
+        "frequency_strategies": frequency_results,
         "daily_target_policy": "One genuine pre-game virtual reference if eligible; otherwise report missed target, never fabricate odds.",
         "registered_strategies": registry,
         "policy": "Existing balances and settled records persist; only brand-new strategies start with EUR 1000.",
