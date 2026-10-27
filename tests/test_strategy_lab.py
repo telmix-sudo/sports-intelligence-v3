@@ -50,7 +50,7 @@ class StrategyLabTests(unittest.TestCase):
     def test_eight_models_and_market_only_when_price_exists(self):
         models = make_models()
         probabilities = predictions(models, "Arsenal", "Chelsea")
-        self.assertEqual(set(probabilities), set(STRATEGIES))
+        self.assertEqual(set(probabilities), set(STRATEGIES) - {"MARKET_DAILY_REFERENCE"})
         self.assertIsNone(probabilities["MARKET_ANCHORED"])
         for values in probabilities.values():
             if values is None:
