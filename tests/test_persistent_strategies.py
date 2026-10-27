@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 from sports_intelligence.custom_strategies import (
-    ORIGINAL_NAMES, CUSTOM_NAMES, ALL_NAMES, RULES, accepts_candidate
+    ORIGINAL_NAMES, CUSTOM_NAMES, REFERENCE_NAMES, ALL_NAMES, RULES, accepts_candidate
 )
 from sports_intelligence.strategy_lab import (
     build_accounts, make_models, open_accounts, predictions, STRATEGIES
@@ -41,12 +41,12 @@ class PersistentWalletTests(unittest.TestCase):
             (data / "strategy_accounts_v3.json").write_text(json.dumps(previous))
             registry = ensure_registry(root, NOW, ALL_NAMES)
             verify_prior_accounts(root, registry)
-            self.assertEqual(len(registry), 8)
+            self.assertEqual(len(registry), 9)
             self.assertEqual(registry["ELO_STANDARD"]["origin"], "legacy_existing_account")
             self.assertEqual(registry[CUSTOM_NAMES[0]]["created_utc"], NOW.isoformat())
             accounts, changes = build_accounts(root, {}, NOW)
             self.assertEqual(accounts[old]["bankroll_eur"], 995)
-            for name in CUSTOM_NAMES:
+            for name in CUSTOM_NAMES + REFERENCE_NAMES:
                 self.assertEqual(accounts[name]["bankroll_eur"], 1000)
                 self.assertEqual(accounts[name]["settled"], 0)
             frozen_first = (ledger_dir / (old.lower() + ".jsonl")).read_text()
