@@ -70,7 +70,7 @@ class DailyReferenceTests(unittest.TestCase):
             quoted["quote"]["bookmaker_count"] = 8
             quoted["start_utc"] = "2026-10-27T02:00:00+00:00"
             self.assertIsNone(quote_for_reference(quoted, NOW))
-            self.assertFalse((root/"data"/"strategy_ledgers"/(NAME.lower()+".jsonl")).exists())
+            self.assertEqual(read_jsonl(root/"data"/"strategy_ledgers"/(NAME.lower()+".jsonl")), [])
 
     def test_settle_ml_away_without_phantom_draw_loss(self):
         with tempfile.TemporaryDirectory() as temp:
