@@ -4,7 +4,10 @@
 </style></head><body>
 <header class="bar"><div><div class="badge">EXPERIMENTAÇÃO · DINHEIRO 100% FICTÍCIO</div><h1>Laboratório de estratégias V3</h1><p class="muted" id="updated">A carregar o relatório...</p><p class="muted small" id="freshness">Consulta automática de 5 em 5 minutos; relatórios novos são publicados pelo GitHub Actions, não em tempo real.</p></div><nav><a href="./">Painel principal</a> &nbsp; <a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/strategy-lab.yml">Execuções</a> &nbsp; <button id="refresh">Atualizar</button></nav></header>
 <main>
-<section class="card space"><h2>Como interpretar os resultados</h2><p>Cada estratégia nova começa com <strong style="display:inline;font-size:inherit">1.000 € fictícios</strong>. As carteiras existentes preservam os seus saldos, lucros, perdas e previsões quando entra uma estratégia nova. Os testes históricos com OpenFootball avaliam Brier Score e Log Loss, não lucro retrospetivo: não existem odds históricas cronológicas neste conjunto. Valores mais baixos são melhores. Comparar cinco métodos num mesmo período não valida nenhum deles fora da amostra.</p><p id="status" class="warn" role="status">A procurar relatório...</p></section>
+<section class="card space"><h2>Como interpretar os resultados</h2><p>Cada estratégia nova começa com <strong style="display:inline;font-size:inherit">1.000 € fictícios</strong>. As carteiras existentes preservam os seus saldos, lucros, perdas e previsões quando entra uma estratégia nova. Os testes históricos com OpenFootball avaliam Brier Score e Log Loss, não lucro retrospetivo: não existem odds históricas cronológicas neste conjunto. Valores mais baixos são melhores. Comparar métodos no mesmo histórico não os valida fora da amostra. A carteira MARKET DAILY REFERENCE usa o favorito do mercado apenas como controlo diário, sem vantagem estimada.</p><p id="status" class="warn" role="status">A procurar relatório...</p></section>
+<section class="card space"><h2>Meta diária de entradas fictícias</h2>
+<p class="muted">Objetivo: pelo menos uma entrada por dia no total. A carteira Market Daily Reference usa exclusivamente odds reais pré-jogo de pelo menos duas casas; não é um sinal de valor. Sem jogo e odd verificáveis, a meta é assinalada como não cumprida em vez de simular preços.</p>
+<p id="dailyTarget" class="warn" role="status">A verificar a meta de hoje…</p></section>
 <section class="card space"><h2>Porque não abriu mais posições?</h2><p id="entryDiagnostics" class="muted">A carregar diagnóstico…</p></section>
 <section class="grid space" id="wallets" aria-label="Carteiras virtuais"></section>
 <section class="space"><h2>Backtest cronológico</h2><p class="muted">Cinco ligas; previsões feitas antes de conhecer os resultados do próprio dia. Referência trivial = probabilidade 1/3 para cada resultado (não representa o mercado).</p><div class="table"><table><thead><tr><th>Estratégia</th><th>Jogos avaliados</th><th>Brier</th><th>Log Loss</th><th>Brier uniforme</th><th>ROI histórico</th></tr></thead><tbody id="backtests"><tr><td colspan="6">A carregar…</td></tr></tbody></table></div></section>
@@ -25,9 +28,9 @@ function positionView(r){
  const article=document.createElement("article");article.className="position";
  const title=document.createElement("h3");title.textContent=(r.home||"?")+" — "+(r.away||"?");
  const sub=document.createElement("p");sub.className="muted small";
- sub.textContent="ID "+(r.id||"—")+" · "+(r.sport||"Futebol")+" · "+(r.market||"1X2")+" · "+(r.status==="SETTLED"?"Liquidada":"Aberta");
+ sub.textContent="ID "+(r.id||"—")+" · "+(r.sport||"Futebol")+" · "+(r.market||"1X2")+" · "+(r.status==="SETTLED"?"Liquidada":r.status==="VOID"?"Anulada":"Aberta");
  const facts=document.createElement("div");facts.className="facts";
- const idx=Number(r.selection_index),selections=[r.home,"Empate",r.away];
+ const idx=Number(r.selection_index),selections=r.market==="ML"?[r.home,r.away]:[r.home,"Empate",r.away];
  const odd=Number(r.odds?.[idx]),stake=Number(r.stake_eur);
  const valid=Number.isFinite(odd)&&odd>1&&Number.isFinite(stake)&&stake>=0;
  fact(facts,"Seleção",selections[idx]||"—");
@@ -40,11 +43,12 @@ function positionView(r){
  const end=r.start_utc?new Date(new Date(r.start_utc).getTime()+120*60000).toISOString():null;
  fact(facts,"Fim estimado",datePT(end)+" (aprox.)");
  fact(facts,"Previsão registada",datePT(r.forecast_utc));
- fact(facts,"Probabilidade do modelo",Number.isFinite(Number(r.probabilities?.[idx]))?fmt(Number(r.probabilities[idx])*100,1)+"%":"—");
+ fact(facts,r.strategy==="MARKET_DAILY_REFERENCE"?"Probabilidade do mercado":"Probabilidade do modelo",Number.isFinite(Number(r.probabilities?.[idx]))?fmt(Number(r.probabilities[idx])*100,1)+"%":"—");
  fact(facts,"Edge estimado",Number.isFinite(Number(r.edge_pp))?fmt(Number(r.edge_pp),2)+" pp":"—");
  fact(facts,"Casa / fornecedor",(r.bookmakers?.[idx]||"Não indicada")+" · "+(r.price_source||"—"));
  fact(facts,"Hora da odd",datePT(r.book_quote_updates_utc?.[idx]));
- if(r.status==="SETTLED"){fact(facts,"Resultado final",r.observed_outcome===idx?"Ganhou":"Perdeu");fact(facts,"P/L realizado",money(Number(r.pnl_eur)),Number(r.pnl_eur)>=0?"positive":"negative");fact(facts,"Liquidação",datePT(r.settlement_utc))}
+ if(r.status==="VOID"){fact(facts,"Resultado final","Nulo / stake devolvida");fact(facts,"P/L realizado","0,00 €")}
+ if(r.status==="SETTLED"){const actual=(r.market==="ML"&&r.observed_outcome===2)?1:r.observed_outcome;fact(facts,"Resultado final",actual===idx?"Ganhou":"Perdeu");fact(facts,"P/L realizado",money(Number(r.pnl_eur)),Number(r.pnl_eur)>=0?"positive":"negative");fact(facts,"Liquidação",datePT(r.settlement_utc))}
  article.append(title,sub,facts);return article;
 }
 async function showPositions(name){
@@ -59,8 +63,8 @@ async function showPositions(name){
   if(!response.ok)throw Error("HTTP "+response.status);
   const rows=(await response.text()).split(/\r?\n/).filter(Boolean).map(line=>JSON.parse(line));
   rows.sort((a,b)=>(a.status==="OPEN"?0:1)-(b.status==="OPEN"?0:1)||String(a.start_utc).localeCompare(String(b.start_utc)));
-  const open=rows.filter(r=>r.status==="OPEN").length,settled=rows.filter(r=>r.status==="SETTLED").length;
-  el("positionsSummary").textContent=open+" abertas · "+settled+" liquidadas · valores exclusivamente fictícios. Fim previsto = início + 2 horas; não é a hora oficial de conclusão. A liquidação depende do próximo processamento e do resultado confirmado.";
+  const open=rows.filter(r=>r.status==="OPEN").length,settled=rows.filter(r=>r.status==="SETTLED").length,voided=rows.filter(r=>r.status==="VOID").length;
+  el("positionsSummary").textContent=open+" abertas · "+settled+" liquidadas · "+voided+" anuladas · valores exclusivamente fictícios. Fim previsto = início + 2 horas; não é a hora oficial de conclusão. A liquidação depende do próximo processamento e do resultado confirmado.";
   if(!rows.length){el("positionsContent").textContent="Ainda não existem posições registadas nesta carteira.";return}
   el("positionsContent").replaceChildren(...rows.map(positionView));
  }catch(err){el("positionsSummary").textContent="Não foi possível carregar as posições.";el("positionsContent").textContent="Erro: "+err.message}
@@ -93,6 +97,10 @@ target.append(tr);
 }
 const src=x.provenance||{};
 el("sources").textContent="Jogos históricos por liga: "+Object.entries(src.matches_per_league||{}).map(([k,n])=>k+": "+n).join(" · ")+" | Falhas de fontes: "+(src.failures?.length??0)+" | Eventos no scanner: "+(x.events_seen??0);
+const daily=x.daily_reference||{};
+el("dailyTarget").textContent=daily.local_date?
+"Dia "+daily.local_date+" · "+(daily.opened_today||0)+" / "+(daily.target||1)+" entrada(s) de referência. "+(daily.status==="COMPLETED"?"Meta cumprida":daily.status==="NO_ELIGIBLE_QUOTE"?"Sem odd pré-jogo suficientemente recente; não há entrada forçada":"Estado: "+daily.status)+". "+(daily.reason||""):
+"Meta diária ainda indisponível neste relatório.";
 el("status").textContent="Experimento ativo. Novos papers nesta execução: "+Object.values(x.new_paper_entries||{}).reduce((a,b)=>a+b,0)+". Liquidados: "+(x.newly_settled??0)+".";
 }catch(err){el("status").textContent="Sem relatório disponível: "+err.message+". Consulta GitHub Actions."}
 }
