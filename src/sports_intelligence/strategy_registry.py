@@ -11,7 +11,7 @@ import json
 import math
 from pathlib import Path
 
-from .custom_strategies import ORIGINAL_NAMES, CUSTOM_NAMES, RULES
+from .custom_strategies import ORIGINAL_NAMES, CUSTOM_NAMES, REFERENCE_NAMES, RULES
 
 START_EUR = 1000.0
 FIRST_LAB_UTC = "2026-10-18T12:34:17.387525+00:00"
@@ -59,6 +59,9 @@ def ensure_registry(root: Path, now: dt.datetime, names: tuple[str, ...]) -> dic
         elif name in CUSTOM_NAMES:
             started = stamp
             origin = "original_v3_strategy"
+        elif name in REFERENCE_NAMES:
+            started = stamp
+            origin = "research_control_reference_no_edge"
         else:
             raise ValueError("New strategy requires explicit registered model identity: " + name)
         registered[name] = {
