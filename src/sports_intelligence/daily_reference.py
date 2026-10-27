@@ -67,6 +67,7 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
         raise ValueError("Naive clock cannot create paper forecast")
     now = now.astimezone(dt.timezone.utc)
     day = local_day(now)
+    from .strategy_lab import read_jsonl, save_jsonl
     ledger = root / "data" / "strategy_ledgers" / (NAME.lower()+".jsonl")
     records = read_jsonl(ledger)
     started = parse_iso(registry[NAME]["created_utc"])
