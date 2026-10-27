@@ -1,6 +1,18 @@
 {
-  "asof_utc": "2026-10-26T20:58:28.335944+00:00",
-  "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V2",
+  "asof_utc": "2026-10-27T00:34:13.759437+00:00",
+  "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
+  "daily_reference": {
+    "local_date": "2026-10-27",
+    "target": 1,
+    "opened_today": 0,
+    "new_entries": 0,
+    "reference": true,
+    "not_a_value_signal": true,
+    "status": "NO_ELIGIBLE_QUOTE",
+    "reason": "No upcoming event with authentic, timely 1X2/ML odds from at least two bookmakers",
+    "eligible_events": 0
+  },
+  "daily_target_policy": "One genuine pre-game virtual reference if eligible; otherwise report missed target, never fabricate odds.",
   "registered_strategies": {
     "ELO_STANDARD": {
       "created_utc": "2026-10-18T12:34:17.387525+00:00",
@@ -49,6 +61,12 @@
       "initial_bank_eur": 1000,
       "origin": "original_v3_strategy",
       "strategy_version": "1.0.0"
+    },
+    "MARKET_DAILY_REFERENCE": {
+      "created_utc": "2026-10-27T00:34:13.759437+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "research_control_reference_no_edge",
+      "strategy_version": "legacy-1.0.0"
     }
   },
   "policy": "Existing balances and settled records persist; only brand-new strategies start with EUR 1000.",
@@ -67,7 +85,8 @@
     "ELO_POISSON_BLEND",
     "CONSENSUS_SHRUNK",
     "DISAGREEMENT_VETO",
-    "MARKET_ANCHORED"
+    "MARKET_ANCHORED",
+    "MARKET_DAILY_REFERENCE"
   ],
   "initial_bank_per_strategy_eur": 1000.0,
   "historical": {
@@ -366,6 +385,43 @@
           "log_loss": null
         }
       }
+    },
+    "MARKET_DAILY_REFERENCE": {
+      "n": 0,
+      "brier": null,
+      "log_loss": null,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "la_liga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "bundesliga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "serie_a": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "ligue_1": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        }
+      }
     }
   },
   "accounts": {
@@ -527,6 +583,26 @@
       "benchmark_n": 2,
       "market_brier": 0.740896,
       "market_log_loss": 1.200581,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "MARKET_DAILY_REFERENCE": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
+      "brier": null,
+      "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     }
   },
@@ -755,10 +831,10 @@
     }
   },
   "sources": {
-    "fixtures": 20,
+    "fixtures": 36,
     "failures": 0
   },
-  "events_seen": 32,
+  "events_seen": 74,
   "new_paper_entries": {},
   "entry_diagnostics": {
     "rejections": {
@@ -767,7 +843,7 @@
     "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 19,
+  "newly_settled": 0,
   "missing_final_event_ids": [],
   "restrictions": [
     "No real bets; outcomes do not imply profit guarantee.",
@@ -777,6 +853,7 @@
     "Money wagered is virtual and book execution/liquidity not confirmed.",
     "Current matchup name mismatches are rejected, not guessed.",
     "No odds: no paper wager.",
+    "Market daily reference is NON-VALUE control, not an edge or investment recommendation.",
     "Strategy portfolios are correlated; never sum as independent diversification."
   ]
 }
