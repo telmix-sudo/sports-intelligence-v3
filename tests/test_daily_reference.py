@@ -52,6 +52,27 @@ class DailyReferenceTests(unittest.TestCase):
             self.assertEqual(saved[0]["forecast_utc"], NOW.isoformat())
             verify_prior_accounts(root, registry)
 
+    def test_three_distinct_daily_events_no_fourth_and_no_bank_reset(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = ensure_registry(root, NOW, ALL_NAMES)
+            four = [event(sport) for sport in ("nba", "nhl", "nfl", "mlb")]
+            result = select_daily_reference(root, four, NOW, registry)
+            self.assertEqual(result["new_entries"], 3)
+            self.assertEqual(result["opened_today"], 3)
+            self.assertEqual(len(result["distinct_event_ids_today"]), 3)
+            self.assertEqual(result["status"], "DAILY_CAP")
+            saved = read_jsonl(root / "data" / "strategy_ledgers" / (NAME.lower()+".jsonl"))
+            self.assertEqual(len(saved), 3)
+            self.assertEqual(len({r["event_id"] for r in saved}), 3)
+            self.assertEqual(sum(r["stake_eur"] for r in saved), 15.0)
+            retry = select_daily_reference(root, four, NOW + dt.timedelta(minutes=20), registry)
+            self.assertEqual(retry["new_entries"], 0)
+            self.assertEqual(len(read_jsonl(root / "data" / "strategy_ledgers" / (NAME.lower()+".jsonl"))), 3)
+            accounts, _ = build_accounts(root, {}, NOW)
+            self.assertEqual(accounts[NAME]["bankroll_eur"], 1000.0)
+            self.assertEqual(accounts[NAME]["open"], 3)
+
     def test_missing_stale_and_nonprovable_prices_cannot_meet_target(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
