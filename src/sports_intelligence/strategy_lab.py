@@ -532,12 +532,33 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     if daily_reference["new_entries"]:
         entry_counts["MARKET_DAILY_REFERENCE"] = daily_reference["new_entries"]
     after, _ = build_accounts(root, {}, now)
+    # Count the TRUE number of unique events forecast on this Lisbon calendar day,
+    # not duplicated strategy picks on the same match.
+    activity_rows = [
+        r for strategy in STRATEGIES
+        for r in read_jsonl(root / "data" / "strategy_ledgers" / (strategy.lower() + ".jsonl"))
+        if parse_iso(r["forecast_utc"]).astimezone(PORTUGAL).date()
+        == now.astimezone(PORTUGAL).date()
+    ]
+    unique_events_today = sorted({r["event_id"] for r in activity_rows})
+    daily_activity = {
+        "local_date": now.astimezone(PORTUGAL).date().isoformat(),
+        "min_distinct_events_target": 1,
+        "preferred_max_distinct_events": 3,
+        "distinct_events_recorded": len(unique_events_today),
+        "paper_entries_across_all_accounts": len(activity_rows),
+        "reference_entries": sum(r["strategy"] == "MARKET_DAILY_REFERENCE" for r in activity_rows),
+        "unique_event_ids": unique_events_today,
+        "minimum_met": bool(unique_events_today),
+        "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
+    }
     report = {
         "asof_utc": now.isoformat(),
         "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
         "daily_reference": daily_reference,
+        "daily_activity": daily_activity,
         "frequency_strategies": frequency_results,
-        "daily_target_policy": "One genuine pre-game virtual reference if eligible; otherwise report missed target, never fabricate odds.",
+        "daily_target_policy": "1–3 distinct real-odds paper references per Lisbon day if available; never force a missing edge, odds or event.",
         "registered_strategies": registry,
         "policy": "Existing balances and settled records persist; only brand-new strategies start with EUR 1000.",
         "sports_tested": sorted(matches),
