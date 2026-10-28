@@ -1,27 +1,36 @@
 {
-  "asof_utc": "2026-10-28T22:18:38.879255+00:00",
+  "asof_utc": "2026-10-28T22:19:51.225385+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-10-28",
     "target": 1,
     "max_per_day": 3,
-    "opened_today": 0,
-    "new_entries": 0,
+    "opened_today": 3,
+    "new_entries": 3,
     "reference": true,
     "not_a_value_signal": true,
-    "status": "NO_ELIGIBLE_QUOTE",
-    "reason": "No upcoming event with recent, genuine odds from 2+ bookmakers",
-    "eligible_events": 0
+    "status": "DAILY_CAP",
+    "reason": "Genuine timestamped paper selections; reference only, no demonstrated edge",
+    "eligible_events": 31,
+    "distinct_event_ids_today": [
+      "nba:401909882",
+      "nba:401909883",
+      "nba:401909884"
+    ]
   },
   "daily_activity": {
     "local_date": "2026-10-28",
     "min_distinct_events_target": 1,
     "preferred_max_distinct_events": 3,
-    "distinct_events_recorded": 0,
-    "paper_entries_across_all_accounts": 0,
-    "reference_entries": 0,
-    "unique_event_ids": [],
-    "minimum_met": false,
+    "distinct_events_recorded": 3,
+    "paper_entries_across_all_accounts": 3,
+    "reference_entries": 3,
+    "unique_event_ids": [
+      "nba:401909882",
+      "nba:401909883",
+      "nba:401909884"
+    ],
+    "minimum_met": true,
     "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
   },
   "frequency_strategies": {
@@ -764,13 +773,13 @@
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 1006.9,
-      "open_exposure_eur": 0,
+      "open_exposure_eur": 15.09,
       "pnl_eur": 6.9,
       "total_staked_settled_eur": 5,
       "paper_wins": 1,
       "paper_losses": 0,
       "settled": 1,
-      "open": 0,
+      "open": 3,
       "yield_percent": 138.0,
       "return_on_initial_bank_percent": 0.69,
       "max_settled_drawdown_percent": 0.0,
@@ -1071,12 +1080,15 @@
     "failures": 0
   },
   "events_seen": 77,
-  "new_paper_entries": {},
+  "new_paper_entries": {
+    "MARKET_DAILY_REFERENCE": 3
+  },
   "entry_diagnostics": {
     "rejections": {
-      "missing_timestamped_odds": 56
+      "insufficient_history": 16,
+      "missing_timestamped_odds": 40
     },
-    "new_entries": 0,
+    "new_entries": 3,
     "unit": "strategy-event evaluations"
   },
   "newly_settled": 0,
