@@ -32,7 +32,11 @@ jobs:
         env:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -v
-      - name: Run eight isolated strategy portfolios with CC0 data
+      # The scanner publishes odds in another workflow. The lab must refresh
+      # checkout AFTER tests and immediately BEFORE choosing its paper events.
+      - name: Refresh latest scanner odds from main
+        run: git pull --ff-only origin main
+      - name: Run independent strategy portfolios with CC0 data
         env:
           PYTHONPATH: src
           PYTHONUNBUFFERED: "1"
