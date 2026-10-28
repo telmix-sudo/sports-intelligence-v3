@@ -12,7 +12,7 @@ from sports_intelligence.strategy_lab import (
     build_accounts, open_accounts, make_models, predictions, run_strategy_lab,
     INITIAL_BANKROLL_EUR, dc_adjusted,
 )
-from sports_intelligence.custom_strategies import ORIGINAL_NAMES, CUSTOM_NAMES, RULES
+from sports_intelligence.custom_strategies import ORIGINAL_NAMES, CUSTOM_NAMES, REFERENCE_NAMES, FREQUENCY_NAMES, RULES
 from sports_intelligence.strategy_registry import ensure_registry, verify_prior_accounts
 
 UTC = dt.timezone.utc
@@ -50,7 +50,7 @@ class StrategyLabTests(unittest.TestCase):
     def test_eight_models_and_market_only_when_price_exists(self):
         models = make_models()
         probabilities = predictions(models, "Arsenal", "Chelsea")
-        self.assertEqual(set(probabilities), set(STRATEGIES) - {"MARKET_DAILY_REFERENCE"})
+        self.assertEqual(set(probabilities), set(ORIGINAL_NAMES + CUSTOM_NAMES))
         self.assertIsNone(probabilities["MARKET_ANCHORED"])
         for values in probabilities.values():
             if values is None:
