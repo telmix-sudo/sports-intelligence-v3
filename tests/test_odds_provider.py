@@ -52,14 +52,14 @@ class OddsProviderTests(unittest.TestCase):
                 return ROWS
             events = [dict(EVENT)]
             summary = annotate_odds(events, path, NOW, secret="DO_NOT_PERSIST", requester=fake)
-            self.assertEqual(len(called), len(SPORTS_PER_POLL[NOW.hour]))
+            self.assertEqual(len(called), sum(len(v) for h,v in SPORTS_PER_POLL.items() if h <= NOW.hour))
             self.assertEqual(summary["quotes_matched"], 1)
             self.assertTrue(events[0]["quote"])
             disk = (path / "data" / "odds_cache_v3.json").read_text()
             self.assertNotIn("DO_NOT_PERSIST", disk)
             self.assertNotIn("commence_time", disk, "Bulk API response cannot be redistributed")
             again = annotate_odds([dict(EVENT)], path, NOW, secret="DO_NOT_PERSIST", requester=fake)
-            self.assertEqual(len(called), len(SPORTS_PER_POLL[NOW.hour]), "No repeated calls inside same hour")
+            self.assertEqual(len(called), sum(len(v) for h,v in SPORTS_PER_POLL.items() if h <= NOW.hour), "No repeated calls inside same hour")
             self.assertEqual(again["calls_this_run"], 0)
             self.assertLessEqual(summary["calls_today"], MAX_CALLS_PER_DAY)
 
@@ -73,14 +73,14 @@ class OddsProviderTests(unittest.TestCase):
             late = NOW.replace(hour=9, minute=10)
             result = annotate_odds([dict(EVENT)], root, late,
                                    secret="TEST_ONLY", requester=fake)
-            self.assertEqual(result["calls_this_run"], len(SPORTS_PER_POLL[8]))
+            self.assertEqual(result["calls_this_run"], len(SPORTS_PER_POLL[2]) + len(SPORTS_PER_POLL[8]))
             again = annotate_odds([dict(EVENT)], root, late.replace(minute=40),
                                   secret="TEST_ONLY", requester=fake)
             self.assertEqual(again["calls_this_run"], 0)
             afternoon = annotate_odds([dict(EVENT)], root,
                                       late.replace(hour=15, minute=5),
                                       secret="TEST_ONLY", requester=fake)
-            self.assertEqual(afternoon["calls_this_run"], len(SPORTS_PER_POLL[14]))
+            self.assertEqual(afternoon["calls_this_run"], len(SPORTS_PER_POLL[14])-1) # EPL already fetched earlier today
             self.assertLessEqual(afternoon["calls_today"], MAX_CALLS_PER_DAY)
 
     def test_no_key_no_calls(self):
