@@ -306,7 +306,7 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
                 continue
             # Moneyline has no draw selection: a drawn NFL result voids the
             # paper bet rather than converting it into a phantom loss.
-            if len(p) == 2 and index == 1:
+            if len(p) == 2 and index == 1 and record.get("sport") == "nfl":
                 record["status"] = "VOID"
                 record["settlement_utc"] = now.isoformat()
                 record["observed_outcome"] = index
@@ -314,6 +314,9 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
                 counts["settled_this_run"] += 1
                 continue
             if len(p) == 2:
+                # ESPN 1X2 indices: 0 home, 1 draw, 2 away. NHL ML includes OT.
+                if index == 1:
+                    continue  # Non-NFL draw requires explicit market settlement rules.
                 index = 0 if index == 0 else 1
             success = score_settlement(selected, index)
             stake = record["stake_eur"]
