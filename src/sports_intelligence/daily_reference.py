@@ -115,13 +115,12 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
                            reason=("Existing reference(s) already registered today" if daily else
                                    "No upcoming event with recent, genuine odds from 2+ bookmakers"))
         return diagnostics
-    candidates.sort(key=lambda x: (x[0], x[1], x[2]))
-    # Prioritise other sports when multiple are available on this execution.
+    # Prefer different sports within the day where possible. Re-rank after
+    # EACH opening: static sorting could choose three games from the same league.
     used_sports = {r.get("sport") for r in daily}
-    candidates.sort(key=lambda x: (x[3]["sport"] in used_sports, x[0], x[1], x[2]))
-    for _, _, _, event, pick, odds, p, timestamps, books, quote in candidates:
-        if len(daily) >= DAILY_TARGET_MAX:
-            break
+    while candidates and len(daily) < DAILY_TARGET_MAX:
+        candidates.sort(key=lambda x: (x[3]["sport"] in used_sports, x[0], x[1], x[2]))
+        _, _, _, event, pick, odds, p, timestamps, books, quote = candidates.pop(0)
         stake = round(min(bankroll * FRACTION,
                           max(0., bankroll * MAX_EXPOSURE - exposure)), 2)
         if stake <= 0:
