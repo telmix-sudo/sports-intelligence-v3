@@ -6,7 +6,7 @@
 <main>
 <section class="card space"><h2>Como interpretar os resultados</h2><p>Cada estratégia nova começa com <strong style="display:inline;font-size:inherit">1.000 € fictícios</strong>. As carteiras existentes preservam os seus saldos, lucros, perdas e previsões quando entra uma estratégia nova. Os testes históricos com OpenFootball avaliam Brier Score e Log Loss, não lucro retrospetivo: não existem odds históricas cronológicas neste conjunto. Valores mais baixos são melhores. Comparar métodos no mesmo histórico não os valida fora da amostra. A carteira MARKET DAILY REFERENCE usa o favorito do mercado apenas como controlo diário, sem vantagem estimada.</p><p id="status" class="warn" role="status">A procurar relatório...</p></section>
 <section class="card space"><h2>Meta diária de entradas fictícias</h2>
-<p class="muted">Objetivo: pelo menos uma entrada por dia no total. A carteira Market Daily Reference usa exclusivamente odds reais pré-jogo de pelo menos duas casas; não é um sinal de valor. Sem jogo e odd verificáveis, a meta é assinalada como não cumprida em vez de simular preços.</p>
+<p class="muted">Objetivo operacional: 1 a 3 jogos diferentes por dia no conjunto da V3. A carteira Market Daily Reference pode criar até três posições fictícias, apenas com odds reais anteriores ao jogo e pelo menos duas casas. Estes registos não demonstram vantagem sobre o mercado. Sem odds elegíveis, a meta fica por cumprir — não são simuladas cotações.</p>
 <p id="dailyTarget" class="warn" role="status">A verificar a meta de hoje…</p></section>
 <section class="card space"><h2>Porque não abriu mais posições?</h2><p id="entryDiagnostics" class="muted">A carregar diagnóstico…</p></section>
 <section class="grid space" id="wallets" aria-label="Carteiras virtuais"></section>
@@ -85,7 +85,7 @@ if(!response.ok)throw Error("HTTP "+response.status);
 const x=await response.json();
 el("updated").textContent="Último relatório: "+new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(x.asof_utc))+" (Lisboa)";
 const elapsed=Math.max(0,Math.round((Date.now()-new Date(x.asof_utc).getTime())/60000));
-el("freshness").textContent="Verificado agora; relatório publicado há "+(elapsed<60?elapsed+" min":Math.floor(elapsed/60)+" h "+elapsed%60+" min")+". A verificação automática ocorre a cada 5 minutos e não provoca novas apostas nem consultas à API de odds. "+(elapsed>24*60?"Atenção: laboratório sem novo relatório há mais de um dia.":"As oito carteiras só mudam quando existe uma nova operação ou liquidação.");
+el("freshness").textContent="Verificado agora; relatório publicado há "+(elapsed<60?elapsed+" min":Math.floor(elapsed/60)+" h "+elapsed%60+" min")+". A verificação automática ocorre a cada 5 minutos e não provoca novas apostas nem consultas à API de odds. "+(elapsed>24*60?"Atenção: laboratório sem novo relatório há mais de um dia.":"As carteiras só mudam quando existe uma nova operação ou liquidação.");
 el("wallets").replaceChildren(...Object.entries(x.accounts||{}).map(([n,a])=>card(n,a,x.registered_strategies?.[n])));
 const diag=x.entry_diagnostics;
 el("entryDiagnostics").textContent=diag ? "Entradas nesta execução: "+diag.new_entries+". Rejeições: "+Object.entries(diag.rejections||{}).map(([k,v])=>label(k)+": "+v).join(" · ")+". Contagem por avaliação estratégia/jogo, não por jogos únicos." : "O próximo relatório do laboratório apresentará as causas de rejeição.";
@@ -98,8 +98,12 @@ target.append(tr);
 const src=x.provenance||{};
 el("sources").textContent="Jogos históricos por liga: "+Object.entries(src.matches_per_league||{}).map(([k,n])=>k+": "+n).join(" · ")+" | Falhas de fontes: "+(src.failures?.length??0)+" | Eventos no scanner: "+(x.events_seen??0);
 const daily=x.daily_reference||{};
-el("dailyTarget").textContent=daily.local_date?
-"Dia "+daily.local_date+" · "+(daily.opened_today||0)+" / "+(daily.target||1)+" entrada(s) de referência. "+(daily.status==="COMPLETED"?"Meta cumprida":daily.status==="NO_ELIGIBLE_QUOTE"?"Sem odd pré-jogo suficientemente recente; não há entrada forçada":"Estado: "+daily.status)+". "+(daily.reason||""):
+const activity=x.daily_activity||{};
+el("dailyTarget").textContent=activity.local_date?
+"Dia "+activity.local_date+": "+activity.distinct_events_recorded+" jogos diferentes e "+activity.paper_entries_across_all_accounts+" operações experimentais (incluindo repetições entre carteiras). Meta: 1–3 jogos/dia. "+
+(activity.minimum_met?"Mínimo atingido. ":"Mínimo ainda não atingido. ")+
+"Carteira de referência: "+(daily.opened_today||0)+"/"+(daily.max_per_day||3)+
+". "+(daily.reason||""):
 "Meta diária ainda indisponível neste relatório.";
 el("status").textContent="Experimento ativo. Novos papers nesta execução: "+Object.values(x.new_paper_entries||{}).reduce((a,b)=>a+b,0)+". Liquidados: "+(x.newly_settled??0)+".";
 }catch(err){el("status").textContent="Sem relatório disponível: "+err.message+". Consulta GitHub Actions."}
