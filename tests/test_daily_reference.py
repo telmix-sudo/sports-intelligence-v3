@@ -65,6 +65,7 @@ class DailyReferenceTests(unittest.TestCase):
             saved = read_jsonl(root / "data" / "strategy_ledgers" / (NAME.lower()+".jsonl"))
             self.assertEqual(len(saved), 3)
             self.assertEqual(len({r["event_id"] for r in saved}), 3)
+            self.assertEqual(len({r["sport"] for r in saved}), 3, "Prefer distinct sports when available")
             self.assertEqual(sum(r["stake_eur"] for r in saved), 15.0)
             retry = select_daily_reference(root, four, NOW + dt.timedelta(minutes=20), registry)
             self.assertEqual(retry["new_entries"], 0)
