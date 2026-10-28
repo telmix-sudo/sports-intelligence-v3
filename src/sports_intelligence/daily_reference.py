@@ -16,8 +16,10 @@ from .scanner import parse_iso
 
 NAME = "MARKET_DAILY_REFERENCE"
 LOCAL = ZoneInfo("Europe/Lisbon")
-MAX_QUOTE_AGE_HOURS = 6
+MAX_QUOTE_AGE_HOURS = 8
 MAX_GAME_AHEAD_HOURS = 48
+DAILY_TARGET_MIN = 1
+DAILY_TARGET_MAX = 3
 FRACTION = .005
 MAX_EXPOSURE = .02
 
@@ -63,6 +65,11 @@ def quote_for_reference(e: dict, now: dt.datetime) -> tuple | None:
 
 def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
                            registry: dict) -> dict:
+    """Up to three distinct, genuine pre-game paper references per Lisbon day.
+
+    This portfolio is a market BASELINE, not a prediction with demonstrated edge.
+    The one-per-day minimum is an operational target, never a fabricated bet.
+    """
     if now.tzinfo is None:
         raise ValueError("Naive clock cannot create paper forecast")
     now = now.astimezone(dt.timezone.utc)
@@ -70,63 +77,87 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
     from .strategy_lab import read_jsonl, save_jsonl
     ledger = root / "data" / "strategy_ledgers" / (NAME.lower()+".jsonl")
     records = read_jsonl(ledger)
-    # Ensure the new account is inspectable in the public portfolio dashboard
-    # even if it has yet to make a single paper entry.
     if not ledger.exists():
         save_jsonl(ledger, [])
     started = parse_iso(registry[NAME]["created_utc"])
     daily = [r for r in records if local_day(parse_iso(r["forecast_utc"])) == day]
-    diagnostics = {"local_date": day, "target": 1, "opened_today": len(daily),
-                   "new_entries": 0, "reference": True,
-                   "not_a_value_signal": True,
-                   "status": "COMPLETED" if daily else "NO_ELIGIBLE_QUOTE",
-                   "reason": None}
-    if now < started or daily:
-        diagnostics["reason"] = "already_recorded" if daily else "not_registered_yet"
+    previous_ids = {r["event_id"] for r in records}
+    diagnostics = {
+        "local_date": day, "target": DAILY_TARGET_MIN,
+        "max_per_day": DAILY_TARGET_MAX,
+        "opened_today": len(daily), "new_entries": 0,
+        "reference": True, "not_a_value_signal": True,
+        "status": "NO_ELIGIBLE_QUOTE", "reason": None,
+        "eligible_events": 0,
+    }
+    if now < started:
+        diagnostics.update(status="NOT_REGISTERED_YET", reason="Strategy not yet registered")
+        return diagnostics
+    if len(daily) >= DAILY_TARGET_MAX:
+        diagnostics.update(status="DAILY_CAP", reason="Daily cap of 3 separate events reached")
         return diagnostics
     bankroll = 1000 + sum(float(r["pnl_eur"]) for r in records if r.get("status") == "SETTLED")
     exposure = sum(float(r["stake_eur"]) for r in records if r.get("status") == "OPEN")
-    stake = round(min(bankroll * FRACTION, max(0, bankroll * MAX_EXPOSURE - exposure)), 2)
-    if stake <= 0:
-        diagnostics["status"] = "MAX_EXPOSURE"
-        diagnostics["reason"] = "No available virtual exposure"
-        return diagnostics
-    seen = {r["event_id"] for r in records}
     candidates = []
     for event in events:
-        if event["id"] in seen:
+        if event["id"] in previous_ids:
             continue
         details = quote_for_reference(event, now)
         if details:
-            start, prices, probs, timestamps, books, quote = details
+            start, odds, probs, timestamps, books, quote = details
             idx = max(range(len(probs)), key=lambda i: probs[i])
-            candidates.append((start, -probs[idx], event["id"], event, idx, prices, probs, timestamps, books, quote))
+            # Sport diversity first, then nearer kickoffs; no arbitrary model edge.
+            candidates.append((start, -probs[idx], event["id"], event,
+                               idx, odds, probs, timestamps, books, quote))
     diagnostics["eligible_events"] = len(candidates)
     if not candidates:
-        diagnostics["reason"] = "No upcoming event with authentic, timely 1X2/ML odds from at least two bookmakers"
+        diagnostics.update(status="COMPLETED" if daily else "NO_ELIGIBLE_QUOTE",
+                           reason=("Existing reference(s) already registered today" if daily else
+                                   "No upcoming event with recent, genuine odds from 2+ bookmakers"))
         return diagnostics
-    _, _, _, event, pick, odds, p, timestamps, books, quote = min(candidates)
-    key = NAME+"|"+event["id"]+"|"+day
-    record = {
-        "id": "PREF-"+hashlib.sha256(key.encode()).hexdigest()[:14],
-        "strategy": NAME, "event_id": event["id"], "sport": event["sport"],
-        "home": event["home"], "away": event["away"], "start_utc":event["start_utc"],
-        "forecast_utc": now.isoformat(), "market":quote["market"],
-        "probabilities": p, "no_vig":p,
-        "odds": odds, "selection_index":pick,
-        "stake_eur":stake, "status":"OPEN", "pnl_eur":None,
-        "price_source":quote["provider"], "bookmakers":books,
-        "book_quote_updates_utc":timestamps,
-        "strategy_version":"1.0.0",
-        "strategy_registered_utc":registry[NAME]["created_utc"],
-        "model_status":"MARKET_REFERENCE_NO_ESTIMATED_EDGE",
-        "classification":"EXPLORATORY_DAILY_BASELINE_NOT_VALUE_BET",
-        "edge_pp":0, "selection_expected_value":round(p[pick]*odds[pick]-1,7),
-        "sizing_note":"0.5% of independent virtual bankroll; market favourite reference only; no demonstrated edge and no guarantee of execution.",
-    }
-    records.append(record)
-    save_jsonl(ledger, records)
-    diagnostics.update({"opened_today": 1, "new_entries": 1,
-                        "status":"COMPLETED", "reason":"Genuine pre-game odds reference",
-                        "event_id": event["id"],"sport":event["sport"],"kickoff_utc":event["start_utc"]})
+    candidates.sort(key=lambda x: (x[0], x[1], x[2]))
+    # Prioritise other sports when multiple are available on this execution.
+    used_sports = {r.get("sport") for r in daily}
+    candidates.sort(key=lambda x: (x[3]["sport"] in used_sports, x[0], x[1], x[2]))
+    for _, _, _, event, pick, odds, p, timestamps, books, quote in candidates:
+        if len(daily) >= DAILY_TARGET_MAX:
+            break
+        stake = round(min(bankroll * FRACTION,
+                          max(0., bankroll * MAX_EXPOSURE - exposure)), 2)
+        if stake <= 0:
+            diagnostics["reason"] = "Maximum exposure (2% of virtual bank) reached"
+            break
+        record = {
+            "id": "PREF-"+hashlib.sha256((NAME+"|"+event["id"]).encode()).hexdigest()[:14],
+            "strategy": NAME, "event_id": event["id"], "sport": event["sport"],
+            "home": event["home"], "away": event["away"], "start_utc": event["start_utc"],
+            "forecast_utc": now.isoformat(), "market": quote["market"],
+            "probabilities": list(p), "no_vig": list(p),
+            "odds": list(odds), "selection_index": pick,
+            "stake_eur": stake, "status": "OPEN",
+            "price_source": quote["provider"], "bookmakers": list(books),
+            "book_quote_updates_utc": list(timestamps),
+            "strategy_version": "2.0.0", "strategy_registered_utc": registry[NAME]["created_utc"],
+            "model_status": "MARKET_REFERENCE_NO_ESTIMATED_EDGE",
+            "classification": "EXPLORATORY_DAILY_BASELINE_NOT_VALUE_BET",
+            "edge_pp": 0, "selection_expected_value": round(p[pick]*odds[pick]-1, 7),
+            "sizing_note": "0.5% independent virtual bank, max 2% exposure; price execution unconfirmed.",
+        }
+        records.append(record)
+        daily.append(record)
+        previous_ids.add(event["id"])
+        used_sports.add(event["sport"])
+        exposure += stake
+        diagnostics["new_entries"] += 1
+    if diagnostics["new_entries"]:
+        save_jsonl(ledger, records)
+    diagnostics["opened_today"] = len(daily)
+    diagnostics["status"] = ("DAILY_CAP" if len(daily) >= DAILY_TARGET_MAX else
+                             "PARTIAL" if daily else
+                             "NO_ELIGIBLE_QUOTE")
+    if diagnostics["reason"] is None:
+        diagnostics["reason"] = (
+            "Genuine timestamped paper selections; reference only, no demonstrated edge"
+            if daily else "No valid quote or remaining exposure")
+    diagnostics["distinct_event_ids_today"] = sorted({r["event_id"] for r in daily})
     return diagnostics
