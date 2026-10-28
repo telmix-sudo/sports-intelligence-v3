@@ -80,7 +80,7 @@ class OddsProviderTests(unittest.TestCase):
             afternoon = annotate_odds([dict(EVENT)], root,
                                       late.replace(hour=15, minute=5),
                                       secret="TEST_ONLY", requester=fake)
-            self.assertEqual(afternoon["calls_this_run"], len(SPORTS_PER_POLL[14])-1) # EPL already fetched earlier today
+            self.assertEqual(afternoon["calls_this_run"], len(SPORTS_PER_POLL[14])) # EPL refreshes at the afternoon slot
             self.assertLessEqual(afternoon["calls_today"], MAX_CALLS_PER_DAY)
 
     def test_no_key_no_calls(self):
