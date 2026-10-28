@@ -1,15 +1,48 @@
 {
-  "asof_utc": "2026-10-28T08:16:58.822Z",
+  "asof_utc": "2026-10-28T22:09:20.391056+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
-    "local_date": "2026-10-27",
+    "local_date": "2026-10-28",
     "target": 1,
-    "opened_today": 1,
+    "opened_today": 0,
     "new_entries": 0,
     "reference": true,
     "not_a_value_signal": true,
-    "status": "COMPLETED",
-    "reason": "already_recorded"
+    "status": "NO_ELIGIBLE_QUOTE",
+    "reason": "No upcoming event with authentic, timely 1X2/ML odds from at least two bookmakers",
+    "eligible_events": 0
+  },
+  "frequency_strategies": {
+    "FREQ_SELECTIVE_1_3": {
+      "weekly_target": [
+        1,
+        3
+      ],
+      "opened_this_week": 0,
+      "new_entries": 0,
+      "eligible": 0,
+      "status": "NO_ELIGIBLE_QUOTE"
+    },
+    "FREQ_BALANCED_3_5": {
+      "weekly_target": [
+        3,
+        5
+      ],
+      "opened_this_week": 0,
+      "new_entries": 0,
+      "eligible": 0,
+      "status": "NO_ELIGIBLE_QUOTE"
+    },
+    "FREQ_BROAD_5_10": {
+      "weekly_target": [
+        5,
+        10
+      ],
+      "opened_this_week": 0,
+      "new_entries": 0,
+      "eligible": 0,
+      "status": "NO_ELIGIBLE_QUOTE"
+    }
   },
   "daily_target_policy": "One genuine pre-game virtual reference if eligible; otherwise report missed target, never fabricate odds.",
   "registered_strategies": {
@@ -57,7 +90,7 @@
     },
     "MARKET_DAILY_REFERENCE": {
       "created_utc": "2026-10-27T00:34:13.759437+00:00",
-      "initial_bank_eur": 1000,
+      "initial_bank_eur": 1000.0,
       "origin": "research_control_reference_no_edge",
       "strategy_version": "legacy-1.0.0"
     },
@@ -65,6 +98,24 @@
       "created_utc": "2026-10-18T12:34:17.387525+00:00",
       "initial_bank_eur": 1000,
       "origin": "legacy_existing_account",
+      "strategy_version": "legacy-1.0.0"
+    },
+    "FREQ_SELECTIVE_1_3": {
+      "created_utc": "2026-10-28T22:09:20.391056+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "prospective_frequency_model_paper",
+      "strategy_version": "legacy-1.0.0"
+    },
+    "FREQ_BALANCED_3_5": {
+      "created_utc": "2026-10-28T22:09:20.391056+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "prospective_frequency_model_paper",
+      "strategy_version": "legacy-1.0.0"
+    },
+    "FREQ_BROAD_5_10": {
+      "created_utc": "2026-10-28T22:09:20.391056+00:00",
+      "initial_bank_eur": 1000.0,
+      "origin": "prospective_frequency_model_paper",
       "strategy_version": "legacy-1.0.0"
     }
   },
@@ -85,9 +136,12 @@
     "CONSENSUS_SHRUNK",
     "DISAGREEMENT_VETO",
     "MARKET_ANCHORED",
-    "MARKET_DAILY_REFERENCE"
+    "MARKET_DAILY_REFERENCE",
+    "FREQ_SELECTIVE_1_3",
+    "FREQ_BALANCED_3_5",
+    "FREQ_BROAD_5_10"
   ],
-  "initial_bank_per_strategy_eur": 1000,
+  "initial_bank_per_strategy_eur": 1000.0,
   "historical": {
     "ELO_STANDARD": {
       "n": 3733,
@@ -421,22 +475,133 @@
           "log_loss": null
         }
       }
+    },
+    "FREQ_SELECTIVE_1_3": {
+      "n": 0,
+      "brier": null,
+      "log_loss": null,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "la_liga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "bundesliga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "serie_a": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "ligue_1": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        }
+      }
+    },
+    "FREQ_BALANCED_3_5": {
+      "n": 0,
+      "brier": null,
+      "log_loss": null,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "la_liga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "bundesliga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "serie_a": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "ligue_1": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        }
+      }
+    },
+    "FREQ_BROAD_5_10": {
+      "n": 0,
+      "brier": null,
+      "log_loss": null,
+      "uniform_brier": 0.666667,
+      "uniform_log_loss": 1.098612,
+      "historical_roi": null,
+      "historical_scope": "FULL_RESEARCH_SAMPLE",
+      "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_league": {
+        "epl": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "la_liga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "bundesliga": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "serie_a": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        },
+        "ligue_1": {
+          "n": 0,
+          "brier": null,
+          "log_loss": null
+        }
+      }
     }
   },
   "accounts": {
     "ELO_STANDARD": {
-      "bankroll_initial_eur": 1000,
-      "bankroll_eur": 990,
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 990.0,
       "open_exposure_eur": 0,
-      "pnl_eur": -10,
-      "total_staked_settled_eur": 10,
+      "pnl_eur": -10.0,
+      "total_staked_settled_eur": 10.0,
       "paper_wins": 0,
       "paper_losses": 2,
       "settled": 2,
       "open": 0,
-      "yield_percent": -100,
-      "return_on_initial_bank_percent": -1,
-      "max_settled_drawdown_percent": 1,
+      "yield_percent": -100.0,
+      "return_on_initial_bank_percent": -1.0,
+      "max_settled_drawdown_percent": 1.0,
       "brier": 0.850556,
       "log_loss": 1.355422,
       "benchmark_n": 2,
@@ -445,18 +610,18 @@
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "ELO_DYNAMIC": {
-      "bankroll_initial_eur": 1000,
-      "bankroll_eur": 990,
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 990.0,
       "open_exposure_eur": 0,
-      "pnl_eur": -10,
-      "total_staked_settled_eur": 10,
+      "pnl_eur": -10.0,
+      "total_staked_settled_eur": 10.0,
       "paper_wins": 0,
       "paper_losses": 2,
       "settled": 2,
       "open": 0,
-      "yield_percent": -100,
-      "return_on_initial_bank_percent": -1,
-      "max_settled_drawdown_percent": 1,
+      "yield_percent": -100.0,
+      "return_on_initial_bank_percent": -1.0,
+      "max_settled_drawdown_percent": 1.0,
       "brier": 0.84781,
       "log_loss": 1.362697,
       "benchmark_n": 2,
@@ -465,16 +630,16 @@
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "POISSON_SHRINK": {
-      "bankroll_initial_eur": 1000,
-      "bankroll_eur": 985,
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 985.0,
       "open_exposure_eur": 0,
-      "pnl_eur": -15,
-      "total_staked_settled_eur": 15,
+      "pnl_eur": -15.0,
+      "total_staked_settled_eur": 15.0,
       "paper_wins": 0,
       "paper_losses": 3,
       "settled": 3,
       "open": 0,
-      "yield_percent": -100,
+      "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.5,
       "max_settled_drawdown_percent": 1.5,
       "brier": 0.811196,
@@ -485,18 +650,18 @@
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "DIXON_COLES_LOW": {
-      "bankroll_initial_eur": 1000,
-      "bankroll_eur": 990,
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 990.0,
       "open_exposure_eur": 0,
-      "pnl_eur": -10,
-      "total_staked_settled_eur": 10,
+      "pnl_eur": -10.0,
+      "total_staked_settled_eur": 10.0,
       "paper_wins": 0,
       "paper_losses": 2,
       "settled": 2,
       "open": 0,
-      "yield_percent": -100,
-      "return_on_initial_bank_percent": -1,
-      "max_settled_drawdown_percent": 1,
+      "yield_percent": -100.0,
+      "return_on_initial_bank_percent": -1.0,
+      "max_settled_drawdown_percent": 1.0,
       "brier": 0.896829,
       "log_loss": 1.398721,
       "benchmark_n": 2,
@@ -505,16 +670,16 @@
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "ELO_POISSON_BLEND": {
-      "bankroll_initial_eur": 1000,
-      "bankroll_eur": 985,
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 985.0,
       "open_exposure_eur": 0,
-      "pnl_eur": -15,
-      "total_staked_settled_eur": 15,
+      "pnl_eur": -15.0,
+      "total_staked_settled_eur": 15.0,
       "paper_wins": 0,
       "paper_losses": 3,
       "settled": 3,
       "open": 0,
-      "yield_percent": -100,
+      "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.5,
       "max_settled_drawdown_percent": 1.5,
       "brier": 0.787064,
@@ -525,16 +690,16 @@
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "CONSENSUS_SHRUNK": {
-      "bankroll_initial_eur": 1000,
-      "bankroll_eur": 985,
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 985.0,
       "open_exposure_eur": 0,
-      "pnl_eur": -15,
-      "total_staked_settled_eur": 15,
+      "pnl_eur": -15.0,
+      "total_staked_settled_eur": 15.0,
       "paper_wins": 0,
       "paper_losses": 3,
       "settled": 3,
       "open": 0,
-      "yield_percent": -100,
+      "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.5,
       "max_settled_drawdown_percent": 1.5,
       "brier": 0.781103,
@@ -545,18 +710,18 @@
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "DISAGREEMENT_VETO": {
-      "bankroll_initial_eur": 1000,
-      "bankroll_eur": 990,
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 990.0,
       "open_exposure_eur": 0,
-      "pnl_eur": -10,
-      "total_staked_settled_eur": 10,
+      "pnl_eur": -10.0,
+      "total_staked_settled_eur": 10.0,
       "paper_wins": 0,
       "paper_losses": 2,
       "settled": 2,
       "open": 0,
-      "yield_percent": -100,
-      "return_on_initial_bank_percent": -1,
-      "max_settled_drawdown_percent": 1,
+      "yield_percent": -100.0,
+      "return_on_initial_bank_percent": -1.0,
+      "max_settled_drawdown_percent": 1.0,
       "brier": 0.8794,
       "log_loss": 1.3856,
       "benchmark_n": 2,
@@ -565,18 +730,18 @@
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "MARKET_ANCHORED": {
-      "bankroll_initial_eur": 1000,
-      "bankroll_eur": 990,
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 990.0,
       "open_exposure_eur": 0,
-      "pnl_eur": -10,
-      "total_staked_settled_eur": 10,
+      "pnl_eur": -10.0,
+      "total_staked_settled_eur": 10.0,
       "paper_wins": 0,
       "paper_losses": 2,
       "settled": 2,
       "open": 0,
-      "yield_percent": -100,
-      "return_on_initial_bank_percent": -1,
-      "max_settled_drawdown_percent": 1,
+      "yield_percent": -100.0,
+      "return_on_initial_bank_percent": -1.0,
+      "max_settled_drawdown_percent": 1.0,
       "brier": 0.830983,
       "log_loss": 1.326325,
       "benchmark_n": 2,
@@ -585,7 +750,7 @@
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "MARKET_DAILY_REFERENCE": {
-      "bankroll_initial_eur": 1000,
+      "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 1006.9,
       "open_exposure_eur": 0,
       "pnl_eur": 6.9,
@@ -594,14 +759,74 @@
       "paper_losses": 0,
       "settled": 1,
       "open": 0,
-      "yield_percent": 138,
+      "yield_percent": 138.0,
       "return_on_initial_bank_percent": 0.69,
-      "max_settled_drawdown_percent": 0,
+      "max_settled_drawdown_percent": 0.0,
       "brier": 0.435595,
       "log_loss": 0.628648,
       "benchmark_n": 1,
       "market_brier": 0.435595,
       "market_log_loss": 0.628648,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "FREQ_SELECTIVE_1_3": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
+      "brier": null,
+      "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "FREQ_BALANCED_3_5": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
+      "brier": null,
+      "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
+      "status": "EXPERIMENTAL_PAPER_ONLY"
+    },
+    "FREQ_BROAD_5_10": {
+      "bankroll_initial_eur": 1000.0,
+      "bankroll_eur": 1000.0,
+      "open_exposure_eur": 0,
+      "pnl_eur": 0,
+      "total_staked_settled_eur": 0,
+      "paper_wins": 0,
+      "paper_losses": 0,
+      "settled": 0,
+      "open": 0,
+      "yield_percent": null,
+      "return_on_initial_bank_percent": 0.0,
+      "max_settled_drawdown_percent": 0.0,
+      "brier": null,
+      "log_loss": null,
+      "benchmark_n": 0,
+      "market_brier": null,
+      "market_log_loss": null,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     }
   },
@@ -833,16 +1058,16 @@
     "fixtures": 36,
     "failures": 0
   },
-  "events_seen": 74,
+  "events_seen": 77,
   "new_paper_entries": {},
   "entry_diagnostics": {
     "rejections": {
-      "missing_timestamped_odds": 64
+      "missing_timestamped_odds": 56
     },
     "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 1,
+  "newly_settled": 0,
   "missing_final_event_ids": [],
   "restrictions": [
     "No real bets; outcomes do not imply profit guarantee.",
@@ -854,6 +1079,5 @@
     "No odds: no paper wager.",
     "Market daily reference is NON-VALUE control, not an edge or investment recommendation.",
     "Strategy portfolios are correlated; never sum as independent diversification."
-  ],
-  "settlement_reconciliation_note": "Verified official NHL result CBJ 4 PHI 3 OT; reference PREF-2873832b593b41 settled WIN +6.90 EUR; manual reconciliation, other report discovery fields retain 2026-10-27 snapshot."
+  ]
 }
