@@ -149,30 +149,41 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
             pass
     diagnostics = {"configured": bool(secret), "calls_this_run": 0,
                    "cached_sports": [], "quotes_matched": 0, "errors": []}
-    # GitHub scheduled jobs can start hours late. Use the most recent elapsed
-    # slot, not equality with the actual start hour. Record its completion so
-    # retries within the slot never consume duplicate API credits.
-    slot = max((hour for hour in POLL_HOURS_UTC if hour <= now.hour), default=None)
-    if secret and slot is not None and slot not in record["polled_windows"]:
+    # When GitHub skips or delays cron jobs, catch up EACH missed daily slot
+    # within the same daily budget. Never substitute later quotes for earlier ones
+    # in historical decisions: only future unstarted events enter the cache.
+    pending_slots = [
+        hour for hour in POLL_HOURS_UTC
+        if hour <= now.hour and hour not in record["polled_windows"]
+    ]
+    for slot in pending_slots if secret else ():
+        complete = True
         for sport in SPORTS_PER_POLL[slot]:
-            sport_key = ODDS_KEY_MAP[sport]
             if record["calls_today"] >= MAX_CALLS_PER_DAY:
+                complete = False
                 break
+            sport_key = ODDS_KEY_MAP[sport]
             snap = record["snapshots"].get(sport)
-            if snap and snap.get("fetched_at", "")[:10] == record["day"] and parse_utc(snap["fetched_at"]).hour >= slot:
+            if (snap and snap.get("fetched_at", "")[:10] == record["day"] and
+                    parse_utc(snap["fetched_at"]).hour >= slot):
                 continue
-            # Count even failed calls conservatively to protect free quota.
             record["calls_today"] += 1
             diagnostics["calls_this_run"] += 1
             try:
                 rows = requester(sport_key, secret)
-                limited = {event["id"]: q for event in events if event["sport"] == sport
-                           if (q := quotes_for_event(event, rows, now)) is not None}
-                # Never redistribute a provider's bulk feed in our public repository.
+                limited = {event["id"]: quote for event in events if event["sport"] == sport
+                           if (quote := quotes_for_event(event, rows, now)) is not None}
                 record["snapshots"][sport] = {"fetched_at": now.isoformat(), "quotes": limited}
             except Exception as exc:
-                diagnostics["errors"].append({"sport": sport, "reason": type(exc).__name__ + ": " + str(exc)[:100]})
-        record["polled_windows"].append(slot)
+                diagnostics["errors"].append({
+                    "sport": sport,
+                    "reason": type(exc).__name__ + ": " + str(exc)[:100]
+                })
+        if complete:
+            record["polled_windows"].append(slot)
+        if not complete:
+            break
+    if pending_slots and secret:
         cache_path.parent.mkdir(parents=True, exist_ok=True)
         cache_path.write_text(json.dumps(record, ensure_ascii=False, sort_keys=True), encoding="utf8")
     for event in events:
