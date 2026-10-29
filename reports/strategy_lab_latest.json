@@ -1,34 +1,32 @@
 {
-  "asof_utc": "2026-10-28T22:19:51.225385+00:00",
+  "asof_utc": "2026-10-29T01:14:56.044024+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
-    "local_date": "2026-10-28",
+    "local_date": "2026-10-29",
     "target": 1,
     "max_per_day": 3,
-    "opened_today": 3,
-    "new_entries": 3,
+    "opened_today": 2,
+    "new_entries": 2,
     "reference": true,
     "not_a_value_signal": true,
-    "status": "DAILY_CAP",
-    "reason": "Genuine timestamped paper selections; reference only, no demonstrated edge",
-    "eligible_events": 31,
+    "status": "PARTIAL",
+    "reason": "Maximum exposure (2% of virtual bank) reached",
+    "eligible_events": 17,
     "distinct_event_ids_today": [
-      "nba:401909882",
-      "nba:401909883",
-      "nba:401909884"
+      "nba:401909891",
+      "nhl:401892599"
     ]
   },
   "daily_activity": {
-    "local_date": "2026-10-28",
+    "local_date": "2026-10-29",
     "min_distinct_events_target": 1,
     "preferred_max_distinct_events": 3,
-    "distinct_events_recorded": 3,
-    "paper_entries_across_all_accounts": 3,
-    "reference_entries": 3,
+    "distinct_events_recorded": 2,
+    "paper_entries_across_all_accounts": 2,
+    "reference_entries": 2,
     "unique_event_ids": [
-      "nba:401909882",
-      "nba:401909883",
-      "nba:401909884"
+      "nba:401909891",
+      "nhl:401892599"
     ],
     "minimum_met": true,
     "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
@@ -773,13 +771,13 @@
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 1006.9,
-      "open_exposure_eur": 15.09,
+      "open_exposure_eur": 20.14,
       "pnl_eur": 6.9,
       "total_staked_settled_eur": 5,
       "paper_wins": 1,
       "paper_losses": 0,
       "settled": 1,
-      "open": 3,
+      "open": 5,
       "yield_percent": 138.0,
       "return_on_initial_bank_percent": 0.69,
       "max_settled_drawdown_percent": 0.0,
@@ -1079,20 +1077,24 @@
     "fixtures": 36,
     "failures": 0
   },
-  "events_seen": 77,
+  "events_seen": 98,
   "new_paper_entries": {
-    "MARKET_DAILY_REFERENCE": 3
+    "MARKET_DAILY_REFERENCE": 2
   },
   "entry_diagnostics": {
     "rejections": {
       "insufficient_history": 16,
       "missing_timestamped_odds": 40
     },
-    "new_entries": 3,
+    "new_entries": 2,
     "unit": "strategy-event evaluations"
   },
   "newly_settled": 0,
-  "missing_final_event_ids": [],
+  "missing_final_event_ids": [
+    "nba:401909882",
+    "nba:401909883",
+    "nba:401909884"
+  ],
   "restrictions": [
     "No real bets; outcomes do not imply profit guarantee.",
     "Historical comparison has NO historic book prices; historical ROI deliberately missing.",
