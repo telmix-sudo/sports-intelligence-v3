@@ -1,32 +1,34 @@
 {
-  "asof_utc": "2026-10-29T01:14:56.044024+00:00",
+  "asof_utc": "2026-10-29T07:40:11.232797+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-10-29",
     "target": 1,
     "max_per_day": 3,
-    "opened_today": 2,
-    "new_entries": 2,
+    "opened_today": 3,
+    "new_entries": 1,
     "reference": true,
     "not_a_value_signal": true,
-    "status": "PARTIAL",
-    "reason": "Maximum exposure (2% of virtual bank) reached",
-    "eligible_events": 17,
+    "status": "DAILY_CAP",
+    "reason": "Genuine timestamped paper selections; reference only, no demonstrated edge",
+    "eligible_events": 14,
     "distinct_event_ids_today": [
       "nba:401909891",
-      "nhl:401892599"
+      "nhl:401892599",
+      "nhl:401892601"
     ]
   },
   "daily_activity": {
     "local_date": "2026-10-29",
     "min_distinct_events_target": 1,
     "preferred_max_distinct_events": 3,
-    "distinct_events_recorded": 2,
-    "paper_entries_across_all_accounts": 2,
-    "reference_entries": 2,
+    "distinct_events_recorded": 3,
+    "paper_entries_across_all_accounts": 3,
+    "reference_entries": 3,
     "unique_event_ids": [
       "nba:401909891",
-      "nhl:401892599"
+      "nhl:401892599",
+      "nhl:401892601"
     ],
     "minimum_met": true,
     "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
@@ -770,19 +772,19 @@
     },
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 1006.9,
-      "open_exposure_eur": 20.14,
-      "pnl_eur": 6.9,
-      "total_staked_settled_eur": 5,
-      "paper_wins": 1,
-      "paper_losses": 0,
-      "settled": 1,
-      "open": 5,
-      "yield_percent": 138.0,
-      "return_on_initial_bank_percent": 0.69,
-      "max_settled_drawdown_percent": 0.0,
-      "brier": 0.435595,
-      "log_loss": 0.628648,
+      "bankroll_eur": 1007.383,
+      "open_exposure_eur": 5.04,
+      "pnl_eur": 7.383,
+      "total_staked_settled_eur": 25.14,
+      "paper_wins": 4,
+      "paper_losses": 2,
+      "settled": 6,
+      "open": 1,
+      "yield_percent": 29.3675,
+      "return_on_initial_bank_percent": 0.7383,
+      "max_settled_drawdown_percent": 0.4988,
+      "brier": 0.391622,
+      "log_loss": 0.575181,
       "benchmark_n": 1,
       "market_brier": 0.435595,
       "market_log_loss": 0.628648,
@@ -1077,24 +1079,20 @@
     "fixtures": 36,
     "failures": 0
   },
-  "events_seen": 98,
+  "events_seen": 96,
   "new_paper_entries": {
-    "MARKET_DAILY_REFERENCE": 2
+    "MARKET_DAILY_REFERENCE": 1
   },
   "entry_diagnostics": {
     "rejections": {
       "insufficient_history": 16,
       "missing_timestamped_odds": 40
     },
-    "new_entries": 2,
+    "new_entries": 1,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 0,
-  "missing_final_event_ids": [
-    "nba:401909882",
-    "nba:401909883",
-    "nba:401909884"
-  ],
+  "newly_settled": 5,
+  "missing_final_event_ids": [],
   "restrictions": [
     "No real bets; outcomes do not imply profit guarantee.",
     "Historical comparison has NO historic book prices; historical ROI deliberately missing.",
