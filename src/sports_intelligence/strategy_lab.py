@@ -45,7 +45,8 @@ PAPER_STAKE_FRACTION = 0.005
 MAX_PAPER_EXPOSURE_FRACTION = 0.02
 EDGE_MINIMUM = 0.04
 EV_MINIMUM = 0.02
-MAX_DAILY_ENTRIES_PER_ACCOUNT = 4
+MIN_DAILY_ENTRIES_TARGET_PER_ACCOUNT = 1
+MAX_DAILY_ENTRIES_PER_ACCOUNT = 3
 
 # Exact-name aliases only. Unrecognized club names are NOT guessed/fuzzy-matched.
 ALIASES = {
@@ -541,7 +542,20 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         == now.astimezone(PORTUGAL).date()
     ]
     unique_events_today = sorted({r["event_id"] for r in activity_rows})
+    daily_per_strategy = {
+        name: {
+            "entries": sum(r["strategy"] == name for r in activity_rows),
+            "minimum_target": MIN_DAILY_ENTRIES_TARGET_PER_ACCOUNT,
+            "maximum": MAX_DAILY_ENTRIES_PER_ACCOUNT,
+            "target_met": any(r["strategy"] == name for r in activity_rows),
+        }
+        for name in ORIGINAL_NAMES + CUSTOM_NAMES
+    }
     daily_activity = {
+        "per_strategy": daily_per_strategy,
+        "strategies_below_minimum": [
+            name for name, stats in daily_per_strategy.items() if not stats["target_met"]
+        ],
         "local_date": now.astimezone(PORTUGAL).date().isoformat(),
         "min_distinct_events_target": 1,
         "preferred_max_distinct_events": 3,
@@ -558,7 +572,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "daily_reference": daily_reference,
         "daily_activity": daily_activity,
         "frequency_strategies": frequency_results,
-        "daily_target_policy": "1–3 distinct real-odds paper references per Lisbon day if available; never force a missing edge, odds or event.",
+        "daily_target_policy": "Each of eight core strategies targets 1–3 qualified PAPER entries per Lisbon day; maximum 3 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",
         "registered_strategies": registry,
         "policy": "Existing balances and settled records persist; only brand-new strategies start with EUR 1000.",
         "sports_tested": sorted(matches),
