@@ -1,5 +1,5 @@
 {
-  "asof_utc": "2026-10-30T18:52:21.708602+00:00",
+  "asof_utc": "2026-10-30T23:15:20.373050+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-10-30",
@@ -103,9 +103,9 @@
         5
       ],
       "opened_this_week": 3,
-      "new_entries": 1,
-      "eligible": 1,
-      "status": "OPENED_PAPER"
+      "new_entries": 0,
+      "eligible": 0,
+      "status": "NO_ELIGIBLE_QUOTE"
     },
     "FREQ_BROAD_5_10": {
       "weekly_target": [
@@ -113,9 +113,9 @@
         10
       ],
       "opened_this_week": 5,
-      "new_entries": 2,
-      "eligible": 2,
-      "status": "OPENED_PAPER"
+      "new_entries": 0,
+      "eligible": 0,
+      "status": "NO_ELIGIBLE_QUOTE"
     }
   },
   "daily_target_policy": "Each of eight core strategies targets 1–3 qualified PAPER entries per Lisbon day; maximum 3 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",
@@ -1133,25 +1133,22 @@
     "failures": 0
   },
   "events_seen": 111,
-  "new_paper_entries": {
-    "POISSON_SHRINK": 2,
-    "DIXON_COLES_LOW": 1,
-    "CONSENSUS_SHRUNK": 2,
-    "MARKET_ANCHORED": 1,
-    "FREQ_BALANCED_3_5": 1,
-    "FREQ_BROAD_5_10": 2
-  },
+  "new_paper_entries": {},
   "entry_diagnostics": {
     "rejections": {
       "insufficient_edge_or_ev": 7,
-      "insufficient_history": 112,
-      "missing_timestamped_odds": 80
+      "insufficient_history": 117,
+      "missing_timestamped_odds": 74
     },
-    "new_entries": 9,
+    "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
   "newly_settled": 0,
-  "missing_final_event_ids": [],
+  "missing_final_event_ids": [
+    "nba:401909277",
+    "nhl:401892611",
+    "nhl:401892612"
+  ],
   "restrictions": [
     "No real bets; outcomes do not imply profit guarantee.",
     "Historical comparison has NO historic book prices; historical ROI deliberately missing.",
