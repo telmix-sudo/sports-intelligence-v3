@@ -1,5 +1,5 @@
 {
-  "asof_utc": "2026-10-30T00:24:32.007828+00:00",
+  "asof_utc": "2026-10-30T06:28:46.487587+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-10-30",
@@ -765,19 +765,19 @@
     },
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 1007.383,
-      "open_exposure_eur": 5.04,
-      "pnl_eur": 7.383,
-      "total_staked_settled_eur": 25.14,
-      "paper_wins": 4,
+      "bankroll_eur": 1011.0622,
+      "open_exposure_eur": 0,
+      "pnl_eur": 11.0622,
+      "total_staked_settled_eur": 30.18,
+      "paper_wins": 5,
       "paper_losses": 2,
-      "settled": 6,
-      "open": 1,
-      "yield_percent": 29.3675,
-      "return_on_initial_bank_percent": 0.7383,
+      "settled": 7,
+      "open": 0,
+      "yield_percent": 36.6541,
+      "return_on_initial_bank_percent": 1.1062,
       "max_settled_drawdown_percent": 0.4988,
-      "brier": 0.391622,
-      "log_loss": 0.575181,
+      "brier": 0.363085,
+      "log_loss": 0.545966,
       "benchmark_n": 1,
       "market_brier": 0.435595,
       "market_log_loss": 0.628648,
@@ -1073,23 +1073,16 @@
     "failures": 0
   },
   "events_seen": 111,
-  "new_paper_entries": {
-    "ELO_STANDARD": 1,
-    "ELO_POISSON_BLEND": 1
-  },
+  "new_paper_entries": {},
   "entry_diagnostics": {
     "rejections": {
-      "insufficient_edge_or_ev": 5,
-      "insufficient_history": 86,
-      "missing_timestamped_odds": 71
+      "missing_timestamped_odds": 191
     },
-    "new_entries": 2,
+    "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 0,
-  "missing_final_event_ids": [
-    "nhl:401892601"
-  ],
+  "newly_settled": 1,
+  "missing_final_event_ids": [],
   "restrictions": [
     "No real bets; outcomes do not imply profit guarantee.",
     "Historical comparison has NO historic book prices; historical ROI deliberately missing.",
