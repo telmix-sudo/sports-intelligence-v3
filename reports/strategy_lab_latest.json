@@ -1,33 +1,27 @@
 {
-  "asof_utc": "2026-10-29T19:54:28.474660+00:00",
+  "asof_utc": "2026-10-30T00:24:32.007828+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
-    "local_date": "2026-10-29",
+    "local_date": "2026-10-30",
     "target": 1,
     "max_per_day": 3,
-    "opened_today": 3,
+    "opened_today": 0,
     "new_entries": 0,
     "reference": true,
     "not_a_value_signal": true,
-    "status": "DAILY_CAP",
-    "reason": "Daily cap of 3 separate events reached",
+    "status": "NO_ELIGIBLE_QUOTE",
+    "reason": "No upcoming event with recent, genuine odds from 2+ bookmakers",
     "eligible_events": 0
   },
   "daily_activity": {
-    "local_date": "2026-10-29",
+    "local_date": "2026-10-30",
     "min_distinct_events_target": 1,
     "preferred_max_distinct_events": 3,
-    "distinct_events_recorded": 7,
-    "paper_entries_across_all_accounts": 32,
-    "reference_entries": 3,
+    "distinct_events_recorded": 1,
+    "paper_entries_across_all_accounts": 2,
+    "reference_entries": 0,
     "unique_event_ids": [
-      "epl:401878761",
-      "epl:401879248",
-      "epl:401879249",
-      "epl:401879251",
-      "nba:401909891",
-      "nhl:401892599",
-      "nhl:401892601"
+      "epl:401879250"
     ],
     "minimum_met": true,
     "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
@@ -39,9 +33,9 @@
         3
       ],
       "opened_this_week": 1,
-      "new_entries": 1,
-      "eligible": 1,
-      "status": "OPENED_PAPER"
+      "new_entries": 0,
+      "eligible": 0,
+      "status": "NO_ELIGIBLE_QUOTE"
     },
     "FREQ_BALANCED_3_5": {
       "weekly_target": [
@@ -49,9 +43,9 @@
         5
       ],
       "opened_this_week": 2,
-      "new_entries": 1,
-      "eligible": 1,
-      "status": "OPENED_PAPER"
+      "new_entries": 0,
+      "eligible": 0,
+      "status": "NO_ELIGIBLE_QUOTE"
     },
     "FREQ_BROAD_5_10": {
       "weekly_target": [
@@ -59,9 +53,9 @@
         10
       ],
       "opened_this_week": 3,
-      "new_entries": 2,
-      "eligible": 2,
-      "status": "OPENED_PAPER"
+      "new_entries": 0,
+      "eligible": 0,
+      "status": "NO_ELIGIBLE_QUOTE"
     }
   },
   "daily_target_policy": "1–3 distinct real-odds paper references per Lisbon day if available; never force a missing edge, odds or event.",
@@ -612,13 +606,13 @@
     "ELO_STANDARD": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 990.0,
-      "open_exposure_eur": 14.85,
+      "open_exposure_eur": 19.8,
       "pnl_eur": -10.0,
       "total_staked_settled_eur": 10.0,
       "paper_wins": 0,
       "paper_losses": 2,
       "settled": 2,
-      "open": 3,
+      "open": 4,
       "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.0,
       "max_settled_drawdown_percent": 1.0,
@@ -692,13 +686,13 @@
     "ELO_POISSON_BLEND": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 985.0,
-      "open_exposure_eur": 19.68,
+      "open_exposure_eur": 19.7,
       "pnl_eur": -15.0,
       "total_staked_settled_eur": 15.0,
       "paper_wins": 0,
       "paper_losses": 3,
       "settled": 3,
-      "open": 4,
+      "open": 5,
       "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.5,
       "max_settled_drawdown_percent": 1.5,
@@ -1078,30 +1072,24 @@
     "fixtures": 36,
     "failures": 0
   },
-  "events_seen": 96,
+  "events_seen": 111,
   "new_paper_entries": {
-    "ELO_STANDARD": 2,
-    "ELO_DYNAMIC": 3,
-    "POISSON_SHRINK": 3,
-    "DIXON_COLES_LOW": 3,
-    "ELO_POISSON_BLEND": 3,
-    "CONSENSUS_SHRUNK": 2,
-    "MARKET_ANCHORED": 2,
-    "FREQ_SELECTIVE_1_3": 1,
-    "FREQ_BALANCED_3_5": 1,
-    "FREQ_BROAD_5_10": 2
+    "ELO_STANDARD": 1,
+    "ELO_POISSON_BLEND": 1
   },
   "entry_diagnostics": {
     "rejections": {
-      "insufficient_edge_or_ev": 3,
-      "insufficient_history": 70,
-      "missing_timestamped_odds": 62
+      "insufficient_edge_or_ev": 5,
+      "insufficient_history": 86,
+      "missing_timestamped_odds": 71
     },
-    "new_entries": 22,
+    "new_entries": 2,
     "unit": "strategy-event evaluations"
   },
   "newly_settled": 0,
-  "missing_final_event_ids": [],
+  "missing_final_event_ids": [
+    "nhl:401892601"
+  ],
   "restrictions": [
     "No real bets; outcomes do not imply profit guarantee.",
     "Historical comparison has NO historic book prices; historical ROI deliberately missing.",
