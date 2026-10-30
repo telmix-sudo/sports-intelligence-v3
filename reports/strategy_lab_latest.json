@@ -1,22 +1,17 @@
 {
-  "asof_utc": "2026-10-30T13:36:32.415898+00:00",
+  "asof_utc": "2026-10-30T18:52:21.708602+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-10-30",
     "target": 1,
     "max_per_day": 3,
     "opened_today": 3,
-    "new_entries": 3,
+    "new_entries": 0,
     "reference": true,
     "not_a_value_signal": true,
     "status": "DAILY_CAP",
-    "reason": "Genuine timestamped paper selections; reference only, no demonstrated edge",
-    "eligible_events": 12,
-    "distinct_event_ids_today": [
-      "nba:401909277",
-      "nhl:401892611",
-      "nhl:401892612"
-    ]
+    "reason": "Daily cap of 3 separate events reached",
+    "eligible_events": 0
   },
   "daily_activity": {
     "per_strategy": {
@@ -33,16 +28,16 @@
         "target_met": false
       },
       "POISSON_SHRINK": {
-        "entries": 0,
+        "entries": 2,
         "minimum_target": 1,
         "maximum": 3,
-        "target_met": false
+        "target_met": true
       },
       "DIXON_COLES_LOW": {
-        "entries": 0,
+        "entries": 1,
         "minimum_target": 1,
         "maximum": 3,
-        "target_met": false
+        "target_met": true
       },
       "ELO_POISSON_BLEND": {
         "entries": 1,
@@ -51,10 +46,10 @@
         "target_met": true
       },
       "CONSENSUS_SHRUNK": {
-        "entries": 0,
+        "entries": 2,
         "minimum_target": 1,
         "maximum": 3,
-        "target_met": false
+        "target_met": true
       },
       "DISAGREEMENT_VETO": {
         "entries": 0,
@@ -63,28 +58,27 @@
         "target_met": false
       },
       "MARKET_ANCHORED": {
-        "entries": 0,
+        "entries": 1,
         "minimum_target": 1,
         "maximum": 3,
-        "target_met": false
+        "target_met": true
       }
     },
     "strategies_below_minimum": [
       "ELO_DYNAMIC",
-      "POISSON_SHRINK",
-      "DIXON_COLES_LOW",
-      "CONSENSUS_SHRUNK",
-      "DISAGREEMENT_VETO",
-      "MARKET_ANCHORED"
+      "DISAGREEMENT_VETO"
     ],
     "local_date": "2026-10-30",
     "min_distinct_events_target": 1,
     "preferred_max_distinct_events": 3,
-    "distinct_events_recorded": 4,
-    "paper_entries_across_all_accounts": 5,
+    "distinct_events_recorded": 7,
+    "paper_entries_across_all_accounts": 14,
     "reference_entries": 3,
     "unique_event_ids": [
+      "epl:401879246",
+      "epl:401879249",
       "epl:401879250",
+      "ligue_1:401876415",
       "nba:401909277",
       "nhl:401892611",
       "nhl:401892612"
@@ -108,20 +102,20 @@
         3,
         5
       ],
-      "opened_this_week": 2,
-      "new_entries": 0,
-      "eligible": 0,
-      "status": "NO_ELIGIBLE_QUOTE"
+      "opened_this_week": 3,
+      "new_entries": 1,
+      "eligible": 1,
+      "status": "OPENED_PAPER"
     },
     "FREQ_BROAD_5_10": {
       "weekly_target": [
         5,
         10
       ],
-      "opened_this_week": 3,
-      "new_entries": 0,
-      "eligible": 0,
-      "status": "NO_ELIGIBLE_QUOTE"
+      "opened_this_week": 5,
+      "new_entries": 2,
+      "eligible": 2,
+      "status": "OPENED_PAPER"
     }
   },
   "daily_target_policy": "Each of eight core strategies targets 1–3 qualified PAPER entries per Lisbon day; maximum 3 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",
@@ -712,13 +706,13 @@
     "POISSON_SHRINK": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 985.0,
-      "open_exposure_eur": 14.76,
+      "open_exposure_eur": 19.7,
       "pnl_eur": -15.0,
       "total_staked_settled_eur": 15.0,
       "paper_wins": 0,
       "paper_losses": 3,
       "settled": 3,
-      "open": 3,
+      "open": 5,
       "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.5,
       "max_settled_drawdown_percent": 1.5,
@@ -732,13 +726,13 @@
     "DIXON_COLES_LOW": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 990.0,
-      "open_exposure_eur": 14.85,
+      "open_exposure_eur": 19.8,
       "pnl_eur": -10.0,
       "total_staked_settled_eur": 10.0,
       "paper_wins": 0,
       "paper_losses": 2,
       "settled": 2,
-      "open": 3,
+      "open": 4,
       "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.0,
       "max_settled_drawdown_percent": 1.0,
@@ -772,13 +766,13 @@
     "CONSENSUS_SHRUNK": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 985.0,
-      "open_exposure_eur": 14.76,
+      "open_exposure_eur": 19.7,
       "pnl_eur": -15.0,
       "total_staked_settled_eur": 15.0,
       "paper_wins": 0,
       "paper_losses": 3,
       "settled": 3,
-      "open": 3,
+      "open": 5,
       "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.5,
       "max_settled_drawdown_percent": 1.5,
@@ -812,13 +806,13 @@
     "MARKET_ANCHORED": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 990.0,
-      "open_exposure_eur": 14.85,
+      "open_exposure_eur": 19.8,
       "pnl_eur": -10.0,
       "total_staked_settled_eur": 10.0,
       "paper_wins": 0,
       "paper_losses": 2,
       "settled": 2,
-      "open": 3,
+      "open": 4,
       "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.0,
       "max_settled_drawdown_percent": 1.0,
@@ -872,13 +866,13 @@
     "FREQ_BALANCED_3_5": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 1000.0,
-      "open_exposure_eur": 5.0,
+      "open_exposure_eur": 7.5,
       "pnl_eur": 0,
       "total_staked_settled_eur": 0,
       "paper_wins": 0,
       "paper_losses": 0,
       "settled": 0,
-      "open": 2,
+      "open": 3,
       "yield_percent": null,
       "return_on_initial_bank_percent": 0.0,
       "max_settled_drawdown_percent": 0.0,
@@ -892,13 +886,13 @@
     "FREQ_BROAD_5_10": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 1000.0,
-      "open_exposure_eur": 7.5,
+      "open_exposure_eur": 12.5,
       "pnl_eur": 0,
       "total_staked_settled_eur": 0,
       "paper_wins": 0,
       "paper_losses": 0,
       "settled": 0,
-      "open": 3,
+      "open": 5,
       "yield_percent": null,
       "return_on_initial_bank_percent": 0.0,
       "max_settled_drawdown_percent": 0.0,
@@ -1140,13 +1134,20 @@
   },
   "events_seen": 111,
   "new_paper_entries": {
-    "MARKET_DAILY_REFERENCE": 3
+    "POISSON_SHRINK": 2,
+    "DIXON_COLES_LOW": 1,
+    "CONSENSUS_SHRUNK": 2,
+    "MARKET_ANCHORED": 1,
+    "FREQ_BALANCED_3_5": 1,
+    "FREQ_BROAD_5_10": 2
   },
   "entry_diagnostics": {
     "rejections": {
-      "missing_timestamped_odds": 207
+      "insufficient_edge_or_ev": 7,
+      "insufficient_history": 112,
+      "missing_timestamped_odds": 80
     },
-    "new_entries": 3,
+    "new_entries": 9,
     "unit": "strategy-event evaluations"
   },
   "newly_settled": 0,
