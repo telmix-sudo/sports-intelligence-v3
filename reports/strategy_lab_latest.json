@@ -1,27 +1,93 @@
 {
-  "asof_utc": "2026-10-30T06:28:46.487587+00:00",
+  "asof_utc": "2026-10-30T13:36:32.415898+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-10-30",
     "target": 1,
     "max_per_day": 3,
-    "opened_today": 0,
-    "new_entries": 0,
+    "opened_today": 3,
+    "new_entries": 3,
     "reference": true,
     "not_a_value_signal": true,
-    "status": "NO_ELIGIBLE_QUOTE",
-    "reason": "No upcoming event with recent, genuine odds from 2+ bookmakers",
-    "eligible_events": 0
+    "status": "DAILY_CAP",
+    "reason": "Genuine timestamped paper selections; reference only, no demonstrated edge",
+    "eligible_events": 12,
+    "distinct_event_ids_today": [
+      "nba:401909277",
+      "nhl:401892611",
+      "nhl:401892612"
+    ]
   },
   "daily_activity": {
+    "per_strategy": {
+      "ELO_STANDARD": {
+        "entries": 1,
+        "minimum_target": 1,
+        "maximum": 3,
+        "target_met": true
+      },
+      "ELO_DYNAMIC": {
+        "entries": 0,
+        "minimum_target": 1,
+        "maximum": 3,
+        "target_met": false
+      },
+      "POISSON_SHRINK": {
+        "entries": 0,
+        "minimum_target": 1,
+        "maximum": 3,
+        "target_met": false
+      },
+      "DIXON_COLES_LOW": {
+        "entries": 0,
+        "minimum_target": 1,
+        "maximum": 3,
+        "target_met": false
+      },
+      "ELO_POISSON_BLEND": {
+        "entries": 1,
+        "minimum_target": 1,
+        "maximum": 3,
+        "target_met": true
+      },
+      "CONSENSUS_SHRUNK": {
+        "entries": 0,
+        "minimum_target": 1,
+        "maximum": 3,
+        "target_met": false
+      },
+      "DISAGREEMENT_VETO": {
+        "entries": 0,
+        "minimum_target": 1,
+        "maximum": 3,
+        "target_met": false
+      },
+      "MARKET_ANCHORED": {
+        "entries": 0,
+        "minimum_target": 1,
+        "maximum": 3,
+        "target_met": false
+      }
+    },
+    "strategies_below_minimum": [
+      "ELO_DYNAMIC",
+      "POISSON_SHRINK",
+      "DIXON_COLES_LOW",
+      "CONSENSUS_SHRUNK",
+      "DISAGREEMENT_VETO",
+      "MARKET_ANCHORED"
+    ],
     "local_date": "2026-10-30",
     "min_distinct_events_target": 1,
     "preferred_max_distinct_events": 3,
-    "distinct_events_recorded": 1,
-    "paper_entries_across_all_accounts": 2,
-    "reference_entries": 0,
+    "distinct_events_recorded": 4,
+    "paper_entries_across_all_accounts": 5,
+    "reference_entries": 3,
     "unique_event_ids": [
-      "epl:401879250"
+      "epl:401879250",
+      "nba:401909277",
+      "nhl:401892611",
+      "nhl:401892612"
     ],
     "minimum_met": true,
     "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
@@ -58,7 +124,7 @@
       "status": "NO_ELIGIBLE_QUOTE"
     }
   },
-  "daily_target_policy": "1–3 distinct real-odds paper references per Lisbon day if available; never force a missing edge, odds or event.",
+  "daily_target_policy": "Each of eight core strategies targets 1–3 qualified PAPER entries per Lisbon day; maximum 3 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",
   "registered_strategies": {
     "CONSENSUS_SHRUNK": {
       "created_utc": "2026-10-18T13:16:29.281097+00:00",
@@ -766,13 +832,13 @@
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 1011.0622,
-      "open_exposure_eur": 0,
+      "open_exposure_eur": 15.18,
       "pnl_eur": 11.0622,
       "total_staked_settled_eur": 30.18,
       "paper_wins": 5,
       "paper_losses": 2,
       "settled": 7,
-      "open": 0,
+      "open": 3,
       "yield_percent": 36.6541,
       "return_on_initial_bank_percent": 1.1062,
       "max_settled_drawdown_percent": 0.4988,
@@ -1073,15 +1139,17 @@
     "failures": 0
   },
   "events_seen": 111,
-  "new_paper_entries": {},
+  "new_paper_entries": {
+    "MARKET_DAILY_REFERENCE": 3
+  },
   "entry_diagnostics": {
     "rejections": {
-      "missing_timestamped_odds": 191
+      "missing_timestamped_odds": 207
     },
-    "new_entries": 0,
+    "new_entries": 3,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 1,
+  "newly_settled": 0,
   "missing_final_event_ids": [],
   "restrictions": [
     "No real bets; outcomes do not imply profit guarantee.",
