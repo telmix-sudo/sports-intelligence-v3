@@ -38,3 +38,9 @@ Relatório verificável: https://github.com/telmix-sudo/sports-intelligence-v3/b
 - O campo `daily_activity` no relatório distingue o número de **jogos diferentes** do número de **operações repetidas** entre carteiras.
 - O comparador apresenta 12 carteiras (8 estratégias quantitativas, uma referência diária e três experiências de frequência semanal). As três estratégias de frequência semanal conservam a sua definição; a meta diária de 1–3 jogos é medida no sistema global.
 - Uma sequência sem entradas não significa necessariamente falha de software, mas deve surgir com diagnóstico de odds ausentes ou insuficientes.
+
+## Meta individual das oito carteiras principais (30/10/2026)
+
+Cada uma das oito estratégias quantitativas originais passa a ter uma meta operacional **individual de 1 a 3 novas posições PAPER por dia civil de Lisboa** e um teto efetivo de **3 entradas diárias por carteira**. O relatório `daily_activity.per_strategy` publica contagens, meta e cumprimento por carteira; `strategies_below_minimum` identifica carteiras abaixo da meta. As carteiras continuam independentes, com saldos, ledgers, modelos e histórico preservados. As três experiências de frequência e a carteira de referência mantêm regras próprias.
+
+**A meta não é uma obrigação de apostar sem vantagem.** Continuam obrigatórios evento futuro, cotação genuína com timestamp, modelo aplicável, edge/EV mínimo, deduplicação e limites de exposição. Se uma carteira tiver zero oportunidades elegíveis, regista zero e sinaliza a falha da meta. A ampliação de cobertura e a calibração dos modelos são trabalho adicional, não uma autorização para afrouxar filtros. Não existem apostas reais.
