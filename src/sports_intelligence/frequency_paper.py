@@ -4,6 +4,7 @@ import hashlib
 from .daily_reference import quote_for_reference
 from .scanner import parse_iso
 from .custom_strategies import FREQUENCY_NAMES
+from .portfolio_controls import PaperRiskBook, conservative_expected_value
 
 POLICIES = {
  "FREQ_SELECTIVE_1_3": (1,3,.06,.08,.01),
@@ -11,8 +12,9 @@ POLICIES = {
  "FREQ_BROAD_5_10": (5,10,.03,.05,.02),
 }
 
-def run_frequency_strategies(root, models, events, now, registry):
+def run_frequency_strategies(root, models, events, now, registry, risk=None):
  from .strategy_lab import read_jsonl, save_jsonl, predictions, team_name
+ risk = risk or PaperRiskBook(root)
  output = {}
  for name in FREQUENCY_NAMES:
   low, cap, edge_min, uncertainty, max_exposure = POLICIES[name]
@@ -43,14 +45,17 @@ def run_frequency_strategies(root, models, events, now, registry):
    for i in range(3):
     edge = p[i]-market[i]
     ev_low = (p[i]-uncertainty)*odds[i]-1
-    if edge>=edge_min and ev_low>0:
+    if edge>=edge_min and ev_low>0 and conservative_expected_value(p[i],odds[i],min(lm["ELO_STANDARD"].played.get(home,0),lm["ELO_STANDARD"].played.get(away,0)))>.01:
      candidates.append((ev_low,e["id"],e,i,p,odds,market,stamps,books,raw))
   candidates.sort(key=lambda x:(-x[0],x[1]))
   diag["eligible"] = len(candidates)
   for ev_low,eid,e,i,p,odds,market,stamps,books,raw in candidates:
    if weekly>=cap: break
+   if eid in seen: continue
    stake = round(min(bank*.0025,bank*max_exposure-exposure),2)
-   if stake<=0: break
+   if stake<1: break
+   stake = risk.reserve(eid, stake)
+   if stake == 0: continue
    key = "PFREQ-"+hashlib.sha256((name+"|"+eid).encode()).hexdigest()[:14]
    rows.append({"id":key,"strategy":name,"event_id":eid,"sport":e["sport"],
     "home":e["home"],"away":e["away"],"start_utc":e["start_utc"],
@@ -62,6 +67,7 @@ def run_frequency_strategies(root, models, events, now, registry):
     "bookmakers":books,"book_quote_updates_utc":stamps,
     "strategy_version":"1.0.0","model_status":"EXPERIMENTAL_NOT_VALIDATED"})
    weekly+=1
+   seen.add(eid)
    exposure+=stake
    diag["new_entries"]+=1
   if diag["new_entries"]:
