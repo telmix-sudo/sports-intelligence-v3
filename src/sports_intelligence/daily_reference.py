@@ -33,6 +33,7 @@ def local_day(timestamp: dt.datetime) -> str:
 def quote_for_reference(e: dict, now: dt.datetime) -> tuple | None:
     """The Odds API verified prices only. No ESPN non-timestamped odds."""
     try:
+        if e.get("paper_execution_enabled") is False:return None
         kickoff = parse_iso(e["start_utc"])
         if (e.get("status") != "pre" or
             not (now < kickoff <= now + dt.timedelta(hours=MAX_GAME_AHEAD_HOURS))):

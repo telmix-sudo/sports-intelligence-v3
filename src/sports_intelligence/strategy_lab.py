@@ -634,7 +634,10 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "minimum_met": all(s["target_met"] for s in daily_per_strategy.values()),
         "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
     }
+    global_file=root/"reports/global_discovery_latest.json"
+    global_snapshot=json.loads(global_file.read_text()) if global_file.exists() else None
     report = {
+        "global_discovery":global_snapshot,
         "asof_utc": now.isoformat(),
         "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
         "daily_reference": daily_reference,

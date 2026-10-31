@@ -129,6 +129,7 @@ def classify(event: dict, model: FootballElo | FootballPoisson | None, now: dt.d
     if not (now < kickoff <= now + dt.timedelta(hours=48)) or event["status"] != "pre":
         return None
     record = {k: event[k] for k in ("id", "sport", "home", "away", "start_utc")}
+    record.update({k:event[k] for k in ("family","competition","title","event_type","paper_execution_enabled","sources") if k in event})
     record["model_version"] = None
     record["model_probabilities"] = None
     record["market"] = event["quote"]

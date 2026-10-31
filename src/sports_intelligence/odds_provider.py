@@ -101,7 +101,7 @@ def parse_utc(text: str) -> dt.datetime:
 def quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict | None:
     if event["status"] != "pre" or parse_utc(event["start_utc"]) <= at:
         return None
-    is_three_way = event["sport"] in {"epl", "la_liga", "bundesliga", "serie_a", "ligue_1"}
+    is_three_way = event.get("family")=="soccer" or event["sport"] in FOOTBALL
     matched = []
     for row in rows:
         try:
@@ -120,6 +120,8 @@ def quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict | N
                     if age < -120 or age > MAX_BOOK_QUOTE_AGE_HOURS * 3600:
                         continue
                     outcomes = {key_for(o["name"]): float(o["price"]) for o in market["outcomes"]}
+                    if not is_three_way and "draw" in outcomes:
+                        continue  # Never normalize an incomplete two-way book.
                     prices = [
                         outcomes[key_for(row["home_team"])],
                         *([outcomes["draw"]] if is_three_way else []),
@@ -163,7 +165,7 @@ def quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict | N
 
 def market_quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict:
     """Return separately priced complete binary goal markets at exact lines."""
-    if event["sport"] not in FOOTBALL or event["status"] != "pre" or parse_utc(event["start_utc"]) <= at:
+    if (event["sport"] not in FOOTBALL and event.get("family")!="soccer") or event["status"] != "pre" or parse_utc(event["start_utc"]) <= at:
         return {}
     grouped = {}
     for row in rows:
@@ -237,9 +239,13 @@ def _provider_id(event, rows):
 
 
 def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
-                  secret: str | None = None, requester=_request_odds) -> dict:
+                  secret: str | None = None, requester=_request_odds, global_discovery=None) -> dict:
     """Updates odds cache only during designated hours and within daily budget."""
     now = now.astimezone(UTC)
+    if global_discovery is not None:
+        from .broad_odds import annotate_discovered
+        key=os.getenv("ODDS_API_KEY", "") if secret is None else secret
+        return annotate_discovered(events,root,now,key,requester)
     secret = os.getenv("ODDS_API_KEY", "") if secret is None else secret
     cache_path = root / "data" / "odds_cache_v3.json"
     record = {"day": now.date().isoformat(), "calls_today": 0,

@@ -35,7 +35,7 @@
 <header>
   <div><div class="sub">INVESTIGAÇÃO QUANTITATIVA · PAPER TRADING</div><h1>Sports Intelligence <span style="color:var(--accent)">V3</span></h1>
   <div id="updated" class="sub">A carregar relatório…</div></div>
-  <nav><a href="./strategies.html">Ver 9 carteiras (8 estratégias + referência)</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/roadmap.md">Desenvolvimento</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3">Código</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions">Execuções</a><button id="refresh" type="button">Atualizar</button></nav>
+  <nav><a href="./strategies.html">Ver carteiras e posições</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/roadmap.md">Desenvolvimento</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3">Código</a><a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions">Execuções</a><button id="refresh" type="button">Atualizar</button></nav>
 </header>
 <main>
   <div id="status" class="pill" role="status" aria-live="polite">A consultar relatório confirmado…</div>
@@ -59,6 +59,7 @@
     </div>
     <p id="warning" class="critical">Ainda não existem evidências de vantagem estatística validada.</p>
   </section>
+  <section class="tablebox"><h2>Pesquisa global de modalidades</h2><p id="global-summary" class="sub">A aguardar o primeiro relatório global.</p><p class="sub">Modalidades no catálogo, calendários pesquisados, odds verificadas e modelos são etapas distintas. As modalidades novas não abrem posições automaticamente.</p><table><thead><tr><th>Modalidade</th><th>Consultas</th><th>Eventos futuros</th><th>Com odds</th><th>Com modelo</th><th>Estado</th></tr></thead><tbody id="global-sports"></tbody></table></section>
   <section class="tablebox"><h2>Cobertura por modalidade</h2><div id="coverage" class="grid" aria-live="polite"></div></section>
   <section class="tablebox"><h2>Eventos e estimativas experimentais</h2><p class="sub">Estes valores não são recomendações. Sem odd atual e modelo validado não há oportunidade.</p>
     <div class="tools"><label for="event-search" class="sub">Pesquisar:</label><input id="event-search" type="search" placeholder="Equipa, competição, evento..." autocomplete="off">
@@ -72,6 +73,7 @@
 </main><footer class="sub">Sports Intelligence · Evidência antes de ação · <a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/data_quality.md">Qualidade dos dados</a></footer>
 <script>
 "use strict";
+const GLOBAL_EVENTS="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/data/global_events_v3.json";
 const ROOT="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/reports/latest.json";
 const $=id=>document.getElementById(id);
 const num=(x,d=3)=>typeof x==="number"?x.toLocaleString("pt-PT",{minimumFractionDigits:d,maximumFractionDigits:d}):"—";
@@ -80,14 +82,14 @@ let currentGames=[];
 function renderGames(){
   const text=$("event-search").value.toLocaleLowerCase("pt-PT").trim();
   const filter=$("sport-filter").value;
-  const rows=currentGames.filter(x=>(!filter||x.sport===filter)&&(!text||[x.sport,x.home,x.away,x.reason].join(" ").toLocaleLowerCase("pt-PT").includes(text)));
+  const rows=currentGames.filter(x=>(!filter||(x.family||x.sport)===filter)&&(!text||[x.family,x.sport,x.competition,x.title,x.home,x.away,x.reason].join(" ").toLocaleLowerCase("pt-PT").includes(text)));
   $("filter-count").textContent=rows.length+" / "+currentGames.length+" eventos";
   const tbody=$("games");tbody.replaceChildren();
   if(!rows.length){const tr=document.createElement("tr");const cel=td(currentGames.length?"Sem eventos com estes filtros.":"Sem eventos pré-jogo disponíveis.");cel.colSpan=5;tr.append(cel);tbody.append(tr)}
   for(const e of rows){
     const tr=document.createElement("tr");
     const ps=e.model_probabilities?.map(v=>(v*100).toFixed(1)+"%").join(" / ")||"sem modelo";
-    for(const part of [e.sport,(e.home||"")+" – "+(e.away||""),kickoff(e.start_utc),ps,e.reason||e.classification])tr.append(td(part));
+    for(const part of [e.competition||e.sport,e.title||(e.home||"")+" – "+(e.away||""),kickoff(e.start_utc),ps,e.reason||e.classification])tr.append(td(part));
     tbody.append(tr);
   }
 }
@@ -123,10 +125,28 @@ async function load(){
       const bar=document.createElement("div");bar.className="progress";const fill=document.createElement("span");
       fill.style.width=(n/max*100)+"%";bar.append(fill);node.append(label,bar);region.append(node);
     }
+    const discovery=x.global_discovery;
+    const globalRows=$("global-sports");globalRows.replaceChildren();
+    if(discovery){
+      $("global-summary").textContent=discovery.modalities_in_catalog+" modalidades/grupos no catálogo · "+discovery.modalities_queried+" pesquisados · "+discovery.modalities_with_future_events+" com eventos nas próximas 48h · "+discovery.modalities_with_timestamped_odds+" com odds verificadas. A descoberta usa endpoints gratuitos; os preços partilham o limite de 16 créditos/dia.";
+      for(const [sport,g] of Object.entries(discovery.by_modality||{})){
+        const tr=document.createElement("tr");for(const value of [sport.split("_").join(" "),g.queries,g.future_events,g.events_with_odds,g.events_with_model,g.status])tr.append(td(value));globalRows.append(tr);
+      }
+    }
     currentGames=(x.candidates||[]).slice(0,100);
+    if(discovery){
+      try{
+        const result=await fetch(GLOBAL_EVENTS+"?t="+Date.now(),{cache:"no-store"});
+        if(!result.ok)throw Error("HTTP "+result.status);
+        const calendar=await result.json();
+        if(calendar.asof_utc!==x.generated_at_utc)throw Error("O calendário e o relatório têm horas diferentes; atualizar novamente.");
+        const modeled=new Map((x.candidates||[]).map(c=>[c.id,c]));
+        currentGames=(calendar.events||[]).filter(e=>e.status==="pre"&&new Date(e.start_utc)>new Date()).map(e=>Object.assign({},e,modeled.get(e.id)||{}, {reason:modeled.get(e.id)?.reason||(e.quote?"Preço disponível; modelo por validar":"Calendário descoberto; sem preço/modelo elegível")}));
+      }catch(err){$("global-summary").textContent+=" Calendário completo indisponível: "+err.message}
+    }
     const menu=$("sport-filter"), old=menu.value;
     menu.replaceChildren(new Option("Todas",""));
-    for(const sport of [...new Set(currentGames.map(x=>x.sport))].sort())menu.add(new Option(sport.toUpperCase(),sport));
+    for(const sport of [...new Set(currentGames.map(x=>x.family||x.sport))].sort())menu.add(new Option(sport.toUpperCase(),sport));
     menu.value=old;
     renderGames();
     $("integrity").textContent="Fonte de odds: "+(x.odds_sources?.status||"desconhecida")+" · chamadas quota hoje: "+(x.odds_sources?.calls_today??0)+" · falhas de fontes: "+(x.event_sources?.sources_failed??0);

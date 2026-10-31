@@ -66,6 +66,28 @@ def check(root: Path, now: dt.datetime) -> tuple[bool, list[str], list[str]]:
                 warnings.append(f"{overdue} multi-market forecasts await official results after 5h")
     except (ValueError,KeyError,OSError,TypeError) as exc:
         errors.append("Health check cannot read published lab: "+type(exc).__name__)
+    try:
+        global_path=root/"reports/global_discovery_latest.json"
+        if not global_path.exists():
+            errors.append("Global discovery report was not persisted")
+        else:
+            discovery=json.loads(global_path.read_text())
+            latest=dt.datetime.fromisoformat(discovery["asof_utc"])
+            if not -0.2<=(now-latest).total_seconds()/3600<=4:
+                errors.append("Global discovery report is stale or has a future timestamp")
+            calendar=json.loads((root/"data/global_events_v3.json").read_text())
+            if calendar["asof_utc"]!=discovery["asof_utc"]:
+                errors.append("Global calendar and report timestamps differ")
+            if not (root/"data/global_discovery_cache_v3.json").exists():
+                errors.append("Global discovery cache was not persisted")
+            if not any(q.get("status") not in ("ERROR","UNAVAILABLE")
+                       for s in discovery.get("sources",[]) for q in s.get("queries",[])):
+                errors.append("No global calendar provider returned a usable response")
+            for source in discovery.get("sources",[]):
+                if source.get("status") in ("UNAVAILABLE","MISSING_KEY"):
+                    warnings.append(source["provider"]+" global discovery unavailable: "+source["status"])
+    except (ValueError,KeyError,OSError,TypeError) as exc:
+        errors.append("Health check cannot read global discovery: "+type(exc).__name__)
     return not errors,errors,warnings
 
 

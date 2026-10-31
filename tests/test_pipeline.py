@@ -9,6 +9,34 @@ from sports_intelligence.cli import run
 
 
 class PipelineTests(unittest.TestCase):
+    def test_global_scan_persists_full_universe_beyond_preview(self):
+        from sports_intelligence.global_discovery import summarize
+        now=dt.datetime(2026,10,31,8,tzinfo=dt.timezone.utc)
+        events=[{'id':f'tennis:{n}','sport':'tennis_atp','family':'tennis',
+                 'home':f'Home {n}','away':f'Away {n}','quote':None,'completed':False,'final':None,
+                 'status':'pre','start_utc':(now+dt.timedelta(hours=2)).isoformat(),
+                 'paper_execution_enabled':False} for n in range(60)]
+        universe=summarize(events,[{'provider':'Test','catalog_families':['tennis'],
+                                   'queries':[{'family':'tennis','status':'OK'}]}],now)
+        coverage={'sources_ok':0,'sources_failed':0}
+        odds={'quotes_matched':0,'status':'TEST'}
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            with (patch('sports_intelligence.cli.historical_football',return_value=(None,{'status':'UNAVAILABLE'})),
+                  patch('sports_intelligence.cli.historical_tennis',return_value={'status':'DISABLED'}),
+                  patch('sports_intelligence.cli.capture_scoreboards',return_value=([],coverage)),
+                  patch('sports_intelligence.cli.discover_universe',return_value=(events,universe)),
+                  patch('sports_intelligence.cli.annotate_odds',return_value=odds)):
+                report=run(root,now)
+            self.assertEqual(len(report['candidates']),50)
+            self.assertEqual(report['global_candidates_count'],60)
+            self.assertTrue(report['candidate_preview_is_partial'])
+            calendar=json.loads((root/'data/global_events_v3.json').read_text())
+            self.assertEqual(len(calendar['events']),60)
+            self.assertEqual(calendar['asof_utc'],report['generated_at_utc'])
+            self.assertEqual(report['global_discovery']['modalities_with_model_forecasts'],0)
+            self.assertEqual(report['v3_papers_with_stake'],0)
+
     def test_no_bookmaker_odds_stays_unvalidated(self):
         now = dt.datetime(2026, 10, 18, 10, tzinfo=dt.timezone.utc)
         with tempfile.TemporaryDirectory() as tmp:
@@ -30,7 +58,7 @@ class PipelineTests(unittest.TestCase):
                         return_value=([], source)),
                   patch("sports_intelligence.cli.annotate_odds",
                         return_value=odds)):
-                report = run(root, now)
+                report = run(root, now, discover_global=False)
             self.assertEqual(report["model_gate"], "NO_TIMED_MARKET_BENCHMARK")
             self.assertEqual(report["v3_papers_with_stake"], 0)
 
@@ -52,7 +80,7 @@ class PipelineTests(unittest.TestCase):
                   patch("sports_intelligence.cli.capture_scoreboards",
                         return_value=([], coverage)),
                   patch("sports_intelligence.cli.annotate_odds", return_value=odds)):
-                report = run(root, now)
+                report = run(root, now, discover_global=False)
             self.assertEqual(report["model_gate"], "NO_MODEL")
             self.assertEqual(report["prospective_event_count"], 0)
             self.assertEqual(report["v3_papers_with_stake"], 0)

@@ -1,3 +1,4 @@
+# Dynamic global discovery: all provider sports, ESPN leagues and partial free SportsDB.
 # 5–10 daily entries: broad bookmaker event markets and 16-credit free-tier budget.
 # Credit-aware h2h/totals/spreads and targeted BTTS collection.
 # Paper daily target 1–3 distinct events; persistence/odds catch-up smoke test 2026-10-28.
@@ -13,6 +14,9 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/scanner.yml"
+      - "src/sports_intelligence/global_discovery.py"
+      - "src/sports_intelligence/broad_odds.py"
+      - "config/global_discovery.json"
 
 permissions:
   contents: write

@@ -11,6 +11,7 @@ from .feeds import fetch_text
 from .football import backtest_football
 from .scanner import capture_scoreboards, classify, freeze_observations, parse_iso, settle_observations
 from .odds_provider import annotate_odds
+from .global_discovery import discover_universe,summarize as summarize_universe,_atomic
 from .poisson import backtest_poisson
 from .audit import audit_ledger
 from .strategy_lab import collect_openfootball
@@ -61,7 +62,7 @@ def historical_tennis(now: dt.datetime) -> dict:
     return {"status": "EXPERIMENTAL", "metrics": metrics, "sources": sources}
 
 
-def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
+def run(root: Path, now: dt.datetime, fetcher=None, discover_global=True) -> dict:
     if now.tzinfo is None:
         raise ValueError("now must include a timezone")
     now = now.astimezone(UTC)
@@ -69,8 +70,25 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
     tennis = historical_tennis(now)
     kwargs = {"fetcher": fetcher} if fetcher else {}
     events, coverage = capture_scoreboards(now, **kwargs)
-    odds_coverage = annotate_odds(events, root, now)
+    universe=None
+    if discover_global:
+        events,universe=discover_universe(root,now,seed=events)
+    odds_coverage = annotate_odds(events, root, now,global_discovery=universe) if universe is not None else annotate_odds(events, root, now)
+    if universe is not None:
+        universe=summarize_universe(events,universe["sources"],now)
+        universe["odds_allocation"]=odds_coverage
+        _atomic(root/"reports/global_discovery_latest.json",universe)
+        _atomic(root/"data/global_events_v3.json",{"asof_utc":now.isoformat(),"events":events})
     candidates = [x for x in (classify(ev, football_model, now) for ev in events) if x]
+    if universe is not None:
+        for group in universe["by_modality"].values():group["events_with_model"]=0
+        event_groups={e["id"]:e.get("family") for e in events}
+        for candidate in candidates:
+            group=event_groups.get(candidate["id"])
+            if candidate.get("model_probabilities") and group in universe["by_modality"]:
+                universe["by_modality"][group]["events_with_model"]+=1
+        universe["modalities_with_model_forecasts"]=sum(g["events_with_model"]>0 for g in universe["by_modality"].values())
+        _atomic(root/"reports/global_discovery_latest.json",universe)
     path = root / "data" / "forecasts_v3.jsonl"
     frozen, added = freeze_observations(candidates, path, now)
     settled = settle_observations(frozen, events, path)
@@ -115,7 +133,8 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
         "version": "0.3.0",
         "mode": "PAPER_RESEARCH_ONLY",
         "live_bets_allowed": False,
-        "v3_papers_with_stake": 0,  # Main scanner only; see independent strategy_lab_snapshot.\n        "strategy_lab_snapshot": lab_snapshot,
+        "v3_papers_with_stake": 0,  # Main scanner only; see independent strategy_lab_snapshot.
+        "strategy_lab_snapshot": lab_snapshot,
         "observations_open": sum(1 for x in frozen if x["status"] == "OPEN"),
         "observations_settled": len(complete),
         "observations_new_this_run": added,
@@ -126,8 +145,11 @@ def run(root: Path, now: dt.datetime, fetcher=None) -> dict:
         "football_elo": football,
         "tennis_elo": tennis,
         "event_sources": coverage,
+        "global_discovery":universe,
         "odds_sources": odds_coverage,
         "candidates": sorted(candidates, key=lambda c: -c.get("best_model_edge_pp", -999))[:50],
+        "global_candidates_count":len(candidates),
+        "candidate_preview_is_partial":len(candidates)>50,
         "model_gate": gate,
         "integrity": ["No automatic paper stake until model risk bounds and quote timestamps validated",
                       "Free ESPN odds may be unavailable or lack quote timestamps",

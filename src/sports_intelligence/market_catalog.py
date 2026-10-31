@@ -35,7 +35,7 @@ def _time(s):
 def catalog_quotes(event,rows,now):
     """Normalize full paired bookmaker books by exact metric/team/period/line."""
     groups=defaultdict(dict); inventory=Counter()
-    if event['sport'] not in FOOTBALL or event['status']!='pre' or _time(event['start_utc'])<=now:
+    if (event['sport'] not in FOOTBALL and event.get('family')!='soccer') or event['status']!='pre' or _time(event['start_utc'])<=now:
         return {},{}
     for row in rows:
         try:

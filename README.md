@@ -7,7 +7,7 @@ Sistema de investigação desportiva **exclusivamente em paper trading**. Modelo
 - GitHub Actions: [scanner programado de hora a hora](https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/scanner.yml) e [testes automáticos](https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/ci.yml).
 - [Relatório mais recente](reports/latest.json) e [histórico de execução](reports/runs/).
 - [Painel principal publicado](https://telmix-sudo.github.io/sports-intelligence-v3/) e [comparador de oito carteiras](https://telmix-sudo.github.io/sports-intelligence-v3/strategies.html).
-- Calendário de 9 competições com fonte ESPN e controlo de estados/timezones.
+- Descoberta global automática: catálogos ESPN e The Odds API, complemento parcial TheSportsDB, janela futura de 48h e rotação das competições. [Cobertura, quotas e limites](docs/global_discovery.md).
 - O scanner regular usa agora resultados OpenFootball (domínio público/CC0) para EPL. O histórico anterior Football-Data foi descontinuado na recolha automatizada devido às restrições de utilização do fornecedor.
 - [Laboratório paralelo](reports/strategy_lab_latest.json), agendado duas vezes por dia: oito estratégias (cinco anteriores e três próprias) e oito carteiras fictícias isoladas em cinco ligas europeias.
 - Importação ATP Jeff Sackmann opcional, **desativada por defeito** devido à licença CC BY-NC-SA.
@@ -29,7 +29,7 @@ V3: scanner geral e oito contas de estratégias em paper independente. No labora
 O feed ESPN que foi testado fornece jogos, mas **não disponibilizou 1X2/ML completas** nesta varredura. Foi por isso criado suporte a [The Odds API](https://the-odds-api.com/) (plano Starter de **500 créditos/mês** indicado pelo fornecedor).
 
 1. A autenticação da API foi confirmada num teste pontual a 18/10/2026, sem revelar a chave.
-2. O orçamento máximo atual é de **10 chamadas/dia**: EPL, La Liga, Bundesliga, Serie A e Ligue 1 às 08 UTC; EPL, NFL, NBA, NHL e MLB às 20 UTC. Um mercado `h2h`, região `eu`.
+2. O orçamento máximo atual é de **16 créditos/dia**, partilhado por todos os mercados. Catálogos e calendários The Odds API custam zero créditos. Os preços rodam por modalidades com eventos próximos, em quatro janelas de seis horas, região `eu`; até três créditos ficam disponíveis para mercados adicionais de futebol.
 3. Guardar a chave apenas como Secret `ODDS_API_KEY` no GitHub; nunca em chat, código ou relatórios.
 4. Uma autenticação bem-sucedida não prova que a recolha agendada de odds foi persistida; confirmar `reports/latest.json` após o próximo ciclo.
 
@@ -69,6 +69,8 @@ src/sports_intelligence/
   football.py        Elo prequential
   poisson.py         Poisson com shrinkage
   tennis.py          Elo ATP não comercial (opcional)
+  global_discovery.py catálogos dinâmicos, calendários e cobertura por modalidade
+  broad_odds.py      rotação das odds por modalidades e quota partilhada
   odds_provider.py   odds via segredo opcional e budget
   scanner.py         eventos, candidatos e observações
   metrics.py         Brier, Log Loss, no-vig
@@ -105,3 +107,9 @@ O laboratório recolhe histórico NBA/NHL/NFL/MLB e executa previsões prospetiv
 ## Meta atual por banca: 5–10 entradas PAPER/dia
 
 Todas as doze carteiras e a experiência adicional passam a ter meta diária 5–10; as antigas frequências semanais foram substituídas por limites diários sem mudar os IDs ou saldos. Mercados de golos em várias linhas e cantos passam pelo componente auxiliar tipado, com descoberta dos mercados do evento, histórico de estatísticas e liquidação própria. Foras de jogo/faltas não têm preços no fornecedor atual; não há cotações inventadas. Orçamento gratuito máximo de 16 créditos/dia, sujeito à quota real disponível. [Política completa e limitações](docs/multimarket_integration.md).
+
+## Pesquisa global automática
+
+A lista fixa de nove competições deixou de limitar a pesquisa. O scanner consulta todas as modalidades e competições ativas do catálogo de odds; descobre também todas as competições do catálogo público ESPN, com até 96 consultas por ciclo e rotação das restantes. O teste público inicial identificou 17 grupos e 359 competições ESPN. Estes números variam com o fornecedor. O TheSportsDB gratuito é um complemento parcial: no teste apenas devolveu futebol e desportos motorizados.
+
+O painel mostra separadamente modalidades no catálogo, consultadas, com eventos futuros, com odds verificadas e com previsões do modelo. Descobrir uma modalidade não a torna automaticamente elegível para operações. As novas modalidades exigem dados, modelo e liquidação próprios. [Relatório global](reports/global_discovery_latest.json), [calendário completo](data/global_events_v3.json) e [detalhes de operação](docs/global_discovery.md). Os saldos, IDs das carteiras e posições anteriores são preservados.
