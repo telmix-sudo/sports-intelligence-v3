@@ -1,5 +1,5 @@
 {
-  "asof_utc": "2026-10-31T23:04:49.184163+00:00",
+  "asof_utc": "2026-10-31T23:06:41.220787+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-10-31",
@@ -108,24 +108,30 @@
     "existing_positions_never_retroactively_changed": true
   },
   "market_research": {
-    "asof_utc": "2026-10-31T23:04:49.184163+00:00",
+    "asof_utc": "2026-10-31T23:06:41.220787+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-    "new_forecasts": 0,
+    "new_forecasts": 4,
     "new_settlements": 0,
-    "forecasts_total": 0,
-    "zero_stake_forecasts": 0,
-    "open_observations": 0,
+    "forecasts_total": 4,
+    "zero_stake_forecasts": 4,
+    "open_observations": 4,
     "settlements_total": 0,
-    "candidate_markets": 17,
+    "candidate_markets": 28,
     "closing_line_values_available": 0,
     "blocks": {
-      "missing_timestamped_ML_odds": 8,
-      "insufficient_nhl_history": 7,
+      "missing_timestamped_ML_odds": 15,
       "insufficient_football_home_away_history": 18,
       "missing_timestamped_OVER_UNDER_2_5_odds": 3,
       "missing_timestamped_BTTS_odds": 3,
       "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 3,
-      "insufficient_nfl_history": 12
+      "insufficient_nfl_history": 8,
+      "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 4,
+      "NEEDS_50_HOLDOUT_FORECASTS": 4,
+      "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 4,
+      "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 4,
+      "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 4,
+      "EDGE_BELOW_4PP": 2,
+      "CONSERVATIVE_EV_BELOW_1_PERCENT": 3
     },
     "history": {
       "requests": 96,
@@ -133,604 +139,621 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261030&limit=300",
-          "sha256": "c2b52c6fa52a019fc351d328a75bedcadc0b8669e68e883ecf30d48fc87612f9",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "sha256": "7caf423dcb9a591a290060cbac526e82a2a7e508023ed72388465ee7107037bf",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 5
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260331&limit=300",
-          "sha256": "e141ad97dce1607a9fb5da67671bd1f4f50d11a9f964277b132ecd41b48d2e51",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261014&limit=300",
+          "sha256": "c4d3a0fc9e735fbafb4251b382bf0a4af9fdd7d201366838f09fdd8cb609ae17",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 7
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261029&limit=300",
-          "sha256": "37d171c550d771837fa7b90d08c288b2d5f1d92391b870202dfaf49e24a6cfd5",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 3
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260315&limit=300",
+          "sha256": "f3316f9b4d94339777366d94014a26b1f2d5ddc889ec3067be69fa0203f7ed7e",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 7
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260330&limit=300",
-          "sha256": "e4e8269b3584032a5de21ba35f9971c8013447ed069f5cd2b7aec6a94385dc68",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261013&limit=300",
+          "sha256": "58fb8d92184a4f6a8c7aa1a1a7f52cc47f36b3d2fdfa7721aff3fa51b8c02b80",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 5
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260314&limit=300",
+          "sha256": "e8e4b4ce8ca9a1a2c6740cd06ead19af7380361a25416554889595e7dbe59992",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 7
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261012&limit=300",
+          "sha256": "e888608e7b72875f1c56f1942f89c35105c4abd4f97ad8d3607ac2a847302c71",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 5
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260313&limit=300",
+          "sha256": "1e09743e3e8f03c3d769289db1fc47139b3f994233dce983be638ff78e6a8a8d",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 8
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261028&limit=300",
-          "sha256": "0dd68d181ffe7260b048881e4912bf0665edc3d3ca032f577b3a615bc43b1631",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 12
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260329&limit=300",
-          "sha256": "2ce0ebea26cc6e18880b21ded0e436cb523f33b0cbafd1e4aed95382880f1dd8",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 9
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261027&limit=300",
-          "sha256": "7c2f5174083ea1878d714734d76891e320a313a4c74f57616b6f1f93060b1a80",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261011&limit=300",
+          "sha256": "977e554283188f3b501dd53a68fa35eb6cff81b6a73601e727953dec2f1503f7",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 4
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260328&limit=300",
-          "sha256": "7655b64461fdf1dd99ba466450ca85d9152738f594bdca9946248fa351145984",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260312&limit=300",
+          "sha256": "e4b6f138c782111876c3e9918008a667f12daaf820ef11fce0782959b8334d3b",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 9
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261010&limit=300",
+          "sha256": "9d6cc30c2bc1b8b688d7f95bc5b5d55277e5fe7b19b432ec85d01b2ed6d893bc",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 7
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260311&limit=300",
+          "sha256": "a31110f96f9eaad00288751d9992a3d064fad4f6c6bc1bce813e9e23b924b349",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 6
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261026&limit=300",
-          "sha256": "e4713fabcd14a4af33eb3b6f592c59e773855b7154654a7dd9e38db49424f666",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 9
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260327&limit=300",
-          "sha256": "c972e5546c2ce37b6db2424cc047ad8678423e16e329b6094fce087c057e8f0e",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 10
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261025&limit=300",
-          "sha256": "896311f4b654408cbbe276268b9d9772bd7fe861f4cb2d7f5547590a49083d76",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 7
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260326&limit=300",
-          "sha256": "413ba7fd009311c0c022082b1c698b860344403f2755247f71872d91c753578a",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261024&limit=300",
-          "sha256": "b595c4d025f8bf8d9775d2e0b8fb57bc9b11b7aaf36876d8b779a97d0c693122",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 8
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260325&limit=300",
-          "sha256": "63543c7e254e1972050da09a66740aae425fdffc6b627df7819cf2fdfbe8cc7c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 12
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261023&limit=300",
-          "sha256": "9784a2a21bb2dc7535651699e797319b57bfea5f0c572bc8ba7cb48417d3d098",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 12
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260324&limit=300",
-          "sha256": "80757f3fb56c5db803f5c2d449b5ff934ae9fc038de37b0ca3fa57781f721ff4",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261022&limit=300",
-          "sha256": "961403f0344d61c5f0b1f8d7bd69ee67da78c91258079dec3817bfc1e50b9488",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261009&limit=300",
+          "sha256": "5cd0af4bdcaf7403e2aff3f5857e25794155a8eed5c3c9afc611c9020ff0bad7",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 2
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260323&limit=300",
-          "sha256": "b3334b7d2fbd8fe8a55780706807804577bf2d53b3ce06adf4d526fb113edad6",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 10
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261021&limit=300",
-          "sha256": "f5e64d5fc4a3b307cbe34b298e11d50182e573f9623de5441eae0c60840dc9ba",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260310&limit=300",
+          "sha256": "589d431d177744dcb1711a991a17fed1fd1881625b926d4e59c03c8c2e46a49f",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 11
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260322&limit=300",
-          "sha256": "0f456ef30ff667dd614f6feeb543008b716d4f6f9a52525c94559b2f125ea125",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 5
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261020&limit=300",
-          "sha256": "f5e68f816aae87ad4d299c7c237442ccf730b1fec47a2fcc4dc900132653ac4e",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260321&limit=300",
-          "sha256": "1537366b6f986d10a0020b4de8ab9009230254f6e7cc74dee10992cfdc9e34dc",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 10
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261019&limit=300",
-          "sha256": "325692a1425b05ef22ceb075d24e88a1e98679fd89d7590c66055772bcc4b205",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260320&limit=300",
-          "sha256": "8daba435f100b53f45adc5b0ad0143e1625b4b4e641e3a082dbd2f239507a020",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261008&limit=300",
+          "sha256": "d79e86d8e99bb613baa054c1009c3ccc85cdd8a406c1ec5e111663b2ce1f3bfe",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 6
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261018&limit=300",
-          "sha256": "325692a1425b05ef22ceb075d24e88a1e98679fd89d7590c66055772bcc4b205",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260309&limit=300",
+          "sha256": "687c9b237af7812cb8575a9aec95f8bb298cbca2b5151bc66c621aa300f6ceac",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 5
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260319&limit=300",
-          "sha256": "475135f534fe0bd30f9dab99a58028c8bad4a0c769cfbd0f35d20689b2adb8f3",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 8
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261007&limit=300",
+          "sha256": "381ab9cdb501afc37abe9c22f556dacc426d92b034b8412669a2d52c0e14fda5",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 5
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261017&limit=300",
-          "sha256": "325692a1425b05ef22ceb075d24e88a1e98679fd89d7590c66055772bcc4b205",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260308&limit=300",
+          "sha256": "373706cbcaf0aaa7e560ea0fe3e7ff90b5d21ab4eee645dd50de5dc85d2ab50a",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 10
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260318&limit=300",
-          "sha256": "3341464847684d1eef1875e8a438b41c7f28e9ea95b9253f2b8a92cf834b935f",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 9
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261006&limit=300",
+          "sha256": "c3cd769844f2937c2f3587995ddf917509ceab4d740117563724e6b486340982",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 4
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261016&limit=300",
-          "sha256": "afb0cd8c02ab4daa92fdc0ff0436a98f7c546b382b6b8903e984f63a18282ec8",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 12
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260307&limit=300",
+          "sha256": "73acff11c080f61a49fd07e2fcf4e6701fee635f070cbc24d4ad8dc619920a58",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 6
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260317&limit=300",
-          "sha256": "78071680f7fe79f902314954077263dc7a11555a43ec1afce0aba31b6b87c48e",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 8
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261005&limit=300",
+          "sha256": "2db446fb7b193a49615897ec634eb0e5505504f3a30ea1b27fd119945bf76529",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 5
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261015&limit=300",
-          "sha256": "724dfb564be8d3abbbf4332ec57c9adfe40bb90e4b3c1cb1c1b4edc44f10487d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260306&limit=300",
+          "sha256": "e3154b22fda98eea7c45a0e382a364111e032678011de92722ab49f69a7a0497",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 7
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261004&limit=300",
+          "sha256": "5056f818ae9774067e14e9bb39be5c7310e77633fc047da1449da5a8b1193205",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 2
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260316&limit=300",
-          "sha256": "1c2a1a6a656fdcd07fe5cb03113a032ebc00cb1c3c88cae22b8df65938384c35",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 8
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260305&limit=300",
+          "sha256": "168aa27e25cc58b0ba41ed12f5e746a6ca22cc05e3ada8699005fe6412b6cb39",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 9
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261003&limit=300",
+          "sha256": "cf919d5271a98427765a767299a630fc212d4d55255affb8117af1f57a26b84d",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 1
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260304&limit=300",
+          "sha256": "d9fd2e77ce9fb8e022cf54719f1a2ad7507288692b9d8d99eaff9c801a7a9eb7",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 6
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261002&limit=300",
+          "sha256": "4253232c5df83b08f3ab69236f9c89716c81eae7e48da0760b06fb91cad3f7fc",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260303&limit=300",
+          "sha256": "aaccfbc097462f415996758e04b571190ef469bfd834d0bf8bf2328bf7e0efb7",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 10
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261001&limit=300",
+          "sha256": "4253232c5df83b08f3ab69236f9c89716c81eae7e48da0760b06fb91cad3f7fc",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260302&limit=300",
+          "sha256": "880dc89494d8217a7ce32ee3d060002d2f8a60d317a77e4fddefba4426cbe1e0",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 4
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260930&limit=300",
+          "sha256": "4253232c5df83b08f3ab69236f9c89716c81eae7e48da0760b06fb91cad3f7fc",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260301&limit=300",
+          "sha256": "97d1bdf8c2ddb5c0fc3ee8491b6957da5291794589481eb1addeef98ef8557d8",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 11
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260929&limit=300",
+          "sha256": "c17a555ed8a89b85bbf389118e8c405749ecb4295c487d70b2a6fd6b0be9b4ae",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261030&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251231&limit=300",
-          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261029&limit=300",
-          "sha256": "8238b005d5e4ad2711d2277978fc322a174087f739452be1e2fd022bb47f5414",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 1
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251230&limit=300",
-          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261028&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261014&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251229&limit=300",
-          "sha256": "91eed2fa3813d3703031bcd72adad100cab5a17e96ac9f974a6f6ac3044de826",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251215&limit=300",
+          "sha256": "1df1c17117f09766bae89c5c798cc29ef7c1bdd1e1dbc5427094b2413ede829e",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 1
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261027&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261013&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251228&limit=300",
-          "sha256": "dd780f1a0b2924fa5d700b6f38380731f95e1e28e3a333cf93e4024c343a4939",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 10
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251214&limit=300",
+          "sha256": "9c4149125631399a71df8beba1c0ba2c11c451dd385519862d4c3bbea6540657",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 14
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261026&limit=300",
-          "sha256": "9c72140c37b5d99ee566a39f1ed3c4d094f61f7ca923b49c4b0b59322689b8f6",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261012&limit=300",
+          "sha256": "501318f2d69987ae7a1780fc815973589c6561133a4a64604e4aad5a444eee46",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 1
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251227&limit=300",
-          "sha256": "4978161738fd29b355e079a393a8376f8dc23052e42f1abe7c4718715200cfab",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 2
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251213&limit=300",
+          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025&limit=300",
-          "sha256": "b83c4ed4afebe5608cb17d27e2a51c630821a6b6baab0f550b28c3dd9cffa2c7",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011&limit=300",
+          "sha256": "b0f5723fd37ebbbcec48ccdb0a4f51b39eccfdb27ade3ec745caa3717eed4a66",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 13
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251212&limit=300",
+          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261010&limit=300",
+          "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251211&limit=300",
+          "sha256": "0b467a3ee0c1cfcb3ff884bb100e3c42671be65df794ea45d6cc6ddf92beb4ba",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 1
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261009&limit=300",
+          "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251210&limit=300",
+          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261008&limit=300",
+          "sha256": "01a7f2fd156b6dfc3f47cdc1cca81ee729dd2a622807c0a3f99e836373ddead0",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 1
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251209&limit=300",
+          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261007&limit=300",
+          "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251208&limit=300",
+          "sha256": "d22abbb264a44c5898675cc84a6a6bb6cdd98ff2a367e72a236c9c17d7f41bf8",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 1
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261006&limit=300",
+          "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251207&limit=300",
+          "sha256": "ff2a4e9810a7f4759482cd452c45e3a43da1e07356b45e45960b8f2f0d170c44",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 12
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251226&limit=300",
-          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261024&limit=300",
-          "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251225&limit=300",
-          "sha256": "a74598be0b601e743e02b52b98d6b06f6c277f081b6814f9155e6093cdd58a70",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261023&limit=300",
-          "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251224&limit=300",
-          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261022&limit=300",
-          "sha256": "097d9fa598bf813db80a7f80c4b0b3867459656d8341634dbbb169797537c4f3",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261005&limit=300",
+          "sha256": "66fa731db97ebd1bda9a9bf76f60d9a6cc4209861c4bd4c5a6e8538be5fb31ae",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 1
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251223&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251206&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261021&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004&limit=300",
+          "sha256": "4321299b31fd285d22f05ae4badb755209c138d84c2c3684e249de98923ed6b7",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 14
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251205&limit=300",
+          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261003&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251222&limit=300",
-          "sha256": "768164e2fbdad178a3d773491bd3150e23d420bde03d64f0d550fc27f5359ed4",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251204&limit=300",
+          "sha256": "6608140d65526f56dfc26d0393b25ac3275596f46c7a063219430d3f1c5b4554",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 1
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261020&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261002&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251221&limit=300",
-          "sha256": "b0c173951bb1f2e419e1a9ccc2617998f665601525e6e3f531a1f993d6c9795b",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 12
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251203&limit=300",
+          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261019&limit=300",
-          "sha256": "db6261bfaefa24792d12ce4d3d66bf58f9b94ce8dda4837fbf0e4e142abce9c1",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261001&limit=300",
+          "sha256": "65213f3fc4234b443babf941688155899c3eb91469418e61148b21d453dc92d1",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 1
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251220&limit=300",
-          "sha256": "69158d8f4eb4a921bf27aeb517b96f871f28e59947ef16a2cc713b2e31aa896f",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018&limit=300",
-          "sha256": "3a6c7f481da5a56766cae49464629f9043b8d9e2145133fd6102351f300debe3",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 12
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251219&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251202&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261017&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260930&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251218&limit=300",
-          "sha256": "316b488efa3cf5b04392338afc0b5a80288c45390f9cba416dd3f71b5c600ca2",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251201&limit=300",
+          "sha256": "c46a35f0a43d146c6dcca08a102a02ee8c399a53286df1e4ba57d5a38997ca4d",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 1
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261016&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260929&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251217&limit=300",
-          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261015&limit=300",
-          "sha256": "9c737d1385179c6daab10193b957b896649e1810f86c8327183c36eabdd4db92",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 1
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251216&limit=300",
-          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 0
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261030&limit=300",
           "sha256": "17af634be3fb90522f7732fa17c0cef61c3ee1dd147175ada2b24b4b2b897024",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 2
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260331&limit=300",
-          "sha256": "70252f293b47a2d9d42ff05a45fe722fe43d56a81ceb6c0634e1251b097d410a",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 10
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261014&limit=300",
+          "sha256": "f96cc1bd9b9709f7b252aaf22fdf33f5df810f7358b692dc4701a718d6982341",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 2
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261029&limit=300",
-          "sha256": "261d83cb0cb46be53abbac0c6c86afce84adc87838bee43eb82656d3840494e5",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 11
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260330&limit=300",
-          "sha256": "becf68805b11baba3a2fb9a9dc278712382a9efdbd512e4f3b6eff6f3b69b067",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 5
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261028&limit=300",
-          "sha256": "51bfcca2ce8f3bc323e378810c2d9349a96d7e29bfccbfb35402aba0659e6f7b",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260329&limit=300",
-          "sha256": "b39413439cb066afbab688d228addbaea36bbec78ea0e8bb1794a8ef1bb1722a",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260315&limit=300",
+          "sha256": "3b03dfabfecf2d8cc2166f6c7feaafe9fc0bb85f7c7e9b027b54cb2c0f2616df",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 6
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261027&limit=300",
-          "sha256": "646b60ccf530c113b8bab79d1d9c3015e06cc0bf5bf16c752682436992c0453c",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 11
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261013&limit=300",
+          "sha256": "84f7f38c05b8796f7925eaf346adc0f9ddae92f829d71616b2392f2d26eeb8c0",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 16
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260328&limit=300",
-          "sha256": "c9125361cbc536de2ab1bf882b6e2ac3daf9de80731358b78d865d7f87914750",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 15
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261026&limit=300",
-          "sha256": "641a30d5996e34b5a0235ea880bad3a7d4795f8c74e3d6d07121f65529082973",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260327&limit=300",
-          "sha256": "b44f686e7f71dda2b234a473e019610f6f9a50f3ac814fe7935238b12dd7f218",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261025&limit=300",
-          "sha256": "cb41b285623c68ce66aa02670d4646a43958e567f1856022b377565ba238922d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 5
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260326&limit=300",
-          "sha256": "97709dd49db9f9783991ec1e632d170a33e5b5c39419a91af2fffdfd9bdbbfe8",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 13
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261024&limit=300",
-          "sha256": "751660073db84f658df9991b3d8d6c1057c11b9dc7ac27fbb1d3cba49b7b684b",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 12
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260325&limit=300",
-          "sha256": "a78b346d182313e8e9b604e02ed1770eab8bc2a87f27307eb333e7e303f2277d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261023&limit=300",
-          "sha256": "2c1cac45abcfec0165d059112ff1e7144e41554e6b39eae0513dfadf54fbc282",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260324&limit=300",
-          "sha256": "7be31cf8733bc8ffbe6e9f1ab8a914b0d23aa39c6a830072b1f94b70b9bf9fc4",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 15
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261022&limit=300",
-          "sha256": "8da631107ed4b4afd00ee12fb3d0edd929bf371c445eb774b89a1ea7ae7b5040",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 12
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260323&limit=300",
-          "sha256": "52059b86acf1b15345c3b6f48c79735f26135cc76ca8400f62a5bb03ad073055",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 1
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261021&limit=300",
-          "sha256": "28531aa82fbc3d94f1e2c0deafcdc4e61436fa7605f9b2424f27318adcb869bd",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260322&limit=300",
-          "sha256": "e79a5bef1e3ee2a123d8e80f2f0da19fde969375392b6f8d5da59a50436dd065",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 9
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261020&limit=300",
-          "sha256": "08694def2d372c2aef125b30d2dc5412f46c918afead4f00452779015deef5d6",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 11
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260321&limit=300",
-          "sha256": "bbc7a8675ea6a25ead55bc1da83022d03bfc669a5bed12836d84bc41b9dcb751",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 11
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261019&limit=300",
-          "sha256": "10080a105d6c5201442d084950109524dcfda1d251c67273f0cccccd48e5d229",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260320&limit=300",
-          "sha256": "ed7a998d508a61324253f5aacead74a0d9dc510d320d3475c29389e3a50fb72d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 5
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261018&limit=300",
-          "sha256": "a0cca49f1aded78087cfa1844886807befffb4757a493290387486dd9463d9d0",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260319&limit=300",
-          "sha256": "ddfbae32820966c5b92bc8195a76fa7422d9eb6bfeb6395ae0acf4c60b267381",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 11
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261017&limit=300",
-          "sha256": "49f95f7d125b7c0fb4e03bbdb84d4a3cfdcb77510d7468c690a1d0eb7732b3e1",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260314&limit=300",
+          "sha256": "a336d30df12817846fca7411209e8d06788fb214bcc60f8d5316820dcb9b75a4",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 14
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260318&limit=300",
-          "sha256": "0c3a7121c9e37da7d86636815e5ea34bf6bea07fc19c90a79b80c92f17e94626",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
-          "completed_games": 6
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261012&limit=300",
+          "sha256": "4531215d017f66ff11f2e55b06d74af11e9a43e44768c009f976ef07d86edc81",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 3
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261016&limit=300",
-          "sha256": "8a389f01b0e8237838fb593101fa3f01d489c16d7d8d3b98ab98515dc7e672a5",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260313&limit=300",
+          "sha256": "d71e613251e7f03fd26ebd590c5cb48404b72be17454b08fe7d5a63115d9588f",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 2
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260317&limit=300",
-          "sha256": "c4d6722e446b91cbff0f5a9842e29fd6643a69e3f441b3207067c2daa6fe7a51",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261011&limit=300",
+          "sha256": "bd15831c2f6c758c9f4356091b92c06af91b53535d0f431301b1770bb7a41ef5",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 3
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260312&limit=300",
+          "sha256": "49179bb84c080374472d72ba0ba9af60298044a239d06c66e2876719d4fe1ae6",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 14
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261010&limit=300",
+          "sha256": "95df029b889186b6fa6dff4a0bc3e69f6ee7d3b9c2e86b639125f1e11517db81",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 14
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260311&limit=300",
+          "sha256": "99d639a34d6081e6813f3a48c0151e75aec3802ba28be2583c7563aa661b8b15",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 2
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261009&limit=300",
+          "sha256": "71eee88de5becbde4d4e6e3ba9d317df19794bf42ab0590a1ae00bbad65dae97",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 4
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260310&limit=300",
+          "sha256": "1f719aeb4527cc30930ce766f4c1de54435e93eb9bead8bc7b70ff2a0a71fcb5",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 13
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261008&limit=300",
+          "sha256": "3fb230e1a410d54b756a2016de7e05309bc271539de5cac6cdd506218c54804a",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 10
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260309&limit=300",
+          "sha256": "f60f5fd74be210a33c787e5b11897ca6a9e5aa7d0e39899c0d3848880fdb0cbc",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 5
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261007&limit=300",
+          "sha256": "d5f0ae71e161a90086dc484703ddfc3d0622425c83e29c3c3fd1bf9f919485ae",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 3
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260308&limit=300",
+          "sha256": "5c04ea87a7d375f72ff7877fd46167f5b508b1459b979b3ef0bc7e46960e3673",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 7
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261006&limit=300",
+          "sha256": "731e0a9123cc905612558bb0b37b5e0be987d456893728774af0b3f4de0c87a3",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 9
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261015&limit=300",
-          "sha256": "8b4eb6c5e0c475d07ee74d8e5dedcf87b80d5f05d98b286a97b9fb1f4514728d",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260307&limit=300",
+          "sha256": "678166f4bd1a33d23d6f1f8c6a122fff1770e216e02572bbc97bb97359b97d27",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 11
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260316&limit=300",
-          "sha256": "81cf626ae9a14e4df9c822cc2ab5e0bdfdd0cf320146f6f944afa43841013e23",
-          "captured_at_utc": "2026-10-31T23:04:49.184163+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261005&limit=300",
+          "sha256": "7936810477b63165420551b5e22e128c1a6a27f954375fad761b188c74dbf304",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 4
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260306&limit=300",
+          "sha256": "bb58b8536058e7242f79cd4b377507188094b0868d8e43895a855dfc28deb453",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 7
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261004&limit=300",
+          "sha256": "446453c3d2841c01b4038b3f8725143bc5f7a20e7dcbb906c1058e45542808d3",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 5
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260305&limit=300",
+          "sha256": "377813ed84da736c72b2a5972a10564b87f5ff8fd655246d80dd1a984eac975d",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 8
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261003&limit=300",
+          "sha256": "9b2681cb89b382aa469949d353fe8cacee9ebb4177f0a22a9847bce7d4dbd5a4",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 13
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260304&limit=300",
+          "sha256": "96dad8154bde3d9349c1bc953521fbde98c81c04a886554e1e845463d2fcb1f8",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 5
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261002&limit=300",
+          "sha256": "2ff58b0c20776dbc8841a4a1884b34ceff9193418c01939e12057d4cb545c58a",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 5
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260303&limit=300",
+          "sha256": "f363a210d2538ccdae6b7b00bcde6bf3180b53d9768b35c575b17e55d7b84659",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 11
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261001&limit=300",
+          "sha256": "398e9de7c0c83d51332ccbab8c2b48e71e3b8f9cb90e91976a2d9fc8d0a690ad",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 8
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260302&limit=300",
+          "sha256": "ee71d3c80a05adf435c64a5153efb4626bb997fe968e24c353de958e2faa05c5",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 6
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260930&limit=300",
+          "sha256": "a3122edf234bb0725a7b2efdea99e20590576d3994a000ac8d97f0a717769da2",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 3
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260301&limit=300",
+          "sha256": "36225530ba951b04cab095130a599bb590ba06c31c64aed2968b376db4b23466",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
+          "completed_games": 6
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260929&limit=300",
+          "sha256": "c01f91e80953874d33489620027b188eca87210a4f03a0813547d96ffcc01945",
+          "captured_at_utc": "2026-10-31T23:06:41.220787+00:00",
           "completed_games": 5
         }
       ],
       "games_per_sport": {
-        "nba": 213,
-        "nfl": 61,
-        "nhl": 233
+        "nba": 382,
+        "nfl": 123,
+        "nhl": 457
       },
       "cutoff_exclusive_utc_date": "2026-10-31",
       "max_parallel_requests": 8
     },
     "score_backtests": {
       "nba": {
-        "n": 27,
-        "brier": 0.49997375883061373,
-        "log_loss": 0.6952243269313444,
+        "n": 194,
+        "brier": 0.4643513879426252,
+        "log_loss": 0.6573696132813814,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2026-10-29",
-          "n": 15,
-          "brier": 0.5173878361698722,
-          "log_loss": 0.714117203561664,
-          "ece": 0.16769788078316158
+          "from": "2026-10-23",
+          "n": 61,
+          "brier": 0.47539428054432525,
+          "log_loss": 0.6675125831710564,
+          "ece": 0.09076834344032164
+        },
+        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+      },
+      "nhl": {
+        "n": 191,
+        "brier": 0.49152299793973186,
+        "log_loss": 0.6846451802825664,
+        "uniform_brier": 0.5,
+        "uniform_log_loss": 0.6931471805599453,
+        "market_brier": null,
+        "roi": null,
+        "holdout": {
+          "from": "2026-10-25",
+          "n": 39,
+          "brier": 0.5008547891319147,
+          "log_loss": 0.6940065476305487,
+          "ece": 0.02286086583010709
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       }
