@@ -346,7 +346,7 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
             record["brier"] = round(brier(p, index), 6)
             record["log_loss"] = round(log_loss(p, index), 6)
             market = record.get("no_vig")
-            if market and len(market) == 3 and sum(market) > 0:
+            if market and len(market) == len(p) and sum(market) > 0:
                 normalized_market = [value / sum(market) for value in market]
                 record["market_brier"] = round(brier(normalized_market, index), 6)
                 record["market_log_loss"] = round(log_loss(normalized_market, index), 6)
@@ -374,6 +374,7 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
             "pnl_eur": round(pnl, 4), "total_staked_settled_eur": round(stake_total, 4),
             "paper_wins": wins, "paper_losses": losers,
             "settled": len(settled),
+            "voided": sum(r.get("status") == "VOID" for r in rows),
             "open": sum(r.get("status") == "OPEN" for r in rows),
             "yield_percent": round(100 * pnl / stake_total, 4) if stake_total else None,
             "return_on_initial_bank_percent": round(100 * pnl / INITIAL_BANKROLL_EUR, 4),
