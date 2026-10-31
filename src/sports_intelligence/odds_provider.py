@@ -34,10 +34,10 @@ ODDS_KEY_MAP = {
 # Ten daily requests split across four time windows, nearer to kick-off.
 # Preserve the same maximum API quota; no extra paid requests.
 SPORTS_PER_POLL = {
-    2: ("nba", "nhl"),
+    2: (),  # Legacy slot retained for idempotent cache migration; no new calls.
     8: ("epl",),
-    14: ("la_liga", "bundesliga"),
-    20: ("nfl", "mlb"),
+    14: ("nfl", "la_liga", "bundesliga"),
+    20: ("nba", "nhl", "mlb"),
 }
 POLL_HOURS_UTC = tuple(SPORTS_PER_POLL)
 MAX_CALLS_PER_DAY = 10  # backwards compatible name: HTTP requests
@@ -151,6 +151,8 @@ def quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict | N
         "provider": "The Odds API v4",
         "bookmaker_count": n,
         "bookmaker_count_is_unique": True,
+        "complete_book_quotes": [{"bookmaker": q["bookmaker"], "decimal": q["decimal"],
+                                 "no_vig": q["no_vig"], "updated_utc": q["updated"]} for q in matched],
         "start_time_tolerance_seconds": 1800,
         "quote_timestamp_available": True,
         "scope": "EU bookmaker quotes; consensus no-vig and best prices across books"
@@ -213,6 +215,8 @@ def market_quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> d
                         "bookmakers": [q["bookmaker"] for q in best],
                         "best_book_updates": [q["updated"] for q in best],
                         "bookmaker_count": len(books), "bookmaker_count_is_unique": True,
+                        "complete_book_quotes": [{"bookmaker":q["bookmaker"], "decimal":q["decimal"],
+                                                  "no_vig":q["no_vig"], "updated_utc":q["updated"]} for q in quotes],
                         "quote_timestamp_available": True, "provider": "The Odds API v4",
                         "rules": "REGULATION_90_MINUTES", "captured_at_utc": at.isoformat()}
     return result
@@ -267,7 +271,7 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
         if slot == 14:
             rotation = ("la_liga", "bundesliga", "serie_a", "ligue_1")
             offset = 2*(now.date().toordinal() % 2)
-            sports = rotation[offset:offset+2]
+            sports = ("nfl",) + rotation[offset:offset+2]
         for sport in sports:
             if record["calls_today"] >= MAX_CALLS_PER_DAY:
                 complete = False

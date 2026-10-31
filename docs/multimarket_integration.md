@@ -6,7 +6,7 @@ Estado: integrada no laboratório automático, exclusivamente PAPER. As doze car
 
 - Odds: vencedor (`h2h`), O/U 2,5 (`totals`), handicap casa −0,5/fora +0,5 (`spreads`) e ambas marcam (`btts`, endpoint por evento).
 - Pares completos do mesmo operador e linha, timestamps efetivos, nomes exatos e tolerância de início de 30 minutos. Probabilidade sem margem por casa antes do consenso. Cotações de mercados diferentes nunca são deduzidas de 1X2.
-- Limite conservador de **10 créditos/dia**, não dez chamadas com mercados ilimitados. Uma região. A recolha EPL inclui três mercados numa chamada; BTTS usa até um jogo EPL por dia. NBA/NHL, NFL/MLB e duas das outras quatro ligas europeias (alternadas por dia) partilham o orçamento restante. Sem nova subscrição ou plano pago. Cabeçalhos de quota esgotada interrompem chamadas.
+- Limite conservador de **10 créditos/dia**, não dez chamadas com mercados ilimitados. Uma região. A recolha EPL inclui três mercados numa chamada; BTTS usa até um jogo EPL por dia. NBA/NHL/MLB são consultados às 20 UTC, NFL e duas das outras quatro ligas europeias (alternadas por dia) às 14 UTC. EPL às 08 UTC; BTTS após obter um ID futuro. A janela noturna foi deslocada das 02 para as 20 UTC para evitar odds caducadas antes dos jogos da noite. Sem nova subscrição ou plano pago. Cabeçalhos de quota esgotada interrompem chamadas.
 - O pipeline aceita falta de cobertura do fornecedor como bloqueio explícito. Não promete preços para todos os jogos/mercados. Snapshots de odds antigos não são tornados atuais pela execução do código novo.
 
 ## Modelos e testes em funcionamento
