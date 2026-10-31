@@ -42,6 +42,8 @@ def check(root: Path, now: dt.datetime) -> tuple[bool, list[str], list[str]]:
                     errors.append("Multi-market report and lab summary differ")
             if research.get("history",{}).get("games_per_sport") and not (root/"data/score_history_v3.json").exists():
                 errors.append("Historical score cache was not persisted")
+            if research.get("team_statistics_history",{}).get("events_with_statistics",0) and not (root/"data/football_statistics_v3.json").exists():
+                errors.append("Football statistics cache was not persisted")
             journal = root/"data/market_research_v3.jsonl"
             rows = [json.loads(line) for line in journal.read_text().splitlines() if line.strip()] if journal.exists() else []
             forecasts = {r["id"]:r for r in rows if r["kind"]=="FORECAST"}

@@ -101,3 +101,7 @@ Controlo de risco consolidado para novas operações, qualidade das odds, audito
 ## Mercados e modelos integrados no ciclo automático
 
 O laboratório recolhe histórico NBA/NHL/NFL/MLB e executa previsões prospetivas com liquidação append-only. A recolha de odds inclui O/U 2,5, handicap −0,5 e BTTS no orçamento de 10 **créditos**/dia. Uma conta experimental separada pode iniciar posições a 0,25% após testes cronológicos e critérios de preço/risco, sem alterar as doze carteiras anteriores. [Integração, limites e critérios](docs/multimarket_integration.md). A capacidade preditiva continua em validação; as observações sem stake são apresentadas separadamente das posições PAPER.
+
+## Meta atual por banca: 5–10 entradas PAPER/dia
+
+Todas as doze carteiras e a experiência adicional passam a ter meta diária 5–10; as antigas frequências semanais foram substituídas por limites diários sem mudar os IDs ou saldos. Mercados de golos em várias linhas e cantos passam pelo componente auxiliar tipado, com descoberta dos mercados do evento, histórico de estatísticas e liquidação própria. Foras de jogo/faltas não têm preços no fornecedor atual; não há cotações inventadas. Orçamento gratuito máximo de 16 créditos/dia, sujeito à quota real disponível. [Política completa e limitações](docs/multimarket_integration.md).

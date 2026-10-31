@@ -278,7 +278,16 @@ def reconcile(root, rows, events, now, result_fetcher=fetch_espn):
         if fid in settled or f['event_id'] not in finals or parse_utc(f['start_utc']) > now:
             continue
         e = finals[f['event_id']]
-        outcome = settlement_outcome(f, e['final'])
+        if f.get('market_spec'):
+            from .market_catalog import outcome_for_spec,enrich_final
+            if f['market_spec']['metric']!='goals' and not e['final'].get('team_statistics'):
+                try:e=enrich_final(e)
+                except Exception as exc:
+                    errors.append({'event_id':e['id'],'reason':'STAT_RESULT_'+type(exc).__name__});continue
+            outcome=outcome_for_spec(f['market_spec'],e['final'])
+            if outcome is None:continue
+            if outcome=='VOID':outcome=None
+        else:outcome = settlement_outcome(f, e['final'])
         row = {'id':'SET-'+fid, 'kind':'SETTLEMENT', 'forecast_id':fid,
                'event_id':e['id'], 'settlement_utc':now.isoformat(),
                'status':'VOID' if outcome is None else 'SETTLED',
@@ -373,7 +382,7 @@ def paper_state(rows):
 
 
 def run_research(root, events, football_models, now, risk, football_history=None, history_fetcher=fetch_text,
-                 result_fetcher=fetch_espn, previous_settlement_result=None):
+                 result_fetcher=fetch_espn, previous_settlement_result=None, collect_team_stats=False):
     rows = read_journal(root)
     newly_settled, settlement_errors = (previous_settlement_result if previous_settlement_result is not None
                                        else reconcile(root, rows, events, now, result_fetcher))
@@ -383,6 +392,19 @@ def run_research(root, events, football_models, now, risk, football_history=None
     history, history_info = collect_history(root, sports, now, history_fetcher) if sports else ([], {'games_per_sport':{}, 'requests':0, 'failures':[]})
     models, backtest = fit_sports(history)
     goal_scores = goal_backtests(football_history or {})
+    from .market_catalog import collect_statistics,CountModel,generic_backtests,distribution
+    stat_history=[];stat_info={"events_with_statistics":0,"failures":[]}
+    if collect_team_stats and any(e['sport'] in football_models for e in events):
+        stat_history,stat_info=collect_statistics(root,events,now,result_fetcher,history_fetcher)
+    specs=defaultdict(dict)
+    for e in events:
+        for mid,q in e.get('market_quotes',{}).items():
+            if q.get('market_spec'):specs[e['sport']][mid]=q['market_spec']
+    generic_scores=generic_backtests(football_history or {},stat_history,specs)
+    stat_models={}
+    for e in stat_history:
+        for metric in ('corners','offsides','fouls','throw_ins','shots','shots_on_target'):
+            stat_models.setdefault((e['sport'],metric),CountModel(metric)).update(e)
     digest = hashlib.sha256('|'.join(sorted(e['id'] for e in history)).encode()).hexdigest()
     blocks = Counter()
     candidates = 0
@@ -412,6 +434,25 @@ def run_research(root, events, football_models, now, risk, football_history=None
             pred = full_game_forecast(models[e['sport']], e['home'], e['away'])
             if pred: outputs['ML'] = pred
             else: blocks['insufficient_'+e['sport']+'_history'] += 1
+        for market,q in e.get('market_quotes',{}).items():
+            spec=q.get('market_spec')
+            if not spec:continue
+            if spec.get('settlement_block'):
+                blocks[spec['settlement_block']]+=1;continue
+            if spec['metric']=='goals' and e['sport'] in football_models:
+                from .experimental_markets import goal_rates
+                from .strategy_lab import team_name
+                m=football_models[e['sport']]['POISSON_SHRINK'];h,a=team_name(e['home']),team_name(e['away'])
+                sample=min(m.home[h].matches if h in m.home else 0,m.away[a].matches if a in m.away else 0)
+                if sample<8:continue
+                mh,ma=goal_rates(m,h,a)
+                pred=distribution(mh,ma,spec)|{'sample_min':sample,'version':VERSION+'-goal-lines',
+                    'expected_home':mh,'expected_away':ma,'rules':'REGULATION_90_MINUTES'}
+            else:
+                m=stat_models.get((e['sport'],spec['metric']))
+                pred=m.forecast(e['home'],e['away'],spec) if m else None
+            if pred:outputs[market]=dict(pred,market_spec=spec)
+            else:blocks['insufficient_'+spec['metric']+'_history']+=1
         for market,pred in outputs.items():
             candidates += 1
             q = e.get('quote') if market=='ML' else e.get('market_quotes',{}).get(market)
@@ -446,13 +487,13 @@ def run_research(root, events, football_models, now, risk, football_history=None
             conservative_ev = conservative_expected_value(p[choice], prices[choice], pred['sample_min'])
             gate_key = '|'.join((e['sport'],market,pred['version']))
             forward = readiness.get(gate_key, {})
-            score = backtest.get(e['sport'], {}) if market=='ML' else goal_scores.get(e['sport']+'|'+market,{})
+            score = backtest.get(e['sport'], {}) if market=='ML' else (generic_scores if pred.get('market_spec') else goal_scores).get(e['sport']+'|'+market,{})
             gate = experimental_admission(score, forward)
             reasons = list(gate['blocks'])
             if (q.get('bookmaker_count') or 0)<2: reasons.append('NEEDS_TWO_BOOKMAKERS')
             if p[choice]-p_market[choice]<.04: reasons.append('EDGE_BELOW_4PP')
             if conservative_ev<=.01: reasons.append('CONSERVATIVE_EV_BELOW_1_PERCENT')
-            if daily_papers>=3: reasons.append('DAILY_PAPER_LIMIT')
+            if daily_papers>=10: reasons.append('DAILY_PAPER_LIMIT')
             # Only one experimental risk-bearing position per distinct event.
             if any(r['kind']=='FORECAST' and r['event_id']==e['id'] and r['stake_eur']>0 for r in rows):
                 reasons.append('EXPERIMENTAL_EVENT_ALREADY_TRADED')
@@ -463,7 +504,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
                 stake = risk.reserve(e['id'], requested)
                 if not stake: reasons.append('AGGREGATE_RISK_LIMIT')
             row = {'id':fid, 'kind':'FORECAST', 'event_id':e['id'], 'sport':e['sport'],
-                   'home':e['home'], 'away':e['away'], 'market':market,
+                   'home':e['home'], 'away':e['away'], 'market':market, 'market_spec':pred.get('market_spec'),
                    'start_utc':e['start_utc'], 'forecast_utc':now.isoformat(),
                    'model_version':pred['version'], 'probabilities':p,
                    'model_inputs':pred, 'training_cutoff_exclusive_utc_date':now.date().isoformat(),
@@ -495,6 +536,10 @@ def run_research(root, events, football_models, now, risk, football_history=None
               'settlements_total':len(s), 'candidate_markets':candidates,
               'closing_line_values_available':sum(r.get('closing_line_value') is not None for r in s),
               'blocks':dict(blocks), 'history':history_info, 'score_backtests':backtest, 'goal_backtests':goal_scores,
+              'team_statistics_history':stat_info,'additional_market_backtests':generic_scores,
+              'market_catalog':{'requested':['goals','corners','offsides','fouls','cards','shots','throw_ins'],
+                                'priced_specs':{s:dict(v) for s,v in specs.items()},
+                                'provider_limitations':{'offsides':'NO_CURRENT_PROVIDER_MARKET','throw_ins':'NO_CURRENT_PROVIDER_MARKET','fouls':'NO_CURRENT_PROVIDER_MARKET'}},
               'validation_by_sport_market_version':readiness, 'experimental_account':paper_state(rows),
               'settlement_errors':settlement_errors, 'paper_only':True,
               'goal_markets':list(GOAL_MARKETS), 'sports':list(NA_SPORTS),
@@ -504,6 +549,6 @@ def run_research(root, events, football_models, now, risk, football_history=None
                                    'market_validation_minimum_independent_events':MIN_PROSPECTIVE_EVENTS,
                                    'minimum_forward_days':MIN_PROSPECTIVE_DAYS,
                                    'stake_fraction':.0025, 'max_exposure_fraction':.02,
-                                   'max_papers_per_day':3, 'real_money_allowed':False}}
+                                   'min_papers_per_day':5, 'max_papers_per_day':10, 'real_money_allowed':False}}
     atomic_json(root/'reports'/'market_research_latest.json', report)
     return report

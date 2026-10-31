@@ -1,4 +1,4 @@
-"""Prospective weekly-frequency V3 paper portfolios. Targets never force entries."""
+"""Prospective daily-frequency V3 paper portfolios. Targets never force entries."""
 import datetime as dt
 import hashlib
 from .daily_reference import quote_for_reference
@@ -7,8 +7,8 @@ from .custom_strategies import FREQUENCY_NAMES
 from .portfolio_controls import PaperRiskBook, conservative_expected_value
 
 POLICIES = {
- "FREQ_SELECTIVE_1_3": (1,3,.06,.08,.01),
- "FREQ_BALANCED_3_5": (3,5,.045,.065,.015),
+ "FREQ_SELECTIVE_1_3": (5,10,.06,.08,.02),
+ "FREQ_BALANCED_3_5": (5,10,.045,.065,.02),
  "FREQ_BROAD_5_10": (5,10,.03,.05,.02),
 }
 
@@ -21,11 +21,12 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None):
   path = root/"data"/"strategy_ledgers"/(name.lower()+".jsonl")
   rows = read_jsonl(path)
   if not path.exists(): save_jsonl(path, [])
-  year, week, _ = now.isocalendar()
-  weekly = sum(parse_iso(r["forecast_utc"]).isocalendar()[:2] == (year,week) for r in rows)
-  diag = {"weekly_target":[low,cap],"opened_this_week":weekly,"new_entries":0,"eligible":0,"status":"NO_ELIGIBLE_QUOTE"}
-  if now < parse_iso(registry[name]["created_utc"]) or weekly >= cap:
-   diag["status"] = "WEEKLY_CAP_OR_NOT_STARTED"
+  from zoneinfo import ZoneInfo
+  today = now.astimezone(ZoneInfo("Europe/Lisbon")).date()
+  daily = sum(parse_iso(r["forecast_utc"]).astimezone(ZoneInfo("Europe/Lisbon")).date() == today for r in rows)
+  diag = {"daily_target":[low,cap],"opened_this_week":daily,"new_entries":0,"eligible":0,"status":"NO_ELIGIBLE_QUOTE"}
+  if now < parse_iso(registry[name]["created_utc"]) or daily >= cap:
+   diag["status"] = "DAILY_CAP_OR_NOT_STARTED"
    output[name] = diag
    continue
   bank = 1000+sum(r.get("pnl_eur",0) for r in rows if r.get("status")=="SETTLED")
@@ -50,7 +51,7 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None):
   candidates.sort(key=lambda x:(-x[0],x[1]))
   diag["eligible"] = len(candidates)
   for ev_low,eid,e,i,p,odds,market,stamps,books,raw in candidates:
-   if weekly>=cap: break
+   if daily>=cap: break
    if eid in seen: continue
    stake = round(min(bank*.0025,bank*max_exposure-exposure),2)
    if stake<1: break
@@ -66,13 +67,13 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None):
     "stake_eur":stake,"status":"OPEN","price_source":raw["provider"],
     "bookmakers":books,"book_quote_updates_utc":stamps,
     "strategy_version":"1.0.0","model_status":"EXPERIMENTAL_NOT_VALIDATED"})
-   weekly+=1
+   daily+=1
    seen.add(eid)
    exposure+=stake
    diag["new_entries"]+=1
   if diag["new_entries"]:
    save_jsonl(path,rows)
    diag["status"]="OPENED_PAPER"
-  diag["opened_this_week"]=weekly
+  diag["opened_this_week"]=daily
   output[name]=diag
  return output

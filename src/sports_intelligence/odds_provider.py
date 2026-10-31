@@ -40,8 +40,8 @@ SPORTS_PER_POLL = {
     20: ("nba", "nhl", "mlb"),
 }
 POLL_HOURS_UTC = tuple(SPORTS_PER_POLL)
-MAX_CALLS_PER_DAY = 10  # backwards compatible name: HTTP requests
-MAX_CREDITS_PER_DAY = 10
+MAX_CALLS_PER_DAY = 16  # backwards compatible name: HTTP requests
+MAX_CREDITS_PER_DAY = 16
 FOOTBALL = {"epl", "la_liga", "bundesliga", "serie_a", "ligue_1"}
 MAX_SNAPSHOT_AGE_HOURS = 13
 MAX_BOOK_QUOTE_AGE_HOURS = 12
@@ -58,12 +58,14 @@ class OddsRows(list):
 
 
 def _request_odds(sport: str, secret: str, markets: str = "h2h",
-                  event_id: str | None = None) -> list[dict]:
+                  event_id: str | None = None, discover: bool = False, events_only: bool = False) -> list[dict]:
     parameters = urllib.parse.urlencode({
         "apiKey": secret, "regions": "eu", "markets": markets,
         "oddsFormat": "decimal", "dateFormat": "iso"
     })
-    suffix = f"events/{urllib.parse.quote(event_id, safe='')}/odds" if event_id else "odds"
+    if events_only:
+        parameters = urllib.parse.urlencode({"apiKey":secret,"dateFormat":"iso"})
+    suffix = f"events/{urllib.parse.quote(event_id, safe='')}/{'markets' if discover else 'odds'}" if event_id else "events" if events_only else "odds"
     url = f"https://api.the-odds-api.com/v4/sports/{sport}/{suffix}?{parameters}"
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     try:
@@ -241,7 +243,7 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
     secret = os.getenv("ODDS_API_KEY", "") if secret is None else secret
     cache_path = root / "data" / "odds_cache_v3.json"
     record = {"day": now.date().isoformat(), "calls_today": 0,
-              "snapshots": {}, "polled_windows": [], "credits_today": 0, "btts_attempted": []}
+              "snapshots": {}, "polled_windows": [], "credits_today": 0, "btts_attempted": [], "event_markets_done": [], "market_inventory": {}}
     if cache_path.exists():
         try:
             loaded = json.loads(cache_path.read_text(encoding="utf8"))
@@ -252,6 +254,8 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
                 record["polled_windows"] = loaded.get("polled_windows", [])
                 record["credits_today"] = max(record["calls_today"], int(loaded.get("credits_today", record["calls_today"])))
                 record["btts_attempted"] = loaded.get("btts_attempted", [])
+                record["event_markets_done"] = loaded.get("event_markets_done", [])
+                record["market_inventory"] = loaded.get("market_inventory", {})
             # Probe quota again on a new day: a previous billing period may have reset.
             record["credits_remaining"] = loaded.get("credits_remaining") if loaded.get("day") == record["day"] else None
         except (ValueError, KeyError, TypeError):
@@ -299,6 +303,11 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
                            if (quote := quotes_for_event(event, rows, now)) is not None}
                 extras = {event["id"]: market_quotes_for_event(event, rows, now)
                           for event in events if event["sport"] == sport}
+                from .market_catalog import catalog_quotes
+                for event in events:
+                    if event["sport"]==sport:
+                        extended,_ = catalog_quotes(event,rows,now)
+                        extras.setdefault(event["id"],{}).update(extended)
                 ids = {event["id"]: _provider_id(event, rows) for event in events if event["sport"] == sport}
                 record["snapshots"][sport] = {"fetched_at": now.isoformat(), "quotes": limited,
                                                "market_quotes": extras, "provider_ids": ids}
@@ -311,31 +320,58 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
             record["polled_windows"].append(slot)
         if not complete:
             break
-    if secret and record["credits_today"] < MAX_CREDITS_PER_DAY:
-        snap = record["snapshots"].get("epl", {})
-        candidates = sorted((e for e in events if e["sport"] == "epl" and e["status"] == "pre"
-                            and now < parse_utc(e["start_utc"]) <= now+dt.timedelta(hours=48)),
-                            key=lambda e:e["start_utc"])
+    # Extra markets are discovered/priced by EVENT, not fabricated from 1X2.
+    # Reserve room for any unpolled featured slots; spend at most 7 extra credits.
+    featured_reserve = sum((3 if sport=="epl" else 1) for hour,sports in SPORTS_PER_POLL.items()
+                           if hour>now.hour and hour not in record["polled_windows"] for sport in sports)
+    extra_budget = min(7, MAX_CREDITS_PER_DAY-record["credits_today"]-featured_reserve)
+    if secret and extra_budget>=2:
+        from .market_catalog import EXTRA_MARKET_PRIORITY,catalog_quotes
+        candidates=sorted((e for e in events if e["sport"] in FOOTBALL and e["status"]=="pre"
+                          and now<parse_utc(e["start_utc"])<=now+dt.timedelta(hours=48)),key=lambda e:e["start_utc"])
         for event in candidates:
-            provider_id = snap.get("provider_ids", {}).get(event["id"])
-            if not provider_id or record["btts_attempted"]:
-                continue
-            if record.get("credits_remaining") is not None and record["credits_remaining"] < 1:
-                break
-            record["credits_today"] += 1
-            record["calls_today"] += 1
-            diagnostics["calls_this_run"] += 1
-            record["btts_attempted"].append(provider_id)
+            snap=record["snapshots"].get(event["sport"],{})
+            provider_id=snap.get("provider_ids",{}).get(event["id"])
+            if not provider_id and requester is _request_odds:
+                try:
+                    identity=(_request_odds(ODDS_KEY_MAP[event["sport"]],secret,events_only=True)
+                              if requester is _request_odds else requester(ODDS_KEY_MAP[event["sport"]],secret))
+                    diagnostics["free_event_identity_calls"]=diagnostics.get("free_event_identity_calls",0)+1
+                    provider_id=_provider_id(event,identity)
+                    if provider_id:
+                        snap=record["snapshots"].setdefault(event["sport"],{"fetched_at":now.isoformat(),"quotes":{}})
+                        snap.setdefault("provider_ids",{})[event["id"]]=provider_id
+                except Exception as exc:
+                    diagnostics["errors"].append({"sport":event["sport"],"reason":"FREE_EVENT_ID_"+type(exc).__name__})
+            if not provider_id or provider_id in record["event_markets_done"]:continue
+            remaining=record.get("credits_remaining")
+            if remaining is not None:extra_budget=min(extra_budget,remaining)
+            if extra_budget<2:break
+            # Discovery costs 1 credit. It also records unsupported market types.
+            record["calls_today"]+=1;record["credits_today"]+=1;diagnostics["calls_this_run"]+=1
+            record["event_markets_done"].append(provider_id)
             try:
-                rows = (_request_odds(ODDS_KEY_MAP["epl"], secret, "btts", provider_id)
-                        if requester is _request_odds else requester(ODDS_KEY_MAP["epl"], secret))
-                if getattr(rows, "credits_remaining", None) is not None:
-                    record["credits_remaining"] = rows.credits_remaining
-                snap.setdefault("market_quotes", {}).setdefault(event["id"], {}).update(
-                    market_quotes_for_event(event, rows, now))
+                available=(_request_odds(ODDS_KEY_MAP[event["sport"]],secret,"h2h",provider_id,True)
+                           if requester is _request_odds else requester(ODDS_KEY_MAP[event["sport"]],secret))
+                keys=sorted({m["key"] for row in available for b in row.get("bookmakers",[]) for m in b.get("markets",[])})
+                record["market_inventory"][event["id"]]={"keys":keys,"captured_at_utc":now.isoformat(),
+                    "unpriced_reason":"Provider coverage/model/rules and remaining credit budget determine admission."}
+                if getattr(available,"credits_remaining",None) is not None:record["credits_remaining"]=available.credits_remaining
+                selected=[k for k in EXTRA_MARKET_PRIORITY if k in keys][:max(0,extra_budget-1)]
+                if not selected:continue
+                cost=len(selected)
+                if record.get("credits_remaining") is not None and record["credits_remaining"]<cost:continue
+                record["calls_today"]+=1;record["credits_today"]+=cost;diagnostics["calls_this_run"]+=1
+                rows=(_request_odds(ODDS_KEY_MAP[event["sport"]],secret,",".join(selected),provider_id)
+                      if requester is _request_odds else requester(ODDS_KEY_MAP[event["sport"]],secret))
+                if getattr(rows,"credits_remaining",None) is not None:record["credits_remaining"]=rows.credits_remaining
+                quotes=market_quotes_for_event(event,rows,now);extended,_=catalog_quotes(event,rows,now);quotes.update(extended)
+                snap.setdefault("market_quotes",{}).setdefault(event["id"],{}).update(quotes)
+                snap["fetched_at"]=now.isoformat()
+                extra_budget-=1+cost
             except Exception as exc:
-                diagnostics["errors"].append({"sport":"epl", "reason":"BTTS_"+type(exc).__name__})
-            break
+                diagnostics["errors"].append({"sport":event["sport"],"reason":"EVENT_MARKETS_"+type(exc).__name__})
+            break  # One broad event catalog per day; multi-line markets yield many paired prices.
     if secret:
         cache_path.parent.mkdir(parents=True, exist_ok=True)
         cache_path.write_text(json.dumps(record, ensure_ascii=False, sort_keys=True), encoding="utf8")
@@ -368,6 +404,8 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
     diagnostics["credits_today"] = record["credits_today"]
     diagnostics["max_credits_per_day"] = MAX_CREDITS_PER_DAY
     diagnostics["credits_remaining"] = record.get("credits_remaining")
+    diagnostics["market_inventory"] = record["market_inventory"]
+    diagnostics["unsupported_requested_markets"] = {"offsides":"NOT_ADVERTISED_BY_CURRENT_PROVIDER", "throw_ins":"NOT_ADVERTISED_BY_CURRENT_PROVIDER", "fouls":"NOT_ADVERTISED_BY_CURRENT_PROVIDER"}
     diagnostics["goal_market_quotes"] = sum(len(e.get("market_quotes", {})) for e in events)
     diagnostics["status"] = "OK" if secret else "MISSING_KEY_NO_ODDS_API_CALLS"
     return diagnostics

@@ -35,3 +35,16 @@ Snapshots adicionais de preço são append-only. CLV só é calculado quando há
 - Os testes cobrem mercados/linhas, créditos, timestamps, ida de preço a previsão e resultado, imutabilidade, repetição idempotente, limites partilhados, pares NHL e bloqueio por desempenho inferior ao mercado.
 
 Continua dependente de dados e resultados que cheguem após a previsão. Não é possível fabricar retroativamente odds pré-jogo ou declarar vantagem antes de a amostra existir.
+
+
+## Atualização de atividade e mercados adicionais — 31/10/2026
+
+A pedido do utilizador, a meta passa a **5–10 apostas PAPER elegíveis por dia em TODAS as bancas ativas**, incluindo as três antigas estratégias de frequência (agora contadas por dia, não por semana), referência e conta experimental quando criada. O máximo diário é 10. As novas stakes base são 0,25%; saldos, stakes e previsões antigos não são reescritos. O limite de 2% por conta e os tetos agregados de €36/jogo e €240 em aberto continuam em vigor, pelo que é preciso diversificar eventos e reutilizar exposição após liquidações. Frequência não prova vantagem nem permite inventar operações.
+
+O motor mantém os modelos de vencedor e acrescenta um componente auxiliar comum explicitamente identificado, disponível a todas as carteiras: diferentes linhas de golos, totais/handicaps de cantos e outros mercados binários com estatística, preço e regras verificáveis. A mesma previsão repetida entre carteiras não passa a ser evidência independente. São permitidos até dois mercados por evento/conta; duplicação de uma vitória caseira como handicap −0,5 é rejeitada.
+
+O catálogo é descoberto no endpoint de mercados do evento. Faz-se recolha incremental de estatísticas oficiais ESPN (cantos, foras de jogo, faltas, remates e cartões quando presentes), modelos de contagem específicos e teste cronológico por estatística/linha. Não são usadas probabilidades de golos para cantos. A liquidação consulta o número oficial da estatística; o resultado final em golos não liquida uma aposta de cantos.
+
+O orçamento máximo passa a **16 créditos por dia** (até 496 em 31 dias), dentro do plano gratuito de referência de 500/mês e sempre sujeito à quota restante comunicada pelo fornecedor. Não foi comprada qualquer API/subscrição. A discovery custa um crédito e a recolha adicional usa até seis mercados num evento; um mercado pode devolver muitas linhas. Cobertura não é exaustiva.
+
+**Limitações explícitas:** o fornecedor atual anuncia cantos/cartões mas não mercados de foras de jogo, lançamentos laterais ou faltas. Esses dados estatísticos são recolhidos, mas não se inventam odds para abrir apostas. Mercados de cartões/bookings dependem de regras inequívocas por operador (contagem vs pontos); sem essa prova são bloqueados. Períodos, jogadores e linhas com devoluções/quarters não são convertidos em binários incorretos. Mercados presentes no catálogo mas sem modelo/regra validada são identificados como bloqueios. O painel mostra todas as carteiras abaixo de cinco entradas e o motivo da insuficiência.

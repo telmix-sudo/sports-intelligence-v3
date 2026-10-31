@@ -26,6 +26,7 @@ from .custom_strategies import (
 from .strategy_registry import ensure_registry, verify_prior_accounts
 from .portfolio_controls import PaperRiskBook, conservative_expected_value, audit_ledgers
 from .daily_reference import select_daily_reference
+from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION
 
 UTC = dt.timezone.utc
 PORTUGAL = ZoneInfo("Europe/Lisbon")
@@ -42,12 +43,12 @@ STRATEGIES = ALL_NAMES
 INITIAL_BANKROLL_EUR = 1000.0
 EVALUATION_FROM = dt.date(2024, 8, 1)
 WARMUP = 100
-PAPER_STAKE_FRACTION = 0.005
+PAPER_STAKE_FRACTION = NEW_STAKE_FRACTION
 MAX_PAPER_EXPOSURE_FRACTION = 0.02
 EDGE_MINIMUM = 0.04
 EV_MINIMUM = 0.02
-MIN_DAILY_ENTRIES_TARGET_PER_ACCOUNT = 1
-MAX_DAILY_ENTRIES_PER_ACCOUNT = 3
+MIN_DAILY_ENTRIES_TARGET_PER_ACCOUNT = MIN_DAILY_ENTRIES
+MAX_DAILY_ENTRIES_PER_ACCOUNT = MAX_DAILY_ENTRIES
 
 # Exact-name aliases only. Unrecognized club names are NOT guessed/fuzzy-matched.
 ALIASES = {
@@ -316,7 +317,16 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
             outcome = match_finals.get(record["event_id"])
             if outcome is None or parse_iso(record["start_utc"]) > now:
                 continue
-            index = outcome["outcome"]
+            typed_market = record.get("market_spec")
+            if typed_market:
+                from .market_catalog import outcome_for_spec
+                index=outcome_for_spec(typed_market,outcome)
+                if index is None:continue
+                if index=="VOID":
+                    record.update(status="VOID",settlement_utc=now.isoformat(),pnl_eur=0.0)
+                    counts["settled_this_run"]+=1
+                    continue
+            else:index = outcome["outcome"]
             selected = record["selection_index"]
             p = record["probabilities"]
             if (len(p) not in (2, 3) or len(p) != len(record["odds"])
@@ -324,14 +334,14 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
                 continue
             # Moneyline has no draw selection: a drawn NFL result voids the
             # paper bet rather than converting it into a phantom loss.
-            if len(p) == 2 and index == 1 and record.get("sport") == "nfl":
+            if not typed_market and len(p) == 2 and index == 1 and record.get("sport") == "nfl":
                 record["status"] = "VOID"
                 record["settlement_utc"] = now.isoformat()
                 record["observed_outcome"] = index
                 record["pnl_eur"] = 0.0
                 counts["settled_this_run"] += 1
                 continue
-            if len(p) == 2:
+            if not typed_market and len(p) == 2:
                 # ESPN 1X2 indices: 0 home, 1 draw, 2 away. NHL ML includes OT.
                 if index == 1:
                     continue  # Non-NFL draw requires explicit market settlement rules.
@@ -501,7 +511,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 "selection_expected_value": round(ev, 7),
                 "conservative_expected_value": round(conservative_expected_value(p[choice], prices[choice], sample_min), 7),
                 "uncertainty_calibrated": False,
-                "sizing_note": "0.5% virtual bank, max 2% exposure; hypothetical quote may not have been executable",
+                "sizing_note": "0.25% virtual bank, max 2% exposure; hypothetical quote may not have been executable",
             }
             rows.append(r)
             seen_events.add(e["id"])
@@ -560,6 +570,14 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         except Exception as exc:
             print("Settlement lookup failed", league, day.isoformat(), type(exc).__name__, flush=True)
     missing_final_ids = sorted({row["event_id"] for name in STRATEGIES for row in read_jsonl(root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")) if row.get("status") == "OPEN" and parse_iso(row["start_utc"]) <= now and row["event_id"] not in finals})
+    for strategy in STRATEGIES:
+        for r in read_jsonl(root/"data"/"strategy_ledgers"/(strategy.lower()+".jsonl")):
+            if r.get("status")=="OPEN" and r.get("market_spec",{}).get("metric","goals")!="goals" and r["event_id"] in finals:
+                from .market_catalog import enrich_final
+                try:
+                    e={"id":r["event_id"],"sport":r["sport"],"home":r["home"],"away":r["away"],"final":finals[r["event_id"]]}
+                    finals[r["event_id"]]=enrich_final(e)["final"]
+                except Exception as exc:print("Stat settlement lookup failed",r["event_id"],type(exc).__name__,flush=True)
     before, settle_counts = build_accounts(root, finals, now)
     from .research_pipeline import read_journal, reconcile, run_research
     research_settlement_result = reconcile(root, read_journal(root), events, now)
@@ -573,7 +591,10 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     if daily_reference["new_entries"]:
         entry_counts["MARKET_DAILY_REFERENCE"] = daily_reference["new_entries"]
     market_research = run_research(root, events, models, now, risk, football_history=matches,
-                                   previous_settlement_result=research_settlement_result)
+                                   previous_settlement_result=research_settlement_result,collect_team_stats=True)
+    from .auxiliary_portfolios import open_auxiliary_markets
+    auxiliary = open_auxiliary_markets(root, events, now, registry, risk)
+    for name,count in auxiliary.items(): entry_counts[name]=entry_counts.get(name,0)+count
     after, _ = build_accounts(root, {}, now)
     # Count the TRUE number of unique events forecast on this Lisbon calendar day,
     # not duplicated strategy picks on the same match.
@@ -589,23 +610,28 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             "entries": sum(r["strategy"] == name for r in activity_rows),
             "minimum_target": MIN_DAILY_ENTRIES_TARGET_PER_ACCOUNT,
             "maximum": MAX_DAILY_ENTRIES_PER_ACCOUNT,
-            "target_met": any(r["strategy"] == name for r in activity_rows),
+            "target_met": sum(r["strategy"] == name for r in activity_rows) >= MIN_DAILY_ENTRIES_TARGET_PER_ACCOUNT,
         }
-        for name in ORIGINAL_NAMES + CUSTOM_NAMES
+        for name in STRATEGIES
     }
+    if market_research["experimental_account"]["created"]:
+        from .research_pipeline import read_journal
+        experimental_today=[r for r in read_journal(root) if r["kind"]=="FORECAST" and r["stake_eur"]>0 and parse_iso(r["forecast_utc"]).astimezone(PORTUGAL).date()==now.astimezone(PORTUGAL).date()]
+        daily_per_strategy["EXPERIMENTAL_MULTI_MARKET"]={"entries":len(experimental_today),"minimum_target":5,"maximum":10,"target_met":len(experimental_today)>=5}
+    else:experimental_today=[]
     daily_activity = {
         "per_strategy": daily_per_strategy,
         "strategies_below_minimum": [
             name for name, stats in daily_per_strategy.items() if not stats["target_met"]
         ],
         "local_date": now.astimezone(PORTUGAL).date().isoformat(),
-        "min_distinct_events_target": 1,
-        "preferred_max_distinct_events": 3,
+        "min_distinct_events_target": 5,
+        "preferred_max_distinct_events": 10,
         "distinct_events_recorded": len(unique_events_today),
-        "paper_entries_across_all_accounts": len(activity_rows),
+        "paper_entries_across_all_accounts": len(activity_rows)+len(experimental_today),
         "reference_entries": sum(r["strategy"] == "MARKET_DAILY_REFERENCE" for r in activity_rows),
         "unique_event_ids": unique_events_today,
-        "minimum_met": bool(unique_events_today),
+        "minimum_met": all(s["target_met"] for s in daily_per_strategy.values()),
         "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
     }
     report = {
@@ -621,7 +647,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             "goal_markets": "AUTOMATED_TIMESTAMPED_QUOTES_FORECASTS_AND_SETTLEMENT",
             "holdout_caveat": "Prequential score walk-forward is not independent market-based holdout."},
         "frequency_strategies": frequency_results,
-        "daily_target_policy": "Each of eight core strategies targets 1–3 qualified PAPER entries per Lisbon day; maximum 3 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",
+        "daily_target_policy": "All active strategies target 5–10 qualified PAPER entries per Lisbon day; maximum 10 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",
         "registered_strategies": registry,
         "policy": "Existing balances and settled records persist; only brand-new strategies start with EUR 1000.",
         "sports_tested": sorted(matches),

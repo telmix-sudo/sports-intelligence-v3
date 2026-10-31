@@ -14,14 +14,15 @@ from zoneinfo import ZoneInfo
 
 from .scanner import parse_iso
 from .portfolio_controls import PaperRiskBook
+from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION
 
 NAME = "MARKET_DAILY_REFERENCE"
 LOCAL = ZoneInfo("Europe/Lisbon")
 MAX_QUOTE_AGE_HOURS = 8
 MAX_GAME_AHEAD_HOURS = 48
-DAILY_TARGET_MIN = 1
-DAILY_TARGET_MAX = 3
-FRACTION = .005
+DAILY_TARGET_MIN = MIN_DAILY_ENTRIES
+DAILY_TARGET_MAX = MAX_DAILY_ENTRIES
+FRACTION = NEW_STAKE_FRACTION
 MAX_EXPOSURE = .02
 
 
@@ -66,7 +67,7 @@ def quote_for_reference(e: dict, now: dt.datetime) -> tuple | None:
 
 def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
                            registry: dict, risk: PaperRiskBook | None = None) -> dict:
-    """Up to three distinct, genuine pre-game paper references per Lisbon day.
+    """Up to ten distinct, genuine pre-game paper references per Lisbon day.
 
     This portfolio is a market BASELINE, not a prediction with demonstrated edge.
     The one-per-day minimum is an operational target, never a fabricated bet.
@@ -96,7 +97,7 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
         diagnostics.update(status="NOT_REGISTERED_YET", reason="Strategy not yet registered")
         return diagnostics
     if len(daily) >= DAILY_TARGET_MAX:
-        diagnostics.update(status="DAILY_CAP", reason="Daily cap of 3 separate events reached")
+        diagnostics.update(status="DAILY_CAP", reason="Daily cap of 10 entries reached")
         return diagnostics
     bankroll = 1000 + sum(float(r["pnl_eur"]) for r in records if r.get("status") == "SETTLED")
     exposure = sum(float(r["stake_eur"]) for r in records if r.get("status") == "OPEN")
@@ -146,7 +147,7 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
             "model_status": "MARKET_REFERENCE_NO_ESTIMATED_EDGE",
             "classification": "EXPLORATORY_DAILY_BASELINE_NOT_VALUE_BET",
             "edge_pp": 0, "selection_expected_value": round(p[pick]*odds[pick]-1, 7),
-            "sizing_note": "0.5% independent virtual bank, max 2% exposure; price execution unconfirmed.",
+            "sizing_note": "0.25% independent virtual bank, max 2% exposure; price execution unconfirmed.",
         }
         records.append(record)
         daily.append(record)

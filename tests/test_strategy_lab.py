@@ -133,7 +133,7 @@ class StrategyLabTests(unittest.TestCase):
             self.assertEqual(entries.get("ELO_STANDARD"), 1)
             ledger = root / "data" / "strategy_ledgers" / "elo_standard.jsonl"
             row = json.loads(ledger.read_text().splitlines()[0])
-            self.assertEqual(row["stake_eur"], 5.0)
+            self.assertEqual(row["stake_eur"], 2.5)
             self.assertEqual(row["forecast_utc"], DAY.isoformat())
             self.assertEqual(row["selection_index"], 0)
             _, repeated = open_accounts(root, models, [event], DAY)
@@ -141,7 +141,7 @@ class StrategyLabTests(unittest.TestCase):
             accounts, settled = build_accounts(
                 root, {"epl:101": {"outcome": 0}},
                 dt.datetime(2026, 10, 19, tzinfo=UTC))
-            self.assertEqual(accounts["ELO_STANDARD"]["bankroll_eur"], 1005.0)
+            self.assertEqual(accounts["ELO_STANDARD"]["bankroll_eur"], 1002.5)
             self.assertEqual(settled["settled_this_run"] >= 1, True)
 
     def test_end_to_end_offline_reproduces_honest_state(self):
