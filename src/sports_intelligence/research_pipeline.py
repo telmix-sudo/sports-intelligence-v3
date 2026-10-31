@@ -422,7 +422,9 @@ def run_research(root, events, football_models, now, risk, football_history=None
                 prices = [float(v) for v in q['decimal']]
                 p_market = [float(v) for v in q['no_vig']]
                 times = q['best_book_updates']
-                if (len(prices)!=2 or len(p_market)!=2 or len(times)!=2 or
+                books = q.get('bookmakers')
+                if (not isinstance(books,list) or len(books)!=2 or not all(isinstance(b,str) and b for b in books) or
+                    len(prices)!=2 or len(p_market)!=2 or len(times)!=2 or
                     any(not math.isfinite(v) or v<=1 for v in prices) or
                     any(not math.isfinite(v) or not 0<v<1 for v in p_market) or
                     abs(sum(p_market)-1)>.001 or

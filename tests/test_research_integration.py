@@ -191,3 +191,27 @@ class ResearchExecutionTests(unittest.TestCase):
 
 
 if __name__=='__main__': unittest.main()
+
+class OperationalPersistenceTests(unittest.TestCase):
+    def test_daily_results_cache_advances_without_reloading_completed_days(self):
+        from urllib.parse import urlparse, parse_qs
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);called=[]
+            def source(url):
+                day=parse_qs(urlparse(url).query)['dates'][0];called.append(day)
+                return json.dumps({'events':[]}),{'sha256':'SYNTHETIC_EMPTY_DAY'}
+            collect_history(root,{'nba'},NOW,source,max_days_per_sport=3)
+            first=list(called);called.clear()
+            collect_history(root,{'nba'},NOW,source,max_days_per_sport=3)
+            self.assertEqual(len(called),3)
+            self.assertNotIn(first[1],called,'Completed in-season historical day should be cached')
+            self.assertIn('20261030',called,'Yesterday is refreshed for overnight final results')
+            self.assertTrue((root/'data/score_history_v3.json').is_file())
+
+    def test_new_forecast_requires_bookmaker_identity(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);history=football_history();e=dict(EVENT)
+            e['market_quotes']=market_quotes_for_event(e,odds_rows(),NOW)
+            for q in e['market_quotes'].values():q.pop('bookmakers')
+            r=run_research(root,[e],models(history),NOW,PaperRiskBook(root),football_history=history)
+            self.assertEqual(r['forecasts_total'],0)
