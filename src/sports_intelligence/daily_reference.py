@@ -13,6 +13,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from .scanner import parse_iso
+from .portfolio_controls import PaperRiskBook
 
 NAME = "MARKET_DAILY_REFERENCE"
 LOCAL = ZoneInfo("Europe/Lisbon")
@@ -64,7 +65,7 @@ def quote_for_reference(e: dict, now: dt.datetime) -> tuple | None:
 
 
 def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
-                           registry: dict) -> dict:
+                           registry: dict, risk: PaperRiskBook | None = None) -> dict:
     """Up to three distinct, genuine pre-game paper references per Lisbon day.
 
     This portfolio is a market BASELINE, not a prediction with demonstrated edge.
@@ -79,6 +80,7 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
     records = read_jsonl(ledger)
     if not ledger.exists():
         save_jsonl(ledger, [])
+    risk = risk or PaperRiskBook(root)
     started = parse_iso(registry[NAME]["created_utc"])
     daily = [r for r in records if local_day(parse_iso(r["forecast_utc"])) == day]
     previous_ids = {r["event_id"] for r in records}
@@ -123,9 +125,13 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
         _, _, _, event, pick, odds, p, timestamps, books, quote = candidates.pop(0)
         stake = round(min(bankroll * FRACTION,
                           max(0., bankroll * MAX_EXPOSURE - exposure)), 2)
-        if stake <= 0:
-            diagnostics["reason"] = "Maximum exposure (2% of virtual bank) reached"
+        if stake < 1:
+            diagnostics["reason"] = "Maximum exposure (2% of virtual bank) or 1 EUR minimum stake reached"
             break
+        stake = risk.reserve(event["id"], stake)
+        if stake == 0:
+            diagnostics["reason"] = "Aggregate event or paper portfolio exposure limit reached"
+            continue
         record = {
             "id": "PREF-"+hashlib.sha256((NAME+"|"+event["id"]).encode()).hexdigest()[:14],
             "strategy": NAME, "event_id": event["id"], "sport": event["sport"],
