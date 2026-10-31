@@ -9,6 +9,11 @@
 <p class="muted">Objetivo operacional: 1 a 3 jogos diferentes por dia no conjunto da V3. A carteira Market Daily Reference pode criar até três posições fictícias, apenas com odds reais anteriores ao jogo e pelo menos duas casas. Estes registos não demonstram vantagem sobre o mercado. Sem odds elegíveis, a meta fica por cumprir — não são simuladas cotações.</p>
 <p id="dailyTarget" class="warn" role="status">A verificar a meta de hoje…</p></section>
 <section class="card space"><h2>Porque não abriu mais posições?</h2><p id="entryDiagnostics" class="muted">A carregar diagnóstico…</p></section>
+<section class="grid space" aria-label="Auditoria operacional">
+<article class="card"><h2>Lucro/perda por data</h2><p id="dailyPnl" class="muted" role="status">A carregar…</p></article>
+<article class="card"><h2>Risco agregado</h2><p id="riskOverview" class="muted" role="status">A carregar…</p></article>
+<article class="card"><h2>Liquidação e atraso</h2><p id="settlementHealth" class="muted" role="status">A carregar…</p></article>
+<article class="card"><h2>Comparação com mercado</h2><p id="marketAudit" class="muted" role="status">A carregar…</p></article></section>
 <section class="grid space" id="wallets" aria-label="Carteiras virtuais"></section>
 <section class="space"><h2>Backtest cronológico</h2><p class="muted">Cinco ligas; previsões feitas antes de conhecer os resultados do próprio dia. Referência trivial = probabilidade 1/3 para cada resultado (não representa o mercado).</p><div class="table"><table><thead><tr><th>Estratégia</th><th>Jogos avaliados</th><th>Brier</th><th>Log Loss</th><th>Brier uniforme</th><th>ROI histórico</th></tr></thead><tbody id="backtests"><tr><td colspan="6">A carregar…</td></tr></tbody></table></div></section>
 <section class="space"><h2>Fonte e qualidade</h2><div class="card"><div id="sources" class="muted">—</div><p class="muted small">As carteiras simulam preços observados, mas não verificam a execução real em bookmaker nem oferecem garantias. Estratégias podem selecionar os mesmos jogos; por isso não somamos as carteiras como posições independentes.</p><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/original_strategies.md">Metodologia, fontes científicas e próximas estratégias</a></p></div></section>
@@ -86,6 +91,19 @@ const x=await response.json();
 el("updated").textContent="Último relatório: "+new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(x.asof_utc))+" (Lisboa)";
 const elapsed=Math.max(0,Math.round((Date.now()-new Date(x.asof_utc).getTime())/60000));
 el("freshness").textContent="Verificado agora; relatório publicado há "+(elapsed<60?elapsed+" min":Math.floor(elapsed/60)+" h "+elapsed%60+" min")+". A verificação automática ocorre a cada 5 minutos e não provoca novas apostas nem consultas à API de odds. "+(elapsed>24*60?"Atenção: laboratório sem novo relatório há mais de um dia.":"As carteiras só mudam quando existe uma nova operação ou liquidação.");
+const audit=x.ledger_audit||{},risk=x.aggregate_risk||{},marketAudit=audit.prospective_benchmark||{};
+el("dailyPnl").textContent=audit.local_date ?
+"Jogos de hoje: "+fmt(audit.games_played_today?.pnl_eur)+" € ("+ (audit.games_played_today?.n||0)+" posições em "+(audit.games_played_today?.independent_events||0)+" jogos). Liquidadas hoje: "+fmt(audit.settled_today?.pnl_eur)+" €. Não confundir data do evento com data de liquidação.":
+"Auditoria aguardando próxima execução.";
+el("riskOverview").textContent=Number.isFinite(risk.total_open_eur)?
+"Exposição em aberto "+fmt(risk.total_open_eur)+" € / "+fmt(risk.max_total_open_eur)+" €; máximo por jogo "+fmt(risk.max_event_open_eur)+" €. Jogo mais concentrado: "+Object.entries(risk.event_exposure_eur||{}).sort((a,b)=>b[1]-a[1]).slice(0,1).map(([k,v])=>k+" ("+fmt(v)+" €)").join("")+".":
+"Sem diagnóstico agregado ainda.";
+el("settlementHealth").textContent=audit.local_date?
+(audit.overdue_count>0?"Atenção: "+audit.overdue_count+" posições ainda abertas 5h depois do início; confirmar resultado oficial.":"Sem posições marcadas como atrasadas nesta execução.")+" Apostas fechadas "+audit.closed+"; abertas "+audit.open+"; anuladas "+audit.voided+".":
+"Auditoria pendente.";
+el("marketAudit").textContent=marketAudit.n?
+"Comparação com odds verificadas em "+marketAudit.n+" posições: Brier modelo "+fmt(marketAudit.model_brier,4)+", Brier mercado "+fmt(marketAudit.market_brier,4)+". Amostra correlacionada, não valida edge. CLV ainda indisponível.":
+"Não há amostra com benchmark de mercado suficiente para validar vantagem. Sem preços de fecho: CLV indisponível.";
 el("wallets").replaceChildren(...Object.entries(x.accounts||{}).map(([n,a])=>card(n,a,x.registered_strategies?.[n])));
 const diag=x.entry_diagnostics;
 el("entryDiagnostics").textContent=diag ? "Entradas nesta execução: "+diag.new_entries+". Rejeições: "+Object.entries(diag.rejections||{}).map(([k,v])=>label(k)+": "+v).join(" · ")+". Contagem por avaliação estratégia/jogo, não por jogos únicos." : "O próximo relatório do laboratório apresentará as causas de rejeição.";
