@@ -1,3 +1,4 @@
+# Automated multi-market collection, backfill, admission and append-only settlement.
 # 2026-10-31 22:42 UTC paper safety, reporting and all 12 wallet regression smoke test.
 # 2026-10-31 22:30 UTC: refresh V3 paper ledger for day-end settlement (Aston Villa–Fulham).
 # Manual audit and fresh settlement of completed 31 Oct fixtures at 19h Portugal; paper-only.
@@ -7,6 +8,10 @@
 name: Sports Intelligence V3 - Parallel Strategy Lab
 
 on:
+  workflow_run:
+    workflows: ["Sports Intelligence V3 — Hourly Paper Scanner"]
+    types: [completed]
+    branches: [main]
   schedule:
     - cron: "42 * * * *"
   workflow_dispatch:
@@ -24,6 +29,7 @@ concurrency:
 
 jobs:
   research:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -48,6 +54,7 @@ jobs:
         run: |
           git config user.name "sports-intelligence-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --ignore-errors data/score_history_v3.json data/market_research_v3.jsonl reports/market_research_latest.json 2>/dev/null || true
           git add data/strategy_ledgers data/strategy_accounts_v3.json data/strategy_registry_v3.json reports/strategy_lab_latest.json reports/strategy_lab_runs/
           if ! git diff --cached --quiet; then
             git commit -m "data: parallel paper strategy observations [skip ci]"
@@ -72,5 +79,8 @@ jobs:
           path: |
             reports/strategy_lab_latest.json
             data/strategy_accounts_v3.json
+            reports/market_research_latest.json
+            data/score_history_v3.json
+            data/market_research_v3.jsonl
           if-no-files-found: ignore
           retention-days: 14

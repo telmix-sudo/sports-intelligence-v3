@@ -6,7 +6,7 @@
 <main>
 <section class="card space"><h2>Como interpretar os resultados</h2><p>Cada estratégia nova começa com <strong style="display:inline;font-size:inherit">1.000 € fictícios</strong>. As carteiras existentes preservam os seus saldos, lucros, perdas e previsões quando entra uma estratégia nova. Os testes históricos com OpenFootball avaliam Brier Score e Log Loss, não lucro retrospetivo: não existem odds históricas cronológicas neste conjunto. Valores mais baixos são melhores. Comparar métodos no mesmo histórico não os valida fora da amostra. A carteira MARKET DAILY REFERENCE usa o favorito do mercado apenas como controlo diário, sem vantagem estimada.</p><p id="status" class="warn" role="status">A procurar relatório...</p></section>
 <section class="card space"><h2>Meta diária de entradas fictícias</h2>
-<p class="muted">Objetivo operacional: 1 a 3 jogos diferentes por dia no conjunto da V3. A carteira Market Daily Reference pode criar até três posições fictícias, apenas com odds reais anteriores ao jogo e pelo menos duas casas. Estes registos não demonstram vantagem sobre o mercado. Sem odds elegíveis, a meta fica por cumprir — não são simuladas cotações.</p>
+<p class="muted">Objetivo operacional: 1 a 3 entradas elegíveis por dia em cada uma das oito estratégias principais. A carteira Market Daily Reference pode criar até três posições fictícias, apenas com odds reais anteriores ao jogo e pelo menos duas casas. Estes registos não demonstram vantagem sobre o mercado. Sem odds elegíveis, a meta fica por cumprir — não são simuladas cotações.</p>
 <p id="dailyTarget" class="warn" role="status">A verificar a meta de hoje…</p></section>
 <section class="card space"><h2>Porque não abriu mais posições?</h2><p id="entryDiagnostics" class="muted">A carregar diagnóstico…</p></section>
 <section class="grid space" aria-label="Auditoria operacional">
@@ -14,6 +14,7 @@
 <article class="card"><h2>Risco agregado</h2><p id="riskOverview" class="muted" role="status">A carregar…</p></article>
 <article class="card"><h2>Liquidação e atraso</h2><p id="settlementHealth" class="muted" role="status">A carregar…</p></article>
 <article class="card"><h2>Comparação com mercado</h2><p id="marketAudit" class="muted" role="status">A carregar…</p></article></section>
+<section class="card space"><h2>Novos mercados e modalidades</h2><p id="marketResearch" class="muted" role="status">A carregar o registo prospetivo…</p><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/reports/market_research_latest.json">Histórico, testes e motivos de rejeição por mercado</a></p></section>
 <section class="grid space" id="wallets" aria-label="Carteiras virtuais"></section>
 <section class="space"><h2>Backtest cronológico</h2><p class="muted">Cinco ligas; previsões feitas antes de conhecer os resultados do próprio dia. Referência trivial = probabilidade 1/3 para cada resultado (não representa o mercado).</p><div class="table"><table><thead><tr><th>Estratégia</th><th>Jogos avaliados</th><th>Brier</th><th>Log Loss</th><th>Brier uniforme</th><th>ROI histórico</th></tr></thead><tbody id="backtests"><tr><td colspan="6">A carregar…</td></tr></tbody></table></div></section>
 <section class="space"><h2>Fonte e qualidade</h2><div class="card"><div id="sources" class="muted">—</div><p class="muted small">As carteiras simulam preços observados, mas não verificam a execução real em bookmaker nem oferecem garantias. Estratégias podem selecionar os mesmos jogos; por isso não somamos as carteiras como posições independentes.</p><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/original_strategies.md">Metodologia, fontes científicas e próximas estratégias</a></p></div></section>
@@ -105,6 +106,10 @@ el("marketAudit").textContent=marketAudit.n?
 "Comparação com odds verificadas em "+marketAudit.n+" posições: Brier modelo "+fmt(marketAudit.model_brier,4)+", Brier mercado "+fmt(marketAudit.market_brier,4)+". Amostra correlacionada, não valida edge. CLV ainda indisponível.":
 "Não há amostra com benchmark de mercado suficiente para validar vantagem. Sem preços de fecho: CLV indisponível.";
 el("wallets").replaceChildren(...Object.entries(x.accounts||{}).map(([n,a])=>card(n,a,x.registered_strategies?.[n])));
+const research=x.market_research;
+el("marketResearch").textContent=research ?
+"Recolha e liquidação automáticas ativas: "+research.forecasts_total+" previsões, "+research.zero_stake_forecasts+" sem stake e "+research.settlements_total+" liquidações. Mercados: Over/Under 2,5, ambas marcam e handicap −0,5; modelos próprios NBA/NHL/NFL/MLB. Conta experimental separada: "+(research.experimental_account.created?money(research.experimental_account.bankroll_eur)+"; "+research.experimental_account.positions+" posições PAPER, "+research.experimental_account.open+" abertas.":"ainda sem posições com stake.")+" Entradas de 0,25% dependem de teste cronológico, odds verificadas, EV e risco; vantagem sobre o mercado ainda não demonstrada. Bloqueios nesta execução: "+Object.entries(research.blocks||{}).map(([k,v])=>label(k)+": "+v).join(" · ") :
+"A aguardar o primeiro relatório da integração automática.";
 const diag=x.entry_diagnostics;
 el("entryDiagnostics").textContent=diag ? "Entradas nesta execução: "+diag.new_entries+". Rejeições: "+Object.entries(diag.rejections||{}).map(([k,v])=>label(k)+": "+v).join(" · ")+". Contagem por avaliação estratégia/jogo, não por jogos únicos." : "O próximo relatório do laboratório apresentará as causas de rejeição.";
 const target=el("backtests");target.replaceChildren();
@@ -118,9 +123,9 @@ el("sources").textContent="Jogos históricos por liga: "+Object.entries(src.matc
 const daily=x.daily_reference||{};
 const activity=x.daily_activity||{};
 el("dailyTarget").textContent=activity.local_date?
-"Dia "+activity.local_date+": "+activity.distinct_events_recorded+" jogos diferentes e "+activity.paper_entries_across_all_accounts+" operações experimentais (incluindo repetições entre carteiras). Meta: 1–3 jogos/dia. "+
+"Dia "+activity.local_date+": "+activity.distinct_events_recorded+" jogos diferentes e "+activity.paper_entries_across_all_accounts+" operações experimentais (incluindo repetições entre carteiras). Meta: 1–3 entradas por estratégia principal/dia. "+
 (activity.minimum_met?"Mínimo atingido. ":"Mínimo ainda não atingido. ")+
-"Carteira de referência: "+(daily.opened_today||0)+"/"+(daily.max_per_day||3)+
+"Estratégias abaixo do mínimo: "+(activity.strategies_below_minimum?.join(", ")||"nenhuma")+". Carteira de referência: "+(daily.opened_today||0)+"/"+(daily.max_per_day||3)+
 ". "+(daily.reason||""):
 "Meta diária ainda indisponível neste relatório.";
 el("status").textContent="Experimento ativo. Novos papers nesta execução: "+Object.values(x.new_paper_entries||{}).reduce((a,b)=>a+b,0)+". Liquidados: "+(x.newly_settled??0)+".";

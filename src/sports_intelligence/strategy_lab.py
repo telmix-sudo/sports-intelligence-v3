@@ -535,6 +535,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             try:
                 updated = parse_iso(snap["fetched_at"])
                 if dt.timedelta(0) <= now - updated <= dt.timedelta(hours=13):
+                    event["market_quotes"] = snap.get("market_quotes", {}).get(event["id"], {})
                     quote = snap["quotes"].get(event["id"])
                     if quote and all(now - parse_iso(t) <= dt.timedelta(hours=12)
                                      for t in quote.get("best_book_updates", [])):
@@ -560,6 +561,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             print("Settlement lookup failed", league, day.isoformat(), type(exc).__name__, flush=True)
     missing_final_ids = sorted({row["event_id"] for name in STRATEGIES for row in read_jsonl(root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")) if row.get("status") == "OPEN" and parse_iso(row["start_utc"]) <= now and row["event_id"] not in finals})
     before, settle_counts = build_accounts(root, finals, now)
+    from .research_pipeline import read_journal, reconcile, run_research
+    research_settlement_result = reconcile(root, read_journal(root), events, now)
     risk = PaperRiskBook(root)
     rejected = {}
     additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk)
@@ -569,6 +572,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     daily_reference = select_daily_reference(root, events, now, registry, risk=risk)
     if daily_reference["new_entries"]:
         entry_counts["MARKET_DAILY_REFERENCE"] = daily_reference["new_entries"]
+    market_research = run_research(root, events, models, now, risk, football_history=matches,
+                                   previous_settlement_result=research_settlement_result)
     after, _ = build_accounts(root, {}, now)
     # Count the TRUE number of unique events forecast on this Lisbon calendar day,
     # not duplicated strategy picks on the same match.
@@ -609,10 +614,11 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "daily_reference": daily_reference,
         "daily_activity": daily_activity,
         "aggregate_risk": risk.summary(),
+        "market_research": market_research,
         "ledger_audit": audit_ledgers(root, now),
         "validation_readiness": {"real_money_ready": False, "market_edge_verified": False,
-            "nba_nhl_models": "RESEARCH_ONLY_NOT_STAKE_ENABLED",
-            "goal_markets": "RESEARCH_ONLY_NEED_TIMESTAMPED_MARKET_ODDS",
+            "nba_nhl_models": "AUTOMATED_PROSPECTIVE_TESTS_WITH_CONDITIONAL_025_PERCENT_PAPER",
+            "goal_markets": "AUTOMATED_TIMESTAMPED_QUOTES_FORECASTS_AND_SETTLEMENT",
             "holdout_caveat": "Prequential score walk-forward is not independent market-based holdout."},
         "frequency_strategies": frequency_results,
         "daily_target_policy": "Each of eight core strategies targets 1–3 qualified PAPER entries per Lisbon day; maximum 3 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",

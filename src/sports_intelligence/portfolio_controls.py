@@ -39,6 +39,20 @@ class PaperRiskBook:
                 self.event_exposure[record["event_id"]] += stake
                 self.total_exposure += stake
                 self.event_legs[record["event_id"]] += 1
+        journal = root / "data" / "market_research_v3.jsonl"
+        if journal.exists():
+            rows = [json.loads(line) for line in journal.read_text().splitlines() if line.strip()]
+            settled = {r["forecast_id"] for r in rows if r.get("kind")=="SETTLEMENT"}
+            for r in rows:
+                if r.get("kind")!="FORECAST" or r["id"] in settled:
+                    continue
+                stake = float(r.get("stake_eur",0))
+                if not math.isfinite(stake) or stake<0:
+                    raise ValueError("Invalid experimental paper exposure")
+                if stake:
+                    self.event_exposure[r["event_id"]] += stake
+                    self.total_exposure += stake
+                    self.event_legs[r["event_id"]] += 1
         self.rejections = defaultdict(int)
 
     def reserve(self, event_id: str, requested: float) -> float:

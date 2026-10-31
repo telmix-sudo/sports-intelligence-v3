@@ -2,6 +2,8 @@
 
 **Estado:** código, testes e execução laboratorial atualizados; uso EXCLUSIVAMENTE PAPER. Não altera retrospetivamente posições, odds ou saldos das 12 carteiras.
 
+**Atualização operacional posterior:** os pontos 6 e 7 foram ligados ao ciclo automático, com recolha, backfill, previsão, admissão PAPER condicional e liquidação. Ver [integração de mercados e modalidades](multimarket_integration.md). O estado abaixo documenta a versão anterior; validação de vantagem continua dependente de amostra futura.
+
 Este registo distingue o que já está **operacional** do que só pode ser **investigado/validado** antes de ativar novos mercados.
 
 | # | Melhoria | Situação verificável | Validação / limitações |

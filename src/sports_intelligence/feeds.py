@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import datetime as dt
 import hashlib
+import gzip
 import json
 import urllib.parse
 import urllib.request
@@ -30,6 +31,10 @@ def fetch_bytes(url: str, timeout: int = 12) -> bytes:
         data = response.read(3_500_000 + 1)
     if len(data) > 3_500_000:
         raise ValueError("Data source unexpectedly large")
+    if data[:2] == b"\x1f\x8b":
+        data = gzip.decompress(data)
+        if len(data) > 3_500_000:
+            raise ValueError("Decompressed response too large")
     return data
 
 

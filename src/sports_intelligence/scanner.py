@@ -72,6 +72,15 @@ def unpack_scoreboard(payload: dict, sport: str, observed_at: dt.datetime) -> li
                 hs, as_ = int(home["score"]), int(away["score"])
                 final = {"home": hs, "away": as_,
                          "outcome": 0 if hs > as_ else (1 if hs == as_ else 2)}
+                periods = 3 if sport == "nhl" else 9 if sport == "mlb" else None
+                if periods:
+                    hl, al = home.get("linescores", []), away.get("linescores", [])
+                    if len(hl) >= periods and len(al) >= periods:
+                        try:
+                            final["regulation"] = {"home":sum(int(x["value"]) for x in hl[:periods]),
+                                                   "away":sum(int(x["value"]) for x in al[:periods])}
+                        except (ValueError, KeyError, TypeError):
+                            pass
             # Odds are relevant only for scheduled events not yet started.
             quote = extract_odds(competition, sport) if (kickoff > observed_at and match_state == "pre") else None
             result.append({"id": event_id, "sport": sport, "home": home_name, "away": away_name,

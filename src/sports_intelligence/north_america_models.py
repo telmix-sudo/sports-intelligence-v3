@@ -24,6 +24,8 @@ class TeamScoreBaseline:
         self.prior_games=prior_games
         self.teams=defaultdict(lambda:[0,0.,0.])
         self.games=0
+        self.tied_decisions=0
+        self.home_tied_wins=0
     def update(self,home:str,away:str,home_score:int,away_score:int):
         if min(home_score,away_score)<0:raise ValueError("Invalid score")
         for team,scored,conceded in ((home,home_score,away_score),(away,away_score,home_score)):

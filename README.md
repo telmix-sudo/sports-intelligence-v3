@@ -97,3 +97,7 @@ Desde 27/10/2026 o laboratório suporta uma **nona carteira independente**, `MAR
 ## Auditoria de melhorias e limites de validação (31/10/2026)
 
 Controlo de risco consolidado para novas operações, qualidade das odds, auditoria diária por data de evento/liquidação e monitorização automática: ver [12 melhorias e respetivo estado](docs/v3_quality_release_2026-10-31.md). Os modelos específicos NBA/NHL/NFL/MLB e os mercados de golos permanecem em investigação até existirem dados cronológicos e validação por mercado. **Todo o sistema continua exclusivamente PAPER.**
+
+## Mercados e modelos integrados no ciclo automático
+
+O laboratório recolhe histórico NBA/NHL/NFL/MLB e executa previsões prospetivas com liquidação append-only. A recolha de odds inclui O/U 2,5, handicap −0,5 e BTTS no orçamento de 10 **créditos**/dia. Uma conta experimental separada pode iniciar posições a 0,25% após testes cronológicos e critérios de preço/risco, sem alterar as doze carteiras anteriores. [Integração, limites e critérios](docs/multimarket_integration.md). A capacidade preditiva continua em validação; as observações sem stake são apresentadas separadamente das posições PAPER.
