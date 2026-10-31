@@ -1,0 +1,30 @@
+name: Sports Intelligence V3 - Paper Health Audit
+
+on:
+  schedule:
+    - cron: "15 */3 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/check_v3_health.py"
+      - ".github/workflows/health-check.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v3-health-audit
+  cancel-in-progress: true
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Audit last report, balances and overdue official results
+        run: python scripts/check_v3_health.py
