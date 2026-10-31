@@ -37,6 +37,16 @@ class OddsProviderTests(unittest.TestCase):
         self.assertAlmostEqual(sum(value["no_vig"]), 1.0, places=6)
         self.assertTrue(value["quote_timestamp_available"])
 
+    def test_duplicate_bookmaker_not_counted_twice_and_kickoff_must_match(self):
+        duplicated = json.loads(json.dumps(ROWS))
+        duplicated[0]["bookmakers"].append(dict(duplicated[0]["bookmakers"][0]))
+        quote = quotes_for_event(EVENT, duplicated, NOW)
+        self.assertEqual(quote["bookmaker_count"], 1)
+        self.assertTrue(quote["bookmaker_count_is_unique"])
+        shifted = json.loads(json.dumps(ROWS))
+        shifted[0]["commence_time"] = "2026-10-18T19:00:00Z"
+        self.assertIsNone(quotes_for_event(EVENT, shifted, NOW))
+
     def test_stale_market_fails_closed(self):
         stale = json.loads(json.dumps(ROWS))
         stale[0]["bookmakers"][0]["last_update"] = "2026-10-16T08:35:00Z"
