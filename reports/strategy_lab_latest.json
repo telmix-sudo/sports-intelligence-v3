@@ -1,5 +1,5 @@
 {
-  "asof_utc": "2026-10-31T22:30:55.034771+00:00",
+  "asof_utc": "2026-10-31T22:42:00.241358+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-10-31",
@@ -82,6 +82,286 @@
     ],
     "minimum_met": true,
     "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
+  },
+  "aggregate_risk": {
+    "max_event_open_eur": 36.0,
+    "max_total_open_eur": 240.0,
+    "minimum_new_stake_eur": 1.0,
+    "total_open_eur": 109.25,
+    "event_exposure_eur": {
+      "epl:401878762": 42.1,
+      "epl:401879246": 27.04,
+      "ligue_1:401876415": 24.9,
+      "nfl:401873024": 5.07,
+      "nfl:401873028": 5.07,
+      "nfl:401873031": 5.07
+    },
+    "event_position_counts": {
+      "epl:401878762": 10,
+      "epl:401879246": 7,
+      "ligue_1:401876415": 7,
+      "nfl:401873024": 1,
+      "nfl:401873028": 1,
+      "nfl:401873031": 1
+    },
+    "limit_rejections": {},
+    "existing_positions_never_retroactively_changed": true
+  },
+  "ledger_audit": {
+    "local_date": "2026-10-31",
+    "opened_today": {
+      "n": 25,
+      "independent_events": 7
+    },
+    "games_played_today": {
+      "n": 38,
+      "independent_events": 5,
+      "wins": 13,
+      "losses": 25,
+      "staked_eur": 162.89,
+      "pnl_eur": -27.75,
+      "roi_pct": -17.03
+    },
+    "settled_today": {
+      "n": 41,
+      "independent_events": 8,
+      "wins": 15,
+      "losses": 26,
+      "staked_eur": 178.07,
+      "pnl_eur": -24.31,
+      "roi_pct": -13.65
+    },
+    "total": 94,
+    "open": 27,
+    "closed": 67,
+    "voided": 0,
+    "all_time": {
+      "n": 67,
+      "independent_events": 18,
+      "wins": 20,
+      "losses": 47,
+      "staked_eur": 303.25,
+      "pnl_eur": -108.24,
+      "roi_pct": -35.69
+    },
+    "prospective_benchmark": {
+      "n": 58,
+      "model_brier": 0.630749,
+      "market_brier": 0.53307,
+      "beats_market_on_sample": false,
+      "note": "No market forecast invented; beware event correlation and low sample size."
+    },
+    "by_sport": {
+      "epl": {
+        "n": 57,
+        "independent_events": 8,
+        "wins": 13,
+        "losses": 44,
+        "staked_eur": 257.89,
+        "pnl_eur": -122.75,
+        "roi_pct": -47.6
+      },
+      "nba": {
+        "n": 5,
+        "independent_events": 5,
+        "wins": 4,
+        "losses": 1,
+        "staked_eur": 25.18,
+        "pnl_eur": 5.01,
+        "roi_pct": 19.88
+      },
+      "nhl": {
+        "n": 5,
+        "independent_events": 5,
+        "wins": 3,
+        "losses": 2,
+        "staked_eur": 20.18,
+        "pnl_eur": 9.5,
+        "roi_pct": 47.06
+      }
+    },
+    "by_market": {
+      "1X2": {
+        "n": 57,
+        "independent_events": 8,
+        "wins": 13,
+        "losses": 44,
+        "staked_eur": 257.89,
+        "pnl_eur": -122.75,
+        "roi_pct": -47.6
+      },
+      "ML": {
+        "n": 10,
+        "independent_events": 10,
+        "wins": 7,
+        "losses": 3,
+        "staked_eur": 45.36,
+        "pnl_eur": 14.5,
+        "roi_pct": 31.97
+      }
+    },
+    "by_strategy": {
+      "CONSENSUS_SHRUNK": {
+        "n": 8,
+        "independent_events": 8,
+        "wins": 2,
+        "losses": 6,
+        "staked_eur": 39.5,
+        "pnl_eur": -17.95,
+        "roi_pct": -45.44
+      },
+      "DISAGREEMENT_VETO": {
+        "n": 3,
+        "independent_events": 3,
+        "wins": 0,
+        "losses": 3,
+        "staked_eur": 14.95,
+        "pnl_eur": -14.95,
+        "roi_pct": -100.0
+      },
+      "DIXON_COLES_LOW": {
+        "n": 5,
+        "independent_events": 5,
+        "wins": 2,
+        "losses": 3,
+        "staked_eur": 24.85,
+        "pnl_eur": -3.27,
+        "roi_pct": -13.15
+      },
+      "ELO_DYNAMIC": {
+        "n": 7,
+        "independent_events": 7,
+        "wins": 2,
+        "losses": 5,
+        "staked_eur": 34.65,
+        "pnl_eur": -13.07,
+        "roi_pct": -37.71
+      },
+      "ELO_POISSON_BLEND": {
+        "n": 8,
+        "independent_events": 8,
+        "wins": 2,
+        "losses": 6,
+        "staked_eur": 34.7,
+        "pnl_eur": -13.25,
+        "roi_pct": -38.18
+      },
+      "ELO_STANDARD": {
+        "n": 6,
+        "independent_events": 6,
+        "wins": 1,
+        "losses": 5,
+        "staked_eur": 29.8,
+        "pnl_eur": -18.81,
+        "roi_pct": -63.12
+      },
+      "FREQ_BALANCED_3_5": {
+        "n": 3,
+        "independent_events": 3,
+        "wins": 0,
+        "losses": 3,
+        "staked_eur": 7.49,
+        "pnl_eur": -7.49,
+        "roi_pct": -100.0
+      },
+      "FREQ_BROAD_5_10": {
+        "n": 4,
+        "independent_events": 4,
+        "wins": 1,
+        "losses": 3,
+        "staked_eur": 9.99,
+        "pnl_eur": -4.44,
+        "roi_pct": -44.44
+      },
+      "FREQ_SELECTIVE_1_3": {
+        "n": 1,
+        "independent_events": 1,
+        "wins": 0,
+        "losses": 1,
+        "staked_eur": 2.5,
+        "pnl_eur": -2.5,
+        "roi_pct": -100.0
+      },
+      "MARKET_ANCHORED": {
+        "n": 6,
+        "independent_events": 6,
+        "wins": 1,
+        "losses": 5,
+        "staked_eur": 29.7,
+        "pnl_eur": -18.71,
+        "roi_pct": -63.0
+      },
+      "MARKET_DAILY_REFERENCE": {
+        "n": 10,
+        "independent_events": 10,
+        "wins": 7,
+        "losses": 3,
+        "staked_eur": 45.36,
+        "pnl_eur": 14.5,
+        "roi_pct": 31.97
+      },
+      "POISSON_SHRINK": {
+        "n": 6,
+        "independent_events": 6,
+        "wins": 2,
+        "losses": 4,
+        "staked_eur": 29.76,
+        "pnl_eur": -8.31,
+        "roi_pct": -27.92
+      }
+    },
+    "by_odds_band": {
+      "under_2": {
+        "n": 7,
+        "independent_events": 7,
+        "wins": 6,
+        "losses": 1,
+        "staked_eur": 35.28,
+        "pnl_eur": 12.68,
+        "roi_pct": 35.95
+      },
+      "2_to_3": {
+        "n": 32,
+        "independent_events": 7,
+        "wins": 14,
+        "losses": 18,
+        "staked_eur": 141.22,
+        "pnl_eur": 5.82,
+        "roi_pct": 4.12
+      },
+      "3_to_5": {
+        "n": 18,
+        "independent_events": 3,
+        "wins": 0,
+        "losses": 18,
+        "staked_eur": 84.69,
+        "pnl_eur": -84.69,
+        "roi_pct": -100.0
+      },
+      "over_5": {
+        "n": 10,
+        "independent_events": 1,
+        "wins": 0,
+        "losses": 10,
+        "staked_eur": 42.06,
+        "pnl_eur": -42.06,
+        "roi_pct": -100.0
+      }
+    },
+    "overdue_open_positions": [],
+    "overdue_count": 0,
+    "attention_required": false,
+    "independent_bets_caveat": "Multiple model wagers on the same match are NOT independent observations.",
+    "closing_line_value": null,
+    "closing_line_value_reason": "No verified point-in-time closing prices saved.",
+    "paper_only": true
+  },
+  "validation_readiness": {
+    "real_money_ready": false,
+    "market_edge_verified": false,
+    "nba_nhl_models": "RESEARCH_ONLY_NOT_STAKE_ENABLED",
+    "goal_markets": "RESEARCH_ONLY_NEED_TIMESTAMPED_MARKET_ODDS",
+    "holdout_caveat": "Prequential score walk-forward is not independent market-based holdout."
   },
   "frequency_strategies": {
     "FREQ_SELECTIVE_1_3": {
@@ -223,6 +503,23 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {
+        "2024": {
+          "n": 1732,
+          "brier": 0.593389,
+          "log_loss": 0.99306
+        },
+        "2025": {
+          "n": 1751,
+          "brier": 0.59787,
+          "log_loss": 1.002511
+        },
+        "2026": {
+          "n": 250,
+          "brier": 0.586238,
+          "log_loss": 0.985759
+        }
+      },
       "by_league": {
         "epl": {
           "n": 810,
@@ -260,6 +557,23 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {
+        "2024": {
+          "n": 1732,
+          "brier": 0.591505,
+          "log_loss": 0.991272
+        },
+        "2025": {
+          "n": 1751,
+          "brier": 0.599778,
+          "log_loss": 1.007426
+        },
+        "2026": {
+          "n": 250,
+          "brier": 0.588412,
+          "log_loss": 0.990859
+        }
+      },
       "by_league": {
         "epl": {
           "n": 810,
@@ -297,6 +611,23 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {
+        "2024": {
+          "n": 1732,
+          "brier": 0.591745,
+          "log_loss": 0.992484
+        },
+        "2025": {
+          "n": 1751,
+          "brier": 0.59854,
+          "log_loss": 1.003067
+        },
+        "2026": {
+          "n": 250,
+          "brier": 0.593216,
+          "log_loss": 0.994785
+        }
+      },
       "by_league": {
         "epl": {
           "n": 810,
@@ -334,6 +665,23 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {
+        "2024": {
+          "n": 1732,
+          "brier": 0.591414,
+          "log_loss": 0.991766
+        },
+        "2025": {
+          "n": 1751,
+          "brier": 0.598103,
+          "log_loss": 1.002287
+        },
+        "2026": {
+          "n": 250,
+          "brier": 0.593116,
+          "log_loss": 0.994305
+        }
+      },
       "by_league": {
         "epl": {
           "n": 810,
@@ -371,6 +719,23 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {
+        "2024": {
+          "n": 1732,
+          "brier": 0.590035,
+          "log_loss": 0.989008
+        },
+        "2025": {
+          "n": 1751,
+          "brier": 0.595626,
+          "log_loss": 0.99875
+        },
+        "2026": {
+          "n": 250,
+          "brier": 0.587137,
+          "log_loss": 0.987064
+        }
+      },
       "by_league": {
         "epl": {
           "n": 810,
@@ -408,6 +773,23 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {
+        "2024": {
+          "n": 1732,
+          "brier": 0.592689,
+          "log_loss": 0.993137
+        },
+        "2025": {
+          "n": 1751,
+          "brier": 0.597058,
+          "log_loss": 1.000739
+        },
+        "2026": {
+          "n": 250,
+          "brier": 0.590849,
+          "log_loss": 0.993067
+        }
+      },
       "by_league": {
         "epl": {
           "n": 810,
@@ -445,6 +827,23 @@
       "historical_roi": null,
       "historical_scope": "CONDITIONAL_SUBSET_NOT_COMPARABLE_DIRECTLY",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {
+        "2024": {
+          "n": 1240,
+          "brier": 0.585659,
+          "log_loss": 0.981116
+        },
+        "2025": {
+          "n": 1272,
+          "brier": 0.583039,
+          "log_loss": 0.980997
+        },
+        "2026": {
+          "n": 153,
+          "brier": 0.570246,
+          "log_loss": 0.964947
+        }
+      },
       "by_league": {
         "epl": {
           "n": 533,
@@ -482,6 +881,7 @@
       "historical_roi": null,
       "historical_scope": "UNAVAILABLE_NEEDS_POINT_IN_TIME_MARKET",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {},
       "by_league": {
         "epl": {
           "n": 0,
@@ -519,6 +919,7 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {},
       "by_league": {
         "epl": {
           "n": 0,
@@ -556,6 +957,7 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {},
       "by_league": {
         "epl": {
           "n": 0,
@@ -593,6 +995,7 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {},
       "by_league": {
         "epl": {
           "n": 0,
@@ -630,6 +1033,7 @@
       "historical_roi": null,
       "historical_scope": "FULL_RESEARCH_SAMPLE",
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+      "by_season": {},
       "by_league": {
         "epl": {
           "n": 0,
@@ -669,6 +1073,7 @@
       "paper_wins": 1,
       "paper_losses": 5,
       "settled": 6,
+      "voided": 0,
       "open": 2,
       "yield_percent": -63.1242,
       "return_on_initial_bank_percent": -1.8811,
@@ -689,6 +1094,7 @@
       "paper_wins": 2,
       "paper_losses": 5,
       "settled": 7,
+      "voided": 0,
       "open": 2,
       "yield_percent": -37.7143,
       "return_on_initial_bank_percent": -1.3068,
@@ -709,6 +1115,7 @@
       "paper_wins": 2,
       "paper_losses": 4,
       "settled": 6,
+      "voided": 0,
       "open": 3,
       "yield_percent": -27.9194,
       "return_on_initial_bank_percent": -0.8309,
@@ -729,6 +1136,7 @@
       "paper_wins": 2,
       "paper_losses": 3,
       "settled": 5,
+      "voided": 0,
       "open": 3,
       "yield_percent": -13.1509,
       "return_on_initial_bank_percent": -0.3268,
@@ -749,6 +1157,7 @@
       "paper_wins": 2,
       "paper_losses": 6,
       "settled": 8,
+      "voided": 0,
       "open": 3,
       "yield_percent": -38.181,
       "return_on_initial_bank_percent": -1.3249,
@@ -769,6 +1178,7 @@
       "paper_wins": 2,
       "paper_losses": 6,
       "settled": 8,
+      "voided": 0,
       "open": 3,
       "yield_percent": -45.4441,
       "return_on_initial_bank_percent": -1.795,
@@ -789,6 +1199,7 @@
       "paper_wins": 0,
       "paper_losses": 3,
       "settled": 3,
+      "voided": 0,
       "open": 0,
       "yield_percent": -100.0,
       "return_on_initial_bank_percent": -1.495,
@@ -809,6 +1220,7 @@
       "paper_wins": 1,
       "paper_losses": 5,
       "settled": 6,
+      "voided": 0,
       "open": 2,
       "yield_percent": -63.0,
       "return_on_initial_bank_percent": -1.8711,
@@ -829,6 +1241,7 @@
       "paper_wins": 7,
       "paper_losses": 3,
       "settled": 10,
+      "voided": 0,
       "open": 3,
       "yield_percent": 31.9731,
       "return_on_initial_bank_percent": 1.4503,
@@ -849,6 +1262,7 @@
       "paper_wins": 0,
       "paper_losses": 1,
       "settled": 1,
+      "voided": 0,
       "open": 1,
       "yield_percent": -100.0,
       "return_on_initial_bank_percent": -0.25,
@@ -869,6 +1283,7 @@
       "paper_wins": 0,
       "paper_losses": 3,
       "settled": 3,
+      "voided": 0,
       "open": 2,
       "yield_percent": -100.0,
       "return_on_initial_bank_percent": -0.749,
@@ -889,6 +1304,7 @@
       "paper_wins": 1,
       "paper_losses": 3,
       "settled": 4,
+      "voided": 0,
       "open": 3,
       "yield_percent": -44.4444,
       "return_on_initial_bank_percent": -0.444,
@@ -1140,7 +1556,7 @@
     "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 8,
+  "newly_settled": 0,
   "missing_final_event_ids": [],
   "restrictions": [
     "No real bets; outcomes do not imply profit guarantee.",
@@ -1151,6 +1567,8 @@
     "Current matchup name mismatches are rejected, not guessed.",
     "No odds: no paper wager.",
     "Market daily reference is NON-VALUE control, not an edge or investment recommendation.",
-    "Strategy portfolios are correlated; never sum as independent diversification."
+    "Strategy portfolios are correlated; never sum as independent diversification.",
+    "New positions obey aggregate event and total risk limits; legacy entries are never rewritten.",
+    "Uncertainty sensitivity is not yet a calibrated statistical interval."
   ]
 }
