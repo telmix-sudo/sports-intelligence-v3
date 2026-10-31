@@ -93,3 +93,7 @@ O mecanismo de integridade em `strategy_registry.py` compara, antes de cada exec
 ## Objetivo operacional: uma entrada paper diária, sem fabricar oportunidades
 
 Desde 27/10/2026 o laboratório suporta uma **nona carteira independente**, `MARKET_DAILY_REFERENCE`, para teste de frequência: **1.000 € fictícios de banca inicial** apenas uma vez, com a possibilidade de registar até uma seleção diária do favorito de mercado quando houver odds reais, timestamps comprovados e jogo ainda por começar. Isto é um **benchmark de controlo, não uma estratégia com vantagem sobre o mercado**. As oito carteiras anteriores **não recomeçam** e mantêm todos os lucros/prejuízos acumulados. Sem odds válidas, o sistema reporta a meta não cumprida e não cria operação fictícia artificial. Ver [política da meta diária](docs/daily_paper_policy.md) e o [painel das nove carteiras](https://telmix-sudo.github.io/sports-intelligence-v3/strategies.html).
+
+## Auditoria de melhorias e limites de validação (31/10/2026)
+
+Controlo de risco consolidado para novas operações, qualidade das odds, auditoria diária por data de evento/liquidação e monitorização automática: ver [12 melhorias e respetivo estado](docs/v3_quality_release_2026-10-31.md). Os modelos específicos NBA/NHL/NFL/MLB e os mercados de golos permanecem em investigação até existirem dados cronológicos e validação por mercado. **Todo o sistema continua exclusivamente PAPER.**
