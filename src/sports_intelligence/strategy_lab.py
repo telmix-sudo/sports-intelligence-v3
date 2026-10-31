@@ -24,6 +24,7 @@ from .custom_strategies import (
     experimental_forecasts, accepts_candidate,
 )
 from .strategy_registry import ensure_registry, verify_prior_accounts
+from .portfolio_controls import PaperRiskBook, conservative_expected_value, audit_ledgers
 from .daily_reference import select_daily_reference
 
 UTC = dt.timezone.utc
@@ -253,6 +254,22 @@ def historical_comparison(matches_by_league: dict) -> tuple[dict, dict]:
                                  if name == "DISAGREEMENT_VETO" else
                                  "FULL_RESEARCH_SAMPLE"),
             "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
+            "by_season": {
+                season: {
+                    "n": sum(v[name]["by_season"].get(season, {}).get("n", 0) for v in stats.values()),
+                    "brier": (
+                        round(sum(v[name]["by_season"].get(season, {}).get("brier_sum", 0) for v in stats.values()) /
+                              sum(v[name]["by_season"].get(season, {}).get("n", 0) for v in stats.values()), 6)
+                        if sum(v[name]["by_season"].get(season, {}).get("n", 0) for v in stats.values()) else None
+                    ),
+                    "log_loss": (
+                        round(sum(v[name]["by_season"].get(season, {}).get("log_sum", 0) for v in stats.values()) /
+                              sum(v[name]["by_season"].get(season, {}).get("n", 0) for v in stats.values()), 6)
+                        if sum(v[name]["by_season"].get(season, {}).get("n", 0) for v in stats.values()) else None
+                    ),
+                }
+                for season in sorted({t for v in stats.values() for t in v[name]["by_season"]})
+            },
             "by_league": {league: {"n": s[name]["n"],
                                 "brier": round(s[name]["brier_sum"] / s[name]["n"], 6) if s[name]["n"] else None,
                                 "log_loss": round(s[name]["log_sum"] / s[name]["n"], 6) if s[name]["n"] else None}
@@ -372,12 +389,14 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
 
 
 def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime,
-                  registry: dict | None = None, diagnostics: dict | None = None) -> tuple[dict, dict]:
+                  registry: dict | None = None, diagnostics: dict | None = None,
+                  risk: PaperRiskBook | None = None) -> tuple[dict, dict]:
     """Optional experimental paper entries; each account independently limits exposure.
 
     Only model probabilities and pre-game timestamped quotes are eligible.
     Correlated portfolios are intentionally reported separately, not combined.
     """
+    risk = risk or PaperRiskBook(root)
     account_stats = {}
     added = defaultdict(int)
     rejected = defaultdict(int)
@@ -392,7 +411,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             continue
         bank = INITIAL_BANKROLL_EUR + sum(r.get("pnl_eur", 0) for r in rows if r.get("status") == "SETTLED")
         exposure = sum(r["stake_eur"] for r in rows if r.get("status") == "OPEN")
-        today_count = sum(r["forecast_utc"][:10] == now.date().isoformat() for r in rows)
+        today_count = sum(parse_iso(r["forecast_utc"]).astimezone(PORTUGAL).date() == now.astimezone(PORTUGAL).date() for r in rows)
         seen_events = {r["event_id"] for r in rows}
         for e in events:
             if e["id"] in seen_events or today_count >= MAX_DAILY_ENTRIES_PER_ACCOUNT:
@@ -444,10 +463,21 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             elif diffs[choice] < EDGE_MINIMUM or ev < EV_MINIMUM:
                 rejected["insufficient_edge_or_ev"] += 1
                 continue
+            sample_min = min(base.played.get(home, 0), base.played.get(away, 0))
+            # A positive point estimate alone is not sufficient. This is a
+            # deliberately conservative sensitivity check, NOT a calibrated CI.
+            if conservative_expected_value(p[choice], prices[choice], sample_min) < .01:
+                rejected["uncertain_value"] += 1
+                continue
             stake = round(min(bank * PAPER_STAKE_FRACTION,
                              max(0., bank * MAX_PAPER_EXPOSURE_FRACTION - exposure)), 2)
-            if stake <= 0:
-                break
+            if stake < 1:
+                rejected["too_small_stake"] += 1
+                continue
+            stake = risk.reserve(e["id"], stake)
+            if stake == 0:
+                rejected["aggregate_risk_limit"] += 1
+                continue
             record_id = hashlib.sha256(f"{name}|{e['id']}".encode()).hexdigest()[:14]
             r = {
                 "id": "PLAB-" + record_id,
@@ -465,6 +495,8 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 "strategy_version": RULES.get(name, {}).get("version", "legacy-1.0.0"),
                 "strategy_registered_utc": registry[name]["created_utc"] if registry else None,
                 "selection_expected_value": round(ev, 7),
+                "conservative_expected_value": round(conservative_expected_value(p[choice], prices[choice], sample_min), 7),
+                "uncertainty_calibrated": False,
                 "sizing_note": "0.5% virtual bank, max 2% exposure; hypothetical quote may not have been executable",
             }
             rows.append(r)
@@ -524,12 +556,13 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             print("Settlement lookup failed", league, day.isoformat(), type(exc).__name__, flush=True)
     missing_final_ids = sorted({row["event_id"] for name in STRATEGIES for row in read_jsonl(root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")) if row.get("status") == "OPEN" and parse_iso(row["start_utc"]) <= now and row["event_id"] not in finals})
     before, settle_counts = build_accounts(root, finals, now)
+    risk = PaperRiskBook(root)
     rejected = {}
-    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected)
+    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk)
     from .frequency_paper import run_frequency_strategies
-    frequency_results = run_frequency_strategies(root, models, events, now, registry)
+    frequency_results = run_frequency_strategies(root, models, events, now, registry, risk=risk)
     entry_counts.update({k:v['new_entries'] for k,v in frequency_results.items() if v['new_entries']})
-    daily_reference = select_daily_reference(root, events, now, registry)
+    daily_reference = select_daily_reference(root, events, now, registry, risk=risk)
     if daily_reference["new_entries"]:
         entry_counts["MARKET_DAILY_REFERENCE"] = daily_reference["new_entries"]
     after, _ = build_accounts(root, {}, now)
@@ -571,6 +604,12 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
         "daily_reference": daily_reference,
         "daily_activity": daily_activity,
+        "aggregate_risk": risk.summary(),
+        "ledger_audit": audit_ledgers(root, now),
+        "validation_readiness": {"real_money_ready": False, "market_edge_verified": False,
+            "nba_nhl_models": "RESEARCH_ONLY_NOT_STAKE_ENABLED",
+            "goal_markets": "RESEARCH_ONLY_NEED_TIMESTAMPED_MARKET_ODDS",
+            "holdout_caveat": "Prequential score walk-forward is not independent market-based holdout."},
         "frequency_strategies": frequency_results,
         "daily_target_policy": "Each of eight core strategies targets 1–3 qualified PAPER entries per Lisbon day; maximum 3 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",
         "registered_strategies": registry,
@@ -596,6 +635,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             "No odds: no paper wager.",
             "Market daily reference is NON-VALUE control, not an edge or investment recommendation.",
             "Strategy portfolios are correlated; never sum as independent diversification.",
+            "New positions obey aggregate event and total risk limits; legacy entries are never rewritten.",
+            "Uncertainty sensitivity is not yet a calibrated statistical interval.",
         ],
     }
     path = root / "reports" / "strategy_lab_latest.json"
