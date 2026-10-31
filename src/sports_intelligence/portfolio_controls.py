@@ -90,54 +90,90 @@ def conservative_expected_value(prob: float, price: float, sample_min: int,
 
 
 def audit_ledgers(root: Path, now: dt.datetime) -> dict:
-    """Point-in-time accounting, unique events, stale pending and calibration.
+    """Audit frozen papers by kickoff date, settlement date, market and league.
 
-    Never settle using scheduled kick-off time: official final is required.
+    Duplicate picks by distinct models are correlated and are explicitly counted.
     """
-    from .metrics import brier, log_loss
     today = now.astimezone(LOCAL_TZ).date()
     trades = []
     for path in sorted((root / "data" / "strategy_ledgers").glob("*.jsonl")):
         for line in path.read_text(encoding="utf8").splitlines():
             if line.strip():
                 trades.append(json.loads(line))
-    opened_today = [r for r in trades if
-                    dt.datetime.fromisoformat(r["forecast_utc"]).astimezone(LOCAL_TZ).date() == today]
+    def local_date(r: dict, key: str) -> dt.date | None:
+        val = r.get(key)
+        if not val:
+            return None
+        stamp = dt.datetime.fromisoformat(val.replace("Z", "+00:00"))
+        return stamp.astimezone(LOCAL_TZ).date() if stamp.tzinfo else None
+    def summarize(group: list[dict]) -> dict:
+        stake = sum(float(r["stake_eur"]) for r in group)
+        pnl = sum(float(r.get("pnl_eur") or 0) for r in group)
+        return {
+            "n": len(group),
+            "independent_events": len({r["event_id"] for r in group}),
+            "wins": sum(float(r.get("pnl_eur") or 0) > 0 for r in group),
+            "losses": sum(float(r.get("pnl_eur") or 0) < 0 for r in group),
+            "staked_eur": round(stake, 2),
+            "pnl_eur": round(pnl, 2),
+            "roi_pct": round(100*pnl/stake, 2) if stake else None,
+        }
+    opened_today = [r for r in trades if local_date(r,"forecast_utc") == today]
     settled = [r for r in trades if r.get("status") == "SETTLED"]
-    delayed = []
+    games_today = [r for r in settled if local_date(r,"start_utc") == today]
+    settled_today = [r for r in settled if local_date(r,"settlement_utc") == today]
+    overdue = []
     for r in trades:
-        if r.get("status") == "OPEN":
-            kickoff = dt.datetime.fromisoformat(r["start_utc"])
-            if (now - kickoff).total_seconds() > 5 * 3600:
-                delayed.append({"event_id": r["event_id"], "strategy": r["strategy"],
-                                "kickoff_utc": r["start_utc"], "delay_hours": round(
-                                    (now-kickoff).total_seconds()/3600, 1)})
-    indices = {r["event_id"] for r in settled}
-    total_stake = sum(float(r["stake_eur"]) for r in settled)
-    pnl = sum(float(r.get("pnl_eur") or 0) for r in settled)
-    by_sport = {}
-    for sport in sorted({r.get("sport", "unknown") for r in settled}):
-        subset = [r for r in settled if r.get("sport") == sport]
-        by_sport[sport] = {"n": len(subset),
-                           "unique_events": len({r["event_id"] for r in subset}),
-                           "pnl_eur": round(sum(float(r["pnl_eur"]) for r in subset), 2),
-                           "wins": sum(float(r["pnl_eur"]) > 0 for r in subset)}
+        if r.get("status") != "OPEN":
+            continue
+        kickoff = dt.datetime.fromisoformat(r["start_utc"].replace("Z","+00:00"))
+        if (now-kickoff).total_seconds() > 5*3600:
+            overdue.append({"event_id":r["event_id"],"strategy":r.get("strategy"),
+                            "kickoff_utc":r["start_utc"],
+                            "delay_hours":round((now-kickoff).total_seconds()/3600,1)})
+    dimensions = {}
+    for key, label in (("sport","by_sport"),("market","by_market"),("strategy","by_strategy")):
+        dimensions[label] = {
+            k: summarize([r for r in settled if r.get(key)==k])
+            for k in sorted({r.get(key) for r in settled if r.get(key)})
+        }
+    bins = {"under_2": [], "2_to_3": [], "3_to_5": [], "over_5": []}
+    for r in settled:
+        try:
+            price = float(r["odds"][r["selection_index"]])
+        except (KeyError,ValueError,IndexError,TypeError):
+            continue
+        bucket = "under_2" if price<2 else "2_to_3" if price<3 else "3_to_5" if price<=5 else "over_5"
+        bins[bucket].append(r)
+    dimensions["by_odds_band"] = {k:summarize(v) for k,v in bins.items()}
+    # True prospective comparisons only, never impute market performance.
+    comparable = [r for r in settled if r.get("brier") is not None and r.get("market_brier") is not None]
+    model_brier = sum(r["brier"] for r in comparable)/len(comparable) if comparable else None
+    market_brier = sum(r["market_brier"] for r in comparable)/len(comparable) if comparable else None
     return {
         "local_date": today.isoformat(),
-        "new_entries": len(opened_today),
-        "distinct_events_today": len({r["event_id"] for r in opened_today}),
-        "total": len(trades), "open": sum(r.get("status") == "OPEN" for r in trades),
-        "closed": len(settled), "voided": sum(r.get("status") == "VOID" for r in trades),
-        "settled_unique_events": len(indices),
-        "settled_wins": sum(float(r["pnl_eur"]) > 0 for r in settled),
-        "settled_losses": sum(float(r["pnl_eur"]) < 0 for r in settled),
-        "settled_stakes_eur": round(total_stake, 2),
-        "settled_pnl_eur": round(pnl, 2),
-        "roi_on_settled_stakes_pct": round(100*pnl/total_stake, 2) if total_stake else None,
-        "by_sport": by_sport,
-        "overdue_open_positions": delayed[:50],
-        "overdue_count": len(delayed),
-        "attention_required": bool(delayed),
-        "independent_bets_caveat": "Correlated model selections on one event are NOT independent trials.",
+        "opened_today": {"n": len(opened_today),
+                         "independent_events": len({r["event_id"] for r in opened_today})},
+        "games_played_today": summarize(games_today),
+        "settled_today": summarize(settled_today),
+        "total": len(trades),
+        "open": sum(r.get("status")=="OPEN" for r in trades),
+        "closed": len(settled),
+        "voided": sum(r.get("status")=="VOID" for r in trades),
+        "all_time": summarize(settled),
+        "prospective_benchmark": {
+            "n": len(comparable),
+            "model_brier": round(model_brier, 6) if model_brier is not None else None,
+            "market_brier": round(market_brier, 6) if market_brier is not None else None,
+            "beats_market_on_sample": (model_brier<market_brier if comparable else None),
+            "note": "No market forecast invented; beware event correlation and low sample size.",
+        },
+        **dimensions,
+        "overdue_open_positions": overdue[:50],
+        "overdue_count": len(overdue),
+        "attention_required": bool(overdue),
+        "independent_bets_caveat": "Multiple model wagers on the same match are NOT independent observations.",
+        "closing_line_value": None,
+        "closing_line_value_reason": "No verified point-in-time closing prices saved.",
         "paper_only": True,
     }
