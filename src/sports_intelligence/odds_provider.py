@@ -87,7 +87,7 @@ def quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict | N
         try:
             if key_for(row["home_team"]) != key_for(event["home"]) or key_for(row["away_team"]) != key_for(event["away"]):
                 continue
-            if abs((parse_utc(row["commence_time"]) - parse_utc(event["start_utc"])).total_seconds()) > 7200:
+            if abs((parse_utc(row["commence_time"]) - parse_utc(event["start_utc"])).total_seconds()) > 1800:
                 continue
             for book in row["bookmakers"]:
                 if not isinstance(book, dict):
@@ -112,6 +112,14 @@ def quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict | N
             continue
     if not matched:
         return None
+    # Use each bookmaker only once; duplicated rows or stale reruns cannot
+    # artificially inflate consensus confidence or the source count.
+    deduplicated = {}
+    for quote in matched:
+        book = quote["bookmaker"]
+        if book not in deduplicated or quote["updated"] > deduplicated[book]["updated"]:
+            deduplicated[book] = quote
+    matched = list(deduplicated.values())
     # Market consensus = average of bookmaker-specific vig-free probabilities.
     n = len(matched)
     consensus = [sum(book["no_vig"][i] for book in matched) / n for i in range(len(matched[0]["no_vig"]))]
@@ -124,6 +132,8 @@ def quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict | N
         "best_book_updates": [x["updated"] for x in best],
         "provider": "The Odds API v4",
         "bookmaker_count": n,
+        "bookmaker_count_is_unique": True,
+        "start_time_tolerance_seconds": 1800,
         "quote_timestamp_available": True,
         "scope": "EU bookmaker quotes; consensus no-vig and best prices across books"
     }
