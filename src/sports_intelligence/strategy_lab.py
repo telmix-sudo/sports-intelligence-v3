@@ -422,6 +422,9 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             if not quote or not quote.get("quote_timestamp_available") or quote.get("market") != "1X2":
                 rejected["missing_timestamped_odds"] += 1
                 continue
+            if int(quote.get("bookmaker_count") or 0) < 2:
+                rejected["insufficient_independent_bookmakers"] += 1
+                continue
             if len(quote.get("decimal", [])) != 3 or len(quote.get("no_vig", [])) != 3:
                 continue
             # Never accept a feed merely claiming to have timestamps. Demand
