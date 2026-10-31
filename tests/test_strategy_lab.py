@@ -126,6 +126,7 @@ class StrategyLabTests(unittest.TestCase):
                                "no_vig": list(no_vig(prices)),
                                "quote_timestamp_available": True,
                                "provider": "synthetic bookmaker",
+                               "bookmaker_count": 2,
                                "bookmakers": ["A", "A", "A"],
                                "best_book_updates": ["2026-10-18T09:30:00+00:00"] * 3}}
             _, entries = open_accounts(root, models, [event], DAY)
