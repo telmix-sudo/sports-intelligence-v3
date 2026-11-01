@@ -7,6 +7,7 @@ on:
       - "src/**"
       - "tests/**"
       - "docs/*.html"
+      - "docs/*.js"
       - ".github/workflows/**"
   pull_request:
 
@@ -54,11 +55,17 @@ jobs:
           import re
           for page in (Path("docs/index.html"), Path("docs/strategies.html")):
               html = page.read_text(encoding="utf8")
-              script = re.search(r"<script[^>]*>(.*?)</script>", html, flags=re.S|re.I)
-              if script is None:
+              scripts = [body for attrs, body in re.findall(r"<script([^>]*)>(.*?)</script>", html, flags=re.S|re.I)
+                         if not re.search(r"\bsrc\s*=", attrs, flags=re.I) and body.strip()]
+              if not scripts:
                   raise RuntimeError(f"Dashboard JS missing: {page}")
-              Path(f"/tmp/v3-{page.stem}.js").write_text(script.group(1), encoding="utf8")
+              Path(f"/tmp/v3-{page.stem}.js").write_text("\n".join(scripts), encoding="utf8")
               print(f"Extracted dashboard script from {page}")
           PY
           node --check /tmp/v3-index.js
           node --check /tmp/v3-strategies.js
+
+      - name: Verify wallet balance calculations and Lisbon period boundaries
+        run: |
+          node --check docs/balance.js
+          node --test tests/test_balance.cjs
