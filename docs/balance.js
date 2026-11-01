@@ -193,7 +193,7 @@
         const totalRow = document.createElement("tr"), totalTitle = document.createElement("th"), totalDetail = document.createElement("small");
         totalTitle.scope = "row"; totalTitle.className = "balance-wallet-name";
         totalTitle.append("TOTAL");
-        totalDetail.textContent = total.available + " de " + total.wallets + " carteiras com saldo neste período";
+        totalDetail.textContent = total.available + " de " + total.wallets + (total.wallets === 1 ? " carteira" : " carteiras") + " com saldo neste período";
         totalTitle.append(totalDetail); totalRow.append(totalTitle); appendAmounts(totalRow, total);
         get("balanceTotals").replaceChildren(totalRow); get("balanceTotals").hidden = false;
         get("balanceCaption").textContent = periodLabel(period.value, range, month.value) + " · valores fictícios em euros";
