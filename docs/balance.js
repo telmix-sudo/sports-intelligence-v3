@@ -109,6 +109,14 @@
       closing: unavailable ? null : (initial + before + gains - losses) / 10000,
       wins, defeats, voided, open: totalOpen, unavailable };
   }
+  function totalBalance(results) {
+    const available = results.filter(result => !result.unavailable);
+    const total = { available: available.length, wallets: results.length };
+    for (const key of ["opening", "gains", "losses", "net", "closing"]) {
+      total[key] = available.length ? available.reduce((sum, result) => sum + units(result[key]), 0) / 10000 : null;
+    }
+    return total;
+  }
   function money(value, signed = false) {
     if (value === null) return "—";
     const rounded = Math.abs(value) < .005 ? 0 : value;
@@ -156,6 +164,16 @@
         const entries = state.entries.filter(item => wallet.value === "all" || item.id === wallet.value);
         const results = entries.map(item => ({ ...item, result: summarize(item.rows, item.account, item.created, range, state.asof) }));
         const fragment = document.createDocumentFragment();
+        function appendAmounts(tr, result) {
+          for (const key of ["opening", "gains", "losses", "net", "closing"]) {
+            const td = document.createElement("td"), value = result[key];
+            td.textContent = money(key === "losses" && value !== null ? -value : value, key === "net");
+            if (key === "gains" && value > 0 || key === "net" && value > 0) td.className = "positive";
+            if (key === "losses" && value > 0 || key === "net" && value < 0) td.className = "negative";
+            if (key === "net" || key === "closing") td.classList.add("number");
+            tr.append(td);
+          }
+        }
         for (const item of results) {
           const tr = document.createElement("tr"), first = document.createElement("th");
           first.scope = "row"; first.className = "balance-wallet-name";
@@ -167,17 +185,17 @@
               + item.result.defeats + (item.result.defeats === 1 ? " derrota · " : " derrotas · ")
               + item.result.voided + (item.result.voided === 1 ? " anulada" : " anuladas");
           first.append(title, detail); tr.append(first);
-          for (const key of ["opening", "gains", "losses", "net", "closing"]) {
-            const td = document.createElement("td"), value = item.result[key];
-            td.textContent = money(key === "losses" && value !== null ? -value : value, key === "net");
-            if (key === "gains" && value > 0 || key === "net" && value > 0) td.className = "positive";
-            if (key === "losses" && value > 0 || key === "net" && value < 0) td.className = "negative";
-            if (key === "net" || key === "closing") td.classList.add("number");
-            tr.append(td);
-          }
+          appendAmounts(tr, item.result);
           fragment.append(tr);
         }
         get("balanceRows").replaceChildren(fragment);
+        const total = totalBalance(results.map(item => item.result));
+        const totalRow = document.createElement("tr"), totalTitle = document.createElement("th"), totalDetail = document.createElement("small");
+        totalTitle.scope = "row"; totalTitle.className = "balance-wallet-name";
+        totalTitle.append("TOTAL");
+        totalDetail.textContent = total.available + " de " + total.wallets + (total.wallets === 1 ? " carteira" : " carteiras") + " com saldo neste período";
+        totalTitle.append(totalDetail); totalRow.append(totalTitle); appendAmounts(totalRow, total);
+        get("balanceTotals").replaceChildren(totalRow); get("balanceTotals").hidden = false;
         get("balanceCaption").textContent = periodLabel(period.value, range, month.value) + " · valores fictícios em euros";
         const singles = results.length === 1;
         get("balanceHighlights").hidden = !singles;
@@ -194,10 +212,11 @@
         const date = new Intl.DateTimeFormat("pt-PT", { timeZone: TZ, dateStyle: "short", timeStyle: "short" }).format(instant(state.asof));
         get("balanceStatus").textContent = "Dados até " + date + " (Portugal) · " + results.length + (singles ? " carteira" : " carteiras") + ".";
         get("balanceOpen").textContent = singles ? results[0].result.open + " posições atualmente abertas nesta carteira, excluídas dos ganhos e perdas realizados."
-          : "Cada linha apresenta uma carteira independente. Os mesmos jogos podem aparecer em várias carteiras; os saldos não são somados.";
+          : "Os totais somam as carteiras apresentadas. Cada carteira é independente e o mesmo jogo pode ser contado em várias estratégias.";
       } catch (_) {
         get("balanceStatus").textContent = "Não foi possível confirmar este balanço. Atualiza o quadro para obter registos consistentes.";
-        get("balanceRows").replaceChildren(); get("balanceHighlights").hidden = true; get("balanceMovement").hidden = true;
+        get("balanceRows").replaceChildren(); get("balanceTotals").replaceChildren(); get("balanceTotals").hidden = true;
+        get("balanceHighlights").hidden = true; get("balanceMovement").hidden = true;
       }
     }
     period.addEventListener("change", render);
@@ -258,5 +277,5 @@
     render();
     return { updateReport };
   }
-  return { localDay, bounds, summarize, experimentalRows, fetchReport, mount };
+  return { localDay, bounds, summarize, totalBalance, experimentalRows, fetchReport, mount };
 });

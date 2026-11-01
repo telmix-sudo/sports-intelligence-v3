@@ -1,7 +1,7 @@
 "use strict";
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { localDay, bounds, summarize, experimentalRows, fetchReport } = require("../docs/balance.js");
+const { localDay, bounds, summarize, totalBalance, experimentalRows, fetchReport } = require("../docs/balance.js");
 const ASOF = "2026-11-02T12:00:00Z";
 function trade(id, status, pnl, settlement) {
   return { id, status, stake_eur: 5, pnl_eur: pnl, settlement_utc: settlement, forecast_utc: "2026-10-20T12:00:00Z" };
@@ -62,6 +62,25 @@ test("four decimal PnL values are summed without floating point drift", () => {
   const small = [trade("one", "SETTLED", .1, "2026-11-01T01:00:00Z"), trade("two", "SETTLED", .2, "2026-11-01T02:00:00Z")];
   const result = summarize(small, { bankroll_initial_eur: 1000, bankroll_eur: 1000.3 }, created, bounds("all"), ASOF);
   assert.equal(result.net, .3); assert.equal(result.closing, 1000.3);
+});
+test("totals follow the selected period and wallet without including unavailable balances", () => {
+  const first = summarize(rows, account, created, bounds("day", "2026-11-01"), ASOF);
+  const second = summarize([], { bankroll_initial_eur: 1000, bankroll_eur: 1000 }, created, bounds("day", "2026-11-01"), ASOF);
+  const unavailable = summarize([], { bankroll_initial_eur: 1000, bankroll_eur: 1000 }, "2026-11-02T01:00:00Z", bounds("day", "2026-11-01"), ASOF);
+  assert.deepEqual(totalBalance([first, second, unavailable]), {
+    available: 2, wallets: 3, opening: 1995, gains: 4.25, losses: 2.5, net: 1.75, closing: 1996.75
+  });
+  assert.equal(totalBalance([first]).closing, 996.75);
+  const week = summarize(rows, account, created, bounds("week", "2026-11-01"), ASOF);
+  assert.equal(totalBalance([week, second]).net, -3.25);
+  assert.equal(totalBalance([unavailable]).closing, null);
+  assert.equal(totalBalance([]).gains, null);
+});
+test("totals retain the ledger's four decimal precision across wallets", () => {
+  const first = { opening: 1000, gains: .1, losses: 0, net: .1, closing: 1000.1 };
+  const second = { opening: 1000, gains: .2, losses: 0, net: .2, closing: 1000.2 };
+  assert.equal(totalBalance([first, second]).net, .3);
+  assert.equal(totalBalance([first, second]).closing, 2000.3);
 });
 test("experimental account joins append-only settlements and excludes zero-stake observations", () => {
   const journal = [{ id: "F1", kind: "FORECAST", stake_eur: 2.5, forecast_utc: created },
