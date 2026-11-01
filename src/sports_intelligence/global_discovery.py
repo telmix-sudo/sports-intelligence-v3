@@ -15,9 +15,11 @@ import json
 import os
 from pathlib import Path
 import re
+import threading
 import time
 from urllib.parse import urlencode,urlparse
 import urllib.request
+import urllib.error
 
 from .feeds import SCOREBOARDS,USER_AGENT,fetch_text
 from .football import canonical
@@ -41,6 +43,8 @@ ALIASES={
 EXCLUDED={'politics','entertainment','lotteries','lottery','virtual sports'}
 CORE_ODDS={v:k for k,v in ODDS_KEY_MAP.items()}
 CORE_ESPN={v:k for k,v in SCOREBOARDS.items()}
+_ODDS_DISCOVERY_LOCK=threading.Lock()
+_ODDS_LAST_REQUEST=0.
 
 
 def family(name):
@@ -61,17 +65,33 @@ def _json(url):
 
 
 def _odds_get(path,secret,params=None):
+    global _ODDS_LAST_REQUEST
     query=dict(params or {},apiKey=secret)
     url='https://api.the-odds-api.com/v4/'+path+'?'+urlencode(query)
-    try:
-        req=urllib.request.Request(url,headers={'User-Agent':USER_AGENT,'Accept':'application/json'})
-        with urllib.request.urlopen(req,timeout=10) as response:
-            raw=response.read(3500001)
-        if len(raw)>3500000:raise ValueError('Provider response limit')
-        return json.loads(raw)
-    except Exception as exc:
-        # Neither the credential-bearing URL nor arbitrary provider text is logged.
-        raise ValueError('ODDS_FREE_DISCOVERY_'+type(exc).__name__) from None
+    for attempt in range(3):
+        # Limit this free collector to <8 requests/s, including concurrent workers.
+        with _ODDS_DISCOVERY_LOCK:
+            wait=.14-(time.monotonic()-_ODDS_LAST_REQUEST)
+            if wait>0:time.sleep(wait)
+            _ODDS_LAST_REQUEST=time.monotonic()
+        try:
+            req=urllib.request.Request(url,headers={'User-Agent':USER_AGENT,'Accept':'application/json'})
+            with urllib.request.urlopen(req,timeout=10) as response:
+                raw=response.read(3500001)
+            if len(raw)>3500000:raise ValueError('Provider response limit')
+            return json.loads(raw)
+        except urllib.error.HTTPError as exc:
+            if exc.code in (429,500,502,503,504) and attempt<2:
+                time.sleep(attempt+1);continue
+            raise ValueError('ODDS_FREE_DISCOVERY_HTTP_'+str(exc.code)) from None
+        except Exception as exc:
+            # Neither the credential-bearing URL nor arbitrary provider text is logged.
+            raise ValueError('ODDS_FREE_DISCOVERY_'+type(exc).__name__) from None
+
+
+def _safe_error(exc):
+    message=str(exc)
+    return message if re.fullmatch(r'ODDS_FREE_DISCOVERY_[A-Za-z0-9_]+',message) else type(exc).__name__
 
 
 def _cached(cache,key,now,ttl,loader):
@@ -249,7 +269,7 @@ def odds_discovery(cache,now,secret,requester=_odds_get):
                 except (KeyError,TypeError,ValueError):continue
             return result
         try:return r,_cached(cache,'odds_events:'+key,now,dt.timedelta(minutes=50),get)[0],None
-        except Exception as exc:return r,[],type(exc).__name__
+        except Exception as exc:return r,[],_safe_error(exc)
     events=[]
     with ThreadPoolExecutor(max_workers=8) as pool:
         for r,found,error in pool.map(games,active):
@@ -381,7 +401,7 @@ def discover_universe(root:Path,now,seed=(),secret=None,public_requester=_json,o
         for name,task in futures:
             try:found,diag=task.result();all_events.extend(found);diagnostics.append(diag)
             except Exception as exc:diagnostics.append({'provider':name,'catalog_families':[], 'queries':[],
-                'status':'UNAVAILABLE','errors':[{'reason':type(exc).__name__}]})
+                'status':'UNAVAILABLE','errors':[{'reason':_safe_error(exc)}]})
     events=merge_events(seed,all_events)
     report=summarize(events,diagnostics,now)
     _atomic(path,cache)

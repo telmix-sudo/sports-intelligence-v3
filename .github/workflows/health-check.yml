@@ -1,6 +1,10 @@
 name: Sports Intelligence V3 - Paper Health Audit
 
 on:
+  workflow_run:
+    workflows: ["Sports Intelligence V3 — Hourly Paper Scanner"]
+    types: [completed]
+    branches: [main]
   schedule:
     - cron: "15 */3 * * *"
   workflow_dispatch:
@@ -19,6 +23,7 @@ concurrency:
 
 jobs:
   inspect:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -26,5 +31,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Refresh published data before audit
+        run: git pull --ff-only origin main
       - name: Audit last report, balances and overdue official results
         run: python scripts/check_v3_health.py

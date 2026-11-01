@@ -3,10 +3,12 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch,MagicMock
+import urllib.error
 from urllib.parse import urlparse
 
 from sports_intelligence.global_discovery import (
-    ESPN_CORE, _espn_event, discover_universe, espn_discovery,
+    ESPN_CORE, _espn_event, _odds_get, discover_universe, espn_discovery,
     merge_events, odds_discovery, summarize, tsdb_discovery,
 )
 from sports_intelligence.broad_odds import annotate_discovered
@@ -30,6 +32,20 @@ def refs(slugs, prefix=ESPN_CORE):
 
 
 class GlobalDiscoveryTests(unittest.TestCase):
+    def test_free_provider_retries_transient_rate_limit_and_sanitizes_failures(self):
+        response=MagicMock()
+        response.__enter__.return_value.read.return_value=b'[]'
+        limited=urllib.error.HTTPError('https://example/?apiKey=SECRET',429,'Too many',{},None)
+        with (patch('sports_intelligence.global_discovery.urllib.request.urlopen',side_effect=[limited,response]) as request,
+              patch('sports_intelligence.global_discovery.time.sleep')):
+            self.assertEqual(_odds_get('sports','SECRET'),[])
+            self.assertEqual(request.call_count,2)
+        denied=urllib.error.HTTPError('https://example/?apiKey=SECRET',401,'denied',{},None)
+        with (patch('sports_intelligence.global_discovery.urllib.request.urlopen',side_effect=denied),
+              patch('sports_intelligence.global_discovery.time.sleep')):
+            with self.assertRaisesRegex(ValueError,'^ODDS_FREE_DISCOVERY_HTTP_401$'):
+                _odds_get('sports','SECRET')
+
     def test_free_odds_catalog_queries_all_active_sports_and_never_prices(self):
         calls=[]
         def get(path, key, params):
