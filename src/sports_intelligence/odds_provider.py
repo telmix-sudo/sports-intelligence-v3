@@ -98,6 +98,37 @@ def parse_utc(text: str) -> dt.datetime:
     return value.astimezone(UTC)
 
 
+def fresh_quote(quote: dict, now: dt.datetime) -> bool:
+    """Validate actual bookmaker times, never the cache file's refresh time."""
+    try:
+        prices = quote["decimal"]
+        updates = quote["best_book_updates"]
+        return (quote.get("quote_timestamp_available") is True
+                and len(prices) in (2, 3) and len(updates) == len(prices)
+                and all(0 <= (now - parse_utc(t)).total_seconds()
+                        <= MAX_BOOK_QUOTE_AGE_HOURS * 3600 for t in updates))
+    except (AttributeError, KeyError, TypeError, ValueError, OverflowError):
+        return False
+
+
+def attach_cached_odds(events: list[dict], snapshots: dict, now: dt.datetime) -> int:
+    """Share exactly the same point-in-time cache policy in scanner and lab."""
+    matched = 0
+    for event in events:
+        if event.get("status") != "pre" or parse_utc(event["start_utc"]) <= now:
+            continue
+        snap = snapshots.get(event["sport"], {})
+        quote = snap.get("quotes", {}).get(event["id"])
+        if fresh_quote(quote, now):
+            event["quote"] = quote
+            matched += 1
+        event["market_quotes"] = {
+            name: q for name, q in snap.get("market_quotes", {}).get(event["id"], {}).items()
+            if fresh_quote(q, now)
+        }
+    return matched
+
+
 def quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> dict | None:
     if event["status"] != "pre" or parse_utc(event["start_utc"]) <= at:
         return None
@@ -393,13 +424,9 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
             if event["status"] != "pre" or parse_utc(event["start_utc"]) <= now:
                 continue
             event["market_quotes"] = {name:q for name,q in snap.get("market_quotes", {}).get(event["id"], {}).items()
-                if all(0 <= (now-parse_utc(t)).total_seconds() <= MAX_BOOK_QUOTE_AGE_HOURS*3600
-                       for t in q.get("best_book_updates", [])) and len(q.get("best_book_updates", [])) == 2}
+                if fresh_quote(q, now) and len(q["decimal"]) == 2}
             quote = snap["quotes"].get(event["id"])
-            if quote and any((now - parse_utc(timestamp)).total_seconds() > MAX_BOOK_QUOTE_AGE_HOURS * 3600
-                             for timestamp in quote["best_book_updates"]):
-                quote = None
-            if quote:
+            if fresh_quote(quote, now):
                 event["quote"] = quote
                 diagnostics["quotes_matched"] += 1
                 if event["sport"] not in diagnostics["cached_sports"]:

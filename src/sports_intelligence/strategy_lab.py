@@ -27,6 +27,7 @@ from .strategy_registry import ensure_registry, verify_prior_accounts
 from .portfolio_controls import PaperRiskBook, conservative_expected_value, audit_ledgers
 from .daily_reference import select_daily_reference
 from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION
+from .odds_provider import attach_cached_odds
 
 UTC = dt.timezone.utc
 PORTUGAL = ZoneInfo("Europe/Lisbon")
@@ -525,6 +526,30 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
     return account_stats, {name: count for name, count in added.items() if count > 0}
 
 
+def enrich_pending_statistics(root: Path, finals: dict, now: dt.datetime, enricher=None) -> dict:
+    """Fetch each final boxscore once, even when many wallets share the game."""
+    if enricher is None:
+        from .market_catalog import enrich_final
+        enricher = enrich_final
+    pending = {}
+    for strategy in STRATEGIES:
+        path = root / "data" / "strategy_ledgers" / (strategy.lower() + ".jsonl")
+        for row in read_jsonl(path):
+            spec = row.get("market_spec") or {}
+            if (row.get("status") == "OPEN" and spec.get("metric", "goals") != "goals"
+                    and row["event_id"] in finals and parse_iso(row["start_utc"]) <= now):
+                pending.setdefault(row["event_id"], row)
+    errors = []
+    for event_id, row in pending.items():
+        try:
+            event = {key: row[key] for key in ("sport", "home", "away")}
+            event.update(id=event_id, final=finals[event_id])
+            finals[event_id] = enricher(event)["final"]
+        except Exception as exc:
+            errors.append({"event_id": event_id, "reason": type(exc).__name__})
+    return {"lookups": len(pending), "errors": errors}
+
+
 def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
                      discover=capture_scoreboards) -> dict:
     if now.tzinfo is None:
@@ -540,18 +565,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     archive_path = root / "data" / "odds_cache_v3.json"
     if archive_path.exists():
         cache = json.loads(archive_path.read_text(encoding="utf8"))
-        for event in events:
-            snap = cache.get("snapshots", {}).get(event["sport"], {})
-            try:
-                updated = parse_iso(snap["fetched_at"])
-                if dt.timedelta(0) <= now - updated <= dt.timedelta(hours=13):
-                    event["market_quotes"] = snap.get("market_quotes", {}).get(event["id"], {})
-                    quote = snap["quotes"].get(event["id"])
-                    if quote and all(now - parse_iso(t) <= dt.timedelta(hours=12)
-                                     for t in quote.get("best_book_updates", [])):
-                        event["quote"] = quote
-            except (KeyError, ValueError, TypeError):
-                continue
+        attach_cached_odds(events, cache.get("snapshots", {}), now)
     # Retrieve confirmed results for ALL outstanding frozen rows, not only yesterday.
     pending = {}
     for strategy in STRATEGIES:
@@ -570,14 +584,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         except Exception as exc:
             print("Settlement lookup failed", league, day.isoformat(), type(exc).__name__, flush=True)
     missing_final_ids = sorted({row["event_id"] for name in STRATEGIES for row in read_jsonl(root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")) if row.get("status") == "OPEN" and parse_iso(row["start_utc"]) <= now and row["event_id"] not in finals})
-    for strategy in STRATEGIES:
-        for r in read_jsonl(root/"data"/"strategy_ledgers"/(strategy.lower()+".jsonl")):
-            if r.get("status")=="OPEN" and r.get("market_spec",{}).get("metric","goals")!="goals" and r["event_id"] in finals:
-                from .market_catalog import enrich_final
-                try:
-                    e={"id":r["event_id"],"sport":r["sport"],"home":r["home"],"away":r["away"],"final":finals[r["event_id"]]}
-                    finals[r["event_id"]]=enrich_final(e)["final"]
-                except Exception as exc:print("Stat settlement lookup failed",r["event_id"],type(exc).__name__,flush=True)
+    stat_settlement = enrich_pending_statistics(root, finals, now)
     before, settle_counts = build_accounts(root, finals, now)
     from .research_pipeline import read_journal, reconcile, run_research
     research_settlement_result = reconcile(root, read_journal(root), events, now)
@@ -664,6 +671,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "entry_diagnostics": {"rejections": rejected, "new_entries": sum(entry_counts.values()), "unit": "strategy-event evaluations"},
         "newly_settled": settle_counts["settled_this_run"],
         "missing_final_event_ids": missing_final_ids,
+        "statistic_settlement": stat_settlement,
         "restrictions": [
             "No real bets; outcomes do not imply profit guarantee.",
             "Historical comparison has NO historic book prices; historical ROI deliberately missing.",
