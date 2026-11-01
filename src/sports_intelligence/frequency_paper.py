@@ -10,6 +10,7 @@ POLICIES = {
  "FREQ_SELECTIVE_1_3": (5,10,.06,.08,.02),
  "FREQ_BALANCED_3_5": (5,10,.045,.065,.02),
  "FREQ_BROAD_5_10": (5,10,.03,.05,.02),
+ "FREQ_DAILY_5_10": (5,10,.03,.05,.02),
 }
 
 def run_frequency_strategies(root, models, events, now, registry, risk=None):
