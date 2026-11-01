@@ -27,6 +27,18 @@ class MetricTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             american_to_decimal(80)
 
+    def test_frozen_rounding_boundary_accepts_only_representation_noise(self):
+        frozen = [0.6785009, 0.1897843, 0.1317147]
+        original = frozen.copy()
+        self.assertGreater(abs(sum(frozen)-1), 1e-7)
+        self.assertTrue(math.isfinite(brier(frozen, 0)))
+        self.assertTrue(math.isfinite(log_loss(frozen, 0)))
+        self.assertEqual(frozen, original)
+        for bad in ([0.6785009, 0.1897843, 0.1317145], [0.9, 0.9], [float('nan'), .5]):
+            with self.subTest(probabilities=bad):
+                with self.assertRaises(ValueError):
+                    brier(bad, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

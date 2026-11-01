@@ -21,7 +21,12 @@ def log_loss(probabilities: tuple[float, ...] | list[float], outcome: int) -> fl
 def validate_distribution(probabilities: tuple[float, ...] | list[float]) -> None:
     if len(probabilities) < 2 or any(not math.isfinite(p) or p < 0 or p > 1 for p in probabilities):
         raise ValueError("Invalid probability distribution")
-    if not math.isclose(sum(probabilities), 1.0, rel_tol=0, abs_tol=1e-7):
+    # Frozen seven-decimal vectors can sit exactly on the 1e-7 boundary.
+    # Binary floating-point may put that boundary a few ulps above the limit.
+    # Preserve the original probabilities and tolerance, allowing only that
+    # representation noise; materially invalid distributions still fail closed.
+    tolerance = 1e-7 + len(probabilities) * math.ulp(1.0)
+    if not math.isclose(math.fsum(probabilities), 1.0, rel_tol=0, abs_tol=tolerance):
         raise ValueError("Probabilities must add to one")
 
 
