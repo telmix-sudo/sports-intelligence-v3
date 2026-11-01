@@ -6,7 +6,8 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
   const TZ = "Europe/Lisbon";
-  const RAW = "https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/";
+  const RAW = "https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/";
+  const HEAD = "https://api.github.com/repos/telmix-sudo/sports-intelligence-v3/commits/main";
   const dayFormatter = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" });
   const euro = new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR" });
   const dateFormatter = new Intl.DateTimeFormat("pt-PT", { timeZone: "UTC", dateStyle: "short" });
@@ -123,6 +124,21 @@
   }
   function parseJournal(text) { return text.split(/\r?\n/).filter(line => line.trim()).map(line => JSON.parse(line)); }
 
+  async function fetchReport(fetcher = fetch) {
+    let ref = "main";
+    try {
+      const head = await fetcher(HEAD + "?t=" + Date.now(), { cache: "no-store", signal: AbortSignal.timeout(8000) });
+      if (head.ok) {
+        const commit = await head.json();
+        if (/^[a-f0-9]{40}$/.test(commit.sha)) ref = commit.sha;
+      }
+    } catch (_) { /* Public metadata can be unavailable; reconciliation still protects the fallback. */ }
+    const response = await fetcher(RAW + ref + "/reports/strategy_lab_latest.json?t=" + Date.now(),
+      { cache: "no-store", signal: AbortSignal.timeout(20000) });
+    if (!response.ok) throw Error("Não foi possível carregar o relatório");
+    return { report: await response.json(), ref };
+  }
+
   function mount(container) {
     const get = id => container.querySelector("#" + id);
     const period = get("balancePeriod"), day = get("balanceDay"), month = get("balanceMonth"), wallet = get("balanceWallet");
@@ -198,20 +214,21 @@
     get("balancePrevious").addEventListener("click", () => step(-1));
     get("balanceNext").addEventListener("click", () => step(1));
     get("balanceToday").addEventListener("click", () => { period.value = "day"; day.value = localDay(new Date()); month.value = day.value.slice(0, 7); render(); });
-    async function read(path, stamp) {
-      const response = await fetch(RAW + path + "?t=" + stamp, { cache: "no-store", signal: AbortSignal.timeout(20000) });
+    async function read(path, stamp, ref) {
+      const response = await fetch(RAW + ref + "/" + path + "?t=" + stamp, { cache: "no-store", signal: AbortSignal.timeout(20000) });
       if (!response.ok) throw Error("LOAD_FAILED");
       return parseJournal(await response.text());
     }
-    async function updateReport(report) {
+    async function updateReport(report, ref = "main") {
       const version = ++generation;
       if (state?.asof === report.asof_utc) { render(); return; }
       get("balanceStatus").textContent = "A confirmar os movimentos das carteiras…";
       try {
+        if (ref !== "main" && !/^[a-f0-9]{40}$/.test(ref)) throw Error("INVALID_SNAPSHOT");
         const stamp = Date.now(), range = { start: null, end: null };
         const entries = await Promise.all(Object.entries(report.accounts || {}).map(async ([id, account]) => {
           if (!/^[A-Z0-9_]+$/.test(id)) throw Error("INVALID_WALLET");
-          const rows = await read("data/strategy_ledgers/" + id.toLowerCase() + ".jsonl", stamp);
+          const rows = await read("data/strategy_ledgers/" + id.toLowerCase() + ".jsonl", stamp, ref);
           const created = report.registered_strategies?.[id]?.created_utc;
           summarize(rows, account, created, range, report.asof_utc);
           return { id, account, created, rows };
@@ -219,7 +236,7 @@
         if (!entries.length) throw Error("NO_WALLETS");
         const experimental = report.market_research?.experimental_account;
         if (experimental?.created) {
-          const rows = experimentalRows(await read("data/market_research_v3.jsonl", stamp));
+          const rows = experimentalRows(await read("data/market_research_v3.jsonl", stamp, ref));
           const account = { bankroll_initial_eur: experimental.initial_bankroll_eur, bankroll_eur: experimental.bankroll_eur, open: experimental.open };
           const created = rows.map(row => row.forecast_utc).sort()[0];
           summarize(rows, account, created, range, report.asof_utc);
@@ -241,5 +258,5 @@
     render();
     return { updateReport };
   }
-  return { localDay, bounds, summarize, experimentalRows, mount };
+  return { localDay, bounds, summarize, experimentalRows, fetchReport, mount };
 });
