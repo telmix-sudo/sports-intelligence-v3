@@ -1,22 +1,22 @@
 {
   "global_discovery": {
-    "asof_utc": "2026-10-31T23:59:08.984702+00:00",
+    "asof_utc": "2026-11-01T00:01:13.339028+00:00",
     "window_hours": 48,
     "modalities_in_catalog": 19,
     "modalities_queried": 19,
-    "modalities_with_future_events": 13,
+    "modalities_with_future_events": 14,
     "modalities_with_timestamped_odds": 2,
-    "future_events": 273,
+    "future_events": 396,
     "by_modality": {
       "american_football": {
         "catalog_sources": [
           "ESPN",
           "The Odds API"
         ],
-        "queries": 11,
+        "queries": 7,
         "query_errors": 0,
-        "future_events": 19,
-        "events_with_odds": 12,
+        "future_events": 18,
+        "events_with_odds": 13,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
@@ -39,7 +39,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 13,
+        "queries": 2,
         "query_errors": 0,
         "future_events": 1,
         "events_with_odds": 0,
@@ -52,9 +52,9 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 20,
+        "queries": 11,
         "query_errors": 0,
-        "future_events": 37,
+        "future_events": 51,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -102,8 +102,8 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 14,
-        "query_errors": 1,
+        "queries": 5,
+        "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
         "events_with_model": 0,
@@ -127,9 +127,9 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 11,
-        "query_errors": 3,
-        "future_events": 16,
+        "queries": 6,
+        "query_errors": 0,
+        "future_events": 27,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -140,7 +140,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 4,
+        "queries": 1,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -153,7 +153,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 12,
+        "queries": 35,
         "query_errors": 0,
         "future_events": 5,
         "events_with_odds": 0,
@@ -166,7 +166,7 @@
           "ESPN",
           "TheSportsDB free"
         ],
-        "queries": 8,
+        "queries": 4,
         "query_errors": 0,
         "future_events": 2,
         "events_with_odds": 0,
@@ -192,12 +192,12 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 11,
+        "queries": 14,
         "query_errors": 0,
-        "future_events": 0,
+        "future_events": 2,
         "events_with_odds": 0,
         "events_with_model": 0,
-        "status": "QUERIED_NO_FUTURE_EVENTS",
+        "status": "FUTURE_EVENTS_FOUND",
         "model_status": "NO_TRAINED_MODEL"
       },
       "soccer": {
@@ -206,9 +206,9 @@
           "The Odds API",
           "TheSportsDB free"
         ],
-        "queries": 61,
-        "query_errors": 19,
-        "future_events": 116,
+        "queries": 83,
+        "query_errors": 0,
+        "future_events": 196,
         "events_with_odds": 13,
         "events_with_model": 2,
         "status": "FUTURE_EVENTS_FOUND",
@@ -219,9 +219,9 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 6,
-        "query_errors": 1,
-        "future_events": 3,
+        "queries": 5,
+        "query_errors": 0,
+        "future_events": 24,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -231,9 +231,9 @@
         "catalog_sources": [
           "ESPN"
         ],
-        "queries": 2,
+        "queries": 1,
         "query_errors": 0,
-        "future_events": 59,
+        "future_events": 55,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -243,7 +243,7 @@
         "catalog_sources": [
           "ESPN"
         ],
-        "queries": 2,
+        "queries": 1,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -277,60 +277,67 @@
         "competitions_catalogued": 359,
         "competitions_queried": 96,
         "competitions_deferred": 263,
-        "requests": 306,
-        "errors": [],
+        "requests": 252,
+        "errors": [
+          {
+            "date": "2026-11-03",
+            "reason": "URLError",
+            "sport": "mma",
+            "competition": "m1"
+          }
+        ],
         "queries": [
           {
             "family": "australian_football",
             "competition": "afl",
             "events": 0,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "baseball",
             "competition": "mlb",
             "events": 0,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "basketball",
-            "competition": "nba",
-            "events": 8,
+            "competition": "wnba",
+            "events": 0,
             "status": "OK"
           },
           {
             "family": "field_hockey",
             "competition": "womens-college-field-hockey",
             "events": 5,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "american_football",
             "competition": "nfl",
             "events": 12,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "golf",
             "competition": "champions-tour",
             "events": 0,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "ice_hockey",
             "competition": "nhl",
-            "events": 7,
-            "status": "OK"
+            "events": 6,
+            "status": "CACHED"
           },
           {
             "family": "lacrosse",
             "competition": "mens-college-lacrosse",
             "events": 0,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "mma",
-            "competition": "absolute",
+            "competition": "bosnia",
             "events": 0,
             "status": "OK"
           },
@@ -338,532 +345,532 @@
             "family": "motorsport",
             "competition": "f1",
             "events": 2,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "rugby_union",
-            "competition": "164205",
-            "events": 0,
+            "competition": "270559",
+            "events": 2,
             "status": "OK"
           },
           {
             "family": "rugby_league",
             "competition": "3",
             "events": 0,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "soccer",
-            "competition": "eng.1",
-            "events": 2,
+            "competition": "afc.saff.championship",
+            "events": 0,
             "status": "OK"
           },
           {
             "family": "tennis",
             "competition": "atp",
             "events": 0,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "volleyball",
             "competition": "mens-college-volleyball",
             "events": 0,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "water_polo",
             "competition": "mens-college-water-polo",
             "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "caribbean-series",
-            "events": 0,
-            "status": "OK"
+            "status": "CACHED"
           },
           {
             "family": "basketball",
-            "competition": "fiba",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "american_football",
-            "competition": "cfl",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "eur",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "ice_hockey",
-            "competition": "hockey-world-cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "lacrosse",
-            "competition": "nll",
-            "events": 0,
+            "competition": "womens-college-basketball",
+            "events": 16,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "affliction",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "motorsport",
-            "competition": "irl",
+            "competition": "boxe",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "rugby_union",
-            "competition": "17567",
+            "competition": "270563",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "esp.1",
-            "events": 5,
-            "status": "OK"
-          },
-          {
-            "family": "tennis",
-            "competition": "wta",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "volleyball",
-            "competition": "womens-college-volleyball",
-            "events": 59,
-            "status": "OK"
-          },
-          {
-            "family": "water_polo",
-            "competition": "womens-college-water-polo",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "college-baseball",
+            "competition": "afc.w.asian.cup",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "basketball",
-            "competition": "mens-college-basketball",
+            "competition": "womens-olympics-basketball",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "brazilian-freestyle",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "271937",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "aff.championship",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "budo",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "272073",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "arg.1",
             "events": 6,
             "status": "OK"
           },
           {
-            "family": "american_football",
-            "competition": "college-football",
-            "events": 5,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "liv",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "ice_hockey",
-            "competition": "mens-college-hockey",
-            "events": 5,
-            "status": "OK"
-          },
-          {
-            "family": "lacrosse",
-            "competition": "pll",
-            "events": 0,
-            "status": "OK"
-          },
-          {
             "family": "mma",
-            "competition": "bang-fighting",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "motorsport",
-            "competition": "nascar-premier",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "180659",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "fra.1",
-            "events": 5,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "college-softball",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "mens-olympics-basketball",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "american_football",
-            "competition": "ufl",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "lpga",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "ice_hockey",
-            "competition": "olympics-mens-ice-hockey",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "lacrosse",
-            "competition": "womens-college-lacrosse",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "banni-fight",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "motorsport",
-            "competition": "nascar-secondary",
+            "competition": "cage-warriors",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "rugby_union",
-            "competition": "2009",
+            "competition": "282",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "ger.1",
+            "competition": "arg.2",
+            "events": 5,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "dream",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "283",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "arg.3",
+            "events": 6,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "fng",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289234",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "arg.copa",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "ifc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289237",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "arg.copa_de_la_superliga",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "ifl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289262",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "arg.supercopa",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "k1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289271",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "arg.supercopa.internacional",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "ksw",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289272",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "arg.trofeo_de_la_campeones",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "lfa",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289274",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "aus.1",
             "events": 2,
             "status": "OK"
           },
           {
-            "family": "baseball",
-            "competition": "dominican-winter-league",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-development",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "american_football",
-            "competition": "xfl",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "mens-olympics-golf",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "ice_hockey",
-            "competition": "olympics-womens-ice-hockey",
-            "events": 0,
-            "status": "OK"
-          },
-          {
             "family": "mma",
-            "competition": "banzay",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "motorsport",
-            "competition": "nascar-truck",
+            "competition": "lfc",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "rugby_union",
-            "competition": "236461",
+            "competition": "289277",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "ita.1",
-            "events": 7,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "llb",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-summer-california",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "ntw",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "ice_hockey",
-            "competition": "womens-college-hockey",
-            "events": 0,
+            "competition": "aus.w.1",
+            "events": 3,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "barracao",
+            "competition": "m1",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "rugby_union",
-            "competition": "242041",
+            "competition": "289279",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "afc.asian.cup",
+            "competition": "aut.1",
+            "events": 3,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "mfc",
             "events": 0,
             "status": "OK"
           },
           {
-            "family": "baseball",
-            "competition": "lls",
+            "family": "soccer",
+            "competition": "bel.1",
+            "events": 4,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "mvp",
             "events": 0,
             "status": "OK"
           },
           {
-            "family": "basketball",
-            "competition": "nba-summer-golden-state",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "pga",
+            "family": "soccer",
+            "competition": "bel.promotion.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "battlezone",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "244293",
+            "competition": "ofc",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "afc.champions",
+            "competition": "bol.1",
+            "events": 4,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "other",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bol.copa",
+            "events": 1,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "pancrase",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bol.ply.rel",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "pfl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.1",
+            "events": 1,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "pride",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.2",
             "events": 6,
             "status": "OK"
           },
           {
-            "family": "baseball",
-            "competition": "mexican-winter-league",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-summer-las-vegas",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "tgl",
-            "events": 0,
-            "status": "OK"
-          },
-          {
             "family": "mma",
-            "competition": "bellator",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "267979",
+            "competition": "proelite",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "afc.champions_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "olympics-baseball",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-summer-orlando",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "womens-olympics-golf",
+            "competition": "bra.camp.carioca",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "benevides",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "268565",
+            "competition": "rfa",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "afc.cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "puerto-rican-winter-league",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-summer-sacramento",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "wtgl",
+            "competition": "bra.camp.gaucho",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "big-fight",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "270555",
+            "competition": "rizin",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "afc.cup_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "venezuelan-winter-league",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-summer-utah",
+            "competition": "bra.camp.mineiro",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "blackout",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "270557",
+            "competition": "roc",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "afc.cupq",
+            "competition": "bra.camp.paulista",
             "events": 0,
             "status": "OK"
           },
           {
-            "family": "baseball",
-            "competition": "world-baseball-classic",
+            "family": "mma",
+            "competition": "sfl",
             "events": 0,
             "status": "OK"
           },
           {
-            "family": "basketball",
-            "competition": "nbl",
-            "events": 3,
+            "family": "soccer",
+            "competition": "bra.copa_do_brazil",
+            "events": 2,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "shark-fights",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.supercopa_do_brazil",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "shooto-brazil",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.champions",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "shooto-japan",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.championship",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "shoxc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.confed",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "strikeforce",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.cosafa",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "tfc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.nations",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "tpf",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.nations_qual",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "ufc",
+            "events": 0,
             "status": "OK"
           }
         ],
-        "deferred_cached_competitions_reused": 0,
-        "status": "OK"
+        "deferred_cached_competitions_reused": 84,
+        "status": "PARTIAL"
       },
       {
         "provider": "The Odds API",
         "usage_credits": 0,
-        "requests": 83,
+        "requests": 24,
         "catalog_families": [
           "american_football",
           "australian_football",
@@ -905,7 +912,7 @@
           {
             "family": "american_football",
             "competition": "NCAAF FCS",
-            "events": 2,
+            "events": 1,
             "status": "OK"
           },
           {
@@ -1014,7 +1021,7 @@
             "family": "golf",
             "competition": "PGA Championship Winner",
             "events": 0,
-            "status": "ERROR"
+            "status": "OK"
           },
           {
             "family": "golf",
@@ -1037,14 +1044,14 @@
           {
             "family": "ice_hockey",
             "competition": "AHL",
-            "events": 0,
-            "status": "ERROR"
+            "events": 10,
+            "status": "OK"
           },
           {
             "family": "ice_hockey",
             "competition": "Liiga",
-            "events": 0,
-            "status": "ERROR"
+            "events": 1,
+            "status": "OK"
           },
           {
             "family": "ice_hockey",
@@ -1056,7 +1063,7 @@
             "family": "ice_hockey",
             "competition": "NHL Championship Winner",
             "events": 0,
-            "status": "ERROR"
+            "status": "OK"
           },
           {
             "family": "ice_hockey",
@@ -1079,8 +1086,8 @@
           {
             "family": "soccer",
             "competition": "A-League",
-            "events": 0,
-            "status": "ERROR"
+            "events": 2,
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1091,14 +1098,14 @@
           {
             "family": "soccer",
             "competition": "Belgium First Div",
-            "events": 0,
-            "status": "ERROR"
+            "events": 4,
+            "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Brazil Série A",
-            "events": 0,
-            "status": "ERROR"
+            "events": 1,
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1116,25 +1123,25 @@
             "family": "soccer",
             "competition": "Super League - China",
             "events": 0,
-            "status": "ERROR"
+            "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Copa Libertadores",
             "events": 0,
-            "status": "ERROR"
+            "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Copa Sudamericana",
             "events": 0,
-            "status": "ERROR"
+            "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Denmark Superliga",
-            "events": 0,
-            "status": "ERROR"
+            "events": 5,
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1181,8 +1188,8 @@
           {
             "family": "soccer",
             "competition": "Ligue 1 - France",
-            "events": 0,
-            "status": "ERROR"
+            "events": 5,
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1199,14 +1206,14 @@
           {
             "family": "soccer",
             "competition": "Bundesliga 2 - Germany",
-            "events": 0,
-            "status": "ERROR"
+            "events": 3,
+            "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "3. Liga - Germany",
-            "events": 0,
-            "status": "ERROR"
+            "events": 3,
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1241,14 +1248,14 @@
           {
             "family": "soccer",
             "competition": "Liga MX",
-            "events": 0,
-            "status": "ERROR"
+            "events": 5,
+            "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Dutch Eredivisie",
-            "events": 0,
-            "status": "ERROR"
+            "events": 4,
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1271,14 +1278,14 @@
           {
             "family": "soccer",
             "competition": "Premier League - Russia",
-            "events": 0,
-            "status": "ERROR"
+            "events": 5,
+            "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Saudi Pro League",
             "events": 0,
-            "status": "ERROR"
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1295,20 +1302,20 @@
           {
             "family": "soccer",
             "competition": "Premiership - Scotland",
-            "events": 0,
-            "status": "ERROR"
+            "events": 1,
+            "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Allsvenskan - Sweden",
-            "events": 0,
-            "status": "ERROR"
+            "events": 7,
+            "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Superettan - Sweden",
-            "events": 0,
-            "status": "ERROR"
+            "events": 3,
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1326,7 +1333,7 @@
             "family": "soccer",
             "competition": "UEFA Champions League",
             "events": 0,
-            "status": "ERROR"
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1338,7 +1345,7 @@
             "family": "soccer",
             "competition": "UEFA Europa League",
             "events": 0,
-            "status": "ERROR"
+            "status": "OK"
           },
           {
             "family": "soccer",
@@ -1355,8 +1362,8 @@
           {
             "family": "tennis",
             "competition": "ATP Paris Masters",
-            "events": 0,
-            "status": "ERROR"
+            "events": 21,
+            "status": "OK"
           },
           {
             "family": "tennis",
@@ -1377,104 +1384,7 @@
             "status": "OK"
           }
         ],
-        "errors": [
-          {
-            "sport": "golf_pga_championship_winner",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "icehockey_ahl",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "icehockey_liiga",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "icehockey_nhl_championship_winner",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_australia_aleague",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_belgium_first_div",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_brazil_campeonato",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_china_superleague",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_conmebol_copa_libertadores",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_conmebol_copa_sudamericana",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_denmark_superliga",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_france_ligue_one",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_germany_bundesliga2",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_germany_liga3",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_mexico_ligamx",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_netherlands_eredivisie",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_russia_premier_league",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_saudi_arabia_pro_league",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_spl",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_sweden_allsvenskan",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_sweden_superettan",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_uefa_champs_league",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "soccer_uefa_europa_league",
-            "reason": "ValueError"
-          },
-          {
-            "sport": "tennis_atp_paris_masters",
-            "reason": "ValueError"
-          }
-        ],
+        "errors": [],
         "catalog": [
           {
             "key": "americanfootball_cfl",
@@ -2758,7 +2668,7 @@
             "has_outrights": false
           }
         ],
-        "status": "PARTIAL"
+        "status": "OK"
       },
       {
         "provider": "TheSportsDB free",
@@ -2766,10 +2676,22 @@
           "soccer",
           "motorsport"
         ],
-        "requests": 7,
+        "requests": 2,
         "queries": [
           {
             "family": "soccer",
+            "date": "2026-11-02",
+            "events": 0,
+            "status": "PARTIAL_FREE_TIER"
+          },
+          {
+            "family": "motorsport",
+            "date": "2026-11-02",
+            "events": 0,
+            "status": "PARTIAL_FREE_TIER"
+          },
+          {
+            "family": "soccer",
             "date": "2026-11-01",
             "events": 0,
             "status": "PARTIAL_FREE_TIER"
@@ -2782,25 +2704,13 @@
           },
           {
             "family": "soccer",
-            "date": "2026-10-31",
+            "date": "2026-11-03",
             "events": 0,
             "status": "PARTIAL_FREE_TIER"
           },
           {
             "family": "motorsport",
-            "date": "2026-10-31",
-            "events": 0,
-            "status": "PARTIAL_FREE_TIER"
-          },
-          {
-            "family": "soccer",
-            "date": "2026-11-02",
-            "events": 0,
-            "status": "PARTIAL_FREE_TIER"
-          },
-          {
-            "family": "motorsport",
-            "date": "2026-11-02",
+            "date": "2026-11-03",
             "events": 0,
             "status": "PARTIAL_FREE_TIER"
           }
@@ -2808,7 +2718,7 @@
         "errors": [],
         "free_query_event_limit": 3,
         "coverage": "PARTIAL_FREE_TIER_NOT_EXHAUSTIVE",
-        "untimed_events": 15,
+        "untimed_events": 12,
         "status": "PARTIAL_FREE_TIER"
       }
     ],
@@ -2818,24 +2728,30 @@
     "odds_allocation": {
       "configured": true,
       "status": "OK",
-      "calls_this_run": 0,
+      "calls_this_run": 4,
       "errors": [],
       "cached_sports": [
         "epl",
         "la_liga",
         "serie_a",
         "ligue_1",
-        "nfl"
+        "nfl",
+        "americanfootball_ncaaf"
       ],
-      "quotes_matched": 26,
+      "quotes_matched": 27,
       "allocation": "DIVERSE_DYNAMIC_SPORTS_4_CREDITS_PER_6H_SLOT_CATCHUP",
       "maximum_daily_credits": 16,
-      "calls_today": 12,
-      "credits_today": 16,
-      "credits_remaining": 445,
+      "calls_today": 4,
+      "credits_today": 4,
+      "credits_remaining": 496,
       "max_credits_per_day": 16,
-      "priced_families_today": [],
-      "eligible_competitions": 18,
+      "priced_families_today": [
+        "basketball",
+        "american_football",
+        "mma",
+        "soccer"
+      ],
+      "eligible_competitions": 25,
       "goal_market_quotes": 18,
       "market_inventory": {
         "serie_a:401875002": {
@@ -2881,7 +2797,7 @@
     },
     "modalities_with_model_forecasts": 1
   },
-  "asof_utc": "2026-11-01T00:01:12.700277+00:00",
+  "asof_utc": "2026-11-01T00:01:45.213687+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-01",
@@ -3024,7 +2940,7 @@
     "existing_positions_never_retroactively_changed": true
   },
   "market_research": {
-    "asof_utc": "2026-11-01T00:01:12.700277+00:00",
+    "asof_utc": "2026-11-01T00:01:45.213687+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
     "new_forecasts": 0,
     "new_settlements": 0,
@@ -3050,621 +2966,621 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261031&limit=300",
-          "sha256": "56f400cbf711fd4a53bf1c482d427fbf94f102de5c21d60cf4d762cb1f7f1777",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "sha256": "e0db6dd5367b02240083262d2c06a605703a2968b9d22e5ba423a16c412dcd41",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 1
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261030&limit=300",
-          "sha256": "20957515125a8ec8ea79139c1dc0d868305879fff28560d26cc66debbdd19f98",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 10
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260426&limit=300",
-          "sha256": "34c0b81c6213bb1c8488217abc7dc98a7185018b7a6821170d597bd75b244d3d",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260425&limit=300",
-          "sha256": "6934a1346a76cc989b94702092130a7dea093336d92f96da80a4da959d3d4247",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260424&limit=300",
-          "sha256": "b49513f9f13e588a1618e0c582595a5cb839b4a9a57fa6d42b6279d381824640",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260423&limit=300",
-          "sha256": "cc8882dd10a71c7c0e76c99c5547ef7178680184c94029013e285e294db8d297",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260422&limit=300",
-          "sha256": "f2bcfdb931f2b4ab83345975491dc421447f9b9f277efa5f94cd0d73bdd24a77",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260421&limit=300",
-          "sha256": "8eaa8aecbee475bc8618bb3045bfb7dd7244e89de144dcdf2907cc50b71e0f9d",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260420&limit=300",
-          "sha256": "50fc04c6acfef0860e7217160a307c6d5566166efc1e8f674a460f7084bd9321",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260419&limit=300",
-          "sha256": "b599543cfd4b8e95ac8b567422ec3500c166dc1b08c98ba004d330b097b53b47",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260418&limit=300",
-          "sha256": "f5df8cc096d3778501f2c8c8253e81a52e01e3b1ff354cdf8ceadeec28406346",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260417&limit=300",
-          "sha256": "f9b89bc64be1b9ca1d7fd609ddc35a45c807f1d822dc0bd51d49f6d3521bb5c7",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260416&limit=300",
-          "sha256": "c17a555ed8a89b85bbf389118e8c405749ecb4295c487d70b2a6fd6b0be9b4ae",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260415&limit=300",
-          "sha256": "5d1de80a3b67c014987c09f4bb54984b1f118843bbaa9d10c707a93fa8abaf35",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260414&limit=300",
-          "sha256": "7486034c86a2863db8ee3f9545c730a0c1206c6aeb16a50f352b4e326c608cfa",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 2
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260413&limit=300",
-          "sha256": "c17a555ed8a89b85bbf389118e8c405749ecb4295c487d70b2a6fd6b0be9b4ae",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260412&limit=300",
-          "sha256": "31b3725cc91c4addcf5e89006e96f0811a52ecfb16b63303b7d8a2ef2b25214a",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 15
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260411&limit=300",
-          "sha256": "c17a555ed8a89b85bbf389118e8c405749ecb4295c487d70b2a6fd6b0be9b4ae",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260410&limit=300",
-          "sha256": "674c89ceb6df8f9258906a1906779ef7f3b075e54395e610a76469e0b676d847",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 15
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260409&limit=300",
-          "sha256": "65e992329d65883f4ad4643fe263f1709487dd54ea82a975a71caae770572eee",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 6
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260408&limit=300",
-          "sha256": "05c3b62537c38b589191e3845a03c4dc76b0ab07f28aaa8027cfd1a8d9fe6a18",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 7
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260407&limit=300",
-          "sha256": "90d574c2d4f164502d0eeb6930d287ec8213b61e1b1768f4a9a448fe11b0687c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 10
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260406&limit=300",
-          "sha256": "f17cd20a19910f0e8d956b9b973e103e515e0ea1f0d7378cd138b8fd1a41b657",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 5
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260405&limit=300",
-          "sha256": "63bf8cdff3321db4a087d3bf7ab20f26c948a58bf084b6fb09f713cd7048cfde",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260224&limit=300",
+          "sha256": "dfe5765c0c120e18aef9c6e0765d5270c0b9b98a1e5e5aae168d01bafb977972",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 11
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260404&limit=300",
-          "sha256": "d8774916909def3d16f8921f4dfc369b61c511a6e5105a584dbdd3b36b4eaf4e",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260223&limit=300",
+          "sha256": "3c3d9580f4f27090a24cd5a7086a71258cf14129b590dc41bfc8f46ec640fc42",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 3
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260403&limit=300",
-          "sha256": "95bbf9fc35479910da01a3ebf2742ad84eea525488b4d75b6871074702aa2348",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 9
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260222&limit=300",
+          "sha256": "1a75d08ea12065dfeb2a9f6feab63ebff16896267c0122abd1677c9362939dc7",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 11
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260402&limit=300",
-          "sha256": "010098d2cebd6a67e0f5137a2bea56aa18f34881bebc2bf17fbd8db8683b2b8b",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260221&limit=300",
+          "sha256": "2928064937bcd8905f179aeb06b097c0faba7e3590115bf600aae3c4e93704de",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 6
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260401&limit=300",
-          "sha256": "f9cab66765eae1dd7e2fbf7a2e5b0f40556c943ae9a7859229d2c4f81d400bea",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260220&limit=300",
+          "sha256": "715cac08e2ed92aaef228097924a461d95880b573e0674c3c1b7038c364c5017",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 9
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260228&limit=300",
-          "sha256": "5f5568c253aea9e36993ae968d9c0c0004e41bc87b093e7165d6d409b2ecafc6",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 5
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260227&limit=300",
-          "sha256": "a3b31d08568f31b8480cd10f227048b268da7339d74f927c39d780179ef594d1",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 5
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260226&limit=300",
-          "sha256": "a26781efb36eda1ee86bca352eb2164bba07ebb88d84f2a6ed5004ddd5423b59",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260219&limit=300",
+          "sha256": "819f8d2ba49637ce94cae561697f1557f8d80dfdf2450fc4bbc07ef47ed2029d",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 10
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260225&limit=300",
-          "sha256": "b6df4ce80849c51b670324500cda869447f33c12f201326117bfd104781379e5",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260218&limit=300",
+          "sha256": "c17a555ed8a89b85bbf389118e8c405749ecb4295c487d70b2a6fd6b0be9b4ae",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260217&limit=300",
+          "sha256": "c17a555ed8a89b85bbf389118e8c405749ecb4295c487d70b2a6fd6b0be9b4ae",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260216&limit=300",
+          "sha256": "c17a555ed8a89b85bbf389118e8c405749ecb4295c487d70b2a6fd6b0be9b4ae",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260215&limit=300",
+          "sha256": "04af5d2a0f933035274c8b0b6ac14d6edc4ef898ead3d489dfb8d34f7c4f2bf4",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 4
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260214&limit=300",
+          "sha256": "c17a555ed8a89b85bbf389118e8c405749ecb4295c487d70b2a6fd6b0be9b4ae",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260213&limit=300",
+          "sha256": "c17a555ed8a89b85bbf389118e8c405749ecb4295c487d70b2a6fd6b0be9b4ae",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260212&limit=300",
+          "sha256": "8023c0d2f38c4ad26e107f3e1a78ba3986100fa31a2f30e7af636699a39456ec",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 3
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260211&limit=300",
+          "sha256": "5416654a16e48b54d3b94f9ab28a626541653c58064b7548d16378decbb9f858",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 14
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260210&limit=300",
+          "sha256": "8604650a73c4a31e56a4589a1953c22cacb70693a8eb451efc0c41038d3d2cdb",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 4
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260209&limit=300",
+          "sha256": "25b62bbbebf6848bf7ef91b41a1c60dc2a1a123bc250b7480f0442f65011ae25",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 10
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260208&limit=300",
+          "sha256": "8a4ec6ab20dbc63f431f75088ead2b130d5a5300e6d21afbe0ddb570380bf76b",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 4
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260207&limit=300",
+          "sha256": "4a6f99b03b800ae569e1f2ed06f1ec34771de202a0d95b4732ad956416654432",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 10
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260206&limit=300",
+          "sha256": "05b6e7f97df393674df916a0d08224c966627e17eee1517e9a1b312cb0fbbb83",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 6
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260205&limit=300",
+          "sha256": "0498e9349e77cfebad547cb6221084165975bf9bfe72cdc1bf844ee913cff463",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 8
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260204&limit=300",
+          "sha256": "5d24b82eb4b04811bf02102dd08eb2d0abf48207772f070c5ce68a0ec8be3b79",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 7
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260203&limit=300",
+          "sha256": "ed5f6d535b6b2290298598b1e872c530f8b72a65a7aa9dce3b908a48a3586691",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 10
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260202&limit=300",
+          "sha256": "917b1457deb68676374181ea24264cccfe06060581b8e8a0a7711263771cb4d9",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 4
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260201&limit=300",
+          "sha256": "637a9f1ce92c1363d94fc84a5ac35ceacce44fc811c7ce6c2f9d11787f1e27b9",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 10
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260131&limit=300",
+          "sha256": "90377928208e7cbdd6e1aaac8c1125ae51c016c0a244d99b52b9d247576a5a49",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 6
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260130&limit=300",
+          "sha256": "56559c01cdccb19d46f3bab8237df13295fe8ba531bc16c4837a56f1e6d0dd49",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 9
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260129&limit=300",
+          "sha256": "3d2c5280e8b765aaeb6869e701335cf9a7e254f70115f62e19e9905b5dda7b9c",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 8
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260128&limit=300",
+          "sha256": "a9835aa958f76d7765afec393605b641d69ba6f47c3e11cee4136dac5702dae0",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 9
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260127&limit=300",
+          "sha256": "4a246144e2ab2b39501fdba63c5b92c6efe1647235d5203f0bb49753beff42b2",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 7
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260126&limit=300",
+          "sha256": "9c3829e8371123a01b7a67534a543dfa0cdcf27f34bcac84bd408bc01efc8c44",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 7
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260125&limit=300",
+          "sha256": "70a025040980e0169decffca550dda0f57b4f80491dd4bab6712173428a408fa",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 6
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261031&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261030&limit=300",
-          "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260426&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260327&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260425&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260326&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260424&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260325&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260423&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260324&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260422&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260323&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260421&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260322&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260420&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260321&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260419&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260320&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260418&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260319&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260417&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260318&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260416&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260317&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260415&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260316&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260414&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260315&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260413&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260314&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260412&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260313&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260411&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260312&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260410&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260311&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260409&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260310&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260408&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260309&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260407&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260308&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260406&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260307&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260405&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260306&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260404&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260305&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260403&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260304&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260402&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260303&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260401&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260302&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260331&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260301&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260330&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260228&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260329&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260227&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260328&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260226&limit=300",
           "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20260225&limit=300",
+          "sha256": "ca84a5c37edd2df56b70314796cfe16179cc6f1adc757a6977a7b7568f7c219c",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261031&limit=300",
-          "sha256": "9abfabec9c0b90406c2fe08800194227c0bf22b79eaa53ae77cebaa4a51298fa",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "sha256": "6b48fc0bcc545cfc412a0dfc0ca0781f9e63aad65c4ef74ee63d4491278c2055",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 6
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261030&limit=300",
-          "sha256": "17af634be3fb90522f7732fa17c0cef61c3ee1dd147175ada2b24b4b2b897024",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260426&limit=300",
-          "sha256": "861e3afcd8673af29ee7f7fde271f1c2fc7b5bed0728e8cb65b7cac5676d0c27",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260425&limit=300",
-          "sha256": "dc2f689e2d6c555641b5c2a6185580e2dc39f039cfb8db382545776f23d30a61",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260424&limit=300",
-          "sha256": "1135f22dfb61e91005ad3dde184de725ace5c9423c781a690b68d286de22603d",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260423&limit=300",
-          "sha256": "acd383e3b0d4b2a94815693f77ce90292194039de653d0f104f6308b597e7985",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260422&limit=300",
-          "sha256": "e260d54ebd0661627b8210dcb67aa9fe94504467b11542b15a77df53738c9ce6",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260421&limit=300",
-          "sha256": "46c3285eac8d157eb8ae1d46b8a88a40041f1f97b2fa075b7a2bb73472e2f4e6",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260420&limit=300",
-          "sha256": "4b57d6d30b435052ba89127fd6a2044eb3af135db9d0fb670372e7bc527d3d99",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260419&limit=300",
-          "sha256": "8deba8c46162446dfd89f9a0e10bd8b57a4e31c2074cbd3b65b53ac56d12bfda",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 4
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260418&limit=300",
-          "sha256": "25dba76e26bad756486d624d7713f145de6da504a048b27760e2561633153ed4",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260417&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260224&limit=300",
           "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260416&limit=300",
-          "sha256": "cace9a05f5ca30b7238003239662fc20a363f9ea70bd606a3ecbaa90a4152383",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 6
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260415&limit=300",
-          "sha256": "41f3e8c67a1f288ebbaaa8d083e48c533cc68a4d617c2b2d8ce221fa7d3952ed",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 6
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260414&limit=300",
-          "sha256": "9b809e68bf04634570ae663654832937b09c54b287747d90ca61ea49cecf7613",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 9
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260413&limit=300",
-          "sha256": "6d9257f9614bdcbb56f008dda5c0508ce32897f105b45a257d4b96598ea247cc",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 10
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260412&limit=300",
-          "sha256": "2cec640343ade1ebe70951f1a1d3e84011369c85bd480a3281de254e45f5a682",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 6
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260411&limit=300",
-          "sha256": "cf8980aeae4ed68647cf402df3f508380497958361ecd19fab2fc6569228b23e",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 15
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260410&limit=300",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260223&limit=300",
           "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260409&limit=300",
-          "sha256": "0a3cc617694a414815121f77b9f34c63732b0ea71b17a08bb35741b5a2c74306",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 14
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260222&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260408&limit=300",
-          "sha256": "3115b562ae550ef36f277cdbddbb79fbbb854918af0f19d46d42c760f8582590",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 3
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260221&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260407&limit=300",
-          "sha256": "1e291fbb03593432e534152bd903128a113a2bba941ea7412ff94c2af75f4ad3",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 11
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260220&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260406&limit=300",
-          "sha256": "bca8f5ca62bac8c63d1d3b63138a01839b1d61adc3048a5f8f2d588f36807266",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 4
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260219&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260405&limit=300",
-          "sha256": "0f370cf57ceeed5234e338d9caf318ed9a5f2ff3cf1e0636d85aab98d9fd9f3b",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260218&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260217&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260216&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260215&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260214&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260213&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260212&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260211&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260210&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260209&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260208&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260207&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260206&limit=300",
+          "sha256": "b9260588c8676b11348f994792de39e130dc1124612ea3fe45bb1a467e984911",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 0
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260205&limit=300",
+          "sha256": "4862b6f7f17dd8ceaf17c769f1db94ddb0738fed4b308d09d9265100a1974d21",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 7
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260404&limit=300",
-          "sha256": "1998df53c4bd12c561e0a54939136d16be7e2f73421f2a4cb2679e4b5da33619",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 15
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260204&limit=300",
+          "sha256": "4c2e1dff92b5e9e0ad032fa8d273870d2b3e44ddc065d2f0ee2d2135da31b40b",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 10
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260403&limit=300",
-          "sha256": "9625fac893f2aa6206e275320e6e078e7634df42afd5ca820a04e5782a356ff8",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 2
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260203&limit=300",
+          "sha256": "f5720796164ea3ecd52db2f7ef8501c1ea0912a05a19fe0020fa55844492c861",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 7
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260402&limit=300",
-          "sha256": "2375cfd90646adf1ac5a6fa5f25f833349080d01c3015b744d555f2388d6350b",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 14
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260202&limit=300",
+          "sha256": "fcb1c61976de473708c59bf212975dad781512703328391bbb7c202acb55785f",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 10
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260401&limit=300",
-          "sha256": "1323d1ee411c172507c8b45b0b4c548f0559058f13bdac2ba9f0375de0ff1c91",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260201&limit=300",
+          "sha256": "59a9ef50543c82f4dbacf4042bc31700c878cb8f0c9a1f45298950337ed3e441",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 3
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260228&limit=300",
-          "sha256": "6a86ce4212fb04c17f53953776bebed29d60f9355db96ef66a07f3466472ddaa",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 13
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260131&limit=300",
+          "sha256": "85c59b63ce1f13c69834392ccdaf78c37d5f98511f61bea2fad1c1e9664906b8",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 14
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260227&limit=300",
-          "sha256": "0d76e5df22b2d2fa7cb9edf019ae4b58032535457095cbd2b859b0ed230a4289",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260130&limit=300",
+          "sha256": "11dc1effa3b9533697a63a3cb433b8eab36acc9be564c2006522d5a66b22673a",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 1
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260129&limit=300",
+          "sha256": "84aead25118617fe6ae2185164758ecb18076eacbdbc822b0dfa3c8df17b20d3",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 15
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260128&limit=300",
+          "sha256": "c0f1642dec68a4ebb70e1f55bf88cd43b98003869c81b12a84651dfe3bff4c40",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 3
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260127&limit=300",
+          "sha256": "246f73c83ed6346399666c873a61386b79ee463e2562adf46f4939f655ba15f8",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 10
+        },
+        {
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260126&limit=300",
+          "sha256": "c7566799c9b5c20f1ad51a6007b0e83ff44799794a746e2bba273e3cbc63fb71",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
           "completed_games": 4
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260226&limit=300",
-          "sha256": "fcc0123a67cb25c41108c105f0303604b563656e8251272727ee1e92c0b5d337",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 12
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260225&limit=300",
-          "sha256": "ab776444ba654c2230ea50704b722e89115c1da8ab009f502dad4cf4809ac574",
-          "captured_at_utc": "2026-11-01T00:01:12.700277+00:00",
-          "completed_games": 8
+          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20260125&limit=300",
+          "sha256": "97a534ce8a0d85a5735be883bd1923b902f95f3ea69f62bc3b6fe848b47397e5",
+          "captured_at_utc": "2026-11-01T00:01:45.213687+00:00",
+          "completed_games": 6
         }
       ],
       "games_per_sport": {
-        "nba": 601,
+        "nba": 797,
         "nfl": 220,
-        "nhl": 773
+        "nhl": 863
       },
       "cutoff_exclusive_utc_date": "2026-11-01",
       "max_parallel_requests": 8
     },
     "score_backtests": {
       "nba": {
-        "n": 410,
-        "brier": 0.44715342202134556,
-        "log_loss": 0.6393291756630964,
+        "n": 606,
+        "brier": 0.42853376619346006,
+        "log_loss": 0.6194203854232085,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2026-10-10",
-          "n": 124,
-          "brier": 0.47647757345628816,
-          "log_loss": 0.6684780938111661,
-          "ece": 0.05763491268725525
+          "from": "2026-10-05",
+          "n": 145,
+          "brier": 0.4951278600153873,
+          "log_loss": 0.6896300870438713,
+          "ece": 0.07419143276074881
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "nhl": {
-        "n": 509,
-        "brier": 0.484280064763249,
-        "log_loss": 0.6773088246588994,
+        "n": 602,
+        "brier": 0.4834290204422545,
+        "log_loss": 0.6764627315370986,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2026-10-10",
-          "n": 154,
-          "brier": 0.47907874795687955,
-          "log_loss": 0.672061858010856,
-          "ece": 0.07036729750561467
+          "from": "2026-10-08",
+          "n": 168,
+          "brier": 0.47443266415683266,
+          "log_loss": 0.6673323727424781,
+          "ece": 0.09511947758560212
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
@@ -3945,8 +3861,8 @@
     },
     "team_statistics_history": {
       "scoreboard_requests": 15,
-      "summary_requests": 26,
-      "events_with_statistics": 134,
+      "summary_requests": 21,
+      "events_with_statistics": 155,
       "failures": [],
       "missing_stats": 0
     },
