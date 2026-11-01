@@ -9,6 +9,7 @@ from collections import defaultdict
 import datetime as dt
 import json
 import math
+from decimal import Decimal, ROUND_DOWN
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -64,7 +65,9 @@ class PaperRiskBook:
             INITIAL_TOTAL_BANK * MAX_EVENT_OPEN_FRACTION - self.event_exposure[event_id],
             INITIAL_TOTAL_BANK * MAX_PORTFOLIO_OPEN_FRACTION - self.total_exposure,
         )
-        size = round(max(0.0, available), 2)
+        # Rounding up could exceed the remaining account/event budget. Virtual
+        # stakes are whole cents and must always stay below the requested size.
+        size = float(Decimal(str(max(0.0, available))).quantize(Decimal("0.01"), rounding=ROUND_DOWN))
         if size < MIN_MEANINGFUL_STAKE_EUR:
             self.rejections["aggregate_event_or_portfolio_limit"] += 1
             return 0.0

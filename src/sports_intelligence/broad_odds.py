@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 from .odds_provider import (parse_utc,quotes_for_event,market_quotes_for_event,
-                            _request_odds,MAX_CREDITS_PER_DAY,MAX_BOOK_QUOTE_AGE_HOURS)
+                            _request_odds,MAX_CREDITS_PER_DAY,ODDS_KEY_MAP,attach_cached_odds)
 from .market_catalog import catalog_quotes,EXTRA_MARKET_PRIORITY
 
 
@@ -23,11 +23,15 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
             'event_markets_done':old.get('event_markets_done',[]) if same else [],
             'global_priced_keys':old.get('global_priced_keys',[]) if same else [],
             'global_priced_families':old.get('global_priced_families',[]) if same else [],
+            'global_poll_windows':old.get('global_poll_windows',{}) if same else {},
+            'key_last_priced':old.get('key_last_priced',{}),
             'family_last_priced':old.get('family_last_priced',{}),
+            'polled_windows':old.get('polled_windows',[]) if same else [],
+            'btts_attempted':old.get('btts_attempted',[]) if same else [],
             'credits_remaining':old.get('credits_remaining') if same else None}
     diag={'configured':bool(secret),'status':'OK' if secret else 'MISSING_KEY_NO_ODDS_API_CALLS',
           'calls_this_run':0,'errors':[],'cached_sports':[],'quotes_matched':0,
-          'allocation':'DIVERSE_DYNAMIC_SPORTS_4_CREDITS_PER_6H_SLOT_CATCHUP',
+          'allocation':'EXECUTABLE_SPORTS_THEN_DIVERSITY_4_CREDITS_PER_6H_SLOT',
           'maximum_daily_credits':MAX_CREDITS_PER_DAY}
     current_cap=min(MAX_CREDITS_PER_DAY,4*(now.hour//6+1))
     by_key=defaultdict(list)
@@ -44,19 +48,31 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
         rows=requester(key,secret,markets,event_id,discover)
         if getattr(rows,'credits_remaining',None) is not None:record['credits_remaining']=rows.credits_remaining
         return rows
+    def executable(key):
+        return any(e['sport'] in ODDS_KEY_MAP and e.get('paper_execution_enabled') is not False
+                   for e in by_key[key])
+    soccer=[e for matches in by_key.values() for e in matches
+            if e.get('family')=='soccer' and e.get('odds_event_id') and executable(e['odds_sport_key'])]
+    reserve_extra=3 if soccer and not record['event_markets_done'] else 0
+    window=now.hour//6
     available=set(by_key)
     while secret and available:
-        key=min(available,key=lambda k:(by_key[k][0]['family'] in record['global_priced_families'],
-                    record['family_last_priced'].get(by_key[k][0]['family'],''),
+        key=min(available,key=lambda k:(not executable(k),
+                    by_key[k][0]['family'] in record['global_priced_families'],
+                    record['key_last_priced'].get(k,''),
                     min(e['start_utc'] for e in by_key[k]),k))
         available.remove(key)
-        if key in record['global_priced_keys']:continue
+        # Modelled competitions may refresh in later slots. Discovery-only
+        # leagues rotate once daily so they cannot starve executable prices.
+        if record['global_poll_windows'].get(key)==window:continue
+        if not executable(key) and key in record['global_priced_keys']:continue
         matches=by_key[key];family=matches[0]['family']
-        markets='h2h,totals,spreads' if key=='soccer_epl' else 'h2h'
+        markets='h2h,totals,spreads' if family=='soccer' and executable(key) else 'h2h'
         cost=len(markets.split(','))
         # Preserve up to 3 credits for a real event's corner/BTTS market catalog.
-        if not remaining(cost,min(current_cap,MAX_CREDITS_PER_DAY-3)):continue
-        record['global_priced_keys'].append(key)
+        if not remaining(cost,min(current_cap,MAX_CREDITS_PER_DAY-reserve_extra)):continue
+        if key not in record['global_priced_keys']:record['global_priced_keys'].append(key)
+        record['global_poll_windows'][key]=window
         try:
             rows=request(key,markets)
             for sport in {e['sport'] for e in matches}:
@@ -68,15 +84,21 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
                     extra=market_quotes_for_event(e,rows,now);extended,_=catalog_quotes(e,rows,now);extra.update(extended)
                     if extra:extras[e['id']]=extra
                     if e.get('odds_event_id'):ids[e['id']]=e['odds_event_id']
-                record['snapshots'][sport]={'fetched_at':now.isoformat(),'quotes':quotes,'market_quotes':extras,
-                                             'provider_ids':ids,'family':family,'odds_sport_key':key}
+                # Different provider leagues can share an internal sport. A
+                # partial/empty response must not erase still-valid old quotes.
+                snap=record['snapshots'].setdefault(sport,{})
+                snap.setdefault('quotes',{}).update(quotes)
+                snap.setdefault('provider_ids',{}).update(ids)
+                for eid,markets_for_event in extras.items():
+                    snap.setdefault('market_quotes',{}).setdefault(eid,{}).update(markets_for_event)
+                snap.update(fetched_at=now.isoformat(),family=family,odds_sport_key=key)
             if family not in record['global_priced_families']:record['global_priced_families'].append(family)
             record['family_last_priced'][family]=now.isoformat()
+            record['key_last_priced'][key]=now.isoformat()
         except Exception as exc:diag['errors'].append({'sport_key':key,'reason':type(exc).__name__})
     # A broad sport catalog does not remove the user's request for corner markets.
     if secret and remaining(2,current_cap) and not record['event_markets_done']:
-        soccer=sorted((e for e in events if e.get('family')=='soccer' and e.get('odds_event_id') and
-                       e.get('status')=='pre' and now<parse_utc(e['start_utc'])<=now+dt.timedelta(hours=12)),key=lambda e:e['start_utc'])
+        soccer=sorted(soccer,key=lambda e:e['start_utc'])
         if soccer:
             e=soccer[0];key=e['odds_sport_key'];eid=e['odds_event_id']
             record['event_markets_done'].append(eid)
@@ -93,19 +115,9 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
                     snap.setdefault('market_quotes',{}).setdefault(e['id'],{}).update(extra)
                     snap['fetched_at']=now.isoformat()
             except Exception as exc:diag['errors'].append({'sport_key':key,'reason':'EVENT_MARKETS_'+type(exc).__name__})
-    for e in events:
-        if e.get('status')!='pre' or parse_utc(e['start_utc'])<=now:continue
-        snap=record['snapshots'].get(e['sport'],{})
-        def fresh(q):
-            try:
-                ts=q['best_book_updates']
-                return len(ts)==len(q['decimal']) and all(0<=(now-parse_utc(t)).total_seconds()<=MAX_BOOK_QUOTE_AGE_HOURS*3600 for t in ts)
-            except (KeyError,TypeError,ValueError):return False
-        quote=snap.get('quotes',{}).get(e['id'])
-        if quote and fresh(quote):
-            e['quote']=quote;diag['quotes_matched']+=1
-            if e['sport'] not in diag['cached_sports']:diag['cached_sports'].append(e['sport'])
-        e['market_quotes']={k:q for k,q in snap.get('market_quotes',{}).get(e['id'],{}).items() if fresh(q)}
+    diag['quotes_matched']=attach_cached_odds(events,record['snapshots'],now)
+    diag['cached_sports']=sorted({e['sport'] for e in events if e.get('quote') and
+                                 e['quote'].get('provider')=='The Odds API v4'})
     from .global_discovery import _atomic
     _atomic(path,record)
     diag.update(calls_today=record['calls_today'],credits_today=record['credits_today'],
