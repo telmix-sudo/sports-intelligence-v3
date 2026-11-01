@@ -113,3 +113,7 @@ Todas as doze carteiras e a experiência adicional passam a ter meta diária 5�
 A lista fixa de nove competições deixou de limitar a pesquisa. O scanner consulta todas as modalidades e competições ativas do catálogo de odds; descobre também todas as competições do catálogo público ESPN, com até 96 consultas por ciclo e rotação das restantes. O teste público inicial identificou 17 grupos e 359 competições ESPN. Estes números variam com o fornecedor. O TheSportsDB gratuito é um complemento parcial: no teste apenas devolveu futebol e desportos motorizados.
 
 O painel mostra separadamente modalidades no catálogo, consultadas, com eventos futuros, com odds verificadas e com previsões do modelo. Descobrir uma modalidade não a torna automaticamente elegível para operações. As novas modalidades exigem dados, modelo e liquidação próprios. [Relatório global](reports/global_discovery_latest.json), [calendário completo](data/global_events_v3.json) e [detalhes de operação](docs/global_discovery.md). Os saldos, IDs das carteiras e posições anteriores são preservados.
+
+## Ferramentas de IA e laboratório de aprendizagem automática
+
+Optuna e LightGBM têm um [fluxo diário independente](.github/workflows/ml-lab.yml), avaliação temporal e observações de stake zero. [Painel ML](https://telmix-sudo.github.io/sports-intelligence-v3/ml.html) e [integração/configuração dos revisores](docs/ai_integration.md). As aplicações externas requerem ativação na conta GitHub; ficheiros de configuração não equivalem a instalação confirmada.

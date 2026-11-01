@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: pt-PT
+reviews:
+  profile: assertive
+  high_level_summary: true
+  poem: false
+  auto_review:
+    enabled: true
+    drafts: false
+  path_filters:
+    - '!reports/**'
+    - '!data/*cache*.json'
+    - '!data/global_events_v3.json'
+  path_instructions:
+    - path: 'src/sports_intelligence/**'
+      instructions: |
+        Read AGENTS.md. Prioritize immutable forecasts, reconciliation of existing
+        balances, official market-specific settlement, pre-start bookmaker
+        timestamps, complete outcome sets and the shared 16-credit daily quota.
+        No automatic funded execution for newly discovered sports or ML models.
+    - path: 'src/sports_intelligence/ml_lab.py'
+      instructions: |
+        Check feature availability by date, no same-day results, separate tuning,
+        calibration and final evaluation periods, stable class order HOME/DRAW/AWAY,
+        and explicit absence of historical ROI without point-in-time odds.
+    - path: '.github/workflows/**'
+      instructions: |
+        Keep ML packages outside hourly workflows. Limit CPU, trials and execution
+        time. Persist only owned outputs and preserve concurrent wallet updates.
+chat:
+  auto_reply: true

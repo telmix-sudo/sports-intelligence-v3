@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-PT"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V3 · Laboratório de IA</title>
+<style>body{font:16px system-ui,sans-serif;background:#0b1425;color:#e6edf6;max-width:1100px;margin:40px auto;padding:0 20px}a{color:#79b8ff}h1{font-size:28px}.card{border:1px solid #334155;background:#111e32;border-radius:12px;padding:20px;margin:18px 0}.muted{color:#b6c3d6}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:12px 8px;border-bottom:1px solid #334155}button{padding:10px 16px;border:0;border-radius:7px;background:#9bc5ff;color:#10213a;cursor:pointer}.scroll{overflow:auto}</style>
+<nav><a href="./">Pesquisa global</a> · <a href="strategies.html">Carteiras PAPER</a></nav>
+<h1>Laboratório de IA da V3</h1>
+<p class="muted">Optuna procura parâmetros. LightGBM estima probabilidades 1X2 nas cinco ligas com histórico. As observações deste laboratório têm stake zero.</p>
+<button id="refresh">Atualizar</button>
+<section class="card"><h2>Experiência de aprendizagem automática</h2><p id="status">A carregar…</p><p id="method" class="muted"></p><div class="scroll"><table><thead><tr><th>Modelo</th><th>Jogos de avaliação</th><th>Log Loss ↓</th><th>Brier ↓</th></tr></thead><tbody id="scores"></tbody></table></div><p id="prospective"></p><p id="splits" class="muted"></p></section>
+<section class="card"><h2>Revisores de código</h2><p>Os revisores colaboram através das propostas de alteração e comentários no GitHub. Configuração guardada e aplicação ativada são estados diferentes.</p><ul id="tools"></ul><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/pulls">Ver propostas de alteração e revisões</a></p></section>
+<p class="muted">Os resultados históricos medem a qualidade das probabilidades. Sem odds contemporâneas não existe cálculo de lucro histórico. A avaliação é repetida diariamente e não representa um teste independente novo em cada execução. Os saldos das carteiras são geridos no laboratório PAPER existente.</p>
+<script>
+const BASE='https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/reports/';
+const el=id=>document.getElementById(id);
+const stamp=s=>new Intl.DateTimeFormat('pt-PT',{timeZone:'Europe/Lisbon',dateStyle:'short',timeStyle:'short'}).format(new Date(s));
+async function get(file){const r=await fetch(BASE+file+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);return r.json()}
+async function load(){
+  try{
+    const x=await get('ml_lab_latest.json');el('status').textContent=(x.status==='EXPERIMENTAL'?'Experiência executada':'Histórico insuficiente')+' · '+stamp(x.asof_utc)+' · '+x.historical_rows+' jogos preparados.';
+    const e=x.evaluation;el('scores').replaceChildren();
+    if(e){
+      el('method').textContent=e.trials_completed+' experiências Optuna · LightGBM '+e.packages.lightgbm+' · sem posições com stake.';
+      for(const [name,m] of Object.entries(e.holdout)){const tr=document.createElement('tr');for(const v of [name==='candidate'?'LightGBM calibrado':name,m.n,m.log_loss.toFixed(4),m.brier.toFixed(4)]){const td=document.createElement('td');td.textContent=v;tr.append(td)}el('scores').append(tr)}
+      el('splits').textContent=Object.entries(e.splits).map(([k,v])=>k+': '+v.first_date+' a '+v.last_date+' ('+v.n+')').join(' · ');
+    }
+    const p=x.prospective||{};el('prospective').textContent=p.forecasts_total!==undefined?p.forecasts_total+' observações congeladas · '+p.settled_total+' liquidadas para avaliação · 0 apostas com stake.':p.status||'Sem observações futuras neste ciclo.';
+  }catch(e){el('status').textContent='Relatório ML ainda indisponível: '+e.message}
+  el('tools').replaceChildren();
+  try{const r=await get('ai_review_latest.json');for(const [name,t] of Object.entries(r.tools||{})){const li=document.createElement('li');li.textContent=name+': '+(t.status==='REVIEW_ACTIVITY_OBSERVED'?'atividade de revisão observada':'sem atividade observada; ativação não confirmada');el('tools').append(li)}}catch(e){const li=document.createElement('li');li.textContent='A aguardar inventário de revisões.';el('tools').append(li)}
+}
+el('refresh').addEventListener('click',load);load();
+</script></html>
