@@ -2802,22 +2802,25 @@
     },
     "modalities_with_model_forecasts": 1
   },
-  "asof_utc": "2026-11-01T19:54:25.791564+00:00",
+  "asof_utc": "2026-11-01T22:35:14.078758+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-01",
     "target": 5,
     "max_per_day": 10,
-    "opened_today": 2,
-    "new_entries": 0,
+    "opened_today": 5,
+    "new_entries": 3,
     "reference": true,
     "not_a_value_signal": true,
     "status": "PARTIAL",
-    "reason": "Maximum exposure (2% of virtual bank) or 1 EUR minimum stake reached",
-    "eligible_events": 7,
+    "reason": "Genuine timestamped paper selections; reference only, no demonstrated edge",
+    "eligible_events": 3,
     "distinct_event_ids_today": [
       "nba:401909903",
-      "nfl:401873027"
+      "nba:401909906",
+      "nfl:401873027",
+      "nfl:401873035",
+      "nfl:401873036"
     ]
   },
   "daily_activity": {
@@ -2871,10 +2874,10 @@
         "target_met": false
       },
       "MARKET_DAILY_REFERENCE": {
-        "entries": 2,
+        "entries": 5,
         "minimum_target": 5,
         "maximum": 10,
-        "target_met": false
+        "target_met": true
       },
       "FREQ_SELECTIVE_1_3": {
         "entries": 1,
@@ -2910,7 +2913,6 @@
       "CONSENSUS_SHRUNK",
       "DISAGREEMENT_VETO",
       "MARKET_ANCHORED",
-      "MARKET_DAILY_REFERENCE",
       "FREQ_SELECTIVE_1_3",
       "FREQ_BALANCED_3_5",
       "FREQ_BROAD_5_10",
@@ -2919,13 +2921,15 @@
     "local_date": "2026-11-01",
     "min_distinct_events_target": 5,
     "preferred_max_distinct_events": 10,
-    "distinct_events_recorded": 3,
-    "paper_entries_across_all_accounts": 23,
-    "reference_entries": 2,
+    "distinct_events_recorded": 5,
+    "paper_entries_across_all_accounts": 26,
+    "reference_entries": 5,
     "unique_event_ids": [
       "nba:401909903",
       "nba:401909906",
-      "nfl:401873027"
+      "nfl:401873027",
+      "nfl:401873035",
+      "nfl:401873036"
     ],
     "minimum_met": false,
     "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
@@ -2934,44 +2938,38 @@
     "max_event_open_eur": 36.0,
     "max_total_open_eur": 240.0,
     "minimum_new_stake_eur": 1.0,
-    "total_open_eur": 114.13,
+    "total_open_eur": 104.0,
     "event_exposure_eur": {
       "epl:401878762": 42.1,
       "nba:401909903": 32.12,
-      "nba:401909906": 22.16,
-      "nfl:401873024": 5.07,
-      "nfl:401873027": 2.54,
-      "nfl:401873028": 5.07,
-      "nfl:401873031": 5.07
+      "nba:401909906": 24.7,
+      "nfl:401873035": 2.54,
+      "nfl:401873036": 2.54
     },
     "event_position_counts": {
       "epl:401878762": 10,
       "nba:401909903": 13,
-      "nba:401909906": 9,
-      "nfl:401873024": 1,
-      "nfl:401873027": 1,
-      "nfl:401873028": 1,
-      "nfl:401873031": 1
+      "nba:401909906": 10,
+      "nfl:401873035": 1,
+      "nfl:401873036": 1
     },
-    "limit_rejections": {
-      "aggregate_event_or_portfolio_limit": 1
-    },
+    "limit_rejections": {},
     "existing_positions_never_retroactively_changed": true
   },
   "market_research": {
-    "asof_utc": "2026-11-01T19:54:25.791564+00:00",
+    "asof_utc": "2026-11-01T22:35:14.078758+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
     "new_forecasts": 0,
-    "new_settlements": 0,
+    "new_settlements": 8,
     "forecasts_total": 16,
     "zero_stake_forecasts": 14,
-    "open_observations": 14,
-    "settlements_total": 0,
-    "candidate_markets": 35,
+    "open_observations": 6,
+    "settlements_total": 8,
+    "candidate_markets": 28,
     "closing_line_values_available": 0,
     "blocks": {
-      "insufficient_football_home_away_history": 5,
-      "missing_timestamped_ML_odds": 24,
+      "missing_timestamped_ML_odds": 22,
+      "insufficient_football_home_away_history": 4,
       "missing_timestamped_OVER_UNDER_2_5_odds": 1,
       "missing_timestamped_BTTS_odds": 1,
       "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 1
@@ -2982,20 +2980,20 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261031&limit=300",
-          "sha256": "a6e14c5c0d4316afe302b267024dee5e8a58fe60931c890ed3d6f9f0ebcad872",
-          "captured_at_utc": "2026-11-01T19:54:25.791564+00:00",
+          "sha256": "6a09428ff34da4e87b3b73b4a5c80700e9b7190ee86d4dcd7da7dc3a1140ccce",
+          "captured_at_utc": "2026-11-01T22:35:14.078758+00:00",
           "completed_games": 3
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261031&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-11-01T19:54:25.791564+00:00",
+          "captured_at_utc": "2026-11-01T22:35:14.078758+00:00",
           "completed_games": 0
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261031&limit=300",
-          "sha256": "1c17878ddce00dd3ff1d24be60bc26c99a3447085a2b76cf037315e712366ec1",
-          "captured_at_utc": "2026-11-01T19:54:25.791564+00:00",
+          "sha256": "b2b57f6de02d4ff5aef3cde7a66241d15a497bb7440a502386c9a371c6d5c35b",
+          "captured_at_utc": "2026-11-01T22:35:14.078758+00:00",
           "completed_games": 8
         }
       ],
@@ -3319,8 +3317,8 @@
     },
     "team_statistics_history": {
       "scoreboard_requests": 15,
-      "summary_requests": 40,
-      "events_with_statistics": 282,
+      "summary_requests": 3,
+      "events_with_statistics": 285,
       "failures": [],
       "missing_stats": 0
     },
@@ -3383,44 +3381,44 @@
   "ledger_audit": {
     "local_date": "2026-11-01",
     "opened_today": {
-      "n": 21,
-      "independent_events": 3
+      "n": 24,
+      "independent_events": 5
     },
     "games_played_today": {
-      "n": 16,
-      "independent_events": 4,
-      "wins": 4,
-      "losses": 12,
-      "staked_eur": 57.02,
-      "pnl_eur": -24.6,
-      "roi_pct": -43.14
+      "n": 20,
+      "independent_events": 8,
+      "wins": 7,
+      "losses": 13,
+      "staked_eur": 74.77,
+      "pnl_eur": -26.27,
+      "roi_pct": -35.13
     },
     "settled_today": {
-      "n": 16,
-      "independent_events": 4,
-      "wins": 4,
-      "losses": 12,
-      "staked_eur": 57.02,
-      "pnl_eur": -24.6,
-      "roi_pct": -43.14
+      "n": 20,
+      "independent_events": 8,
+      "wins": 7,
+      "losses": 13,
+      "staked_eur": 74.77,
+      "pnl_eur": -26.27,
+      "roi_pct": -35.13
     },
-    "total": 117,
-    "open": 34,
-    "closed": 83,
+    "total": 120,
+    "open": 33,
+    "closed": 87,
     "voided": 0,
     "all_time": {
-      "n": 83,
-      "independent_events": 22,
-      "wins": 24,
-      "losses": 59,
-      "staked_eur": 360.27,
-      "pnl_eur": -132.84,
-      "roi_pct": -36.87
+      "n": 87,
+      "independent_events": 26,
+      "wins": 27,
+      "losses": 60,
+      "staked_eur": 378.02,
+      "pnl_eur": -134.51,
+      "roi_pct": -35.58
     },
     "prospective_benchmark": {
-      "n": 74,
-      "model_brier": 0.616129,
-      "market_brier": 0.523457,
+      "n": 78,
+      "model_brier": 0.60341,
+      "market_brier": 0.51549,
       "beats_market_on_sample": false,
       "note": "No market forecast invented; beware event correlation and low sample size."
     },
@@ -3452,6 +3450,15 @@
         "pnl_eur": 5.01,
         "roi_pct": 19.88
       },
+      "nfl": {
+        "n": 4,
+        "independent_events": 4,
+        "wins": 3,
+        "losses": 1,
+        "staked_eur": 17.75,
+        "pnl_eur": -1.67,
+        "roi_pct": -9.41
+      },
       "nhl": {
         "n": 5,
         "independent_events": 5,
@@ -3482,13 +3489,13 @@
         "roi_pct": -46.79
       },
       "ML": {
-        "n": 10,
-        "independent_events": 10,
-        "wins": 7,
-        "losses": 3,
-        "staked_eur": 45.36,
-        "pnl_eur": 14.5,
-        "roi_pct": 31.97
+        "n": 14,
+        "independent_events": 14,
+        "wins": 10,
+        "losses": 4,
+        "staked_eur": 63.11,
+        "pnl_eur": 12.83,
+        "roi_pct": 20.33
       }
     },
     "by_strategy": {
@@ -3583,13 +3590,13 @@
         "roi_pct": -68.29
       },
       "MARKET_DAILY_REFERENCE": {
-        "n": 12,
-        "independent_events": 12,
-        "wins": 9,
-        "losses": 3,
-        "staked_eur": 50.44,
-        "pnl_eur": 16.48,
-        "roi_pct": 32.68
+        "n": 16,
+        "independent_events": 16,
+        "wins": 12,
+        "losses": 4,
+        "staked_eur": 68.19,
+        "pnl_eur": 14.81,
+        "roi_pct": 21.72
       },
       "POISSON_SHRINK": {
         "n": 8,
@@ -3603,13 +3610,13 @@
     },
     "by_odds_band": {
       "under_2": {
-        "n": 9,
-        "independent_events": 9,
-        "wins": 8,
-        "losses": 1,
-        "staked_eur": 40.36,
-        "pnl_eur": 14.66,
-        "roi_pct": 36.33
+        "n": 13,
+        "independent_events": 13,
+        "wins": 11,
+        "losses": 2,
+        "staked_eur": 58.11,
+        "pnl_eur": 12.99,
+        "roi_pct": 22.36
       },
       "2_to_3": {
         "n": 34,
@@ -4525,23 +4532,23 @@
     },
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 1016.4842,
-      "open_exposure_eur": 20.29,
-      "pnl_eur": 16.4842,
-      "total_staked_settled_eur": 50.44,
-      "paper_wins": 9,
-      "paper_losses": 3,
-      "settled": 12,
+      "bankroll_eur": 1014.8139,
+      "open_exposure_eur": 10.16,
+      "pnl_eur": 14.8139,
+      "total_staked_settled_eur": 68.19,
+      "paper_wins": 12,
+      "paper_losses": 4,
+      "settled": 16,
       "voided": 0,
-      "open": 5,
-      "yield_percent": 32.6808,
-      "return_on_initial_bank_percent": 1.6484,
+      "open": 4,
+      "yield_percent": 21.7244,
+      "return_on_initial_bank_percent": 1.4814,
       "max_settled_drawdown_percent": 0.6352,
-      "brier": 0.332879,
-      "log_loss": 0.523016,
-      "benchmark_n": 3,
-      "market_brier": 0.233698,
-      "market_log_loss": 0.44267,
+      "brier": 0.341684,
+      "log_loss": 0.52795,
+      "benchmark_n": 7,
+      "market_brier": 0.310499,
+      "market_log_loss": 0.49986,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "FREQ_SELECTIVE_1_3": {
@@ -4837,20 +4844,19 @@
     "failures": 0
   },
   "events_seen": 112,
-  "new_paper_entries": {},
+  "new_paper_entries": {
+    "MARKET_DAILY_REFERENCE": 3
+  },
   "entry_diagnostics": {
     "rejections": {
-      "missing_timestamped_odds": 41
+      "missing_timestamped_odds": 33
     },
-    "new_entries": 0,
+    "new_entries": 3,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 0,
+  "newly_settled": 4,
   "missing_final_event_ids": [
-    "nfl:401873024",
-    "nfl:401873027",
-    "nfl:401873028",
-    "nfl:401873031"
+    "nba:401909903"
   ],
   "statistic_settlement": {
     "lookups": 0,
