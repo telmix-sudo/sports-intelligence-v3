@@ -45,7 +45,7 @@
 <section class="space"><h2>Backtest cronológico</h2><p class="muted">Cinco ligas; previsões feitas antes de conhecer os resultados do próprio dia. Referência trivial = probabilidade 1/3 para cada resultado (não representa o mercado).</p><div class="table"><table><thead><tr><th>Estratégia</th><th>Jogos avaliados</th><th>Brier</th><th>Log Loss</th><th>Brier uniforme</th><th>ROI histórico</th></tr></thead><tbody id="backtests"><tr><td colspan="6">A carregar…</td></tr></tbody></table></div></section>
 <section class="space"><h2>Fonte e qualidade</h2><div class="card"><div id="sources" class="muted">—</div><p class="muted small">As carteiras simulam preços observados, mas não verificam a execução real em bookmaker nem oferecem garantias. Estratégias podem selecionar os mesmos jogos; por isso não somamos as carteiras como posições independentes.</p><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/original_strategies.md">Metodologia, fontes científicas e próximas estratégias</a></p></div></section>
 </main><dialog id="positionsDialog" aria-labelledby="positionsTitle"><div class="dialogtop"><h2 id="positionsTitle">Posições</h2><button id="closePositions" aria-label="Fechar quadro">Fechar ×</button></div><p class="muted" id="positionsSummary"></p><div id="positionsContent"></div></dialog><footer>Sports Intelligence · Sem apostas reais · Fontes públicas e cálculos reproduzíveis</footer>
-<script src="balance.js"></script>
+<script src="balance.js?v=20261101-totals"></script>
 <script>
 "use strict";
 const el=id=>document.getElementById(id);
