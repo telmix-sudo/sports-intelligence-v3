@@ -9,8 +9,42 @@ import json
 from pathlib import Path
 
 from .odds_provider import (parse_utc,quotes_for_event,market_quotes_for_event,
-                            _request_odds,MAX_CREDITS_PER_DAY,ODDS_KEY_MAP,attach_cached_odds)
+                            _request_odds,MAX_CREDITS_PER_DAY,MAX_BOOK_QUOTE_AGE_HOURS,
+                            ODDS_KEY_MAP,attach_cached_odds)
 from .market_catalog import catalog_quotes,EXTRA_MARKET_PRIORITY
+
+
+def prune_expired_prices(snapshots, now):
+    """Bound the live cache; frozen audit prices live in journals and ledgers.
+
+    Only discard prices whose latest known bookmaker time has expired. Opaque
+    legacy entries and future/invalid times are retained for diagnosis, not used.
+    """
+    removed = 0
+    def expired(quote):
+        try:
+            updates = quote['best_book_updates']
+            return bool(updates) and all(now-parse_utc(t) > dt.timedelta(hours=MAX_BOOK_QUOTE_AGE_HOURS)
+                                         for t in updates)
+        except (AttributeError,KeyError,TypeError,ValueError,OverflowError):
+            return False
+    for snap in snapshots.values():
+        touched = set()
+        quotes = snap.get('quotes', {})
+        markets = snap.get('market_quotes', {})
+        for eid, quote in list(quotes.items()):
+            if expired(quote):
+                del quotes[eid]; touched.add(eid); removed += 1
+        for eid, values in list(markets.items()):
+            for name, quote in list(values.items()):
+                if expired(quote):
+                    del values[name]; touched.add(eid); removed += 1
+            if not values:
+                del markets[eid]
+        for eid in touched:
+            if eid not in quotes and eid not in markets:
+                snap.get('provider_ids', {}).pop(eid, None)
+    return removed
 
 
 def annotate_discovered(events,root,now,secret,requester=_request_odds):
@@ -115,6 +149,7 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
                     snap.setdefault('market_quotes',{}).setdefault(e['id'],{}).update(extra)
                     snap['fetched_at']=now.isoformat()
             except Exception as exc:diag['errors'].append({'sport_key':key,'reason':'EVENT_MARKETS_'+type(exc).__name__})
+    diag['expired_cached_quotes_removed']=prune_expired_prices(record['snapshots'],now)
     diag['quotes_matched']=attach_cached_odds(events,record['snapshots'],now)
     diag['cached_sports']=sorted({e['sport'] for e in events if e.get('quote') and
                                  e['quote'].get('provider')=='The Odds API v4'})

@@ -12,11 +12,13 @@ O teste público inicial encontrou 17 grupos desportivos e 359 competições na 
 
 ## Preços e mercados
 
-Os preços partilham o cache e o limite existente de **16 créditos/dia**. São libertados até quatro créditos por janela de seis horas; um ciclo atrasado pode usar as janelas anteriores. Há prioridade a modalidades ainda não cotadas nesse dia e às menos recentemente cotadas. Só são pagos preços de competições com confrontos nas próximas 12h. Até três créditos ficam reservados para a descoberta e recolha de mercados adicionais de um evento de futebol.
+Os preços partilham o cache e o limite existente de **16 créditos/dia**. São libertados até quatro créditos por janela de seis horas; um ciclo atrasado pode usar as janelas anteriores. As competições já suportadas pelo laboratório têm prioridade; dentro desse grupo e depois nas restantes, favorecem-se modalidades ainda não cotadas e competições menos recentemente cotadas. Competições com modelo podem renovar os preços noutra janela do mesmo dia, sem repetir pedidos na mesma janela. Só são pagos preços de competições com confrontos nas próximas 12h. Até três créditos ficam reservados para a descoberta e recolha de mercados adicionais de um evento de futebol suportado.
 
 Um crédito não equivale sempre a uma chamada: mercados distintos e regiões multiplicam o custo. A V3 usa uma região, contabiliza antecipadamente o custo e respeita o saldo comunicado pelo fornecedor. A descoberta gratuita continua quando o orçamento de preços termina. Não há subscrição ou aumento automático do plano.
 
 As 16 unidades diárias não permitem atualizar preços de todas as competições todos os dias. A pesquisa de calendários tem cobertura maior do que a de odds. Datas de atualização dos bookmakers são preservadas; a hora de leitura do cache nunca é apresentada como uma nova cotação.
+
+Atualizações parciais preservam outras cotações ainda válidas. O scanner e o laboratório verificam os timestamps efetivos de todas as seleções; a atualização de outro mercado não rejuvenesce preços antigos. Preços com timestamps conhecidos já expirados saem da cache ativa. As cotações congeladas das apostas e observações continuam nos ledgers e diários de investigação; estes registos de auditoria não são podados.
 
 ## Integridade e interpretação
 

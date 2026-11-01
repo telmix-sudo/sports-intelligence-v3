@@ -541,9 +541,9 @@ def enrich_pending_statistics(root: Path, finals: dict, now: dt.datetime, enrich
                 pending.setdefault(row["event_id"], row)
     errors = []
     for event_id, row in pending.items():
-        event = {key: row[key] for key in ("sport", "home", "away")}
-        event.update(id=event_id, final=finals[event_id])
         try:
+            event = {key: row[key] for key in ("sport", "home", "away")}
+            event.update(id=event_id, final=finals[event_id])
             finals[event_id] = enricher(event)["final"]
         except Exception as exc:
             errors.append({"event_id": event_id, "reason": type(exc).__name__})

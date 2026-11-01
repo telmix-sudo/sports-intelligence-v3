@@ -424,13 +424,9 @@ def annotate_odds(events: list[dict], root: Path, now: dt.datetime,
             if event["status"] != "pre" or parse_utc(event["start_utc"]) <= now:
                 continue
             event["market_quotes"] = {name:q for name,q in snap.get("market_quotes", {}).get(event["id"], {}).items()
-                if all(0 <= (now-parse_utc(t)).total_seconds() <= MAX_BOOK_QUOTE_AGE_HOURS*3600
-                       for t in q.get("best_book_updates", [])) and len(q.get("best_book_updates", [])) == 2}
+                if fresh_quote(q, now) and len(q["decimal"]) == 2}
             quote = snap["quotes"].get(event["id"])
-            if quote and any((now - parse_utc(timestamp)).total_seconds() > MAX_BOOK_QUOTE_AGE_HOURS * 3600
-                             for timestamp in quote["best_book_updates"]):
-                quote = None
-            if quote:
+            if fresh_quote(quote, now):
                 event["quote"] = quote
                 diagnostics["quotes_matched"] += 1
                 if event["sport"] not in diagnostics["cached_sports"]:

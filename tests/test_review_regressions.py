@@ -6,8 +6,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from sports_intelligence.broad_odds import annotate_discovered
-from sports_intelligence.odds_provider import attach_cached_odds, quotes_for_event
+from sports_intelligence.broad_odds import annotate_discovered, prune_expired_prices
+from sports_intelligence.odds_provider import attach_cached_odds, quotes_for_event, annotate_odds
 from sports_intelligence.portfolio_controls import PaperRiskBook
 from sports_intelligence.strategy_lab import enrich_pending_statistics, save_jsonl
 
@@ -142,8 +142,59 @@ class LiveCacheTests(unittest.TestCase):
             self.assertEqual(first["errors"][0]["reason"], "ConnectionError")
             self.assertNotIn("PRIVATE_PROVIDER_DETAIL", json.dumps(first))
 
+    def test_legacy_path_uses_same_quote_validation_and_keeps_diagnostics(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "data").mkdir()
+            e = event()
+            quote = quotes_for_event(e, prices(e), NOW)
+            path = root / "data/odds_cache_v3.json"
+            for stamps in ([], [(NOW+dt.timedelta(minutes=1)).isoformat()]*2,
+                           [NOW.isoformat()], [NOW.isoformat()]*2):
+                with self.subTest(stamps=stamps):
+                    q = dict(quote, best_book_updates=stamps)
+                    future = dict(quote, best_book_updates=[(NOW+dt.timedelta(minutes=1)).isoformat()]*2)
+                    path.write_text(json.dumps({"day": str(NOW.date()), "snapshots": {"nfl": {
+                        "fetched_at": NOW.isoformat(), "quotes": {e["id"]: q},
+                        "market_quotes": {e["id"]: {"valid": quote, "future": future}}}}}))
+                    fresh_event = event()
+                    result = annotate_odds([fresh_event], root, NOW, secret="")
+                    self.assertEqual(result["quotes_matched"], int(len(stamps)==2 and stamps[0]==NOW.isoformat()))
+                    self.assertEqual(set(fresh_event["market_quotes"]), {"valid"})
+                    self.assertEqual(result["cached_sports"], ["nfl"] if fresh_event["quote"] else [])
+
+    def test_cache_expiry_keeps_fresh_prices_and_opaque_legacy_metadata(self):
+        e = event()
+        quote = quotes_for_event(e, prices(e), NOW)
+        old = copy.deepcopy(quote)
+        old["best_book_updates"] = [(NOW-dt.timedelta(hours=13)).isoformat()]*2
+        snapshots = {"nfl": {"quotes": {"fresh": copy.deepcopy(quote), "old": old, "legacy": {"x": 1}},
+                             "market_quotes": {"fresh": {"valid": copy.deepcopy(quote), "old": old},
+                                               "expired": {"old": old}},
+                             "provider_ids": {"fresh": "A", "old": "B", "expired": "C", "no_prices": "D"}}}
+        self.assertEqual(prune_expired_prices(snapshots, NOW), 3)
+        snap = snapshots["nfl"]
+        self.assertEqual(set(snap["quotes"]), {"fresh", "legacy"})
+        self.assertEqual(snap["quotes"]["fresh"], quote)
+        self.assertEqual(set(snap["market_quotes"]["fresh"]), {"valid"})
+        self.assertEqual(snap["provider_ids"], {"fresh": "A", "no_prices": "D"})
+
 
 class SharedSettlementTests(unittest.TestCase):
+    def test_incomplete_legacy_row_is_diagnosed_without_interrupting_settlement(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path = root / "data/strategy_ledgers/elo_standard.jsonl"
+            path.parent.mkdir(parents=True)
+            save_jsonl(path, [{"id": "SYNTHETIC", "event_id": "epl:1", "status": "OPEN",
+                              "start_utc": (NOW-dt.timedelta(hours=3)).isoformat(),
+                              "market_spec": {"metric": "corners"}}])
+            finals = {"epl:1": {"home": 1, "away": 0, "outcome": 0}}
+            frozen = copy.deepcopy(finals)
+            result = enrich_pending_statistics(root, finals, NOW, lambda _: self.fail("Missing identity"))
+            self.assertEqual(result, {"lookups": 1, "errors": [{"event_id": "epl:1", "reason": "KeyError"}]})
+            self.assertEqual(finals, frozen)
+
     def test_nullable_specs_do_not_crash_and_boxscore_is_shared_across_wallets(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
