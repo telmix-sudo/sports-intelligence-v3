@@ -1,7 +1,7 @@
 "use strict";
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { localDay, bounds, summarize, experimentalRows } = require("../docs/balance.js");
+const { localDay, bounds, summarize, experimentalRows, fetchReport } = require("../docs/balance.js");
 const ASOF = "2026-11-02T12:00:00Z";
 function trade(id, status, pnl, settlement) {
   return { id, status, stake_eur: 5, pnl_eur: pnl, settlement_utc: settlement, forecast_utc: "2026-10-20T12:00:00Z" };
@@ -71,4 +71,26 @@ test("experimental account joins append-only settlements and excludes zero-stake
   assert.equal(normalized.length, 1);
   assert.equal(summarize(normalized, { bankroll_initial_eur: 1000, bankroll_eur: 1001.25 }, created, bounds("all"), ASOF).net, 1.25);
   assert.throws(() => experimentalRows([...journal, { ...journal[2], id: "S2" }]), /DUPLICATE_SETTLEMENT/);
+});
+
+test("report and ledgers use one immutable snapshot instead of cached main files", async () => {
+  const sha = "a".repeat(40), calls = [], report = { asof_utc: ASOF };
+  const reader = async url => {
+    calls.push(url);
+    return { ok: true, json: async () => calls.length === 1 ? { sha } : report };
+  };
+  const snapshot = await fetchReport(reader);
+  assert.equal(snapshot.ref, sha);
+  assert.equal(snapshot.report, report);
+  assert.match(calls[1], new RegExp("/" + sha + "/reports/strategy_lab_latest\\.json"));
+});
+
+test("public metadata limits retain the reconciled main fallback without extra authorization", async () => {
+  const calls = [];
+  const snapshot = await fetchReport(async url => {
+    calls.push(url);
+    return calls.length === 1 ? { ok: false } : { ok: true, json: async () => ({ asof_utc: ASOF }) };
+  });
+  assert.equal(snapshot.ref, "main");
+  assert.match(calls[1], /\/main\/reports\/strategy_lab_latest\.json/);
 });

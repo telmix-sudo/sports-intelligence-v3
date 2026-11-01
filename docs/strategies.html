@@ -48,7 +48,6 @@
 <script src="balance.js"></script>
 <script>
 "use strict";
-const url="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/reports/strategy_lab_latest.json";
 const el=id=>document.getElementById(id);
 const fmt=(x,places=2)=>Number.isFinite(x)?x.toLocaleString("pt-PT",{minimumFractionDigits:places,maximumFractionDigits:places}):"—";
 const label=id=>id.split("_").join(" ");
@@ -114,10 +113,8 @@ const stamp=document.createElement("div");stamp.className="small muted";stamp.te
 async function load(){
 el("status").textContent="A verificar estado...";
 try{
-const response=await fetch(url+"?t="+Date.now(),{cache:"no-store"});
-if(!response.ok)throw Error("HTTP "+response.status);
-const x=await response.json();
-balancePanel.updateReport(x);
+const {report:x,ref}=await V3Balance.fetchReport();
+balancePanel.updateReport(x,ref);
 el("updated").textContent="Último relatório: "+new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(x.asof_utc))+" (Lisboa)";
 const elapsed=Math.max(0,Math.round((Date.now()-new Date(x.asof_utc).getTime())/60000));
 el("freshness").textContent="Verificado agora; relatório publicado há "+(elapsed<60?elapsed+" min":Math.floor(elapsed/60)+" h "+elapsed%60+" min")+". A verificação automática ocorre a cada 5 minutos e não provoca novas apostas nem consultas à API de odds. "+(elapsed>24*60?"Atenção: laboratório sem novo relatório há mais de um dia.":"As carteiras só mudam quando existe uma nova operação ou liquidação.");
