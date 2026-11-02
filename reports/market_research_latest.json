@@ -1,16 +1,28 @@
 {
-  "asof_utc": "2026-11-02T23:26:27.638340+00:00",
+  "asof_utc": "2026-11-02T23:33:35.182128+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-  "new_forecasts": 0,
+  "new_forecasts": 17,
   "new_settlements": 0,
-  "forecasts_total": 63,
-  "zero_stake_forecasts": 51,
-  "open_observations": 5,
+  "forecasts_total": 80,
+  "zero_stake_forecasts": 68,
+  "open_observations": 22,
   "settlements_total": 50,
   "candidate_markets": 31,
   "closing_line_values_available": 0,
   "blocks": {
-    "missing_timestamped_ML_odds": 31
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 22,
+    "EDGE_BELOW_4PP": 13,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 13,
+    "DAILY_PAPER_LIMIT": 22,
+    "NEEDS_100_DISTINCT_EVENTS": 8,
+    "NEEDS_14_DAY_FORWARD_PERIOD": 8,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 8,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 8,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 8,
+    "CALIBRATION_ERROR_OVER_10PP": 8,
+    "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 1,
+    "NEEDS_50_HOLDOUT_FORECASTS": 1,
+    "missing_timestamped_ML_odds": 1
   },
   "history": {
     "requests": 3,
@@ -19,19 +31,19 @@
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
         "sha256": "a1aa87e29362523f7b7d24feb239d2094e0495d0083d57faab7a074984608142",
-        "captured_at_utc": "2026-11-02T23:26:27.638340+00:00",
+        "captured_at_utc": "2026-11-02T23:33:35.182128+00:00",
         "completed_games": 2
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
         "sha256": "7ab05326149c665e508895473a5f8e8906fa49ea1e22e84f0137be5552a2f47d",
-        "captured_at_utc": "2026-11-02T23:26:27.638340+00:00",
+        "captured_at_utc": "2026-11-02T23:33:35.182128+00:00",
         "completed_games": 11
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-        "sha256": "c19076b392b08a20acc45852e3bec95025442a456850084884719ef20b77de79",
-        "captured_at_utc": "2026-11-02T23:26:27.638340+00:00",
+        "sha256": "5cece08cd947d886bf0c26050d0a906599a6b3abe281209d3c2229085a3c933c",
+        "captured_at_utc": "2026-11-02T23:33:35.182128+00:00",
         "completed_games": 4
       }
     ],
@@ -356,16 +368,16 @@
   "team_statistics_history": {
     "scoreboard_requests": 40,
     "summary_requests": 120,
-    "events_with_statistics": 1348,
+    "events_with_statistics": 1468,
     "failures": [],
     "missing_stats": 0,
     "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
     "events_by_sport": {
-      "ligue_1": 302,
-      "la_liga": 289,
-      "bundesliga": 155,
-      "serie_a": 288,
-      "epl": 314
+      "ligue_1": 328,
+      "la_liga": 307,
+      "bundesliga": 180,
+      "serie_a": 313,
+      "epl": 340
     }
   },
   "additional_market_backtests": {},
