@@ -2834,7 +2834,7 @@
     },
     "modalities_with_model_forecasts": 1
   },
-  "asof_utc": "2026-11-02T15:58:30.191607+00:00",
+  "asof_utc": "2026-11-02T20:53:43.260794+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-02",
@@ -2972,7 +2972,7 @@
     "max_event_open_eur": 36.0,
     "max_total_open_eur": 240.0,
     "minimum_new_stake_eur": 1.0,
-    "total_open_eur": 240.0,
+    "total_open_eur": 205.45,
     "event_exposure_eur": {
       "epl:401878762": 42.1,
       "ligue_1:401876419": 5.9,
@@ -2985,8 +2985,7 @@
       "nba:401909917": 29.5,
       "nfl:401873036": 2.54,
       "nhl:401892629": 2.53,
-      "nhl:401892630": 24.63,
-      "serie_a:401874963": 34.55
+      "nhl:401892630": 24.63
     },
     "event_position_counts": {
       "epl:401878762": 10,
@@ -3000,44 +2999,24 @@
       "nba:401909917": 12,
       "nfl:401873036": 1,
       "nhl:401892629": 1,
-      "nhl:401892630": 13,
-      "serie_a:401874963": 15
+      "nhl:401892630": 13
     },
-    "limit_rejections": {
-      "invalid_stake": 26,
-      "aggregate_event_or_portfolio_limit": 8
-    },
+    "limit_rejections": {},
     "existing_positions_never_retroactively_changed": true
   },
   "market_research": {
-    "asof_utc": "2026-11-02T15:58:30.191607+00:00",
+    "asof_utc": "2026-11-02T20:53:43.260794+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
     "new_forecasts": 0,
-    "new_settlements": 0,
+    "new_settlements": 22,
     "forecasts_total": 63,
     "zero_stake_forecasts": 51,
-    "open_observations": 37,
-    "settlements_total": 16,
-    "candidate_markets": 72,
+    "open_observations": 16,
+    "settlements_total": 38,
+    "candidate_markets": 31,
     "closing_line_values_available": 0,
     "blocks": {
-      "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 4,
-      "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 5,
-      "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 5,
-      "DAILY_PAPER_LIMIT": 33,
-      "EXPERIMENTAL_EVENT_ALREADY_TRADED": 30,
-      "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 3,
-      "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 10,
-      "NEEDS_50_HOLDOUT_FORECASTS": 10,
-      "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 3,
-      "NEEDS_TWO_BOOKMAKERS": 19,
-      "EDGE_BELOW_4PP": 15,
-      "CONSERVATIVE_EV_BELOW_1_PERCENT": 23,
-      "missing_timestamped_BTTS_odds": 3,
-      "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL": 2,
-      "missing_timestamped_OVER_UNDER_2_5_odds": 1,
-      "insufficient_football_home_away_history": 1,
-      "missing_timestamped_ML_odds": 30
+      "missing_timestamped_ML_odds": 31
     },
     "history": {
       "requests": 3,
@@ -3045,20 +3024,20 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-          "sha256": "d5b9339d5bf04127fcb69902edcb809bfb7f10ff23dd9830e9701ffa74017510",
-          "captured_at_utc": "2026-11-02T15:58:30.191607+00:00",
+          "sha256": "367630d74682beee5268cce44f07707d15aa7a458b1caf289a94cab3bcda4c50",
+          "captured_at_utc": "2026-11-02T20:53:43.260794+00:00",
           "completed_games": 2
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-          "sha256": "7959473e3f9dea5d4fcc490b535edd8507474e028d12cd0edfcab0e7753352c6",
-          "captured_at_utc": "2026-11-02T15:58:30.191607+00:00",
+          "sha256": "2f136b3346239199b9ede4cd60bb4cbac312fc9914bd798f21cd0d19aaf578b8",
+          "captured_at_utc": "2026-11-02T20:53:43.260794+00:00",
           "completed_games": 11
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-          "sha256": "d4b17a7d2f3bcb1dda954936fe38253ff0b1bb5a62a31bc931654b775d4e5e76",
-          "captured_at_utc": "2026-11-02T15:58:30.191607+00:00",
+          "sha256": "03d0e4879db1095e3d6b81b9648202d0b859256dca741658b2cfd3eaf332c9d5",
+          "captured_at_utc": "2026-11-02T20:53:43.260794+00:00",
           "completed_games": 4
         }
       ],
@@ -3381,515 +3360,21 @@
       }
     },
     "team_statistics_history": {
-      "scoreboard_requests": 32,
-      "summary_requests": 82,
-      "events_with_statistics": 988,
+      "scoreboard_requests": 40,
+      "summary_requests": 120,
+      "events_with_statistics": 1108,
       "failures": [],
       "missing_stats": 0,
       "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
       "events_by_sport": {
-        "ligue_1": 227,
-        "la_liga": 230,
-        "bundesliga": 72,
-        "serie_a": 230,
-        "epl": 229
+        "ligue_1": 250,
+        "la_liga": 250,
+        "bundesliga": 107,
+        "serie_a": 249,
+        "epl": 252
       }
     },
-    "additional_market_backtests": {
-      "serie_a|STAT_da016301f271bb98": {
-        "n": 1283,
-        "brier": 0.440830573069591,
-        "log_loss": 0.6321307189771872,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-11-02",
-          "n": 246,
-          "brier": 0.44783763183914416,
-          "log_loss": 0.6429027998465591,
-          "ece": 0.07740314709862695
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_c122fd6d54f99fd5": {
-        "n": 1232,
-        "brier": 0.4610502383311818,
-        "log_loss": 0.6551140218378612,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-11-01",
-          "n": 251,
-          "brier": 0.5013399658895304,
-          "log_loss": 0.6989235003514841,
-          "ece": 0.11557318419525356
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_3467965f94bbdcae": {
-        "n": 1666,
-        "brier": 0.37907445927710903,
-        "log_loss": 0.5661926583808685,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-30",
-          "n": 334,
-          "brier": 0.3648797691665202,
-          "log_loss": 0.5525073837339778,
-          "ece": 0.04624439370998487
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_c3bf160eebc9f0a7": {
-        "n": 1443,
-        "brier": 0.2361675436372456,
-        "log_loss": 0.4009893445830494,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-11-02",
-          "n": 292,
-          "brier": 0.2355677241758701,
-          "log_loss": 0.40398807044636054,
-          "ece": 0.04322198964529825
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_952a66564a42804e": {
-        "n": 1350,
-        "brier": 0.16447149300040254,
-        "log_loss": 0.30611806556685517,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-30",
-          "n": 267,
-          "brier": 0.1629083609226526,
-          "log_loss": 0.30408524471241116,
-          "ece": 0.02042044971273167
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_6735dcb261466588": {
-        "n": 1666,
-        "brier": 0.39086817809827573,
-        "log_loss": 0.5808637068379388,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-30",
-          "n": 334,
-          "brier": 0.4154151591968348,
-          "log_loss": 0.6101428632617254,
-          "ece": 0.07725913641147944
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_78cca34d2a598cc7": {
-        "n": 1666,
-        "brier": 0.20664344305725393,
-        "log_loss": 0.3633550464359951,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-30",
-          "n": 334,
-          "brier": 0.20754285122037103,
-          "log_loss": 0.3675705703025068,
-          "ece": 0.03451751591667198
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_329a302abf4b38c7": {
-        "n": 1666,
-        "brier": 0.08502931590831159,
-        "log_loss": 0.18451026753487942,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-30",
-          "n": 334,
-          "brier": 0.07048901126192549,
-          "log_loss": 0.16086951976124803,
-          "ece": 0.015924289934845362
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_1cd60dc370eb6569": {
-        "n": 1666,
-        "brier": 0.027754300004503702,
-        "log_loss": 0.07551995999338666,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-30",
-          "n": 334,
-          "brier": 0.023048165275419575,
-          "log_loss": 0.05811679685995494,
-          "ece": 0.007311280923628205
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_abc77560c94b37d7": {
-        "n": 1666,
-        "brier": 0.13527707773026934,
-        "log_loss": 0.263161705381574,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-30",
-          "n": 334,
-          "brier": 0.13014512238938258,
-          "log_loss": 0.25511417295931593,
-          "ece": 0.01285643968716804
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_2e230ad49950dc73": {
-        "n": 1550,
-        "brier": 0.09165696345669869,
-        "log_loss": 0.19594374342255105,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-29",
-          "n": 314,
-          "brier": 0.07524968150753121,
-          "log_loss": 0.16978313160061811,
-          "ece": 0.018596042795053537
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_119b17a1a4b3f346": {
-        "n": 36,
-        "brier": 0.4855677249871843,
-        "log_loss": 0.6793133788860947,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-28",
-          "n": 7,
-          "brier": 0.45656978289226136,
-          "log_loss": 0.6499219067455585,
-          "ece": 0.2095641143809196
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_d211ca82b378b66a": {
-        "n": 42,
-        "brier": 0.4868719081414144,
-        "log_loss": 0.6805884106502644,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-28",
-          "n": 9,
-          "brier": 0.413623676736909,
-          "log_loss": 0.6051884539994457,
-          "ece": 0.21356829419290613
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_5be39236948e8dee": {
-        "n": 42,
-        "brier": 0.4695693611298929,
-        "log_loss": 0.662725659617711,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-28",
-          "n": 9,
-          "brier": 0.4838174772565255,
-          "log_loss": 0.6779914438689442,
-          "ece": 0.12120815962279179
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_fedf6836cdc9327c": {
-        "n": 39,
-        "brier": 0.4457396881143399,
-        "log_loss": 0.6380205059004531,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-27",
-          "n": 11,
-          "brier": 0.5288556300665351,
-          "log_loss": 0.7255393183100414,
-          "ece": 0.24955298143558569
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_83f28bc6acb854e0": {
-        "n": 42,
-        "brier": 0.31050062687852276,
-        "log_loss": 0.49473526397729184,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-28",
-          "n": 9,
-          "brier": 0.3295917734622843,
-          "log_loss": 0.5047356875964714,
-          "ece": 0.026594161585607123
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_385053163a87bd62": {
-        "n": 42,
-        "brier": 0.4512924947396101,
-        "log_loss": 0.6469016168975228,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-28",
-          "n": 9,
-          "brier": 0.3390925623741049,
-          "log_loss": 0.5219458974532467,
-          "ece": 0.08568446320534101
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_f2fc55e247f090d2": {
-        "n": 42,
-        "brier": 0.43399271730077416,
-        "log_loss": 0.6254278250519406,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-28",
-          "n": 9,
-          "brier": 0.5020972767148921,
-          "log_loss": 0.7001500386485572,
-          "ece": 0.12912557163848432
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_0625f0a9fd5832ad": {
-        "n": 42,
-        "brier": 0.368728686350076,
-        "log_loss": 0.5580746166668135,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-28",
-          "n": 9,
-          "brier": 0.47891583038586966,
-          "log_loss": 0.6913458525165248,
-          "ece": 0.1174730078058015
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_0a1855c839d9869d": {
-        "n": 37,
-        "brier": 0.4730108107578042,
-        "log_loss": 0.6685959014257119,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-28",
-          "n": 9,
-          "brier": 0.35616090019299457,
-          "log_loss": 0.5424320060958949,
-          "ece": 0.14614874998686014
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "ligue_1|STAT_3467965f94bbdcae": {
-        "n": 1426,
-        "brier": 0.4296081818229386,
-        "log_loss": 0.6222811782648794,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-05",
-          "n": 273,
-          "brier": 0.44024829649686564,
-          "log_loss": 0.6330406120916725,
-          "ece": 0.04311572085637138
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "ligue_1|STAT_6735dcb261466588": {
-        "n": 1426,
-        "brier": 0.36196708626138824,
-        "log_loss": 0.5478619528279416,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-05",
-          "n": 273,
-          "brier": 0.3761692376274881,
-          "log_loss": 0.563600476445241,
-          "ece": 0.04088079313019205
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "ligue_1|STAT_78cca34d2a598cc7": {
-        "n": 1426,
-        "brier": 0.2608222931807677,
-        "log_loss": 0.42951268571035695,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-05",
-          "n": 273,
-          "brier": 0.27191861005814916,
-          "log_loss": 0.44744676148145984,
-          "ece": 0.0310369011661964
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "ligue_1|STAT_abc77560c94b37d7": {
-        "n": 1426,
-        "brier": 0.127335631995157,
-        "log_loss": 0.24755206287543388,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-05",
-          "n": 273,
-          "brier": 0.1475097802318418,
-          "log_loss": 0.2775179556411724,
-          "ece": 0.01777259446516707
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "ligue_1|STAT_2e230ad49950dc73": {
-        "n": 1308,
-        "brier": 0.14662978779146438,
-        "log_loss": 0.2770685052271294,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-05",
-          "n": 249,
-          "brier": 0.14657831208921163,
-          "log_loss": 0.28768091686464664,
-          "ece": 0.03238357580604195
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "ligue_1|STAT_952a66564a42804e": {
-        "n": 1188,
-        "brier": 0.15061107187887604,
-        "log_loss": 0.2816810605352996,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-09-27",
-          "n": 236,
-          "brier": 0.1887607894362787,
-          "log_loss": 0.33515927777712246,
-          "ece": 0.028208303268664064
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "ligue_1|STAT_c122fd6d54f99fd5": {
-        "n": 1103,
-        "brier": 0.4290473842256551,
-        "log_loss": 0.6198552347618521,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-19",
-          "n": 210,
-          "brier": 0.43973143054734376,
-          "log_loss": 0.6304747762645884,
-          "ece": 0.051729100367001866
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "ligue_1|STAT_c3bf160eebc9f0a7": {
-        "n": 1198,
-        "brier": 0.29821889973117416,
-        "log_loss": 0.47508792814757256,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-09-28",
-          "n": 233,
-          "brier": 0.30704141055041484,
-          "log_loss": 0.48825876339210034,
-          "ece": 0.048243958516607725
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "ligue_1|STAT_da016301f271bb98": {
-        "n": 1110,
-        "brier": 0.48004739027977333,
-        "log_loss": 0.6750511661797964,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2025-10-25",
-          "n": 202,
-          "brier": 0.47179805191640134,
-          "log_loss": 0.6659844280048728,
-          "ece": 0.07684455596890898
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      }
-    },
+    "additional_market_backtests": {},
     "market_catalog": {
       "requested": [
         "goals",
@@ -3900,329 +3385,7 @@
         "shots",
         "throw_ins"
       ],
-      "priced_specs": {
-        "epl": {
-          "STAT_fc23d43b669eec22": {
-            "kind": "SPREAD",
-            "metric": "goals",
-            "line": 0.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL",
-            "provider_market_key": "spreads"
-          },
-          "STAT_e47da7ca64625890": {
-            "kind": "SPREAD",
-            "metric": "goals",
-            "line": -1.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL",
-            "provider_market_key": "spreads"
-          }
-        },
-        "serie_a": {
-          "STAT_da016301f271bb98": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 3.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_c122fd6d54f99fd5": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 2.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_2904f94398cc8e45": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 2.25,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_766f1eaddafe2749": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 2.75,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_de67abf76c5a82c7": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 3.25,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_3467965f94bbdcae": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 3.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_2d1014453e700026": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 3.75,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_c3bf160eebc9f0a7": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 4.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_119b17a1a4b3f346": {
-            "kind": "TOTAL",
-            "metric": "corners",
-            "line": 9.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals_corners"
-          },
-          "STAT_0a1855c839d9869d": {
-            "kind": "TOTAL",
-            "metric": "corners",
-            "line": 8.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals_corners"
-          },
-          "STAT_d211ca82b378b66a": {
-            "kind": "TOTAL",
-            "metric": "corners",
-            "line": 8.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals_corners"
-          },
-          "STAT_5be39236948e8dee": {
-            "kind": "TOTAL",
-            "metric": "corners",
-            "line": 9.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals_corners"
-          },
-          "STAT_fedf6836cdc9327c": {
-            "kind": "TOTAL",
-            "metric": "corners",
-            "line": 10.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals_corners"
-          },
-          "STAT_952a66564a42804e": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 1.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_6735dcb261466588": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 1.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_78cca34d2a598cc7": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 4.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_2e230ad49950dc73": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 5.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_329a302abf4b38c7": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 5.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_1cd60dc370eb6569": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 6.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_abc77560c94b37d7": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 0.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_83f28bc6acb854e0": {
-            "kind": "TOTAL",
-            "metric": "corners",
-            "line": 6.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals_corners"
-          },
-          "STAT_385053163a87bd62": {
-            "kind": "TOTAL",
-            "metric": "corners",
-            "line": 7.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals_corners"
-          },
-          "STAT_f2fc55e247f090d2": {
-            "kind": "TOTAL",
-            "metric": "corners",
-            "line": 10.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals_corners"
-          },
-          "STAT_0625f0a9fd5832ad": {
-            "kind": "TOTAL",
-            "metric": "corners",
-            "line": 11.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals_corners"
-          }
-        },
-        "ligue_1": {
-          "STAT_3467965f94bbdcae": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 3.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_6735dcb261466588": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 1.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_78cca34d2a598cc7": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 4.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_abc77560c94b37d7": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 0.5,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_2e230ad49950dc73": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 5.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_da016301f271bb98": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 3.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_952a66564a42804e": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 1.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_c122fd6d54f99fd5": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 2.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          },
-          "STAT_c3bf160eebc9f0a7": {
-            "kind": "TOTAL",
-            "metric": "goals",
-            "line": 4.0,
-            "team": null,
-            "period": "FULL_TIME",
-            "settlement_block": null,
-            "provider_market_key": "alternate_totals"
-          }
-        }
-      },
+      "priced_specs": {},
       "provider_limitations": {
         "offsides": "NO_CURRENT_PROVIDER_MARKET",
         "throw_ins": "NO_CURRENT_PROVIDER_MARKET",
@@ -4272,11 +3435,11 @@
     "experimental_account": {
       "created": true,
       "initial_bankroll_eur": 1000,
-      "bankroll_eur": 995.0,
-      "pnl_eur": -5.0,
+      "bankroll_eur": 992.52,
+      "pnl_eur": -7.48,
       "positions": 12,
-      "open_exposure_eur": 17.43,
-      "open": 10,
+      "open_exposure_eur": 14.950000000000001,
+      "open": 9,
       "note": "Separate experimental virtual account; original twelve wallets preserved."
     },
     "settlement_errors": [],
@@ -4315,40 +3478,40 @@
       "independent_events": 12
     },
     "games_played_today": {
-      "n": 11,
-      "independent_events": 3,
-      "wins": 2,
-      "losses": 9,
-      "staked_eur": 25.75,
-      "pnl_eur": -17.8,
-      "roi_pct": -69.13
+      "n": 25,
+      "independent_events": 4,
+      "wins": 3,
+      "losses": 22,
+      "staked_eur": 57.82,
+      "pnl_eur": -47.37,
+      "roi_pct": -81.92
     },
     "settled_today": {
-      "n": 11,
-      "independent_events": 3,
-      "wins": 2,
-      "losses": 9,
-      "staked_eur": 25.75,
-      "pnl_eur": -17.8,
-      "roi_pct": -69.13
+      "n": 25,
+      "independent_events": 4,
+      "wins": 3,
+      "losses": 22,
+      "staked_eur": 57.82,
+      "pnl_eur": -47.37,
+      "roi_pct": -81.92
     },
     "total": 229,
-    "open": 119,
-    "closed": 110,
+    "open": 105,
+    "closed": 124,
     "voided": 0,
     "all_time": {
-      "n": 110,
-      "independent_events": 30,
-      "wins": 30,
-      "losses": 80,
-      "staked_eur": 433.39,
-      "pnl_eur": -178.43,
-      "roi_pct": -41.17
+      "n": 124,
+      "independent_events": 31,
+      "wins": 31,
+      "losses": 93,
+      "staked_eur": 465.46,
+      "pnl_eur": -207.99,
+      "roi_pct": -44.68
     },
     "prospective_benchmark": {
-      "n": 101,
-      "model_brier": 0.558861,
-      "market_brier": 0.457321,
+      "n": 115,
+      "model_brier": 0.583929,
+      "market_brier": 0.46625,
       "beats_market_on_sample": false,
       "note": "No market forecast invented; beware event correlation and low sample size."
     },
@@ -4399,24 +3562,24 @@
         "roi_pct": 40.05
       },
       "serie_a": {
-        "n": 1,
-        "independent_events": 1,
-        "wins": 1,
-        "losses": 0,
-        "staked_eur": 2.54,
-        "pnl_eur": 0.86,
-        "roi_pct": 34.0
+        "n": 15,
+        "independent_events": 2,
+        "wins": 2,
+        "losses": 13,
+        "staked_eur": 34.61,
+        "pnl_eur": -28.7,
+        "roi_pct": -82.93
       }
     },
     "by_market": {
       "1X2": {
-        "n": 73,
-        "independent_events": 12,
-        "wins": 17,
-        "losses": 56,
-        "staked_eur": 314.91,
-        "pnl_eur": -147.34,
-        "roi_pct": -46.79
+        "n": 75,
+        "independent_events": 13,
+        "wins": 18,
+        "losses": 57,
+        "staked_eur": 318.35,
+        "pnl_eur": -148.28,
+        "roi_pct": -46.58
       },
       "ML": {
         "n": 37,
@@ -4426,107 +3589,125 @@
         "staked_eur": 118.48,
         "pnl_eur": -31.08,
         "roi_pct": -26.23
+      },
+      "STAT_3467965f94bbdcae": {
+        "n": 3,
+        "independent_events": 1,
+        "wins": 0,
+        "losses": 3,
+        "staked_eur": 6.78,
+        "pnl_eur": -6.78,
+        "roi_pct": -100.0
+      },
+      "STAT_da016301f271bb98": {
+        "n": 9,
+        "independent_events": 1,
+        "wins": 0,
+        "losses": 9,
+        "staked_eur": 21.85,
+        "pnl_eur": -21.85,
+        "roi_pct": -100.0
       }
     },
     "by_strategy": {
       "CONSENSUS_SHRUNK": {
-        "n": 12,
-        "independent_events": 12,
+        "n": 13,
+        "independent_events": 13,
         "wins": 2,
-        "losses": 10,
-        "staked_eur": 49.36,
-        "pnl_eur": -27.81,
-        "roi_pct": -56.34
+        "losses": 11,
+        "staked_eur": 51.75,
+        "pnl_eur": -30.2,
+        "roi_pct": -58.36
       },
       "DISAGREEMENT_VETO": {
-        "n": 4,
-        "independent_events": 4,
+        "n": 6,
+        "independent_events": 5,
         "wins": 0,
-        "losses": 4,
-        "staked_eur": 17.41,
-        "pnl_eur": -17.41,
+        "losses": 6,
+        "staked_eur": 22.31,
+        "pnl_eur": -22.31,
         "roi_pct": -100.0
       },
       "DIXON_COLES_LOW": {
-        "n": 9,
-        "independent_events": 9,
-        "wins": 2,
-        "losses": 7,
-        "staked_eur": 39.73,
-        "pnl_eur": -18.15,
-        "roi_pct": -45.68
-      },
-      "ELO_DYNAMIC": {
         "n": 10,
         "independent_events": 10,
+        "wins": 2,
+        "losses": 8,
+        "staked_eur": 42.14,
+        "pnl_eur": -20.56,
+        "roi_pct": -48.79
+      },
+      "ELO_DYNAMIC": {
+        "n": 11,
+        "independent_events": 11,
         "wins": 3,
-        "losses": 7,
-        "staked_eur": 44.59,
-        "pnl_eur": -10.16,
-        "roi_pct": -22.78
+        "losses": 8,
+        "staked_eur": 47.02,
+        "pnl_eur": -12.59,
+        "roi_pct": -26.77
       },
       "ELO_POISSON_BLEND": {
-        "n": 12,
-        "independent_events": 12,
+        "n": 13,
+        "independent_events": 13,
         "wins": 2,
-        "losses": 10,
-        "staked_eur": 49.36,
-        "pnl_eur": -27.91,
-        "roi_pct": -56.54
+        "losses": 11,
+        "staked_eur": 51.75,
+        "pnl_eur": -30.3,
+        "roi_pct": -58.55
       },
       "ELO_STANDARD": {
-        "n": 9,
-        "independent_events": 9,
+        "n": 10,
+        "independent_events": 10,
         "wins": 2,
-        "losses": 7,
-        "staked_eur": 39.59,
-        "pnl_eur": -16.09,
-        "roi_pct": -40.64
+        "losses": 8,
+        "staked_eur": 42.01,
+        "pnl_eur": -18.51,
+        "roi_pct": -44.06
       },
       "FREQ_BALANCED_3_5": {
-        "n": 5,
-        "independent_events": 5,
+        "n": 7,
+        "independent_events": 6,
         "wins": 0,
-        "losses": 5,
-        "staked_eur": 12.46,
-        "pnl_eur": -12.46,
+        "losses": 7,
+        "staked_eur": 17.38,
+        "pnl_eur": -17.38,
         "roi_pct": -100.0
       },
       "FREQ_BROAD_5_10": {
-        "n": 8,
-        "independent_events": 8,
-        "wins": 1,
-        "losses": 7,
-        "staked_eur": 19.93,
-        "pnl_eur": -14.38,
-        "roi_pct": -72.15
-      },
-      "FREQ_SELECTIVE_1_3": {
-        "n": 2,
-        "independent_events": 2,
-        "wins": 0,
-        "losses": 2,
-        "staked_eur": 4.99,
-        "pnl_eur": -4.99,
-        "roi_pct": -100.0
-      },
-      "MARKET_ANCHORED": {
         "n": 9,
         "independent_events": 9,
         "wins": 1,
         "losses": 8,
-        "staked_eur": 39.53,
-        "pnl_eur": -28.54,
-        "roi_pct": -72.2
+        "staked_eur": 22.39,
+        "pnl_eur": -16.84,
+        "roi_pct": -75.21
+      },
+      "FREQ_SELECTIVE_1_3": {
+        "n": 4,
+        "independent_events": 3,
+        "wins": 0,
+        "losses": 4,
+        "staked_eur": 9.34,
+        "pnl_eur": -9.34,
+        "roi_pct": -100.0
+      },
+      "MARKET_ANCHORED": {
+        "n": 10,
+        "independent_events": 10,
+        "wins": 1,
+        "losses": 9,
+        "staked_eur": 41.92,
+        "pnl_eur": -30.93,
+        "roi_pct": -73.79
       },
       "MARKET_DAILY_REFERENCE": {
-        "n": 20,
-        "independent_events": 20,
-        "wins": 15,
+        "n": 21,
+        "independent_events": 21,
+        "wins": 16,
         "losses": 5,
-        "staked_eur": 76.82,
-        "pnl_eur": 17.64,
-        "roi_pct": 22.96
+        "staked_eur": 77.83,
+        "pnl_eur": 19.13,
+        "roi_pct": 24.58
       },
       "POISSON_SHRINK": {
         "n": 10,
@@ -4540,22 +3721,22 @@
     },
     "by_odds_band": {
       "under_2": {
-        "n": 17,
-        "independent_events": 17,
+        "n": 20,
+        "independent_events": 18,
         "wins": 14,
-        "losses": 3,
-        "staked_eur": 66.74,
-        "pnl_eur": 15.82,
-        "roi_pct": 23.7
+        "losses": 6,
+        "staked_eur": 73.52,
+        "pnl_eur": 9.04,
+        "roi_pct": 12.3
       },
       "2_to_3": {
-        "n": 42,
-        "independent_events": 9,
-        "wins": 16,
-        "losses": 26,
-        "staked_eur": 170.71,
-        "pnl_eur": 1.7,
-        "roi_pct": 0.99
+        "n": 53,
+        "independent_events": 10,
+        "wins": 17,
+        "losses": 36,
+        "staked_eur": 196.0,
+        "pnl_eur": -21.09,
+        "roi_pct": -10.76
       },
       "3_to_5": {
         "n": 41,
@@ -4585,17 +3766,17 @@
     "paper_only": true
   },
   "market_activity": {
-    "asof_utc": "2026-11-02T15:58:30.191607+00:00",
+    "asof_utc": "2026-11-02T20:53:43.260794+00:00",
     "by_market": {
       "1X2": {
         "label": "Resultado 1X2",
         "papers_total": 87,
-        "papers_open": 14,
-        "papers_settled": 73,
+        "papers_open": 12,
+        "papers_settled": 75,
         "papers_voided": 0,
         "papers_today": 4,
         "observations": 0,
-        "priced_event_count": 1,
+        "priced_event_count": 0,
         "status": "PAPER_RECORDED"
       },
       "ML": {
@@ -4606,18 +3787,18 @@
         "papers_voided": 0,
         "papers_today": 101,
         "observations": 19,
-        "priced_event_count": 1,
+        "priced_event_count": 0,
         "status": "PAPER_RECORDED"
       },
       "GOALS_TOTAL": {
         "label": "Mais/menos golos",
         "papers_total": 14,
-        "papers_open": 14,
-        "papers_settled": 0,
+        "papers_open": 1,
+        "papers_settled": 13,
         "papers_voided": 0,
         "papers_today": 14,
         "observations": 21,
-        "priced_event_count": 3,
+        "priced_event_count": 0,
         "status": "PAPER_RECORDED"
       },
       "GOALS_HANDICAP": {
@@ -4628,7 +3809,7 @@
         "papers_voided": 0,
         "papers_today": 0,
         "observations": 1,
-        "priced_event_count": 1,
+        "priced_event_count": 0,
         "status": "OBSERVATION_ONLY"
       },
       "BTTS": {
@@ -4639,7 +3820,7 @@
         "papers_voided": 0,
         "papers_today": 0,
         "observations": 1,
-        "priced_event_count": 1,
+        "priced_event_count": 0,
         "status": "OBSERVATION_ONLY"
       },
       "corners": {
@@ -4650,7 +3831,7 @@
         "papers_voided": 0,
         "papers_today": 0,
         "observations": 9,
-        "priced_event_count": 1,
+        "priced_event_count": 0,
         "status": "OBSERVATION_ONLY"
       },
       "offsides": {
@@ -5416,44 +4597,44 @@
   "accounts": {
     "ELO_STANDARD": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 983.912,
-      "open_exposure_eur": 19.67,
-      "pnl_eur": -16.088,
-      "total_staked_settled_eur": 39.59,
+      "bankroll_eur": 981.492,
+      "open_exposure_eur": 17.25,
+      "pnl_eur": -18.508,
+      "total_staked_settled_eur": 42.01,
       "paper_wins": 2,
-      "paper_losses": 7,
-      "settled": 9,
+      "paper_losses": 8,
+      "settled": 10,
       "voided": 0,
-      "open": 10,
-      "yield_percent": -40.6365,
-      "return_on_initial_bank_percent": -1.6088,
+      "open": 9,
+      "yield_percent": -44.0562,
+      "return_on_initial_bank_percent": -1.8508,
       "max_settled_drawdown_percent": 1.8811,
-      "brier": 0.601105,
-      "log_loss": 0.965976,
-      "benchmark_n": 9,
-      "market_brier": 0.494211,
-      "market_log_loss": 0.837559,
+      "brier": 0.614853,
+      "log_loss": 0.962951,
+      "benchmark_n": 10,
+      "market_brier": 0.492251,
+      "market_log_loss": 0.820578,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "ELO_DYNAMIC": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 989.8404,
-      "open_exposure_eur": 19.79,
-      "pnl_eur": -10.1596,
-      "total_staked_settled_eur": 44.59,
+      "bankroll_eur": 987.4104,
+      "open_exposure_eur": 17.36,
+      "pnl_eur": -12.5896,
+      "total_staked_settled_eur": 47.02,
       "paper_wins": 3,
-      "paper_losses": 7,
-      "settled": 10,
+      "paper_losses": 8,
+      "settled": 11,
       "voided": 0,
-      "open": 10,
-      "yield_percent": -22.7845,
-      "return_on_initial_bank_percent": -1.016,
+      "open": 9,
+      "yield_percent": -26.775,
+      "return_on_initial_bank_percent": -1.259,
       "max_settled_drawdown_percent": 1.495,
-      "brier": 0.58103,
-      "log_loss": 0.944267,
-      "benchmark_n": 10,
-      "market_brier": 0.483706,
-      "market_log_loss": 0.825309,
+      "brier": 0.585397,
+      "log_loss": 0.952227,
+      "benchmark_n": 11,
+      "market_brier": 0.488209,
+      "market_log_loss": 0.832357,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "POISSON_SHRINK": {
@@ -5479,191 +4660,191 @@
     },
     "DIXON_COLES_LOW": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 981.852,
-      "open_exposure_eur": 19.63,
-      "pnl_eur": -18.148,
-      "total_staked_settled_eur": 39.73,
+      "bankroll_eur": 979.442,
+      "open_exposure_eur": 17.22,
+      "pnl_eur": -20.558,
+      "total_staked_settled_eur": 42.14,
       "paper_wins": 2,
-      "paper_losses": 7,
-      "settled": 9,
+      "paper_losses": 8,
+      "settled": 10,
       "voided": 0,
-      "open": 10,
-      "yield_percent": -45.6783,
-      "return_on_initial_bank_percent": -1.8148,
-      "max_settled_drawdown_percent": 1.9797,
-      "brier": 0.592964,
-      "log_loss": 0.956879,
-      "benchmark_n": 9,
-      "market_brier": 0.466574,
-      "market_log_loss": 0.797477,
+      "open": 9,
+      "yield_percent": -48.785,
+      "return_on_initial_bank_percent": -2.0558,
+      "max_settled_drawdown_percent": 2.2203,
+      "brier": 0.607527,
+      "log_loss": 0.954763,
+      "benchmark_n": 10,
+      "market_brier": 0.467378,
+      "market_log_loss": 0.784505,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "ELO_POISSON_BLEND": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 972.0912,
-      "open_exposure_eur": 19.44,
-      "pnl_eur": -27.9088,
-      "total_staked_settled_eur": 49.36,
+      "bankroll_eur": 969.7012,
+      "open_exposure_eur": 17.05,
+      "pnl_eur": -30.2988,
+      "total_staked_settled_eur": 51.75,
       "paper_wins": 2,
-      "paper_losses": 10,
-      "settled": 12,
+      "paper_losses": 11,
+      "settled": 13,
       "voided": 0,
-      "open": 10,
-      "yield_percent": -56.5413,
-      "return_on_initial_bank_percent": -2.7909,
-      "max_settled_drawdown_percent": 2.7909,
-      "brier": 0.587499,
-      "log_loss": 0.955843,
-      "benchmark_n": 12,
-      "market_brier": 0.495432,
-      "market_log_loss": 0.842829,
+      "open": 9,
+      "yield_percent": -58.5484,
+      "return_on_initial_bank_percent": -3.0299,
+      "max_settled_drawdown_percent": 3.0299,
+      "brier": 0.599122,
+      "log_loss": 0.954295,
+      "benchmark_n": 13,
+      "market_brier": 0.49383,
+      "market_log_loss": 0.829362,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "CONSENSUS_SHRUNK": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 972.1896,
-      "open_exposure_eur": 19.44,
-      "pnl_eur": -27.8104,
-      "total_staked_settled_eur": 49.36,
+      "bankroll_eur": 969.7996,
+      "open_exposure_eur": 17.05,
+      "pnl_eur": -30.2004,
+      "total_staked_settled_eur": 51.75,
       "paper_wins": 2,
-      "paper_losses": 10,
-      "settled": 12,
+      "paper_losses": 11,
+      "settled": 13,
       "voided": 0,
-      "open": 10,
-      "yield_percent": -56.342,
-      "return_on_initial_bank_percent": -2.781,
-      "max_settled_drawdown_percent": 2.781,
-      "brier": 0.586649,
-      "log_loss": 0.956052,
-      "benchmark_n": 12,
-      "market_brier": 0.491504,
-      "market_log_loss": 0.837787,
+      "open": 9,
+      "yield_percent": -58.3583,
+      "return_on_initial_bank_percent": -3.02,
+      "max_settled_drawdown_percent": 3.02,
+      "brier": 0.598336,
+      "log_loss": 0.954488,
+      "benchmark_n": 13,
+      "market_brier": 0.490204,
+      "market_log_loss": 0.824707,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "DISAGREEMENT_VETO": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 982.59,
-      "open_exposure_eur": 14.8,
-      "pnl_eur": -17.41,
-      "total_staked_settled_eur": 17.41,
+      "bankroll_eur": 977.69,
+      "open_exposure_eur": 9.9,
+      "pnl_eur": -22.31,
+      "total_staked_settled_eur": 22.31,
       "paper_wins": 0,
-      "paper_losses": 4,
-      "settled": 4,
+      "paper_losses": 6,
+      "settled": 6,
       "voided": 0,
-      "open": 9,
+      "open": 7,
       "yield_percent": -100.0,
-      "return_on_initial_bank_percent": -1.741,
-      "max_settled_drawdown_percent": 1.741,
-      "brier": 0.766539,
-      "log_loss": 1.192365,
-      "benchmark_n": 4,
-      "market_brier": 0.615712,
-      "market_log_loss": 1.013383,
+      "return_on_initial_bank_percent": -2.231,
+      "max_settled_drawdown_percent": 2.231,
+      "brier": 0.795083,
+      "log_loss": 1.148711,
+      "benchmark_n": 6,
+      "market_brier": 0.605765,
+      "market_log_loss": 0.93564,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "MARKET_ANCHORED": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 971.459,
-      "open_exposure_eur": 19.42,
-      "pnl_eur": -28.541,
-      "total_staked_settled_eur": 39.53,
+      "bankroll_eur": 969.069,
+      "open_exposure_eur": 17.03,
+      "pnl_eur": -30.931,
+      "total_staked_settled_eur": 41.92,
       "paper_wins": 1,
-      "paper_losses": 8,
-      "settled": 9,
+      "paper_losses": 9,
+      "settled": 10,
       "voided": 0,
-      "open": 10,
-      "yield_percent": -72.2009,
-      "return_on_initial_bank_percent": -2.8541,
-      "max_settled_drawdown_percent": 2.8541,
-      "brier": 0.578498,
-      "log_loss": 0.939672,
-      "benchmark_n": 9,
-      "market_brier": 0.486131,
-      "market_log_loss": 0.8269,
+      "open": 9,
+      "yield_percent": -73.7858,
+      "return_on_initial_bank_percent": -3.0931,
+      "max_settled_drawdown_percent": 3.0931,
+      "brier": 0.594507,
+      "log_loss": 0.939277,
+      "benchmark_n": 10,
+      "market_brier": 0.484978,
+      "market_log_loss": 0.810985,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 1017.6393,
-      "open_exposure_eur": 19.25,
-      "pnl_eur": 17.6393,
-      "total_staked_settled_eur": 76.82,
-      "paper_wins": 15,
+      "bankroll_eur": 1019.1341,
+      "open_exposure_eur": 18.24,
+      "pnl_eur": 19.1341,
+      "total_staked_settled_eur": 77.83,
+      "paper_wins": 16,
       "paper_losses": 5,
-      "settled": 20,
+      "settled": 21,
       "voided": 0,
-      "open": 10,
-      "yield_percent": 22.9619,
-      "return_on_initial_bank_percent": 1.7639,
+      "open": 9,
+      "yield_percent": 24.5845,
+      "return_on_initial_bank_percent": 1.9134,
       "max_settled_drawdown_percent": 0.6352,
-      "brier": 0.336091,
-      "log_loss": 0.521816,
-      "benchmark_n": 11,
-      "market_brier": 0.311669,
-      "market_log_loss": 0.498921,
+      "brier": 0.345479,
+      "log_loss": 0.53996,
+      "benchmark_n": 12,
+      "market_brier": 0.330133,
+      "market_log_loss": 0.532581,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "FREQ_SELECTIVE_1_3": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 995.01,
-      "open_exposure_eur": 16.8,
-      "pnl_eur": -4.99,
-      "total_staked_settled_eur": 4.99,
+      "bankroll_eur": 990.66,
+      "open_exposure_eur": 12.45,
+      "pnl_eur": -9.34,
+      "total_staked_settled_eur": 9.34,
       "paper_wins": 0,
-      "paper_losses": 2,
-      "settled": 2,
+      "paper_losses": 4,
+      "settled": 4,
       "voided": 0,
-      "open": 10,
+      "open": 8,
       "yield_percent": -100.0,
-      "return_on_initial_bank_percent": -0.499,
-      "max_settled_drawdown_percent": 0.499,
-      "brier": 0.468751,
-      "log_loss": 0.747267,
-      "benchmark_n": 2,
-      "market_brier": 0.192868,
-      "market_log_loss": 0.410769,
+      "return_on_initial_bank_percent": -0.934,
+      "max_settled_drawdown_percent": 0.934,
+      "brier": 0.660461,
+      "log_loss": 0.904336,
+      "benchmark_n": 4,
+      "market_brier": 0.389369,
+      "market_log_loss": 0.595462,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "FREQ_BALANCED_3_5": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 987.54,
-      "open_exposure_eur": 17.33,
-      "pnl_eur": -12.46,
-      "total_staked_settled_eur": 12.46,
+      "bankroll_eur": 982.62,
+      "open_exposure_eur": 12.41,
+      "pnl_eur": -17.38,
+      "total_staked_settled_eur": 17.38,
       "paper_wins": 0,
-      "paper_losses": 5,
-      "settled": 5,
+      "paper_losses": 7,
+      "settled": 7,
       "voided": 0,
-      "open": 10,
+      "open": 8,
       "yield_percent": -100.0,
-      "return_on_initial_bank_percent": -1.246,
-      "max_settled_drawdown_percent": 1.246,
-      "brier": 0.58258,
-      "log_loss": 0.94216,
-      "benchmark_n": 5,
-      "market_brier": 0.414541,
-      "market_log_loss": 0.736602,
+      "return_on_initial_bank_percent": -1.738,
+      "max_settled_drawdown_percent": 1.738,
+      "brier": 0.659606,
+      "log_loss": 0.97623,
+      "benchmark_n": 7,
+      "market_brier": 0.463492,
+      "market_log_loss": 0.749046,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "FREQ_BROAD_5_10": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 985.62,
-      "open_exposure_eur": 17.37,
-      "pnl_eur": -14.38,
-      "total_staked_settled_eur": 19.93,
+      "bankroll_eur": 983.16,
+      "open_exposure_eur": 14.91,
+      "pnl_eur": -16.84,
+      "total_staked_settled_eur": 22.39,
       "paper_wins": 1,
-      "paper_losses": 7,
-      "settled": 8,
+      "paper_losses": 8,
+      "settled": 9,
       "voided": 0,
-      "open": 10,
-      "yield_percent": -72.1525,
-      "return_on_initial_bank_percent": -1.438,
-      "max_settled_drawdown_percent": 1.4922,
-      "brier": 0.541294,
-      "log_loss": 0.879007,
-      "benchmark_n": 8,
-      "market_brier": 0.429119,
-      "market_log_loss": 0.744397,
+      "open": 9,
+      "yield_percent": -75.2121,
+      "return_on_initial_bank_percent": -1.684,
+      "max_settled_drawdown_percent": 1.738,
+      "brier": 0.563216,
+      "log_loss": 0.885308,
+      "benchmark_n": 9,
+      "market_brier": 0.434173,
+      "market_log_loss": 0.735881,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     }
   },
@@ -5898,14 +5079,15 @@
   "events_seen": 91,
   "new_paper_entries": {},
   "entry_diagnostics": {
-    "rejections": {
-      "missing_timestamped_odds": 24
-    },
+    "rejections": {},
     "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 0,
-  "missing_final_event_ids": [],
+  "newly_settled": 14,
+  "missing_final_event_ids": [
+    "epl:401878762",
+    "ligue_1:401876419"
+  ],
   "statistic_settlement": {
     "lookups": 0,
     "errors": []
