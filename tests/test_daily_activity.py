@@ -1,3 +1,4 @@
+from market_validation_fixtures import approved_research,ApprovedOriginal
 """Synthetic daily-throughput regressions; no live quotes or network requests."""
 import copy
 import datetime as dt
@@ -35,7 +36,8 @@ class DailyActivityTests(unittest.TestCase):
         self.assertEqual(daily_entry_stake(1000, 19.01, 0), 0.0)
         self.assertEqual(daily_entry_stake(0, 0, 0), 0.0)
 
-    def test_all_thirteen_wallets_reach_five_when_five_qualified_events_exist(self):
+    @approved_research
+    def test_five_shared_events_do_not_force_five_copies_into_every_wallet(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             registry = ensure_registry(root, NOW-dt.timedelta(days=2), ALL_NAMES)
@@ -59,20 +61,22 @@ class DailyActivityTests(unittest.TestCase):
                                     PaperRiskBook(root), football_history=history)
             self.assertEqual(research['experimental_account']['positions'], 5)
             frozen = copy.deepcopy(read_journal(root))
-            added = open_auxiliary_markets(root, events, NOW, registry, PaperRiskBook(root))
-            self.assertEqual(added, dict.fromkeys(ALL_NAMES, 5))
+            added = open_auxiliary_markets(root, events, NOW, registry, PaperRiskBook(root),admission=ApprovedOriginal())
+            self.assertNotIn('MARKET_DAILY_REFERENCE',added)
+            self.assertLess(sum(added.values()),len(ALL_NAMES)*5)
             for name in ALL_NAMES:
                 rows = read_jsonl(root/'data/strategy_ledgers'/(name.lower()+'.jsonl'))
                 today = [r for r in rows if r['forecast_utc']==NOW.isoformat()]
-                self.assertEqual(len(today), 5)
-                self.assertEqual(len({r['event_id'] for r in today}), 5)
+                self.assertEqual(len(today),added.get(name,0))
+                self.assertLessEqual(len({r['event_id'] for r in today}),5)
                 self.assertTrue(all(r['stake_eur']==1.0 for r in today))
             self.assertEqual(read_jsonl(path)[0], legacy)
             self.assertEqual(read_journal(root), frozen)
-            self.assertEqual(open_auxiliary_markets(root, events, NOW, registry, PaperRiskBook(root)), {})
+            self.assertEqual(open_auxiliary_markets(root, events, NOW, registry, PaperRiskBook(root),admission=ApprovedOriginal()), {})
             risk = PaperRiskBook(root).summary()
             self.assertLessEqual(risk['total_open_eur'], 240)
             self.assertTrue(all(v<=36 for v in risk['event_exposure_eur'].values()))
+            self.assertTrue(all(v<=2.5 for k,v in risk['shared_prediction_open_eur'].items() if 'SYNTHETIC-LEGACY' not in k))
 
     def test_reference_below_five_is_partial_instead_of_completed(self):
         with tempfile.TemporaryDirectory() as tmp:

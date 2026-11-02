@@ -1,3 +1,4 @@
+from market_validation_fixtures import approved_research,ApprovedOriginal
 import copy
 import datetime as dt
 import json
@@ -53,7 +54,7 @@ class HistoricalLearningTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             learner=HistoricalLearning(Path(tmp),CLOCK)
             for r in sample_rows():learner.add('model','epl','ML',r['date'],r['event'],r['p'],r['y'])
-            pairs=[{'date':str(dt.date(2026,8,1)+dt.timedelta(days=i)), 'base':[.8,.2],'candidate':[.5,.5],'y':1} for i in range(100)]
+            pairs=[{'date':str(dt.date(2026,8,1)+dt.timedelta(days=i)), 'base':[.8,.2],'candidate':[.5,.5],'market':[.7,.3],'y':1} for i in range(100)]
             self.assertFalse(forward_gate(pairs[:99])['eligible'])
             self.assertFalse(forward_gate([dict(r,date='2026-08-01') for r in pairs])['eligible'])
             learner.forward['model|epl|ML']={str(i):r for i,r in enumerate(pairs)}
@@ -107,6 +108,7 @@ class HistoricalLearningTests(unittest.TestCase):
             report=learner.report((*ALL_NAMES,'EXPERIMENTAL_MULTI_MARKET'))
             self.assertEqual(len(report['wallets']),13)
 
+    @approved_research
     def test_auxiliary_learning_evidence_reaches_all_thirteen_without_rewriting(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);registry=ensure_registry(root,NOW-dt.timedelta(days=2),ALL_NAMES)
@@ -116,9 +118,11 @@ class HistoricalLearningTests(unittest.TestCase):
             forecasts=[r for r in read_journal(root) if r['kind']=='FORECAST']
             self.assertTrue(forecasts);self.assertTrue(all('historical_learning' in r for r in forecasts))
             frozen=copy.deepcopy(read_journal(root))
-            added=open_auxiliary_markets(root,[e],NOW,registry,PaperRiskBook(root))
-            self.assertEqual(set(added),set(ALL_NAMES))
-            for name in ALL_NAMES:
+            added=open_auxiliary_markets(root,[e],NOW,registry,PaperRiskBook(root),admission=ApprovedOriginal())
+            self.assertTrue(added)
+            self.assertNotIn('MARKET_DAILY_REFERENCE',added)
+            self.assertLess(len(added),len(ALL_NAMES))
+            for name in added:
                 row=read_jsonl(root/'data/strategy_ledgers'/(name.lower()+'.jsonl'))[0]
                 source=next(f for f in forecasts if f['id']==row['source_forecast_id'])
                 self.assertEqual(row['historical_learning'],source['historical_learning'])

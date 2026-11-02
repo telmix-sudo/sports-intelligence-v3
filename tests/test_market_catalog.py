@@ -1,3 +1,4 @@
+from market_validation_fixtures import approved_research,ApprovedOriginal
 import copy,datetime as dt,json,tempfile,unittest
 from pathlib import Path
 from test_research_integration import EVENT,NOW,odds_rows,football_history,models
@@ -46,23 +47,27 @@ class MarketCatalogTests(unittest.TestCase):
   self.assertEqual(stats['home']['fouls'],12)
   self.assertNotIn('throw_ins',stats['home'],'Missing statistics cannot become zero')
 
- def test_all_wallets_receive_new_market_positions_without_reset(self):
+ @approved_research
+ def test_validated_shared_markets_preserve_control_and_concentration_budget(self):
   with tempfile.TemporaryDirectory() as tmp:
    root=Path(tmp);registry=ensure_registry(root,NOW,ALL_NAMES);h=football_history();e=dict(EVENT)
    e['market_quotes']=market_quotes_for_event(e,odds_rows(),NOW)
    run_research(root,[e],models(h),NOW,PaperRiskBook(root),football_history=h)
    # Avoid duplicate home-win evidence; the eligible -0.5 example is standalone.
-   added=open_auxiliary_markets(root,[e],NOW,registry,PaperRiskBook(root))
-   self.assertEqual(set(added),set(ALL_NAMES))
-   self.assertEqual(open_auxiliary_markets(root,[e],NOW,registry,PaperRiskBook(root)),{})
-   for name in ALL_NAMES:
+   added=open_auxiliary_markets(root,[e],NOW,registry,PaperRiskBook(root),admission=ApprovedOriginal())
+   self.assertTrue(added)
+   self.assertNotIn('MARKET_DAILY_REFERENCE',added)
+   self.assertLess(sum(added.values()),len(ALL_NAMES))
+   self.assertEqual(open_auxiliary_markets(root,[e],NOW,registry,PaperRiskBook(root),admission=ApprovedOriginal()),{})
+   for name in added:
     rows=read_jsonl(root/'data/strategy_ledgers'/(name.lower()+'.jsonl'))
     self.assertEqual(len(rows),1)
     self.assertTrue(rows[0]['shared_forecast_not_independent'])
    final={'home':3,'away':0,'outcome':0}
    accounts,count=build_accounts(root,{e['id']:final},NOW+dt.timedelta(hours=8))
-   self.assertEqual(count['settled_this_run'],12)
-   self.assertTrue(all(a['bankroll_eur']==1001.5 for a in accounts.values()))
+   self.assertEqual(count['settled_this_run'],sum(added.values()))
+   self.assertEqual(accounts['MARKET_DAILY_REFERENCE']['bankroll_eur'],1000)
+   self.assertTrue(all(a['bankroll_eur']>=1000 for a in accounts.values()))
    self.assertEqual(MIN_DAILY_ENTRIES,5);self.assertEqual(MAX_DAILY_ENTRIES,10)
 
  def test_winner_does_not_settle_a_pending_corner_position(self):

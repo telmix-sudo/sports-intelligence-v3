@@ -7,17 +7,20 @@ import datetime as dt
 import hashlib
 from collections import Counter
 from zoneinfo import ZoneInfo
+from .portfolio_controls import prediction_signal
 from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION,MAX_ACCOUNT_EXPOSURE,MAX_MARKETS_PER_EVENT_ACCOUNT
 from .activity_policy import daily_entry_stake
-from .custom_strategies import ALL_NAMES,RULES,FREQUENCY_NAMES
+from .custom_strategies import ALL_NAMES,RULES,FREQUENCY_NAMES,REFERENCE_NAMES
 from .research_pipeline import read_journal
 from .odds_provider import parse_utc
 
 LOCAL=ZoneInfo('Europe/Lisbon')
 
 
-def open_auxiliary_markets(root,events,now,registry,risk,market_scope='all'):
+def open_auxiliary_markets(root,events,now,registry,risk,market_scope='all',admission=None,learning=None):
     from .strategy_lab import read_jsonl,save_jsonl
+    from .admission_validation import AdmissionValidation
+    admission=admission or AdmissionValidation(root,now)
     states={};additions=Counter();today=now.astimezone(LOCAL).date()
     for name in ALL_NAMES:
         path=root/'data'/'strategy_ledgers'/(name.lower()+'.jsonl');rows=read_jsonl(path)
@@ -35,12 +38,22 @@ def open_auxiliary_markets(root,events,now,registry,risk,market_scope='all'):
     forecasts=list(latest.values())
     forecasts.sort(key=lambda r:-r['conservative_ev'])
     for f in forecasts:
+        learned=None
+        prior_learning=f.get('historical_learning') or {}
+        if learning is not None and prior_learning.get('stream'):
+            current=learning.model(prior_learning['stream'])
+            if current['status']=='ACTIVE' and current.get('model_sha256')==prior_learning.get('model_sha256'):
+                learned=prior_learning
+        gate=admission.decision(f['model_version'],f['sport'],f['market'],learned)
+        if not gate['eligible_for_paper']:continue
+        if not f.get('admission_evidence',{}).get('eligible_for_small_paper'):continue
         if market_scope=='non_winner' and f['market']=='ML':continue
         if market_scope=='moneyline' and f['market']!='ML':continue
         general_blocks=[r for r in f['admission_blocks'] if r not in ('DAILY_PAPER_LIMIT','EXPERIMENTAL_EVENT_ALREADY_TRADED','AGGREGATE_RISK_LIMIT')]
         if general_blocks:continue
         if any(not 0<=(now-parse_utc(t)).total_seconds()<=8*3600 for t in f['book_quote_updates_utc']):continue
         for name in sorted(ALL_NAMES,key=lambda n:(states[n]['today'],n)):
+            if name in REFERENCE_NAMES:continue  # Pure, unmodified market control.
             s=states[name];rows=s['rows']
             if s['today']>=MAX_DAILY_ENTRIES or now<parse_utc(registry[name]['created_utc']):continue
             if any(r['event_id']==f['event_id'] and r['market']==f['market'] for r in rows):continue
@@ -54,7 +67,7 @@ def open_auxiliary_markets(root,events,now,registry,risk,market_scope='all'):
                 f['model_inputs']['sample_min']<rule.get('min_team_matches',8) or
                 any((now-parse_utc(t)).total_seconds()>rule.get('max_quote_age_hours',8)*3600 for t in f['book_quote_updates_utc'])):continue
             wanted=daily_entry_stake(s['bank'],s['exposure'],s['today'])
-            stake=risk.reserve(f['event_id'],wanted)
+            stake=risk.reserve(f['event_id'],wanted,signal_key=prediction_signal(f['event_id'],f['market'],f['model_version'],f['selection_index']))
             if not stake:continue
             spec=f.get('market_spec')
             if spec is None and f['market']!='ML':
@@ -72,6 +85,7 @@ def open_auxiliary_markets(root,events,now,registry,risk,market_scope='all'):
                  'model_status':'SHARED_AUXILIARY_EXPERIMENT_NOT_MARKET_VALIDATED',
                  'model_version':f['model_version'],'source_forecast_id':f['id'],
                  'shared_forecast_not_independent':True,'conservative_expected_value':f['conservative_ev'],
+                 'admission_evidence':gate,
                  'strategy_version':'daily-multimarket-2.0.0'}
             if f.get('historical_learning'):row['historical_learning']=f['historical_learning']
             rows.append(row);s['today']+=1;s['exposure']+=stake;additions[name]+=1

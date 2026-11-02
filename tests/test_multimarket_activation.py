@@ -1,3 +1,4 @@
+from market_validation_fixtures import approved_research
 """Synthetic prices/results only. Verify market diversity without forced bets."""
 import copy
 import datetime as dt
@@ -117,6 +118,7 @@ class CollectionAndAdmissionTests(unittest.TestCase):
             self.assertEqual(next(iter(e['market_quotes'].values()))['bookmaker_count'],2)
             self.assertEqual(annotate_discovered([e],root,NOW,'SYNTHETIC',lambda *_:self.fail('Duplicate request'))['calls_this_run'],0)
 
+    @approved_research
     def test_qualified_goal_market_gets_room_before_ten_earlier_moneylines(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);history=football_history();goal=copy.deepcopy(EVENT)
@@ -185,6 +187,7 @@ class CollectionAndAdmissionTests(unittest.TestCase):
             self.assertEqual(report['scoreboard_requests'],8)
             self.assertTrue(all(day<NOW.date() for day in calls))
 
+    @approved_research
     def test_zero_stake_forecast_can_gain_a_new_paper_record_without_rewriting_history(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);history=football_history();e=copy.deepcopy(EVENT)

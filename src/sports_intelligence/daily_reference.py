@@ -13,7 +13,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from .scanner import parse_iso
-from .portfolio_controls import PaperRiskBook
+from .portfolio_controls import prediction_signal,PaperRiskBook
 from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION,daily_entry_stake
 
 NAME = "MARKET_DAILY_REFERENCE"
@@ -131,7 +131,7 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
         if stake < 1:
             diagnostics["reason"] = "Maximum exposure (2% of virtual bank) or 1 EUR minimum stake reached"
             break
-        stake = risk.reserve(event["id"], stake)
+        stake = risk.reserve(event["id"], stake,signal_key=prediction_signal(event["id"],quote["market"],"MARKET_REFERENCE",pick))
         if stake == 0:
             diagnostics["reason"] = "Aggregate event or paper portfolio exposure limit reached"
             continue

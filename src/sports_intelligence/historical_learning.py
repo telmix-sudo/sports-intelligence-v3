@@ -76,14 +76,20 @@ def fit(rows):
 def forward_gate(pairs):
     """Paired prequential scoring, one event per stream, all before today's UTC."""
     dates = {r['date'] for r in pairs}
-    result = {'n':len(pairs),'dates':len(dates),'eligible':False}
-    if len(pairs)<MIN_FORWARD or len(dates)<MIN_DATES:return result
-    for metric,score in (('brier',brier),('log_loss',log_loss)):
-        differences = [score(r['candidate'],r['y'])-score(r['base'],r['y']) for r in pairs]
-        mean = math.fsum(differences)/len(pairs)
-        variance = math.fsum((v-mean)**2 for v in differences)/(len(pairs)-1)
-        result[metric+'_difference_upper'] = mean+1.96*math.sqrt(variance/len(pairs))
-    result['eligible'] = all(result[m+'_difference_upper'] < -1e-5 for m in ('brier','log_loss'))
+    market_pairs=[r for r in pairs if r.get('market') is not None]
+    result = {'n':len(pairs),'dates':len(dates),'eligible':False,
+              'market_n':len(market_pairs),'market_dates':len({r['date'] for r in market_pairs})}
+    if (len(pairs)<MIN_FORWARD or len(dates)<MIN_DATES or
+        result['market_n']<MIN_FORWARD or result['market_dates']<MIN_DATES):return result
+    for benchmark,rows in (('base',pairs),('market',market_pairs)):
+        for metric,score in (('brier',brier),('log_loss',log_loss)):
+            differences = [score(r['candidate'],r['y'])-score(r[benchmark],r['y']) for r in rows]
+            mean = math.fsum(differences)/len(rows)
+            variance = math.fsum((v-mean)**2 for v in differences)/(len(rows)-1)
+            name=metric+'_difference_upper' if benchmark=='base' else 'market_'+metric+'_difference_upper'
+            result[name] = mean+1.96*math.sqrt(variance/len(rows))
+    result['eligible'] = all(result[prefix+m+'_difference_upper'] < -1e-5
+                             for prefix in ('','market_') for m in ('brier','log_loss'))
     return result
 
 
@@ -117,17 +123,8 @@ class HistoricalLearning:
         self.models.pop(key,None)
 
     def _read_frozen(self, root):
-        def read(path):
-            return [json.loads(line) for line in path.read_text().splitlines() if line.strip()] if path.exists() else []
-        records = []
-        for path in sorted((root/'data/strategy_ledgers').glob('*.jsonl')):
-            records.extend(read(path))
-        journal = read(root/'data/market_research_v3.jsonl')
-        settlements = {r['forecast_id']:r for r in journal if r['kind']=='SETTLEMENT'}
-        for r in journal:
-            if r['kind']=='FORECAST' and r['id'] in settlements:
-                s=settlements[r['id']]
-                records.append(dict(r,status=s['status'],settlement_utc=s['settlement_utc'],observed_outcome=s['outcome']))
+        from .admission_validation import settled_forecasts, frozen_market
+        records=list(settled_forecasts(root))
         for r in sorted(records,key=lambda r:r.get('forecast_utc','')):
             if r.get('status')!='SETTLED':continue
             try:
@@ -149,8 +146,12 @@ class HistoricalLearning:
                     (key,identity) not in self.conflicts and
                     learning.get('status') in ('SHADOW_VALIDATION','ACTIVE')):
                     # The exact candidate was frozen BEFORE this event started.
+                    candidate=normalize(learning['candidate_probabilities'])
+                    if len(candidate)!=len(base):self.invalid+=1;continue
+                    market=frozen_market(r)
+                    if market is not None and len(market)!=len(base):market=None
                     self.forward[key].setdefault(identity,{'date':start.date().isoformat(),'y':r['observed_outcome'],
-                        'candidate':normalize(learning['candidate_probabilities']),'base':normalize(base)})
+                        'candidate':candidate,'base':normalize(base),'market':market})
             except (KeyError,ValueError,TypeError):self.invalid+=1
 
     def model(self,key):
@@ -171,6 +172,7 @@ class HistoricalLearning:
         evidence={'version':VERSION,'stream':key,'status':'CONTROL_SHADOW_ONLY' if control else model['status'],
                   'base_probabilities':base,'candidate_probabilities':candidate,
                   'model_sha256':model.get('model_sha256'),'training_cutoff_exclusive_utc_date':self.cutoff}
+        evidence['forward_validation']=model['forward']
         return (candidate if model['status']=='ACTIVE' and not control else list(probabilities)),evidence
 
     def report(self,names):
@@ -179,7 +181,8 @@ class HistoricalLearning:
         wallets={}
         for name in names:
             family=family_for_wallet(name)
-            keys=shared|{k for k in streams if k.startswith(family+'|')}|self.wallets[name]
+            keys=({k for k in streams if k.startswith(family+'|')}|self.wallets[name]|
+                  (set() if name=='MARKET_DAILY_REFERENCE' else shared))
             wallets[name]={'status':'ACTIVE' if any(self.model(k)['status']=='ACTIVE' for k in keys) else
                            'CONTROL_SHADOW_ONLY' if name=='MARKET_DAILY_REFERENCE' else 'LEARNING_IN_SHADOW',
                            'streams':len(keys),'active_streams':sum(self.model(k)['status']=='ACTIVE' for k in keys),
@@ -189,7 +192,9 @@ class HistoricalLearning:
         return {'version':VERSION,'cutoff_exclusive_utc_date':self.cutoff,'wallets':wallets,'streams':streams,
                 'invalid_frozen_rows_skipped':self.invalid,'historical_roi':None,
                 'conflicting_events_excluded':len(self.conflicts),
+                'conflicting_events':[{'stream':k,'event':identity} for k,identity in sorted(self.conflicts)],
                 'policy':{'minimum_history_rows':MIN_ROWS,'minimum_forward_events':MIN_FORWARD,'minimum_forward_dates':MIN_DATES,
-                          'required_metrics':['brier','log_loss'],'reference_remains_control':True,
+                          'required_metrics':['brier','log_loss'],'required_benchmarks':['original','verified_market'],
+                          'reference_remains_control':True,
                           'new_models_start_in_shadow':True,'real_money_enabled':False},
                 'caveat':'Score history measures probabilities, not bookmaker profit. Chronological holdout reuse is exploratory; promotion also requires frozen prequential shadow results.'}
