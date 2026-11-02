@@ -274,14 +274,18 @@ def reconcile(root, rows, events, now, result_fetcher=fetch_espn):
         except Exception as exc:
             errors.append({'sport':key[0], 'date':str(key[1]), 'reason':type(exc).__name__})
     count = 0
+    enriched = set()
     for fid, f in forecasts.items():
         if fid in settled or f['event_id'] not in finals or parse_utc(f['start_utc']) > now:
             continue
         e = finals[f['event_id']]
         if f.get('market_spec'):
             from .market_catalog import outcome_for_spec,enrich_final
-            if f['market_spec']['metric']!='goals' and not e['final'].get('team_statistics'):
-                try:e=enrich_final(e)
+            if f['market_spec']['metric']!='goals' and not e['final'].get('team_statistics') and e['id'] not in enriched:
+                enriched.add(e['id'])
+                try:
+                    e=enrich_final(e)
+                    finals[e['id']]=e
                 except Exception as exc:
                     errors.append({'event_id':e['id'],'reason':'STAT_RESULT_'+type(exc).__name__});continue
             outcome=outcome_for_spec(f['market_spec'],e['final'])
@@ -396,7 +400,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
     from .market_catalog import collect_statistics,CountModel,generic_backtests,distribution
     stat_history=[];stat_info={"events_with_statistics":0,"failures":[]}
     if collect_team_stats and any(e['sport'] in football_models for e in events):
-        stat_history,stat_info=collect_statistics(root,events,now,result_fetcher,history_fetcher)
+        stat_history,stat_info=collect_statistics(root,events,now,result_fetcher,history_fetcher,football_history=football_history)
     specs=defaultdict(dict)
     for e in events:
         for mid,q in e.get('market_quotes',{}).items():
@@ -414,7 +418,9 @@ def run_research(root, events, football_models, now, risk, football_history=None
     today = now.astimezone(LOCAL).date()
     daily_papers = sum(r['kind']=='FORECAST' and r['stake_eur']>0 and
                        parse_utc(r['forecast_utc']).astimezone(LOCAL).date()==today for r in rows)
-    for e in sorted(events, key=lambda e:e['start_utc']):
+    # Qualified goal/stat markets get admission room before the ML-only queue;
+    # missing or unqualified extra markets never force an entry or waste a slot.
+    for e in sorted(events, key=lambda e:(not bool(e.get('market_quotes')),e['start_utc'])):
         if e['status']!='pre' or not now < parse_utc(e['start_utc']) <= now+dt.timedelta(hours=48):
             continue
         outputs = {}
@@ -477,15 +483,19 @@ def run_research(root, events, football_models, now, risk, football_history=None
                 continue
             fid = 'R3-'+hashlib.sha256(f"{e['id']}|{market}|{pred['version']}".encode()).hexdigest()[:20]
             quote_id = 'Q-'+fid+'-'+hashlib.sha256(json.dumps([prices,times,q.get('bookmakers')],sort_keys=True).encode()).hexdigest()[:14]
-            if any(r['id']==fid for r in rows):
+            previous = next((r for r in rows if r['id']==fid),None)
+            if previous:
                 append(root, {'id':quote_id,'kind':'QUOTE','forecast_id':fid,'event_id':e['id'],
                               'captured_at_utc':now.isoformat(),'odds':prices,'bookmakers':q.get('bookmakers'),
                               'book_quote_updates_utc':times},rows)
-                continue
+                if any(r['kind']=='FORECAST' and r['event_id']==e['id'] and r['market']==market and
+                       r['model_version']==pred['version'] and r['stake_eur']>0 for r in rows):
+                    continue
             p = pred['probabilities']
             choice = max(range(2), key=lambda i:p[i]-p_market[i])
-            ev = p[choice]*prices[choice]-1
-            conservative_ev = conservative_expected_value(p[choice], prices[choice], pred['sample_min'])
+            decisive = 1-pred.get('push_probability',0.0)
+            ev = decisive*(p[choice]*prices[choice]-1)
+            conservative_ev = decisive*conservative_expected_value(p[choice], prices[choice], pred['sample_min'])
             gate_key = '|'.join((e['sport'],market,pred['version']))
             forward = readiness.get(gate_key, {})
             score = backtest.get(e['sport'], {}) if market=='ML' else (generic_scores if pred.get('market_spec') else goal_scores).get(e['sport']+'|'+market,{})
@@ -504,6 +514,15 @@ def run_research(root, events, football_models, now, risk, football_history=None
                 requested = daily_entry_stake(bank,state['open_exposure_eur'],daily_papers)
                 stake = risk.reserve(e['id'], requested)
                 if not stake: reasons.append('AGGREGATE_RISK_LIMIT')
+            if previous and not stake:
+                for reason in reasons:blocks[reason]+=1
+                continue
+            source_forecast_id=fid if previous else None
+            if previous:
+                # Append a new prospective position; never edit the earlier
+                # zero-stake forecast, its price, clock or admission evidence.
+                fid += '-PAPER'
+                quote_id = 'Q-'+fid+'-'+hashlib.sha256(json.dumps([prices,times,q.get('bookmakers')],sort_keys=True).encode()).hexdigest()[:14]
             row = {'id':fid, 'kind':'FORECAST', 'event_id':e['id'], 'sport':e['sport'],
                    'home':e['home'], 'away':e['away'], 'market':market, 'market_spec':pred.get('market_spec'),
                    'start_utc':e['start_utc'], 'forecast_utc':now.isoformat(),
@@ -518,6 +537,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
                    'stake_eur':stake, 'paper_only':True, 'admission_blocks':reasons,
                    'classification':'PAPER_POSITION' if stake else 'ZERO_STAKE_VALIDATION',
                    'admission_evidence':gate, 'uncertainty_calibrated':False, 'critical_news_inputs':'NOT_MODELED_IN_BASELINE'}
+            if source_forecast_id:row['source_forecast_id']=source_forecast_id
             if append(root, row, rows):
                 added += 1
                 append(root, {'id':quote_id,'kind':'QUOTE','forecast_id':fid,'event_id':e['id'],

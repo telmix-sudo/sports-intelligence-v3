@@ -194,3 +194,52 @@ def audit_ledgers(root: Path, now: dt.datetime) -> dict:
         "closing_line_value_reason": "No verified point-in-time closing prices saved.",
         "paper_only": True,
     }
+
+
+def market_activity(root: Path, events: list[dict], now: dt.datetime) -> dict:
+    """Distinguish live prices, zero-stake research and actual PAPER positions."""
+    from .odds_provider import fresh_quote, parse_utc
+    labels = {'1X2':'Resultado 1X2', 'ML':'Vencedor (ML)', 'GOALS_TOTAL':'Mais/menos golos',
+              'GOALS_HANDICAP':'Handicap de golos', 'BTTS':'Ambas marcam', 'corners':'Cantos',
+              'offsides':'Foras de jogo', 'fouls':'Faltas', 'cards':'Cartões', 'throw_ins':'Lançamentos laterais'}
+    groups = {k:{'label':v,'papers_total':0,'papers_open':0,'papers_settled':0,'papers_voided':0,
+                 'papers_today':0,'observations':0,'priced_event_count':0} for k,v in labels.items()}
+    def family(row):
+        market=row.get('market')
+        if market in ('1X2','ML','BTTS'):return market
+        if market=='OVER_UNDER_2_5':return 'GOALS_TOTAL'
+        if market=='ASIAN_HOME_MINUS_0_5':return 'GOALS_HANDICAP'
+        spec=row.get('market_spec') or {}
+        if spec.get('metric')=='goals':return 'GOALS_TOTAL' if spec.get('kind')=='TOTAL' else 'GOALS_HANDICAP'
+        return spec.get('metric')
+    today=now.astimezone(LOCAL_TZ).date()
+    def count(row):
+        key=family(row)
+        if key not in groups:return
+        g=groups[key]
+        if row.get('stake_eur',0)<=0:g['observations']+=1;return
+        g['papers_total']+=1
+        g['papers_open']+=row.get('status')=='OPEN'
+        g['papers_settled']+=row.get('status')=='SETTLED'
+        g['papers_voided']+=row.get('status')=='VOID'
+        g['papers_today']+=parse_utc(row['forecast_utc']).astimezone(LOCAL_TZ).date()==today
+    for path in (root/'data/strategy_ledgers').glob('*.jsonl'):
+        for line in path.read_text().splitlines():
+            if line.strip():count(json.loads(line))
+    journal=root/'data/market_research_v3.jsonl'
+    if journal.exists():
+        rows=[json.loads(line) for line in journal.read_text().splitlines() if line.strip()]
+        settlements={r['forecast_id']:r for r in rows if r.get('kind')=='SETTLEMENT'}
+        for row in rows:
+            if row.get('kind')=='FORECAST':count(dict(row,status=settlements.get(row['id'],{}).get('status','OPEN')))
+    priced=defaultdict(set)
+    for event in events:
+        for quote in [event.get('quote')]+list(event.get('market_quotes',{}).values()):
+            if not quote or not fresh_quote(quote,now) or quote.get('bookmaker_count',0)<2:continue
+            key=family(quote)
+            if key in groups:priced[key].add(event['id'])
+    for key,g in groups.items():
+        g['priced_event_count']=len(priced[key])
+        g['status']='PAPER_RECORDED' if g['papers_total'] else 'OBSERVATION_ONLY' if g['observations'] else 'PRICE_AVAILABLE_NO_PAPER' if priced[key] else 'NO_ELIGIBLE_PRICE'
+    return {'asof_utc':now.isoformat(),'by_market':groups,
+            'note':'Counts include repeated strategies on the same event; zero-stake observations are not bets.'}

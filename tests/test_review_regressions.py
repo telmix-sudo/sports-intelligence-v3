@@ -89,8 +89,9 @@ class LiveCacheTests(unittest.TestCase):
                 calls.append(key)
                 return prices(supported) if key == "soccer_epl" else []
             result = annotate_discovered([unsupported, supported], root, NOW, "SYNTHETIC", request)
-            self.assertEqual(calls, ["soccer_epl"])
-            self.assertEqual(result["credits_today"], 8)
+            self.assertEqual(calls, ["soccer_epl", "soccer_epl"])
+            self.assertEqual(result["credits_today"], 11)
+            self.assertEqual(result["event_market_credits_today"], 3)
             self.assertIsNotNone(supported["quote"])
             cache = json.loads((root / "data/odds_cache_v3.json").read_text())
             self.assertEqual(cache["polled_windows"], [2])

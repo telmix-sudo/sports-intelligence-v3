@@ -48,3 +48,19 @@ O catálogo é descoberto no endpoint de mercados do evento. Faz-se recolha incr
 O orçamento máximo passa a **16 créditos por dia** (até 496 em 31 dias), dentro do plano gratuito de referência de 500/mês e sempre sujeito à quota restante comunicada pelo fornecedor. Não foi comprada qualquer API/subscrição. A discovery custa um crédito e a recolha adicional usa até seis mercados num evento; um mercado pode devolver muitas linhas. Cobertura não é exaustiva.
 
 **Limitações explícitas:** o fornecedor atual anuncia cantos/cartões mas não mercados de foras de jogo, lançamentos laterais ou faltas. Esses dados estatísticos são recolhidos, mas não se inventam odds para abrir apostas. Mercados de cartões/bookings dependem de regras inequívocas por operador (contagem vs pontos); sem essa prova são bloqueados. Períodos, jogadores e linhas com devoluções/quarters não são convertidos em binários incorretos. Mercados presentes no catálogo mas sem modelo/regra validada são identificados como bloqueios. O painel mostra todas as carteiras abaixo de cinco entradas e o motivo da insuficiência.
+
+## Correções de operacionalização — 02/11/2026
+
+Esta atualização substitui a recolha adicional descrita acima: reserva até quatro dos mesmos 16 créditos diários para pedir diretamente `alternate_totals_corners`, `alternate_totals` e `btts` no endpoint de odds do evento. Não é necessário gastar primeiro um crédito a listar mercados. As tentativas e o orçamento são persistidos; uma tentativa anterior num jogo não bloqueia os restantes. Preços de dois operadores e timestamps originais continuam obrigatórios.
+
+As correspondências de clubes são exatas: nomes oficiais presentes em OpenFootball, como `US Sassuolo Calcio`, `ACF Fiorentina`, `FC Lorient` e `Stade Brestois 29`, passam a coincidir com os nomes apresentados pela ESPN. Não se removem prefixos genericamente nem se aproximam nomes ambíguos como `Deportivo`. Fontes de nomes: `openfootball/football.json`, ficheiros `2025-26/it.1.json`, `fr.1.json`, `es.1.json` e `de.1.json`; nomes de apresentação nos registos oficiais ESPN.
+
+Totais e handicaps de linha inteira usam probabilidades condicionais a um resultado sem devolução e conservam separadamente a probabilidade de push. O EV inclui a fração de probabilidade que não é devolvida; um resultado exatamente na linha liquida como VOID, com lucro zero. Linhas de quarto, períodos e regras de cartões não implementados continuam bloqueados. Não se modela uma devolução como derrota.
+
+O backfill de estatísticas usa datas de jogos efetivamente concluídos no histórico dos dois anos anteriores, até oito datas por liga ativa e 120 resumos por execução, com cache e oito pedidos em paralelo. Os limites de validação não foram reduzidos. Uma previsão anterior sem stake pode originar uma nova posição PAPER quando satisfaz os critérios: a previsão original mantém-se intocada e a nova posição identifica a sua origem.
+
+Golos, ambas marcam e estatísticas qualificadas são avaliados antes da fila de vencedor para que esta não esgote os dez lugares diários ou a exposição. Sem oportunidade qualificada, a procura de vencedor continua. As primeiras cinco entradas qualificadas usam aproximadamente 0,10% da banca fictícia, mínimo 1 € e nunca acima do anterior teto de 0,25%; as seguintes mantêm 0,25%. Mantêm-se os tetos de 2%/conta, 36 €/jogo e 240 € agregados, sem alterar posições antigas.
+
+O novo campo `market_activity` e a tabela «Utilização efetiva por mercado» distinguem preços disponíveis, observações sem stake e posições PAPER abertas/liquidadas. Existir código ou preços para um mercado não significa que já existam apostas nele. A evolução operacional é confirmada pelos relatórios de execução, não apenas pelos testes.
+
+Referência da API: https://the-odds-api.com/liveapi/guides/v4/ e https://the-odds-api.com/sports-odds-data/betting-markets.html.

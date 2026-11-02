@@ -11,10 +11,12 @@ from pathlib import Path
 from .odds_provider import (parse_utc,quotes_for_event,market_quotes_for_event,
                             _request_odds,MAX_CREDITS_PER_DAY,MAX_BOOK_QUOTE_AGE_HOURS,
                             ODDS_KEY_MAP,attach_cached_odds,fresh_quote)
-from .market_catalog import catalog_quotes,EXTRA_MARKET_PRIORITY
+from .market_catalog import catalog_quotes
 from .activity_policy import MIN_DAILY_ENTRIES
 
 PRICE_LOOKAHEAD_HOURS = 48
+EXTRA_MARKET_DAILY_CREDITS = 4
+DIRECT_SOCCER_MARKETS = ('alternate_totals_corners', 'alternate_totals', 'btts')
 
 
 def prune_expired_prices(snapshots, now):
@@ -58,6 +60,8 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
             'credits_today':max(int(old.get('credits_today',0)),int(old.get('calls_today',0))) if same else 0,
             'snapshots':old.get('snapshots',{}),'market_inventory':old.get('market_inventory',{}),
             'event_markets_done':old.get('event_markets_done',[]) if same else [],
+            'event_market_credits_today':int(old.get('event_market_credits_today',0)) if same else 0,
+            'event_market_attempts':old.get('event_market_attempts',[]) if same else [],
             'global_priced_keys':old.get('global_priced_keys',[]) if same else [],
             'global_priced_families':old.get('global_priced_families',[]) if same else [],
             'global_poll_windows':old.get('global_poll_windows',{}) if same else {},
@@ -118,8 +122,8 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
         matches=by_key[key];family=matches[0]['family']
         markets='h2h,totals,spreads' if family=='soccer' and executable(key) else 'h2h'
         cost=len(markets.split(','))
-        # Preserve up to 3 credits for a real event's corner/BTTS market catalog.
-        reserve_extra=3 if soccer and not record['event_markets_done'] and covered_count()>=MIN_DAILY_ENTRIES else 0
+        # Preserve four daily credits for directly priced extra markets.
+        reserve_extra=max(0,EXTRA_MARKET_DAILY_CREDITS-record['event_market_credits_today']) if soccer and covered_count()>=MIN_DAILY_ENTRIES else 0
         price_cap=min(current_cap,MAX_CREDITS_PER_DAY-reserve_extra)
         if not remaining(cost,price_cap):
             # One remaining credit can still price an entire football league.
@@ -151,25 +155,39 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
             record['family_last_priced'][family]=now.isoformat()
             record['key_last_priced'][key]=now.isoformat()
         except Exception as exc:diag['errors'].append({'sport_key':key,'reason':type(exc).__name__})
-    # A broad sport catalog does not remove the user's request for corner markets.
-    if secret and remaining(2,current_cap) and not record['event_markets_done']:
-        soccer=sorted(soccer,key=lambda e:e['start_utc'])
-        if soccer:
-            e=soccer[0];key=e['odds_sport_key'];eid=e['odds_event_id']
-            record['event_markets_done'].append(eid)
-            try:
-                data=request(key,event_id=eid,discover=True)
-                keys=sorted({m['key'] for r in data for b in r.get('bookmakers',[]) for m in b.get('markets',[])})
-                record['market_inventory'][e['id']]={'keys':keys,'captured_at_utc':now.isoformat()}
-                cap=min(current_cap-record['credits_today'],record['credits_remaining'] if record['credits_remaining'] is not None else MAX_CREDITS_PER_DAY)
-                selected=[k for k in EXTRA_MARKET_PRIORITY if k in keys][:cap]
-                if selected:
-                    rows=request(key,','.join(selected),eid)
-                    extra=market_quotes_for_event(e,rows,now);extended,_=catalog_quotes(e,rows,now);extra.update(extended)
-                    snap=record['snapshots'].setdefault(e['sport'],{'quotes':{},'provider_ids':{}})
-                    snap.setdefault('market_quotes',{}).setdefault(e['id'],{}).update(extra)
-                    snap['fetched_at']=now.isoformat()
-            except Exception as exc:diag['errors'].append({'sport_key':key,'reason':'EVENT_MARKETS_'+type(exc).__name__})
+    # Spend a reserved part of the SAME daily ceiling on executable extra markets.
+    # The event-odds API accepts these documented keys directly: a paid market-list
+    # probe is unnecessary and used to consume a large part of this small budget.
+    from .portfolio_controls import PaperRiskBook,INITIAL_TOTAL_BANK,MAX_EVENT_OPEN_FRACTION
+    exposure=PaperRiskBook(root).event_exposure
+    soccer=sorted(soccer,key=lambda e:(exposure[e['id']]>=INITIAL_TOTAL_BANK*MAX_EVENT_OPEN_FRACTION,e['start_utc'],e['id']))
+    for e in soccer:
+        budget=min(EXTRA_MARKET_DAILY_CREDITS-record['event_market_credits_today'],
+                   MAX_CREDITS_PER_DAY-record['credits_today'],
+                   record['credits_remaining'] if record['credits_remaining'] is not None else MAX_CREDITS_PER_DAY)
+        if not secret or budget<1:break
+        key=e['odds_sport_key'];eid=e['odds_event_id'];attempt=eid+':'+str(window)
+        if attempt in record['event_market_attempts']:continue
+        snap=record['snapshots'].setdefault(e['sport'],{'quotes':{},'provider_ids':{}})
+        existing=snap.get('market_quotes',{}).get(e['id'],{})
+        if all(any(fresh_quote(q,now) and q.get('bookmaker_count',0)>=2 and
+                   ((q.get('market_spec') or {}).get('metric')==metric if metric else q.get('market')=='BTTS')
+                   for q in existing.values()) for metric in ('corners','goals',None)):
+            continue
+        selected=list(DIRECT_SOCCER_MARKETS[:min(3,budget)]) if budget>1 else ['alternate_totals']
+        record['event_market_attempts'].append(attempt)
+        record['event_market_credits_today']+=len(selected)
+        if eid not in record['event_markets_done']:record['event_markets_done'].append(eid)
+        try:
+            rows=request(key,','.join(selected),eid)
+            returned=sorted({m['key'] for r in rows for b in r.get('bookmakers',[]) for m in b.get('markets',[])})
+            record['market_inventory'][e['id']]={'keys':returned,'requested_keys':selected,
+                'captured_at_utc':now.isoformat(),'coverage':'RETURNED_MARKETS_NOT_EXHAUSTIVE_CATALOG'}
+            extra=market_quotes_for_event(e,rows,now);extended,_=catalog_quotes(e,rows,now);extra.update(extended)
+            snap.setdefault('market_quotes',{}).setdefault(e['id'],{}).update(extra)
+            snap.setdefault('provider_ids',{})[e['id']]=eid
+            snap['fetched_at']=now.isoformat()
+        except Exception as exc:diag['errors'].append({'sport_key':key,'reason':'EVENT_MARKETS_'+type(exc).__name__})
     diag['expired_cached_quotes_removed']=prune_expired_prices(record['snapshots'],now)
     diag['quotes_matched']=attach_cached_odds(events,record['snapshots'],now)
     diag['cached_sports']=sorted({e['sport'] for e in events if e.get('quote') and
@@ -181,5 +199,6 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
                 priced_families_today=record['global_priced_families'],
                 eligible_competitions=len(by_key),goal_market_quotes=sum(len(e.get('market_quotes',{})) for e in events),
                 distinct_modelled_events_with_prices=covered_count(),minimum_priced_event_target=MIN_DAILY_ENTRIES,
+                event_market_credits_today=record['event_market_credits_today'],reserved_extra_market_credits=EXTRA_MARKET_DAILY_CREDITS,
                 market_inventory=record['market_inventory'])
     return diag

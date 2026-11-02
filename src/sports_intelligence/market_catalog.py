@@ -76,7 +76,7 @@ def catalog_quotes(event,rows,now):
                             prices=[float(o['price']) for o in outcomes];nv=no_vig(prices)
                             period='FULL_TIME' if not any(t in key for t in ('_h1','_h2','_q1','_q2','_p1','_p2')) else 'UNSUPPORTED_PERIOD'
                             reason=None
-                            if abs(line*2-round(line*2))>1e-8 or abs(line-round(line))<1e-8:reason='PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL'
+                            if abs(line*2-round(line*2))>1e-8:reason='QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT'
                             if metric=='cards':reason='BOOKMAKER_CARD_BOOKING_RULES_REQUIRED'
                             if period!='FULL_TIME':reason='PERIOD_STATISTICS_NOT_AVAILABLE'
                             spec={'kind':kind,'metric':metric,'line':line,'team':side,'period':period,
@@ -132,20 +132,26 @@ def enrich_final(event,fetcher=fetch_text):
     return event
 
 
-def collect_statistics(root,events,now,score_fetcher,fetcher=fetch_text,max_summaries=40):
+def collect_statistics(root,events,now,score_fetcher,fetcher=fetch_text,max_summaries=120,football_history=None):
     """Incremental cache of official completed football event/team-stat records."""
     path=root/'data/football_statistics_v3.json'
     cache=json.loads(path.read_text()) if path.exists() else {'events':{},'days':[]}
     candidates=dict(cache.get('pending',{}))
     candidates.update({e['id']:e for e in events if e['sport'] in FOOTBALL and e.get('completed') and e.get('final') and _time(e['start_utc']).date()<now.date()})
     tasks=[]
-    for sport in sorted(FOOTBALL):
-        days=[now.date()-dt.timedelta(days=i) for i in range(1,181)]
+    active={e['sport'] for e in events if e['sport'] in FOOTBALL and e.get('status')=='pre'
+            and now<_time(e['start_utc'])<=now+dt.timedelta(hours=48)} or FOOTBALL
+    for sport in sorted(active):
+        # Query actual completed match dates, not months of empty off-season
+        # dates. This builds the per-team corner sample using free scoreboards.
+        known={m['date'] for m in (football_history or {}).get(sport,[])
+               if now.date()-dt.timedelta(days=730)<=m['date']<now.date()}
+        days=sorted(known,reverse=True) if known else [now.date()-dt.timedelta(days=i) for i in range(1,731)]
         for day in days:
             key=sport+':'+str(day)
             if key not in cache['days']:
                 tasks.append((sport,day,key))
-                if sum(t[0]==sport for t in tasks)>=3:break
+                if sum(t[0]==sport for t in tasks)>=8:break
     from .scanner import unpack_scoreboard
     failures=[]
     def dates(task):
@@ -159,7 +165,15 @@ def collect_statistics(root,events,now,score_fetcher,fetcher=fetch_text,max_summ
             if error:failures.append({'stage':'scoreboard','sport':sport,'date':str(day),'reason':error});continue
             cache['days'].append(key)
             candidates.update({e['id']:e for e in found if e['completed'] and e['final'] and _time(e['start_utc']).date()<now.date()})
-    pending=sorted((e for eid,e in candidates.items() if eid not in cache['events'] and cache.get('attempts',{}).get(eid,0)<3),key=lambda e:e['start_utc'],reverse=True)[:max_summaries]
+    waiting=defaultdict(list)
+    for e in sorted(candidates.values(),key=lambda e:e['start_utc'],reverse=True):
+        if e['id'] not in cache['events'] and cache.get('attempts',{}).get(e['id'],0)<3:waiting[e['sport']].append(e)
+    pending=[]
+    order=sorted(waiting,key=lambda sport:(sport not in active,sport))
+    while len(pending)<max_summaries:
+        batch=[waiting[sport].pop(0) for sport in order if waiting[sport]]
+        if not batch:break
+        pending.extend(batch[:max_summaries-len(pending)])
     def summary(e):
         try:return enrich_final(e,fetcher),None
         except Exception as exc:return e,type(exc).__name__
@@ -175,7 +189,9 @@ def collect_statistics(root,events,now,score_fetcher,fetcher=fetch_text,max_summ
     eligible=[e for e in cache['events'].values() if _time(e['start_utc']).date()<now.date()]
     return eligible,{'scoreboard_requests':len(tasks),'summary_requests':len(pending),
                     'events_with_statistics':len(eligible),'failures':failures,
-                    'missing_stats':len(pending)-sum(e['id'] in cache['events'] for e in pending)}
+                    'missing_stats':len(pending)-sum(e['id'] in cache['events'] for e in pending),
+                    'backfill_policy':'KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES',
+                    'events_by_sport':dict(Counter(e['sport'] for e in eligible))}
 
 
 class CountModel:
@@ -201,15 +217,23 @@ def distribution(mh,ma,spec):
         vals=[math.exp(-mu)]
         for i in range(1,max(30,int(mu+10*math.sqrt(mu)+10))):vals.append(vals[-1]*mu/i)
         return vals
-    ph,pa=pmf(mh),pmf(ma);yes=0.
+    ph,pa=pmf(mh),pmf(ma);yes=push=0.
     if spec['kind']=='TOTAL':
         if spec.get('team'):
             pm=ph if spec['team']=='home' else pa
             yes=sum(p for i,p in enumerate(pm) if i>spec['line'])/sum(pm)
+            push=sum(p for i,p in enumerate(pm) if i==spec['line'])/sum(pm)
         else:
             pm=pmf(mh+ma);yes=sum(p for i,p in enumerate(pm) if i>spec['line'])/sum(pm)
-    else:yes=sum(x*y for i,x in enumerate(ph) for j,y in enumerate(pa) if i+spec['line']>j)/(sum(ph)*sum(pa))
-    return {'probabilities':[yes,1-yes]}
+            push=sum(p for i,p in enumerate(pm) if i==spec['line'])/sum(pm)
+    else:
+        norm=sum(ph)*sum(pa)
+        yes=sum(x*y for i,x in enumerate(ph) for j,y in enumerate(pa) if i+spec['line']>j)/norm
+        push=sum(x*y for i,x in enumerate(ph) for j,y in enumerate(pa) if i+spec['line']==j)/norm
+    # Book prices on integer Asian lines condition on the non-refunded stake.
+    # Score only decisive results; a push is VOID and returns the whole stake.
+    conditional=yes/(1-push)
+    return {'probabilities':[conditional,1-conditional], 'push_probability':push}
 
 
 def outcome_for_spec(spec,final):

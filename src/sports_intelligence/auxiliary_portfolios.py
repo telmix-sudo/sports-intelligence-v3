@@ -16,7 +16,7 @@ from .odds_provider import parse_utc
 LOCAL=ZoneInfo('Europe/Lisbon')
 
 
-def open_auxiliary_markets(root,events,now,registry,risk):
+def open_auxiliary_markets(root,events,now,registry,risk,market_scope='all'):
     from .strategy_lab import read_jsonl,save_jsonl
     states={};additions=Counter();today=now.astimezone(LOCAL).date()
     for name in ALL_NAMES:
@@ -26,10 +26,17 @@ def open_auxiliary_markets(root,events,now,registry,risk):
                       'exposure':sum(r['stake_eur'] for r in rows if r['status']=='OPEN')}
     event_ids={e['id'] for e in events if e['status']=='pre' and now<parse_utc(e['start_utc'])<=now+dt.timedelta(hours=48)}
     all_rows=read_journal(root)
-    forecasts=[r for r in all_rows if r['kind']=='FORECAST' and r['event_id'] in event_ids and
-               dt.timedelta(0)<=now-parse_utc(r['forecast_utc'])<=dt.timedelta(hours=12)]
+    latest={}
+    for r in all_rows:
+        if (r['kind']=='FORECAST' and r['event_id'] in event_ids and
+            dt.timedelta(0)<=now-parse_utc(r['forecast_utc'])<=dt.timedelta(hours=12)):
+            key=(r['event_id'],r['market'],r['model_version'])
+            if key not in latest or parse_utc(r['forecast_utc'])>=parse_utc(latest[key]['forecast_utc']):latest[key]=r
+    forecasts=list(latest.values())
     forecasts.sort(key=lambda r:-r['conservative_ev'])
     for f in forecasts:
+        if market_scope=='non_winner' and f['market']=='ML':continue
+        if market_scope=='moneyline' and f['market']!='ML':continue
         general_blocks=[r for r in f['admission_blocks'] if r not in ('DAILY_PAPER_LIMIT','EXPERIMENTAL_EVENT_ALREADY_TRADED','AGGREGATE_RISK_LIMIT')]
         if general_blocks:continue
         if any(not 0<=(now-parse_utc(t)).total_seconds()<=8*3600 for t in f['book_quote_updates_utc']):continue
