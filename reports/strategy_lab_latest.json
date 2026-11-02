@@ -2792,21 +2792,21 @@
     },
     "modalities_with_model_forecasts": 1
   },
-  "asof_utc": "2026-11-02T00:25:34.875582+00:00",
+  "asof_utc": "2026-11-02T02:45:09.733643+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-02",
     "target": 5,
     "max_per_day": 10,
     "opened_today": 8,
-    "new_entries": 8,
+    "new_entries": 0,
     "remaining_to_minimum": 0,
     "target_met": true,
     "reference": true,
     "not_a_value_signal": true,
     "status": "PARTIAL",
     "reason": "Maximum exposure (2% of virtual bank) or 1 EUR minimum stake reached",
-    "eligible_events": 15,
+    "eligible_events": 7,
     "distinct_event_ids_today": [
       "ligue_1:401876419",
       "nba:401909907",
@@ -2983,24 +2983,22 @@
     "existing_positions_never_retroactively_changed": true
   },
   "market_research": {
-    "asof_utc": "2026-11-02T00:25:34.875582+00:00",
+    "asof_utc": "2026-11-02T02:45:09.733643+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-    "new_forecasts": 13,
-    "new_settlements": 0,
+    "new_forecasts": 0,
+    "new_settlements": 3,
     "forecasts_total": 29,
     "zero_stake_forecasts": 19,
-    "open_observations": 10,
-    "settlements_total": 10,
-    "candidate_markets": 35,
+    "open_observations": 7,
+    "settlements_total": 13,
+    "candidate_markets": 34,
     "closing_line_values_available": 0,
     "blocks": {
-      "EDGE_BELOW_4PP": 5,
-      "CONSERVATIVE_EV_BELOW_1_PERCENT": 5,
-      "missing_timestamped_ML_odds": 16,
       "insufficient_football_home_away_history": 4,
       "missing_timestamped_OVER_UNDER_2_5_odds": 1,
       "missing_timestamped_BTTS_odds": 1,
-      "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 1
+      "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 1,
+      "missing_timestamped_ML_odds": 18
     },
     "history": {
       "requests": 3,
@@ -3008,80 +3006,80 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-          "sha256": "16179785e4dfda9396048a3c252418e431331804f69707974158cfd6d78eb519",
-          "captured_at_utc": "2026-11-02T00:25:34.875582+00:00",
-          "completed_games": 1
+          "sha256": "19798181bff80b1e6fd591c1e9f258278889bfdf7fa7f288d6ea09aac86f9f2e",
+          "captured_at_utc": "2026-11-02T02:45:09.733643+00:00",
+          "completed_games": 2
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-          "sha256": "ac99b61b0ebcb6eca007af5cb473b2d9eb7188fc27233256da3a77f1cfcd1a54",
-          "captured_at_utc": "2026-11-02T00:25:34.875582+00:00",
-          "completed_games": 9
+          "sha256": "66078013ed0ed74a6b58c381766a80f986c650a72665b710cb4e76866f7db5db",
+          "captured_at_utc": "2026-11-02T02:45:09.733643+00:00",
+          "completed_games": 11
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-          "sha256": "e1a2f43ebdab66aeea7aed6b1aefebda6b22afe78c99edbc05e13be47d455e2a",
-          "captured_at_utc": "2026-11-02T00:25:34.875582+00:00",
-          "completed_games": 3
+          "sha256": "565f0b6839ab870b5f6ee4ca2cc832ee456ede1b879b9fb825153c61c7057374",
+          "captured_at_utc": "2026-11-02T02:45:09.733643+00:00",
+          "completed_games": 4
         }
       ],
       "games_per_sport": {
-        "nba": 1402,
-        "nfl": 330,
-        "nhl": 1508
+        "nba": 1403,
+        "nfl": 332,
+        "nhl": 1509
       },
       "cutoff_exclusive_utc_date": "2026-11-02",
       "max_parallel_requests": 8
     },
     "score_backtests": {
       "nba": {
-        "n": 1210,
-        "brier": 0.44126701870544427,
-        "log_loss": 0.6326469669350409,
+        "n": 1211,
+        "brier": 0.44148495246443076,
+        "log_loss": 0.6328684782010571,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
           "from": "2026-05-21",
-          "n": 169,
-          "brier": 0.48198153806236954,
-          "log_loss": 0.6756679250338437,
-          "ece": 0.05351857226368823
+          "n": 170,
+          "brier": 0.4832944984316385,
+          "log_loss": 0.6769928025929423,
+          "ece": 0.05669666839415819
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "nhl": {
-        "n": 1243,
-        "brier": 0.4885653616969384,
-        "log_loss": 0.6816277212760562,
+        "n": 1244,
+        "brier": 0.4885372675892185,
+        "log_loss": 0.6815996675995263,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
           "from": "2026-09-22",
-          "n": 275,
-          "brier": 0.48128252667986915,
-          "log_loss": 0.6742557231554707,
-          "ece": 0.07701427918226476
+          "n": 276,
+          "brier": 0.4811822866980339,
+          "log_loss": 0.674155988461693,
+          "ece": 0.07500972096693062
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "nfl": {
-        "n": 193,
-        "brier": 0.4764600793830999,
-        "log_loss": 0.669257257423977,
+        "n": 195,
+        "brier": 0.47534996326779627,
+        "log_loss": 0.6681413162922564,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
           "from": "2026-10-12",
-          "n": 40,
-          "brier": 0.48696678740450405,
-          "log_loss": 0.6798879642340331,
-          "ece": 0.1393242519170033
+          "n": 42,
+          "brier": 0.4813123574395749,
+          "log_loss": 0.6742005848458035,
+          "ece": 0.13319766367164307
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       }
@@ -3345,8 +3343,8 @@
     },
     "team_statistics_history": {
       "scoreboard_requests": 15,
-      "summary_requests": 40,
-      "events_with_statistics": 395,
+      "summary_requests": 7,
+      "events_with_statistics": 402,
       "failures": [],
       "missing_stats": 0
     },
@@ -3736,9 +3734,9 @@
         5,
         10
       ],
-      "opened_today": 0,
-      "opened_this_week": 0,
-      "remaining_to_minimum": 5,
+      "opened_today": 7,
+      "opened_this_week": 7,
+      "remaining_to_minimum": 0,
       "new_entries": 0,
       "eligible": 0,
       "status": "NO_ELIGIBLE_QUOTE"
@@ -3748,9 +3746,9 @@
         5,
         10
       ],
-      "opened_today": 0,
-      "opened_this_week": 0,
-      "remaining_to_minimum": 5,
+      "opened_today": 7,
+      "opened_this_week": 7,
+      "remaining_to_minimum": 0,
       "new_entries": 0,
       "eligible": 0,
       "status": "NO_ELIGIBLE_QUOTE"
@@ -3760,9 +3758,9 @@
         5,
         10
       ],
-      "opened_today": 0,
-      "opened_this_week": 0,
-      "remaining_to_minimum": 5,
+      "opened_today": 8,
+      "opened_this_week": 8,
+      "remaining_to_minimum": 0,
       "new_entries": 0,
       "eligible": 0,
       "status": "NO_ELIGIBLE_QUOTE"
@@ -4919,30 +4917,21 @@
     "failures": 0
   },
   "events_seen": 91,
-  "new_paper_entries": {
-    "MARKET_DAILY_REFERENCE": 8,
-    "CONSENSUS_SHRUNK": 8,
-    "DISAGREEMENT_VETO": 7,
-    "DIXON_COLES_LOW": 8,
-    "ELO_DYNAMIC": 8,
-    "ELO_POISSON_BLEND": 8,
-    "ELO_STANDARD": 8,
-    "FREQ_BALANCED_3_5": 7,
-    "FREQ_BROAD_5_10": 8,
-    "FREQ_SELECTIVE_1_3": 7,
-    "MARKET_ANCHORED": 8,
-    "POISSON_SHRINK": 8
-  },
+  "new_paper_entries": {},
   "entry_diagnostics": {
     "rejections": {
       "missing_timestamped_odds": 17,
       "insufficient_history": 16
     },
-    "new_entries": 93,
+    "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
   "newly_settled": 0,
-  "missing_final_event_ids": [],
+  "missing_final_event_ids": [
+    "nba:401909906",
+    "nfl:401873035",
+    "nhl:401892628"
+  ],
   "statistic_settlement": {
     "lookups": 0,
     "errors": []
