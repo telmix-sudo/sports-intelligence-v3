@@ -129,7 +129,7 @@ def collect_history(root, sports, now, fetcher=fetch_text, max_days_per_sport=32
     return eligible,diagnostics
 
 
-def fit_sports(history):
+def fit_sports(history, learning=None):
     models = {sport:TeamScoreBaseline(sport) for sport in NA_SPORTS}
     scores = defaultdict(list)
     grouped = defaultdict(list)
@@ -143,6 +143,9 @@ def fit_sports(history):
             final = event['final']
             if pred and final['outcome'] != 1:
                 outcome = 0 if final['outcome'] == 0 else 1
+                if learning is not None:
+                    from .historical_learning import event_key
+                    learning.add(pred['version'],event['sport'],'ML',day,event_key(day,event['home'],event['away']),pred['probabilities'],outcome)
                 scores[event['sport']].append({'brier':brier(pred['probabilities'], outcome),
                                                'log_loss':log_loss(pred['probabilities'], outcome),
                                                'p':pred['probabilities'][0], 'outcome':outcome, 'date':str(day)})
@@ -178,7 +181,7 @@ def summarize_score_rows(rows):
             'scope':'DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS'}
 
 
-def goal_backtests(matches_by_league):
+def goal_backtests(matches_by_league, learning=None):
     from .poisson import FootballPoisson
     scores = defaultdict(list)
     for league, matches in matches_by_league.items():
@@ -193,6 +196,9 @@ def goal_backtests(matches_by_league):
                 probs = football_goal_markets(model,h,a)
                 for market in GOAL_MARKETS:
                     idx = _goal_outcome(market, {'home':m['goals_home'], 'away':m['goals_away']})
+                    if learning is not None:
+                        from .historical_learning import event_key
+                        learning.add(VERSION+'-goals',league,market,day,event_key(day,h,a),probs[market],idx)
                     scores[league+'|'+market].append({'brier':brier(probs[market],idx),
                         'log_loss':log_loss(probs[market],idx),'p':probs[market][0], 'outcome':idx,'date':str(day)})
             for m in grouped[day]: model.update(m)
@@ -386,7 +392,7 @@ def paper_state(rows):
 
 
 def run_research(root, events, football_models, now, risk, football_history=None, history_fetcher=fetch_text,
-                 result_fetcher=fetch_espn, previous_settlement_result=None, collect_team_stats=False):
+                 result_fetcher=fetch_espn, previous_settlement_result=None, collect_team_stats=False, learning=None):
     from .activity_policy import daily_entry_stake
     rows = read_journal(root)
     newly_settled, settlement_errors = (previous_settlement_result if previous_settlement_result is not None
@@ -395,8 +401,8 @@ def run_research(root, events, football_models, now, risk, football_history=None
     readiness = validation(rows, cutoff)
     sports = {e['sport'] for e in events if e['sport'] in NA_SPORTS}
     history, history_info = collect_history(root, sports, now, history_fetcher) if sports else ([], {'games_per_sport':{}, 'requests':0, 'failures':[]})
-    models, backtest = fit_sports(history)
-    goal_scores = goal_backtests(football_history or {})
+    models, backtest = fit_sports(history,learning)
+    goal_scores = goal_backtests(football_history or {},learning)
     from .market_catalog import collect_statistics,CountModel,generic_backtests,distribution
     stat_history=[];stat_info={"events_with_statistics":0,"failures":[]}
     if collect_team_stats and any(e['sport'] in football_models for e in events):
@@ -405,7 +411,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
     for e in events:
         for mid,q in e.get('market_quotes',{}).items():
             if q.get('market_spec'):specs[e['sport']][mid]=q['market_spec']
-    generic_scores=generic_backtests(football_history or {},stat_history,specs)
+    generic_scores=generic_backtests(football_history or {},stat_history,specs,learning)
     stat_models={}
     for e in stat_history:
         for metric in ('corners','offsides','fouls','throw_ins','shots','shots_on_target'):
@@ -492,6 +498,9 @@ def run_research(root, events, football_models, now, risk, football_history=None
                        r['model_version']==pred['version'] and r['stake_eur']>0 for r in rows):
                     continue
             p = pred['probabilities']
+            learning_evidence=None
+            if learning is not None:
+                p,learning_evidence=learning.apply(pred['version'],e['sport'],market,p,wallet='EXPERIMENTAL_MULTI_MARKET')
             choice = max(range(2), key=lambda i:p[i]-p_market[i])
             decisive = 1-pred.get('push_probability',0.0)
             ev = decisive*(p[choice]*prices[choice]-1)
@@ -537,6 +546,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
                    'stake_eur':stake, 'paper_only':True, 'admission_blocks':reasons,
                    'classification':'PAPER_POSITION' if stake else 'ZERO_STAKE_VALIDATION',
                    'admission_evidence':gate, 'uncertainty_calibrated':False, 'critical_news_inputs':'NOT_MODELED_IN_BASELINE'}
+            if learning_evidence is not None:row['historical_learning']=learning_evidence
             if source_forecast_id:row['source_forecast_id']=source_forecast_id
             if append(root, row, rows):
                 added += 1

@@ -73,6 +73,7 @@ def open_auxiliary_markets(root,events,now,registry,risk,market_scope='all'):
                  'model_version':f['model_version'],'source_forecast_id':f['id'],
                  'shared_forecast_not_independent':True,'conservative_expected_value':f['conservative_ev'],
                  'strategy_version':'daily-multimarket-2.0.0'}
+            if f.get('historical_learning'):row['historical_learning']=f['historical_learning']
             rows.append(row);s['today']+=1;s['exposure']+=stake;additions[name]+=1
     for name,s in states.items():
         if additions[name]:save_jsonl(s['path'],s['rows'])

@@ -225,7 +225,29 @@ def update_observations(path,events,model,state,temperature,now,model_hash):
             'market_benchmark_n':len(benchmark)}
 
 
-def run(root,now,trials=12,timeout=180,collector=collect_openfootball):
+def prospective_calendar(root,now,discover=None):
+    """Refresh the five supported leagues if the global calendar is stale.
+
+    The discovery workflow may not run at the ML schedule. Fetching official
+    scoreboards here avoids silently waiting another day; it buys no odds.
+    """
+    path=root/'data/global_events_v3.json'
+    if path.exists():
+        try:
+            calendar=json.loads(path.read_text());age=now-parse_utc(calendar['asof_utc'])
+            if dt.timedelta(0)<=age<=dt.timedelta(hours=4):
+                return calendar['events'],{'source':'FRESH_GLOBAL_CALENDAR','asof_utc':calendar['asof_utc']}
+        except (ValueError,KeyError,TypeError):pass
+    if discover is None:
+        from .scanner import capture_scoreboards
+        discover=capture_scoreboards
+    from .feeds import SCOREBOARDS
+    events,coverage=discover(now,sports={s:SCOREBOARDS[s] for s in LEAGUES},future_days=2,need_yesterday=True)
+    return events,{'source':'DIRECT_OFFICIAL_REFRESH','asof_utc':now.isoformat(),
+                   'sources_ok':coverage['sources_ok'],'sources_failed':coverage['sources_failed']}
+
+
+def run(root,now,trials=12,timeout=180,collector=collect_openfootball,discover=None):
     if now.tzinfo is None:raise ValueError('Timezone required')
     now=now.astimezone(UTC)
     grouped,provenance=collector(now.date())
@@ -236,13 +258,9 @@ def run(root,now,trials=12,timeout=180,collector=collect_openfootball):
     if len(rows)>=1000:
         model,temp,info=train(rows,trials,timeout)
         report.update(status='EXPERIMENTAL',evaluation=info)
-        path=root/'data/global_events_v3.json'
-        if path.exists():
-            calendar=json.loads(path.read_text());age=now-parse_utc(calendar['asof_utc'])
-            if dt.timedelta(0)<=age<=dt.timedelta(hours=4):
-                report['prospective']=update_observations(root/'data/ml_observations_v3.jsonl',calendar['events'],model,state,temp,now,info['model_sha256'])
-            else:report['prospective']={'status':'STALE_CALENDAR_NO_NEW_OBSERVATIONS'}
-        else:report['prospective']={'status':'CALENDAR_UNAVAILABLE'}
+        events,calendar=prospective_calendar(root,now,discover)
+        report['prospective_calendar']=calendar
+        report['prospective']=update_observations(root/'data/ml_observations_v3.jsonl',events,model,state,temp,now,info['model_sha256'])
     from .global_discovery import _atomic
     _atomic(root/'reports/ml_lab_latest.json',report)
     return report
