@@ -26,7 +26,7 @@ from .custom_strategies import (
 from .strategy_registry import ensure_registry, verify_prior_accounts
 from .portfolio_controls import PaperRiskBook, conservative_expected_value, audit_ledgers
 from .daily_reference import select_daily_reference
-from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION
+from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION,daily_entry_stake
 from .odds_provider import attach_cached_odds
 
 UTC = dt.timezone.utc
@@ -484,8 +484,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             if conservative_expected_value(p[choice], prices[choice], sample_min) < .01:
                 rejected["uncertain_value"] += 1
                 continue
-            stake = round(min(bank * PAPER_STAKE_FRACTION,
-                             max(0., bank * MAX_PAPER_EXPOSURE_FRACTION - exposure)), 2)
+            stake = daily_entry_stake(bank, exposure, today_count)
             if stake < 1:
                 rejected["too_small_stake"] += 1
                 continue
@@ -512,7 +511,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 "selection_expected_value": round(ev, 7),
                 "conservative_expected_value": round(conservative_expected_value(p[choice], prices[choice], sample_min), 7),
                 "uncertainty_calibrated": False,
-                "sizing_note": "0.25% virtual bank, max 2% exposure; hypothetical quote may not have been executable",
+                "sizing_note": "First 5 qualified daily entries: 0.10% virtual bank (minimum EUR 1, capped at 0.25%); then 0.25%. Max 2% exposure; execution unconfirmed.",
             }
             rows.append(r)
             seen_events.add(e["id"])
@@ -618,13 +617,14 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             "minimum_target": MIN_DAILY_ENTRIES_TARGET_PER_ACCOUNT,
             "maximum": MAX_DAILY_ENTRIES_PER_ACCOUNT,
             "target_met": sum(r["strategy"] == name for r in activity_rows) >= MIN_DAILY_ENTRIES_TARGET_PER_ACCOUNT,
+            "remaining_to_minimum": max(0, MIN_DAILY_ENTRIES_TARGET_PER_ACCOUNT - sum(r["strategy"] == name for r in activity_rows)),
         }
         for name in STRATEGIES
     }
     if market_research["experimental_account"]["created"]:
         from .research_pipeline import read_journal
         experimental_today=[r for r in read_journal(root) if r["kind"]=="FORECAST" and r["stake_eur"]>0 and parse_iso(r["forecast_utc"]).astimezone(PORTUGAL).date()==now.astimezone(PORTUGAL).date()]
-        daily_per_strategy["EXPERIMENTAL_MULTI_MARKET"]={"entries":len(experimental_today),"minimum_target":5,"maximum":10,"target_met":len(experimental_today)>=5}
+        daily_per_strategy["EXPERIMENTAL_MULTI_MARKET"]={"entries":len(experimental_today),"minimum_target":MIN_DAILY_ENTRIES,"maximum":MAX_DAILY_ENTRIES,"target_met":len(experimental_today)>=MIN_DAILY_ENTRIES,"remaining_to_minimum":max(0,MIN_DAILY_ENTRIES-len(experimental_today))}
     else:experimental_today=[]
     daily_activity = {
         "per_strategy": daily_per_strategy,

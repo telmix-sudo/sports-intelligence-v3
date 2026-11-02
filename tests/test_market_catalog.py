@@ -62,7 +62,7 @@ class MarketCatalogTests(unittest.TestCase):
    final={'home':3,'away':0,'outcome':0}
    accounts,count=build_accounts(root,{e['id']:final},NOW+dt.timedelta(hours=8))
    self.assertEqual(count['settled_this_run'],12)
-   self.assertTrue(all(a['bankroll_eur']==1003.75 for a in accounts.values()))
+   self.assertTrue(all(a['bankroll_eur']==1001.5 for a in accounts.values()))
    self.assertEqual(MIN_DAILY_ENTRIES,5);self.assertEqual(MAX_DAILY_ENTRIES,10)
 
  def test_winner_does_not_settle_a_pending_corner_position(self):

@@ -5,6 +5,7 @@ from .daily_reference import quote_for_reference
 from .scanner import parse_iso
 from .custom_strategies import FREQUENCY_NAMES
 from .portfolio_controls import PaperRiskBook, conservative_expected_value
+from .activity_policy import daily_entry_stake
 
 POLICIES = {
  "FREQ_SELECTIVE_1_3": (5,10,.06,.08,.02),
@@ -24,7 +25,7 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None):
   from zoneinfo import ZoneInfo
   today = now.astimezone(ZoneInfo("Europe/Lisbon")).date()
   daily = sum(parse_iso(r["forecast_utc"]).astimezone(ZoneInfo("Europe/Lisbon")).date() == today for r in rows)
-  diag = {"daily_target":[low,cap],"opened_this_week":daily,"new_entries":0,"eligible":0,"status":"NO_ELIGIBLE_QUOTE"}
+  diag = {"daily_target":[low,cap],"opened_today":daily,"opened_this_week":daily,"remaining_to_minimum":max(0,low-daily),"new_entries":0,"eligible":0,"status":"NO_ELIGIBLE_QUOTE"}
   if now < parse_iso(registry[name]["created_utc"]) or daily >= cap:
    diag["status"] = "DAILY_CAP_OR_NOT_STARTED"
    output[name] = diag
@@ -53,7 +54,7 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None):
   for ev_low,eid,e,i,p,odds,market,stamps,books,raw in candidates:
    if daily>=cap: break
    if eid in seen: continue
-   stake = round(min(bank*.0025,bank*max_exposure-exposure),2)
+   stake = daily_entry_stake(bank, exposure, daily)
    if stake<1: break
    stake = risk.reserve(eid, stake)
    if stake == 0: continue
@@ -75,5 +76,7 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None):
    save_jsonl(path,rows)
    diag["status"]="OPENED_PAPER"
   diag["opened_this_week"]=daily
+  diag["opened_today"]=daily
+  diag["remaining_to_minimum"]=max(0,low-daily)
   output[name]=diag
  return output

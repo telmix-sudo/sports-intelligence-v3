@@ -14,7 +14,7 @@ from zoneinfo import ZoneInfo
 
 from .scanner import parse_iso
 from .portfolio_controls import PaperRiskBook
-from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION
+from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION,daily_entry_stake
 
 NAME = "MARKET_DAILY_REFERENCE"
 LOCAL = ZoneInfo("Europe/Lisbon")
@@ -71,7 +71,7 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
     """Up to ten distinct, genuine pre-game paper references per Lisbon day.
 
     This portfolio is a market BASELINE, not a prediction with demonstrated edge.
-    The one-per-day minimum is an operational target, never a fabricated bet.
+    The five-per-day minimum is an operational target, never a fabricated bet.
     """
     if now.tzinfo is None:
         raise ValueError("Naive clock cannot create paper forecast")
@@ -90,6 +90,8 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
         "local_date": day, "target": DAILY_TARGET_MIN,
         "max_per_day": DAILY_TARGET_MAX,
         "opened_today": len(daily), "new_entries": 0,
+        "remaining_to_minimum": max(0, DAILY_TARGET_MIN-len(daily)),
+        "target_met": len(daily) >= DAILY_TARGET_MIN,
         "reference": True, "not_a_value_signal": True,
         "status": "NO_ELIGIBLE_QUOTE", "reason": None,
         "eligible_events": 0,
@@ -115,9 +117,9 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
                                idx, odds, probs, timestamps, books, quote))
     diagnostics["eligible_events"] = len(candidates)
     if not candidates:
-        diagnostics.update(status="COMPLETED" if daily else "NO_ELIGIBLE_QUOTE",
-                           reason=("Existing reference(s) already registered today" if daily else
-                                   "No upcoming event with recent, genuine odds from 2+ bookmakers"))
+        diagnostics.update(status="COMPLETED" if len(daily)>=DAILY_TARGET_MIN else "PARTIAL" if daily else "NO_ELIGIBLE_QUOTE",
+                           reason=("Daily minimum met; no further eligible events" if len(daily)>=DAILY_TARGET_MIN else
+                                   "Daily minimum not met; no additional upcoming event with recent, genuine odds from 2+ bookmakers"))
         return diagnostics
     # Prefer different sports within the day where possible. Re-rank after
     # EACH opening: static sorting could choose three games from the same league.
@@ -125,8 +127,7 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
     while candidates and len(daily) < DAILY_TARGET_MAX:
         candidates.sort(key=lambda x: (x[3]["sport"] in used_sports, x[0], x[1], x[2]))
         _, _, _, event, pick, odds, p, timestamps, books, quote = candidates.pop(0)
-        stake = round(min(bankroll * FRACTION,
-                          max(0., bankroll * MAX_EXPOSURE - exposure)), 2)
+        stake = daily_entry_stake(bankroll, exposure, len(daily))
         if stake < 1:
             diagnostics["reason"] = "Maximum exposure (2% of virtual bank) or 1 EUR minimum stake reached"
             break
@@ -148,7 +149,7 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
             "model_status": "MARKET_REFERENCE_NO_ESTIMATED_EDGE",
             "classification": "EXPLORATORY_DAILY_BASELINE_NOT_VALUE_BET",
             "edge_pp": 0, "selection_expected_value": round(p[pick]*odds[pick]-1, 7),
-            "sizing_note": "0.25% independent virtual bank, max 2% exposure; price execution unconfirmed.",
+            "sizing_note": "0.10% virtual bank for first 5 daily entries (minimum EUR 1, capped at 0.25%); then 0.25%. Max 2% exposure; execution unconfirmed.",
         }
         records.append(record)
         daily.append(record)
@@ -159,6 +160,8 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
     if diagnostics["new_entries"]:
         save_jsonl(ledger, records)
     diagnostics["opened_today"] = len(daily)
+    diagnostics["remaining_to_minimum"] = max(0, DAILY_TARGET_MIN-len(daily))
+    diagnostics["target_met"] = len(daily) >= DAILY_TARGET_MIN
     diagnostics["status"] = ("DAILY_CAP" if len(daily) >= DAILY_TARGET_MAX else
                              "PARTIAL" if daily else
                              "NO_ELIGIBLE_QUOTE")

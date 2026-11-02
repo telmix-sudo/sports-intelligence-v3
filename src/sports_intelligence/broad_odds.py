@@ -10,8 +10,11 @@ from pathlib import Path
 
 from .odds_provider import (parse_utc,quotes_for_event,market_quotes_for_event,
                             _request_odds,MAX_CREDITS_PER_DAY,MAX_BOOK_QUOTE_AGE_HOURS,
-                            ODDS_KEY_MAP,attach_cached_odds)
+                            ODDS_KEY_MAP,attach_cached_odds,fresh_quote)
 from .market_catalog import catalog_quotes,EXTRA_MARKET_PRIORITY
+from .activity_policy import MIN_DAILY_ENTRIES
+
+PRICE_LOOKAHEAD_HOURS = 48
 
 
 def prune_expired_prices(snapshots, now):
@@ -65,13 +68,14 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
             'credits_remaining':old.get('credits_remaining') if same else None}
     diag={'configured':bool(secret),'status':'OK' if secret else 'MISSING_KEY_NO_ODDS_API_CALLS',
           'calls_this_run':0,'errors':[],'cached_sports':[],'quotes_matched':0,
-          'allocation':'EXECUTABLE_SPORTS_THEN_DIVERSITY_4_CREDITS_PER_6H_SLOT',
+          'allocation':'UNPRICED_MODELLED_EVENTS_THEN_DIVERSITY_4_CREDITS_PER_6H_SLOT',
+          'price_lookahead_hours':PRICE_LOOKAHEAD_HOURS,
           'maximum_daily_credits':MAX_CREDITS_PER_DAY}
     current_cap=min(MAX_CREDITS_PER_DAY,4*(now.hour//6+1))
     by_key=defaultdict(list)
     for e in events:
         if (e.get('odds_sport_key') and e.get('event_type')=='MATCHUP' and e.get('status')=='pre'
-            and now<parse_utc(e['start_utc'])<=now+dt.timedelta(hours=12)):
+            and now<parse_utc(e['start_utc'])<=now+dt.timedelta(hours=PRICE_LOOKAHEAD_HOURS)):
             by_key[e['odds_sport_key']].append(e)
     def remaining(cost,cap):
         return (record['credits_today']+cost<=cap and
@@ -85,16 +89,27 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
     def executable(key):
         return any(e['sport'] in ODDS_KEY_MAP and e.get('paper_execution_enabled') is not False
                    for e in by_key[key])
+    def priced(event):
+        quote=record['snapshots'].get(event['sport'],{}).get('quotes',{}).get(event['id'])
+        return fresh_quote(quote,now) and (quote.get('bookmaker_count') or 0)>=2
+    def covered_count():
+        return len({e['id'] for k in by_key if executable(k) for e in by_key[k] if priced(e)})
+    def priority(key):
+        missing=sum(not priced(e) for e in by_key[key])
+        covered=covered_count()
+        # Buy enough distinct useful fixtures before refreshing already priced
+        # competitions. After coverage, retain the global sport rotation.
+        return (not executable(key),not bool(missing),
+                -missing if covered<MIN_DAILY_ENTRIES else 0,
+                by_key[key][0]['family'] in record['global_priced_families'],
+                record['key_last_priced'].get(key,''),
+                min(e['start_utc'] for e in by_key[key]),key)
     soccer=[e for matches in by_key.values() for e in matches
             if e.get('family')=='soccer' and e.get('odds_event_id') and executable(e['odds_sport_key'])]
-    reserve_extra=3 if soccer and not record['event_markets_done'] else 0
     window=now.hour//6
     available=set(by_key)
     while secret and available:
-        key=min(available,key=lambda k:(not executable(k),
-                    by_key[k][0]['family'] in record['global_priced_families'],
-                    record['key_last_priced'].get(k,''),
-                    min(e['start_utc'] for e in by_key[k]),k))
+        key=min(available,key=priority)
         available.remove(key)
         # Modelled competitions may refresh in later slots. Discovery-only
         # leagues rotate once daily so they cannot starve executable prices.
@@ -104,7 +119,13 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
         markets='h2h,totals,spreads' if family=='soccer' and executable(key) else 'h2h'
         cost=len(markets.split(','))
         # Preserve up to 3 credits for a real event's corner/BTTS market catalog.
-        if not remaining(cost,min(current_cap,MAX_CREDITS_PER_DAY-reserve_extra)):continue
+        reserve_extra=3 if soccer and not record['event_markets_done'] and covered_count()>=MIN_DAILY_ENTRIES else 0
+        price_cap=min(current_cap,MAX_CREDITS_PER_DAY-reserve_extra)
+        if not remaining(cost,price_cap):
+            # One remaining credit can still price an entire football league.
+            # Never leave all 1X2 quotes missing merely because extras cost more.
+            if cost>1 and remaining(1,price_cap):markets='h2h';cost=1
+            else:continue
         if key not in record['global_priced_keys']:record['global_priced_keys'].append(key)
         record['global_poll_windows'][key]=window
         try:
@@ -159,5 +180,6 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
                 credits_remaining=record['credits_remaining'],max_credits_per_day=MAX_CREDITS_PER_DAY,
                 priced_families_today=record['global_priced_families'],
                 eligible_competitions=len(by_key),goal_market_quotes=sum(len(e.get('market_quotes',{})) for e in events),
+                distinct_modelled_events_with_prices=covered_count(),minimum_priced_event_target=MIN_DAILY_ENTRIES,
                 market_inventory=record['market_inventory'])
     return diag

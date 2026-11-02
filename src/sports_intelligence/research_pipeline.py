@@ -383,6 +383,7 @@ def paper_state(rows):
 
 def run_research(root, events, football_models, now, risk, football_history=None, history_fetcher=fetch_text,
                  result_fetcher=fetch_espn, previous_settlement_result=None, collect_team_stats=False):
+    from .activity_policy import daily_entry_stake
     rows = read_journal(root)
     newly_settled, settlement_errors = (previous_settlement_result if previous_settlement_result is not None
                                        else reconcile(root, rows, events, now, result_fetcher))
@@ -500,7 +501,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
             stake = 0.0
             if not reasons:
                 bank = state['bankroll_eur'] if state['created'] else 1000.0
-                requested = min(bank*.0025, max(0., bank*.02-state['open_exposure_eur']))
+                requested = daily_entry_stake(bank,state['open_exposure_eur'],daily_papers)
                 stake = risk.reserve(e['id'], requested)
                 if not stake: reasons.append('AGGREGATE_RISK_LIMIT')
             row = {'id':fid, 'kind':'FORECAST', 'event_id':e['id'], 'sport':e['sport'],
@@ -548,7 +549,8 @@ def run_research(root, events, football_models, now, risk, football_history=None
                                    'minimum_score_holdout':50,
                                    'market_validation_minimum_independent_events':MIN_PROSPECTIVE_EVENTS,
                                    'minimum_forward_days':MIN_PROSPECTIVE_DAYS,
-                                   'stake_fraction':.0025, 'max_exposure_fraction':.02,
+                                   'stake_fraction':.0025, 'first_five_stake_fraction':.001,
+                                   'minimum_stake_eur':1.0,'max_exposure_fraction':.02,
                                    'min_papers_per_day':5, 'max_papers_per_day':10, 'real_money_allowed':False}}
     atomic_json(root/'reports'/'market_research_latest.json', report)
     return report
