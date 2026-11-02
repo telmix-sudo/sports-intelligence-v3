@@ -13,7 +13,7 @@ POLICIES = {
  "FREQ_BROAD_5_10": (5,10,.03,.05,.02),
 }
 
-def run_frequency_strategies(root, models, events, now, registry, risk=None):
+def run_frequency_strategies(root, models, events, now, registry, risk=None, learning=None):
  from .strategy_lab import read_jsonl, save_jsonl, predictions, team_name
  risk = risk or PaperRiskBook(root)
  output = {}
@@ -44,14 +44,16 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None):
    home, away = team_name(e["home"]),team_name(e["away"])
    if min(lm["ELO_STANDARD"].played.get(home,0),lm["ELO_STANDARD"].played.get(away,0))<16: continue
    p = predictions(lm,home,away)["ELO_POISSON_BLEND"]
+   evidence=None
+   if learning is not None:p,evidence=learning.apply('ELO_POISSON_BLEND',e['sport'],'1X2',p,wallet=name)
    for i in range(3):
     edge = p[i]-market[i]
     ev_low = (p[i]-uncertainty)*odds[i]-1
     if edge>=edge_min and ev_low>0 and conservative_expected_value(p[i],odds[i],min(lm["ELO_STANDARD"].played.get(home,0),lm["ELO_STANDARD"].played.get(away,0)))>.01:
-     candidates.append((ev_low,e["id"],e,i,p,odds,market,stamps,books,raw))
+     candidates.append((ev_low,e["id"],e,i,p,odds,market,stamps,books,raw,evidence))
   candidates.sort(key=lambda x:(-x[0],x[1]))
   diag["eligible"] = len(candidates)
-  for ev_low,eid,e,i,p,odds,market,stamps,books,raw in candidates:
+  for ev_low,eid,e,i,p,odds,market,stamps,books,raw,evidence in candidates:
    if daily>=cap: break
    if eid in seen: continue
    stake = daily_entry_stake(bank, exposure, daily)
@@ -68,6 +70,7 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None):
     "stake_eur":stake,"status":"OPEN","price_source":raw["provider"],
     "bookmakers":books,"book_quote_updates_utc":stamps,
     "strategy_version":"1.0.0","model_status":"EXPERIMENTAL_NOT_VALIDATED"})
+   if evidence is not None:rows[-1]['historical_learning']=evidence
    daily+=1
    seen.add(eid)
    exposure+=stake

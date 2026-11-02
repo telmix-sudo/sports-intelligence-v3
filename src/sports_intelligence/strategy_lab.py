@@ -192,7 +192,7 @@ def update_all(models: dict, match: dict) -> None:
             model.update(match)
 
 
-def historical_comparison(matches_by_league: dict) -> tuple[dict, dict]:
+def historical_comparison(matches_by_league: dict, learning=None) -> tuple[dict, dict]:
     league_models, stats = {}, {}
     for league, matches in matches_by_league.items():
         models = make_models()
@@ -205,6 +205,12 @@ def historical_comparison(matches_by_league: dict) -> tuple[dict, dict]:
         for day in sorted(daily):
             games = daily[day]
             for m in games:
+                if learning is not None and min(models['ELO_STANDARD'].played.get(m['home'],0), models['ELO_STANDARD'].played.get(m['away'],0))>=8:
+                    from .historical_learning import event_key
+                    outcome=0 if m['goals_home']>m['goals_away'] else 1 if m['goals_home']==m['goals_away'] else 2
+                    for family,p in predictions(models,m['home'],m['away']).items():
+                        if p is not None:
+                            learning.add(family,league,'1X2',day,event_key(day,m['home'],m['away']),p,outcome)
                 if trained < WARMUP or day < EVALUATION_FROM:
                     continue
                 o = 0 if m["goals_home"] > m["goals_away"] else (
@@ -402,7 +408,7 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
 
 def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime,
                   registry: dict | None = None, diagnostics: dict | None = None,
-                  risk: PaperRiskBook | None = None) -> tuple[dict, dict]:
+                  risk: PaperRiskBook | None = None, learning=None) -> tuple[dict, dict]:
     """Optional experimental paper entries; each account independently limits exposure.
 
     Only model probabilities and pre-game timestamped quotes are eligible.
@@ -465,6 +471,9 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             p = all_forecasts[name]
             if p is None:
                 continue
+            learning_evidence = None
+            if learning is not None:
+                p,learning_evidence=learning.apply(name,e['sport'],'1X2',p,wallet=name)
             diffs = [a-b for a,b in zip(p, market)]
             choice = max(range(3), key=lambda i: diffs[i])
             ev = p[choice] * prices[choice] - 1
@@ -513,6 +522,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 "uncertainty_calibrated": False,
                 "sizing_note": "First 5 qualified daily entries: 0.10% virtual bank (minimum EUR 1, capped at 0.25%); then 0.25%. Max 2% exposure; execution unconfirmed.",
             }
+            if learning_evidence is not None:r['historical_learning']=learning_evidence
             rows.append(r)
             seen_events.add(e["id"])
             added[name] += 1
@@ -557,7 +567,9 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     registry = ensure_registry(root, now, STRATEGIES)
     verify_prior_accounts(root, registry)
     matches, provenance = collect_openfootball(now.date(), fetcher)
-    models, historical = historical_comparison(matches)
+    from .historical_learning import HistoricalLearning
+    learning=HistoricalLearning(root,now)
+    models, historical = historical_comparison(matches,learning)
     # Includes yesterday/today/future fixtures; only completed final statuses settle.
     events, coverage = discover(now, sports=SCOREBOARDS,
                                 future_days=2, need_yesterday=True)
@@ -589,19 +601,19 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     research_settlement_result = reconcile(root, read_journal(root), events, now)
     risk = PaperRiskBook(root)
     market_research = run_research(root, events, models, now, risk, football_history=matches,
-                                   previous_settlement_result=research_settlement_result,collect_team_stats=True)
+                                   previous_settlement_result=research_settlement_result,collect_team_stats=True,learning=learning)
     from .auxiliary_portfolios import open_auxiliary_markets
     # Give qualified non-winner opportunities room before winner selections
     # consume daily slots and shared exposure. All original gates still apply.
     auxiliary_first = open_auxiliary_markets(root, events, now, registry, risk,market_scope='non_winner')
     rejected = {}
-    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk)
+    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk,learning=learning)
     for name,count in auxiliary_first.items():entry_counts[name]=entry_counts.get(name,0)+count
     from .frequency_paper import run_frequency_strategies
-    frequency_results = run_frequency_strategies(root, models, events, now, registry, risk=risk)
+    frequency_results = run_frequency_strategies(root, models, events, now, registry, risk=risk,learning=learning)
     for name,result in frequency_results.items():
         if result['new_entries']:entry_counts[name]=entry_counts.get(name,0)+result['new_entries']
-    daily_reference = select_daily_reference(root, events, now, registry, risk=risk)
+    daily_reference = select_daily_reference(root, events, now, registry, risk=risk,learning=learning)
     if daily_reference["new_entries"]:
         entry_counts["MARKET_DAILY_REFERENCE"] = entry_counts.get("MARKET_DAILY_REFERENCE",0)+daily_reference["new_entries"]
     auxiliary = open_auxiliary_markets(root, events, now, registry, risk,market_scope='moneyline')
@@ -655,6 +667,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "daily_reference": daily_reference,
         "daily_activity": daily_activity,
         "aggregate_risk": risk.summary(),
+        "historical_learning": learning.report((*STRATEGIES,'EXPERIMENTAL_MULTI_MARKET')),
         "market_research": market_research,
         "ledger_audit": audit_ledgers(root, now),
         "market_activity": market_activity(root, events, now),

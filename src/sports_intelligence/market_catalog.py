@@ -283,7 +283,7 @@ def outcome_for_spec(spec,final):
     return 'VOID' if delta==0 else 0 if delta>0 else 1
 
 
-def generic_backtests(football_history,stat_history,specs):
+def generic_backtests(football_history,stat_history,specs,learning=None):
     from .research_pipeline import summarize_score_rows
     from .poisson import FootballPoisson
     from .experimental_markets import goal_rates
@@ -301,6 +301,10 @@ def generic_backtests(football_history,stat_history,specs):
                 for mid,spec in definitions.items():
                     if spec['metric']!='goals' or spec.get('settlement_block'):continue
                     p=distribution(mh,ma,spec)['probabilities'];idx=outcome_for_spec(spec,{'home':m['goals_home'],'away':m['goals_away']})
+                    if idx in (0,1) and learning is not None:
+                        from .historical_learning import event_key
+                        from .research_pipeline import VERSION
+                        learning.add(VERSION+'-goal-lines',sport,mid,day,event_key(day,h,a),p,idx)
                     if idx in (0,1):rows[mid].append({'p':p[0],'outcome':idx,'date':str(day),'brier':brier(p,idx),'log_loss':log_loss(p,idx)})
             for m in grouped[day]:goal_model.update(m)
         models={metric:CountModel(metric) for metric in PRIOR if metric!='goals'}
@@ -314,7 +318,11 @@ def generic_backtests(football_history,stat_history,specs):
                     pred=models[spec['metric']].forecast(e['home'],e['away'],spec)
                     idx=outcome_for_spec(spec,e['final'])
                     if pred and idx in (0,1):
-                        p=pred['probabilities'];rows[mid].append({'p':p[0],'outcome':idx,'date':str(day),'brier':brier(p,idx),'log_loss':log_loss(p,idx)})
+                        p=pred['probabilities']
+                        if learning is not None:
+                            from .historical_learning import event_key
+                            learning.add(pred['version'],sport,mid,day,event_key(day,e['home'],e['away']),p,idx)
+                        rows[mid].append({'p':p[0],'outcome':idx,'date':str(day),'brier':brier(p,idx),'log_loss':log_loss(p,idx)})
             for e in grouped[day]:
                 for model in models.values():model.update(e)
         for mid,score in rows.items():output[sport+'|'+mid]=summarize_score_rows(score)

@@ -67,7 +67,7 @@ def quote_for_reference(e: dict, now: dt.datetime) -> tuple | None:
 
 
 def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
-                           registry: dict, risk: PaperRiskBook | None = None) -> dict:
+                           registry: dict, risk: PaperRiskBook | None = None, learning=None) -> dict:
     """Up to ten distinct, genuine pre-game paper references per Lisbon day.
 
     This portfolio is a market BASELINE, not a prediction with demonstrated edge.
@@ -151,6 +151,8 @@ def select_daily_reference(root: Path, events: list[dict], now: dt.datetime,
             "edge_pp": 0, "selection_expected_value": round(p[pick]*odds[pick]-1, 7),
             "sizing_note": "0.10% virtual bank for first 5 daily entries (minimum EUR 1, capped at 0.25%); then 0.25%. Max 2% exposure; execution unconfirmed.",
         }
+        if learning is not None:
+            _,record['historical_learning']=learning.apply('MARKET_REFERENCE',event['sport'],quote['market'],p,wallet=NAME,control=True)
         records.append(record)
         daily.append(record)
         previous_ids.add(event["id"])
