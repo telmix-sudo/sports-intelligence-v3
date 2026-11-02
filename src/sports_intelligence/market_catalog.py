@@ -15,6 +15,38 @@ from .feeds import ESPN_BASE,SCOREBOARDS,fetch_text
 from .football import canonical
 from .metrics import no_vig,brier,log_loss
 
+
+def merge_priced_market(first,second,now):
+    """Join paired quotes for the SAME line, deduplicating regional operators."""
+    def identity(q):return {k:v for k,v in (q.get('market_spec') or {}).items() if k!='provider_market_key'}
+    if first and identity(first)!=identity(second):raise ValueError('Market identities differ')
+    books={}
+    for quote in (first,second):
+        if not quote:continue
+        for book in quote.get('complete_book_quotes',[]):
+            try:
+                stamp=_time(book['updated_utc']);prices=list(book['decimal']);prob=list(book['no_vig'])
+                if (not 0<=(now-stamp).total_seconds()<=12*3600 or len(prices)!=2 or len(prob)!=2 or
+                    any(not math.isfinite(v) or v<=1 for v in prices) or
+                    any(not math.isfinite(v) or not 0<v<1 for v in prob) or abs(sum(prob)-1)>.001):continue
+                # A regional variant of the same operator is not a second house.
+                key=book['bookmaker']
+                if not isinstance(key,str) or not key:continue
+                parts=key.rsplit('_',1)
+                group=parts[0] if len(parts)==2 and parts[1] in ('eu','uk','us','au','fr','se','nl','es','it') else key
+                if group in ('betfair_ex','betfair_sb'):group='betfair'
+                if group not in books or stamp>_time(books[group]['updated_utc']):books[group]=book
+            except (KeyError,ValueError,TypeError):continue
+    if not books:return second
+    values=list(books.values());best=[max(values,key=lambda b:b['decimal'][i]) for i in range(2)]
+    return dict(second,decimal=[best[i]['decimal'][i] for i in range(2)],
+                no_vig=[sum(b['no_vig'][i] for b in values)/len(values) for i in range(2)],
+                bookmakers=[b['bookmaker'] for b in best],
+                best_book_updates=[b['updated_utc'] for b in best],
+                bookmaker_count=len(values),bookmaker_count_is_unique=True,
+                complete_book_quotes=values,
+                pricing_regions=sorted(set(first.get('pricing_regions',['eu']) if first else [])|set(second.get('pricing_regions',[]))))
+
 FOOTBALL = {'epl','la_liga','bundesliga','serie_a','ligue_1'}
 STAT_KEYS = {'wonCorners':'corners','cornerKicks':'corners','corners':'corners','offsides':'offsides',
              'foulsCommitted':'fouls','fouls':'fouls','yellowCards':'yellow_cards',

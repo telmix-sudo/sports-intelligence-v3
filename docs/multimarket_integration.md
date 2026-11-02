@@ -64,3 +64,5 @@ Golos, ambas marcam e estatísticas qualificadas são avaliados antes da fila de
 O novo campo `market_activity` e a tabela «Utilização efetiva por mercado» distinguem preços disponíveis, observações sem stake e posições PAPER abertas/liquidadas. Existir código ou preços para um mercado não significa que já existam apostas nele. A evolução operacional é confirmada pelos relatórios de execução, não apenas pelos testes.
 
 Referência da API: https://the-odds-api.com/liveapi/guides/v4/ e https://the-odds-api.com/sports-odds-data/betting-markets.html.
+
+Se os cantos europeus tiverem apenas uma casa, pode ser usado no máximo mais um crédito diário para consultar esse mercado na região UK, retirado da cobertura de vencedor e sempre dentro dos mesmos 16 créditos. As linhas só são unidas por identidade exata. Variantes regionais do mesmo operador não contam como duas casas; os timestamps originais de cada cotação permanecem preservados. São preços para uma simulação, não confirmação de acesso ou execução numa casa portuguesa.
