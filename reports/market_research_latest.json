@@ -1,22 +1,26 @@
 {
-  "asof_utc": "2026-11-02T06:09:32.926653+00:00",
+  "asof_utc": "2026-11-02T08:52:51.024375+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-  "new_forecasts": 2,
-  "new_settlements": 3,
+  "new_forecasts": 0,
+  "new_settlements": 0,
   "forecasts_total": 31,
   "zero_stake_forecasts": 21,
   "open_observations": 7,
   "settlements_total": 16,
-  "candidate_markets": 34,
+  "candidate_markets": 43,
   "closing_line_values_available": 0,
   "blocks": {
-    "insufficient_football_home_away_history": 4,
     "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL": 2,
-    "EDGE_BELOW_4PP": 1,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 1,
-    "missing_timestamped_BTTS_odds": 1,
+    "EDGE_BELOW_4PP": 6,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 6,
+    "missing_timestamped_BTTS_odds": 4,
     "AGGREGATE_RISK_LIMIT": 1,
-    "missing_timestamped_ML_odds": 18
+    "missing_timestamped_OVER_UNDER_2_5_odds": 3,
+    "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 3,
+    "insufficient_football_home_away_history": 1,
+    "missing_timestamped_ML_odds": 18,
+    "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 1,
+    "NEEDS_50_HOLDOUT_FORECASTS": 1
   },
   "history": {
     "requests": 3,
@@ -24,20 +28,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-        "sha256": "1fdb5b391fbf43818cb6ac408a3dff0d7f87782409644191d6211815ba3e63b3",
-        "captured_at_utc": "2026-11-02T06:09:32.926653+00:00",
+        "sha256": "b9ecc03a89ff061a95b0e4f10e170b220a8480d0d02555586c54fcb6da7ed3fc",
+        "captured_at_utc": "2026-11-02T08:52:51.024375+00:00",
         "completed_games": 2
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-        "sha256": "613e188e01f511fad08d586d38a0305a6fc62f0e9a617514f6580412db3cf900",
-        "captured_at_utc": "2026-11-02T06:09:32.926653+00:00",
+        "sha256": "5cb3d603bf373ca0f1b1d35f4846e27521946e5fb063d8f2f658a2d74b5e8898",
+        "captured_at_utc": "2026-11-02T08:52:51.024375+00:00",
         "completed_games": 11
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-        "sha256": "bec8c4b9c07b69d782ec0f2fb590f2bdcfc2077ece77bcff0c8ef463d229c339",
-        "captured_at_utc": "2026-11-02T06:09:32.926653+00:00",
+        "sha256": "4f5401ddf9e000a8437010b72ca19ad2ac9f5f65eceb2654da478758d6339914",
+        "captured_at_utc": "2026-11-02T08:52:51.024375+00:00",
         "completed_games": 4
       }
     ],
@@ -308,63 +312,71 @@
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "ligue_1|OVER_UNDER_2_5": {
-      "n": 1392,
-      "brier": 0.5013821946852342,
-      "log_loss": 0.6945617645278647,
+      "n": 1426,
+      "brier": 0.5002559867919798,
+      "log_loss": 0.6934300632870929,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
-        "from": "2025-10-18",
-        "n": 267,
-        "brier": 0.48957251811410496,
-        "log_loss": 0.6822097363283094,
-        "ece": 0.07326455805677819
+        "from": "2025-10-05",
+        "n": 273,
+        "brier": 0.48884547930577193,
+        "log_loss": 0.6815327140892823,
+        "ece": 0.0618239866822186
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "ligue_1|BTTS": {
-      "n": 1392,
-      "brier": 0.5058146516520494,
-      "log_loss": 0.699137779910294,
+      "n": 1426,
+      "brier": 0.5053726105946077,
+      "log_loss": 0.6986739531132499,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
-        "from": "2025-10-18",
-        "n": 267,
-        "brier": 0.5027959544463132,
-        "log_loss": 0.695945702426529,
-        "ece": 0.035327697430177635
+        "from": "2025-10-05",
+        "n": 273,
+        "brier": 0.5012372413807923,
+        "log_loss": 0.6944150790219535,
+        "ece": 0.015676957414746572
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "ligue_1|ASIAN_HOME_MINUS_0_5": {
-      "n": 1392,
-      "brier": 0.4444686325488557,
-      "log_loss": 0.6342235994037242,
+      "n": 1426,
+      "brier": 0.44177717309961023,
+      "log_loss": 0.6311814004408186,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
-        "from": "2025-10-18",
-        "n": 267,
-        "brier": 0.4651402950407615,
-        "log_loss": 0.6562777955933137,
-        "ece": 0.04650274487565067
+        "from": "2025-10-05",
+        "n": 273,
+        "brier": 0.4617110637645799,
+        "log_loss": 0.6528155258744771,
+        "ece": 0.04401079129761233
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     }
   },
   "team_statistics_history": {
-    "scoreboard_requests": 15,
-    "summary_requests": 35,
-    "events_with_statistics": 437,
+    "scoreboard_requests": 32,
+    "summary_requests": 105,
+    "events_with_statistics": 542,
     "failures": [],
-    "missing_stats": 0
+    "missing_stats": 0,
+    "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
+    "events_by_sport": {
+      "ligue_1": 113,
+      "la_liga": 118,
+      "bundesliga": 72,
+      "serie_a": 128,
+      "epl": 111
+    }
   },
   "additional_market_backtests": {},
   "market_catalog": {

@@ -2787,33 +2787,21 @@
     },
     "modalities_with_model_forecasts": 1
   },
-  "asof_utc": "2026-11-02T06:09:32.926653+00:00",
+  "asof_utc": "2026-11-02T08:52:51.024375+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-02",
     "target": 5,
     "max_per_day": 10,
     "opened_today": 10,
-    "new_entries": 2,
+    "new_entries": 0,
     "remaining_to_minimum": 0,
     "target_met": true,
     "reference": true,
     "not_a_value_signal": true,
     "status": "DAILY_CAP",
-    "reason": "Aggregate event or paper portfolio exposure limit reached",
-    "eligible_events": 8,
-    "distinct_event_ids_today": [
-      "ligue_1:401876419",
-      "nba:401909907",
-      "nba:401909908",
-      "nba:401909910",
-      "nba:401909911",
-      "nba:401909912",
-      "nhl:401892628",
-      "nhl:401892629",
-      "nhl:401892630",
-      "serie_a:401874963"
-    ]
+    "reason": "Daily cap of 10 entries reached",
+    "eligible_events": 0
   },
   "daily_activity": {
     "per_strategy": {
@@ -2825,14 +2813,14 @@
         "remaining_to_minimum": 0
       },
       "ELO_DYNAMIC": {
-        "entries": 8,
+        "entries": 9,
         "minimum_target": 5,
         "maximum": 10,
         "target_met": true,
         "remaining_to_minimum": 0
       },
       "POISSON_SHRINK": {
-        "entries": 8,
+        "entries": 9,
         "minimum_target": 5,
         "maximum": 10,
         "target_met": true,
@@ -2914,7 +2902,7 @@
     "min_distinct_events_target": 5,
     "preferred_max_distinct_events": 10,
     "distinct_events_recorded": 12,
-    "paper_entries_across_all_accounts": 103,
+    "paper_entries_across_all_accounts": 105,
     "reference_entries": 10,
     "unique_event_ids": [
       "ligue_1:401876419",
@@ -2937,10 +2925,10 @@
     "max_event_open_eur": 36.0,
     "max_total_open_eur": 240.0,
     "minimum_new_stake_eur": 1.0,
-    "total_open_eur": 201.57,
+    "total_open_eur": 206.41,
     "event_exposure_eur": {
       "epl:401878762": 42.1,
-      "ligue_1:401876419": 1.01,
+      "ligue_1:401876419": 3.42,
       "nba:401909907": 13.01,
       "nba:401909908": 14.54,
       "nba:401909910": 29.65,
@@ -2951,11 +2939,11 @@
       "nfl:401873036": 2.54,
       "nhl:401892629": 2.53,
       "nhl:401892630": 24.63,
-      "serie_a:401874963": 1.01
+      "serie_a:401874963": 3.44
     },
     "event_position_counts": {
       "epl:401878762": 10,
-      "ligue_1:401876419": 1,
+      "ligue_1:401876419": 2,
       "nba:401909907": 13,
       "nba:401909908": 13,
       "nba:401909910": 13,
@@ -2966,32 +2954,36 @@
       "nfl:401873036": 1,
       "nhl:401892629": 1,
       "nhl:401892630": 13,
-      "serie_a:401874963": 1
+      "serie_a:401874963": 2
     },
     "limit_rejections": {
-      "aggregate_event_or_portfolio_limit": 3
+      "aggregate_event_or_portfolio_limit": 2
     },
     "existing_positions_never_retroactively_changed": true
   },
   "market_research": {
-    "asof_utc": "2026-11-02T06:09:32.926653+00:00",
+    "asof_utc": "2026-11-02T08:52:51.024375+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-    "new_forecasts": 2,
-    "new_settlements": 3,
+    "new_forecasts": 0,
+    "new_settlements": 0,
     "forecasts_total": 31,
     "zero_stake_forecasts": 21,
     "open_observations": 7,
     "settlements_total": 16,
-    "candidate_markets": 34,
+    "candidate_markets": 43,
     "closing_line_values_available": 0,
     "blocks": {
-      "insufficient_football_home_away_history": 4,
       "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL": 2,
-      "EDGE_BELOW_4PP": 1,
-      "CONSERVATIVE_EV_BELOW_1_PERCENT": 1,
-      "missing_timestamped_BTTS_odds": 1,
+      "EDGE_BELOW_4PP": 6,
+      "CONSERVATIVE_EV_BELOW_1_PERCENT": 6,
+      "missing_timestamped_BTTS_odds": 4,
       "AGGREGATE_RISK_LIMIT": 1,
-      "missing_timestamped_ML_odds": 18
+      "missing_timestamped_OVER_UNDER_2_5_odds": 3,
+      "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 3,
+      "insufficient_football_home_away_history": 1,
+      "missing_timestamped_ML_odds": 18,
+      "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 1,
+      "NEEDS_50_HOLDOUT_FORECASTS": 1
     },
     "history": {
       "requests": 3,
@@ -2999,20 +2991,20 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-          "sha256": "1fdb5b391fbf43818cb6ac408a3dff0d7f87782409644191d6211815ba3e63b3",
-          "captured_at_utc": "2026-11-02T06:09:32.926653+00:00",
+          "sha256": "b9ecc03a89ff061a95b0e4f10e170b220a8480d0d02555586c54fcb6da7ed3fc",
+          "captured_at_utc": "2026-11-02T08:52:51.024375+00:00",
           "completed_games": 2
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-          "sha256": "613e188e01f511fad08d586d38a0305a6fc62f0e9a617514f6580412db3cf900",
-          "captured_at_utc": "2026-11-02T06:09:32.926653+00:00",
+          "sha256": "5cb3d603bf373ca0f1b1d35f4846e27521946e5fb063d8f2f658a2d74b5e8898",
+          "captured_at_utc": "2026-11-02T08:52:51.024375+00:00",
           "completed_games": 11
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-          "sha256": "bec8c4b9c07b69d782ec0f2fb590f2bdcfc2077ece77bcff0c8ef463d229c339",
-          "captured_at_utc": "2026-11-02T06:09:32.926653+00:00",
+          "sha256": "4f5401ddf9e000a8437010b72ca19ad2ac9f5f65eceb2654da478758d6339914",
+          "captured_at_utc": "2026-11-02T08:52:51.024375+00:00",
           "completed_games": 4
         }
       ],
@@ -3283,63 +3275,71 @@
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "ligue_1|OVER_UNDER_2_5": {
-        "n": 1392,
-        "brier": 0.5013821946852342,
-        "log_loss": 0.6945617645278647,
+        "n": 1426,
+        "brier": 0.5002559867919798,
+        "log_loss": 0.6934300632870929,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2025-10-18",
-          "n": 267,
-          "brier": 0.48957251811410496,
-          "log_loss": 0.6822097363283094,
-          "ece": 0.07326455805677819
+          "from": "2025-10-05",
+          "n": 273,
+          "brier": 0.48884547930577193,
+          "log_loss": 0.6815327140892823,
+          "ece": 0.0618239866822186
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "ligue_1|BTTS": {
-        "n": 1392,
-        "brier": 0.5058146516520494,
-        "log_loss": 0.699137779910294,
+        "n": 1426,
+        "brier": 0.5053726105946077,
+        "log_loss": 0.6986739531132499,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2025-10-18",
-          "n": 267,
-          "brier": 0.5027959544463132,
-          "log_loss": 0.695945702426529,
-          "ece": 0.035327697430177635
+          "from": "2025-10-05",
+          "n": 273,
+          "brier": 0.5012372413807923,
+          "log_loss": 0.6944150790219535,
+          "ece": 0.015676957414746572
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "ligue_1|ASIAN_HOME_MINUS_0_5": {
-        "n": 1392,
-        "brier": 0.4444686325488557,
-        "log_loss": 0.6342235994037242,
+        "n": 1426,
+        "brier": 0.44177717309961023,
+        "log_loss": 0.6311814004408186,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2025-10-18",
-          "n": 267,
-          "brier": 0.4651402950407615,
-          "log_loss": 0.6562777955933137,
-          "ece": 0.04650274487565067
+          "from": "2025-10-05",
+          "n": 273,
+          "brier": 0.4617110637645799,
+          "log_loss": 0.6528155258744771,
+          "ece": 0.04401079129761233
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       }
     },
     "team_statistics_history": {
-      "scoreboard_requests": 15,
-      "summary_requests": 35,
-      "events_with_statistics": 437,
+      "scoreboard_requests": 32,
+      "summary_requests": 105,
+      "events_with_statistics": 542,
       "failures": [],
-      "missing_stats": 0
+      "missing_stats": 0,
+      "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
+      "events_by_sport": {
+        "ligue_1": 113,
+        "la_liga": 118,
+        "bundesliga": 72,
+        "serie_a": 128,
+        "epl": 111
+      }
     },
     "additional_market_backtests": {},
     "market_catalog": {
@@ -3462,7 +3462,7 @@
   "ledger_audit": {
     "local_date": "2026-11-02",
     "opened_today": {
-      "n": 95,
+      "n": 97,
       "independent_events": 12
     },
     "games_played_today": {
@@ -3483,8 +3483,8 @@
       "pnl_eur": -17.8,
       "roi_pct": -69.13
     },
-    "total": 215,
-    "open": 105,
+    "total": 217,
+    "open": 107,
     "closed": 110,
     "voided": 0,
     "all_time": {
@@ -3735,6 +3735,122 @@
     "closing_line_value_reason": "No verified point-in-time closing prices saved.",
     "paper_only": true
   },
+  "market_activity": {
+    "asof_utc": "2026-11-02T08:52:51.024375+00:00",
+    "by_market": {
+      "1X2": {
+        "label": "Resultado 1X2",
+        "papers_total": 87,
+        "papers_open": 14,
+        "papers_settled": 73,
+        "papers_voided": 0,
+        "papers_today": 4,
+        "observations": 0,
+        "priced_event_count": 3,
+        "status": "PAPER_RECORDED"
+      },
+      "ML": {
+        "label": "Vencedor (ML)",
+        "papers_total": 140,
+        "papers_open": 101,
+        "papers_settled": 39,
+        "papers_voided": 0,
+        "papers_today": 101,
+        "observations": 19,
+        "priced_event_count": 13,
+        "status": "PAPER_RECORDED"
+      },
+      "GOALS_TOTAL": {
+        "label": "Mais/menos golos",
+        "papers_total": 0,
+        "papers_open": 0,
+        "papers_settled": 0,
+        "papers_voided": 0,
+        "papers_today": 0,
+        "observations": 1,
+        "priced_event_count": 1,
+        "status": "OBSERVATION_ONLY"
+      },
+      "GOALS_HANDICAP": {
+        "label": "Handicap de golos",
+        "papers_total": 0,
+        "papers_open": 0,
+        "papers_settled": 0,
+        "papers_voided": 0,
+        "papers_today": 0,
+        "observations": 1,
+        "priced_event_count": 1,
+        "status": "OBSERVATION_ONLY"
+      },
+      "BTTS": {
+        "label": "Ambas marcam",
+        "papers_total": 0,
+        "papers_open": 0,
+        "papers_settled": 0,
+        "papers_voided": 0,
+        "papers_today": 0,
+        "observations": 0,
+        "priced_event_count": 0,
+        "status": "NO_ELIGIBLE_PRICE"
+      },
+      "corners": {
+        "label": "Cantos",
+        "papers_total": 0,
+        "papers_open": 0,
+        "papers_settled": 0,
+        "papers_voided": 0,
+        "papers_today": 0,
+        "observations": 0,
+        "priced_event_count": 0,
+        "status": "NO_ELIGIBLE_PRICE"
+      },
+      "offsides": {
+        "label": "Foras de jogo",
+        "papers_total": 0,
+        "papers_open": 0,
+        "papers_settled": 0,
+        "papers_voided": 0,
+        "papers_today": 0,
+        "observations": 0,
+        "priced_event_count": 0,
+        "status": "NO_ELIGIBLE_PRICE"
+      },
+      "fouls": {
+        "label": "Faltas",
+        "papers_total": 0,
+        "papers_open": 0,
+        "papers_settled": 0,
+        "papers_voided": 0,
+        "papers_today": 0,
+        "observations": 0,
+        "priced_event_count": 0,
+        "status": "NO_ELIGIBLE_PRICE"
+      },
+      "cards": {
+        "label": "Cartões",
+        "papers_total": 0,
+        "papers_open": 0,
+        "papers_settled": 0,
+        "papers_voided": 0,
+        "papers_today": 0,
+        "observations": 0,
+        "priced_event_count": 0,
+        "status": "NO_ELIGIBLE_PRICE"
+      },
+      "throw_ins": {
+        "label": "Lançamentos laterais",
+        "papers_total": 0,
+        "papers_open": 0,
+        "papers_settled": 0,
+        "papers_voided": 0,
+        "papers_today": 0,
+        "observations": 0,
+        "priced_event_count": 0,
+        "status": "NO_ELIGIBLE_PRICE"
+      }
+    },
+    "note": "Counts include repeated strategies on the same event; zero-stake observations are not bets."
+  },
   "validation_readiness": {
     "real_money_ready": false,
     "market_edge_verified": false,
@@ -3881,8 +3997,8 @@
   "historical": {
     "ELO_STANDARD": {
       "n": 3733,
-      "brier": 0.595012,
-      "log_loss": 0.997004,
+      "brier": 0.594716,
+      "log_loss": 0.996593,
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
@@ -3891,18 +4007,18 @@
       "by_season": {
         "2024": {
           "n": 1732,
-          "brier": 0.593389,
-          "log_loss": 0.99306
+          "brier": 0.592855,
+          "log_loss": 0.992226
         },
         "2025": {
           "n": 1751,
-          "brier": 0.59787,
-          "log_loss": 1.002511
+          "brier": 0.597816,
+          "log_loss": 1.002517
         },
         "2026": {
           "n": 250,
-          "brier": 0.586238,
-          "log_loss": 0.985759
+          "brier": 0.585901,
+          "log_loss": 0.985354
         }
       },
       "by_league": {
@@ -3928,15 +4044,15 @@
         },
         "ligue_1": {
           "n": 656,
-          "brier": 0.593398,
-          "log_loss": 0.995158
+          "brier": 0.591716,
+          "log_loss": 0.992818
         }
       }
     },
     "ELO_DYNAMIC": {
       "n": 3733,
-      "brier": 0.595178,
-      "log_loss": 0.998822,
+      "brier": 0.595126,
+      "log_loss": 0.998869,
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
@@ -3945,18 +4061,18 @@
       "by_season": {
         "2024": {
           "n": 1732,
-          "brier": 0.591505,
-          "log_loss": 0.991272
+          "brier": 0.591331,
+          "log_loss": 0.99109
         },
         "2025": {
           "n": 1751,
-          "brier": 0.599778,
-          "log_loss": 1.007426
+          "brier": 0.599839,
+          "log_loss": 1.007695
         },
         "2026": {
           "n": 250,
-          "brier": 0.588412,
-          "log_loss": 0.990859
+          "brier": 0.588407,
+          "log_loss": 0.99094
         }
       },
       "by_league": {
@@ -3982,15 +4098,15 @@
         },
         "ligue_1": {
           "n": 656,
-          "brier": 0.593809,
-          "log_loss": 0.998282
+          "brier": 0.593513,
+          "log_loss": 0.99855
         }
       }
     },
     "POISSON_SHRINK": {
       "n": 3733,
-      "brier": 0.59503,
-      "log_loss": 0.997603,
+      "brier": 0.594937,
+      "log_loss": 0.997502,
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
@@ -3999,18 +4115,18 @@
       "by_season": {
         "2024": {
           "n": 1732,
-          "brier": 0.591745,
-          "log_loss": 0.992484
+          "brier": 0.592208,
+          "log_loss": 0.993234
         },
         "2025": {
           "n": 1751,
-          "brier": 0.59854,
-          "log_loss": 1.003067
+          "brier": 0.598122,
+          "log_loss": 1.002414
         },
         "2026": {
           "n": 250,
-          "brier": 0.593216,
-          "log_loss": 0.994785
+          "brier": 0.591533,
+          "log_loss": 0.99267
         }
       },
       "by_league": {
@@ -4036,15 +4152,15 @@
         },
         "ligue_1": {
           "n": 656,
-          "brier": 0.592478,
-          "log_loss": 0.992891
+          "brier": 0.591946,
+          "log_loss": 0.992318
         }
       }
     },
     "DIXON_COLES_LOW": {
       "n": 3733,
-      "brier": 0.594666,
-      "log_loss": 0.996871,
+      "brier": 0.594556,
+      "log_loss": 0.996764,
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
@@ -4053,18 +4169,18 @@
       "by_season": {
         "2024": {
           "n": 1732,
-          "brier": 0.591414,
-          "log_loss": 0.991766
+          "brier": 0.591845,
+          "log_loss": 0.992529
         },
         "2025": {
           "n": 1751,
-          "brier": 0.598103,
-          "log_loss": 1.002287
+          "brier": 0.597688,
+          "log_loss": 1.001611
         },
         "2026": {
           "n": 250,
-          "brier": 0.593116,
-          "log_loss": 0.994305
+          "brier": 0.591404,
+          "log_loss": 0.992159
         }
       },
       "by_league": {
@@ -4090,15 +4206,15 @@
         },
         "ligue_1": {
           "n": 656,
-          "brier": 0.593364,
-          "log_loss": 0.994178
+          "brier": 0.59274,
+          "log_loss": 0.993571
         }
       }
     },
     "ELO_POISSON_BLEND": {
       "n": 3733,
-      "brier": 0.592463,
-      "log_loss": 0.993447,
+      "brier": 0.592177,
+      "log_loss": 0.992967,
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
@@ -4107,18 +4223,18 @@
       "by_season": {
         "2024": {
           "n": 1732,
-          "brier": 0.590035,
-          "log_loss": 0.989008
+          "brier": 0.589899,
+          "log_loss": 0.988726
         },
         "2025": {
           "n": 1751,
-          "brier": 0.595626,
-          "log_loss": 0.99875
+          "brier": 0.595301,
+          "log_loss": 0.998197
         },
         "2026": {
           "n": 250,
-          "brier": 0.587137,
-          "log_loss": 0.987064
+          "brier": 0.586082,
+          "log_loss": 0.985722
         }
       },
       "by_league": {
@@ -4144,15 +4260,15 @@
         },
         "ligue_1": {
           "n": 656,
-          "brier": 0.590661,
-          "log_loss": 0.990511
+          "brier": 0.589034,
+          "log_loss": 0.98778
         }
       }
     },
     "CONSENSUS_SHRUNK": {
       "n": 3733,
-      "brier": 0.594615,
-      "log_loss": 0.996698,
+      "brier": 0.594299,
+      "log_loss": 0.996212,
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
@@ -4161,18 +4277,18 @@
       "by_season": {
         "2024": {
           "n": 1732,
-          "brier": 0.592689,
-          "log_loss": 0.993137
+          "brier": 0.592476,
+          "log_loss": 0.992796
         },
         "2025": {
           "n": 1751,
-          "brier": 0.597058,
-          "log_loss": 1.000739
+          "brier": 0.596723,
+          "log_loss": 1.000204
         },
         "2026": {
           "n": 250,
-          "brier": 0.590849,
-          "log_loss": 0.993067
+          "brier": 0.589949,
+          "log_loss": 0.991921
         }
       },
       "by_league": {
@@ -4198,15 +4314,15 @@
         },
         "ligue_1": {
           "n": 656,
-          "brier": 0.592788,
-          "log_loss": 0.993817
+          "brier": 0.590989,
+          "log_loss": 0.991052
         }
       }
     },
     "DISAGREEMENT_VETO": {
-      "n": 2665,
-      "brier": 0.583524,
-      "log_loss": 0.980131,
+      "n": 2656,
+      "brier": 0.582945,
+      "log_loss": 0.979092,
       "uniform_brier": 0.666667,
       "uniform_log_loss": 1.098612,
       "historical_roi": null,
@@ -4214,19 +4330,19 @@
       "reason_roi_unavailable": "Public-domain historical scores contain no contemporaneously recorded odds",
       "by_season": {
         "2024": {
-          "n": 1240,
-          "brier": 0.585659,
-          "log_loss": 0.981116
+          "n": 1236,
+          "brier": 0.585871,
+          "log_loss": 0.981013
         },
         "2025": {
-          "n": 1272,
-          "brier": 0.583039,
-          "log_loss": 0.980997
+          "n": 1269,
+          "brier": 0.581797,
+          "log_loss": 0.979178
         },
         "2026": {
-          "n": 153,
-          "brier": 0.570246,
-          "log_loss": 0.964947
+          "n": 151,
+          "brier": 0.568644,
+          "log_loss": 0.962648
         }
       },
       "by_league": {
@@ -4251,9 +4367,9 @@
           "log_loss": 0.963968
         },
         "ligue_1": {
-          "n": 480,
-          "brier": 0.579473,
-          "log_loss": 0.97481
+          "n": 471,
+          "brier": 0.576133,
+          "log_loss": 0.968849
         }
       }
     },
@@ -4473,14 +4589,14 @@
     "ELO_DYNAMIC": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 989.8404,
-      "open_exposure_eur": 17.36,
+      "open_exposure_eur": 19.79,
       "pnl_eur": -10.1596,
       "total_staked_settled_eur": 44.59,
       "paper_wins": 3,
       "paper_losses": 7,
       "settled": 10,
       "voided": 0,
-      "open": 9,
+      "open": 10,
       "yield_percent": -22.7845,
       "return_on_initial_bank_percent": -1.016,
       "max_settled_drawdown_percent": 1.495,
@@ -4494,14 +4610,14 @@
     "POISSON_SHRINK": {
       "bankroll_initial_eur": 1000.0,
       "bankroll_eur": 981.8312,
-      "open_exposure_eur": 17.22,
+      "open_exposure_eur": 19.63,
       "pnl_eur": -18.1688,
       "total_staked_settled_eur": 39.62,
       "paper_wins": 2,
       "paper_losses": 8,
       "settled": 10,
       "voided": 0,
-      "open": 9,
+      "open": 10,
       "yield_percent": -45.8576,
       "return_on_initial_bank_percent": -1.8169,
       "max_settled_drawdown_percent": 1.8169,
@@ -4932,17 +5048,19 @@
   },
   "events_seen": 91,
   "new_paper_entries": {
-    "MARKET_DAILY_REFERENCE": 2
+    "ELO_DYNAMIC": 1,
+    "POISSON_SHRINK": 1
   },
   "entry_diagnostics": {
     "rejections": {
       "missing_timestamped_odds": 16,
-      "insufficient_history": 16
+      "insufficient_edge_or_ev": 7,
+      "too_small_stake": 1
     },
     "new_entries": 2,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 11,
+  "newly_settled": 0,
   "missing_final_event_ids": [],
   "statistic_settlement": {
     "lookups": 0,
