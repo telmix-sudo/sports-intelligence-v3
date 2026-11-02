@@ -2834,7 +2834,7 @@
     },
     "modalities_with_model_forecasts": 1
   },
-  "asof_utc": "2026-11-02T22:36:14.475760+00:00",
+  "asof_utc": "2026-11-02T23:26:27.638340+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-02",
@@ -2972,6 +2972,25 @@
     "max_event_open_eur": 36.0,
     "max_total_open_eur": 240.0,
     "minimum_new_stake_eur": 1.0,
+    "max_shared_prediction_open_eur": 2.5,
+    "shared_prediction_open_eur": {
+      "nba:401909907|ML|MARKET_REFERENCE|0": 1.01,
+      "nba:401909907|ML|MULTIMARKET-1.0.0-nba|1": 12.0,
+      "nba:401909908|ML|MARKET_REFERENCE|1": 2.54,
+      "nba:401909908|ML|MULTIMARKET-1.0.0-nba|0": 12.0,
+      "nba:401909910|ML|MARKET_REFERENCE|0": 2.53,
+      "nba:401909910|ML|MULTIMARKET-1.0.0-nba|1": 27.12,
+      "nba:401909911|ML|MARKET_REFERENCE|0": 2.54,
+      "nba:401909911|ML|MULTIMARKET-1.0.0-nba|0": 12.0,
+      "nba:401909912|ML|MARKET_REFERENCE|0": 2.53,
+      "nba:401909912|ML|MULTIMARKET-1.0.0-nba|1": 13.49,
+      "nba:401909915|ML|MULTIMARKET-1.0.0-nba|1": 10.49,
+      "nba:401909917|ML|MULTIMARKET-1.0.0-nba|1": 29.5,
+      "nfl:401873036|ML|MARKET_REFERENCE|0": 2.54,
+      "nhl:401892629|ML|MARKET_REFERENCE|1": 2.53,
+      "nhl:401892630|ML|MARKET_REFERENCE|0": 1.01,
+      "nhl:401892630|ML|MULTIMARKET-1.0.0-nhl|1": 23.62
+    },
     "total_open_eur": 157.45,
     "event_exposure_eur": {
       "nba:401909907": 13.01,
@@ -2999,6 +3018,343 @@
     },
     "limit_rejections": {},
     "existing_positions_never_retroactively_changed": true
+  },
+  "admission_validation": {
+    "policy": "MARKET-VALIDATED-PAPER-1.0",
+    "cutoff_exclusive_utc_date": "2026-11-02",
+    "streams": {
+      "CONSENSUS_SHRUNK|epl|1X2": {
+        "n_distinct_events": 9,
+        "dates": 3,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.6204008650687661,
+        "market_brier": 0.5360881650840177,
+        "log_loss": 1.0267375372689749,
+        "market_log_loss": 0.9154777163919898,
+        "paired_brier_difference_upper_bound": 1.716143920438626
+      },
+      "CONSENSUS_SHRUNK|ligue_1|1X2": {
+        "n_distinct_events": 1,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.5970298786457809,
+        "market_brier": 0.5437118679744201,
+        "log_loss": 0.9868226758604333,
+        "market_log_loss": 0.9191310116526294,
+        "paired_brier_difference_upper_bound": 4.948811672032994
+      },
+      "DISAGREEMENT_VETO|epl|1X2": {
+        "n_distinct_events": 3,
+        "dates": 2,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.8830486330207424,
+        "market_brier": 0.7664976119210399,
+        "log_loss": 1.3865018030135265,
+        "market_log_loss": 1.2389833877489076,
+        "paired_brier_difference_upper_bound": 2.942965604302948
+      },
+      "DIXON_COLES_LOW|epl|1X2": {
+        "n_distinct_events": 6,
+        "dates": 3,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.6291020418679145,
+        "market_brier": 0.5209857041210921,
+        "log_loss": 1.039060213628081,
+        "market_log_loss": 0.893859347347111,
+        "paired_brier_difference_upper_bound": 2.1066932559743865
+      },
+      "DIXON_COLES_LOW|ligue_1|1X2": {
+        "n_distinct_events": 1,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.7029199050217901,
+        "market_brier": 0.5437118679744201,
+        "log_loss": 1.1323835628414087,
+        "market_log_loss": 0.9191310116526294,
+        "paired_brier_difference_upper_bound": 5.054701698409003
+      },
+      "ELO_DYNAMIC|epl|1X2": {
+        "n_distinct_events": 8,
+        "dates": 3,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.6188946089174564,
+        "market_brier": 0.5384396485897491,
+        "log_loss": 1.024687055587129,
+        "market_log_loss": 0.9197595008720951,
+        "paired_brier_difference_upper_bound": 1.8112733429299928
+      },
+      "ELO_POISSON_BLEND|epl|1X2": {
+        "n_distinct_events": 9,
+        "dates": 3,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.6179098739693134,
+        "market_brier": 0.5394042400984485,
+        "log_loss": 1.0217703841979142,
+        "market_log_loss": 0.9195578644611179,
+        "paired_brier_difference_upper_bound": 1.7103368543247426
+      },
+      "ELO_POISSON_BLEND|ligue_1|1X2": {
+        "n_distinct_events": 1,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.629658925708038,
+        "market_brier": 0.52297674262542,
+        "log_loss": 1.0290141743739236,
+        "market_log_loss": 0.8908654609142176,
+        "paired_brier_difference_upper_bound": 5.002175844444251
+      },
+      "ELO_STANDARD|epl|1X2": {
+        "n_distinct_events": 7,
+        "dates": 3,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.6501145002692288,
+        "market_brier": 0.5597658686140204,
+        "log_loss": 1.0640885989448912,
+        "market_log_loss": 0.9490025354979362,
+        "paired_brier_difference_upper_bound": 1.9406713134917704
+      },
+      "MARKET_ANCHORED|epl|1X2": {
+        "n_distinct_events": 6,
+        "dates": 2,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.6252375737158266,
+        "market_brier": 0.5537764825854267,
+        "log_loss": 1.0377250198379335,
+        "market_log_loss": 0.9427045443570784,
+        "paired_brier_difference_upper_bound": 2.070038009357964
+      },
+      "MARKET_ANCHORED|ligue_1|1X2": {
+        "n_distinct_events": 1,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.5959104820770758,
+        "market_brier": 0.52297674262542,
+        "log_loss": 0.9855295983451106,
+        "market_log_loss": 0.8908654609142176,
+        "paired_brier_difference_upper_bound": 4.9684274008132885
+      },
+      "MARKET_REFERENCE|ligue_1|1X2": {
+        "n_distinct_events": 1,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.15672848106927462,
+        "market_brier": 0.15672848106927462,
+        "log_loss": 0.3878693732526715,
+        "market_log_loss": 0.3878693732526715,
+        "paired_brier_difference_upper_bound": 4.895493661361633
+      },
+      "MARKET_REFERENCE|nba|ML": {
+        "n_distinct_events": 6,
+        "dates": 4,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.31876364451054334,
+        "market_brier": 0.31876364451054334,
+        "log_loss": 0.49893124049482857,
+        "market_log_loss": 0.49893124049482857,
+        "paired_brier_difference_upper_bound": 1.9985769182275641
+      },
+      "MARKET_REFERENCE|nfl|ML": {
+        "n_distinct_events": 4,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.36809897301741995,
+        "market_brier": 0.36809897301741995,
+        "log_loss": 0.5427533684497265,
+        "market_log_loss": 0.5427533684497265,
+        "paired_brier_difference_upper_bound": 2.4477468306808166
+      },
+      "MARKET_REFERENCE|nhl|ML": {
+        "n_distinct_events": 5,
+        "dates": 3,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.39596429147317197,
+        "market_brier": 0.39596429147317197,
+        "log_loss": 0.5839656635468234,
+        "market_log_loss": 0.5839656635468234,
+        "paired_brier_difference_upper_bound": 2.1893313220447896
+      },
+      "MARKET_REFERENCE|serie_a|1X2": {
+        "n_distinct_events": 1,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.10877060550762001,
+        "market_brier": 0.10877060550762001,
+        "log_loss": 0.31149195809358177,
+        "market_log_loss": 0.31149195809358177,
+        "paired_brier_difference_upper_bound": 4.895493661361633
+      },
+      "MULTIMARKET-1.0.0-nba|nba|ML": {
+        "n_distinct_events": 1,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.4170098685937543,
+        "market_brier": 0.16335664950728,
+        "log_loss": 0.6099526549305341,
+        "market_log_loss": 0.33658412288024697,
+        "paired_brier_difference_upper_bound": 5.149146880448107
+      },
+      "MULTIMARKET-1.0.0-nfl|nfl|ML": {
+        "n_distinct_events": 8,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.43951446626067225,
+        "market_brier": 0.3773341785540975,
+        "log_loss": 0.6312880234149788,
+        "market_log_loss": 0.5600739602385995,
+        "paired_brier_difference_upper_bound": 1.79299867030886
+      },
+      "POISSON_SHRINK|epl|1X2": {
+        "n_distinct_events": 7,
+        "dates": 3,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.623708716975963,
+        "market_brier": 0.5216861625354733,
+        "log_loss": 1.0287686330134422,
+        "market_log_loss": 0.8938063956927681,
+        "paired_brier_difference_upper_bound": 1.9523452362770515
+      },
+      "POISSON_SHRINK|ligue_1|1X2": {
+        "n_distinct_events": 1,
+        "dates": 1,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
+          "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+          "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "brier": 0.6914465859187297,
+        "market_brier": 0.52297674262542,
+        "log_loss": 1.1087096061260833,
+        "market_log_loss": 0.8908654609142176,
+        "paired_brier_difference_upper_bound": 5.063963504654943
+      }
+    },
+    "validated_streams": 0,
+    "deferred_evaluations": {},
+    "new_zero_stake_observations": 0,
+    "observations_total": 0,
+    "observations_settled": 0,
+    "observations_pending": 0,
+    "control_wallet": "MARKET_DAILY_REFERENCE",
+    "minimum_market_events": 100,
+    "minimum_market_dates": 14,
+    "daily_target_never_overrides_validation": true,
+    "paper_only": true
   },
   "historical_learning": {
     "version": "HISTORICAL-CALIBRATION-1.0",
@@ -3070,9 +3426,9 @@
       },
       "MARKET_DAILY_REFERENCE": {
         "status": "CONTROL_SHADOW_ONLY",
-        "streams": 23,
+        "streams": 5,
         "active_streams": 0,
-        "history_samples": 25891,
+        "history_samples": 17,
         "primary_is_control": true,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -3161,7 +3517,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "CONSENSUS_SHRUNK|epl|1X2": {
@@ -3215,7 +3573,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "CONSENSUS_SHRUNK|la_liga|1X2": {
@@ -3269,7 +3629,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "CONSENSUS_SHRUNK|ligue_1|1X2": {
@@ -3323,7 +3685,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "CONSENSUS_SHRUNK|serie_a|1X2": {
@@ -3377,7 +3741,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DISAGREEMENT_VETO|bundesliga|1X2": {
@@ -3431,7 +3797,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DISAGREEMENT_VETO|epl|1X2": {
@@ -3485,7 +3853,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DISAGREEMENT_VETO|la_liga|1X2": {
@@ -3539,7 +3909,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DISAGREEMENT_VETO|ligue_1|1X2": {
@@ -3593,7 +3965,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DISAGREEMENT_VETO|serie_a|1X2": {
@@ -3647,7 +4021,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DIXON_COLES_LOW|bundesliga|1X2": {
@@ -3701,7 +4077,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DIXON_COLES_LOW|epl|1X2": {
@@ -3755,7 +4133,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DIXON_COLES_LOW|la_liga|1X2": {
@@ -3809,7 +4189,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DIXON_COLES_LOW|ligue_1|1X2": {
@@ -3863,7 +4245,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "DIXON_COLES_LOW|serie_a|1X2": {
@@ -3917,7 +4301,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_DYNAMIC|bundesliga|1X2": {
@@ -3971,7 +4357,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_DYNAMIC|epl|1X2": {
@@ -4025,7 +4413,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_DYNAMIC|la_liga|1X2": {
@@ -4079,7 +4469,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_DYNAMIC|ligue_1|1X2": {
@@ -4133,7 +4525,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_DYNAMIC|serie_a|1X2": {
@@ -4187,7 +4581,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_POISSON_BLEND|bundesliga|1X2": {
@@ -4241,7 +4637,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_POISSON_BLEND|epl|1X2": {
@@ -4295,7 +4693,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_POISSON_BLEND|la_liga|1X2": {
@@ -4349,7 +4749,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_POISSON_BLEND|ligue_1|1X2": {
@@ -4403,7 +4805,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_POISSON_BLEND|serie_a|1X2": {
@@ -4457,7 +4861,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_STANDARD|bundesliga|1X2": {
@@ -4511,7 +4917,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_STANDARD|epl|1X2": {
@@ -4565,7 +4973,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_STANDARD|la_liga|1X2": {
@@ -4619,7 +5029,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_STANDARD|ligue_1|1X2": {
@@ -4673,7 +5085,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "ELO_STANDARD|serie_a|1X2": {
@@ -4727,7 +5141,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MARKET_ANCHORED|epl|1X2": {
@@ -4737,7 +5153,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MARKET_ANCHORED|ligue_1|1X2": {
@@ -4747,7 +5165,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MARKET_REFERENCE|ligue_1|1X2": {
@@ -4757,7 +5177,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MARKET_REFERENCE|nba|ML": {
@@ -4767,7 +5189,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MARKET_REFERENCE|nfl|ML": {
@@ -4777,7 +5201,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MARKET_REFERENCE|nhl|ML": {
@@ -4787,7 +5213,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MARKET_REFERENCE|serie_a|1X2": {
@@ -4797,7 +5225,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|bundesliga|ASIAN_HOME_MINUS_0_5": {
@@ -4850,7 +5280,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|bundesliga|BTTS": {
@@ -4903,7 +5335,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|bundesliga|OVER_UNDER_2_5": {
@@ -4956,7 +5390,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|epl|ASIAN_HOME_MINUS_0_5": {
@@ -5009,7 +5445,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|epl|BTTS": {
@@ -5062,7 +5500,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|epl|OVER_UNDER_2_5": {
@@ -5115,7 +5555,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|la_liga|ASIAN_HOME_MINUS_0_5": {
@@ -5168,7 +5610,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|la_liga|BTTS": {
@@ -5221,7 +5665,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|la_liga|OVER_UNDER_2_5": {
@@ -5274,7 +5720,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|ligue_1|ASIAN_HOME_MINUS_0_5": {
@@ -5327,7 +5775,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|ligue_1|BTTS": {
@@ -5380,7 +5830,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|ligue_1|OVER_UNDER_2_5": {
@@ -5433,7 +5885,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|serie_a|ASIAN_HOME_MINUS_0_5": {
@@ -5486,7 +5940,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|serie_a|BTTS": {
@@ -5539,7 +5995,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-goals|serie_a|OVER_UNDER_2_5": {
@@ -5592,7 +6050,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-nba|nba|ML": {
@@ -5602,7 +6062,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-nfl|nfl|ML": {
@@ -5612,7 +6074,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "MULTIMARKET-1.0.0-nhl|nhl|ML": {
@@ -5665,7 +6129,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "POISSON_SHRINK|bundesliga|1X2": {
@@ -5719,7 +6185,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "POISSON_SHRINK|epl|1X2": {
@@ -5773,7 +6241,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "POISSON_SHRINK|la_liga|1X2": {
@@ -5827,7 +6297,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "POISSON_SHRINK|ligue_1|1X2": {
@@ -5881,7 +6353,9 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       "POISSON_SHRINK|serie_a|1X2": {
@@ -5935,13 +6409,21 @@
         "forward": {
           "n": 0,
           "dates": 0,
-          "eligible": false
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       }
     },
     "invalid_frozen_rows_skipped": 0,
     "historical_roi": null,
     "conflicting_events_excluded": 1,
+    "conflicting_events": [
+      {
+        "stream": "MULTIMARKET-1.0.0-nba|nba|ML",
+        "event": "2026-02-01|miami heat|chicago bulls"
+      }
+    ],
     "policy": {
       "minimum_history_rows": 300,
       "minimum_forward_events": 100,
@@ -5950,6 +6432,10 @@
         "brier",
         "log_loss"
       ],
+      "required_benchmarks": [
+        "original",
+        "verified_market"
+      ],
       "reference_remains_control": true,
       "new_models_start_in_shadow": true,
       "real_money_enabled": false
@@ -5957,10 +6443,10 @@
     "caveat": "Score history measures probabilities, not bookmaker profit. Chronological holdout reuse is exploratory; promotion also requires frozen prequential shadow results."
   },
   "market_research": {
-    "asof_utc": "2026-11-02T22:36:14.475760+00:00",
+    "asof_utc": "2026-11-02T23:26:27.638340+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
     "new_forecasts": 0,
-    "new_settlements": 12,
+    "new_settlements": 0,
     "forecasts_total": 63,
     "zero_stake_forecasts": 51,
     "open_observations": 5,
@@ -5976,20 +6462,20 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-          "sha256": "d5b9339d5bf04127fcb69902edcb809bfb7f10ff23dd9830e9701ffa74017510",
-          "captured_at_utc": "2026-11-02T22:36:14.475760+00:00",
+          "sha256": "a1aa87e29362523f7b7d24feb239d2094e0495d0083d57faab7a074984608142",
+          "captured_at_utc": "2026-11-02T23:26:27.638340+00:00",
           "completed_games": 2
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-          "sha256": "995d71c5d51c774d8c4d422fd6ed888823acdb6dff9dc5d486a8cbaefe39df06",
-          "captured_at_utc": "2026-11-02T22:36:14.475760+00:00",
+          "sha256": "7ab05326149c665e508895473a5f8e8906fa49ea1e22e84f0137be5552a2f47d",
+          "captured_at_utc": "2026-11-02T23:26:27.638340+00:00",
           "completed_games": 11
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-          "sha256": "b55b9494fd7d07592df666795776c47f422129c539231858ff99a8e666b874e3",
-          "captured_at_utc": "2026-11-02T22:36:14.475760+00:00",
+          "sha256": "c19076b392b08a20acc45852e3bec95025442a456850084884719ef20b77de79",
+          "captured_at_utc": "2026-11-02T23:26:27.638340+00:00",
           "completed_games": 4
         }
       ],
@@ -6314,16 +6800,16 @@
     "team_statistics_history": {
       "scoreboard_requests": 40,
       "summary_requests": 120,
-      "events_with_statistics": 1228,
+      "events_with_statistics": 1348,
       "failures": [],
       "missing_stats": 0,
       "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
       "events_by_sport": {
-        "ligue_1": 276,
-        "la_liga": 269,
-        "bundesliga": 128,
-        "serie_a": 268,
-        "epl": 287
+        "ligue_1": 302,
+        "la_liga": 289,
+        "bundesliga": 155,
+        "serie_a": 288,
+        "epl": 314
       }
     },
     "additional_market_backtests": {},
@@ -6348,6 +6834,7 @@
       "nfl|ML|MULTIMARKET-1.0.0-nfl": {
         "n_distinct_events": 8,
         "days": 1,
+        "dates": 1,
         "brier": 0.43951446626067225,
         "market_brier": 0.3773341785540975,
         "log_loss": 0.6312880234149788,
@@ -6358,6 +6845,7 @@
         "blocks": [
           "NEEDS_100_DISTINCT_EVENTS",
           "NEEDS_14_DAY_FORWARD_PERIOD",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
           "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
           "LOG_LOSS_NOT_BETTER_THAN_MARKET",
           "CALIBRATION_ERROR_OVER_10PP"
@@ -6367,6 +6855,7 @@
       "nba|ML|MULTIMARKET-1.0.0-nba": {
         "n_distinct_events": 1,
         "days": 1,
+        "dates": 1,
         "brier": 0.4170098685937543,
         "market_brier": 0.16335664950728,
         "log_loss": 0.6099526549305341,
@@ -6377,6 +6866,7 @@
         "blocks": [
           "NEEDS_100_DISTINCT_EVENTS",
           "NEEDS_14_DAY_FORWARD_PERIOD",
+          "NEEDS_14_DISTINCT_MARKET_DATES",
           "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
           "LOG_LOSS_NOT_BETTER_THAN_MARKET",
           "CALIBRATION_ERROR_OVER_10PP"
@@ -6409,7 +6899,8 @@
     ],
     "next_step": "Automatic timestamped forecasts and official result settlement on every lab run.",
     "admission_policy": {
-      "paper_entry_after_score_backtest": true,
+      "paper_entry_after_score_backtest": false,
+      "paper_entry_requires_forward_market_validation": true,
       "minimum_score_forecasts": 200,
       "minimum_score_holdout": 50,
       "market_validation_minimum_independent_events": 100,
@@ -6718,7 +7209,7 @@
     "paper_only": true
   },
   "market_activity": {
-    "asof_utc": "2026-11-02T22:36:14.475760+00:00",
+    "asof_utc": "2026-11-02T23:26:27.638340+00:00",
     "by_market": {
       "1X2": {
         "label": "Resultado 1X2",
@@ -8035,7 +8526,7 @@
     "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 12,
+  "newly_settled": 0,
   "missing_final_event_ids": [],
   "statistic_settlement": {
     "lookups": 0,

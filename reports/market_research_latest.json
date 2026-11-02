@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-02T22:36:14.475760+00:00",
+  "asof_utc": "2026-11-02T23:26:27.638340+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "new_forecasts": 0,
-  "new_settlements": 12,
+  "new_settlements": 0,
   "forecasts_total": 63,
   "zero_stake_forecasts": 51,
   "open_observations": 5,
@@ -18,20 +18,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-        "sha256": "d5b9339d5bf04127fcb69902edcb809bfb7f10ff23dd9830e9701ffa74017510",
-        "captured_at_utc": "2026-11-02T22:36:14.475760+00:00",
+        "sha256": "a1aa87e29362523f7b7d24feb239d2094e0495d0083d57faab7a074984608142",
+        "captured_at_utc": "2026-11-02T23:26:27.638340+00:00",
         "completed_games": 2
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-        "sha256": "995d71c5d51c774d8c4d422fd6ed888823acdb6dff9dc5d486a8cbaefe39df06",
-        "captured_at_utc": "2026-11-02T22:36:14.475760+00:00",
+        "sha256": "7ab05326149c665e508895473a5f8e8906fa49ea1e22e84f0137be5552a2f47d",
+        "captured_at_utc": "2026-11-02T23:26:27.638340+00:00",
         "completed_games": 11
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-        "sha256": "b55b9494fd7d07592df666795776c47f422129c539231858ff99a8e666b874e3",
-        "captured_at_utc": "2026-11-02T22:36:14.475760+00:00",
+        "sha256": "c19076b392b08a20acc45852e3bec95025442a456850084884719ef20b77de79",
+        "captured_at_utc": "2026-11-02T23:26:27.638340+00:00",
         "completed_games": 4
       }
     ],
@@ -356,16 +356,16 @@
   "team_statistics_history": {
     "scoreboard_requests": 40,
     "summary_requests": 120,
-    "events_with_statistics": 1228,
+    "events_with_statistics": 1348,
     "failures": [],
     "missing_stats": 0,
     "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
     "events_by_sport": {
-      "ligue_1": 276,
-      "la_liga": 269,
-      "bundesliga": 128,
-      "serie_a": 268,
-      "epl": 287
+      "ligue_1": 302,
+      "la_liga": 289,
+      "bundesliga": 155,
+      "serie_a": 288,
+      "epl": 314
     }
   },
   "additional_market_backtests": {},
@@ -390,6 +390,7 @@
     "nfl|ML|MULTIMARKET-1.0.0-nfl": {
       "n_distinct_events": 8,
       "days": 1,
+      "dates": 1,
       "brier": 0.43951446626067225,
       "market_brier": 0.3773341785540975,
       "log_loss": 0.6312880234149788,
@@ -400,6 +401,7 @@
       "blocks": [
         "NEEDS_100_DISTINCT_EVENTS",
         "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
         "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
         "LOG_LOSS_NOT_BETTER_THAN_MARKET",
         "CALIBRATION_ERROR_OVER_10PP"
@@ -409,6 +411,7 @@
     "nba|ML|MULTIMARKET-1.0.0-nba": {
       "n_distinct_events": 1,
       "days": 1,
+      "dates": 1,
       "brier": 0.4170098685937543,
       "market_brier": 0.16335664950728,
       "log_loss": 0.6099526549305341,
@@ -419,6 +422,7 @@
       "blocks": [
         "NEEDS_100_DISTINCT_EVENTS",
         "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
         "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
         "LOG_LOSS_NOT_BETTER_THAN_MARKET",
         "CALIBRATION_ERROR_OVER_10PP"
@@ -451,7 +455,8 @@
   ],
   "next_step": "Automatic timestamped forecasts and official result settlement on every lab run.",
   "admission_policy": {
-    "paper_entry_after_score_backtest": true,
+    "paper_entry_after_score_backtest": false,
+    "paper_entry_requires_forward_market_validation": true,
     "minimum_score_forecasts": 200,
     "minimum_score_holdout": 50,
     "market_validation_minimum_independent_events": 100,
