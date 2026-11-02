@@ -24,7 +24,7 @@ from .custom_strategies import (
     experimental_forecasts, accepts_candidate,
 )
 from .strategy_registry import ensure_registry, verify_prior_accounts
-from .portfolio_controls import PaperRiskBook, conservative_expected_value, audit_ledgers
+from .portfolio_controls import PaperRiskBook, conservative_expected_value, audit_ledgers, market_activity
 from .daily_reference import select_daily_reference
 from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION,daily_entry_stake
 from .odds_provider import attach_cached_odds
@@ -588,18 +588,23 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     from .research_pipeline import read_journal, reconcile, run_research
     research_settlement_result = reconcile(root, read_journal(root), events, now)
     risk = PaperRiskBook(root)
-    rejected = {}
-    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk)
-    from .frequency_paper import run_frequency_strategies
-    frequency_results = run_frequency_strategies(root, models, events, now, registry, risk=risk)
-    entry_counts.update({k:v['new_entries'] for k,v in frequency_results.items() if v['new_entries']})
-    daily_reference = select_daily_reference(root, events, now, registry, risk=risk)
-    if daily_reference["new_entries"]:
-        entry_counts["MARKET_DAILY_REFERENCE"] = daily_reference["new_entries"]
     market_research = run_research(root, events, models, now, risk, football_history=matches,
                                    previous_settlement_result=research_settlement_result,collect_team_stats=True)
     from .auxiliary_portfolios import open_auxiliary_markets
-    auxiliary = open_auxiliary_markets(root, events, now, registry, risk)
+    # Give qualified non-winner opportunities room before winner selections
+    # consume daily slots and shared exposure. All original gates still apply.
+    auxiliary_first = open_auxiliary_markets(root, events, now, registry, risk,market_scope='non_winner')
+    rejected = {}
+    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk)
+    for name,count in auxiliary_first.items():entry_counts[name]=entry_counts.get(name,0)+count
+    from .frequency_paper import run_frequency_strategies
+    frequency_results = run_frequency_strategies(root, models, events, now, registry, risk=risk)
+    for name,result in frequency_results.items():
+        if result['new_entries']:entry_counts[name]=entry_counts.get(name,0)+result['new_entries']
+    daily_reference = select_daily_reference(root, events, now, registry, risk=risk)
+    if daily_reference["new_entries"]:
+        entry_counts["MARKET_DAILY_REFERENCE"] = entry_counts.get("MARKET_DAILY_REFERENCE",0)+daily_reference["new_entries"]
+    auxiliary = open_auxiliary_markets(root, events, now, registry, risk,market_scope='moneyline')
     for name,count in auxiliary.items(): entry_counts[name]=entry_counts.get(name,0)+count
     after, _ = build_accounts(root, {}, now)
     # Count the TRUE number of unique events forecast on this Lisbon calendar day,
@@ -652,6 +657,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "aggregate_risk": risk.summary(),
         "market_research": market_research,
         "ledger_audit": audit_ledgers(root, now),
+        "market_activity": market_activity(root, events, now),
         "validation_readiness": {"real_money_ready": False, "market_edge_verified": False,
             "nba_nhl_models": "AUTOMATED_PROSPECTIVE_TESTS_WITH_CONDITIONAL_025_PERCENT_PAPER",
             "goal_markets": "AUTOMATED_TIMESTAMPED_QUOTES_FORECASTS_AND_SETTLEMENT",

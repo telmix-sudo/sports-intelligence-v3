@@ -213,7 +213,7 @@ def market_quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> d
                             continue
                         outcomes = market["outcomes"]
                         key = market["key"]
-                        if key == "totals":
+                        if key in ("totals", "alternate_totals"):
                             pair = {key_for(o["name"]):o for o in outcomes if float(o.get("point", -999)) == 2.5}
                             values = [pair["over"]["price"], pair["under"]["price"]]
                             name = "OVER_UNDER_2_5"
@@ -221,8 +221,10 @@ def market_quotes_for_event(event: dict, rows: list[dict], at: dt.datetime) -> d
                             pair = {key_for(o["name"]):o for o in outcomes}
                             values = [pair["yes"]["price"], pair["no"]["price"]]
                             name = "BTTS"
-                        elif key == "spreads":
-                            pair = {key_for(o["name"]):o for o in outcomes}
+                        elif key in ("spreads", "alternate_spreads"):
+                            pair = {key_for(o["name"]):o for o in outcomes
+                                    if ((key_for(o["name"])==key_for(row["home_team"]) and float(o["point"])==-.5)
+                                        or (key_for(o["name"])==key_for(row["away_team"]) and float(o["point"])==.5))}
                             h, a = pair[key_for(row["home_team"])], pair[key_for(row["away_team"])]
                             if float(h["point"]) != -.5 or float(a["point"]) != .5:
                                 continue

@@ -21,6 +21,32 @@ ALIASES = {
     "bournemouth": "afc bournemouth", "leicester": "leicester city",
     "leeds": "leeds united", "sheffield united": "sheffield united",
     "ipswich": "ipswich town", "norwich": "norwich city",
+    # Exact source names: OpenFootball official club names -> ESPN display names.
+    # No prefix stripping or fuzzy matching (e.g. 'Deportivo' stays ambiguous).
+    "us sassuolo calcio": "sassuolo", "acf fiorentina": "fiorentina",
+    "atalanta bc": "atalanta", "parma calcio 1913": "parma",
+    "genoa cfc": "genoa", "us lecce": "lecce", "ssc napoli": "napoli",
+    "bologna fc 1909": "bologna", "cagliari calcio": "cagliari",
+    "como 1907": "como", "ss lazio": "lazio", "juventus fc": "juventus",
+    "udinese calcio": "udinese", "torino fc": "torino",
+    "fc internazionale milano": "internazionale",
+    "stade rennais fc 1901": "stade rennais", "olympique de marseille": "marseille",
+    "racing club de lens": "lens", "olympique lyonnais": "lyon",
+    "as monaco fc": "as monaco", "ogc nice": "nice", "toulouse fc": "toulouse",
+    "stade brestois 29": "brest", "lille osc": "lille", "fc lorient": "lorient",
+    "rc strasbourg alsace": "strasbourg", "angers sco": "angers",
+    "paris saint germain fc": "paris saint germain",
+    "girona fc": "girona", "rayo vallecano de madrid": "rayo vallecano",
+    "villarreal cf": "villarreal", "fc barcelona": "barcelona",
+    "deportivo alaves": "alaves", "levante ud": "levante", "valencia cf": "valencia",
+    "real sociedad de futbol": "real sociedad", "rc celta de vigo": "celta vigo",
+    "getafe cf": "getafe", "sevilla fc": "sevilla",
+    "rcd espanyol de barcelona": "espanyol", "club atletico de madrid": "atletico madrid",
+    "elche cf": "elche", "real betis balompie": "real betis",
+    "real madrid cf": "real madrid", "ca osasuna": "osasuna",
+    "fc bayern munchen": "bayern munich", "sv werder bremen": "werder bremen",
+    "bayer 04 leverkusen": "bayer leverkusen", "tsg 1899 hoffenheim": "tsg hoffenheim",
+    "1 fsv mainz 05": "mainz", "1 fc koln": "fc cologne", "hamburger sv": "hamburg sv",
 }
 
 def canonical(name: str) -> str:
