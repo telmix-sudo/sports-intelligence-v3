@@ -11,7 +11,7 @@ from pathlib import Path
 from .odds_provider import (parse_utc,quotes_for_event,market_quotes_for_event,
                             _request_odds,MAX_CREDITS_PER_DAY,MAX_BOOK_QUOTE_AGE_HOURS,
                             ODDS_KEY_MAP,attach_cached_odds,fresh_quote)
-from .market_catalog import catalog_quotes
+from .market_catalog import catalog_quotes,merge_priced_market
 from .activity_policy import MIN_DAILY_ENTRIES
 
 PRICE_LOOKAHEAD_HOURS = 48
@@ -62,6 +62,8 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
             'event_markets_done':old.get('event_markets_done',[]) if same else [],
             'event_market_credits_today':int(old.get('event_market_credits_today',0)) if same else 0,
             'event_market_attempts':old.get('event_market_attempts',[]) if same else [],
+            'regional_corner_credits_today':int(old.get('regional_corner_credits_today',0)) if same else 0,
+            'regional_corner_attempts':old.get('regional_corner_attempts',[]) if same else [],
             'global_priced_keys':old.get('global_priced_keys',[]) if same else [],
             'global_priced_families':old.get('global_priced_families',[]) if same else [],
             'global_poll_windows':old.get('global_poll_windows',{}) if same else {},
@@ -84,10 +86,11 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
     def remaining(cost,cap):
         return (record['credits_today']+cost<=cap and
                 (record['credits_remaining'] is None or record['credits_remaining']>=cost))
-    def request(key,markets='h2h',event_id=None,discover=False):
+    def request(key,markets='h2h',event_id=None,discover=False,region='eu'):
         cost=1 if discover else len(markets.split(','))
         record['credits_today']+=cost;record['calls_today']+=1;diag['calls_this_run']+=1
-        rows=requester(key,secret,markets,event_id,discover)
+        rows=(requester(key,secret,markets,event_id,discover,regions=region) if region!='eu' and requester is _request_odds
+              else requester(key,secret,markets,event_id,discover))
         if getattr(rows,'credits_remaining',None) is not None:record['credits_remaining']=rows.credits_remaining
         return rows
     def executable(key):
@@ -188,6 +191,20 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
             snap.setdefault('provider_ids',{})[e['id']]=eid
             snap['fetched_at']=now.isoformat()
         except Exception as exc:diag['errors'].append({'sport_key':key,'reason':'EVENT_MARKETS_'+type(exc).__name__})
+    # At most ONE extra region/market credit, transferred from winner coverage,
+    # still within 16/day. EU+UK variants of one operator never count twice.
+    for e in soccer:
+        if not secret or record['regional_corner_credits_today']>=1 or not remaining(1,MAX_CREDITS_PER_DAY):break
+        eid=e['odds_event_id'];snap=record['snapshots'].get(e['sport'],{})
+        existing=snap.get('market_quotes',{}).get(e['id'],{})
+        corners={mid:q for mid,q in existing.items() if (q.get('market_spec') or {}).get('metric')=='corners' and fresh_quote(q,now)}
+        if not corners or any(q.get('bookmaker_count',0)>=2 for q in corners.values()) or eid in record['regional_corner_attempts']:continue
+        record['regional_corner_attempts'].append(eid);record['regional_corner_credits_today']+=1
+        try:
+            rows=request(e['odds_sport_key'],'alternate_totals_corners',eid,region='uk')
+            quotes,_=catalog_quotes(e,rows,now)
+            for mid,q in quotes.items():existing[mid]=merge_priced_market(existing.get(mid),dict(q,pricing_regions=['uk']),now)
+        except Exception as exc:diag['errors'].append({'sport_key':e['odds_sport_key'],'reason':'REGIONAL_CORNERS_'+type(exc).__name__})
     diag['expired_cached_quotes_removed']=prune_expired_prices(record['snapshots'],now)
     diag['quotes_matched']=attach_cached_odds(events,record['snapshots'],now)
     diag['cached_sports']=sorted({e['sport'] for e in events if e.get('quote') and
@@ -200,5 +217,6 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
                 eligible_competitions=len(by_key),goal_market_quotes=sum(len(e.get('market_quotes',{})) for e in events),
                 distinct_modelled_events_with_prices=covered_count(),minimum_priced_event_target=MIN_DAILY_ENTRIES,
                 event_market_credits_today=record['event_market_credits_today'],reserved_extra_market_credits=EXTRA_MARKET_DAILY_CREDITS,
+                regional_corner_credits_today=record['regional_corner_credits_today'],
                 market_inventory=record['market_inventory'])
     return diag

@@ -58,9 +58,12 @@ class OddsRows(list):
 
 
 def _request_odds(sport: str, secret: str, markets: str = "h2h",
-                  event_id: str | None = None, discover: bool = False, events_only: bool = False) -> list[dict]:
+                  event_id: str | None = None, discover: bool = False, events_only: bool = False,
+                  regions: str = "eu") -> list[dict]:
+    if regions not in ("eu","uk"):
+        raise ValueError("Only a single authorized pricing region per request")
     parameters = urllib.parse.urlencode({
-        "apiKey": secret, "regions": "eu", "markets": markets,
+        "apiKey": secret, "regions": regions, "markets": markets,
         "oddsFormat": "decimal", "dateFormat": "iso"
     })
     if events_only:

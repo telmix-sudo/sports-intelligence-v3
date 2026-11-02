@@ -10,14 +10,42 @@ from unittest.mock import patch
 
 from sports_intelligence.football import canonical
 from sports_intelligence.broad_odds import annotate_discovered
-from sports_intelligence.market_catalog import catalog_quotes, distribution, outcome_for_spec, collect_statistics
-from sports_intelligence.odds_provider import market_quotes_for_event
+from sports_intelligence.market_catalog import catalog_quotes, distribution, outcome_for_spec, collect_statistics, merge_priced_market
+from sports_intelligence.odds_provider import market_quotes_for_event, _request_odds
 from sports_intelligence.portfolio_controls import PaperRiskBook, market_activity
 from sports_intelligence.research_pipeline import run_research, read_journal, reconcile, validation, paper_state
 from test_research_integration import EVENT, NOW, football_history, models, odds_rows
 
 
 class IdentityAndLinesTests(unittest.TestCase):
+    def test_regional_quotes_do_not_duplicate_an_operator_or_refresh_its_clock(self):
+        def quote(book):
+            raw=odds_rows();raw[0]['bookmakers']=raw[0]['bookmakers'][:1]
+            raw[0]['bookmakers'][0]['key']=book
+            raw[0]['bookmakers'][0]['markets']=[{'key':'alternate_totals_corners','outcomes':[
+                {'name':'Over','point':9.5,'price':2.1},{'name':'Under','point':9.5,'price':1.8}]}]
+            return next(iter(catalog_quotes(EVENT,raw,NOW)[0].values()))
+        eu=quote('betfair_ex_eu');frozen=copy.deepcopy(eu)
+        same=merge_priced_market(eu,dict(quote('betfair_ex_uk'),pricing_regions=['uk']),NOW)
+        self.assertEqual(same['bookmaker_count'],1)
+        combined=merge_priced_market(same,dict(quote('pinnacle'),pricing_regions=['uk']),NOW)
+        self.assertEqual(combined['bookmaker_count'],2)
+        self.assertEqual(combined['best_book_updates'],[NOW.isoformat()]*2)
+        self.assertEqual(eu,frozen)
+        bad=quote('another');bad['market_spec']=dict(bad['market_spec'],line=10.5)
+        with self.assertRaises(ValueError):merge_priced_market(eu,bad,NOW)
+
+    def test_regional_adapter_requests_one_region_at_the_existing_api(self):
+        from urllib.parse import urlparse,parse_qs
+        with patch('sports_intelligence.odds_provider.urllib.request.urlopen') as http:
+            response=http.return_value.__enter__.return_value
+            response.read.return_value=b'[]';response.headers={}
+            _request_odds('soccer_epl','SYNTHETIC','alternate_totals_corners','SYNTHETIC_EVENT',regions='uk')
+            params=parse_qs(urlparse(http.call_args.args[0].full_url).query)
+            self.assertEqual(params['regions'],['uk'])
+            self.assertEqual(params['markets'],['alternate_totals_corners'])
+        with self.assertRaises(ValueError):_request_odds('soccer_epl','SYNTHETIC',regions='eu,uk')
+
     def test_exact_names_join_model_history_and_quotes_without_fuzzy_names(self):
         pairs=[('US Sassuolo Calcio','Sassuolo'),('ACF Fiorentina','Fiorentina'),
                ('Atalanta BC','Atalanta'),('Parma Calcio 1913','Parma'),
@@ -64,6 +92,31 @@ class IdentityAndLinesTests(unittest.TestCase):
 
 
 class CollectionAndAdmissionTests(unittest.TestCase):
+    def test_one_credit_corner_fallback_stays_under_16_and_is_not_repeated(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'data').mkdir()
+            e=copy.deepcopy(EVENT);e.update(family='soccer',event_type='MATCHUP',
+                odds_sport_key='soccer_epl',odds_event_id='SYNTHETIC_REGION')
+            def rows(books):
+                raw=odds_rows()
+                for book,key in zip(raw[0]['bookmakers'],books):
+                    book['key']=key;book['markets']=[{'key':'alternate_totals_corners','outcomes':[
+                        {'name':'Over','point':9.5,'price':2.1},{'name':'Under','point':9.5,'price':1.8}]}]
+                raw[0]['bookmakers']=raw[0]['bookmakers'][:len(books)]
+                return raw
+            quotes,_=catalog_quotes(e,rows(['betfair_ex_eu']),NOW)
+            (root/'data/odds_cache_v3.json').write_text(json.dumps({'day':str(NOW.date()),
+                'credits_today':12,'calls_today':8,'event_market_credits_today':4,
+                'snapshots':{'epl':{'quotes':{},'market_quotes':{e['id']:quotes}}}}))
+            calls=[]
+            def request(key,secret,markets,*_):calls.append(markets);return rows(['betfair_ex_uk','pinnacle'])
+            report=annotate_discovered([e],root,NOW,'SYNTHETIC',request)
+            self.assertEqual(calls,['alternate_totals_corners'])
+            self.assertEqual(report['credits_today'],13)
+            self.assertEqual(report['regional_corner_credits_today'],1)
+            self.assertEqual(next(iter(e['market_quotes'].values()))['bookmaker_count'],2)
+            self.assertEqual(annotate_discovered([e],root,NOW,'SYNTHETIC',lambda *_:self.fail('Duplicate request'))['calls_this_run'],0)
+
     def test_qualified_goal_market_gets_room_before_ten_earlier_moneylines(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);history=football_history();goal=copy.deepcopy(EVENT)
