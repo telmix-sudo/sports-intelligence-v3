@@ -1,3 +1,4 @@
+from market_validation_fixtures import approved_research
 """Integration checks: real market lines, quota units, frozen forecasts, risk and results.
 All events/prices in this module are explicitly synthetic test fixtures.
 """
@@ -90,6 +91,7 @@ class ExpandedOddsTests(unittest.TestCase):
 
 
 class ResearchExecutionTests(unittest.TestCase):
+    @approved_research
     def test_price_to_forecast_to_official_result_is_immutable_and_idempotent(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp); history=football_history(); event=dict(EVENT)
@@ -135,6 +137,7 @@ class ResearchExecutionTests(unittest.TestCase):
             r=run_research(root,[event],models(history),NOW,PaperRiskBook(root),football_history=history)
             self.assertEqual(r['forecasts_total'],0)
 
+    @approved_research
     def test_unavailable_official_result_stays_open_and_is_retried_by_event_day(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp); history=football_history(); event=dict(EVENT)
@@ -147,6 +150,7 @@ class ResearchExecutionTests(unittest.TestCase):
             self.assertEqual(len(calls),1,'One lookup for a match date despite three different markets')
             self.assertEqual(paper_state(read_journal(root))['open'],1)
 
+    @approved_research
     def test_shared_risk_includes_new_account_but_preserves_prior_limits(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp); history=football_history(); event=dict(EVENT)
@@ -185,7 +189,8 @@ class ResearchExecutionTests(unittest.TestCase):
 
     def test_prospective_underperformance_stops_new_experimental_stakes(self):
         score={'n':1000,'holdout':{'n':200,'brier':.4,'log_loss':.6,'ece':.05}}
-        self.assertTrue(experimental_admission(score,{})['eligible_for_small_paper'])
+        self.assertFalse(experimental_admission(score,{})['eligible_for_small_paper'])
+        self.assertTrue(experimental_admission(score,{'eligible_for_small_paper':True})['eligible_for_small_paper'])
         forward={'n_distinct_events':100,'brier':.55,'market_brier':.45,'log_loss':.8,'market_log_loss':.6}
         self.assertFalse(experimental_admission(score,forward)['eligible_for_small_paper'])
 

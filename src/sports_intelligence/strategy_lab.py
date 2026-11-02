@@ -24,7 +24,7 @@ from .custom_strategies import (
     experimental_forecasts, accepts_candidate,
 )
 from .strategy_registry import ensure_registry, verify_prior_accounts
-from .portfolio_controls import PaperRiskBook, conservative_expected_value, audit_ledgers, market_activity
+from .portfolio_controls import prediction_signal,PaperRiskBook, conservative_expected_value, audit_ledgers, market_activity
 from .daily_reference import select_daily_reference
 from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION,daily_entry_stake
 from .odds_provider import attach_cached_odds
@@ -408,12 +408,14 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
 
 def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime,
                   registry: dict | None = None, diagnostics: dict | None = None,
-                  risk: PaperRiskBook | None = None, learning=None) -> tuple[dict, dict]:
+                  risk: PaperRiskBook | None = None, learning=None, admission=None) -> tuple[dict, dict]:
     """Optional experimental paper entries; each account independently limits exposure.
 
     Only model probabilities and pre-game timestamped quotes are eligible.
     Correlated portfolios are intentionally reported separately, not combined.
     """
+    from .admission_validation import AdmissionValidation
+    admission = admission or AdmissionValidation(root,now)
     risk = risk or PaperRiskBook(root)
     account_stats = {}
     added = defaultdict(int)
@@ -432,8 +434,6 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
         today_count = sum(parse_iso(r["forecast_utc"]).astimezone(PORTUGAL).date() == now.astimezone(PORTUGAL).date() for r in rows)
         seen_events = {r["event_id"] for r in rows}
         for e in events:
-            if e["id"] in seen_events or today_count >= MAX_DAILY_ENTRIES_PER_ACCOUNT:
-                continue
             if e["sport"] not in models or e["status"] != "pre" or not (now < parse_iso(e["start_utc"]) <= now + dt.timedelta(hours=48)):
                 continue
             quote = e.get("quote")
@@ -474,6 +474,12 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             learning_evidence = None
             if learning is not None:
                 p,learning_evidence=learning.apply(name,e['sport'],'1X2',p,wallet=name)
+            admission.observe(name,e,p,quote,learning_evidence)
+            if e['id'] in seen_events or today_count>=MAX_DAILY_ENTRIES_PER_ACCOUNT:continue
+            admission_evidence=admission.decision(name,e['sport'],'1X2',learning_evidence)
+            if not admission_evidence['eligible_for_paper']:
+                rejected['awaiting_prospective_market_validation']+=1
+                continue
             diffs = [a-b for a,b in zip(p, market)]
             choice = max(range(3), key=lambda i: diffs[i])
             ev = p[choice] * prices[choice] - 1
@@ -497,7 +503,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             if stake < 1:
                 rejected["too_small_stake"] += 1
                 continue
-            stake = risk.reserve(e["id"], stake)
+            stake = risk.reserve(e["id"], stake,signal_key=prediction_signal(e["id"],"1X2",name,choice))
             if stake == 0:
                 rejected["aggregate_risk_limit"] += 1
                 continue
@@ -507,7 +513,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 "strategy": name, "event_id": e["id"], "sport": e["sport"],
                 "home": e["home"], "away": e["away"], "start_utc": e["start_utc"],
                 "forecast_utc": now.isoformat(), "market": "1X2",
-                "probabilities": list(p),
+                "probabilities": list(p), "admission_evidence":admission_evidence,
                 "no_vig": quote["no_vig"], "odds": quote["decimal"],
                 "selection_index": choice, "edge_pp": round(diffs[choice]*100, 4),
                 "price_source": quote.get("provider"),
@@ -568,6 +574,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     verify_prior_accounts(root, registry)
     matches, provenance = collect_openfootball(now.date(), fetcher)
     from .historical_learning import HistoricalLearning
+    from .admission_validation import AdmissionValidation
+    admission=AdmissionValidation(root,now)
     learning=HistoricalLearning(root,now)
     models, historical = historical_comparison(matches,learning)
     # Includes yesterday/today/future fixtures; only completed final statuses settle.
@@ -583,6 +591,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         for r in read_jsonl(root / "data" / "strategy_ledgers" / (strategy.lower() + ".jsonl")):
             if r.get("status") == "OPEN" and parse_iso(r["start_utc"]) <= now:
                 pending[(r["sport"], parse_iso(r["start_utc"]).date())] = True
+    for league,day in admission.pending():pending[(league,day)]=True
     finals = result_index(events)
     for (league, day) in sorted(pending):
         if not (dt.timedelta(0) <= now - dt.datetime.combine(day, dt.time(), UTC) <= dt.timedelta(days=30)):
@@ -595,6 +604,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         except Exception as exc:
             print("Settlement lookup failed", league, day.isoformat(), type(exc).__name__, flush=True)
     missing_final_ids = sorted({row["event_id"] for name in STRATEGIES for row in read_jsonl(root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")) if row.get("status") == "OPEN" and parse_iso(row["start_utc"]) <= now and row["event_id"] not in finals})
+    admission.reconcile(finals)
     stat_settlement = enrich_pending_statistics(root, finals, now)
     before, settle_counts = build_accounts(root, finals, now)
     from .research_pipeline import read_journal, reconcile, run_research
@@ -605,18 +615,18 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     from .auxiliary_portfolios import open_auxiliary_markets
     # Give qualified non-winner opportunities room before winner selections
     # consume daily slots and shared exposure. All original gates still apply.
-    auxiliary_first = open_auxiliary_markets(root, events, now, registry, risk,market_scope='non_winner')
+    auxiliary_first = open_auxiliary_markets(root, events, now, registry, risk,market_scope='non_winner',admission=admission,learning=learning)
     rejected = {}
-    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk,learning=learning)
+    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk,learning=learning,admission=admission)
     for name,count in auxiliary_first.items():entry_counts[name]=entry_counts.get(name,0)+count
     from .frequency_paper import run_frequency_strategies
-    frequency_results = run_frequency_strategies(root, models, events, now, registry, risk=risk,learning=learning)
+    frequency_results = run_frequency_strategies(root, models, events, now, registry, risk=risk,learning=learning,admission=admission)
     for name,result in frequency_results.items():
         if result['new_entries']:entry_counts[name]=entry_counts.get(name,0)+result['new_entries']
     daily_reference = select_daily_reference(root, events, now, registry, risk=risk,learning=learning)
     if daily_reference["new_entries"]:
         entry_counts["MARKET_DAILY_REFERENCE"] = entry_counts.get("MARKET_DAILY_REFERENCE",0)+daily_reference["new_entries"]
-    auxiliary = open_auxiliary_markets(root, events, now, registry, risk,market_scope='moneyline')
+    auxiliary = open_auxiliary_markets(root, events, now, registry, risk,market_scope='moneyline',admission=admission,learning=learning)
     for name,count in auxiliary.items(): entry_counts[name]=entry_counts.get(name,0)+count
     after, _ = build_accounts(root, {}, now)
     # Count the TRUE number of unique events forecast on this Lisbon calendar day,
@@ -667,6 +677,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "daily_reference": daily_reference,
         "daily_activity": daily_activity,
         "aggregate_risk": risk.summary(),
+        "admission_validation":admission.report(),
         "historical_learning": learning.report((*STRATEGIES,'EXPERIMENTAL_MULTI_MARKET')),
         "market_research": market_research,
         "ledger_audit": audit_ledgers(root, now),

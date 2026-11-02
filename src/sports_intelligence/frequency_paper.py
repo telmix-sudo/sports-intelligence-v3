@@ -4,7 +4,7 @@ import hashlib
 from .daily_reference import quote_for_reference
 from .scanner import parse_iso
 from .custom_strategies import FREQUENCY_NAMES
-from .portfolio_controls import PaperRiskBook, conservative_expected_value
+from .portfolio_controls import prediction_signal,PaperRiskBook, conservative_expected_value
 from .activity_policy import daily_entry_stake
 
 POLICIES = {
@@ -13,8 +13,10 @@ POLICIES = {
  "FREQ_BROAD_5_10": (5,10,.03,.05,.02),
 }
 
-def run_frequency_strategies(root, models, events, now, registry, risk=None, learning=None):
+def run_frequency_strategies(root, models, events, now, registry, risk=None, learning=None, admission=None):
  from .strategy_lab import read_jsonl, save_jsonl, predictions, team_name
+ from .admission_validation import AdmissionValidation
+ admission=admission or AdmissionValidation(root,now)
  risk = risk or PaperRiskBook(root)
  output = {}
  for name in FREQUENCY_NAMES:
@@ -46,19 +48,24 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None, lea
    p = predictions(lm,home,away)["ELO_POISSON_BLEND"]
    evidence=None
    if learning is not None:p,evidence=learning.apply('ELO_POISSON_BLEND',e['sport'],'1X2',p,wallet=name)
+   admission.observe('ELO_POISSON_BLEND',e,p,raw,evidence)
+   gate=admission.decision('ELO_POISSON_BLEND',e['sport'],'1X2',evidence)
+   if not gate['eligible_for_paper']:
+    diag['status']='AWAITING_MARKET_VALIDATION'
+    continue
    for i in range(3):
     edge = p[i]-market[i]
     ev_low = (p[i]-uncertainty)*odds[i]-1
     if edge>=edge_min and ev_low>0 and conservative_expected_value(p[i],odds[i],min(lm["ELO_STANDARD"].played.get(home,0),lm["ELO_STANDARD"].played.get(away,0)))>.01:
-     candidates.append((ev_low,e["id"],e,i,p,odds,market,stamps,books,raw,evidence))
+     candidates.append((ev_low,e["id"],e,i,p,odds,market,stamps,books,raw,evidence,gate))
   candidates.sort(key=lambda x:(-x[0],x[1]))
   diag["eligible"] = len(candidates)
-  for ev_low,eid,e,i,p,odds,market,stamps,books,raw,evidence in candidates:
+  for ev_low,eid,e,i,p,odds,market,stamps,books,raw,evidence,gate in candidates:
    if daily>=cap: break
    if eid in seen: continue
    stake = daily_entry_stake(bank, exposure, daily)
    if stake<1: break
-   stake = risk.reserve(eid, stake)
+   stake = risk.reserve(eid, stake,signal_key=prediction_signal(eid,"1X2","ELO_POISSON_BLEND",i))
    if stake == 0: continue
    key = "PFREQ-"+hashlib.sha256((name+"|"+eid).encode()).hexdigest()[:14]
    rows.append({"id":key,"strategy":name,"event_id":eid,"sport":e["sport"],
@@ -69,7 +76,7 @@ def run_frequency_strategies(root, models, events, now, registry, risk=None, lea
     "uncertainty_buffer_pp":uncertainty*100,"uncertainty_calibrated":False,
     "stake_eur":stake,"status":"OPEN","price_source":raw["provider"],
     "bookmakers":books,"book_quote_updates_utc":stamps,
-    "strategy_version":"1.0.0","model_status":"EXPERIMENTAL_NOT_VALIDATED"})
+    "strategy_version":"1.1.0","model_status":"PROSPECTIVE_MARKET_VALIDATED_PAPER","admission_evidence":gate})
    if evidence is not None:rows[-1]['historical_learning']=evidence
    daily+=1
    seen.add(eid)

@@ -25,7 +25,7 @@ from .metrics import brier, log_loss
 from .north_america_models import TeamScoreBaseline
 from .odds_provider import parse_utc
 from .scanner import unpack_scoreboard
-from .portfolio_controls import conservative_expected_value
+from .portfolio_controls import prediction_signal,conservative_expected_value
 
 UTC = dt.timezone.utc
 LOCAL = ZoneInfo('Europe/Lisbon')
@@ -205,14 +205,12 @@ def goal_backtests(matches_by_league, learning=None):
     return {key:summarize_score_rows(rows) for key,rows in scores.items()}
 
 
-def experimental_admission(score, forward):
+def experimental_admission(score, forward, learned_active=False):
     """Admit bounded virtual experiments, never declare a profitable/validated model.
 
-    Initial PAPER testing follows chronological score validation against a trivial
-    baseline. Once 100 prospective prices/results exist, a losing comparison with
-    the market blocks further experimental stakes. Stronger paired evidence is
-    reported separately for validation; it is not a prerequisite to collect paper
-    test results in the first place.
+    Scores alone cannot establish market advantage. Until the frozen forward
+    comparison is eligible, forecasts continue with zero stake. Learned candidates
+    must have passed their separate original AND market comparison.
     """
     reasons = []
     holdout = score.get('holdout', {})
@@ -223,8 +221,13 @@ def experimental_admission(score, forward):
     if holdout.get('ece') is None or holdout['ece']>.15: reasons.append('HOLDOUT_CALIBRATION_ERROR_OVER_15PP')
     if forward.get('n_distinct_events',0)>=100 and (forward['brier']>=forward['market_brier'] or
                                                    forward['log_loss']>=forward['market_log_loss']):
-        reasons.append('PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET')
+        if not learned_active:reasons.append('PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET')
+    if not forward.get('eligible_for_small_paper') and not learned_active:
+        reasons.append('NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON')
+        reasons.extend(forward.get('blocks',[]))
     return {'eligible_for_small_paper':not reasons, 'blocks':reasons,
+            'market_validation_required':True,
+            'market_validation_passed':bool(forward.get('eligible_for_small_paper') or learned_active),
             'status':'EXPERIMENTAL_PAPER_NOT_MARKET_VALIDATED', 'score_holdout':holdout}
 
 
@@ -365,11 +368,12 @@ def validation(rows, before):
         reasons = []
         if n < MIN_PROSPECTIVE_EVENTS: reasons.append('NEEDS_100_DISTINCT_EVENTS')
         if span < MIN_PROSPECTIVE_DAYS: reasons.append('NEEDS_14_DAY_FORWARD_PERIOD')
+        if len(dates) < MIN_PROSPECTIVE_DAYS: reasons.append('NEEDS_14_DISTINCT_MARKET_DATES')
         if upper >= 0: reasons.append('PAIRED_BRIER_EDGE_NOT_ESTABLISHED')
         if avg_log >= market_log: reasons.append('LOG_LOSS_NOT_BETTER_THAN_MARKET')
         if ece > .10: reasons.append('CALIBRATION_ERROR_OVER_10PP')
         key = '|'.join((sport,market,version))
-        result[key] = {'n_distinct_events':n, 'days':span, 'brier':sum(r['brier'] for _,r in pairs)/n,
+        result[key] = {'n_distinct_events':n, 'days':span, 'dates':len(dates), 'brier':sum(r['brier'] for _,r in pairs)/n,
                        'market_brier':sum(r['market_brier'] for _,r in pairs)/n,
                        'log_loss':avg_log, 'market_log_loss':market_log,
                        'paired_brier_difference_upper_bound':upper, 'ece':ece,
@@ -394,6 +398,7 @@ def paper_state(rows):
 def run_research(root, events, football_models, now, risk, football_history=None, history_fetcher=fetch_text,
                  result_fetcher=fetch_espn, previous_settlement_result=None, collect_team_stats=False, learning=None):
     from .activity_policy import daily_entry_stake
+    from .admission_validation import validated_learning
     rows = read_journal(root)
     newly_settled, settlement_errors = (previous_settlement_result if previous_settlement_result is not None
                                        else reconcile(root, rows, events, now, result_fetcher))
@@ -508,7 +513,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
             gate_key = '|'.join((e['sport'],market,pred['version']))
             forward = readiness.get(gate_key, {})
             score = backtest.get(e['sport'], {}) if market=='ML' else (generic_scores if pred.get('market_spec') else goal_scores).get(e['sport']+'|'+market,{})
-            gate = experimental_admission(score, forward)
+            gate = experimental_admission(score, forward,learned_active=validated_learning(learning_evidence))
             reasons = list(gate['blocks'])
             if (q.get('bookmaker_count') or 0)<2: reasons.append('NEEDS_TWO_BOOKMAKERS')
             if p[choice]-p_market[choice]<.04: reasons.append('EDGE_BELOW_4PP')
@@ -521,7 +526,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
             if not reasons:
                 bank = state['bankroll_eur'] if state['created'] else 1000.0
                 requested = daily_entry_stake(bank,state['open_exposure_eur'],daily_papers)
-                stake = risk.reserve(e['id'], requested)
+                stake = risk.reserve(e['id'], requested,signal_key=prediction_signal(e['id'],market,pred['version'],choice))
                 if not stake: reasons.append('AGGREGATE_RISK_LIMIT')
             if previous and not stake:
                 for reason in reasons:blocks[reason]+=1
@@ -575,7 +580,8 @@ def run_research(root, events, football_models, now, risk, football_history=None
               'settlement_errors':settlement_errors, 'paper_only':True,
               'goal_markets':list(GOAL_MARKETS), 'sports':list(NA_SPORTS),
               'next_step':'Automatic timestamped forecasts and official result settlement on every lab run.',
-              'admission_policy':{'paper_entry_after_score_backtest':True, 'minimum_score_forecasts':200,
+              'admission_policy':{'paper_entry_after_score_backtest':False,
+                                   'paper_entry_requires_forward_market_validation':True,'minimum_score_forecasts':200,
                                    'minimum_score_holdout':50,
                                    'market_validation_minimum_independent_events':MIN_PROSPECTIVE_EVENTS,
                                    'minimum_forward_days':MIN_PROSPECTIVE_DAYS,

@@ -56,7 +56,7 @@ jobs:
         run: |
           git config user.name "sports-intelligence-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for path in data/score_history_v3.json data/football_statistics_v3.json data/market_research_v3.jsonl reports/market_research_latest.json; do
+          for path in data/decision_observations_v3.jsonl data/score_history_v3.json data/football_statistics_v3.json data/market_research_v3.jsonl reports/market_research_latest.json; do
             if [ -f "$path" ]; then
               git add "$path"
             fi
@@ -86,6 +86,7 @@ jobs:
             reports/strategy_lab_latest.json
             data/strategy_accounts_v3.json
             reports/market_research_latest.json
+            data/decision_observations_v3.jsonl
             data/score_history_v3.json
             data/market_research_v3.jsonl
           if-no-files-found: ignore

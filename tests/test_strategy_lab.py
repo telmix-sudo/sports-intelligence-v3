@@ -1,3 +1,4 @@
+from market_validation_fixtures import ApprovedOriginal
 """Tests for point-in-time integrity and independent virtual portfolios."""
 import datetime as dt
 import json
@@ -129,14 +130,14 @@ class StrategyLabTests(unittest.TestCase):
                                "bookmaker_count": 2,
                                "bookmakers": ["A", "A", "A"],
                                "best_book_updates": ["2026-10-18T09:30:00+00:00"] * 3}}
-            _, entries = open_accounts(root, models, [event], DAY)
+            _, entries = open_accounts(root, models, [event], DAY,admission=ApprovedOriginal())
             self.assertEqual(entries.get("ELO_STANDARD"), 1)
             ledger = root / "data" / "strategy_ledgers" / "elo_standard.jsonl"
             row = json.loads(ledger.read_text().splitlines()[0])
             self.assertEqual(row["stake_eur"], 1.0)
             self.assertEqual(row["forecast_utc"], DAY.isoformat())
             self.assertEqual(row["selection_index"], 0)
-            _, repeated = open_accounts(root, models, [event], DAY)
+            _, repeated = open_accounts(root, models, [event], DAY,admission=ApprovedOriginal())
             self.assertEqual(repeated, {})
             accounts, settled = build_accounts(
                 root, {"epl:101": {"outcome": 0}},
