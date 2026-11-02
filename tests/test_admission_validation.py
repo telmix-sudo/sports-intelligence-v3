@@ -16,6 +16,7 @@ from sports_intelligence.strategy_registry import ensure_registry
 from sports_intelligence.custom_strategies import ALL_NAMES
 from test_research_integration import EVENT, NOW, models, football_history, odds_rows
 from sports_intelligence.odds_provider import market_quotes_for_event
+from sports_intelligence.metrics import brier, log_loss
 
 UTC=dt.timezone.utc
 
@@ -129,6 +130,32 @@ class AdmissionGateTests(unittest.TestCase):
                 if r['kind']=='FORECAST':r['admission_blocks']=[];r['admission_evidence']['eligible_for_small_paper']=True
             path.write_text(''.join(json.dumps(r)+'\n' for r in rows))
             self.assertEqual(open_auxiliary_markets(root,[e],NOW,registry,PaperRiskBook(root)),{})
+
+    def test_real_forward_market_journal_enables_research_and_bounded_auxiliary(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);rows=[]
+            for i in range(100):
+                record=frozen_record(i,market='ASIAN_HOME_MINUS_0_5',model_version='MULTIMARKET-1.0.0-goals',
+                                     probabilities=[.98,.02],no_vig=[.2,.8],odds=[5.,1.25],
+                                     book_quote_updates_utc=frozen_record(i)['book_quote_updates_utc'][:2],stake_eur=0.)
+                record.update(kind='FORECAST',selection_index=0,market_no_vig=record.pop('no_vig'))
+                record.pop('status');record.pop('settlement_utc')
+                rows.extend([record,{'id':'SET-'+record['id'],'kind':'SETTLEMENT','forecast_id':record['id'],
+                    'event_id':record['event_id'],'status':'SETTLED','settlement_utc':frozen_record(i)['settlement_utc'],
+                    'outcome':0,'pnl_eur':0.,'brier':brier(record['probabilities'],0),
+                    'log_loss':log_loss(record['probabilities'],0),'market_brier':brier(record['market_no_vig'],0),
+                    'market_log_loss':log_loss(record['market_no_vig'],0)}])
+            path=root/'data/market_research_v3.jsonl';path.parent.mkdir(parents=True)
+            path.write_text(''.join(json.dumps(r)+'\n' for r in rows));frozen=path.read_bytes()
+            h=football_history();e=copy.deepcopy(EVENT);e['market_quotes']=market_quotes_for_event(e,odds_rows(),NOW)
+            report=run_research(root,[e],models(h),NOW,PaperRiskBook(root),football_history=h)
+            self.assertEqual(report['experimental_account']['positions'],1)
+            self.assertTrue(path.read_bytes().startswith(frozen))
+            registry=ensure_registry(root,NOW,ALL_NAMES)
+            added=open_auxiliary_markets(root,[e],NOW,registry,PaperRiskBook(root))
+            self.assertEqual(sum(added.values()),1)
+            self.assertNotIn('MARKET_DAILY_REFERENCE',added)
+            self.assertTrue(all(v<=2.5 for v in PaperRiskBook(root).summary()['shared_prediction_open_eur'].values()))
 
     def test_shared_signal_limit_survives_reload_and_never_changes_old_stakes(self):
         with tempfile.TemporaryDirectory() as tmp:
