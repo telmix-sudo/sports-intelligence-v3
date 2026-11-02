@@ -1,19 +1,21 @@
 {
-  "asof_utc": "2026-11-02T02:45:09.733643+00:00",
+  "asof_utc": "2026-11-02T06:09:32.926653+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-  "new_forecasts": 0,
+  "new_forecasts": 2,
   "new_settlements": 3,
-  "forecasts_total": 29,
-  "zero_stake_forecasts": 19,
+  "forecasts_total": 31,
+  "zero_stake_forecasts": 21,
   "open_observations": 7,
-  "settlements_total": 13,
+  "settlements_total": 16,
   "candidate_markets": 34,
   "closing_line_values_available": 0,
   "blocks": {
     "insufficient_football_home_away_history": 4,
-    "missing_timestamped_OVER_UNDER_2_5_odds": 1,
+    "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL": 2,
+    "EDGE_BELOW_4PP": 1,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 1,
     "missing_timestamped_BTTS_odds": 1,
-    "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 1,
+    "AGGREGATE_RISK_LIMIT": 1,
     "missing_timestamped_ML_odds": 18
   },
   "history": {
@@ -22,20 +24,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-        "sha256": "19798181bff80b1e6fd591c1e9f258278889bfdf7fa7f288d6ea09aac86f9f2e",
-        "captured_at_utc": "2026-11-02T02:45:09.733643+00:00",
+        "sha256": "1fdb5b391fbf43818cb6ac408a3dff0d7f87782409644191d6211815ba3e63b3",
+        "captured_at_utc": "2026-11-02T06:09:32.926653+00:00",
         "completed_games": 2
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-        "sha256": "66078013ed0ed74a6b58c381766a80f986c650a72665b710cb4e76866f7db5db",
-        "captured_at_utc": "2026-11-02T02:45:09.733643+00:00",
+        "sha256": "613e188e01f511fad08d586d38a0305a6fc62f0e9a617514f6580412db3cf900",
+        "captured_at_utc": "2026-11-02T06:09:32.926653+00:00",
         "completed_games": 11
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-        "sha256": "565f0b6839ab870b5f6ee4ca2cc832ee456ede1b879b9fb825153c61c7057374",
-        "captured_at_utc": "2026-11-02T02:45:09.733643+00:00",
+        "sha256": "bec8c4b9c07b69d782ec0f2fb590f2bdcfc2077ece77bcff0c8ef463d229c339",
+        "captured_at_utc": "2026-11-02T06:09:32.926653+00:00",
         "completed_games": 4
       }
     ],
@@ -359,8 +361,8 @@
   },
   "team_statistics_history": {
     "scoreboard_requests": 15,
-    "summary_requests": 7,
-    "events_with_statistics": 402,
+    "summary_requests": 35,
+    "events_with_statistics": 437,
     "failures": [],
     "missing_stats": 0
   },
@@ -375,7 +377,28 @@
       "shots",
       "throw_ins"
     ],
-    "priced_specs": {},
+    "priced_specs": {
+      "epl": {
+        "STAT_fc23d43b669eec22": {
+          "kind": "SPREAD",
+          "metric": "goals",
+          "line": 0.0,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL",
+          "provider_market_key": "spreads"
+        },
+        "STAT_e47da7ca64625890": {
+          "kind": "SPREAD",
+          "metric": "goals",
+          "line": -1.0,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL",
+          "provider_market_key": "spreads"
+        }
+      }
+    },
     "provider_limitations": {
       "offsides": "NO_CURRENT_PROVIDER_MARKET",
       "throw_ins": "NO_CURRENT_PROVIDER_MARKET",
@@ -425,11 +448,11 @@
   "experimental_account": {
     "created": true,
     "initial_bankroll_eur": 1000,
-    "bankroll_eur": 997.5,
-    "pnl_eur": -2.5,
+    "bankroll_eur": 995.0,
+    "pnl_eur": -5.0,
     "positions": 10,
-    "open_exposure_eur": 14.97,
-    "open": 9,
+    "open_exposure_eur": 12.47,
+    "open": 8,
     "note": "Separate experimental virtual account; original twelve wallets preserved."
   },
   "settlement_errors": [],
