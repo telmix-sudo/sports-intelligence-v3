@@ -8,6 +8,7 @@ import hashlib
 from collections import Counter
 from zoneinfo import ZoneInfo
 from .activity_policy import MIN_DAILY_ENTRIES,MAX_DAILY_ENTRIES,NEW_STAKE_FRACTION,MAX_ACCOUNT_EXPOSURE,MAX_MARKETS_PER_EVENT_ACCOUNT
+from .activity_policy import daily_entry_stake
 from .custom_strategies import ALL_NAMES,RULES,FREQUENCY_NAMES
 from .research_pipeline import read_journal
 from .odds_provider import parse_utc
@@ -26,7 +27,7 @@ def open_auxiliary_markets(root,events,now,registry,risk):
     event_ids={e['id'] for e in events if e['status']=='pre' and now<parse_utc(e['start_utc'])<=now+dt.timedelta(hours=48)}
     all_rows=read_journal(root)
     forecasts=[r for r in all_rows if r['kind']=='FORECAST' and r['event_id'] in event_ids and
-               now-parse_utc(r['forecast_utc'])<=dt.timedelta(hours=12)]
+               dt.timedelta(0)<=now-parse_utc(r['forecast_utc'])<=dt.timedelta(hours=12)]
     forecasts.sort(key=lambda r:-r['conservative_ev'])
     for f in forecasts:
         general_blocks=[r for r in f['admission_blocks'] if r not in ('DAILY_PAPER_LIMIT','EXPERIMENTAL_EVENT_ALREADY_TRADED','AGGREGATE_RISK_LIMIT')]
@@ -45,7 +46,7 @@ def open_auxiliary_markets(root,events,now,registry,risk):
             if (f['edge_pp']<edge_min or f['expected_value']<rule.get('min_ev',.02) or
                 f['model_inputs']['sample_min']<rule.get('min_team_matches',8) or
                 any((now-parse_utc(t)).total_seconds()>rule.get('max_quote_age_hours',8)*3600 for t in f['book_quote_updates_utc'])):continue
-            wanted=min(s['bank']*NEW_STAKE_FRACTION,max(0,s['bank']*MAX_ACCOUNT_EXPOSURE-s['exposure']))
+            wanted=daily_entry_stake(s['bank'],s['exposure'],s['today'])
             stake=risk.reserve(f['event_id'],wanted)
             if not stake:continue
             spec=f.get('market_spec')

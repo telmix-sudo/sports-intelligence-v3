@@ -97,7 +97,7 @@ class ResearchExecutionTests(unittest.TestCase):
             report=run_research(root,[event],models(history),NOW,PaperRiskBook(root),football_history=history)
             self.assertEqual(report['new_forecasts'],3)
             forecasts=[r for r in read_journal(root) if r['kind']=='FORECAST']
-            self.assertTrue(any(r['stake_eur']==2.5 for r in forecasts),'Eligible 0.25% virtual experiment should execute')
+            self.assertTrue(any(r['stake_eur']==1.0 for r in forecasts),'Qualified daily PAPER experiment should execute with EUR 1')
             self.assertEqual(sum(r['stake_eur']>0 for r in forecasts),1,'Correlated markets share one event risk position')
             frozen=copy.deepcopy(forecasts)
             report=run_research(root,[event],models(history),NOW,PaperRiskBook(root),football_history=history)
@@ -110,7 +110,7 @@ class ResearchExecutionTests(unittest.TestCase):
             self.assertEqual([r for r in read_journal(root) if r['kind']=='FORECAST'],frozen)
             self.assertEqual(reconcile(root,read_journal(root),[final],after)[0],0)
             state=paper_state(read_journal(root))
-            self.assertEqual(state["bankroll_eur"],1003.75)
+            self.assertEqual(state["bankroll_eur"],1001.5)
             self.assertEqual(PaperRiskBook(root).total_exposure,0)
             self.assertFalse((root/'data/strategy_ledgers').exists(),'Original portfolios are untouched')
 
