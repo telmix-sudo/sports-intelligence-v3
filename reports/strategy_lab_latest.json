@@ -1,19 +1,19 @@
 {
   "global_discovery": {
-    "asof_utc": "2026-11-02T09:02:35.610616+00:00",
+    "asof_utc": "2026-11-02T15:57:56.440331+00:00",
     "window_hours": 48,
     "modalities_in_catalog": 19,
     "modalities_queried": 18,
-    "modalities_with_future_events": 7,
-    "modalities_with_timestamped_odds": 4,
-    "future_events": 404,
+    "modalities_with_future_events": 10,
+    "modalities_with_timestamped_odds": 2,
+    "future_events": 402,
     "by_modality": {
       "american_football": {
         "catalog_sources": [
           "ESPN",
           "The Odds API"
         ],
-        "queries": 6,
+        "queries": 8,
         "query_errors": 0,
         "future_events": 3,
         "events_with_odds": 1,
@@ -39,12 +39,12 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 2,
+        "queries": 9,
         "query_errors": 0,
-        "future_events": 0,
+        "future_events": 1,
         "events_with_odds": 0,
         "events_with_model": 0,
-        "status": "QUERIED_NO_FUTURE_EVENTS",
+        "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
       },
       "basketball": {
@@ -52,10 +52,10 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 8,
+        "queries": 18,
         "query_errors": 0,
-        "future_events": 166,
-        "events_with_odds": 8,
+        "future_events": 167,
+        "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
@@ -66,10 +66,10 @@
         ],
         "queries": 1,
         "query_errors": 0,
-        "future_events": 0,
+        "future_events": 1,
         "events_with_odds": 0,
         "events_with_model": 0,
-        "status": "QUERIED_NO_FUTURE_EVENTS",
+        "status": "FUTURE_EVENTS_FOUND",
         "model_status": "NO_TRAINED_MODEL"
       },
       "cricket": {
@@ -77,12 +77,12 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 1,
+        "queries": 2,
         "query_errors": 0,
-        "future_events": 0,
+        "future_events": 1,
         "events_with_odds": 0,
         "events_with_model": 0,
-        "status": "QUERIED_NO_FUTURE_EVENTS",
+        "status": "FUTURE_EVENTS_FOUND",
         "model_status": "NO_TRAINED_MODEL"
       },
       "field_hockey": {
@@ -102,7 +102,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 5,
+        "queries": 12,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -127,28 +127,15 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 3,
+        "queries": 8,
         "query_errors": 0,
         "future_events": 16,
-        "events_with_odds": 4,
+        "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
       },
       "lacrosse": {
-        "catalog_sources": [
-          "ESPN",
-          "The Odds API"
-        ],
-        "queries": 1,
-        "query_errors": 0,
-        "future_events": 0,
-        "events_with_odds": 0,
-        "events_with_model": 0,
-        "status": "QUERIED_NO_FUTURE_EVENTS",
-        "model_status": "NO_TRAINED_MODEL"
-      },
-      "mma": {
         "catalog_sources": [
           "ESPN",
           "The Odds API"
@@ -161,12 +148,25 @@
         "status": "QUERIED_NO_FUTURE_EVENTS",
         "model_status": "NO_TRAINED_MODEL"
       },
+      "mma": {
+        "catalog_sources": [
+          "ESPN",
+          "The Odds API"
+        ],
+        "queries": 12,
+        "query_errors": 0,
+        "future_events": 0,
+        "events_with_odds": 0,
+        "events_with_model": 0,
+        "status": "QUERIED_NO_FUTURE_EVENTS",
+        "model_status": "NO_TRAINED_MODEL"
+      },
       "motorsport": {
         "catalog_sources": [
           "ESPN",
           "TheSportsDB free"
         ],
-        "queries": 4,
+        "queries": 6,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -192,7 +192,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 1,
+        "queries": 10,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -206,10 +206,10 @@
           "The Odds API",
           "TheSportsDB free"
         ],
-        "queries": 132,
+        "queries": 82,
         "query_errors": 0,
-        "future_events": 181,
-        "events_with_odds": 3,
+        "future_events": 183,
+        "events_with_odds": 1,
         "events_with_model": 1,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
@@ -221,7 +221,7 @@
         ],
         "queries": 2,
         "query_errors": 0,
-        "future_events": 24,
+        "future_events": 16,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -277,72 +277,72 @@
         "competitions_catalogued": 359,
         "competitions_queried": 96,
         "competitions_deferred": 263,
-        "requests": 279,
+        "requests": 288,
         "errors": [],
         "queries": [
           {
             "family": "australian_football",
             "competition": "afl",
             "events": 0,
-            "status": "CACHED"
+            "status": "OK"
           },
           {
             "family": "baseball",
-            "competition": "mlb",
+            "competition": "llb",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "basketball",
-            "competition": "nba",
-            "events": 15,
+            "competition": "mens-olympics-basketball",
+            "events": 0,
             "status": "OK"
           },
           {
             "family": "field_hockey",
             "competition": "womens-college-field-hockey",
             "events": 6,
-            "status": "CACHED"
+            "status": "OK"
           },
           {
             "family": "american_football",
-            "competition": "nfl",
-            "events": 1,
+            "competition": "ufl",
+            "events": 0,
             "status": "OK"
           },
           {
             "family": "golf",
-            "competition": "champions-tour",
+            "competition": "lpga",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "ice_hockey",
-            "competition": "nhl",
-            "events": 15,
+            "competition": "olympics-mens-ice-hockey",
+            "events": 0,
             "status": "OK"
           },
           {
             "family": "lacrosse",
-            "competition": "mens-college-lacrosse",
+            "competition": "womens-college-lacrosse",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "bang-fighting",
+            "competition": "banni-fight",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "motorsport",
-            "competition": "f1",
+            "competition": "nascar-secondary",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "rugby_union",
-            "competition": "164205",
+            "competition": "2009",
             "events": 0,
             "status": "OK"
           },
@@ -350,509 +350,509 @@
             "family": "rugby_league",
             "competition": "3",
             "events": 0,
-            "status": "CACHED"
+            "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "fra.2",
-            "events": 2,
+            "competition": "eng.1",
+            "events": 1,
             "status": "OK"
           },
           {
             "family": "tennis",
-            "competition": "wta",
+            "competition": "atp",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "volleyball",
-            "competition": "womens-college-volleyball",
-            "events": 8,
+            "competition": "mens-college-volleyball",
+            "events": 0,
             "status": "OK"
           },
           {
             "family": "water_polo",
-            "competition": "womens-college-water-polo",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "fra.coupe_de_france",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "fra.super_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "fra.w.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "friendly.emirates_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ger.2",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ger.2.promotion.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ger.dfb_pokal",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ger.playoff.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ger.super_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "global.arnold.clark_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "global.club_challenge",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "global.finalissima",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "global.gulf_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "global.pinatar_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "global.u20.intercontinental_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "global.w.finalissima",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "gre.1",
-            "events": 2,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "gua.1",
-            "events": 2,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "hon.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ind.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ind.2",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ita.2",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ita.coppa_italia",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ita.super_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "jpn.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "jpn.world_challenge",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ksa.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ksa.kings.cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "mex.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "mex.2",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "mex.campeon",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "mex.w.1",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ned.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ned.2",
-            "events": 4,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ned.3.promotion.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ned.cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ned.playoff.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ned.supercup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ned.w.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ned.w.knvb_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "nonfifa",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "nor.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "nor.1.promotion.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "par.1",
-            "events": 2,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "par.1.supercopa",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "per.1",
-            "events": 5,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "por.1",
-            "events": 2,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "por.1.promotion.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "por.taca.portugal",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "rsa.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "rus.1",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "rus.1.promotion.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "sco.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "sco.1.promotion.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "sco.2",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "sco.2.promotion.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "sco.challenge",
-            "events": 16,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "sco.cis",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "sco.tennents",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "sco.tennents_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "slv.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "swe.1",
-            "events": 3,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "swe.1.promotion.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "tur.1",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.champions",
-            "events": 9,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.champions_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.euro",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.euro.u19",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.euro_u21",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.euro_u21_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.europa",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.europa.conf",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.europa.conf_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.europa_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.euroq",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.nations",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.super_cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.w.europa",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.w.nations",
+            "competition": "mens-college-water-polo",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "baseball",
-            "competition": "dominican-winter-league",
+            "competition": "lls",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "nba-development",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "american_football",
+            "competition": "xfl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "golf",
+            "competition": "mens-olympics-golf",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "ice_hockey",
+            "competition": "olympics-womens-ice-hockey",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "banzay",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "motorsport",
+            "competition": "nascar-truck",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "236461",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "esp.1",
+            "events": 1,
+            "status": "OK"
+          },
+          {
+            "family": "baseball",
+            "competition": "mexican-winter-league",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "nba-summer-california",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "golf",
+            "competition": "ntw",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "ice_hockey",
+            "competition": "womens-college-hockey",
+            "events": 1,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "barracao",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "242041",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "fra.1",
+            "events": 1,
+            "status": "OK"
+          },
+          {
+            "family": "baseball",
+            "competition": "olympics-baseball",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "nba-summer-golden-state",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "golf",
+            "competition": "pga",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "battlezone",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "244293",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ger.1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "baseball",
+            "competition": "puerto-rican-winter-league",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "nba-summer-las-vegas",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "golf",
+            "competition": "tgl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "bellator",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "267979",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ita.1",
+            "events": 2,
+            "status": "OK"
+          },
+          {
+            "family": "baseball",
+            "competition": "venezuelan-winter-league",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "nba-summer-orlando",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "golf",
+            "competition": "womens-olympics-golf",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "benevides",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "268565",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "afc.asian.cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "baseball",
+            "competition": "world-baseball-classic",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "nba-summer-sacramento",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "golf",
+            "competition": "wtgl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "big-fight",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "270555",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "afc.champions",
+            "events": 15,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "nba-summer-utah",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "blackout",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "270557",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "afc.champions_qual",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "nbl",
+            "events": 1,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "bosnia",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "270559",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "afc.cup",
+            "events": 5,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "wnba",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "boxe",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "afc.cup_qual",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "afc.cupq",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "afc.saff.championship",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "afc.w.asian.cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.wchampions",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.wchampions_qual",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.weuro",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uru.1",
+            "events": 1,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uru.2",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.ncaa.m.1",
+            "events": 21,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.ncaa.w.1",
+            "events": 5,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.nwsl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.nwsl.cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.open",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.usl.1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.usl.l1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.usl.l1.cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "usa.w.usl.1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ven.1",
+            "events": 2,
+            "status": "OK"
+          },
+          {
+            "family": "baseball",
+            "competition": "caribbean-series",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "fiba",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "american_football",
+            "competition": "cfl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "golf",
+            "competition": "eur",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "ice_hockey",
+            "competition": "hockey-world-cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "lacrosse",
+            "competition": "nll",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "absolute",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "motorsport",
+            "competition": "irl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "17567",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "aff.championship",
             "events": 0,
             "status": "OK"
           }
@@ -863,7 +863,7 @@
       {
         "provider": "The Odds API",
         "usage_credits": 0,
-        "requests": 0,
+        "requests": 78,
         "catalog_families": [
           "american_football",
           "australian_football",
@@ -882,7 +882,7 @@
           "tennis"
         ],
         "competitions_catalogued": 183,
-        "competitions_queried": 73,
+        "competitions_queried": 77,
         "queries": [
           {
             "family": "american_football",
@@ -927,6 +927,12 @@
             "status": "OK"
           },
           {
+            "family": "baseball",
+            "competition": "KBO",
+            "events": 1,
+            "status": "OK"
+          },
+          {
             "family": "basketball",
             "competition": "Basketball Euroleague",
             "events": 0,
@@ -947,13 +953,13 @@
           {
             "family": "basketball",
             "competition": "NBL",
-            "events": 0,
+            "events": 1,
             "status": "OK"
           },
           {
             "family": "basketball",
             "competition": "NCAAB",
-            "events": 118,
+            "events": 116,
             "status": "OK"
           },
           {
@@ -965,13 +971,19 @@
           {
             "family": "basketball",
             "competition": "WNCAAB",
-            "events": 2,
+            "events": 4,
             "status": "OK"
           },
           {
             "family": "boxing",
             "competition": "Boxing",
-            "events": 0,
+            "events": 1,
+            "status": "OK"
+          },
+          {
+            "family": "cricket",
+            "competition": "One Day Internationals",
+            "events": 1,
             "status": "OK"
           },
           {
@@ -1001,6 +1013,18 @@
           {
             "family": "golf",
             "competition": "US Open Winner",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "ice_hockey",
+            "competition": "AHL",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "ice_hockey",
+            "competition": "Liiga",
             "events": 0,
             "status": "OK"
           },
@@ -1229,7 +1253,7 @@
           {
             "family": "soccer",
             "competition": "Premier League - Russia",
-            "events": 1,
+            "events": 0,
             "status": "OK"
           },
           {
@@ -1253,7 +1277,7 @@
           {
             "family": "soccer",
             "competition": "La Liga 2 - Spain",
-            "events": 4,
+            "events": 2,
             "status": "OK"
           },
           {
@@ -1301,7 +1325,7 @@
           {
             "family": "soccer",
             "competition": "UEFA Europa League",
-            "events": 0,
+            "events": 1,
             "status": "OK"
           },
           {
@@ -1319,7 +1343,7 @@
           {
             "family": "tennis",
             "competition": "ATP Paris Masters",
-            "events": 24,
+            "events": 16,
             "status": "OK"
           }
         ],
@@ -1399,7 +1423,7 @@
             "key": "baseball_kbo",
             "group": "Baseball",
             "title": "KBO",
-            "active": false,
+            "active": true,
             "has_outrights": false
           },
           {
@@ -1588,7 +1612,7 @@
             "key": "cricket_odi",
             "group": "Cricket",
             "title": "One Day Internationals",
-            "active": false,
+            "active": true,
             "has_outrights": false
           },
           {
@@ -1679,14 +1703,14 @@
             "key": "icehockey_ahl",
             "group": "Ice Hockey",
             "title": "AHL",
-            "active": false,
+            "active": true,
             "has_outrights": false
           },
           {
             "key": "icehockey_liiga",
             "group": "Ice Hockey",
             "title": "Liiga",
-            "active": false,
+            "active": true,
             "has_outrights": false
           },
           {
@@ -2615,7 +2639,7 @@
           "soccer",
           "motorsport"
         ],
-        "requests": 0,
+        "requests": 6,
         "queries": [
           {
             "family": "soccer",
@@ -2667,21 +2691,17 @@
     "odds_allocation": {
       "configured": true,
       "status": "OK",
-      "calls_this_run": 1,
+      "calls_this_run": 0,
       "errors": [],
       "cached_sports": [
         "epl",
-        "ligue_1",
-        "nba",
-        "nfl",
-        "nhl",
-        "serie_a"
+        "nfl"
       ],
-      "quotes_matched": 16,
+      "quotes_matched": 2,
       "allocation": "UNPRICED_MODELLED_EVENTS_THEN_DIVERSITY_4_CREDITS_PER_6H_SLOT",
       "price_lookahead_hours": 48,
       "maximum_daily_credits": 16,
-      "expired_cached_quotes_removed": 0,
+      "expired_cached_quotes_removed": 18,
       "calls_today": 9,
       "credits_today": 13,
       "credits_remaining": 475,
@@ -2692,9 +2712,9 @@
         "soccer",
         "american_football"
       ],
-      "eligible_competitions": 31,
+      "eligible_competitions": 35,
       "goal_market_quotes": 40,
-      "distinct_modelled_events_with_prices": 16,
+      "distinct_modelled_events_with_prices": 2,
       "minimum_priced_event_target": 5,
       "event_market_credits_today": 4,
       "reserved_extra_market_credits": 4,
@@ -2814,7 +2834,7 @@
     },
     "modalities_with_model_forecasts": 1
   },
-  "asof_utc": "2026-11-02T11:41:40.390142+00:00",
+  "asof_utc": "2026-11-02T15:58:30.191607+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-02",
@@ -2984,13 +3004,13 @@
       "serie_a:401874963": 15
     },
     "limit_rejections": {
-      "invalid_stake": 30,
-      "aggregate_event_or_portfolio_limit": 10
+      "invalid_stake": 26,
+      "aggregate_event_or_portfolio_limit": 8
     },
     "existing_positions_never_retroactively_changed": true
   },
   "market_research": {
-    "asof_utc": "2026-11-02T11:41:40.390142+00:00",
+    "asof_utc": "2026-11-02T15:58:30.191607+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
     "new_forecasts": 0,
     "new_settlements": 0,
@@ -3002,22 +3022,22 @@
     "closing_line_values_available": 0,
     "blocks": {
       "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 4,
-      "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 6,
-      "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 6,
-      "DAILY_PAPER_LIMIT": 37,
+      "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 5,
+      "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 5,
+      "DAILY_PAPER_LIMIT": 33,
       "EXPERIMENTAL_EVENT_ALREADY_TRADED": 30,
       "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 3,
       "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 10,
       "NEEDS_50_HOLDOUT_FORECASTS": 10,
-      "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 6,
+      "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 3,
       "NEEDS_TWO_BOOKMAKERS": 19,
-      "CONSERVATIVE_EV_BELOW_1_PERCENT": 27,
-      "EDGE_BELOW_4PP": 18,
+      "EDGE_BELOW_4PP": 15,
+      "CONSERVATIVE_EV_BELOW_1_PERCENT": 23,
       "missing_timestamped_BTTS_odds": 3,
       "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL": 2,
       "missing_timestamped_OVER_UNDER_2_5_odds": 1,
       "insufficient_football_home_away_history": 1,
-      "missing_timestamped_ML_odds": 18
+      "missing_timestamped_ML_odds": 30
     },
     "history": {
       "requests": 3,
@@ -3025,20 +3045,20 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-          "sha256": "fd130352f04107e1508fc287781a4ec78c862bb3a6efd64f87d95bf332d3670f",
-          "captured_at_utc": "2026-11-02T11:41:40.390142+00:00",
+          "sha256": "d5b9339d5bf04127fcb69902edcb809bfb7f10ff23dd9830e9701ffa74017510",
+          "captured_at_utc": "2026-11-02T15:58:30.191607+00:00",
           "completed_games": 2
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-          "sha256": "a7de7530d5eb3e4cee56882a4282d5ef21959bf7d85c455a1bb5084e57967f54",
-          "captured_at_utc": "2026-11-02T11:41:40.390142+00:00",
+          "sha256": "7959473e3f9dea5d4fcc490b535edd8507474e028d12cd0edfcab0e7753352c6",
+          "captured_at_utc": "2026-11-02T15:58:30.191607+00:00",
           "completed_games": 11
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-          "sha256": "2431d9476dc0f887bcf0dda82b6530dec7c1684a916f8227e099779e0721aeff",
-          "captured_at_utc": "2026-11-02T11:41:40.390142+00:00",
+          "sha256": "d4b17a7d2f3bcb1dda954936fe38253ff0b1bb5a62a31bc931654b775d4e5e76",
+          "captured_at_utc": "2026-11-02T15:58:30.191607+00:00",
           "completed_games": 4
         }
       ],
@@ -3362,17 +3382,17 @@
     },
     "team_statistics_history": {
       "scoreboard_requests": 32,
-      "summary_requests": 95,
-      "events_with_statistics": 906,
+      "summary_requests": 82,
+      "events_with_statistics": 988,
       "failures": [],
       "missing_stats": 0,
       "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
       "events_by_sport": {
-        "ligue_1": 204,
-        "la_liga": 213,
+        "ligue_1": 227,
+        "la_liga": 230,
         "bundesliga": 72,
-        "serie_a": 214,
-        "epl": 203
+        "serie_a": 230,
+        "epl": 229
       }
     },
     "additional_market_backtests": {
@@ -3564,155 +3584,155 @@
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "serie_a|STAT_119b17a1a4b3f346": {
-        "n": 27,
-        "brier": 0.4973337494834103,
-        "log_loss": 0.6916405362682977,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-29",
-          "n": 5,
-          "brier": 0.49701471229080135,
-          "log_loss": 0.6914371029055459,
-          "ece": 0.27958508739408494
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_0a1855c839d9869d": {
-        "n": 28,
-        "brier": 0.49851479745967847,
-        "log_loss": 0.6976064759433012,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-29",
-          "n": 6,
-          "brier": 0.36655690650542533,
-          "log_loss": 0.552722353939759,
-          "ece": 0.17852587444191376
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_d211ca82b378b66a": {
-        "n": 32,
-        "brier": 0.503618445806604,
-        "log_loss": 0.6981075483467801,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-29",
-          "n": 6,
-          "brier": 0.4355528528670051,
-          "log_loss": 0.6268012831174363,
-          "ece": 0.29906623856821174
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_5be39236948e8dee": {
-        "n": 32,
-        "brier": 0.4667596811928394,
-        "log_loss": 0.6601018950857249,
-        "uniform_brier": 0.5,
-        "uniform_log_loss": 0.6931471805599453,
-        "market_brier": null,
-        "roi": null,
-        "holdout": {
-          "from": "2026-10-29",
-          "n": 6,
-          "brier": 0.5314231009737896,
-          "log_loss": 0.7281160676451629,
-          "ece": 0.22342337271939194
-        },
-        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-      },
-      "serie_a|STAT_fedf6836cdc9327c": {
-        "n": 30,
-        "brier": 0.4352423905454324,
-        "log_loss": 0.6275607520130227,
+        "n": 36,
+        "brier": 0.4855677249871843,
+        "log_loss": 0.6793133788860947,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
           "from": "2026-10-28",
-          "n": 8,
-          "brier": 0.48828909374874213,
-          "log_loss": 0.6857871978010014,
-          "ece": 0.40183306479077835
+          "n": 7,
+          "brier": 0.45656978289226136,
+          "log_loss": 0.6499219067455585,
+          "ece": 0.2095641143809196
+        },
+        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+      },
+      "serie_a|STAT_d211ca82b378b66a": {
+        "n": 42,
+        "brier": 0.4868719081414144,
+        "log_loss": 0.6805884106502644,
+        "uniform_brier": 0.5,
+        "uniform_log_loss": 0.6931471805599453,
+        "market_brier": null,
+        "roi": null,
+        "holdout": {
+          "from": "2026-10-28",
+          "n": 9,
+          "brier": 0.413623676736909,
+          "log_loss": 0.6051884539994457,
+          "ece": 0.21356829419290613
+        },
+        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+      },
+      "serie_a|STAT_5be39236948e8dee": {
+        "n": 42,
+        "brier": 0.4695693611298929,
+        "log_loss": 0.662725659617711,
+        "uniform_brier": 0.5,
+        "uniform_log_loss": 0.6931471805599453,
+        "market_brier": null,
+        "roi": null,
+        "holdout": {
+          "from": "2026-10-28",
+          "n": 9,
+          "brier": 0.4838174772565255,
+          "log_loss": 0.6779914438689442,
+          "ece": 0.12120815962279179
+        },
+        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+      },
+      "serie_a|STAT_fedf6836cdc9327c": {
+        "n": 39,
+        "brier": 0.4457396881143399,
+        "log_loss": 0.6380205059004531,
+        "uniform_brier": 0.5,
+        "uniform_log_loss": 0.6931471805599453,
+        "market_brier": null,
+        "roi": null,
+        "holdout": {
+          "from": "2026-10-27",
+          "n": 11,
+          "brier": 0.5288556300665351,
+          "log_loss": 0.7255393183100414,
+          "ece": 0.24955298143558569
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "serie_a|STAT_83f28bc6acb854e0": {
-        "n": 32,
-        "brier": 0.3101222030582739,
-        "log_loss": 0.49819661247754804,
+        "n": 42,
+        "brier": 0.31050062687852276,
+        "log_loss": 0.49473526397729184,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2026-10-29",
-          "n": 6,
-          "brier": 0.2933554205311616,
-          "log_loss": 0.47049081842225654,
-          "ece": 0.1446803073270857
+          "from": "2026-10-28",
+          "n": 9,
+          "brier": 0.3295917734622843,
+          "log_loss": 0.5047356875964714,
+          "ece": 0.026594161585607123
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "serie_a|STAT_385053163a87bd62": {
-        "n": 32,
-        "brier": 0.4720811220148938,
-        "log_loss": 0.6718760941346712,
+        "n": 42,
+        "brier": 0.4512924947396101,
+        "log_loss": 0.6469016168975228,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2026-10-29",
-          "n": 6,
-          "brier": 0.3331741748874983,
-          "log_loss": 0.5166676046450889,
-          "ece": 0.13429550602756624
+          "from": "2026-10-28",
+          "n": 9,
+          "brier": 0.3390925623741049,
+          "log_loss": 0.5219458974532467,
+          "ece": 0.08568446320534101
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "serie_a|STAT_f2fc55e247f090d2": {
-        "n": 32,
-        "brier": 0.4207796628192979,
-        "log_loss": 0.611824555692112,
+        "n": 42,
+        "brier": 0.43399271730077416,
+        "log_loss": 0.6254278250519406,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2026-10-29",
-          "n": 6,
-          "brier": 0.5669612975549755,
-          "log_loss": 0.7756968203071536,
-          "ece": 0.1761671136643846
+          "from": "2026-10-28",
+          "n": 9,
+          "brier": 0.5020972767148921,
+          "log_loss": 0.7001500386485572,
+          "ece": 0.12912557163848432
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
       "serie_a|STAT_0625f0a9fd5832ad": {
-        "n": 32,
-        "brier": 0.34555052386356816,
-        "log_loss": 0.531928331412448,
+        "n": 42,
+        "brier": 0.368728686350076,
+        "log_loss": 0.5580746166668135,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
-          "from": "2026-10-29",
-          "n": 6,
-          "brier": 0.5094636411795085,
-          "log_loss": 0.7430203788335508,
-          "ece": 0.11903448895035412
+          "from": "2026-10-28",
+          "n": 9,
+          "brier": 0.47891583038586966,
+          "log_loss": 0.6913458525165248,
+          "ece": 0.1174730078058015
+        },
+        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+      },
+      "serie_a|STAT_0a1855c839d9869d": {
+        "n": 37,
+        "brier": 0.4730108107578042,
+        "log_loss": 0.6685959014257119,
+        "uniform_brier": 0.5,
+        "uniform_log_loss": 0.6931471805599453,
+        "market_brier": null,
+        "roi": null,
+        "holdout": {
+          "from": "2026-10-28",
+          "n": 9,
+          "brier": 0.35616090019299457,
+          "log_loss": 0.5424320060958949,
+          "ece": 0.14614874998686014
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
@@ -4565,7 +4585,7 @@
     "paper_only": true
   },
   "market_activity": {
-    "asof_utc": "2026-11-02T11:41:40.390142+00:00",
+    "asof_utc": "2026-11-02T15:58:30.191607+00:00",
     "by_market": {
       "1X2": {
         "label": "Resultado 1X2",
@@ -4575,7 +4595,7 @@
         "papers_voided": 0,
         "papers_today": 4,
         "observations": 0,
-        "priced_event_count": 3,
+        "priced_event_count": 1,
         "status": "PAPER_RECORDED"
       },
       "ML": {
@@ -4586,7 +4606,7 @@
         "papers_voided": 0,
         "papers_today": 101,
         "observations": 19,
-        "priced_event_count": 13,
+        "priced_event_count": 1,
         "status": "PAPER_RECORDED"
       },
       "GOALS_TOTAL": {
@@ -5879,9 +5899,7 @@
   "new_paper_entries": {},
   "entry_diagnostics": {
     "rejections": {
-      "missing_timestamped_odds": 16,
-      "insufficient_edge_or_ev": 4,
-      "too_small_stake": 1
+      "missing_timestamped_odds": 24
     },
     "new_entries": 0,
     "unit": "strategy-event evaluations"
