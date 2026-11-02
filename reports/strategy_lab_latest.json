@@ -2834,7 +2834,7 @@
     },
     "modalities_with_model_forecasts": 1
   },
-  "asof_utc": "2026-11-02T20:53:43.260794+00:00",
+  "asof_utc": "2026-11-02T22:36:14.475760+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-02",
@@ -2972,10 +2972,8 @@
     "max_event_open_eur": 36.0,
     "max_total_open_eur": 240.0,
     "minimum_new_stake_eur": 1.0,
-    "total_open_eur": 205.45,
+    "total_open_eur": 157.45,
     "event_exposure_eur": {
-      "epl:401878762": 42.1,
-      "ligue_1:401876419": 5.9,
       "nba:401909907": 13.01,
       "nba:401909908": 14.54,
       "nba:401909910": 29.65,
@@ -2988,8 +2986,6 @@
       "nhl:401892630": 24.63
     },
     "event_position_counts": {
-      "epl:401878762": 10,
-      "ligue_1:401876419": 3,
       "nba:401909907": 13,
       "nba:401909908": 13,
       "nba:401909910": 13,
@@ -3004,15 +3000,2971 @@
     "limit_rejections": {},
     "existing_positions_never_retroactively_changed": true
   },
+  "historical_learning": {
+    "version": "HISTORICAL-CALIBRATION-1.0",
+    "cutoff_exclusive_utc_date": "2026-11-02",
+    "wallets": {
+      "ELO_STANDARD": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34305,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "ELO_DYNAMIC": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34306,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "POISSON_SHRINK": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34306,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "DIXON_COLES_LOW": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34305,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "ELO_POISSON_BLEND": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34308,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "CONSENSUS_SHRUNK": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34308,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "DISAGREEMENT_VETO": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34301,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "MARKET_ANCHORED": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 20,
+        "active_streams": 0,
+        "history_samples": 25881,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "MARKET_DAILY_REFERENCE": {
+        "status": "CONTROL_SHADOW_ONLY",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 25891,
+        "primary_is_control": true,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "FREQ_SELECTIVE_1_3": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34308,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "FREQ_BALANCED_3_5": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34308,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "FREQ_BROAD_5_10": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 23,
+        "active_streams": 0,
+        "history_samples": 34308,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      },
+      "EXPERIMENTAL_MULTI_MARKET": {
+        "status": "LEARNING_IN_SHADOW",
+        "streams": 18,
+        "active_streams": 0,
+        "history_samples": 25874,
+        "primary_is_control": false,
+        "note": "Shared forecasts are counted once per event/model, not once per wallet."
+      }
+    },
+    "streams": {
+      "CONSENSUS_SHRUNK|bundesliga|1X2": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1430,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0197590739277447,
+            1.004107181122848,
+            0.9673470687863212
+          ],
+          "strength": 0.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 216,
+            "brier": 0.5852014265999227,
+            "log_loss": 0.9842626581226424
+          },
+          "candidate": {
+            "n": 216,
+            "brier": 0.5818440003623648,
+            "log_loss": 0.979894787105196
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 787,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-28"
+          },
+          "tuning": {
+            "n": 288,
+            "first_date": "2024-05-03",
+            "last_date": "2025-04-26"
+          },
+          "calibration": {
+            "n": 139,
+            "first_date": "2025-04-27",
+            "last_date": "2025-12-12"
+          },
+          "final_evaluation": {
+            "n": 216,
+            "first_date": "2025-12-13",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "ae9f50b0614bc1770eb2edf90bca2fdc543b90a38932a1ed372e752f6006b85b",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "CONSENSUS_SHRUNK|epl|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1816,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0541647032235848,
+            0.8987682459596812,
+            1.0059958136759068
+          ],
+          "strength": 0.5,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 262,
+            "brier": 0.6445907217731403,
+            "log_loss": 1.0634744470768358
+          },
+          "candidate": {
+            "n": 262,
+            "brier": 0.6603636435497556,
+            "log_loss": 1.085846335103966
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 968,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-20"
+          },
+          "tuning": {
+            "n": 386,
+            "first_date": "2024-04-21",
+            "last_date": "2025-05-01"
+          },
+          "calibration": {
+            "n": 200,
+            "first_date": "2025-05-02",
+            "last_date": "2025-12-20"
+          },
+          "final_evaluation": {
+            "n": 262,
+            "first_date": "2025-12-21",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "0bbb50cf251a6221c6d1ebdf81becc26fa32199160a3f0bd9d1761ebff807ffe",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "CONSENSUS_SHRUNK|la_liga|1X2": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1811,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0441264032468969,
+            1.0139234510789732,
+            0.9237638910537219
+          ],
+          "strength": 0.5,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 257,
+            "brier": 0.5915937194666824,
+            "log_loss": 0.9954786855837019
+          },
+          "candidate": {
+            "n": 257,
+            "brier": 0.5875006760671435,
+            "log_loss": 0.9897770931961462
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1009,
+            "first_date": "2021-10-16",
+            "last_date": "2024-05-18"
+          },
+          "tuning": {
+            "n": 367,
+            "first_date": "2024-05-19",
+            "last_date": "2025-05-14"
+          },
+          "calibration": {
+            "n": 178,
+            "first_date": "2025-05-15",
+            "last_date": "2026-01-02"
+          },
+          "final_evaluation": {
+            "n": 257,
+            "first_date": "2026-01-03",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "000c872f3ef625a5ce7861b4b11b13cdb79dd8ac98abe28eb145e21b208182f7",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "CONSENSUS_SHRUNK|ligue_1|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1570,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9615518130108539,
+            1.0010584746827227,
+            1.0531624967849857
+          ],
+          "strength": 0.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 213,
+            "brier": 0.6079563956561154,
+            "log_loss": 1.0149477826511846
+          },
+          "candidate": {
+            "n": 213,
+            "brier": 0.608447229169247,
+            "log_loss": 1.0158615316083561
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 897,
+            "first_date": "2021-10-01",
+            "last_date": "2024-04-27"
+          },
+          "tuning": {
+            "n": 303,
+            "first_date": "2024-04-28",
+            "last_date": "2025-04-20"
+          },
+          "calibration": {
+            "n": 157,
+            "first_date": "2025-04-22",
+            "last_date": "2025-12-05"
+          },
+          "final_evaluation": {
+            "n": 213,
+            "first_date": "2025-12-06",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "d24425b0f6dc877262b8d7fa959d465671f11d3f42b50c0086168a94ecc78aa6",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "CONSENSUS_SHRUNK|serie_a|1X2": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1807,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9615318061385506,
+            1.0800773111194566,
+            0.9877036065997736
+          ],
+          "strength": 1.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 258,
+            "brier": 0.5817484102818263,
+            "log_loss": 0.9785347797341372
+          },
+          "candidate": {
+            "n": 258,
+            "brier": 0.5785826718207243,
+            "log_loss": 0.9743574043430945
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1017,
+            "first_date": "2021-10-22",
+            "last_date": "2024-05-19"
+          },
+          "tuning": {
+            "n": 338,
+            "first_date": "2024-05-20",
+            "last_date": "2025-04-28"
+          },
+          "calibration": {
+            "n": 194,
+            "first_date": "2025-05-02",
+            "last_date": "2026-01-03"
+          },
+          "final_evaluation": {
+            "n": 258,
+            "first_date": "2026-01-04",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "b1ba4837b0a326ca2fb0ffeb8d46ec37cc8998757460037bb5c586ef1bf5316f",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DISAGREEMENT_VETO|bundesliga|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1430,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.007525421622175,
+            1.0308001747459026,
+            0.9645049749072235
+          ],
+          "strength": 0.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 216,
+            "brier": 0.5824516808525778,
+            "log_loss": 0.9802802848734218
+          },
+          "candidate": {
+            "n": 216,
+            "brier": 0.5819237556414525,
+            "log_loss": 0.9808037365977824
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 787,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-28"
+          },
+          "tuning": {
+            "n": 288,
+            "first_date": "2024-05-03",
+            "last_date": "2025-04-26"
+          },
+          "calibration": {
+            "n": 139,
+            "first_date": "2025-04-27",
+            "last_date": "2025-12-12"
+          },
+          "final_evaluation": {
+            "n": 216,
+            "first_date": "2025-12-13",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "9fecff3a2b85537ae7a41a3a5b9dfe4a5f62b7633f1bf2b9260a703c47b4c97b",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DISAGREEMENT_VETO|epl|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1810,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0489268796227265,
+            0.9215162031313989,
+            0.9930283607233874
+          ],
+          "strength": 0.25,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 264,
+            "brier": 0.649729296988774,
+            "log_loss": 1.0686222390843172
+          },
+          "candidate": {
+            "n": 264,
+            "brier": 0.6513178149836999,
+            "log_loss": 1.0710895175766535
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 965,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-15"
+          },
+          "tuning": {
+            "n": 388,
+            "first_date": "2024-04-20",
+            "last_date": "2025-04-27"
+          },
+          "calibration": {
+            "n": 193,
+            "first_date": "2025-05-01",
+            "last_date": "2025-12-15"
+          },
+          "final_evaluation": {
+            "n": 264,
+            "first_date": "2025-12-20",
+            "last_date": "2026-10-31"
+          }
+        },
+        "model_sha256": "f7c20a0150fdd41b39161b9374cff3e215ec3bd8976af54b480cf6ced73d3088",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DISAGREEMENT_VETO|la_liga|1X2": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1811,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0370046904106118,
+            1.0284032841352297,
+            0.9215909721428537
+          ],
+          "strength": 0.5,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 257,
+            "brier": 0.5903106811563682,
+            "log_loss": 0.9951224209322495
+          },
+          "candidate": {
+            "n": 257,
+            "brier": 0.5892694269175419,
+            "log_loss": 0.9948451131737096
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1009,
+            "first_date": "2021-10-16",
+            "last_date": "2024-05-18"
+          },
+          "tuning": {
+            "n": 367,
+            "first_date": "2024-05-19",
+            "last_date": "2025-05-14"
+          },
+          "calibration": {
+            "n": 178,
+            "first_date": "2025-05-15",
+            "last_date": "2026-01-02"
+          },
+          "final_evaluation": {
+            "n": 257,
+            "first_date": "2026-01-03",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "4c4c59efbfce08ace8f1135e4d071f0dbf29a359ec25d5cd4b6b9de4b04efe35",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DISAGREEMENT_VETO|ligue_1|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1569,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9559718936806255,
+            1.0201784290287026,
+            1.0454875631203664
+          ],
+          "strength": 0.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 214,
+            "brier": 0.6073348605075591,
+            "log_loss": 1.0139393768404772
+          },
+          "candidate": {
+            "n": 214,
+            "brier": 0.6073348605075591,
+            "log_loss": 1.0139393768404772
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 897,
+            "first_date": "2021-10-01",
+            "last_date": "2024-04-27"
+          },
+          "tuning": {
+            "n": 298,
+            "first_date": "2024-04-28",
+            "last_date": "2025-04-19"
+          },
+          "calibration": {
+            "n": 160,
+            "first_date": "2025-04-20",
+            "last_date": "2025-11-30"
+          },
+          "final_evaluation": {
+            "n": 214,
+            "first_date": "2025-12-05",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "c7f926c64d26d278863b657ebc676b25da6a5595cf07a9d9df55b1205309ddc2",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DISAGREEMENT_VETO|serie_a|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1807,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9583919812048637,
+            1.1022862556328885,
+            0.9763015338546376
+          ],
+          "strength": 1.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 258,
+            "brier": 0.5777987171498826,
+            "log_loss": 0.9724280997868935
+          },
+          "candidate": {
+            "n": 258,
+            "brier": 0.5811021465135402,
+            "log_loss": 0.9773238007018391
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1017,
+            "first_date": "2021-10-22",
+            "last_date": "2024-05-19"
+          },
+          "tuning": {
+            "n": 338,
+            "first_date": "2024-05-20",
+            "last_date": "2025-04-28"
+          },
+          "calibration": {
+            "n": 194,
+            "first_date": "2025-05-02",
+            "last_date": "2026-01-03"
+          },
+          "final_evaluation": {
+            "n": 258,
+            "first_date": "2026-01-04",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "10517bc43d831a91f4f01dc16c501698dd643d5d57e08acec5a15c4b0cedb057",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DIXON_COLES_LOW|bundesliga|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1430,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9697040584853666,
+            1.0623121644907259,
+            0.9995815391854193
+          ],
+          "strength": 1.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 216,
+            "brier": 0.5883903468085395,
+            "log_loss": 0.9899189430622031
+          },
+          "candidate": {
+            "n": 216,
+            "brier": 0.5880433670260858,
+            "log_loss": 0.99103075678749
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 787,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-28"
+          },
+          "tuning": {
+            "n": 288,
+            "first_date": "2024-05-03",
+            "last_date": "2025-04-26"
+          },
+          "calibration": {
+            "n": 139,
+            "first_date": "2025-04-27",
+            "last_date": "2025-12-12"
+          },
+          "final_evaluation": {
+            "n": 216,
+            "first_date": "2025-12-13",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "2ba9e95e14df1c66764ae3fd7116b8e33919815d34647aff6f56c8769525eaa4",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DIXON_COLES_LOW|epl|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1813,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0436364901960127,
+            0.9131505842571411,
+            1.0074036598904452
+          ],
+          "strength": 0.25,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 259,
+            "brier": 0.659439587096707,
+            "log_loss": 1.0846120808604738
+          },
+          "candidate": {
+            "n": 259,
+            "brier": 0.6609487237574054,
+            "log_loss": 1.0869325569601438
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 968,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-20"
+          },
+          "tuning": {
+            "n": 386,
+            "first_date": "2024-04-21",
+            "last_date": "2025-05-01"
+          },
+          "calibration": {
+            "n": 200,
+            "first_date": "2025-05-02",
+            "last_date": "2025-12-20"
+          },
+          "final_evaluation": {
+            "n": 259,
+            "first_date": "2025-12-21",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "ea0ba2d03cf119d19b204b51d5e5124a3e01370fae4518b1fd0a7af1601c33a9",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DIXON_COLES_LOW|la_liga|1X2": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1811,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0384719792161903,
+            0.9700214603253426,
+            0.9698545061926257
+          ],
+          "strength": 0.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 257,
+            "brier": 0.5849373566811841,
+            "log_loss": 0.9844458775902748
+          },
+          "candidate": {
+            "n": 257,
+            "brier": 0.5843966181752521,
+            "log_loss": 0.9829231048978025
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1009,
+            "first_date": "2021-10-16",
+            "last_date": "2024-05-18"
+          },
+          "tuning": {
+            "n": 367,
+            "first_date": "2024-05-19",
+            "last_date": "2025-05-14"
+          },
+          "calibration": {
+            "n": 178,
+            "first_date": "2025-05-15",
+            "last_date": "2026-01-02"
+          },
+          "final_evaluation": {
+            "n": 257,
+            "first_date": "2026-01-03",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "eb3d4dad86bf9d994b5697abae073fa3e9fad5890428f51d39adbdb04f7c042e",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DIXON_COLES_LOW|ligue_1|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1570,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9649406763995396,
+            0.992075233604053,
+            1.0558806048712477
+          ],
+          "strength": 0.25,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 213,
+            "brier": 0.6138651154700835,
+            "log_loss": 1.023412739938245
+          },
+          "candidate": {
+            "n": 213,
+            "brier": 0.618914587880438,
+            "log_loss": 1.0321210290894594
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 897,
+            "first_date": "2021-10-01",
+            "last_date": "2024-04-27"
+          },
+          "tuning": {
+            "n": 303,
+            "first_date": "2024-04-28",
+            "last_date": "2025-04-20"
+          },
+          "calibration": {
+            "n": 157,
+            "first_date": "2025-04-22",
+            "last_date": "2025-12-05"
+          },
+          "final_evaluation": {
+            "n": 213,
+            "first_date": "2025-12-06",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "f5a70bd2969be42d045b22898b96c3bfa6df3ae60e0108d1fb47e5bfacd2edc8",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "DIXON_COLES_LOW|serie_a|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1807,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9805314942833635,
+            1.0844228140935275,
+            0.9597019047933394
+          ],
+          "strength": 1.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 258,
+            "brier": 0.5821949564605032,
+            "log_loss": 0.9791592020800367
+          },
+          "candidate": {
+            "n": 258,
+            "brier": 0.5864122057015257,
+            "log_loss": 0.9853977639576557
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1017,
+            "first_date": "2021-10-22",
+            "last_date": "2024-05-19"
+          },
+          "tuning": {
+            "n": 338,
+            "first_date": "2024-05-20",
+            "last_date": "2025-04-28"
+          },
+          "calibration": {
+            "n": 194,
+            "first_date": "2025-05-02",
+            "last_date": "2026-01-03"
+          },
+          "final_evaluation": {
+            "n": 258,
+            "first_date": "2026-01-04",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "2a709ec5bec0ee6ba4b89a16e8f1e901ee5b1e10bde514ee6e9c75b7922aecef",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_DYNAMIC|bundesliga|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1430,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.077472524192788,
+            0.9483513276918587,
+            0.9374477562637563
+          ],
+          "strength": 0.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 216,
+            "brier": 0.5795179378279021,
+            "log_loss": 0.9752829442753866
+          },
+          "candidate": {
+            "n": 216,
+            "brier": 0.5795179378279021,
+            "log_loss": 0.9752829442753866
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 787,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-28"
+          },
+          "tuning": {
+            "n": 288,
+            "first_date": "2024-05-03",
+            "last_date": "2025-04-26"
+          },
+          "calibration": {
+            "n": 139,
+            "first_date": "2025-04-27",
+            "last_date": "2025-12-12"
+          },
+          "final_evaluation": {
+            "n": 216,
+            "first_date": "2025-12-13",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "fc9db91c3ae46281ec52f6f344fa8bfb19c917036cc3adbd63c6ef1040d277e6",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_DYNAMIC|epl|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1815,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0811411196208445,
+            0.8706664555960107,
+            0.9971529926475869
+          ],
+          "strength": 0.5,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 261,
+            "brier": 0.6442072797104402,
+            "log_loss": 1.0604151347164175
+          },
+          "candidate": {
+            "n": 261,
+            "brier": 0.6487001205453934,
+            "log_loss": 1.066942488511021
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 968,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-20"
+          },
+          "tuning": {
+            "n": 386,
+            "first_date": "2024-04-21",
+            "last_date": "2025-05-01"
+          },
+          "calibration": {
+            "n": 200,
+            "first_date": "2025-05-02",
+            "last_date": "2025-12-20"
+          },
+          "final_evaluation": {
+            "n": 261,
+            "first_date": "2025-12-21",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "a3654e9deae7268fb7a147a47626779c7a08672ef95b4c05116baabdfda94890",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_DYNAMIC|la_liga|1X2": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1811,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.065196934095342,
+            1.0252904989747094,
+            0.8895890836451977
+          ],
+          "strength": 1.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 257,
+            "brier": 0.60998230981676,
+            "log_loss": 1.0358038601989221
+          },
+          "candidate": {
+            "n": 257,
+            "brier": 0.6056988368633585,
+            "log_loss": 1.0292100715987766
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1009,
+            "first_date": "2021-10-16",
+            "last_date": "2024-05-18"
+          },
+          "tuning": {
+            "n": 367,
+            "first_date": "2024-05-19",
+            "last_date": "2025-05-14"
+          },
+          "calibration": {
+            "n": 178,
+            "first_date": "2025-05-15",
+            "last_date": "2026-01-02"
+          },
+          "final_evaluation": {
+            "n": 257,
+            "first_date": "2026-01-03",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "25048b49dbc6182be4796391a345ddd9e441ad738998ff702fef7ea2ea1e8f86",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_DYNAMIC|ligue_1|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1569,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9719673796572954,
+            0.986252241482367,
+            1.050421140485201
+          ],
+          "strength": 1.0,
+          "temperature": 1.5
+        },
+        "holdout": {
+          "base": {
+            "n": 214,
+            "brier": 0.6067697120703469,
+            "log_loss": 1.0181762094458309
+          },
+          "candidate": {
+            "n": 214,
+            "brier": 0.6110039125307388,
+            "log_loss": 1.0198007169690095
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 897,
+            "first_date": "2021-10-01",
+            "last_date": "2024-04-27"
+          },
+          "tuning": {
+            "n": 298,
+            "first_date": "2024-04-28",
+            "last_date": "2025-04-19"
+          },
+          "calibration": {
+            "n": 160,
+            "first_date": "2025-04-20",
+            "last_date": "2025-11-30"
+          },
+          "final_evaluation": {
+            "n": 214,
+            "first_date": "2025-12-05",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "ef81e68b1c3ed49469cbcfa283e504db5c05006fbc7701e3024e8547129a9885",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_DYNAMIC|serie_a|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1807,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9642201014754787,
+            1.0549318061939568,
+            1.00302496843503
+          ],
+          "strength": 1.0,
+          "temperature": 1.2
+        },
+        "holdout": {
+          "base": {
+            "n": 258,
+            "brier": 0.5761695115332572,
+            "log_loss": 0.9714028685413273
+          },
+          "candidate": {
+            "n": 258,
+            "brier": 0.5806302863804875,
+            "log_loss": 0.9756261280398495
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1017,
+            "first_date": "2021-10-22",
+            "last_date": "2024-05-19"
+          },
+          "tuning": {
+            "n": 338,
+            "first_date": "2024-05-20",
+            "last_date": "2025-04-28"
+          },
+          "calibration": {
+            "n": 194,
+            "first_date": "2025-05-02",
+            "last_date": "2026-01-03"
+          },
+          "final_evaluation": {
+            "n": 258,
+            "first_date": "2026-01-04",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "60a46288f18d08e76d95e6838ba038e1139565b8244492c9262394e287b010c0",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_POISSON_BLEND|bundesliga|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1430,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.007525421622175,
+            1.0308001747459026,
+            0.9645049749072235
+          ],
+          "strength": 0.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 216,
+            "brier": 0.5824516808525778,
+            "log_loss": 0.9802802848734218
+          },
+          "candidate": {
+            "n": 216,
+            "brier": 0.5819237556414525,
+            "log_loss": 0.9808037365977824
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 787,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-28"
+          },
+          "tuning": {
+            "n": 288,
+            "first_date": "2024-05-03",
+            "last_date": "2025-04-26"
+          },
+          "calibration": {
+            "n": 139,
+            "first_date": "2025-04-27",
+            "last_date": "2025-12-12"
+          },
+          "final_evaluation": {
+            "n": 216,
+            "first_date": "2025-12-13",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "9fecff3a2b85537ae7a41a3a5b9dfe4a5f62b7633f1bf2b9260a703c47b4c97b",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_POISSON_BLEND|epl|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1816,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.046604655416298,
+            0.9186549740657018,
+            0.9986069408622126
+          ],
+          "strength": 0.25,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 262,
+            "brier": 0.648138386883716,
+            "log_loss": 1.0663922586359447
+          },
+          "candidate": {
+            "n": 262,
+            "brier": 0.649553397799957,
+            "log_loss": 1.0686116062121243
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 968,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-20"
+          },
+          "tuning": {
+            "n": 386,
+            "first_date": "2024-04-21",
+            "last_date": "2025-05-01"
+          },
+          "calibration": {
+            "n": 200,
+            "first_date": "2025-05-02",
+            "last_date": "2025-12-20"
+          },
+          "final_evaluation": {
+            "n": 262,
+            "first_date": "2025-12-21",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "dfaf5c02d7b3ec103baeb79f22733b1b976c5d31eab488874e2e134209e0810d",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_POISSON_BLEND|la_liga|1X2": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1811,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0370046904106118,
+            1.0284032841352297,
+            0.9215909721428537
+          ],
+          "strength": 0.5,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 257,
+            "brier": 0.5903106811563682,
+            "log_loss": 0.9951224209322495
+          },
+          "candidate": {
+            "n": 257,
+            "brier": 0.5892694269175419,
+            "log_loss": 0.9948451131737096
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1009,
+            "first_date": "2021-10-16",
+            "last_date": "2024-05-18"
+          },
+          "tuning": {
+            "n": 367,
+            "first_date": "2024-05-19",
+            "last_date": "2025-05-14"
+          },
+          "calibration": {
+            "n": 178,
+            "first_date": "2025-05-15",
+            "last_date": "2026-01-02"
+          },
+          "final_evaluation": {
+            "n": 257,
+            "first_date": "2026-01-03",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "27243aef8672ac7d0baf6a13a716e838cbdc8be28da6ff76dde286660f3a2ea7",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_POISSON_BLEND|ligue_1|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1570,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9559718936806255,
+            1.0201784290287026,
+            1.0454875631203664
+          ],
+          "strength": 0.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 213,
+            "brier": 0.6078198093934364,
+            "log_loss": 1.0146387742102827
+          },
+          "candidate": {
+            "n": 213,
+            "brier": 0.6078198093934364,
+            "log_loss": 1.0146387742102827
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 897,
+            "first_date": "2021-10-01",
+            "last_date": "2024-04-27"
+          },
+          "tuning": {
+            "n": 303,
+            "first_date": "2024-04-28",
+            "last_date": "2025-04-20"
+          },
+          "calibration": {
+            "n": 157,
+            "first_date": "2025-04-22",
+            "last_date": "2025-12-05"
+          },
+          "final_evaluation": {
+            "n": 213,
+            "first_date": "2025-12-06",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "9d22202d18a0438fcbfdb88227d18b37245126d3de8ff1dfe41b6a192c3fb17c",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_POISSON_BLEND|serie_a|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1807,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9583919812048637,
+            1.1022862556328885,
+            0.9763015338546376
+          ],
+          "strength": 1.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 258,
+            "brier": 0.5777987171498826,
+            "log_loss": 0.9724280997868935
+          },
+          "candidate": {
+            "n": 258,
+            "brier": 0.5811021465135402,
+            "log_loss": 0.9773238007018391
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1017,
+            "first_date": "2021-10-22",
+            "last_date": "2024-05-19"
+          },
+          "tuning": {
+            "n": 338,
+            "first_date": "2024-05-20",
+            "last_date": "2025-04-28"
+          },
+          "calibration": {
+            "n": 194,
+            "first_date": "2025-05-02",
+            "last_date": "2026-01-03"
+          },
+          "final_evaluation": {
+            "n": 258,
+            "first_date": "2026-01-04",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "9096fe8b0295b9b69d7787688a21330c48366d3e4cd2da87de2756184d811ba7",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_STANDARD|bundesliga|1X2": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1430,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.065081990203623,
+            0.9483513276918587,
+            0.9525327949751798
+          ],
+          "strength": 0.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 216,
+            "brier": 0.5811030551135299,
+            "log_loss": 0.9769933571608662
+          },
+          "candidate": {
+            "n": 216,
+            "brier": 0.5786242239497801,
+            "log_loss": 0.9753699029745619
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 787,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-28"
+          },
+          "tuning": {
+            "n": 288,
+            "first_date": "2024-05-03",
+            "last_date": "2025-04-26"
+          },
+          "calibration": {
+            "n": 139,
+            "first_date": "2025-04-27",
+            "last_date": "2025-12-12"
+          },
+          "final_evaluation": {
+            "n": 216,
+            "first_date": "2025-12-13",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "7c06ce3d6a9eb21ea8395725ca32bcf091bfa0da6ad16f4b163e98ab17bb4267",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_STANDARD|epl|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1814,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0679493533382174,
+            0.8706664555960107,
+            1.0141418570583038
+          ],
+          "strength": 0.5,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 260,
+            "brier": 0.6421101874622499,
+            "log_loss": 1.0571440908406033
+          },
+          "candidate": {
+            "n": 260,
+            "brier": 0.6464140131987322,
+            "log_loss": 1.0636905074948253
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 968,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-20"
+          },
+          "tuning": {
+            "n": 386,
+            "first_date": "2024-04-21",
+            "last_date": "2025-05-01"
+          },
+          "calibration": {
+            "n": 200,
+            "first_date": "2025-05-02",
+            "last_date": "2025-12-20"
+          },
+          "final_evaluation": {
+            "n": 260,
+            "first_date": "2025-12-21",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "2693069f9cb0348341b928853f9c0cd65acbba0a4863397fc0c74b6fca0e0bea",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_STANDARD|la_liga|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1811,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0552134406081328,
+            1.0252904989747094,
+            0.9012720266800559
+          ],
+          "strength": 0.5,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 257,
+            "brier": 0.6013861166238444,
+            "log_loss": 1.0164203298264616
+          },
+          "candidate": {
+            "n": 257,
+            "brier": 0.6008355460347538,
+            "log_loss": 1.021314965479311
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1009,
+            "first_date": "2021-10-16",
+            "last_date": "2024-05-18"
+          },
+          "tuning": {
+            "n": 367,
+            "first_date": "2024-05-19",
+            "last_date": "2025-05-14"
+          },
+          "calibration": {
+            "n": 178,
+            "first_date": "2025-05-15",
+            "last_date": "2026-01-02"
+          },
+          "final_evaluation": {
+            "n": 257,
+            "first_date": "2026-01-03",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "957d8d4f64ac5b5ecfc8c00cfb8e2a504bb08a3cb70a855a31008442e7b1c3f9",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_STANDARD|ligue_1|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1569,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9644213130029033,
+            0.986252241482367,
+            1.0619447289369202
+          ],
+          "strength": 1.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 214,
+            "brier": 0.6060668439982411,
+            "log_loss": 1.0141040746625942
+          },
+          "candidate": {
+            "n": 214,
+            "brier": 0.6066716098396235,
+            "log_loss": 1.014819677579286
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 897,
+            "first_date": "2021-10-01",
+            "last_date": "2024-04-27"
+          },
+          "tuning": {
+            "n": 298,
+            "first_date": "2024-04-28",
+            "last_date": "2025-04-19"
+          },
+          "calibration": {
+            "n": 160,
+            "first_date": "2025-04-20",
+            "last_date": "2025-11-30"
+          },
+          "final_evaluation": {
+            "n": 214,
+            "first_date": "2025-12-05",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "abfdef9084adf68de87d844a42c77bb241e654405cb36b8ab25af4bec86ba395",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "ELO_STANDARD|serie_a|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1807,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.953858364905773,
+            1.0549318061939568,
+            1.0180411159522411
+          ],
+          "strength": 1.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 258,
+            "brier": 0.5789202965242644,
+            "log_loss": 0.9737871100352532
+          },
+          "candidate": {
+            "n": 258,
+            "brier": 0.5792728722516292,
+            "log_loss": 0.97425167825227
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1017,
+            "first_date": "2021-10-22",
+            "last_date": "2024-05-19"
+          },
+          "tuning": {
+            "n": 338,
+            "first_date": "2024-05-20",
+            "last_date": "2025-04-28"
+          },
+          "calibration": {
+            "n": 194,
+            "first_date": "2025-05-02",
+            "last_date": "2026-01-03"
+          },
+          "final_evaluation": {
+            "n": 258,
+            "first_date": "2026-01-04",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "b82ed87a515ace911933988b70f6cf1ccd07ed1c08f8fffe1f3efa7d7f02cee1",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MARKET_ANCHORED|epl|1X2": {
+        "status": "INSUFFICIENT_HISTORY",
+        "n": 6,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MARKET_ANCHORED|ligue_1|1X2": {
+        "status": "INSUFFICIENT_HISTORY",
+        "n": 1,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MARKET_REFERENCE|ligue_1|1X2": {
+        "status": "INSUFFICIENT_HISTORY",
+        "n": 1,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MARKET_REFERENCE|nba|ML": {
+        "status": "INSUFFICIENT_HISTORY",
+        "n": 6,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MARKET_REFERENCE|nfl|ML": {
+        "status": "INSUFFICIENT_HISTORY",
+        "n": 4,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MARKET_REFERENCE|nhl|ML": {
+        "status": "INSUFFICIENT_HISTORY",
+        "n": 5,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MARKET_REFERENCE|serie_a|1X2": {
+        "status": "INSUFFICIENT_HISTORY",
+        "n": 1,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|bundesliga|ASIAN_HOME_MINUS_0_5": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1300,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9472775829484675,
+            1.0481729877177564
+          ],
+          "strength": 1.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 198,
+            "brier": 0.4189491941602245,
+            "log_loss": 0.6069537444396726
+          },
+          "candidate": {
+            "n": 198,
+            "brier": 0.4175634690515569,
+            "log_loss": 0.6051842418371296
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 721,
+            "first_date": "2021-12-14",
+            "last_date": "2024-09-01"
+          },
+          "tuning": {
+            "n": 261,
+            "first_date": "2024-09-13",
+            "last_date": "2025-05-17"
+          },
+          "calibration": {
+            "n": 120,
+            "first_date": "2025-08-22",
+            "last_date": "2025-12-21"
+          },
+          "final_evaluation": {
+            "n": 198,
+            "first_date": "2026-01-09",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "8a0c2f64aeb02c452a9aff7dff581d0362d03330ca1b31f144e2530612a4331c",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|bundesliga|BTTS": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1300,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.025111268725305,
+            0.9641215214687425
+          ],
+          "strength": 0.0,
+          "temperature": 2.0
+        },
+        "holdout": {
+          "base": {
+            "n": 198,
+            "brier": 0.47736290817689425,
+            "log_loss": 0.6703507059755788
+          },
+          "candidate": {
+            "n": 198,
+            "brier": 0.4832705388624708,
+            "log_loss": 0.6763331862454598
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 721,
+            "first_date": "2021-12-14",
+            "last_date": "2024-09-01"
+          },
+          "tuning": {
+            "n": 261,
+            "first_date": "2024-09-13",
+            "last_date": "2025-05-17"
+          },
+          "calibration": {
+            "n": 120,
+            "first_date": "2025-08-22",
+            "last_date": "2025-12-21"
+          },
+          "final_evaluation": {
+            "n": 198,
+            "first_date": "2026-01-09",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "eef68a310bb834ad09128e7f8a1a51d15162feb7593c000faf86d46a1f206f1e",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|bundesliga|OVER_UNDER_2_5": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1300,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.002726230952094,
+            0.9958149073996008
+          ],
+          "strength": 0.0,
+          "temperature": 1.5
+        },
+        "holdout": {
+          "base": {
+            "n": 198,
+            "brier": 0.45413099687500846,
+            "log_loss": 0.6465201360903922
+          },
+          "candidate": {
+            "n": 198,
+            "brier": 0.460850283111363,
+            "log_loss": 0.6534006503740174
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 721,
+            "first_date": "2021-12-14",
+            "last_date": "2024-09-01"
+          },
+          "tuning": {
+            "n": 261,
+            "first_date": "2024-09-13",
+            "last_date": "2025-05-17"
+          },
+          "calibration": {
+            "n": 120,
+            "first_date": "2025-08-22",
+            "last_date": "2025-12-21"
+          },
+          "final_evaluation": {
+            "n": 198,
+            "first_date": "2026-01-09",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "700d9a9d956a60cff0b5dfaac0d8550a920fa034c01716f506c2bff99d27183f",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|epl|ASIAN_HOME_MINUS_0_5": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1670,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0221782217593067,
+            0.9818494863210502
+          ],
+          "strength": 0.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 251,
+            "brier": 0.46811468318714705,
+            "log_loss": 0.6588039651113793
+          },
+          "candidate": {
+            "n": 251,
+            "brier": 0.46811468318714705,
+            "log_loss": 0.6588039651113793
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 874,
+            "first_date": "2021-12-14",
+            "last_date": "2024-05-04"
+          },
+          "tuning": {
+            "n": 360,
+            "first_date": "2024-05-05",
+            "last_date": "2025-05-04"
+          },
+          "calibration": {
+            "n": 185,
+            "first_date": "2025-05-05",
+            "last_date": "2025-12-22"
+          },
+          "final_evaluation": {
+            "n": 251,
+            "first_date": "2025-12-26",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "1786cedae5b94bbcfad537c07cb74fea6921e885fe441a752557ad3e62d72ab7",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|epl|BTTS": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1670,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0521983007961533,
+            0.9422835421320996
+          ],
+          "strength": 1.0,
+          "temperature": 1.5
+        },
+        "holdout": {
+          "base": {
+            "n": 251,
+            "brier": 0.4962967227810015,
+            "log_loss": 0.6894289782755796
+          },
+          "candidate": {
+            "n": 251,
+            "brier": 0.49190418604511293,
+            "log_loss": 0.6849901585423612
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 874,
+            "first_date": "2021-12-14",
+            "last_date": "2024-05-04"
+          },
+          "tuning": {
+            "n": 360,
+            "first_date": "2024-05-05",
+            "last_date": "2025-05-04"
+          },
+          "calibration": {
+            "n": 185,
+            "first_date": "2025-05-05",
+            "last_date": "2025-12-22"
+          },
+          "final_evaluation": {
+            "n": 251,
+            "first_date": "2025-12-26",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "89039dcd00116cdb4d3f2b7278636332d33b0cfa52ea4de361883bc99b4152e8",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|epl|OVER_UNDER_2_5": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1670,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0718584541801284,
+            0.9184963492091643
+          ],
+          "strength": 1.0,
+          "temperature": 1.2
+        },
+        "holdout": {
+          "base": {
+            "n": 251,
+            "brier": 0.4981036893960666,
+            "log_loss": 0.6913320392401432
+          },
+          "candidate": {
+            "n": 251,
+            "brier": 0.49776256109827816,
+            "log_loss": 0.6910721978154825
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 874,
+            "first_date": "2021-12-14",
+            "last_date": "2024-05-04"
+          },
+          "tuning": {
+            "n": 360,
+            "first_date": "2024-05-05",
+            "last_date": "2025-05-04"
+          },
+          "calibration": {
+            "n": 185,
+            "first_date": "2025-05-05",
+            "last_date": "2025-12-22"
+          },
+          "final_evaluation": {
+            "n": 251,
+            "first_date": "2025-12-26",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "e0c92d3f3b8fadd62561ff6ed26256952848acc204101fd2bf50a82811dbf82a",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|la_liga|ASIAN_HOME_MINUS_0_5": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1680,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0126512718465845,
+            0.9898317134992607
+          ],
+          "strength": 0.5,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 240,
+            "brier": 0.4644456222422946,
+            "log_loss": 0.6563791936446582
+          },
+          "candidate": {
+            "n": 240,
+            "brier": 0.4698871418907326,
+            "log_loss": 0.6638016172777377
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 931,
+            "first_date": "2021-12-11",
+            "last_date": "2024-08-25"
+          },
+          "tuning": {
+            "n": 344,
+            "first_date": "2024-08-26",
+            "last_date": "2025-08-18"
+          },
+          "calibration": {
+            "n": 165,
+            "first_date": "2025-08-19",
+            "last_date": "2026-01-12"
+          },
+          "final_evaluation": {
+            "n": 240,
+            "first_date": "2026-01-16",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "a9fe956ba7d2cb4186ccb0bc2741fcd46f64cce4d3fbd4f2fe08d7941437e029",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|la_liga|BTTS": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1680,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0556651863803734,
+            0.9510213659923008
+          ],
+          "strength": 1.0,
+          "temperature": 2.0
+        },
+        "holdout": {
+          "base": {
+            "n": 240,
+            "brier": 0.5061668157328839,
+            "log_loss": 0.6993700732714694
+          },
+          "candidate": {
+            "n": 240,
+            "brier": 0.49536239904076623,
+            "log_loss": 0.6884703118171843
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 931,
+            "first_date": "2021-12-11",
+            "last_date": "2024-08-25"
+          },
+          "tuning": {
+            "n": 344,
+            "first_date": "2024-08-26",
+            "last_date": "2025-08-18"
+          },
+          "calibration": {
+            "n": 165,
+            "first_date": "2025-08-19",
+            "last_date": "2026-01-12"
+          },
+          "final_evaluation": {
+            "n": 240,
+            "first_date": "2026-01-16",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "7ff79c555bab48c4bf06161096ae0aacf8ff05fa73630b6de47857a024321175",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|la_liga|OVER_UNDER_2_5": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1680,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0500727545863464,
+            0.959346749801903
+          ],
+          "strength": 1.0,
+          "temperature": 1.5
+        },
+        "holdout": {
+          "base": {
+            "n": 240,
+            "brier": 0.5030739205258168,
+            "log_loss": 0.6970694489200888
+          },
+          "candidate": {
+            "n": 240,
+            "brier": 0.4932802640062141,
+            "log_loss": 0.6863759631299232
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 931,
+            "first_date": "2021-12-11",
+            "last_date": "2024-08-25"
+          },
+          "tuning": {
+            "n": 344,
+            "first_date": "2024-08-26",
+            "last_date": "2025-08-18"
+          },
+          "calibration": {
+            "n": 165,
+            "first_date": "2025-08-19",
+            "last_date": "2026-01-12"
+          },
+          "final_evaluation": {
+            "n": 240,
+            "first_date": "2026-01-16",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "cd71ea3da4a1fb3827c4e241acf7d24840fe7d6a3db81583e452ddea3fd5907f",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|ligue_1|ASIAN_HOME_MINUS_0_5": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1426,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9498173704472628,
+            1.0390135842404067
+          ],
+          "strength": 0.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 201,
+            "brier": 0.4617095719935937,
+            "log_loss": 0.6529841727965385
+          },
+          "candidate": {
+            "n": 201,
+            "brier": 0.4617095719935937,
+            "log_loss": 0.6529841727965385
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 814,
+            "first_date": "2021-12-01",
+            "last_date": "2024-08-25"
+          },
+          "tuning": {
+            "n": 265,
+            "first_date": "2024-08-30",
+            "last_date": "2025-05-03"
+          },
+          "calibration": {
+            "n": 146,
+            "first_date": "2025-05-04",
+            "last_date": "2025-12-13"
+          },
+          "final_evaluation": {
+            "n": 201,
+            "first_date": "2025-12-14",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "c839c2cc92593d53a00cffa2dd3ef3fe25a6aaeed8d1e1374ba3ae20ec059442",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|ligue_1|BTTS": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1426,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.057412398460794,
+            0.9374211648231608
+          ],
+          "strength": 1.0,
+          "temperature": 2.0
+        },
+        "holdout": {
+          "base": {
+            "n": 201,
+            "brier": 0.499586372667132,
+            "log_loss": 0.6927297658487125
+          },
+          "candidate": {
+            "n": 201,
+            "brier": 0.49757389246970546,
+            "log_loss": 0.690694550693375
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 814,
+            "first_date": "2021-12-01",
+            "last_date": "2024-08-25"
+          },
+          "tuning": {
+            "n": 265,
+            "first_date": "2024-08-30",
+            "last_date": "2025-05-03"
+          },
+          "calibration": {
+            "n": 146,
+            "first_date": "2025-05-04",
+            "last_date": "2025-12-13"
+          },
+          "final_evaluation": {
+            "n": 201,
+            "first_date": "2025-12-14",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "2df63b5995d290b671dc033eff6629f33a81fcaa87a5e5b132575864c6fb53e7",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|ligue_1|OVER_UNDER_2_5": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1426,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0367003762222524,
+            0.9616990988953722
+          ],
+          "strength": 1.0,
+          "temperature": 1.5
+        },
+        "holdout": {
+          "base": {
+            "n": 201,
+            "brier": 0.4960238372124681,
+            "log_loss": 0.6887863142375
+          },
+          "candidate": {
+            "n": 201,
+            "brier": 0.49301546966580667,
+            "log_loss": 0.685900371952152
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 814,
+            "first_date": "2021-12-01",
+            "last_date": "2024-08-25"
+          },
+          "tuning": {
+            "n": 265,
+            "first_date": "2024-08-30",
+            "last_date": "2025-05-03"
+          },
+          "calibration": {
+            "n": 146,
+            "first_date": "2025-05-04",
+            "last_date": "2025-12-13"
+          },
+          "final_evaluation": {
+            "n": 201,
+            "first_date": "2025-12-14",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "e99797ff3dff8c90f5517c87c7b7f59cb6513111171bc65a3e8ae0aaeb02e65a",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|serie_a|ASIAN_HOME_MINUS_0_5": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1666,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9450525032236781,
+            1.0406275340846085
+          ],
+          "strength": 1.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 244,
+            "brier": 0.41838447678630153,
+            "log_loss": 0.6036889469757998
+          },
+          "candidate": {
+            "n": 244,
+            "brier": 0.4193390174691928,
+            "log_loss": 0.6045329576695985
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 924,
+            "first_date": "2021-12-05",
+            "last_date": "2024-08-24"
+          },
+          "tuning": {
+            "n": 309,
+            "first_date": "2024-08-25",
+            "last_date": "2025-05-09"
+          },
+          "calibration": {
+            "n": 189,
+            "first_date": "2025-05-10",
+            "last_date": "2026-01-08"
+          },
+          "final_evaluation": {
+            "n": 244,
+            "first_date": "2026-01-10",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "a2ae4784c0999e7053989c87a640c46dbeb9db9bff6208a69e25df4ba48f5ead",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|serie_a|BTTS": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1666,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9961189039754619,
+            1.0042476438501735
+          ],
+          "strength": 0.0,
+          "temperature": 2.0
+        },
+        "holdout": {
+          "base": {
+            "n": 244,
+            "brier": 0.5027628981792348,
+            "log_loss": 0.6962273378807847
+          },
+          "candidate": {
+            "n": 244,
+            "brier": 0.49879853495190857,
+            "log_loss": 0.6919647916158731
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 924,
+            "first_date": "2021-12-05",
+            "last_date": "2024-08-24"
+          },
+          "tuning": {
+            "n": 309,
+            "first_date": "2024-08-25",
+            "last_date": "2025-05-09"
+          },
+          "calibration": {
+            "n": 189,
+            "first_date": "2025-05-10",
+            "last_date": "2026-01-08"
+          },
+          "final_evaluation": {
+            "n": 244,
+            "first_date": "2026-01-10",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "d830452d34ec37d1c248d2385704380d2634ee289413fe70d6621a04cb76c984",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-goals|serie_a|OVER_UNDER_2_5": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1666,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9281988577852894,
+            1.0774422469166998
+          ],
+          "strength": 0.5,
+          "temperature": 2.0
+        },
+        "holdout": {
+          "base": {
+            "n": 244,
+            "brier": 0.5186899431372836,
+            "log_loss": 0.7134487771462605
+          },
+          "candidate": {
+            "n": 244,
+            "brier": 0.5056709615633497,
+            "log_loss": 0.6989988962552889
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 924,
+            "first_date": "2021-12-05",
+            "last_date": "2024-08-24"
+          },
+          "tuning": {
+            "n": 309,
+            "first_date": "2024-08-25",
+            "last_date": "2025-05-09"
+          },
+          "calibration": {
+            "n": 189,
+            "first_date": "2025-05-10",
+            "last_date": "2026-01-08"
+          },
+          "final_evaluation": {
+            "n": 244,
+            "first_date": "2026-01-10",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "b94582d922c705bd025be0966372f616093c1710dbad4e74824e29f4ede8bfbe",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-nba|nba|ML": {
+        "status": "CONFLICTING_HISTORY",
+        "n": 1209,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-nfl|nfl|ML": {
+        "status": "INSUFFICIENT_HISTORY",
+        "n": 195,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "MULTIMARKET-1.0.0-nhl|nhl|ML": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1244,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0468792915397276,
+            0.953741095338622
+          ],
+          "strength": 0.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 212,
+            "brier": 0.47561952111815736,
+            "log_loss": 0.668531319497372
+          },
+          "candidate": {
+            "n": 212,
+            "brier": 0.47140918317536695,
+            "log_loss": 0.6641466518877628
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 850,
+            "first_date": "2025-12-04",
+            "last_date": "2026-04-14"
+          },
+          "tuning": {
+            "n": 92,
+            "first_date": "2026-04-15",
+            "last_date": "2026-05-28"
+          },
+          "calibration": {
+            "n": 90,
+            "first_date": "2026-05-30",
+            "last_date": "2026-10-02"
+          },
+          "final_evaluation": {
+            "n": 212,
+            "first_date": "2026-10-03",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "0a7ea01d978910a39f262e58bae919ff444970927cd70d5194ba0d0b76830479",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "POISSON_SHRINK|bundesliga|1X2": {
+        "status": "SHADOW_VALIDATION",
+        "n": 1430,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9558705897322867,
+            1.1289501256367989,
+            0.9767819370936647
+          ],
+          "strength": 1.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 216,
+            "brier": 0.589777554053186,
+            "log_loss": 0.9926676746857387
+          },
+          "candidate": {
+            "n": 216,
+            "brier": 0.5879781782552814,
+            "log_loss": 0.9907363176529338
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 787,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-28"
+          },
+          "tuning": {
+            "n": 288,
+            "first_date": "2024-05-03",
+            "last_date": "2025-04-26"
+          },
+          "calibration": {
+            "n": 139,
+            "first_date": "2025-04-27",
+            "last_date": "2025-12-12"
+          },
+          "final_evaluation": {
+            "n": 216,
+            "first_date": "2025-12-13",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "d28c6bde58dbec1518c8300e79f1f9f88f45db52e22be786f6696214fff6dca2",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "POISSON_SHRINK|epl|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1814,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0260964554608387,
+            0.9722420331087797,
+            0.9835407807408201
+          ],
+          "strength": 0.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 260,
+            "brier": 0.6626085816137068,
+            "log_loss": 1.0898096217925692
+          },
+          "candidate": {
+            "n": 260,
+            "brier": 0.6626085816137068,
+            "log_loss": 1.0898096217925692
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 968,
+            "first_date": "2021-10-22",
+            "last_date": "2024-04-20"
+          },
+          "tuning": {
+            "n": 386,
+            "first_date": "2024-04-21",
+            "last_date": "2025-05-01"
+          },
+          "calibration": {
+            "n": 200,
+            "first_date": "2025-05-02",
+            "last_date": "2025-12-20"
+          },
+          "final_evaluation": {
+            "n": 260,
+            "first_date": "2025-12-21",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "3951f99b5776ec324fe15937c323279fe7712a655a5ef736ad0028dc3585b924",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "POISSON_SHRINK|la_liga|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1811,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.019413700096566,
+            1.0315350277044975,
+            0.9428472196107702
+          ],
+          "strength": 0.25,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 257,
+            "brier": 0.5838607171375165,
+            "log_loss": 0.9822578382568555
+          },
+          "candidate": {
+            "n": 257,
+            "brier": 0.583949876478205,
+            "log_loss": 0.9810007098203872
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1009,
+            "first_date": "2021-10-16",
+            "last_date": "2024-05-18"
+          },
+          "tuning": {
+            "n": 367,
+            "first_date": "2024-05-19",
+            "last_date": "2025-05-14"
+          },
+          "calibration": {
+            "n": 178,
+            "first_date": "2025-05-15",
+            "last_date": "2026-01-02"
+          },
+          "final_evaluation": {
+            "n": 257,
+            "first_date": "2026-01-03",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "4f1e30972957a803a8ded847821cb25fa1893068f9b7fe8547e5ce2ed3f8d117",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "POISSON_SHRINK|ligue_1|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1570,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9476692414148775,
+            1.0565218269341834,
+            1.029532692984173
+          ],
+          "strength": 0.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 213,
+            "brier": 0.6143653273536567,
+            "log_loss": 1.0242181364038485
+          },
+          "candidate": {
+            "n": 213,
+            "brier": 0.6143653273536567,
+            "log_loss": 1.0242181364038485
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 897,
+            "first_date": "2021-10-01",
+            "last_date": "2024-04-27"
+          },
+          "tuning": {
+            "n": 303,
+            "first_date": "2024-04-28",
+            "last_date": "2025-04-20"
+          },
+          "calibration": {
+            "n": 157,
+            "first_date": "2025-04-22",
+            "last_date": "2025-12-05"
+          },
+          "final_evaluation": {
+            "n": 213,
+            "first_date": "2025-12-06",
+            "last_date": "2026-11-01"
+          }
+        },
+        "model_sha256": "3bd628807b0a18c01886cac4e49fe1267e5df6c145f4fe1f749d7bbe318f3174",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      },
+      "POISSON_SHRINK|serie_a|1X2": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1807,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9629688991808092,
+            1.1540918648098404,
+            0.9378497880365368
+          ],
+          "strength": 1.0,
+          "temperature": 1.0
+        },
+        "holdout": {
+          "base": {
+            "n": 258,
+            "brier": 0.5806413812500748,
+            "log_loss": 0.9769024662592668
+          },
+          "candidate": {
+            "n": 258,
+            "brier": 0.5867756280090755,
+            "log_loss": 0.9858290468744294
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 1017,
+            "first_date": "2021-10-22",
+            "last_date": "2024-05-19"
+          },
+          "tuning": {
+            "n": 338,
+            "first_date": "2024-05-20",
+            "last_date": "2025-04-28"
+          },
+          "calibration": {
+            "n": 194,
+            "first_date": "2025-05-02",
+            "last_date": "2026-01-03"
+          },
+          "final_evaluation": {
+            "n": 258,
+            "first_date": "2026-01-04",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "1114c3135c1061384f68950709810fd1571701f6a3aaa530308d67fc929f1849",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false
+        }
+      }
+    },
+    "invalid_frozen_rows_skipped": 0,
+    "historical_roi": null,
+    "conflicting_events_excluded": 1,
+    "policy": {
+      "minimum_history_rows": 300,
+      "minimum_forward_events": 100,
+      "minimum_forward_dates": 14,
+      "required_metrics": [
+        "brier",
+        "log_loss"
+      ],
+      "reference_remains_control": true,
+      "new_models_start_in_shadow": true,
+      "real_money_enabled": false
+    },
+    "caveat": "Score history measures probabilities, not bookmaker profit. Chronological holdout reuse is exploratory; promotion also requires frozen prequential shadow results."
+  },
   "market_research": {
-    "asof_utc": "2026-11-02T20:53:43.260794+00:00",
+    "asof_utc": "2026-11-02T22:36:14.475760+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
     "new_forecasts": 0,
-    "new_settlements": 22,
+    "new_settlements": 12,
     "forecasts_total": 63,
     "zero_stake_forecasts": 51,
-    "open_observations": 16,
-    "settlements_total": 38,
+    "open_observations": 5,
+    "settlements_total": 50,
     "candidate_markets": 31,
     "closing_line_values_available": 0,
     "blocks": {
@@ -3024,20 +5976,20 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-          "sha256": "367630d74682beee5268cce44f07707d15aa7a458b1caf289a94cab3bcda4c50",
-          "captured_at_utc": "2026-11-02T20:53:43.260794+00:00",
+          "sha256": "d5b9339d5bf04127fcb69902edcb809bfb7f10ff23dd9830e9701ffa74017510",
+          "captured_at_utc": "2026-11-02T22:36:14.475760+00:00",
           "completed_games": 2
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-          "sha256": "2f136b3346239199b9ede4cd60bb4cbac312fc9914bd798f21cd0d19aaf578b8",
-          "captured_at_utc": "2026-11-02T20:53:43.260794+00:00",
+          "sha256": "995d71c5d51c774d8c4d422fd6ed888823acdb6dff9dc5d486a8cbaefe39df06",
+          "captured_at_utc": "2026-11-02T22:36:14.475760+00:00",
           "completed_games": 11
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-          "sha256": "03d0e4879db1095e3d6b81b9648202d0b859256dca741658b2cfd3eaf332c9d5",
-          "captured_at_utc": "2026-11-02T20:53:43.260794+00:00",
+          "sha256": "b55b9494fd7d07592df666795776c47f422129c539231858ff99a8e666b874e3",
+          "captured_at_utc": "2026-11-02T22:36:14.475760+00:00",
           "completed_games": 4
         }
       ],
@@ -3362,16 +6314,16 @@
     "team_statistics_history": {
       "scoreboard_requests": 40,
       "summary_requests": 120,
-      "events_with_statistics": 1108,
+      "events_with_statistics": 1228,
       "failures": [],
       "missing_stats": 0,
       "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
       "events_by_sport": {
-        "ligue_1": 250,
-        "la_liga": 250,
-        "bundesliga": 107,
-        "serie_a": 249,
-        "epl": 252
+        "ligue_1": 276,
+        "la_liga": 269,
+        "bundesliga": 128,
+        "serie_a": 268,
+        "epl": 287
       }
     },
     "additional_market_backtests": {},
@@ -3435,11 +6387,11 @@
     "experimental_account": {
       "created": true,
       "initial_bankroll_eur": 1000,
-      "bankroll_eur": 992.52,
-      "pnl_eur": -7.48,
+      "bankroll_eur": 990.04,
+      "pnl_eur": -9.96,
       "positions": 12,
-      "open_exposure_eur": 14.950000000000001,
-      "open": 9,
+      "open_exposure_eur": 12.47,
+      "open": 8,
       "note": "Separate experimental virtual account; original twelve wallets preserved."
     },
     "settlement_errors": [],
@@ -3478,61 +6430,61 @@
       "independent_events": 12
     },
     "games_played_today": {
-      "n": 25,
-      "independent_events": 4,
+      "n": 37,
+      "independent_events": 6,
       "wins": 3,
-      "losses": 22,
-      "staked_eur": 57.82,
-      "pnl_eur": -47.37,
-      "roi_pct": -81.92
+      "losses": 34,
+      "staked_eur": 103.34,
+      "pnl_eur": -92.89,
+      "roi_pct": -89.88
     },
     "settled_today": {
-      "n": 25,
-      "independent_events": 4,
+      "n": 37,
+      "independent_events": 6,
       "wins": 3,
-      "losses": 22,
-      "staked_eur": 57.82,
-      "pnl_eur": -47.37,
-      "roi_pct": -81.92
+      "losses": 34,
+      "staked_eur": 103.34,
+      "pnl_eur": -92.89,
+      "roi_pct": -89.88
     },
     "total": 229,
-    "open": 105,
-    "closed": 124,
+    "open": 93,
+    "closed": 136,
     "voided": 0,
     "all_time": {
-      "n": 124,
-      "independent_events": 31,
+      "n": 136,
+      "independent_events": 33,
       "wins": 31,
-      "losses": 93,
-      "staked_eur": 465.46,
-      "pnl_eur": -207.99,
-      "roi_pct": -44.68
+      "losses": 105,
+      "staked_eur": 510.98,
+      "pnl_eur": -253.51,
+      "roi_pct": -49.61
     },
     "prospective_benchmark": {
-      "n": 115,
-      "model_brier": 0.583929,
-      "market_brier": 0.46625,
+      "n": 127,
+      "model_brier": 0.614753,
+      "market_brier": 0.48761,
       "beats_market_on_sample": false,
       "note": "No market forecast invented; beware event correlation and low sample size."
     },
     "by_sport": {
       "epl": {
-        "n": 64,
-        "independent_events": 9,
+        "n": 74,
+        "independent_events": 10,
         "wins": 15,
-        "losses": 49,
-        "staked_eur": 284.93,
-        "pnl_eur": -124.42,
-        "roi_pct": -43.67
+        "losses": 59,
+        "staked_eur": 327.03,
+        "pnl_eur": -166.52,
+        "roi_pct": -50.92
       },
       "ligue_1": {
-        "n": 8,
-        "independent_events": 2,
+        "n": 10,
+        "independent_events": 3,
         "wins": 1,
-        "losses": 7,
-        "staked_eur": 27.44,
-        "pnl_eur": -23.78,
-        "roi_pct": -86.67
+        "losses": 9,
+        "staked_eur": 30.86,
+        "pnl_eur": -27.2,
+        "roi_pct": -88.15
       },
       "nba": {
         "n": 26,
@@ -3573,13 +6525,13 @@
     },
     "by_market": {
       "1X2": {
-        "n": 75,
-        "independent_events": 13,
+        "n": 87,
+        "independent_events": 15,
         "wins": 18,
-        "losses": 57,
-        "staked_eur": 318.35,
-        "pnl_eur": -148.28,
-        "roi_pct": -46.58
+        "losses": 69,
+        "staked_eur": 363.87,
+        "pnl_eur": -193.8,
+        "roi_pct": -53.26
       },
       "ML": {
         "n": 37,
@@ -3611,13 +6563,13 @@
     },
     "by_strategy": {
       "CONSENSUS_SHRUNK": {
-        "n": 13,
-        "independent_events": 13,
+        "n": 14,
+        "independent_events": 14,
         "wins": 2,
-        "losses": 11,
-        "staked_eur": 51.75,
-        "pnl_eur": -30.2,
-        "roi_pct": -58.36
+        "losses": 12,
+        "staked_eur": 56.68,
+        "pnl_eur": -35.13,
+        "roi_pct": -61.98
       },
       "DISAGREEMENT_VETO": {
         "n": 6,
@@ -3629,94 +6581,94 @@
         "roi_pct": -100.0
       },
       "DIXON_COLES_LOW": {
-        "n": 10,
-        "independent_events": 10,
-        "wins": 2,
-        "losses": 8,
-        "staked_eur": 42.14,
-        "pnl_eur": -20.56,
-        "roi_pct": -48.79
-      },
-      "ELO_DYNAMIC": {
         "n": 11,
         "independent_events": 11,
+        "wins": 2,
+        "losses": 9,
+        "staked_eur": 47.12,
+        "pnl_eur": -25.54,
+        "roi_pct": -54.2
+      },
+      "ELO_DYNAMIC": {
+        "n": 12,
+        "independent_events": 12,
         "wins": 3,
-        "losses": 8,
-        "staked_eur": 47.02,
-        "pnl_eur": -12.59,
-        "roi_pct": -26.77
+        "losses": 9,
+        "staked_eur": 51.98,
+        "pnl_eur": -17.55,
+        "roi_pct": -33.76
       },
       "ELO_POISSON_BLEND": {
-        "n": 13,
-        "independent_events": 13,
+        "n": 14,
+        "independent_events": 14,
         "wins": 2,
-        "losses": 11,
-        "staked_eur": 51.75,
-        "pnl_eur": -30.3,
-        "roi_pct": -58.55
+        "losses": 12,
+        "staked_eur": 56.68,
+        "pnl_eur": -35.23,
+        "roi_pct": -62.15
       },
       "ELO_STANDARD": {
-        "n": 10,
-        "independent_events": 10,
+        "n": 11,
+        "independent_events": 11,
         "wins": 2,
-        "losses": 8,
-        "staked_eur": 42.01,
-        "pnl_eur": -18.51,
-        "roi_pct": -44.06
+        "losses": 9,
+        "staked_eur": 46.94,
+        "pnl_eur": -23.44,
+        "roi_pct": -49.93
       },
       "FREQ_BALANCED_3_5": {
-        "n": 7,
-        "independent_events": 6,
+        "n": 8,
+        "independent_events": 7,
         "wins": 0,
-        "losses": 7,
-        "staked_eur": 17.38,
-        "pnl_eur": -17.38,
+        "losses": 8,
+        "staked_eur": 19.87,
+        "pnl_eur": -19.87,
         "roi_pct": -100.0
       },
       "FREQ_BROAD_5_10": {
-        "n": 9,
-        "independent_events": 9,
-        "wins": 1,
-        "losses": 8,
-        "staked_eur": 22.39,
-        "pnl_eur": -16.84,
-        "roi_pct": -75.21
-      },
-      "FREQ_SELECTIVE_1_3": {
-        "n": 4,
-        "independent_events": 3,
-        "wins": 0,
-        "losses": 4,
-        "staked_eur": 9.34,
-        "pnl_eur": -9.34,
-        "roi_pct": -100.0
-      },
-      "MARKET_ANCHORED": {
         "n": 10,
         "independent_events": 10,
         "wins": 1,
         "losses": 9,
-        "staked_eur": 41.92,
-        "pnl_eur": -30.93,
-        "roi_pct": -73.79
+        "staked_eur": 24.89,
+        "pnl_eur": -19.34,
+        "roi_pct": -77.7
+      },
+      "FREQ_SELECTIVE_1_3": {
+        "n": 5,
+        "independent_events": 4,
+        "wins": 0,
+        "losses": 5,
+        "staked_eur": 11.83,
+        "pnl_eur": -11.83,
+        "roi_pct": -100.0
+      },
+      "MARKET_ANCHORED": {
+        "n": 11,
+        "independent_events": 11,
+        "wins": 1,
+        "losses": 10,
+        "staked_eur": 46.85,
+        "pnl_eur": -35.86,
+        "roi_pct": -76.54
       },
       "MARKET_DAILY_REFERENCE": {
-        "n": 21,
-        "independent_events": 21,
+        "n": 22,
+        "independent_events": 22,
         "wins": 16,
-        "losses": 5,
-        "staked_eur": 77.83,
-        "pnl_eur": 19.13,
-        "roi_pct": 24.58
+        "losses": 6,
+        "staked_eur": 78.84,
+        "pnl_eur": 18.12,
+        "roi_pct": 22.99
       },
       "POISSON_SHRINK": {
-        "n": 10,
-        "independent_events": 10,
+        "n": 12,
+        "independent_events": 12,
         "wins": 2,
-        "losses": 8,
-        "staked_eur": 39.62,
-        "pnl_eur": -18.17,
-        "roi_pct": -45.86
+        "losses": 10,
+        "staked_eur": 46.99,
+        "pnl_eur": -25.54,
+        "roi_pct": -54.35
       }
     },
     "by_odds_band": {
@@ -3730,13 +6682,13 @@
         "roi_pct": 12.3
       },
       "2_to_3": {
-        "n": 53,
-        "independent_events": 10,
+        "n": 65,
+        "independent_events": 12,
         "wins": 17,
-        "losses": 36,
-        "staked_eur": 196.0,
-        "pnl_eur": -21.09,
-        "roi_pct": -10.76
+        "losses": 48,
+        "staked_eur": 241.52,
+        "pnl_eur": -66.61,
+        "roi_pct": -27.58
       },
       "3_to_5": {
         "n": 41,
@@ -3766,13 +6718,13 @@
     "paper_only": true
   },
   "market_activity": {
-    "asof_utc": "2026-11-02T20:53:43.260794+00:00",
+    "asof_utc": "2026-11-02T22:36:14.475760+00:00",
     "by_market": {
       "1X2": {
         "label": "Resultado 1X2",
         "papers_total": 87,
-        "papers_open": 12,
-        "papers_settled": 75,
+        "papers_open": 0,
+        "papers_settled": 87,
         "papers_voided": 0,
         "papers_today": 4,
         "observations": 0,
@@ -3793,8 +6745,8 @@
       "GOALS_TOTAL": {
         "label": "Mais/menos golos",
         "papers_total": 14,
-        "papers_open": 1,
-        "papers_settled": 13,
+        "papers_open": 0,
+        "papers_settled": 14,
         "papers_voided": 0,
         "papers_today": 14,
         "observations": 21,
@@ -4597,128 +7549,128 @@
   "accounts": {
     "ELO_STANDARD": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 981.492,
-      "open_exposure_eur": 17.25,
-      "pnl_eur": -18.508,
-      "total_staked_settled_eur": 42.01,
+      "bankroll_eur": 976.562,
+      "open_exposure_eur": 12.32,
+      "pnl_eur": -23.438,
+      "total_staked_settled_eur": 46.94,
       "paper_wins": 2,
-      "paper_losses": 8,
-      "settled": 10,
+      "paper_losses": 9,
+      "settled": 11,
       "voided": 0,
-      "open": 9,
-      "yield_percent": -44.0562,
-      "return_on_initial_bank_percent": -1.8508,
-      "max_settled_drawdown_percent": 1.8811,
-      "brier": 0.614853,
-      "log_loss": 0.962951,
-      "benchmark_n": 10,
-      "market_brier": 0.492251,
-      "market_log_loss": 0.820578,
+      "open": 8,
+      "yield_percent": -49.9318,
+      "return_on_initial_bank_percent": -2.3438,
+      "max_settled_drawdown_percent": 2.3438,
+      "brier": 0.635356,
+      "log_loss": 0.997125,
+      "benchmark_n": 11,
+      "market_brier": 0.510328,
+      "market_log_loss": 0.847928,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "ELO_DYNAMIC": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 987.4104,
-      "open_exposure_eur": 17.36,
-      "pnl_eur": -12.5896,
-      "total_staked_settled_eur": 47.02,
+      "bankroll_eur": 982.4504,
+      "open_exposure_eur": 12.4,
+      "pnl_eur": -17.5496,
+      "total_staked_settled_eur": 51.98,
       "paper_wins": 3,
-      "paper_losses": 8,
-      "settled": 11,
+      "paper_losses": 9,
+      "settled": 12,
       "voided": 0,
-      "open": 9,
-      "yield_percent": -26.775,
-      "return_on_initial_bank_percent": -1.259,
-      "max_settled_drawdown_percent": 1.495,
-      "brier": 0.585397,
-      "log_loss": 0.952227,
-      "benchmark_n": 11,
-      "market_brier": 0.488209,
-      "market_log_loss": 0.832357,
+      "open": 8,
+      "yield_percent": -33.7622,
+      "return_on_initial_bank_percent": -1.755,
+      "max_settled_drawdown_percent": 1.755,
+      "brier": 0.601385,
+      "log_loss": 0.97641,
+      "benchmark_n": 12,
+      "market_brier": 0.505116,
+      "market_log_loss": 0.856446,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "POISSON_SHRINK": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 981.8312,
-      "open_exposure_eur": 19.63,
-      "pnl_eur": -18.1688,
-      "total_staked_settled_eur": 39.62,
+      "bankroll_eur": 974.4612,
+      "open_exposure_eur": 12.26,
+      "pnl_eur": -25.5388,
+      "total_staked_settled_eur": 46.99,
       "paper_wins": 2,
-      "paper_losses": 8,
-      "settled": 10,
+      "paper_losses": 10,
+      "settled": 12,
       "voided": 0,
-      "open": 10,
-      "yield_percent": -45.8576,
-      "return_on_initial_bank_percent": -1.8169,
-      "max_settled_drawdown_percent": 1.8169,
-      "brier": 0.591655,
-      "log_loss": 0.955526,
-      "benchmark_n": 10,
-      "market_brier": 0.470432,
-      "market_log_loss": 0.804252,
+      "open": 8,
+      "yield_percent": -54.3494,
+      "return_on_initial_bank_percent": -2.5539,
+      "max_settled_drawdown_percent": 2.5539,
+      "brier": 0.644471,
+      "log_loss": 1.038615,
+      "benchmark_n": 12,
+      "market_brier": 0.507817,
+      "market_log_loss": 0.858646,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "DIXON_COLES_LOW": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 979.442,
-      "open_exposure_eur": 17.22,
-      "pnl_eur": -20.558,
-      "total_staked_settled_eur": 42.14,
+      "bankroll_eur": 974.462,
+      "open_exposure_eur": 12.24,
+      "pnl_eur": -25.538,
+      "total_staked_settled_eur": 47.12,
       "paper_wins": 2,
-      "paper_losses": 8,
-      "settled": 10,
+      "paper_losses": 9,
+      "settled": 11,
       "voided": 0,
-      "open": 9,
-      "yield_percent": -48.785,
-      "return_on_initial_bank_percent": -2.0558,
-      "max_settled_drawdown_percent": 2.2203,
-      "brier": 0.607527,
-      "log_loss": 0.954763,
-      "benchmark_n": 10,
-      "market_brier": 0.467378,
-      "market_log_loss": 0.784505,
+      "open": 8,
+      "yield_percent": -54.1978,
+      "return_on_initial_bank_percent": -2.5538,
+      "max_settled_drawdown_percent": 2.7174,
+      "brier": 0.653906,
+      "log_loss": 1.032805,
+      "benchmark_n": 11,
+      "market_brier": 0.487715,
+      "market_log_loss": 0.815134,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "ELO_POISSON_BLEND": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 969.7012,
-      "open_exposure_eur": 17.05,
-      "pnl_eur": -30.2988,
-      "total_staked_settled_eur": 51.75,
+      "bankroll_eur": 964.7712,
+      "open_exposure_eur": 12.12,
+      "pnl_eur": -35.2288,
+      "total_staked_settled_eur": 56.68,
       "paper_wins": 2,
-      "paper_losses": 11,
-      "settled": 13,
+      "paper_losses": 12,
+      "settled": 14,
       "voided": 0,
-      "open": 9,
-      "yield_percent": -58.5484,
-      "return_on_initial_bank_percent": -3.0299,
-      "max_settled_drawdown_percent": 3.0299,
-      "brier": 0.599122,
-      "log_loss": 0.954295,
-      "benchmark_n": 13,
-      "market_brier": 0.49383,
-      "market_log_loss": 0.829362,
+      "open": 8,
+      "yield_percent": -62.1538,
+      "return_on_initial_bank_percent": -3.5229,
+      "max_settled_drawdown_percent": 3.5229,
+      "brier": 0.625415,
+      "log_loss": 0.995493,
+      "benchmark_n": 14,
+      "market_brier": 0.50792,
+      "market_log_loss": 0.850224,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "CONSENSUS_SHRUNK": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 969.7996,
-      "open_exposure_eur": 17.05,
-      "pnl_eur": -30.2004,
-      "total_staked_settled_eur": 51.75,
+      "bankroll_eur": 964.8696,
+      "open_exposure_eur": 12.12,
+      "pnl_eur": -35.1304,
+      "total_staked_settled_eur": 56.68,
       "paper_wins": 2,
-      "paper_losses": 11,
-      "settled": 13,
+      "paper_losses": 12,
+      "settled": 14,
       "voided": 0,
-      "open": 9,
-      "yield_percent": -58.3583,
-      "return_on_initial_bank_percent": -3.02,
-      "max_settled_drawdown_percent": 3.02,
-      "brier": 0.598336,
-      "log_loss": 0.954488,
-      "benchmark_n": 13,
-      "market_brier": 0.490204,
-      "market_log_loss": 0.824707,
+      "open": 8,
+      "yield_percent": -61.9802,
+      "return_on_initial_bank_percent": -3.513,
+      "max_settled_drawdown_percent": 3.513,
+      "brier": 0.621619,
+      "log_loss": 0.990882,
+      "benchmark_n": 14,
+      "market_brier": 0.504553,
+      "market_log_loss": 0.845901,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "DISAGREEMENT_VETO": {
@@ -4744,107 +7696,107 @@
     },
     "MARKET_ANCHORED": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 969.069,
-      "open_exposure_eur": 17.03,
-      "pnl_eur": -30.931,
-      "total_staked_settled_eur": 41.92,
+      "bankroll_eur": 964.139,
+      "open_exposure_eur": 12.1,
+      "pnl_eur": -35.861,
+      "total_staked_settled_eur": 46.85,
       "paper_wins": 1,
-      "paper_losses": 9,
-      "settled": 10,
+      "paper_losses": 10,
+      "settled": 11,
       "voided": 0,
-      "open": 9,
-      "yield_percent": -73.7858,
-      "return_on_initial_bank_percent": -3.0931,
-      "max_settled_drawdown_percent": 3.0931,
-      "brier": 0.594507,
-      "log_loss": 0.939277,
-      "benchmark_n": 10,
-      "market_brier": 0.484978,
-      "market_log_loss": 0.810985,
+      "open": 8,
+      "yield_percent": -76.5443,
+      "return_on_initial_bank_percent": -3.5861,
+      "max_settled_drawdown_percent": 3.5861,
+      "brier": 0.620251,
+      "log_loss": 0.980221,
+      "benchmark_n": 11,
+      "market_brier": 0.503716,
+      "market_log_loss": 0.839208,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 1019.1341,
-      "open_exposure_eur": 18.24,
-      "pnl_eur": 19.1341,
-      "total_staked_settled_eur": 77.83,
+      "bankroll_eur": 1018.1241,
+      "open_exposure_eur": 17.23,
+      "pnl_eur": 18.1241,
+      "total_staked_settled_eur": 78.84,
       "paper_wins": 16,
-      "paper_losses": 5,
-      "settled": 21,
+      "paper_losses": 6,
+      "settled": 22,
       "voided": 0,
-      "open": 9,
-      "yield_percent": 24.5845,
-      "return_on_initial_bank_percent": 1.9134,
+      "open": 8,
+      "yield_percent": 22.9885,
+      "return_on_initial_bank_percent": 1.8124,
       "max_settled_drawdown_percent": 0.6352,
-      "brier": 0.345479,
-      "log_loss": 0.53996,
-      "benchmark_n": 12,
-      "market_brier": 0.330133,
-      "market_log_loss": 0.532581,
+      "brier": 0.36152,
+      "log_loss": 0.567225,
+      "benchmark_n": 13,
+      "market_brier": 0.358461,
+      "market_log_loss": 0.57929,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "FREQ_SELECTIVE_1_3": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 990.66,
-      "open_exposure_eur": 12.45,
-      "pnl_eur": -9.34,
-      "total_staked_settled_eur": 9.34,
+      "bankroll_eur": 988.17,
+      "open_exposure_eur": 9.96,
+      "pnl_eur": -11.83,
+      "total_staked_settled_eur": 11.83,
       "paper_wins": 0,
-      "paper_losses": 4,
-      "settled": 4,
+      "paper_losses": 5,
+      "settled": 5,
       "voided": 0,
-      "open": 8,
+      "open": 7,
       "yield_percent": -100.0,
-      "return_on_initial_bank_percent": -0.934,
-      "max_settled_drawdown_percent": 0.934,
-      "brier": 0.660461,
-      "log_loss": 0.904336,
-      "benchmark_n": 4,
-      "market_brier": 0.389369,
-      "market_log_loss": 0.595462,
+      "return_on_initial_bank_percent": -1.183,
+      "max_settled_drawdown_percent": 1.183,
+      "brier": 0.721814,
+      "log_loss": 1.029681,
+      "benchmark_n": 5,
+      "market_brier": 0.449713,
+      "market_log_loss": 0.700655,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "FREQ_BALANCED_3_5": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 982.62,
-      "open_exposure_eur": 12.41,
-      "pnl_eur": -17.38,
-      "total_staked_settled_eur": 17.38,
+      "bankroll_eur": 980.13,
+      "open_exposure_eur": 9.92,
+      "pnl_eur": -19.87,
+      "total_staked_settled_eur": 19.87,
       "paper_wins": 0,
-      "paper_losses": 7,
-      "settled": 7,
+      "paper_losses": 8,
+      "settled": 8,
       "voided": 0,
-      "open": 8,
+      "open": 7,
       "yield_percent": -100.0,
-      "return_on_initial_bank_percent": -1.738,
-      "max_settled_drawdown_percent": 1.738,
-      "brier": 0.659606,
-      "log_loss": 0.97623,
-      "benchmark_n": 7,
-      "market_brier": 0.463492,
-      "market_log_loss": 0.749046,
+      "return_on_initial_bank_percent": -1.987,
+      "max_settled_drawdown_percent": 1.987,
+      "brier": 0.698058,
+      "log_loss": 1.045584,
+      "benchmark_n": 8,
+      "market_brier": 0.491942,
+      "market_log_loss": 0.795594,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "FREQ_BROAD_5_10": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 983.16,
-      "open_exposure_eur": 14.91,
-      "pnl_eur": -16.84,
-      "total_staked_settled_eur": 22.39,
+      "bankroll_eur": 980.66,
+      "open_exposure_eur": 12.41,
+      "pnl_eur": -19.34,
+      "total_staked_settled_eur": 24.89,
       "paper_wins": 1,
-      "paper_losses": 8,
-      "settled": 9,
+      "paper_losses": 9,
+      "settled": 10,
       "voided": 0,
-      "open": 9,
-      "yield_percent": -75.2121,
-      "return_on_initial_bank_percent": -1.684,
-      "max_settled_drawdown_percent": 1.738,
-      "brier": 0.563216,
-      "log_loss": 0.885308,
-      "benchmark_n": 9,
-      "market_brier": 0.434173,
-      "market_log_loss": 0.735881,
+      "open": 8,
+      "yield_percent": -77.7019,
+      "return_on_initial_bank_percent": -1.934,
+      "max_settled_drawdown_percent": 1.9879,
+      "brier": 0.603617,
+      "log_loss": 0.949883,
+      "benchmark_n": 10,
+      "market_brier": 0.459865,
+      "market_log_loss": 0.774436,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     }
   },
@@ -5083,11 +8035,8 @@
     "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 14,
-  "missing_final_event_ids": [
-    "epl:401878762",
-    "ligue_1:401876419"
-  ],
+  "newly_settled": 12,
+  "missing_final_event_ids": [],
   "statistic_settlement": {
     "lookups": 0,
     "errors": []
