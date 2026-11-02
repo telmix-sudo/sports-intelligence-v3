@@ -1,32 +1,32 @@
 {
-  "asof_utc": "2026-11-02T09:02:42.900122+00:00",
+  "asof_utc": "2026-11-02T09:03:13.949000+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-  "new_forecasts": 0,
+  "new_forecasts": 9,
   "new_settlements": 0,
-  "forecasts_total": 54,
-  "zero_stake_forecasts": 42,
-  "open_observations": 28,
+  "forecasts_total": 63,
+  "zero_stake_forecasts": 51,
+  "open_observations": 37,
   "settlements_total": 16,
-  "candidate_markets": 63,
+  "candidate_markets": 72,
   "closing_line_values_available": 0,
   "blocks": {
     "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 4,
-    "insufficient_corners_history": 5,
-    "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 3,
-    "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 3,
-    "DAILY_PAPER_LIMIT": 28,
-    "EXPERIMENTAL_EVENT_ALREADY_TRADED": 21,
+    "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 8,
+    "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 8,
+    "DAILY_PAPER_LIMIT": 37,
+    "EXPERIMENTAL_EVENT_ALREADY_TRADED": 30,
     "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 3,
-    "NEEDS_TWO_BOOKMAKERS": 12,
-    "EDGE_BELOW_4PP": 11,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 18,
+    "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 10,
+    "NEEDS_50_HOLDOUT_FORECASTS": 10,
+    "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 9,
+    "NEEDS_TWO_BOOKMAKERS": 19,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 27,
+    "EDGE_BELOW_4PP": 18,
     "missing_timestamped_BTTS_odds": 3,
     "PUSH_OR_QUARTER_LINE_NEEDS_EXPLICIT_REFUND_MODEL": 2,
     "missing_timestamped_OVER_UNDER_2_5_odds": 1,
     "insufficient_football_home_away_history": 1,
-    "missing_timestamped_ML_odds": 18,
-    "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 1,
-    "NEEDS_50_HOLDOUT_FORECASTS": 1
+    "missing_timestamped_ML_odds": 18
   },
   "history": {
     "requests": 3,
@@ -34,20 +34,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-        "sha256": "6a3b7181085111a04380e2c0a9f1ec0da447873d7436cc62653fcc36356f9594",
-        "captured_at_utc": "2026-11-02T09:02:42.900122+00:00",
+        "sha256": "abe275c6bb606dc892b3e9cd91dd9e762d01dc53a547cedddf2d4d52292798b3",
+        "captured_at_utc": "2026-11-02T09:03:13.949000+00:00",
         "completed_games": 2
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-        "sha256": "c2c596c76c3151838df5c4eb99248ca0b65f0099c6bb0da9fed680dec589177c",
-        "captured_at_utc": "2026-11-02T09:02:42.900122+00:00",
+        "sha256": "691609f70e137400e3e7187e365ef565921a18d8024a9685c4bb6a6e9a972f33",
+        "captured_at_utc": "2026-11-02T09:03:13.949000+00:00",
         "completed_games": 11
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
         "sha256": "5fe289477b4aa447d8e91697bc621f8d56965568e180f6a54fb9cb420682f89e",
-        "captured_at_utc": "2026-11-02T09:02:42.900122+00:00",
+        "captured_at_utc": "2026-11-02T09:03:13.949000+00:00",
         "completed_games": 4
       }
     ],
@@ -371,17 +371,17 @@
   },
   "team_statistics_history": {
     "scoreboard_requests": 32,
-    "summary_requests": 83,
-    "events_with_statistics": 719,
+    "summary_requests": 92,
+    "events_with_statistics": 811,
     "failures": [],
     "missing_stats": 0,
     "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
     "events_by_sport": {
-      "ligue_1": 156,
-      "la_liga": 168,
+      "ligue_1": 178,
+      "la_liga": 189,
       "bundesliga": 72,
-      "serie_a": 168,
-      "epl": 155
+      "serie_a": 194,
+      "epl": 178
     }
   },
   "additional_market_backtests": {
@@ -573,87 +573,155 @@
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "serie_a|STAT_119b17a1a4b3f346": {
-      "n": 3,
-      "brier": 0.46187204546650057,
-      "log_loss": 0.6552137612066514,
+      "n": 17,
+      "brier": 0.4412036840854543,
+      "log_loss": 0.633593434208475,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
         "from": "2026-10-31",
-        "n": 1,
-        "brier": 0.8116492911629368,
-        "log_loss": 1.013472772488328,
-        "ece": 0.6370436763530962
-      },
-      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-    },
-    "serie_a|STAT_0a1855c839d9869d": {
-      "n": 3,
-      "brier": 0.23745705397800174,
-      "log_loss": 0.4095706419994269,
-      "uniform_brier": 0.5,
-      "uniform_log_loss": 0.6931471805599453,
-      "market_brier": null,
-      "roi": null,
-      "holdout": {
-        "from": "2026-10-31",
-        "n": 1,
-        "brier": 0.468555911562424,
-        "log_loss": 0.6616924700106875,
-        "ece": 0.48402268106072466
+        "n": 4,
+        "brier": 0.5053548279819042,
+        "log_loss": 0.6991498612885472,
+        "ece": 0.2818479699623218
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "serie_a|STAT_d211ca82b378b66a": {
-      "n": 3,
-      "brier": 0.35239235446370104,
-      "log_loss": 0.5388807776007652,
+      "n": 20,
+      "brier": 0.4383190471983724,
+      "log_loss": 0.6295326432347075,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
         "from": "2026-10-31",
-        "n": 1,
-        "brier": 0.6176931511559522,
-        "log_loss": 0.8113445489454826,
-        "ece": 0.555739665291201
+        "n": 5,
+        "brier": 0.451748552370337,
+        "log_loss": 0.6425753852465943,
+        "ece": 0.2756446904222678
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "serie_a|STAT_5be39236948e8dee": {
-      "n": 3,
-      "brier": 0.5890747928306476,
-      "log_loss": 0.7897064815526459,
+      "n": 20,
+      "brier": 0.44950925504526246,
+      "log_loss": 0.6425508081470798,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
         "from": "2026-10-31",
-        "n": 1,
-        "brier": 0.9339801605711237,
-        "log_loss": 1.1500110347092694,
-        "ece": 0.6833667245963633
+        "n": 5,
+        "brier": 0.5170868609866484,
+        "log_loss": 0.7137541870602199,
+        "ece": 0.3409211820265736
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "serie_a|STAT_fedf6836cdc9327c": {
-      "n": 3,
-      "brier": 0.7519262015981251,
-      "log_loss": 0.9728674169613521,
+      "n": 19,
+      "brier": 0.45514248251449285,
+      "log_loss": 0.6477184496084456,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
         "from": "2026-10-31",
-        "n": 1,
-        "brier": 1.1672117268581603,
-        "log_loss": 1.4436735383287504,
-        "ece": 0.763941007820028
+        "n": 5,
+        "brier": 0.5708927765495775,
+        "log_loss": 0.776401603993853,
+        "ece": 0.5121087642732904
+      },
+      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+    },
+    "serie_a|STAT_83f28bc6acb854e0": {
+      "n": 20,
+      "brier": 0.2499958497392088,
+      "log_loss": 0.4136914502015482,
+      "uniform_brier": 0.5,
+      "uniform_log_loss": 0.6931471805599453,
+      "market_brier": null,
+      "roi": null,
+      "holdout": {
+        "from": "2026-10-31",
+        "n": 5,
+        "brier": 0.3404352487966119,
+        "log_loss": 0.5278371606995632,
+        "ece": 0.20844898862239852
+      },
+      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+    },
+    "serie_a|STAT_385053163a87bd62": {
+      "n": 20,
+      "brier": 0.37872055664555204,
+      "log_loss": 0.5651954851088548,
+      "uniform_brier": 0.5,
+      "uniform_log_loss": 0.6931471805599453,
+      "market_brier": null,
+      "roi": null,
+      "holdout": {
+        "from": "2026-10-31",
+        "n": 5,
+        "brier": 0.3666411854512622,
+        "log_loss": 0.5523102193565765,
+        "ece": 0.2002739929078087
+      },
+      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+    },
+    "serie_a|STAT_f2fc55e247f090d2": {
+      "n": 20,
+      "brier": 0.4718840842513995,
+      "log_loss": 0.664136733114643,
+      "uniform_brier": 0.5,
+      "uniform_log_loss": 0.6931471805599453,
+      "market_brier": null,
+      "roi": null,
+      "holdout": {
+        "from": "2026-10-31",
+        "n": 5,
+        "brier": 0.6156567774682888,
+        "log_loss": 0.8263603151534415,
+        "ece": 0.2729633629831302
+      },
+      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+    },
+    "serie_a|STAT_0625f0a9fd5832ad": {
+      "n": 20,
+      "brier": 0.4620382200051732,
+      "log_loss": 0.659083720490364,
+      "uniform_brier": 0.5,
+      "uniform_log_loss": 0.6931471805599453,
+      "market_brier": null,
+      "roi": null,
+      "holdout": {
+        "from": "2026-10-31",
+        "n": 5,
+        "brier": 0.5856855177522766,
+        "log_loss": 0.8296847502957332,
+        "ece": 0.29441478234060114
+      },
+      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+    },
+    "serie_a|STAT_0a1855c839d9869d": {
+      "n": 18,
+      "brier": 0.3981196633722772,
+      "log_loss": 0.5855366327175772,
+      "uniform_brier": 0.5,
+      "uniform_log_loss": 0.6931471805599453,
+      "market_brier": null,
+      "roi": null,
+      "holdout": {
+        "from": "2026-10-31",
+        "n": 5,
+        "brier": 0.39555342842066,
+        "log_loss": 0.5824128868545293,
+        "ece": 0.2603840565451866
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
@@ -1022,6 +1090,42 @@
           "period": "FULL_TIME",
           "settlement_block": null,
           "provider_market_key": "alternate_totals"
+        },
+        "STAT_83f28bc6acb854e0": {
+          "kind": "TOTAL",
+          "metric": "corners",
+          "line": 6.5,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "alternate_totals_corners"
+        },
+        "STAT_385053163a87bd62": {
+          "kind": "TOTAL",
+          "metric": "corners",
+          "line": 7.5,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "alternate_totals_corners"
+        },
+        "STAT_f2fc55e247f090d2": {
+          "kind": "TOTAL",
+          "metric": "corners",
+          "line": 10.5,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "alternate_totals_corners"
+        },
+        "STAT_0625f0a9fd5832ad": {
+          "kind": "TOTAL",
+          "metric": "corners",
+          "line": 11.5,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "alternate_totals_corners"
         }
       },
       "ligue_1": {
