@@ -119,9 +119,9 @@ ativado nenhum serviço pago. O plano pequeno deve ser monitorizado por consumo
 de memória; qualquer aumento de plano exige rever o custo.
 
 A configuração passa o JSON Schema público do Render; o CLI do Render não está
-instalado neste ambiente. A imagem Docker foi confirmada no registo oficial, mas
-não foi construída localmente porque Docker não está disponível. Os testes
-integrados foram executados numa instalação nativa do Freqtrade.
+instalado neste ambiente. Os testes integrados nativos passaram. Posteriormente,
+o contentor Docker também passou os testes de arranque, dados reais e reinício
+em AMD64 e ARM64 no GitHub.
 
 A implantação deve usar a branch `freqtrade-paper-250-eur` e o ficheiro
 `bots/freqtrade-paper/render.yaml`. A palavra-passe do painel é gerada pelo Render

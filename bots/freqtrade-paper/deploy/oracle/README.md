@@ -5,6 +5,10 @@ por estes ficheiros. A conta, os recursos gratuitos disponíveis e a região ain
 têm de ser confirmados na consola. O bot só está ativo quando o servidor for
 criado, a instalação terminar e os dados atuais forem verificados.
 
+O contentor passou os testes reais de arranque e reinício em AMD64 e ARM64:
+https://github.com/telmix-sudo/sports-intelligence-v3/actions/runs/41632913260
+A instalação do sistema numa VM Oracle permanece pendente de acesso à conta.
+
 ## Configuração prevista
 
 | Campo | Valor |

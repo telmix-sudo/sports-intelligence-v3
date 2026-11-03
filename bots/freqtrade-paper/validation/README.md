@@ -11,8 +11,10 @@
 - Seis testes unitários aprovados: schema, bloqueio de dinheiro real/overrides,
   preservação de estado, causalidade dos sinais, spread e saída por prazo.
 - Configuração Render validada com o JSON Schema público atual.
-- Docker não está disponível neste ambiente: a imagem foi confirmada no registo,
-  mas a construção/execução do container e a implantação no Render estão pendentes.
+- O contentor Docker foi construído e executado com sucesso em Intel/AMD64 e ARM64
+  através de testes no GitHub. Foram confirmados o modo dry-run, os 250 EUR, os
+  oito pares atuais e a preservação da carteira após reinício do contentor.
+- Evidência: https://github.com/telmix-sudo/sports-intelligence-v3/actions/runs/41632913260
 
 ## Backtest operacional curto
 
@@ -36,10 +38,16 @@ A configuração da nova simulação começa com 250 EUR.
 ## Estado de implantação
 
 Os processos usados na verificação foram parados no final do teste. Não há serviço
-24/7 nem alojamento pago ativado. A configuração de execução contínua está
-preparada para um computador/servidor permanente. No Render foi preparado um
-serviço novo, ainda não criado, com disco persistente de 1 GB e plano de
-7 USD/mês + 0,25 USD/mês de disco, antes de impostos e utilização adicional.
+24/7 nem alojamento pago ativado. A via escolhida passou a ser a Oracle Cloud
+Always Free. Estão preparados um instalador Ubuntu 24.04 e o respetivo cloud-init,
+com arranque automático e volume persistente. O instalador não cria recursos
+Oracle; só é executado depois de aprovisionar uma máquina gratuita elegível.
+
+O navegador disponível devolveu "Site Unavailable" ao abrir https://cloud.oracle.com/,
+incluindo após uma nova tentativa. Ainda não foi possível aceder a uma conta,
+verificar quotas/vagas ou criar o servidor. O acesso remoto por HTTPS ao painel
+também só será configurado depois de o servidor existir. Não apresentar o bot
+como ativo enquanto estes passos e a verificação no servidor não estiverem feitos.
 
 ## Referências
 
