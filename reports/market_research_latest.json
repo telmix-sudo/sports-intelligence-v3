@@ -1,109 +1,126 @@
 {
-  "asof_utc": "2026-11-02T23:33:35.182128+00:00",
+  "asof_utc": "2026-11-03T00:29:40.347031+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-  "new_forecasts": 17,
+  "new_forecasts": 0,
   "new_settlements": 0,
   "forecasts_total": 80,
   "zero_stake_forecasts": 68,
   "open_observations": 22,
   "settlements_total": 50,
-  "candidate_markets": 31,
+  "candidate_markets": 30,
   "closing_line_values_available": 0,
   "blocks": {
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 22,
-    "EDGE_BELOW_4PP": 13,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 13,
-    "DAILY_PAPER_LIMIT": 22,
-    "NEEDS_100_DISTINCT_EVENTS": 8,
-    "NEEDS_14_DAY_FORWARD_PERIOD": 8,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 8,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 8,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 8,
-    "CALIBRATION_ERROR_OVER_10PP": 8,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 21,
+    "NEEDS_100_DISTINCT_EVENTS": 21,
+    "NEEDS_14_DAY_FORWARD_PERIOD": 21,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 21,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 21,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 21,
+    "CALIBRATION_ERROR_OVER_10PP": 21,
+    "EDGE_BELOW_4PP": 12,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 12,
     "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 1,
     "NEEDS_50_HOLDOUT_FORECASTS": 1,
-    "missing_timestamped_ML_odds": 1
+    "missing_timestamped_ML_odds": 3
   },
   "history": {
-    "requests": 3,
+    "requests": 6,
     "failures": [],
     "sources": [
       {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261102&limit=300",
+        "sha256": "25bab7c12e75b7a2ca470bb56343d706d1b91598dd28ddc0c11588b15e8b3552",
+        "captured_at_utc": "2026-11-03T00:29:40.347031+00:00",
+        "completed_games": 0
+      },
+      {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261101&limit=300",
-        "sha256": "a1aa87e29362523f7b7d24feb239d2094e0495d0083d57faab7a074984608142",
-        "captured_at_utc": "2026-11-02T23:33:35.182128+00:00",
-        "completed_games": 2
+        "sha256": "d9a96770652f7e0c0b57a2ada966e1a9bee0d712d76e15c209b3a3bc6bfe4df1",
+        "captured_at_utc": "2026-11-03T00:29:40.347031+00:00",
+        "completed_games": 4
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261102&limit=300",
+        "sha256": "45c28999fa9cbced6f218dffe755a90193f3d3ded535def734bd4ff9fb285d21",
+        "captured_at_utc": "2026-11-03T00:29:40.347031+00:00",
+        "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101&limit=300",
-        "sha256": "7ab05326149c665e508895473a5f8e8906fa49ea1e22e84f0137be5552a2f47d",
-        "captured_at_utc": "2026-11-02T23:33:35.182128+00:00",
-        "completed_games": 11
+        "sha256": "e4ceca289bf0f0834d00544967dff95a0605360577b2f19e4b480b025404488a",
+        "captured_at_utc": "2026-11-03T00:29:40.347031+00:00",
+        "completed_games": 12
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261102&limit=300",
+        "sha256": "63dd5f11963b24b9e4dc559ea1b8bc5a27fc9ae26e33b1806b9f331fb262f5f3",
+        "captured_at_utc": "2026-11-03T00:29:40.347031+00:00",
+        "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261101&limit=300",
-        "sha256": "5cece08cd947d886bf0c26050d0a906599a6b3abe281209d3c2229085a3c933c",
-        "captured_at_utc": "2026-11-02T23:33:35.182128+00:00",
-        "completed_games": 4
+        "sha256": "c19076b392b08a20acc45852e3bec95025442a456850084884719ef20b77de79",
+        "captured_at_utc": "2026-11-03T00:29:40.347031+00:00",
+        "completed_games": 5
       }
     ],
     "games_per_sport": {
-      "nba": 1403,
-      "nfl": 332,
-      "nhl": 1509
+      "nba": 1405,
+      "nfl": 333,
+      "nhl": 1510
     },
-    "cutoff_exclusive_utc_date": "2026-11-02",
+    "cutoff_exclusive_utc_date": "2026-11-03",
     "max_parallel_requests": 8
   },
   "score_backtests": {
     "nba": {
-      "n": 1211,
-      "brier": 0.44148495246443076,
-      "log_loss": 0.6328684782010571,
+      "n": 1213,
+      "brier": 0.44145310050392916,
+      "log_loss": 0.6328391985604149,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
-        "from": "2026-05-21",
-        "n": 170,
-        "brier": 0.4832944984316385,
-        "log_loss": 0.6769928025929423,
-        "ece": 0.05669666839415819
+        "from": "2026-05-22",
+        "n": 171,
+        "brier": 0.48361965812083285,
+        "log_loss": 0.6773298349424693,
+        "ece": 0.053278400667233924
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "nhl": {
-      "n": 1244,
-      "brier": 0.4885372675892185,
-      "log_loss": 0.6815996675995263,
+      "n": 1245,
+      "brier": 0.48861178547270145,
+      "log_loss": 0.681674389896066,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
         "from": "2026-09-22",
-        "n": 276,
-        "brier": 0.4811822866980339,
-        "log_loss": 0.674155988461693,
-        "ece": 0.07500972096693062
+        "n": 277,
+        "brier": 0.4815437659248479,
+        "log_loss": 0.6745187066506096,
+        "ece": 0.07668522822859725
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "nfl": {
-      "n": 195,
-      "brier": 0.47534996326779627,
-      "log_loss": 0.6681413162922564,
+      "n": 196,
+      "brier": 0.4755192589758463,
+      "log_loss": 0.6683124284965014,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
-        "from": "2026-10-12",
+        "from": "2026-10-13",
         "n": 42,
-        "brier": 0.4813123574395749,
-        "log_loss": 0.6742005848458035,
-        "ece": 0.13319766367164307
+        "brier": 0.4824533448768909,
+        "log_loss": 0.6753420776198581,
+        "ece": 0.12908634947487824
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     }
@@ -368,16 +385,16 @@
   "team_statistics_history": {
     "scoreboard_requests": 40,
     "summary_requests": 120,
-    "events_with_statistics": 1468,
+    "events_with_statistics": 1588,
     "failures": [],
     "missing_stats": 0,
     "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
     "events_by_sport": {
-      "ligue_1": 328,
-      "la_liga": 307,
-      "bundesliga": 180,
-      "serie_a": 313,
-      "epl": 340
+      "ligue_1": 354,
+      "la_liga": 329,
+      "bundesliga": 201,
+      "serie_a": 338,
+      "epl": 366
     }
   },
   "additional_market_backtests": {},
@@ -400,15 +417,15 @@
   },
   "validation_by_sport_market_version": {
     "nfl|ML|MULTIMARKET-1.0.0-nfl": {
-      "n_distinct_events": 8,
+      "n_distinct_events": 12,
       "days": 1,
       "dates": 1,
-      "brier": 0.43951446626067225,
-      "market_brier": 0.3773341785540975,
-      "log_loss": 0.6312880234149788,
-      "market_log_loss": 0.5600739602385995,
-      "paired_brier_difference_upper_bound": 1.79299867030886,
-      "ece": 0.17341592647669976,
+      "brier": 0.43074287075207085,
+      "market_brier": 0.337436926702735,
+      "log_loss": 0.6227454583552486,
+      "market_log_loss": 0.5184309176828255,
+      "paired_brier_difference_upper_bound": 1.5065132356509587,
+      "ece": 0.1907897205731784,
       "eligible_for_small_paper": false,
       "blocks": [
         "NEEDS_100_DISTINCT_EVENTS",
@@ -421,15 +438,687 @@
       "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
     },
     "nba|ML|MULTIMARKET-1.0.0-nba": {
+      "n_distinct_events": 3,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.5214433271445805,
+      "market_brier": 0.41937112593774,
+      "log_loss": 0.7153548512401211,
+      "market_log_loss": 0.606748890443178,
+      "paired_brier_difference_upper_bound": 2.928486784410086,
+      "ece": 0.1934133320522321,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "nhl|ML|MULTIMARKET-1.0.0-nhl": {
       "n_distinct_events": 1,
       "days": 1,
       "dates": 1,
-      "brier": 0.4170098685937543,
-      "market_brier": 0.16335664950728,
-      "log_loss": 0.6099526549305341,
-      "market_log_loss": 0.33658412288024697,
-      "paired_brier_difference_upper_bound": 5.149146880448107,
-      "ece": 0.45662340533187423,
+      "brier": 0.5813120325254881,
+      "market_brier": 0.5509071233337801,
+      "log_loss": 0.7746289267915856,
+      "market_log_loss": 0.7440967445558719,
+      "paired_brier_difference_upper_bound": 4.925898570553342,
+      "ece": 0.539125232448588,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|OVER_UNDER_2_5|MULTIMARKET-1.0.0-goals": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.4467519512800568,
+      "market_brier": 0.3002008324968579,
+      "log_loss": 0.6398465880980383,
+      "market_log_loss": 0.4900887104222377,
+      "paired_brier_difference_upper_bound": 5.042044780144832,
+      "ece": 0.4726266768180023,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|BTTS|MULTIMARKET-1.0.0-goals": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.38056656898755636,
+      "market_brier": 0.24858614574337265,
+      "log_loss": 0.5730818143746313,
+      "market_log_loss": 0.4347171483598753,
+      "paired_brier_difference_upper_bound": 5.027474084605817,
+      "ece": 0.4362147229218406,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_da016301f271bb98|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.738589923289617,
+      "market_brier": 0.4746104716617269,
+      "log_loss": 0.9357193478821138,
+      "market_log_loss": 0.6677520878113903,
+      "paired_brier_difference_upper_bound": 5.159473112989524,
+      "ece": 0.6076964387297399,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_c122fd6d54f99fd5|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.1881881599384124,
+      "market_brier": 0.1037699311540364,
+      "log_loss": 0.3663611087041824,
+      "market_log_loss": 0.2584893122268288,
+      "paired_brier_difference_upper_bound": 4.979911890146009,
+      "ece": 0.3067475834773702,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_3467965f94bbdcae|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.9657494016830548,
+      "market_brier": 0.6971278790866049,
+      "log_loss": 1.1870890166754704,
+      "market_log_loss": 0.8925572087950073,
+      "paired_brier_difference_upper_bound": 5.164115183958083,
+      "ece": 0.6948918626962957,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_c3bf160eebc9f0a7|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 1.3520544237057892,
+      "market_brier": 1.0197563937227379,
+      "log_loss": 1.7271451125100228,
+      "market_log_loss": 1.2519647419384285,
+      "paired_brier_difference_upper_bound": 5.2277916913446845,
+      "ece": 0.8222087398300353,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_952a66564a42804e|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.01107065801911469,
+      "market_brier": 0.017290879493173157,
+      "log_loss": 0.07731287809254497,
+      "market_log_loss": 0.09759172311663757,
+      "paired_brier_difference_upper_bound": 4.889273439887575,
+      "ece": 0.07439979173060463,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_6735dcb261466588|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.10890450031180496,
+      "market_brier": 0.07748255997056866,
+      "log_loss": 0.26572498239499764,
+      "market_log_loss": 0.21918644941004137,
+      "paired_brier_difference_upper_bound": 4.926915601702869,
+      "ece": 0.2333500592584079,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_78cca34d2a598cc7|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 1.4441135940538203,
+      "market_brier": 1.1564612035114854,
+      "log_loss": 1.895383176511445,
+      "market_log_loss": 1.4288460022968859,
+      "paired_brier_difference_upper_bound": 5.183146051903968,
+      "ece": 0.8497392523750508,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_2e230ad49950dc73|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 1.7298045664713377,
+      "market_brier": 1.4819251364810007,
+      "log_loss": 2.6592775734472327,
+      "market_log_loss": 1.9717848137616594,
+      "paired_brier_difference_upper_bound": 5.14337309135197,
+      "ece": 0.9300012275452484,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_329a302abf4b38c7|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 1.752350515438777,
+      "market_brier": 1.4862872571731762,
+      "log_loss": 2.749533939023193,
+      "market_log_loss": 1.9809204298315093,
+      "paired_brier_difference_upper_bound": 5.161556919627234,
+      "ece": 0.9360423375677985,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_1cd60dc370eb6569|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.0011399347662308656,
+      "market_brier": 0.017290879493173157,
+      "log_loss": 0.024163591965770843,
+      "market_log_loss": 0.09759172311663757,
+      "paired_brier_difference_upper_bound": 4.8793427166346905,
+      "ece": 0.02387398967737551,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_abc77560c94b37d7|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.007594877280645443,
+      "market_brier": 0.01992179870634686,
+      "log_loss": 0.06360387662165061,
+      "market_log_loss": 0.10514310072056368,
+      "paired_brier_difference_upper_bound": 4.883166739935931,
+      "ece": 0.061623361157297496,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_119b17a1a4b3f346|COUNT-POISSON-1.0-corners": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.42505192318907065,
+      "market_brier": 0.5105260272470601,
+      "log_loss": 0.6180496919960163,
+      "market_log_loss": 0.7036735935469329,
+      "paired_brier_difference_upper_bound": 4.810019557303644,
+      "ece": 0.4610053813075671,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_d211ca82b378b66a|COUNT-POISSON-1.0-corners": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.5660189615899681,
+      "market_brier": 0.6211480034722223,
+      "log_loss": 0.7592578252750752,
+      "market_log_loss": 0.814844115537465,
+      "paired_brier_difference_upper_bound": 4.840364619479379,
+      "ece": 0.5319863539556104,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_5be39236948e8dee|COUNT-POISSON-1.0-corners": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.32047205065499024,
+      "market_brier": 0.3758616842364589,
+      "log_loss": 0.511317282835417,
+      "market_log_loss": 0.5682956921493367,
+      "paired_brier_difference_upper_bound": 4.840104027780164,
+      "ece": 0.40029492293494695,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_fedf6836cdc9327c|COUNT-POISSON-1.0-corners": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.20557751775692773,
+      "market_brier": 0.30796346739304603,
+      "log_loss": 0.3865553209089005,
+      "market_log_loss": 0.4982468415591305,
+      "paired_brier_difference_upper_bound": 4.793107711725515,
+      "ece": 0.3206068603109794,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_83f28bc6acb854e0|COUNT-POISSON-1.0-corners": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.09280850187399836,
+      "market_brier": 0.11995002082465639,
+      "log_loss": 0.2426022233762396,
+      "market_log_loss": 0.2809023854664022,
+      "paired_brier_difference_upper_bound": 4.868352142410975,
+      "ece": 0.21541645929918907,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_385053163a87bd62|COUNT-POISSON-1.0-corners": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.22437232648890423,
+      "market_brier": 0.23451902296055016,
+      "log_loss": 0.4078810687083012,
+      "market_log_loss": 0.4192067359604606,
+      "paired_brier_difference_upper_bound": 4.885346964889987,
+      "ece": 0.33494202967745346,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_f2fc55e247f090d2|COUNT-POISSON-1.0-corners": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.16018017162047915,
+      "market_brier": 0.19436210487055938,
+      "log_loss": 0.33268211395952324,
+      "market_log_loss": 0.3735867990380665,
+      "paired_brier_difference_upper_bound": 4.861311728111553,
+      "ece": 0.2830019183861473,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "serie_a|STAT_0625f0a9fd5832ad|COUNT-POISSON-1.0-corners": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.07071075757521741,
+      "market_brier": 0.07366595245383122,
+      "log_loss": 0.20829220589130593,
+      "market_log_loss": 0.2130932154607082,
+      "paired_brier_difference_upper_bound": 4.892538466483019,
+      "ece": 0.18803026029766784,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "epl|OVER_UNDER_2_5|MULTIMARKET-1.0.0-goals": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.5384996927704886,
+      "market_brier": 0.6186672138877963,
+      "log_loss": 0.7316653819821746,
+      "market_log_loss": 0.8123309671285944,
+      "paired_brier_difference_upper_bound": 4.815326140244325,
+      "ece": 0.518892904543167,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "epl|ASIAN_HOME_MINUS_0_5|MULTIMARKET-1.0.0-goals": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.7418246129527539,
+      "market_brier": 0.3644743311610648,
+      "log_loss": 0.9391134568101135,
+      "market_log_loss": 0.5566818870469992,
+      "paired_brier_difference_upper_bound": 5.2728439431533225,
+      "ece": 0.6090257026401898,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "ligue_1|OVER_UNDER_2_5|MULTIMARKET-1.0.0-goals": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.5702439472134715,
+      "market_brier": 0.41477554905224695,
+      "log_loss": 0.7635012762295825,
+      "market_log_loss": 0.6077009055696965,
+      "paired_brier_difference_upper_bound": 5.050962059522858,
+      "ece": 0.533968139130731,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "ligue_1|STAT_3467965f94bbdcae|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.1937711359935144,
+      "market_brier": 0.125,
+      "log_loss": 0.3728979224746482,
+      "market_log_loss": 0.2876820724517809,
+      "paired_brier_difference_upper_bound": 4.964264797355147,
+      "ece": 0.3112644663252733,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "ligue_1|STAT_6735dcb261466588|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.10455280230929478,
+      "market_brier": 0.1903747958663201,
+      "log_loss": 0.25960051798956546,
+      "market_log_loss": 0.3689276309924825,
+      "paired_brier_difference_upper_bound": 4.809671667804608,
+      "ece": 0.22864033142612306,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "ligue_1|STAT_78cca34d2a598cc7|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.047784406870025664,
+      "market_brier": 0.027681660899654015,
+      "log_loss": 0.16791112409254325,
+      "market_log_loss": 0.12516314295400616,
+      "paired_brier_difference_upper_bound": 4.915596407332004,
+      "ece": 0.15457103038736858,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "ligue_1|STAT_abc77560c94b37d7|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.007185992528130897,
+      "market_brier": 0.027681660899654015,
+      "log_loss": 0.06181328556179478,
+      "market_log_loss": 0.12516314295400616,
+      "paired_brier_difference_upper_bound": 4.87499799299011,
+      "ece": 0.059941607119474605,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "ligue_1|STAT_2e230ad49950dc73|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.010597384914089389,
+      "market_brier": 0.00875107874456844,
+      "log_loss": 0.0755774862345081,
+      "market_log_loss": 0.0684371615532286,
+      "paired_brier_difference_upper_bound": 4.897339967531154,
+      "ece": 0.0727921180969801,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "ligue_1|STAT_da016301f271bb98|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.3207124755562749,
+      "market_brier": 0.19233935109203382,
+      "log_loss": 0.5115676483918469,
+      "market_log_loss": 0.3712265345790431,
+      "paired_brier_difference_upper_bound": 5.0238667858258745,
+      "ece": 0.4004450496361985,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
+        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
+        "CALIBRATION_ERROR_OVER_10PP"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "ligue_1|STAT_952a66564a42804e|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.010398480156283956,
+      "market_brier": 0.040399304217810635,
+      "log_loss": 0.07483751411968158,
+      "market_log_loss": 0.15329743745467417,
+      "paired_brier_difference_upper_bound": 4.865492837300106,
+      "ece": 0.07210575620671333,
+      "eligible_for_small_paper": false,
+      "blocks": [
+        "NEEDS_100_DISTINCT_EVENTS",
+        "NEEDS_14_DAY_FORWARD_PERIOD",
+        "NEEDS_14_DISTINCT_MARKET_DATES",
+        "PAIRED_BRIER_EDGE_NOT_ESTABLISHED"
+      ],
+      "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
+    },
+    "ligue_1|STAT_c3bf160eebc9f0a7|MULTIMARKET-1.0.0-goal-lines": {
+      "n_distinct_events": 1,
+      "days": 1,
+      "dates": 1,
+      "brier": 0.06719163949226611,
+      "market_brier": 0.03599048185603805,
+      "log_loss": 0.2024731938233131,
+      "market_log_loss": 0.14403937022293758,
+      "paired_brier_difference_upper_bound": 4.926694818997861,
+      "ece": 0.1832916248663126,
       "eligible_for_small_paper": false,
       "blocks": [
         "NEEDS_100_DISTINCT_EVENTS",
