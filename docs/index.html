@@ -44,12 +44,15 @@
     <span id="last-scan">Última execução: a verificar</span>
     <span id="available-models">Eventos com probabilidade própria: —</span>
     <span id="new-observations">Novas observações: —</span>
+    <span id="scanner-papers">Posições com stake do scanner isolado: —</span>
   </div>
   <section class="grid" aria-label="Indicadores"><div class="card"><div class="sub">Eventos pré-jogo</div><div class="value" id="events">—</div></div>
     <div class="card"><div class="sub">Fontes verificadas</div><div class="value" id="sources">—</div></div>
     <div class="card"><div class="sub">Odds completas</div><div class="value" id="odds">—</div></div>
-    <div class="card"><div class="sub">Papers com stake V3</div><div class="value" id="papers">—</div></div>
+    <div class="card"><div class="sub">Posições PAPER abertas nas carteiras</div><div class="value" id="papers">—</div></div>
   </section>
+  <p id="paper-context" class="sub" role="status">A carregar as posições das carteiras…</p>
+  <p class="sub">Zero novas entradas ou zero resultados liquidados hoje não significa zero posições abertas. <a href="./strategies.html">Ver carteiras e posições</a>.</p>
   <section class="tablebox"><h2>Validação histórica — Futebol</h2><p class="sub" id="model">—</p>
     <div class="grid">
       <div><div class="sub">Brier modelo</div><div class="value" id="brier">—</div></div>
@@ -71,9 +74,11 @@
     <p class="footnote">Sem apostas reais. A banca histórica V1 e o motor ChatGPT V2.1 são registos separados. O GitHub Actions executa a V3; odds do fornecedor só são usadas se existir chave API guardada em GitHub Secrets. Não existem garantias de lucro.</p>
   </section>
 </main><footer class="sub">Sports Intelligence · Evidência antes de ação · <a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/data_quality.md">Qualidade dos dados</a></footer>
+<script src="paper-summary.js?v=20261103-wallet-count"></script>
 <script>
 "use strict";
 const GLOBAL_EVENTS="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/data/global_events_v3.json";
+const WALLET_REPORT="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/reports/strategy_lab_latest.json";
 const ROOT="https://raw.githubusercontent.com/telmix-sudo/sports-intelligence-v3/main/reports/latest.json";
 const $=id=>document.getElementById(id);
 const num=(x,d=3)=>typeof x==="number"?x.toLocaleString("pt-PT",{minimumFractionDigits:d,maximumFractionDigits:d}):"—";
@@ -94,7 +99,19 @@ function renderGames(){
   }
 }
 function td(value){const el=document.createElement("td");el.textContent=String(value??"—");return el}
+async function loadWalletPositions(){
+  try{
+    const summary=await V3Papers.fetchSummary(WALLET_REPORT);
+    $("papers").textContent=num(summary.open,0);
+    $("paper-context").textContent=V3Papers.describe(summary);
+  }catch(error){
+    $("papers").textContent="—";
+    $("paper-context").textContent="Posições das carteiras indisponíveis: "+error.message+". Não é uma contagem de zero apostas.";
+  }
+}
 async function load(){
+  // Independently refresh wallets even when scanner data cannot be loaded.
+  const walletsTask=loadWalletPositions();
   $("status").textContent="A consultar relatório…";
   try{
     const res=await fetch(ROOT+"?ts="+Date.now(),{cache:"no-store"});
@@ -110,13 +127,13 @@ async function load(){
     $("events").textContent=num(x.prospective_event_count,0);
     $("sources").textContent=num(x.event_sources?.sources_ok,0)+"/"+num(x.event_sources?.sources_checked,0);
     $("odds").textContent=num(x.market_coverage?.with_complete_odds,0);
-    $("papers").textContent=num(x.v3_papers_with_stake,0);
+    $("scanner-papers").textContent="Posições com stake do scanner isolado: "+num(x.v3_papers_with_stake,0)+" (separado das carteiras).";
     const m=x.football_elo?.metrics||{};
     $("model").textContent=(x.football_elo?.selected_model||"indisponível")+" · "+num(m.n,0)+" previsões cronológicas avaliadas · "+(x.football_elo?.status||"sem dados");
     $("brier").textContent=num(m.brier,4);$("marketbrier").textContent=num(m.benchmark_brier,4);
     $("logloss").textContent=num(m.log_loss,4);$("marketloss").textContent=num(m.benchmark_log_loss,4);
     const gate=x.model_gate||"SEM_VALIDAÇÃO";
-    $("warning").textContent=gate==="UNVALIDATED_AGAINST_MARKET"?"Modelo selecionado ainda é pior do que o benchmark do mercado no teste histórico. Sem posições com stake.":"Modelo experimental: não equivale a vantagem comprovada.";
+    $("warning").textContent=gate==="UNVALIDATED_AGAINST_MARKET"?"Modelo do scanner ainda é pior do que o benchmark do mercado no teste histórico; não abre novas posições com stake. As carteiras têm registos próprios.":"Modelo experimental: não equivale a vantagem comprovada.";
     const sports=x.event_sources?.by_sport||{};const max=Math.max(1,...Object.values(sports));
     const region=$("coverage");region.replaceChildren();
     for(const [name,n] of Object.entries(sports)){
@@ -152,6 +169,7 @@ async function load(){
     $("integrity").textContent="Fonte de odds: "+(x.odds_sources?.status||"desconhecida")+" · chamadas quota hoje: "+(x.odds_sources?.calls_today??0)+" · falhas de fontes: "+(x.event_sources?.sources_failed??0);
     $("status").textContent=(x.model_gate||"INVESTIGAÇÃO")+" · scanner apenas paper";
   }catch(e){$("status").textContent="Relatório indisponível: "+e.message+". Consulta GitHub Actions."; $("refresh-status").textContent="Sem atualização do relatório. Os valores anteriores não devem ser considerados atuais."}
+  await walletsTask;
 }
 $("refresh").addEventListener("click",load);
 $("event-search").addEventListener("input",renderGames);

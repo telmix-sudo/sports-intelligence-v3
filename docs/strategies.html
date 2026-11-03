@@ -6,6 +6,7 @@
 .balance-movement{display:flex;flex-wrap:wrap;gap:16px 36px;margin:16px 0}.balance-movement span{font-size:.85rem;color:var(--soft)}.balance-movement strong{display:block;color:var(--text);font-size:1.5rem;font-variant-numeric:tabular-nums}.balance-scroll th:first-child{position:sticky;left:0;background:var(--panel);z-index:1;min-width:175px}</style></head><body>
 <header class="bar"><div><div class="badge">EXPERIMENTAÇÃO · DINHEIRO 100% FICTÍCIO</div><h1>Laboratório de estratégias V3</h1><p class="muted" id="updated">A carregar o relatório...</p><p class="muted small" id="freshness">Consulta automática de 5 em 5 minutos; relatórios novos são publicados pelo GitHub Actions, não em tempo real.</p></div><nav><a href="#balanco">Balanço</a> &nbsp; <a href="./">Painel principal</a> &nbsp; <a href="https://github.com/telmix-sudo/sports-intelligence-v3/actions/workflows/strategy-lab.yml">Execuções</a> &nbsp; <button id="refresh">Atualizar</button></nav></header>
 <main>
+<section class="card space" aria-label="Posições PAPER em aberto"><h2>Posições PAPER em aberto</h2><strong id="openPositions">—</strong><p id="openPositionsContext" class="muted" role="status">A carregar as posições das carteiras…</p><p class="muted small">O balanço por dia inclui apenas resultados liquidados nessa data. Ganhos e perdas a zero hoje não significam que as carteiras estejam sem posições abertas.</p></section>
 <section class="card space balance-panel" id="balanco" aria-labelledby="balanceTitle">
   <div class="balance-heading"><h2 id="balanceTitle">Balanço das carteiras</h2><p class="badge">SALDOS FICTÍCIOS · EUR</p></div>
   <p class="muted small">Consulta os ganhos, as perdas e a evolução do saldo por dia, semana ou mês.</p>
@@ -48,6 +49,7 @@
 <section class="space"><h2>Fonte e qualidade</h2><div class="card"><div id="sources" class="muted">—</div><p class="muted small">As carteiras simulam preços observados, mas não verificam a execução real em bookmaker nem oferecem garantias. Estratégias podem selecionar os mesmos jogos; por isso não somamos as carteiras como posições independentes.</p><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/original_strategies.md">Metodologia, fontes científicas e próximas estratégias</a></p></div></section>
 </main><dialog id="positionsDialog" aria-labelledby="positionsTitle"><div class="dialogtop"><h2 id="positionsTitle">Posições</h2><button id="closePositions" aria-label="Fechar quadro">Fechar ×</button></div><p class="muted" id="positionsSummary"></p><div id="positionsContent"></div></dialog><footer>Sports Intelligence · Sem apostas reais · Fontes públicas e cálculos reproduzíveis</footer>
 <script src="balance.js?v=20261101-totals"></script>
+<script src="paper-summary.js?v=20261103-wallet-count"></script>
 <script>
 "use strict";
 const el=id=>document.getElementById(id);
@@ -117,6 +119,14 @@ el("status").textContent="A verificar estado...";
 try{
 const {report:x,ref}=await V3Balance.fetchReport();
 balancePanel.updateReport(x,ref);
+try{
+ const positions=V3Papers.summarize(x);
+ el('openPositions').textContent=fmt(positions.open,0);
+ el('openPositionsContext').textContent=V3Papers.describe(positions);
+}catch(error){
+ el('openPositions').textContent='—';
+ el('openPositionsContext').textContent='Contagem indisponível: '+error.message+'. Não representa zero posições.';
+}
 el("updated").textContent="Último relatório: "+new Intl.DateTimeFormat("pt-PT",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date(x.asof_utc))+" (Lisboa)";
 const elapsed=Math.max(0,Math.round((Date.now()-new Date(x.asof_utc).getTime())/60000));
 el("freshness").textContent="Verificado agora; relatório publicado há "+(elapsed<60?elapsed+" min":Math.floor(elapsed/60)+" h "+elapsed%60+" min")+". A verificação automática ocorre a cada 5 minutos e não provoca novas apostas nem consultas à API de odds. "+(elapsed>24*60?"Atenção: laboratório sem novo relatório há mais de um dia.":"As carteiras só mudam quando existe uma nova operação ou liquidação.");
