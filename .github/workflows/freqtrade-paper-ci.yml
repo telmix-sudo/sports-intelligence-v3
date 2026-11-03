@@ -1,0 +1,46 @@
+name: Verify Freqtrade paper container
+
+"on":
+  push:
+    branches: [freqtrade-paper-250-eur]
+    paths:
+      - bots/freqtrade-paper/**
+      - .github/workflows/freqtrade-paper-ci.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docker-smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: bots/freqtrade-paper
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Oracle installer syntax
+        run: |
+          bash -n deploy/oracle/bootstrap.sh
+          bash -n deploy/oracle/verify_container.sh
+      - name: Build and start the real paper container
+        run: docker compose up -d --build --wait --wait-timeout 360
+      - name: Verify the running account and markets
+        run: bash deploy/oracle/verify_container.sh
+      - name: Restart without changing the wallet
+        run: |
+          docker compose restart
+          docker compose up -d --wait --wait-timeout 360
+          bash deploy/oracle/verify_container.sh
+      - name: Show recent logs if verification failed
+        if: failure()
+        run: docker compose logs --tail 100
+      - name: Remove disposable CI containers and volumes
+        if: always()
+        run: docker compose down -v --remove-orphans

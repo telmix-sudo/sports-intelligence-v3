@@ -127,3 +127,10 @@ A implantação deve usar a branch `freqtrade-paper-250-eur` e o ficheiro
 `bots/freqtrade-paper/render.yaml`. A palavra-passe do painel é gerada pelo Render
 e fica nas variáveis privadas do serviço. O supervisor verifica dados e ciclo;
 a rota `/api/v1/ping` usada pelo alojamento confirma apenas que a API responde.
+
+### Alojamento gratuito escolhido
+
+A instalação preparada para a **Oracle Cloud Always Free** está em
+[deploy/oracle/README.md](deploy/oracle/README.md). Usar essa via antes de
+considerar o Render pago. A execução na Oracle ainda depende de acesso à conta,
+disponibilidade de recursos elegíveis e validação final do servidor.
