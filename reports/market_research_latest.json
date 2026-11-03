@@ -1,25 +1,25 @@
 {
-  "asof_utc": "2026-11-03T03:05:11.363741+00:00",
+  "asof_utc": "2026-11-03T06:51:13.514868+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-  "new_forecasts": 0,
-  "new_settlements": 7,
-  "forecasts_total": 80,
-  "zero_stake_forecasts": 68,
-  "open_observations": 20,
-  "settlements_total": 57,
-  "candidate_markets": 28,
+  "new_forecasts": 4,
+  "new_settlements": 12,
+  "forecasts_total": 84,
+  "zero_stake_forecasts": 72,
+  "open_observations": 15,
+  "settlements_total": 69,
+  "candidate_markets": 29,
   "closing_line_values_available": 0,
   "blocks": {
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 11,
-    "NEEDS_100_DISTINCT_EVENTS": 11,
-    "NEEDS_14_DAY_FORWARD_PERIOD": 11,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 11,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 11,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 11,
-    "CALIBRATION_ERROR_OVER_10PP": 11,
-    "EDGE_BELOW_4PP": 6,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 6,
-    "missing_timestamped_ML_odds": 17
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 15,
+    "NEEDS_100_DISTINCT_EVENTS": 15,
+    "NEEDS_14_DAY_FORWARD_PERIOD": 15,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 15,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 15,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 15,
+    "CALIBRATION_ERROR_OVER_10PP": 15,
+    "EDGE_BELOW_4PP": 7,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 7,
+    "missing_timestamped_ML_odds": 14
   },
   "history": {
     "requests": 3,
@@ -27,20 +27,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261102&limit=300",
-        "sha256": "856a3764ac5bf6e66688e004820f71c02cf3285fa982d6373525e685394a5c4e",
-        "captured_at_utc": "2026-11-03T03:05:11.363741+00:00",
+        "sha256": "322bc61d043b6ca16e38593c46e2eaabe0176972cfce9e567ffdc93d885e9d73",
+        "captured_at_utc": "2026-11-03T06:51:13.514868+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261102&limit=300",
-        "sha256": "735a9dfc2de94601b3d4668c0a038c796241e3cfad3486ec33807aa1ef671975",
-        "captured_at_utc": "2026-11-03T03:05:11.363741+00:00",
+        "sha256": "9c8fef01bc3a8026e01ae94c446fb464b624eda06edd5bbf29ba2d2f0eeb76cd",
+        "captured_at_utc": "2026-11-03T06:51:13.514868+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261102&limit=300",
-        "sha256": "84dfc0953cd47f62d3b219a322c8cba0244cc0dc4503e81ba52a100ccedd20f1",
-        "captured_at_utc": "2026-11-03T03:05:11.363741+00:00",
+        "sha256": "fdccbce7ff3cce54c258bd9f5bd92c1031924a27aa74294e64cc64e13605ae73",
+        "captured_at_utc": "2026-11-03T06:51:13.514868+00:00",
         "completed_games": 0
       }
     ],
@@ -365,16 +365,16 @@
   "team_statistics_history": {
     "scoreboard_requests": 40,
     "summary_requests": 120,
-    "events_with_statistics": 1708,
+    "events_with_statistics": 1828,
     "failures": [],
     "missing_stats": 0,
     "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
     "events_by_sport": {
-      "ligue_1": 377,
-      "la_liga": 348,
-      "bundesliga": 227,
-      "serie_a": 362,
-      "epl": 394
+      "ligue_1": 404,
+      "la_liga": 368,
+      "bundesliga": 245,
+      "serie_a": 389,
+      "epl": 422
     }
   },
   "additional_market_backtests": {},
@@ -1114,11 +1114,11 @@
   "experimental_account": {
     "created": true,
     "initial_bankroll_eur": 1000,
-    "bankroll_eur": 988.57,
-    "pnl_eur": -11.43,
+    "bankroll_eur": 982.59,
+    "pnl_eur": -17.41,
     "positions": 12,
-    "open_exposure_eur": 5.98,
-    "open": 3,
+    "open_exposure_eur": 0,
+    "open": 0,
     "note": "Separate experimental virtual account; original twelve wallets preserved."
   },
   "settlement_errors": [],
