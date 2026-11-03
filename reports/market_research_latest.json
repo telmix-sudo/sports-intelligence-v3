@@ -1,25 +1,25 @@
 {
-  "asof_utc": "2026-11-03T18:40:04.702621+00:00",
+  "asof_utc": "2026-11-03T21:02:09.909614+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-  "new_forecasts": 0,
+  "new_forecasts": 8,
   "new_settlements": 0,
-  "forecasts_total": 85,
-  "zero_stake_forecasts": 73,
-  "open_observations": 16,
+  "forecasts_total": 93,
+  "zero_stake_forecasts": 81,
+  "open_observations": 24,
   "settlements_total": 69,
   "candidate_markets": 29,
   "closing_line_values_available": 0,
   "blocks": {
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 16,
-    "NEEDS_100_DISTINCT_EVENTS": 16,
-    "NEEDS_14_DAY_FORWARD_PERIOD": 16,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 16,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 16,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 16,
-    "CALIBRATION_ERROR_OVER_10PP": 16,
-    "EDGE_BELOW_4PP": 5,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 6,
-    "missing_timestamped_ML_odds": 13
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 24,
+    "NEEDS_100_DISTINCT_EVENTS": 24,
+    "NEEDS_14_DAY_FORWARD_PERIOD": 24,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 24,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 24,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 24,
+    "CALIBRATION_ERROR_OVER_10PP": 24,
+    "EDGE_BELOW_4PP": 8,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 8,
+    "missing_timestamped_ML_odds": 5
   },
   "history": {
     "requests": 3,
@@ -27,20 +27,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261102&limit=300",
-        "sha256": "caa2dfa7f0bf0ab15f6147913391ea287f0619dd28dd846dda9ceba957d1bc15",
-        "captured_at_utc": "2026-11-03T18:40:04.702621+00:00",
+        "sha256": "b02328829e2400644acdec52bf2472d630f863245e5be18ab368336da0421c7b",
+        "captured_at_utc": "2026-11-03T21:02:09.909614+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261102&limit=300",
         "sha256": "45e21e18b12b4bbc4d6e577ee3cca25c952266abfacb0b9ca0a19e33d9a9a510",
-        "captured_at_utc": "2026-11-03T18:40:04.702621+00:00",
+        "captured_at_utc": "2026-11-03T21:02:09.909614+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261102&limit=300",
         "sha256": "65911f80c39977b7f4481aee37f6c38696fa08f15339667e0514ce443d588660",
-        "captured_at_utc": "2026-11-03T18:40:04.702621+00:00",
+        "captured_at_utc": "2026-11-03T21:02:09.909614+00:00",
         "completed_games": 0
       }
     ],
@@ -365,16 +365,16 @@
   "team_statistics_history": {
     "scoreboard_requests": 40,
     "summary_requests": 120,
-    "events_with_statistics": 2188,
+    "events_with_statistics": 2308,
     "failures": [],
     "missing_stats": 0,
     "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
     "events_by_sport": {
-      "ligue_1": 479,
-      "la_liga": 431,
-      "bundesliga": 317,
-      "serie_a": 463,
-      "epl": 498
+      "ligue_1": 503,
+      "la_liga": 455,
+      "bundesliga": 341,
+      "serie_a": 487,
+      "epl": 522
     }
   },
   "additional_market_backtests": {},
