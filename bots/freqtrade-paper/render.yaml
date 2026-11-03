@@ -1,0 +1,29 @@
+# Plano pago: não aplicar sem autorização para o custo real do alojamento.
+services:
+  - type: web
+    name: freqtrade-paper-250-eur
+    runtime: docker
+    plan: 0.5c-512mb
+    region: frankfurt
+    repo: https://github.com/telmix-sudo/sports-intelligence-v3
+    branch: freqtrade-paper-250-eur
+    dockerfilePath: bots/freqtrade-paper/Dockerfile
+    dockerContext: bots/freqtrade-paper
+    autoDeployTrigger: "off"
+    healthCheckPath: /api/v1/ping
+    maxShutdownDelaySeconds: 60
+    disk:
+      name: freqtrade-paper-state
+      mountPath: /freqtrade/runtime
+      sizeGB: 1
+    envVars:
+      - key: PAPER_DATA_DIR
+        value: /freqtrade/runtime
+      - key: PAPER_BIND
+        value: 0.0.0.0
+      - key: PORT
+        value: "10000"
+      - key: PAPER_UI_USERNAME
+        value: telmo
+      - key: PAPER_UI_PASSWORD
+        generateValue: true
