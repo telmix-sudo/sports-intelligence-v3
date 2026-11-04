@@ -1,106 +1,126 @@
 {
-  "asof_utc": "2026-11-03T23:43:05.452679+00:00",
+  "asof_utc": "2026-11-04T01:24:38.819227+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-  "new_forecasts": 0,
+  "new_forecasts": 5,
   "new_settlements": 0,
-  "forecasts_total": 93,
-  "zero_stake_forecasts": 81,
-  "open_observations": 24,
+  "forecasts_total": 98,
+  "zero_stake_forecasts": 86,
+  "open_observations": 29,
   "settlements_total": 69,
-  "candidate_markets": 29,
+  "candidate_markets": 30,
   "closing_line_values_available": 0,
   "blocks": {
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 24,
-    "NEEDS_100_DISTINCT_EVENTS": 24,
-    "NEEDS_14_DAY_FORWARD_PERIOD": 24,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 24,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 24,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 24,
-    "CALIBRATION_ERROR_OVER_10PP": 24,
-    "EDGE_BELOW_4PP": 8,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 8,
-    "missing_timestamped_ML_odds": 5
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 19,
+    "NEEDS_100_DISTINCT_EVENTS": 19,
+    "NEEDS_14_DAY_FORWARD_PERIOD": 19,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 19,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 19,
+    "CALIBRATION_ERROR_OVER_10PP": 19,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 14,
+    "EDGE_BELOW_4PP": 5,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 5,
+    "missing_timestamped_ML_odds": 11,
+    "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 1,
+    "NEEDS_50_HOLDOUT_FORECASTS": 1
   },
   "history": {
-    "requests": 3,
+    "requests": 6,
     "failures": [],
     "sources": [
       {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261103&limit=300",
+        "sha256": "d1c3b2b83c8b5680ec7ee8523a836263568027298c1b278984eef683705d1006",
+        "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
+        "completed_games": 0
+      },
+      {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261102&limit=300",
-        "sha256": "632ede9e8986592d8b3e4062ba1365bc305265a21465036bf63d6151bfa77cc8",
-        "captured_at_utc": "2026-11-03T23:43:05.452679+00:00",
+        "sha256": "55d36f4ce2d4bdab76c38540627248ea5ee6abe7b267986ee7144f3fc1abd5d3",
+        "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
+        "completed_games": 15
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261103&limit=300",
+        "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
+        "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261102&limit=300",
         "sha256": "45e21e18b12b4bbc4d6e577ee3cca25c952266abfacb0b9ca0a19e33d9a9a510",
-        "captured_at_utc": "2026-11-03T23:43:05.452679+00:00",
+        "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
+        "completed_games": 1
+      },
+      {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261103&limit=300",
+        "sha256": "5ca96e1f437fc996895879894042ce46b79e2fd3f1db1db41da968997e695380",
+        "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261102&limit=300",
-        "sha256": "662c70c50d6017067d507b290325d8bc55c59e0f7c8249ba6672ff640f3c4ecf",
-        "captured_at_utc": "2026-11-03T23:43:05.452679+00:00",
-        "completed_games": 0
+        "sha256": "e0fb66f941bc4f6f7742e2927547eb2892480a9be43eae8656cb64a1fe49fbf3",
+        "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
+        "completed_games": 4
       }
     ],
     "games_per_sport": {
-      "nba": 1405,
-      "nfl": 333,
-      "nhl": 1510
+      "nba": 1420,
+      "nfl": 334,
+      "nhl": 1514
     },
-    "cutoff_exclusive_utc_date": "2026-11-03",
+    "cutoff_exclusive_utc_date": "2026-11-04",
     "max_parallel_requests": 8
   },
   "score_backtests": {
     "nba": {
-      "n": 1213,
-      "brier": 0.44145310050392916,
-      "log_loss": 0.6328391985604149,
+      "n": 1228,
+      "brier": 0.44176692864179457,
+      "log_loss": 0.633137739122521,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
-        "from": "2026-05-22",
-        "n": 171,
-        "brier": 0.48361965812083285,
-        "log_loss": 0.6773298349424693,
-        "ece": 0.053278400667233924
+        "from": "2026-05-23",
+        "n": 185,
+        "brier": 0.4834148828939031,
+        "log_loss": 0.6768645087416408,
+        "ece": 0.062136232122124366
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "nhl": {
-      "n": 1245,
-      "brier": 0.48861178547270145,
-      "log_loss": 0.681674389896066,
+      "n": 1249,
+      "brier": 0.48848615723151073,
+      "log_loss": 0.681544365687555,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
-        "from": "2026-09-22",
-        "n": 277,
-        "brier": 0.4815437659248479,
-        "log_loss": 0.6745187066506096,
-        "ece": 0.07668522822859725
+        "from": "2026-09-23",
+        "n": 273,
+        "brier": 0.4798849846361496,
+        "log_loss": 0.6728092815944525,
+        "ece": 0.07874350941640848
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
     "nfl": {
-      "n": 196,
-      "brier": 0.4755192589758463,
-      "log_loss": 0.6683124284965014,
+      "n": 197,
+      "brier": 0.47668958318985694,
+      "log_loss": 0.6694977358282606,
       "uniform_brier": 0.5,
       "uniform_log_loss": 0.6931471805599453,
       "market_brier": null,
       "roi": null,
       "holdout": {
-        "from": "2026-10-13",
+        "from": "2026-10-16",
         "n": 42,
-        "brier": 0.4824533448768909,
-        "log_loss": 0.6753420776198581,
-        "ece": 0.12908634947487824
+        "brier": 0.48411512810855095,
+        "log_loss": 0.6770472506331816,
+        "ece": 0.12980374420527702
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     }
@@ -365,16 +385,16 @@
   "team_statistics_history": {
     "scoreboard_requests": 40,
     "summary_requests": 120,
-    "events_with_statistics": 2428,
+    "events_with_statistics": 2548,
     "failures": [],
     "missing_stats": 0,
     "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
     "events_by_sport": {
-      "ligue_1": 527,
-      "la_liga": 478,
-      "bundesliga": 366,
-      "serie_a": 511,
-      "epl": 546
+      "ligue_1": 551,
+      "la_liga": 502,
+      "bundesliga": 390,
+      "serie_a": 535,
+      "epl": 570
     }
   },
   "additional_market_backtests": {},
@@ -397,15 +417,15 @@
   },
   "validation_by_sport_market_version": {
     "nfl|ML|MULTIMARKET-1.0.0-nfl": {
-      "n_distinct_events": 12,
-      "days": 1,
-      "dates": 1,
-      "brier": 0.43074287075207085,
-      "market_brier": 0.337436926702735,
-      "log_loss": 0.6227454583552486,
-      "market_log_loss": 0.5184309176828255,
-      "paired_brier_difference_upper_bound": 1.5065132356509587,
-      "ece": 0.1907897205731784,
+      "n_distinct_events": 13,
+      "days": 2,
+      "dates": 2,
+      "brier": 0.45005449287970467,
+      "market_brier": 0.36818136261123846,
+      "log_loss": 0.642283711975338,
+      "market_log_loss": 0.5504110520830003,
+      "paired_brier_difference_upper_bound": 1.4396387775567976,
+      "ece": 0.13120098543786868,
       "eligible_for_small_paper": false,
       "blocks": [
         "NEEDS_100_DISTINCT_EVENTS",
@@ -418,15 +438,15 @@
       "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
     },
     "nba|ML|MULTIMARKET-1.0.0-nba": {
-      "n_distinct_events": 3,
-      "days": 1,
-      "dates": 1,
-      "brier": 0.5214433271445805,
-      "market_brier": 0.41937112593774,
-      "log_loss": 0.7153548512401211,
-      "market_log_loss": 0.606748890443178,
-      "paired_brier_difference_upper_bound": 2.928486784410086,
-      "ece": 0.1934133320522321,
+      "n_distinct_events": 17,
+      "days": 2,
+      "dates": 2,
+      "brier": 0.4718093443618778,
+      "market_brier": 0.41126236101630115,
+      "log_loss": 0.6623890603576685,
+      "market_log_loss": 0.5917939757382072,
+      "paired_brier_difference_upper_bound": 1.2478785983653264,
+      "ece": 0.2045863798454541,
       "eligible_for_small_paper": false,
       "blocks": [
         "NEEDS_100_DISTINCT_EVENTS",
@@ -439,22 +459,21 @@
       "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
     },
     "nhl|ML|MULTIMARKET-1.0.0-nhl": {
-      "n_distinct_events": 1,
+      "n_distinct_events": 5,
       "days": 1,
       "dates": 1,
-      "brier": 0.5813120325254881,
-      "market_brier": 0.5509071233337801,
-      "log_loss": 0.7746289267915856,
-      "market_log_loss": 0.7440967445558719,
-      "paired_brier_difference_upper_bound": 4.925898570553342,
-      "ece": 0.539125232448588,
+      "brier": 0.47576990023382215,
+      "market_brier": 0.5237222566274201,
+      "log_loss": 0.6677852499891255,
+      "market_log_loss": 0.7155716171370184,
+      "paired_brier_difference_upper_bound": 2.141378965651192,
+      "ece": 0.2890782310278818,
       "eligible_for_small_paper": false,
       "blocks": [
         "NEEDS_100_DISTINCT_EVENTS",
         "NEEDS_14_DAY_FORWARD_PERIOD",
         "NEEDS_14_DISTINCT_MARKET_DATES",
         "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
-        "LOG_LOSS_NOT_BETTER_THAN_MARKET",
         "CALIBRATION_ERROR_OVER_10PP"
       ],
       "method": "FIXED_VERSION_PRE_DAY_PAIRED_HOEFFDING_BOUND_95_PERCENT"
