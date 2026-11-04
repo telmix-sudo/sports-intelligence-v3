@@ -145,7 +145,7 @@ class HistoricalLearning:
                 clock = parse_utc(r['forecast_utc'])
                 if not clock<start<=settled or settled.date().isoformat()>=self.cutoff:continue
                 family = r.get('model_version') or family_for_wallet(r['strategy'])
-                if r.get('market')=='1X2':family=family_for_wallet(r['strategy'])
+                if r.get('market')=='1X2' and not r.get('daily_paper_exploration_policy'):family=family_for_wallet(r['strategy'])
                 market,sport = r['market'],r['sport']
                 learning = r.get('historical_learning') or {}
                 base = learning.get('base_probabilities',r['probabilities'])

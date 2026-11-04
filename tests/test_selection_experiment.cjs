@@ -2,7 +2,7 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const view=require('../docs/selection-experiment.js');
 test('Zero results remain unavailable and zero-stake samples never become wallet balances',()=>{
  const t={forecasts_total:1,distinct_events:1,settled_total:0,voided_total:0,pending_total:1,minimum_events:100,minimum_dates:14,streams:[{family:'M',sport:'nba',market:'ML',settled:0,dates:0,pending:1,status:'COLLECTING',arms:{VALUE_GAP:{n:0,wins:0,unit_pnl_eur:0,roi_pct:null}}}]};
- assert.match(view.intro(t),/As carteiras não recebem/);
+ assert.match(view.intro(t),/não alteram saldos/);
  assert.deepEqual(view.cohortRows(t)[0].slice(7,10),['—','—','—']);
  assert.equal(view.cohortRows(t,'nhl').length,0);
 });

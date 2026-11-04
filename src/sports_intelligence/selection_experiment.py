@@ -77,6 +77,7 @@ class SelectionExperiment:
         self.rows=[json.loads(l) for l in path.read_text().splitlines() if l.strip()] if path.exists() else []
         self.ids={r['id'] for r in self.rows}
         if len(self.ids)!=len(self.rows):raise ValueError('Duplicate selection experiment record')
+        self.current_forecasts={}
         self.new_forecasts=self.new_settlements=0
         self.rejections=defaultdict(int)
 
@@ -111,15 +112,7 @@ class SelectionExperiment:
             self.rejections['ineligible_event_or_quote']+=1;return False
         stream='|'.join((VERSION,self.digest,family,event['sport'],market))
         digest=hashlib.sha256(stream.encode()).hexdigest()[:24]
-        if 'LOCK-'+digest in self.ids:return False
         fid='SEL3-'+hashlib.sha256((stream+'|'+event['id']).encode()).hexdigest()[:24]
-        if fid in self.ids:return False
-        self.append({'id':'POLICY-'+VERSION,'kind':'POLICY','version':VERSION,'registered_at_utc':clock.isoformat(),
-                     'arms':list(ARMS),'unit_stake_eur':1.0,'funded_stake_eur':0.,'minimum_events':MIN_EVENTS,
-                     'minimum_dates':MIN_DATES,'cohort_stop_rule':'FIRST_PREFIX_REACHING_100_FORECAST_EVENTS_AND_14_KICKOFF_DATES',
-                     'historical_backfill_allowed':False,'automatic_stake_activation':False,
-                     'probability_inversion_tested':False,'opposite_scope':'TWO_COMPLEMENTARY_OUTCOMES_ONLY',
-                     'assessment':'Fixed cohort; all results resolved; paired day intervals vs original and market favourite; independent confirmation before adoption.'})
         row={k:event[k] for k in ('sport','home','away','start_utc')}
         row.update(id=fid,kind='FORECAST',version=VERSION,stream=stream,event_id=event['id'],family=family,
                    model_code_sha256=self.digest,forecast_utc=clock.isoformat(),market=market,market_spec=market_spec,
@@ -127,6 +120,17 @@ class SelectionExperiment:
                    bookmaker_count=quote['bookmaker_count'],price_source=quote['provider'],stake_eur=0.,unit_stake_eur=1.,
                    source=source,sample_min=sample_min,selection_trace=trace,arms={k:v['selection_index'] for k,v in trace['arms'].items()},
                    training_cutoff_exclusive_utc_date=str(self.now.date()),historical_learning=learning)
+        snapshot_key=(family,event['sport'],market,event['id'])
+        snapshot_id='LIVE-'+hashlib.sha256(json.dumps(row,sort_keys=True,allow_nan=False).encode()).hexdigest()[:24]
+        self.current_forecasts[snapshot_key]=dict(row,source_snapshot_id=snapshot_id,paired_forecast_id=fid)
+        if 'LOCK-'+digest in self.ids:return False
+        if fid in self.ids:return False
+        self.append({'id':'POLICY-'+VERSION,'kind':'POLICY','version':VERSION,'registered_at_utc':clock.isoformat(),
+                     'arms':list(ARMS),'unit_stake_eur':1.0,'funded_stake_eur':0.,'minimum_events':MIN_EVENTS,
+                     'minimum_dates':MIN_DATES,'cohort_stop_rule':'FIRST_PREFIX_REACHING_100_FORECAST_EVENTS_AND_14_KICKOFF_DATES',
+                     'historical_backfill_allowed':False,'automatic_stake_activation':False,
+                     'probability_inversion_tested':False,'opposite_scope':'TWO_COMPLEMENTARY_OUTCOMES_ONLY',
+                     'assessment':'Fixed cohort; all results resolved; paired day intervals vs original and market favourite; independent confirmation before adoption.'})
         self.new_forecasts+=self.append(row)
         cohort=[r for r in self.rows if r.get('kind')=='FORECAST' and r['stream']==stream]
         if len(cohort)>=MIN_EVENTS and len({parse_utc(r['start_utc']).date() for r in cohort})>=MIN_DATES:

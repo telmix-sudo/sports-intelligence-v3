@@ -1,46 +1,57 @@
-# Meta de atividade diária — V3
+# Daily PAPER minimum — policy active from 4 November 2026
 
-**Introduzida em 27/10/2026, hora de Portugal.**
+The user explicitly requested at least **five nonzero virtual-stake entries per
+wallet per Lisbon calendar day**, including during model validation. This replaces
+the previous qualified-entry-only minimum which could leave model wallets at zero.
 
-## Objetivo
+Ordinary value entries are evaluated first and retain all their existing admission
+and sizing rules. A separate daily research allocator fills only the remaining
+places up to five, at **EUR 0.50 fictitious per position**. Ordinary positions still
+require the normal minimum stake and validated forward edge. The research entries
+are labelled `DAILY_EXPLORATORY_PAPER`, with `validated_edge: false`; their model EV
+can be negative. They are experiments, not validated betting recommendations.
 
-Procurar **1 a 3 eventos diferentes com posições fictícias por dia civil de Portugal**, sempre que existam eventos futuros com odds genuínas, completas, atuais e verificáveis. Não é possível garantir a meta em dias sem eventos elegíveis. Não confundir frequência de testes com evidência de valor.
+## Data and capital controls
 
-Os oito modelos anteriores continuam sob as suas próprias regras de edge e EV, sem entrada forçada. Para medir o que acontece quando se tenta manter atividade diária, há uma nona carteira totalmente separada denominada `MARKET_DAILY_REFERENCE`.
+- Current recomputed model forecasts, no more than 15 minutes old at registration.
+- Real future event IDs/names and genuine complete price vectors from at least two
+  bookmakers; the original book clocks are retained and must be at most 8 hours old.
+- Actual capture time before kickoff; no historical or post-start entries.
+- Five distinct new events per wallet when filling from zero; an existing event is
+  not repeated in the same wallet, including across calendar days.
+- Maximum 10 total daily positions per wallet, 2% account exposure, EUR 36 per
+  event and EUR 240 across the original and experimental PAPER portfolios.
+- The existing EUR 2.50 aggregate cap for the same model/event/market/selection
+  remains shared across every wallet; profile labels do not evade that cap.
+- Source model and current snapshot are recorded, and fixed goal markets have
+  explicit settlement rules. Three-way markets have no invented opposite; an
+  opposite profile uses the model favourite when only a 1X2 source is available.
+- No real bets, deposits, subscriptions, paid feeds, fabricated odds or bank resets.
+  The existing 16-credit daily odds ceiling is unchanged.
 
-## Market Daily Reference
+## Fixed daily-fill profiles
 
-- Nova banca **1.000 € fictícios**. Os saldos de todas as outras carteiras ficam intactos.
-- Seleção de referência: **favorito do mercado** pelo consenso das probabilidades *no-vig* de pelo menos duas casas. Não afirma que o favorito tem valor esperado positivo.
-- Modalidades: futebol europeu (mercado 1X2), NFL, NBA, NHL e MLB (mercado moneyline).
-- Apenas jogos ainda não iniciados e até 48h do início; odds reais da The Odds API com timestamp da própria cotação de, no máximo, 8 horas.
-- Até **três entradas de referência por dia civil de Lisboa**, em **eventos distintos**. Não duplicar o mesmo evento na mesma carteira nem ultrapassar 2% de exposição em aberto.
-- Stake: 0,5% da banca fictícia da própria carteira, exposição em aberto limitada a 2%; se o limite estiver atingido, a entrada é rejeitada.
-- Em dinheiro real não existe qualquer ligação a corretora ou casa de apostas e nenhuma operação é executada.
-- Depois do jogo, resultado oficial confirma a liquidação: vitória gera lucro fictício segundo a odd registada, derrota perde a stake, empate em moneyline de dois resultados é considerado anulado (VOID) sem prejuízo fictício.
-- Guarda hora de previsão, event ID, casa, mercado, preço, probabilidade, stake e origem. Contagens por dia são calculadas pela data local portuguesa; o desempenho é independente das restantes oito estratégias.
-- **Sem evento ou cotação elegível não é aberta uma posição falsa**. O campo `daily_reference` no relatório fica com `status=NO_ELIGIBLE_QUOTE` e `opened_today=0`.
+These profiles apply only to daily research complements. Native validated entries
+continue to take precedence. For 1X2 sources the wallet's own model is preferred;
+for other sports the real shared source model is explicitly recorded.
 
-## Interpretação
+| Daily research selector | Wallets |
+|---|---|
+| Model favourite | ELO_STANDARD, POISSON_SHRINK, ELO_POISSON_BLEND |
+| Current model/market probability gap | ELO_DYNAMIC, DIXON_COLES_LOW, FREQ_BROAD_5_10 |
+| Opposite binary choice | FREQ_SELECTIVE_1_3, FREQ_BALANCED_3_5, EXPERIMENTAL_MULTI_MARKET |
+| Market favourite | CONSENSUS_SHRUNK, DISAGREEMENT_VETO, MARKET_ANCHORED |
 
-Esta nona carteira é **controlo**, não sinal de aposta com valor nem estratégia com vantagem. A sua seleção pode ter valor esperado negativo devido à margem da casa, comissão, limitação de preços ou outras condições. Deve ser analisada em separado do conjunto das oito estratégias quantitativas.
+MARKET_DAILY_REFERENCE stays a pure market-favourite control, using market
+probabilities rather than auxiliary model probabilities. Its ordinary routine
+continues to allow up to ten entries per day.
 
-A meta de 1–3 eventos distintos por dia é um objetivo operacional *quando os dados permitem*, nunca justificação para fabricar odds, apostar em jogos já iniciados ou ignorar limites de exposição.
+The allocator runs in every existing laboratory execution, is idempotent and
+counts real positive virtual stakes rather than zero-stake observations. Frozen
+records, previous PnL and existing account IDs are preserved. Missing quotes,
+started games, absent forecasts and exhausted risk budgets are reported as explicit
+blockers; a target never creates a fictitious event or quote.
 
-Painel: https://telmix-sudo.github.io/sports-intelligence-v3/strategies.html
-
-Relatório verificável: https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/reports/strategy_lab_latest.json
-
-## Correções de funcionamento (28/10/2026)
-
-- O scanner deve preservar os resultados mesmo quando outras execuções atualizam o repositório simultaneamente (retries de push com rebase e falha explícita se persistência impossível).
-- Quando o GitHub atrasa a execução, recuperar as janelas horárias de odds ainda não consultadas nesse dia, mantendo o orçamento de 10 chamadas por dia.
-- O campo `daily_activity` no relatório distingue o número de **jogos diferentes** do número de **operações repetidas** entre carteiras.
-- O comparador apresenta 12 carteiras (8 estratégias quantitativas, uma referência diária e três experiências de frequência semanal). As três estratégias de frequência semanal conservam a sua definição; a meta diária de 1–3 jogos é medida no sistema global.
-- Uma sequência sem entradas não significa necessariamente falha de software, mas deve surgir com diagnóstico de odds ausentes ou insuficientes.
-
-## Meta individual das oito carteiras principais (30/10/2026)
-
-Cada uma das oito estratégias quantitativas originais passa a ter uma meta operacional **individual de 1 a 3 novas posições PAPER por dia civil de Lisboa** e um teto efetivo de **3 entradas diárias por carteira**. O relatório `daily_activity.per_strategy` publica contagens, meta e cumprimento por carteira; `strategies_below_minimum` identifica carteiras abaixo da meta. As carteiras continuam independentes, com saldos, ledgers, modelos e histórico preservados. As três experiências de frequência e a carteira de referência mantêm regras próprias.
-
-**A meta não é uma obrigação de apostar sem vantagem.** Continuam obrigatórios evento futuro, cotação genuína com timestamp, modelo aplicável, edge/EV mínimo, deduplicação e limites de exposição. Se uma carteira tiver zero oportunidades elegíveis, regista zero e sinaliza a falha da meta. A ampliação de cobertura e a calibração dos modelos são trabalho adicional, não uma autorização para afrouxar filtros. Não existem apostas reais.
+The zero-stake selection-policy experiment remains a separate journal and does
+not automatically promote a model. Daily research positions are a distinct,
+explicitly user-authorized PAPER activity policy, with their own classification.
