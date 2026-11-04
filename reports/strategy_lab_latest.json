@@ -1,19 +1,20 @@
 {
   "selection_experiment": {
     "version": "SELECTION-PAIRED-1.0",
-    "asof_utc": "2026-11-04T18:57:40.946619+00:00",
+    "asof_utc": "2026-11-04T19:03:37.858472+00:00",
     "registered_at_utc": "2026-11-04T18:57:40.946619+00:00",
     "mode": "ZERO_STAKE_FIXED_FUTURE_COHORT",
     "automatic_stake_activation": false,
     "historical_backfill_allowed": false,
+    "current_model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
     "unit_stake_eur": 1.0,
     "minimum_events": 100,
     "minimum_dates": 14,
-    "forecasts_total": 28,
+    "forecasts_total": 56,
     "distinct_events": 28,
     "settled_total": 0,
     "voided_total": 0,
-    "pending_total": 28,
+    "pending_total": 56,
     "new_forecasts": 28,
     "new_settlements": 0,
     "rejections": {},
@@ -33,7 +34,7 @@
         "cohort_locked": false,
         "remaining_events": 100,
         "remaining_dates": 14,
-        "status": "COLLECTING",
+        "status": "SOURCE_VERSION_RETIRED",
         "arms": {
           "VALUE_GAP": {
             "n": 0,
@@ -83,7 +84,7 @@
         "cohort_locked": false,
         "remaining_events": 100,
         "remaining_dates": 14,
-        "status": "COLLECTING",
+        "status": "SOURCE_VERSION_RETIRED",
         "arms": {
           "VALUE_GAP": {
             "n": 0,
@@ -125,6 +126,156 @@
         "market": "ML",
         "market_spec": null,
         "model_code_sha256": "a7513f68166aff985dfa4e81b31e895fbe331f8bfc5da5407de1943afed91798",
+        "forecasts": 14,
+        "settled": 0,
+        "voided": 0,
+        "pending": 14,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "SOURCE_VERSION_RETIRED",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "OPPOSITE_VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|MULTIMARKET-1.0.0-nba|nba|ML",
+        "family": "MULTIMARKET-1.0.0-nba",
+        "sport": "nba",
+        "market": "ML",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 13,
+        "settled": 0,
+        "voided": 0,
+        "pending": 13,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "OPPOSITE_VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|MULTIMARKET-1.0.0-nfl|nfl|ML",
+        "family": "MULTIMARKET-1.0.0-nfl",
+        "sport": "nfl",
+        "market": "ML",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 1,
+        "settled": 0,
+        "voided": 0,
+        "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "OPPOSITE_VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|MULTIMARKET-1.0.0-nhl|nhl|ML",
+        "family": "MULTIMARKET-1.0.0-nhl",
+        "sport": "nhl",
+        "market": "ML",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
         "forecasts": 14,
         "settled": 0,
         "voided": 0,
@@ -177,7 +328,7 @@
         "home": "Edmonton Oilers",
         "away": "Anaheim Ducks",
         "start_utc": "2026-11-06T01:00:00+00:00",
-        "forecast_utc": "2026-11-04T18:57:40.946619+00:00",
+        "forecast_utc": "2026-11-04T19:03:46.726064+00:00",
         "market": "ML",
         "market_spec": null,
         "selection_trace": {
@@ -231,7 +382,7 @@
         "home": "Baltimore Ravens",
         "away": "Jacksonville Jaguars",
         "start_utc": "2026-11-06T01:15:00+00:00",
-        "forecast_utc": "2026-11-04T18:57:40.946619+00:00",
+        "forecast_utc": "2026-11-04T19:03:46.726604+00:00",
         "market": "ML",
         "market_spec": null,
         "selection_trace": {
@@ -285,7 +436,7 @@
         "home": "Colorado Avalanche",
         "away": "Nashville Predators",
         "start_utc": "2026-11-06T02:30:00+00:00",
-        "forecast_utc": "2026-11-04T18:57:40.946619+00:00",
+        "forecast_utc": "2026-11-04T19:03:46.727103+00:00",
         "market": "ML",
         "market_spec": null,
         "selection_trace": {
@@ -598,7 +749,7 @@
       "interpretation": "High odds imply lower expected hit rates. Market-implied expected wins are descriptive; repeated events/markets are correlated, so a naive binomial test across positions is invalid."
     },
     "official_verification": {
-      "requests_this_run": 23,
+      "requests_this_run": 0,
       "failures": [],
       "model_events_total": 23,
       "verified_model_events": 23,
@@ -606,31 +757,31 @@
     }
   },
   "runtime_status": {
-    "checked_at_utc": "2026-11-04T18:57:40.946619+00:00",
+    "checked_at_utc": "2026-11-04T19:03:37.858472+00:00",
     "maximum_age_minutes": 90,
     "components": {
       "scanner": {
         "status": "FRESH",
         "asof_utc": "2026-11-04T18:57:24.159181+00:00",
-        "age_minutes": 0.3
+        "age_minutes": 6.2
       },
       "calendar": {
         "status": "FRESH",
         "asof_utc": "2026-11-04T18:57:24.159181+00:00",
-        "age_minutes": 0.3
+        "age_minutes": 6.2
       },
       "laboratory": {
         "status": "FRESH",
-        "asof_utc": "2026-11-04T18:57:40.946619+00:00",
+        "asof_utc": "2026-11-04T19:03:37.858472+00:00",
         "age_minutes": 0.0
       }
     },
     "needs_scanner": false,
     "needs_laboratory": false,
-    "scanner_recovery_outcome": "success"
+    "scanner_recovery_outcome": "skipped"
   },
   "pricing_readiness": {
-    "asof_utc": "2026-11-04T18:57:40.946619+00:00",
+    "asof_utc": "2026-11-04T19:03:37.858472+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-04",
     "events": [
       {
@@ -6710,7 +6861,7 @@
     },
     "modalities_with_model_forecasts": 0
   },
-  "asof_utc": "2026-11-04T18:57:40.946619+00:00",
+  "asof_utc": "2026-11-04T19:03:37.858472+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-04",
@@ -11171,10 +11322,10 @@
     "caveat": "Score history measures probabilities, not bookmaker profit. Chronological holdout reuse is exploratory; promotion also requires frozen prequential shadow results."
   },
   "market_research": {
-    "asof_utc": "2026-11-04T18:57:40.946619+00:00",
+    "asof_utc": "2026-11-04T19:03:37.858472+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
     "pricing_readiness": {
-      "asof_utc": "2026-11-04T18:57:40.946619+00:00",
+      "asof_utc": "2026-11-04T19:03:37.858472+00:00",
       "training_cutoff_exclusive_utc_date": "2026-11-04",
       "events": [
         {
@@ -11687,20 +11838,20 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261103&limit=300",
-          "sha256": "d9417c9c4700200123d13c7bde2a46962b8bec90389ff3464a466b9c65feece3",
-          "captured_at_utc": "2026-11-04T18:57:40.946619+00:00",
+          "sha256": "d074b8f6c426777b402c1b395bc2f2527b6d936c664e6a2947867ae6447cb872",
+          "captured_at_utc": "2026-11-04T19:03:37.858472+00:00",
           "completed_games": 0
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261103&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-11-04T18:57:40.946619+00:00",
+          "captured_at_utc": "2026-11-04T19:03:37.858472+00:00",
           "completed_games": 0
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261103&limit=300",
-          "sha256": "ceb4312aadbcbbb3a30b51d6e0880d03d777198142b91dac1352970c881af987",
-          "captured_at_utc": "2026-11-04T18:57:40.946619+00:00",
+          "sha256": "8c06af3f61f9a06e7ae0c31208724f3548efef36fdefc488c2bd0d155efd4bd4",
+          "captured_at_utc": "2026-11-04T19:03:37.858472+00:00",
           "completed_games": 0
         }
       ],
@@ -12023,17 +12174,17 @@
       }
     },
     "team_statistics_history": {
-      "scoreboard_requests": 24,
-      "summary_requests": 62,
-      "events_with_statistics": 3326,
+      "scoreboard_requests": 19,
+      "summary_requests": 53,
+      "events_with_statistics": 3379,
       "failures": [],
       "missing_stats": 0,
       "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
       "events_by_sport": {
         "ligue_1": 602,
-        "la_liga": 672,
-        "bundesliga": 594,
-        "serie_a": 707,
+        "la_liga": 695,
+        "bundesliga": 603,
+        "serie_a": 728,
         "epl": 751
       }
     },
@@ -13105,7 +13256,7 @@
     "paper_only": true
   },
   "market_activity": {
-    "asof_utc": "2026-11-04T18:57:40.946619+00:00",
+    "asof_utc": "2026-11-04T19:03:37.858472+00:00",
     "by_market": {
       "1X2": {
         "label": "Resultado 1X2",
