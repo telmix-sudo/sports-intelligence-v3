@@ -399,7 +399,7 @@ def paper_state(rows):
 
 
 def run_research(root, events, football_models, now, risk, football_history=None, history_fetcher=fetch_text,
-                 result_fetcher=fetch_espn, previous_settlement_result=None, collect_team_stats=False, learning=None):
+                 result_fetcher=fetch_espn, previous_settlement_result=None, collect_team_stats=False, learning=None, selection_experiment=None):
     from .activity_policy import daily_entry_stake
     from .admission_validation import validated_learning
     rows = read_journal(root)
@@ -511,14 +511,16 @@ def run_research(root, events, football_models, now, risk, football_history=None
                 append(root, {'id':quote_id,'kind':'QUOTE','forecast_id':fid,'event_id':e['id'],
                               'captured_at_utc':now.isoformat(),'odds':prices,'bookmakers':q.get('bookmakers'),
                               'book_quote_updates_utc':times},rows)
-                if any(r['kind']=='FORECAST' and r['event_id']==e['id'] and r['market']==market and
-                       r['model_version']==pred['version'] and r['stake_eur']>0 for r in rows):
-                    continue
             p = pred['probabilities']
             learning_evidence=None
             if learning is not None:
                 p,learning_evidence=learning.apply(pred['version'],e['sport'],market,p,wallet='EXPERIMENTAL_MULTI_MARKET')
-            choice = max(range(2), key=lambda i:p[i]-p_market[i])
+            from .selection_policy import selection_trace
+            trace=selection_trace(p,p_market,prices,pred.get('push_probability',0.))
+            choice=trace['selected_index']
+            if selection_experiment is not None:
+                selection_experiment.observe(pred['version'],e,p,q,market_spec=pred.get('market_spec'),sample_min=pred['sample_min'],source='MULTIMARKET',learning=learning_evidence,push_probability=pred.get('push_probability',0.))
+            if previous and any(r['kind']=='FORECAST' and r['event_id']==e['id'] and r['market']==market and r['model_version']==pred['version'] and r['stake_eur']>0 for r in rows):continue
             decisive = 1-pred.get('push_probability',0.0)
             ev = decisive*(p[choice]*prices[choice]-1)
             conservative_ev = decisive*conservative_expected_value(p[choice], prices[choice], pred['sample_min'])
@@ -555,7 +557,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
                    'model_version':pred['version'], 'probabilities':p,
                    'model_inputs':pred, 'training_cutoff_exclusive_utc_date':now.date().isoformat(),
                    'history_event_ids_sha256':digest if e['sport'] in NA_SPORTS else None,
-                   'market_no_vig':p_market, 'odds':prices, 'selection_index':choice,
+                   'market_no_vig':p_market, 'odds':prices, 'selection_trace':trace,'selection_index':choice,
                    'bookmakers':q.get('bookmakers'), 'book_quote_updates_utc':times,
                    'bookmaker_count':q.get('bookmaker_count'), 'price_source':q.get('provider'),
                    'market_rules':pred['rules'], 'edge_pp':100*(p[choice]-p_market[choice]),
