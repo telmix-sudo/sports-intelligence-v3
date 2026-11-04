@@ -408,7 +408,7 @@ def build_accounts(root: Path, match_finals: dict, now: dt.datetime) -> tuple[di
 
 def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime,
                   registry: dict | None = None, diagnostics: dict | None = None,
-                  risk: PaperRiskBook | None = None, learning=None, admission=None) -> tuple[dict, dict]:
+                  risk: PaperRiskBook | None = None, learning=None, admission=None, selection_experiment=None) -> tuple[dict, dict]:
     """Optional experimental paper entries; each account independently limits exposure.
 
     Only model probabilities and pre-game timestamped quotes are eligible.
@@ -475,13 +475,17 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
             if learning is not None:
                 p,learning_evidence=learning.apply(name,e['sport'],'1X2',p,wallet=name)
             admission.observe(name,e,p,quote,learning_evidence)
+            if selection_experiment is not None:
+                selection_experiment.observe(name,e,p,quote,sample_min=min(base.played.get(home,0),base.played.get(away,0)),source='ORIGINAL_STRATEGY',learning=learning_evidence)
             if e['id'] in seen_events or today_count>=MAX_DAILY_ENTRIES_PER_ACCOUNT:continue
             admission_evidence=admission.decision(name,e['sport'],'1X2',learning_evidence)
             if not admission_evidence['eligible_for_paper']:
                 rejected['awaiting_prospective_market_validation']+=1
                 continue
             diffs = [a-b for a,b in zip(p, market)]
-            choice = max(range(3), key=lambda i: diffs[i])
+            from .selection_policy import selection_trace
+            trace = selection_trace(p,market,prices)
+            choice = trace['selected_index']
             ev = p[choice] * prices[choice] - 1
             if name in RULES:
                 if not accepts_candidate(
@@ -515,7 +519,7 @@ def open_accounts(root: Path, models: dict, events: list[dict], now: dt.datetime
                 "forecast_utc": now.isoformat(), "market": "1X2",
                 "probabilities": list(p), "admission_evidence":admission_evidence,
                 "no_vig": quote["no_vig"], "odds": quote["decimal"],
-                "selection_index": choice, "edge_pp": round(diffs[choice]*100, 4),
+                "selection_trace":trace, "selection_index": choice, "edge_pp": round(diffs[choice]*100, 4),
                 "price_source": quote.get("provider"),
                 "bookmakers": quote.get("bookmakers"),
                 "book_quote_updates_utc": quote.get("best_book_updates"),
@@ -554,6 +558,15 @@ def enrich_pending_statistics(root: Path, finals: dict, now: dt.datetime, enrich
             if (row.get("status") == "OPEN" and spec.get("metric", "goals") != "goals"
                     and row["event_id"] in finals and parse_iso(row["start_utc"]) <= now):
                 pending.setdefault(row["event_id"], row)
+    from .selection_experiment import JOURNAL
+    from .admission_validation import read_rows
+    experiment_rows=read_rows(root/JOURNAL)
+    resolved={r['forecast_id'] for r in experiment_rows if r['kind']=='SETTLEMENT'}
+    for row in experiment_rows:
+        spec=row.get('market_spec') or {}
+        if (row['kind']=='FORECAST' and row['id'] not in resolved and spec.get('metric','goals')!='goals'
+                and row['event_id'] in finals and parse_iso(row['start_utc'])<=now):
+            pending.setdefault(row['event_id'],row)
     errors = []
     for event_id, row in pending.items():
         try:
@@ -576,6 +589,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     from .historical_learning import HistoricalLearning
     from .admission_validation import AdmissionValidation
     admission=AdmissionValidation(root,now)
+    from .selection_experiment import SelectionExperiment
+    selection_experiment=SelectionExperiment(root,now)
     learning=HistoricalLearning(root,now)
     models, historical = historical_comparison(matches,learning)
     # Includes yesterday/today/future fixtures; only completed final statuses settle.
@@ -592,6 +607,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             if r.get("status") == "OPEN" and parse_iso(r["start_utc"]) <= now:
                 pending[(r["sport"], parse_iso(r["start_utc"]).date())] = True
     for league,day in admission.pending():pending[(league,day)]=True
+    for league,day in selection_experiment.pending():pending[(league,day)]=True
     finals = result_index(events)
     for (league, day) in sorted(pending):
         if not (dt.timedelta(0) <= now - dt.datetime.combine(day, dt.time(), UTC) <= dt.timedelta(days=30)):
@@ -606,6 +622,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     missing_final_ids = sorted({row["event_id"] for name in STRATEGIES for row in read_jsonl(root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")) if row.get("status") == "OPEN" and parse_iso(row["start_utc"]) <= now and row["event_id"] not in finals})
     admission.reconcile(finals)
     stat_settlement = enrich_pending_statistics(root, finals, now)
+    selection_experiment.reconcile(finals)
     before, settle_counts = build_accounts(root, finals, now)
     from .research_pipeline import read_journal, reconcile, run_research
     research_settlement_result = reconcile(root, read_journal(root), events, now)
@@ -615,13 +632,13 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     runtime['scanner_recovery_outcome'] = os.getenv('V3_SCANNER_RECOVERY_OUTCOME','not_requested')
     risk = PaperRiskBook(root, allow_new_entries=not runtime['needs_scanner'])
     market_research = run_research(root, events, models, now, risk, football_history=matches,
-                                   previous_settlement_result=research_settlement_result,collect_team_stats=True,learning=learning)
+                                   previous_settlement_result=research_settlement_result,collect_team_stats=True,learning=learning,selection_experiment=selection_experiment)
     from .auxiliary_portfolios import open_auxiliary_markets
     # Give qualified non-winner opportunities room before winner selections
     # consume daily slots and shared exposure. All original gates still apply.
     auxiliary_first = open_auxiliary_markets(root, events, now, registry, risk,market_scope='non_winner',admission=admission,learning=learning)
     rejected = {}
-    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk,learning=learning,admission=admission)
+    additions, entry_counts = open_accounts(root, models, events, now, registry=registry, diagnostics=rejected, risk=risk,learning=learning,admission=admission,selection_experiment=selection_experiment)
     for name,count in auxiliary_first.items():entry_counts[name]=entry_counts.get(name,0)+count
     from .frequency_paper import run_frequency_strategies
     frequency_results = run_frequency_strategies(root, models, events, now, registry, risk=risk,learning=learning,admission=admission)
@@ -675,9 +692,13 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     global_file=root/"reports/global_discovery_latest.json"
     global_snapshot=json.loads(global_file.read_text()) if global_file.exists() else None
     from .validation_progress import validation_progress
+    from .selection_audit import audit_selections,verify_official_results
+    official_verification=verify_official_results(root,now,fetcher=fetcher)
     admission_report=admission.report()
     learning_report=learning.report((*STRATEGIES,'EXPERIMENTAL_MULTI_MARKET'))
     report = {
+        "selection_experiment":selection_experiment.report(),
+        "selection_audit":dict(audit_selections(root),official_verification=official_verification),
         "runtime_status":runtime,
         "pricing_readiness":market_research['pricing_readiness'],
         "validation_progress":validation_progress(admission_report,learning_report,market_research),
