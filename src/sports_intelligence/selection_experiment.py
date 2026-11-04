@@ -27,7 +27,8 @@ ARMS=('VALUE_GAP','OPPOSITE_VALUE_GAP','MODEL_FAVOURITE','MARKET_FAVOURITE')
 def model_code_digest():
     base=Path(__file__).parent
     names=('football.py','poisson.py','north_america_models.py','strategy_lab.py','research_pipeline.py',
-           'custom_strategies.py','historical_learning.py','selection_policy.py','selection_experiment.py')
+           'custom_strategies.py','historical_learning.py','experimental_markets.py','market_catalog.py',
+           'selection_policy.py','selection_experiment.py')
     return hashlib.sha256(b''.join(n.encode()+b'\0'+(base/n).read_bytes() for n in names)).hexdigest()
 
 
