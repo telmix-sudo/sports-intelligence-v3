@@ -99,6 +99,17 @@ class SelectionTrialTests(unittest.TestCase):
             self.assertFalse(stream['automatic_stake_activation'])
             self.assertIsNotNone(stream['arms']['OPPOSITE_VALUE_GAP']['paired_unit_difference_vs_VALUE_GAP'])
 
+    def test_real_capture_clock_rejects_a_game_that_started_while_the_lab_was_working(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            delayed=SelectionExperiment(root,NOW,'code',clock=lambda:NOW+dt.timedelta(hours=3))
+            self.assertFalse(delayed.observe('m',event(),[.45,.55],quote()))
+            capture=NOW+dt.timedelta(minutes=1)
+            current=SelectionExperiment(root,NOW,'code',clock=lambda:capture)
+            self.assertTrue(current.observe('m',event(),[.45,.55],quote()))
+            f=next(r for r in current.rows if r['kind']=='FORECAST')
+            self.assertEqual(f['forecast_utc'],capture.isoformat())
+
     def test_model_code_and_exact_market_line_have_separate_cohorts(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)

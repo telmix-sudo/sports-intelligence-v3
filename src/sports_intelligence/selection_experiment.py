@@ -68,10 +68,11 @@ def paired_day_interval(pairs,arm,benchmark,seed,trials=2000):
 
 
 class SelectionExperiment:
-    def __init__(self,root,now,code_digest=None):
+    def __init__(self,root,now,code_digest=None,clock=None):
         if now.tzinfo is None:raise ValueError('Timezone required')
         self.root,self.now=root,now.astimezone(UTC)
         self.digest=code_digest or model_code_digest()
+        self.clock=clock or (lambda:self.now)
         path=root/JOURNAL
         self.rows=[json.loads(l) for l in path.read_text().splitlines() if l.strip()] if path.exists() else []
         self.ids={r['id'] for r in self.rows}
@@ -88,9 +89,12 @@ class SelectionExperiment:
     def observe(self,family,event,p,quote,market_spec=None,sample_min=None,source='MODEL',learning=None,push_probability=0.):
         """Called on current forecasts, before admission; never replays old records."""
         try:
+            clock=self.clock()
+            if clock.tzinfo is None or clock<self.now:raise ValueError('Invalid capture clock')
+            clock=clock.astimezone(UTC)
             if any(not isinstance(event.get(k),str) or not event[k].strip() for k in ('id','sport','home','away')):raise ValueError('incomplete_event_identity')
             start=parse_utc(event['start_utc']);market=quote['market']
-            if event.get('status')!='pre' or not self.now<start<=self.now+dt.timedelta(hours=48):raise ValueError('not_future_event')
+            if event.get('status')!='pre' or not clock<start<=clock+dt.timedelta(hours=48):raise ValueError('not_future_event')
             if market_spec and market_spec.get('settlement_block'):raise ValueError('unsupported_settlement')
             from .research_pipeline import GOAL_MARKETS
             if market not in ('1X2','ML',*GOAL_MARKETS) and not (market.startswith('STAT_') and market_spec):raise ValueError('unsupported_market')
@@ -101,7 +105,7 @@ class SelectionExperiment:
             if int(quote.get('bookmaker_count',0))<2:raise ValueError('needs_two_bookmakers')
             times=quote['best_book_updates'];books=quote['bookmakers']
             if len(times)!=len(p) or len(books)!=len(p) or not all(isinstance(b,str) and b for b in books):raise ValueError('incomplete_quote')
-            if any(not dt.timedelta(0)<=self.now-parse_utc(t)<=dt.timedelta(hours=8) for t in times):raise ValueError('quote_clock')
+            if any(not dt.timedelta(0)<=clock-parse_utc(t)<=dt.timedelta(hours=8) for t in times):raise ValueError('quote_clock')
             trace=selection_trace(p,q,prices,push_probability)
         except (ValueError,KeyError,TypeError,OverflowError):
             self.rejections['ineligible_event_or_quote']+=1;return False
@@ -110,7 +114,7 @@ class SelectionExperiment:
         if 'LOCK-'+digest in self.ids:return False
         fid='SEL3-'+hashlib.sha256((stream+'|'+event['id']).encode()).hexdigest()[:24]
         if fid in self.ids:return False
-        self.append({'id':'POLICY-'+VERSION,'kind':'POLICY','version':VERSION,'registered_at_utc':self.now.isoformat(),
+        self.append({'id':'POLICY-'+VERSION,'kind':'POLICY','version':VERSION,'registered_at_utc':clock.isoformat(),
                      'arms':list(ARMS),'unit_stake_eur':1.0,'funded_stake_eur':0.,'minimum_events':MIN_EVENTS,
                      'minimum_dates':MIN_DATES,'cohort_stop_rule':'FIRST_PREFIX_REACHING_100_FORECAST_EVENTS_AND_14_KICKOFF_DATES',
                      'historical_backfill_allowed':False,'automatic_stake_activation':False,
@@ -118,7 +122,7 @@ class SelectionExperiment:
                      'assessment':'Fixed cohort; all results resolved; paired day intervals vs original and market favourite; independent confirmation before adoption.'})
         row={k:event[k] for k in ('sport','home','away','start_utc')}
         row.update(id=fid,kind='FORECAST',version=VERSION,stream=stream,event_id=event['id'],family=family,
-                   model_code_sha256=self.digest,forecast_utc=self.now.isoformat(),market=market,market_spec=market_spec,
+                   model_code_sha256=self.digest,forecast_utc=clock.isoformat(),market=market,market_spec=market_spec,
                    probabilities=p,market_no_vig=q,odds=prices,bookmakers=books,book_quote_updates_utc=times,
                    bookmaker_count=quote['bookmaker_count'],price_source=quote['provider'],stake_eur=0.,unit_stake_eur=1.,
                    source=source,sample_min=sample_min,selection_trace=trace,arms={k:v['selection_index'] for k,v in trace['arms'].items()},
@@ -126,7 +130,7 @@ class SelectionExperiment:
         self.new_forecasts+=self.append(row)
         cohort=[r for r in self.rows if r.get('kind')=='FORECAST' and r['stream']==stream]
         if len(cohort)>=MIN_EVENTS and len({parse_utc(r['start_utc']).date() for r in cohort})>=MIN_DATES:
-            self.append({'id':'LOCK-'+digest,'kind':'COHORT_LOCK','stream':stream,'locked_at_utc':self.now.isoformat(),
+            self.append({'id':'LOCK-'+digest,'kind':'COHORT_LOCK','stream':stream,'locked_at_utc':clock.isoformat(),
                          'forecast_ids':[r['id'] for r in cohort],'rule':'FORECAST_COUNT_AND_DATES_ONLY_NO_OUTCOME_OR_PNL_INPUT'})
         return True
 
@@ -179,7 +183,7 @@ class SelectionExperiment:
                             'forecasts':len(forecasts),'settled':len(decisive),'voided':len(pairs)-len(decisive),
                             'pending':len(forecasts)-len(pairs),'dates':dates,'cohort_locked':key in locked,
                             'remaining_events':max(0,MIN_EVENTS-len(decisive)),'remaining_dates':max(0,MIN_DATES-dates),
-                            'status':'REVIEW_REQUIRED' if complete and len(decisive)>=MIN_EVENTS and dates>=MIN_DATES else
+                            'status':'SOURCE_VERSION_RETIRED' if first['model_code_sha256']!=self.digest and key not in locked else 'REVIEW_REQUIRED' if complete and len(decisive)>=MIN_EVENTS and dates>=MIN_DATES else
                                      'COHORT_RESOLVED_INSUFFICIENT_DECISIVE_DATA' if complete else 'WAITING_RESULTS' if key in locked else 'COLLECTING',
                             'arms':arms,'automatic_stake_activation':False,
                             'scoring':{k:math.fsum(s[k] for f,s in decisive)/len(decisive) if decisive else None
@@ -187,7 +191,7 @@ class SelectionExperiment:
         forecasts=[r for r in self.rows if r['kind']=='FORECAST']
         return {'version':VERSION,'asof_utc':self.now.isoformat(),'registered_at_utc':next((r['registered_at_utc'] for r in self.rows if r['kind']=='POLICY'),None),
                 'mode':'ZERO_STAKE_FIXED_FUTURE_COHORT','automatic_stake_activation':False,'historical_backfill_allowed':False,
-                'unit_stake_eur':1.,'minimum_events':MIN_EVENTS,'minimum_dates':MIN_DATES,'forecasts_total':len(forecasts),
+                'current_model_code_sha256':self.digest,'unit_stake_eur':1.,'minimum_events':MIN_EVENTS,'minimum_dates':MIN_DATES,'forecasts_total':len(forecasts),
                 'distinct_events':len({r['event_id'] for r in forecasts}),'settled_total':sum(r['status']=='SETTLED' for r in settlements.values()),
                 'voided_total':sum(r['status']=='VOID' for r in settlements.values()),'pending_total':len(forecasts)-len(settlements),
                 'new_forecasts':self.new_forecasts,'new_settlements':self.new_settlements,'rejections':dict(self.rejections),'streams':streams,
