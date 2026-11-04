@@ -121,6 +121,8 @@ class ResearchExecutionTests(unittest.TestCase):
             root=Path(tmp); history=football_history(); event=dict(EVENT)
             r=run_research(root,[event],models(history),NOW,PaperRiskBook(root),football_history=history)
             self.assertEqual(r['forecasts_total'],0)
+            self.assertEqual(r['pricing_readiness']['events'][0]['status'],'READY')
+            self.assertTrue(r['pricing_readiness']['events'][0]['forecasts'])
             event['market_quotes']=market_quotes_for_event(event,odds_rows(),NOW)
             r=run_research(root,[event],models(history),NOW,PaperRiskBook(root),football_history={})
             self.assertEqual(r['zero_stake_forecasts'],3)

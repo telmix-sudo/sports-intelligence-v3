@@ -26,14 +26,15 @@ permissions:
   contents: write
 
 concurrency:
-  group: sports-intelligence-parallel-lab
+  group: sports-intelligence-v3-data
   cancel-in-progress: false
+  queue: max
 
 jobs:
   research:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -47,24 +48,35 @@ jobs:
       # checkout AFTER tests and immediately BEFORE choosing its paper events.
       - name: Refresh latest scanner odds from main
         run: git pull --ff-only origin main
+      - name: Check scanner and calendar freshness
+        id: freshness
+        env:
+          PYTHONPATH: src
+        run: python -m sports_intelligence.runtime_freshness --github-output "$GITHUB_OUTPUT"
+      - name: Recover delayed scanner before portfolio analysis
+        id: refresh_scanner
+        if: steps.freshness.outputs.needs_scanner == 'true'
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+          PYTHONUNBUFFERED: "1"
+          ENABLE_ATP_RESEARCH: "0"
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python -m sports_intelligence.cli --mode scan
       - name: Run independent strategy portfolios with CC0 data
         env:
           PYTHONPATH: src
           PYTHONUNBUFFERED: "1"
+          V3_SCANNER_RECOVERY_OUTCOME: ${{ steps.refresh_scanner.outcome }}
         run: python -m sports_intelligence.strategy_lab
       - name: Persist comparisons and virtual account ledgers
         run: |
           git config user.name "sports-intelligence-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for path in data/decision_observations_v3.jsonl data/score_history_v3.json data/football_statistics_v3.json data/market_research_v3.jsonl reports/market_research_latest.json; do
-            if [ -f "$path" ]; then
-              git add "$path"
-            fi
-          done
-          git add data/strategy_ledgers data/strategy_accounts_v3.json data/strategy_registry_v3.json reports/strategy_lab_latest.json reports/strategy_lab_runs/
+          git add reports/ data/
           if ! git diff --cached --quiet; then
             git commit -m "data: parallel paper strategy observations [skip ci]"
-            # The hourly scanner may have pushed a report concurrently.
+            # Only independent ML files may update while this shared writer runs.
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then
                 exit 0

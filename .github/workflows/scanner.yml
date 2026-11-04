@@ -22,8 +22,9 @@ permissions:
   contents: write
 
 concurrency:
-  group: sports-intelligence-v3-hourly
+  group: sports-intelligence-v3-data
   cancel-in-progress: false
+  queue: max
 
 jobs:
   scan:
@@ -40,6 +41,8 @@ jobs:
         env:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -v
+      - name: Refresh current shared odds budget
+        run: git pull --ff-only origin main
       - name: Scan upcoming events and run historical benchmarks
         env:
           PYTHONPATH: src
@@ -54,7 +57,7 @@ jobs:
           git add reports/ data/ 2>/dev/null || git add reports/latest.json
           if ! git diff --cached --quiet; then
             git commit -m "data: record prospective research scan [skip ci]"
-            # Scanner and laboratory write concurrently; never lose archived odds.
+            # Preserve independent ML updates; scanner/lab share a serialized budget.
             for attempt in 1 2 3 4 5; do
               if git push origin HEAD:main; then
                 exit 0

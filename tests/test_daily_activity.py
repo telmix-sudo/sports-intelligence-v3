@@ -102,7 +102,7 @@ class DailyPricingTests(unittest.TestCase):
             result = annotate_discovered([e], Path(tmp), NOW, 'SYNTHETIC', request)
             self.assertEqual(calls, ['americanfootball_nfl'])
             self.assertIsNotNone(e['quote'])
-            self.assertEqual(result['distinct_modelled_events_with_prices'], 1)
+            self.assertEqual(result['declared_model_scope_priced_events'], 1)
             self.assertEqual(result['price_lookahead_hours'], 48)
             far = dict(e, start_utc=(NOW+dt.timedelta(hours=49)).isoformat())
             other = annotate_discovered([far], Path(tmp), NOW, 'SYNTHETIC', lambda *_:self.fail('Out of horizon'))
@@ -149,7 +149,7 @@ class DailyPricingTests(unittest.TestCase):
                 return [p for e in upcoming for p in prices(e, NOW)]
             result = annotate_discovered([cached]+upcoming, root, NOW, 'SYNTHETIC', request)
             self.assertEqual(calls, ['americanfootball_nfl'])
-            self.assertEqual(result['distinct_modelled_events_with_prices'], 6)
+            self.assertEqual(result['declared_model_scope_priced_events'], 6)
             self.assertEqual(result['credits_today'], 8)
 
 

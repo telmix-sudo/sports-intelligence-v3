@@ -29,6 +29,18 @@ def event_key(day, home, away):
     return '|'.join((str(day), team_name(home), team_name(away)))
 
 
+def sample_identity(sport,day,home,away,event_id=None):
+    """NBA/NHL/NFL/MLB can play the same matchup twice on one UTC date.
+
+    Keep football's cross-source score identity; those score feeds have no ESPN
+    IDs. North American replay and frozen forecasts share stable provider IDs.
+    """
+    if sport in ('nba','nhl','nfl','mlb'):
+        if not isinstance(event_id,str) or not event_id.strip():raise ValueError('Missing stable event ID')
+        return 'event:'+event_id
+    return event_key(day,home,away)
+
+
 def normalize(p):
     p = [float(v) for v in p]
     if len(p) not in (2, 3) or any(not math.isfinite(v) or v < 0 for v in p) or abs(sum(p)-1) > .001:
@@ -137,7 +149,7 @@ class HistoricalLearning:
                 market,sport = r['market'],r['sport']
                 learning = r.get('historical_learning') or {}
                 base = learning.get('base_probabilities',r['probabilities'])
-                identity = event_key(start.date(),r['home'],r['away'])
+                identity = sample_identity(sport,start.date(),r['home'],r['away'],r.get('event_id'))
                 self.add(family,sport,market,settled.date(),identity,base,r['observed_outcome'])
                 key = '|'.join((family,sport,market))
                 if (learning.get('version')==VERSION and learning.get('candidate_probabilities') and
