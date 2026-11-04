@@ -2859,28 +2859,32 @@
     },
     "modalities_with_model_forecasts": 0
   },
-  "asof_utc": "2026-11-04T01:24:38.819227+00:00",
+  "asof_utc": "2026-11-04T06:59:14.921507+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-04",
     "target": 5,
     "max_per_day": 10,
-    "opened_today": 6,
-    "new_entries": 6,
+    "opened_today": 10,
+    "new_entries": 4,
     "remaining_to_minimum": 0,
     "target_met": true,
     "reference": true,
     "not_a_value_signal": true,
-    "status": "PARTIAL",
-    "reason": "Maximum exposure (2% of virtual bank) or 1 EUR minimum stake reached",
-    "eligible_events": 19,
+    "status": "DAILY_CAP",
+    "reason": "Genuine timestamped paper selections; reference only, no demonstrated edge",
+    "eligible_events": 13,
     "distinct_event_ids_today": [
       "nba:401909922",
       "nba:401909923",
       "nba:401909924",
+      "nba:401909925",
       "nba:401909926",
+      "nba:401909927",
       "nfl:401873037",
-      "nhl:401892643"
+      "nhl:401892643",
+      "nhl:401892644",
+      "nhl:401892645"
     ]
   },
   "daily_activity": {
@@ -2942,7 +2946,7 @@
         "remaining_to_minimum": 5
       },
       "MARKET_DAILY_REFERENCE": {
-        "entries": 6,
+        "entries": 10,
         "minimum_target": 5,
         "maximum": 10,
         "target_met": true,
@@ -2994,16 +2998,20 @@
     "local_date": "2026-11-04",
     "min_distinct_events_target": 5,
     "preferred_max_distinct_events": 10,
-    "distinct_events_recorded": 6,
-    "paper_entries_across_all_accounts": 6,
-    "reference_entries": 6,
+    "distinct_events_recorded": 10,
+    "paper_entries_across_all_accounts": 10,
+    "reference_entries": 10,
     "unique_event_ids": [
       "nba:401909922",
       "nba:401909923",
       "nba:401909924",
+      "nba:401909925",
       "nba:401909926",
+      "nba:401909927",
       "nfl:401873037",
-      "nhl:401892643"
+      "nhl:401892643",
+      "nhl:401892644",
+      "nhl:401892645"
     ],
     "minimum_met": false,
     "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
@@ -3017,47 +3025,35 @@
       "nba:401909922|ML|MARKET_REFERENCE|0": 1.01,
       "nba:401909923|ML|MARKET_REFERENCE|1": 1.01,
       "nba:401909924|ML|MARKET_REFERENCE|0": 2.01,
+      "nba:401909925|ML|MARKET_REFERENCE|1": 2.5,
       "nba:401909926|ML|MARKET_REFERENCE|0": 1.01,
+      "nba:401909927|ML|MARKET_REFERENCE|0": 2.5,
       "nfl:401873037|ML|MARKET_REFERENCE|1": 1.01,
-      "nhl:401892633|ML|MARKET_REFERENCE|1": 2.5,
-      "nhl:401892634|ML|MARKET_REFERENCE|0": 1.01,
-      "nhl:401892635|ML|MARKET_REFERENCE|0": 1.01,
-      "nhl:401892637|ML|MARKET_REFERENCE|0": 2.5,
-      "nhl:401892638|ML|MARKET_REFERENCE|1": 2.5,
-      "nhl:401892640|ML|MARKET_REFERENCE|1": 1.15,
-      "nhl:401892641|ML|MARKET_REFERENCE|1": 2.5,
-      "nhl:401892643|ML|MARKET_REFERENCE|1": 1.01
+      "nhl:401892644|ML|MARKET_REFERENCE|0": 2.5,
+      "nhl:401892645|ML|MARKET_REFERENCE|0": 2.5
     },
-    "total_open_eur": 20.23,
+    "total_open_eur": 16.05,
     "event_exposure_eur": {
       "nba:401909922": 1.01,
       "nba:401909923": 1.01,
       "nba:401909924": 2.01,
+      "nba:401909925": 2.5,
       "nba:401909926": 1.01,
+      "nba:401909927": 2.5,
       "nfl:401873037": 1.01,
-      "nhl:401892633": 2.5,
-      "nhl:401892634": 1.01,
-      "nhl:401892635": 1.01,
-      "nhl:401892637": 2.5,
-      "nhl:401892638": 2.5,
-      "nhl:401892640": 1.15,
-      "nhl:401892641": 2.5,
-      "nhl:401892643": 1.01
+      "nhl:401892644": 2.5,
+      "nhl:401892645": 2.5
     },
     "event_position_counts": {
       "nba:401909922": 1,
       "nba:401909923": 1,
       "nba:401909924": 1,
+      "nba:401909925": 1,
       "nba:401909926": 1,
+      "nba:401909927": 1,
       "nfl:401873037": 1,
-      "nhl:401892633": 1,
-      "nhl:401892634": 1,
-      "nhl:401892635": 1,
-      "nhl:401892637": 1,
-      "nhl:401892638": 1,
-      "nhl:401892640": 1,
-      "nhl:401892641": 1,
-      "nhl:401892643": 1
+      "nhl:401892644": 1,
+      "nhl:401892645": 1
     },
     "limit_rejections": {},
     "existing_positions_never_retroactively_changed": true
@@ -3918,7 +3914,7 @@
     "validated_streams": 0,
     "deferred_evaluations": {
       "MULTIMARKET-1.0.0-nfl|nfl|ML": 2,
-      "MULTIMARKET-1.0.0-nba|nba|ML": 18,
+      "MULTIMARKET-1.0.0-nba|nba|ML": 16,
       "MULTIMARKET-1.0.0-nhl|nhl|ML": 8
     },
     "new_zero_stake_observations": 0,
@@ -7342,69 +7338,51 @@
     "caveat": "Score history measures probabilities, not bookmaker profit. Chronological holdout reuse is exploratory; promotion also requires frozen prequential shadow results."
   },
   "market_research": {
-    "asof_utc": "2026-11-04T01:24:38.819227+00:00",
+    "asof_utc": "2026-11-04T06:59:14.921507+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
-    "new_forecasts": 5,
-    "new_settlements": 0,
+    "new_forecasts": 0,
+    "new_settlements": 11,
     "forecasts_total": 98,
     "zero_stake_forecasts": 86,
-    "open_observations": 29,
-    "settlements_total": 69,
-    "candidate_markets": 30,
+    "open_observations": 18,
+    "settlements_total": 80,
+    "candidate_markets": 32,
     "closing_line_values_available": 0,
     "blocks": {
-      "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 19,
-      "NEEDS_100_DISTINCT_EVENTS": 19,
-      "NEEDS_14_DAY_FORWARD_PERIOD": 19,
-      "NEEDS_14_DISTINCT_MARKET_DATES": 19,
-      "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 19,
-      "CALIBRATION_ERROR_OVER_10PP": 19,
+      "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 18,
+      "NEEDS_100_DISTINCT_EVENTS": 18,
+      "NEEDS_14_DAY_FORWARD_PERIOD": 18,
+      "NEEDS_14_DISTINCT_MARKET_DATES": 18,
+      "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 18,
       "LOG_LOSS_NOT_BETTER_THAN_MARKET": 14,
+      "CALIBRATION_ERROR_OVER_10PP": 18,
       "EDGE_BELOW_4PP": 5,
       "CONSERVATIVE_EV_BELOW_1_PERCENT": 5,
-      "missing_timestamped_ML_odds": 11,
+      "missing_timestamped_ML_odds": 14,
       "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 1,
       "NEEDS_50_HOLDOUT_FORECASTS": 1
     },
     "history": {
-      "requests": 6,
+      "requests": 3,
       "failures": [],
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261103&limit=300",
           "sha256": "d1c3b2b83c8b5680ec7ee8523a836263568027298c1b278984eef683705d1006",
-          "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
+          "captured_at_utc": "2026-11-04T06:59:14.921507+00:00",
           "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261102&limit=300",
-          "sha256": "55d36f4ce2d4bdab76c38540627248ea5ee6abe7b267986ee7144f3fc1abd5d3",
-          "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
-          "completed_games": 15
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261103&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
+          "captured_at_utc": "2026-11-04T06:59:14.921507+00:00",
           "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261102&limit=300",
-          "sha256": "45e21e18b12b4bbc4d6e577ee3cca25c952266abfacb0b9ca0a19e33d9a9a510",
-          "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
-          "completed_games": 1
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261103&limit=300",
-          "sha256": "5ca96e1f437fc996895879894042ce46b79e2fd3f1db1db41da968997e695380",
-          "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
+          "sha256": "12a01e779ae2e160438d1508b7e0d231622ced266a0769ef7f680b155168c37a",
+          "captured_at_utc": "2026-11-04T06:59:14.921507+00:00",
           "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261102&limit=300",
-          "sha256": "e0fb66f941bc4f6f7742e2927547eb2892480a9be43eae8656cb64a1fe49fbf3",
-          "captured_at_utc": "2026-11-04T01:24:38.819227+00:00",
-          "completed_games": 4
         }
       ],
       "games_per_sport": {
@@ -7728,16 +7706,16 @@
     "team_statistics_history": {
       "scoreboard_requests": 40,
       "summary_requests": 120,
-      "events_with_statistics": 2548,
+      "events_with_statistics": 2668,
       "failures": [],
       "missing_stats": 0,
       "backfill_policy": "KNOWN_COMPLETED_DATES_2_SEASONS_ROUND_ROBIN_120_SUMMARIES",
       "events_by_sport": {
-        "ligue_1": 551,
-        "la_liga": 502,
-        "bundesliga": 390,
-        "serie_a": 535,
-        "epl": 570
+        "ligue_1": 575,
+        "la_liga": 526,
+        "bundesliga": 414,
+        "serie_a": 559,
+        "epl": 594
       }
     },
     "additional_market_backtests": {},
@@ -8516,44 +8494,44 @@
   "ledger_audit": {
     "local_date": "2026-11-04",
     "opened_today": {
-      "n": 6,
-      "independent_events": 6
+      "n": 10,
+      "independent_events": 10
     },
     "games_played_today": {
-      "n": 0,
-      "independent_events": 0,
-      "wins": 0,
-      "losses": 0,
-      "staked_eur": 0,
-      "pnl_eur": 0,
-      "roi_pct": null
+      "n": 8,
+      "independent_events": 8,
+      "wins": 6,
+      "losses": 2,
+      "staked_eur": 14.18,
+      "pnl_eur": 4.12,
+      "roi_pct": 29.05
     },
     "settled_today": {
-      "n": 0,
-      "independent_events": 0,
-      "wins": 0,
-      "losses": 0,
-      "staked_eur": 0,
-      "pnl_eur": 0,
-      "roi_pct": null
+      "n": 8,
+      "independent_events": 8,
+      "wins": 6,
+      "losses": 2,
+      "staked_eur": 14.18,
+      "pnl_eur": 4.12,
+      "roi_pct": 29.05
     },
-    "total": 245,
-    "open": 13,
-    "closed": 232,
+    "total": 249,
+    "open": 9,
+    "closed": 240,
     "voided": 0,
     "all_time": {
-      "n": 232,
-      "independent_events": 45,
-      "wins": 59,
-      "losses": 173,
-      "staked_eur": 658.99,
-      "pnl_eur": -302.95,
-      "roi_pct": -45.97
+      "n": 240,
+      "independent_events": 53,
+      "wins": 65,
+      "losses": 175,
+      "staked_eur": 673.17,
+      "pnl_eur": -298.83,
+      "roi_pct": -44.39
     },
     "prospective_benchmark": {
-      "n": 223,
-      "model_brier": 0.521079,
-      "market_brier": 0.424693,
+      "n": 231,
+      "model_brier": 0.518196,
+      "market_brier": 0.425148,
       "beats_market_on_sample": false,
       "note": "No market forecast invented; beware event correlation and low sample size."
     },
@@ -8595,13 +8573,13 @@
         "roi_pct": -13.88
       },
       "nhl": {
-        "n": 20,
-        "independent_events": 9,
-        "wins": 15,
-        "losses": 5,
-        "staked_eur": 48.36,
-        "pnl_eur": 39.81,
-        "roi_pct": 82.33
+        "n": 28,
+        "independent_events": 17,
+        "wins": 21,
+        "losses": 7,
+        "staked_eur": 62.54,
+        "pnl_eur": 43.93,
+        "roi_pct": 70.25
       },
       "serie_a": {
         "n": 15,
@@ -8624,13 +8602,13 @@
         "roi_pct": -53.26
       },
       "ML": {
-        "n": 133,
-        "independent_events": 30,
-        "wins": 41,
-        "losses": 92,
-        "staked_eur": 266.49,
-        "pnl_eur": -80.52,
-        "roi_pct": -30.22
+        "n": 141,
+        "independent_events": 38,
+        "wins": 47,
+        "losses": 94,
+        "staked_eur": 280.67,
+        "pnl_eur": -76.41,
+        "roi_pct": -27.22
       },
       "STAT_3467965f94bbdcae": {
         "n": 3,
@@ -8743,13 +8721,13 @@
         "roi_pct": -66.73
       },
       "MARKET_DAILY_REFERENCE": {
-        "n": 33,
-        "independent_events": 33,
-        "wins": 22,
-        "losses": 11,
-        "staked_eur": 99.1,
-        "pnl_eur": 11.93,
-        "roi_pct": 12.04
+        "n": 41,
+        "independent_events": 41,
+        "wins": 28,
+        "losses": 13,
+        "staked_eur": 113.28,
+        "pnl_eur": 16.05,
+        "roi_pct": 14.17
       },
       "POISSON_SHRINK": {
         "n": 20,
@@ -8763,13 +8741,13 @@
     },
     "by_odds_band": {
       "under_2": {
-        "n": 42,
-        "independent_events": 29,
-        "wins": 20,
-        "losses": 22,
-        "staked_eur": 104.78,
-        "pnl_eur": -8.16,
-        "roi_pct": -7.78
+        "n": 50,
+        "independent_events": 37,
+        "wins": 26,
+        "losses": 24,
+        "staked_eur": 118.96,
+        "pnl_eur": -4.04,
+        "roi_pct": -3.39
       },
       "2_to_3": {
         "n": 98,
@@ -8808,7 +8786,7 @@
     "paper_only": true
   },
   "market_activity": {
-    "asof_utc": "2026-11-04T01:24:38.819227+00:00",
+    "asof_utc": "2026-11-04T06:59:14.921507+00:00",
     "by_market": {
       "1X2": {
         "label": "Resultado 1X2",
@@ -8823,13 +8801,13 @@
       },
       "ML": {
         "label": "Vencedor (ML)",
-        "papers_total": 156,
-        "papers_open": 13,
-        "papers_settled": 143,
+        "papers_total": 160,
+        "papers_open": 9,
+        "papers_settled": 151,
         "papers_voided": 0,
-        "papers_today": 6,
+        "papers_today": 10,
         "observations": 54,
-        "priced_event_count": 19,
+        "priced_event_count": 18,
         "status": "PAPER_RECORDED"
       },
       "GOALS_TOTAL": {
@@ -9807,23 +9785,23 @@
     },
     "MARKET_DAILY_REFERENCE": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 1011.9287,
-      "open_exposure_eur": 20.23,
-      "pnl_eur": 11.9287,
-      "total_staked_settled_eur": 99.1,
-      "paper_wins": 22,
-      "paper_losses": 11,
-      "settled": 33,
+      "bankroll_eur": 1016.0477,
+      "open_exposure_eur": 16.05,
+      "pnl_eur": 16.0477,
+      "total_staked_settled_eur": 113.28,
+      "paper_wins": 28,
+      "paper_losses": 13,
+      "settled": 41,
       "voided": 0,
-      "open": 13,
-      "yield_percent": 12.037,
-      "return_on_initial_bank_percent": 1.1929,
+      "open": 9,
+      "yield_percent": 14.1664,
+      "return_on_initial_bank_percent": 1.6048,
       "max_settled_drawdown_percent": 0.7948,
-      "brier": 0.366963,
-      "log_loss": 0.562399,
-      "benchmark_n": 24,
-      "market_brier": 0.367347,
-      "market_log_loss": 0.567124,
+      "brier": 0.380792,
+      "log_loss": 0.575363,
+      "benchmark_n": 32,
+      "market_brier": 0.384969,
+      "market_log_loss": 0.582553,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "FREQ_SELECTIVE_1_3": {
@@ -10120,23 +10098,15 @@
   },
   "events_seen": 60,
   "new_paper_entries": {
-    "MARKET_DAILY_REFERENCE": 6
+    "MARKET_DAILY_REFERENCE": 4
   },
   "entry_diagnostics": {
     "rejections": {},
-    "new_entries": 6,
+    "new_entries": 4,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 0,
-  "missing_final_event_ids": [
-    "nhl:401892633",
-    "nhl:401892634",
-    "nhl:401892635",
-    "nhl:401892637",
-    "nhl:401892638",
-    "nhl:401892640",
-    "nhl:401892641"
-  ],
+  "newly_settled": 8,
+  "missing_final_event_ids": [],
   "statistic_settlement": {
     "lookups": 0,
     "errors": []
