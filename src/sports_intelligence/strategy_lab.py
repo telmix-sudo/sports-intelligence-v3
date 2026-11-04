@@ -590,7 +590,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     from .admission_validation import AdmissionValidation
     admission=AdmissionValidation(root,now)
     from .selection_experiment import SelectionExperiment
-    selection_experiment=SelectionExperiment(root,now)
+    selection_experiment=SelectionExperiment(root,now,clock=lambda:dt.datetime.now(UTC))
     learning=HistoricalLearning(root,now)
     models, historical = historical_comparison(matches,learning)
     # Includes yesterday/today/future fixtures; only completed final statuses settle.

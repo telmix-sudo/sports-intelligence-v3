@@ -1,7 +1,7 @@
 (function(root){
 'use strict';
 const arms={VALUE_GAP:'Diferença para o mercado',OPPOSITE_VALUE_GAP:'Escolha contrária',MODEL_FAVOURITE:'Favorito do modelo',MARKET_FAVOURITE:'Favorito do mercado'};
-const statuses={COLLECTING:'A recolher',WAITING_RESULTS:'A aguardar resultados',REVIEW_REQUIRED:'Amostra fechada; exige revisão',COHORT_RESOLVED_INSUFFICIENT_DECISIVE_DATA:'Amostra fechada; dados decisivos insuficientes'};
+const statuses={SOURCE_VERSION_RETIRED:'Versão anterior; recolha encerrada',COLLECTING:'A recolher',WAITING_RESULTS:'A aguardar resultados',REVIEW_REQUIRED:'Amostra fechada; exige revisão',COHORT_RESOLVED_INSUFFICIENT_DECISIVE_DATA:'Amostra fechada; dados decisivos insuficientes'};
 const number=(v,d=2)=>Number.isFinite(v)?v.toLocaleString('pt-PT',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
 function audit(a){
  if(!a)return 'A auditoria das escolhas será publicada na próxima execução.';
@@ -14,7 +14,7 @@ function intro(t){
 }
 function cohortRows(trial,sport='ALL'){
  return (trial?.streams||[]).filter(s=>sport==='ALL'||s.sport===sport).flatMap(s=>Object.entries(s.arms).map(([arm,a])=>[
- s.family,s.sport.toUpperCase(),root.V3ValidationProgress?root.V3ValidationProgress.market(s):s.market,arms[arm]||arm,
+ s.family+(s.model_code_sha256?' · '+s.model_code_sha256.slice(0,6):''),s.sport.toUpperCase(),root.V3ValidationProgress?root.V3ValidationProgress.market(s):s.market,arms[arm]||arm,
  s.settled+' / '+trial.minimum_events,s.dates+' / '+trial.minimum_dates,s.pending,a.n?a.wins+' / '+(a.n-a.wins):'—',a.n?number(a.unit_pnl_eur)+' €':'—',a.n?number(a.roi_pct)+'%':'—',statuses[s.status]||s.status]));
 }
 function selectionName(f,i){
