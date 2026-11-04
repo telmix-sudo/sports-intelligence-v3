@@ -182,8 +182,8 @@ class GlobalPricingTests(unittest.TestCase):
             events=[fixture('tennis_one','tennis',1),fixture('tennis_two','tennis',2),
                     fixture('handball_one','handball',3),fixture('basketball_one','basketball',4)]
             report=annotate_discovered(events,root,NOW,'KEY',get)
-            self.assertEqual(len(calls),4)
-            self.assertNotEqual(calls[0].split('_')[0],calls[1].split('_')[0])
+            self.assertEqual(len(calls),1)
+            self.assertEqual(report['discovery_only_credits_today'],1)
             again=annotate_discovered(events,root,NOW,'KEY',get)
             self.assertEqual(again['calls_this_run'],0)
             later=NOW.replace(hour=20)

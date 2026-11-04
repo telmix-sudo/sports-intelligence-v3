@@ -52,11 +52,34 @@ def prune_expired_prices(snapshots, now):
     return removed
 
 
+
+def model_readiness(root,events,now):
+    """Use actual pre-price forecasts from the lab, never a sport label as proof."""
+    result={};status='UNAVAILABLE'
+    try:
+        snapshot=json.loads((root/'reports/strategy_lab_latest.json').read_text())['pricing_readiness']
+        stamp=parse_utc(snapshot['asof_utc'])
+        age=(now-stamp).total_seconds()/3600
+        if not 0<=age<=24:return result,'STALE_OR_FUTURE'
+        if snapshot['training_cutoff_exclusive_utc_date']>str(stamp.date()):return result,'INVALID_TRAINING_CLOCK'
+        current={e['id']:e for e in events}
+        for row in snapshot['events']:
+            e=current.get(row.get('id'))
+            if e and all(row.get(k)==e.get(k) for k in ('sport','home','away','start_utc')):
+                if row.get('status')=='READY' and row.get('forecasts'):
+                    result[e['id']]='READY'
+                elif row.get('status')=='INSUFFICIENT_HISTORY':result[e['id']]='INSUFFICIENT_HISTORY'
+        status='FRESH'
+    except (OSError,ValueError,KeyError,TypeError,AttributeError):pass
+    return result,status
+
+
 def annotate_discovered(events,root,now,secret,requester=_request_odds):
     path=root/'data/odds_cache_v3.json'
     old=json.loads(path.read_text()) if path.exists() else {}
     same=old.get('day')==str(now.date())
     record={'day':str(now.date()),'calls_today':int(old.get('calls_today',0)) if same else 0,
+            'discovery_only_credits_today':int(old.get('discovery_only_credits_today',0)) if same else 0,
             'credits_today':max(int(old.get('credits_today',0)),int(old.get('calls_today',0))) if same else 0,
             'snapshots':old.get('snapshots',{}),'market_inventory':old.get('market_inventory',{}),
             'event_markets_done':old.get('event_markets_done',[]) if same else [],
@@ -93,26 +116,31 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
               else requester(key,secret,markets,event_id,discover))
         if getattr(rows,'credits_remaining',None) is not None:record['credits_remaining']=rows.credits_remaining
         return rows
+    readiness,readiness_status=model_readiness(root,events,now)
+    def tier(event):
+        if readiness.get(event['id'])=='READY':return 0
+        if readiness.get(event['id'])=='INSUFFICIENT_HISTORY':return 2
+        return 1 if event['sport'] in ODDS_KEY_MAP and event.get('paper_execution_enabled') is not False else 2
+    def key_tier(key):return min(tier(e) for e in by_key[key])
     def executable(key):
-        return any(e['sport'] in ODDS_KEY_MAP and e.get('paper_execution_enabled') is not False
-                   for e in by_key[key])
+        return key_tier(key)<2
     def priced(event):
         quote=record['snapshots'].get(event['sport'],{}).get('quotes',{}).get(event['id'])
         return fresh_quote(quote,now) and (quote.get('bookmaker_count') or 0)>=2
-    def covered_count():
-        return len({e['id'] for k in by_key if executable(k) for e in by_key[k] if priced(e)})
+    def covered_count(verified=False):
+        return len({e['id'] for k in by_key for e in by_key[k] if tier(e)<(1 if verified else 2) and priced(e)})
     def priority(key):
-        missing=sum(not priced(e) for e in by_key[key])
+        missing=sum(not priced(e) for e in by_key[key] if tier(e)==key_tier(key))
         covered=covered_count()
         # Buy enough distinct useful fixtures before refreshing already priced
         # competitions. After coverage, retain the global sport rotation.
-        return (not executable(key),not bool(missing),
+        return (key_tier(key),not bool(missing),
                 -missing if covered<MIN_DAILY_ENTRIES else 0,
                 by_key[key][0]['family'] in record['global_priced_families'],
                 record['key_last_priced'].get(key,''),
                 min(e['start_utc'] for e in by_key[key]),key)
     soccer=[e for matches in by_key.values() for e in matches
-            if e.get('family')=='soccer' and e.get('odds_event_id') and executable(e['odds_sport_key'])]
+            if e.get('family')=='soccer' and e.get('odds_event_id') and tier(e)<2]
     window=now.hour//6
     available=set(by_key)
     while secret and available:
@@ -121,7 +149,7 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
         # Modelled competitions may refresh in later slots. Discovery-only
         # leagues rotate once daily so they cannot starve executable prices.
         if record['global_poll_windows'].get(key)==window:continue
-        if not executable(key) and key in record['global_priced_keys']:continue
+        if not executable(key) and (key in record['global_priced_keys'] or record['discovery_only_credits_today']>=1):continue
         matches=by_key[key];family=matches[0]['family']
         markets='h2h,totals,spreads' if family=='soccer' and executable(key) else 'h2h'
         cost=len(markets.split(','))
@@ -135,6 +163,7 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
             else:continue
         if key not in record['global_priced_keys']:record['global_priced_keys'].append(key)
         record['global_poll_windows'][key]=window
+        if not executable(key):record['discovery_only_credits_today']+=cost
         try:
             rows=request(key,markets)
             for sport in {e['sport'] for e in matches}:
@@ -163,7 +192,7 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
     # probe is unnecessary and used to consume a large part of this small budget.
     from .portfolio_controls import PaperRiskBook,INITIAL_TOTAL_BANK,MAX_EVENT_OPEN_FRACTION
     exposure=PaperRiskBook(root).event_exposure
-    soccer=sorted(soccer,key=lambda e:(exposure[e['id']]>=INITIAL_TOTAL_BANK*MAX_EVENT_OPEN_FRACTION,e['start_utc'],e['id']))
+    soccer=sorted(soccer,key=lambda e:(tier(e),exposure[e['id']]>=INITIAL_TOTAL_BANK*MAX_EVENT_OPEN_FRACTION,e['start_utc'],e['id']))
     for e in soccer:
         budget=min(EXTRA_MARKET_DAILY_CREDITS-record['event_market_credits_today'],
                    MAX_CREDITS_PER_DAY-record['credits_today'],
@@ -215,7 +244,11 @@ def annotate_discovered(events,root,now,secret,requester=_request_odds):
                 credits_remaining=record['credits_remaining'],max_credits_per_day=MAX_CREDITS_PER_DAY,
                 priced_families_today=record['global_priced_families'],
                 eligible_competitions=len(by_key),goal_market_quotes=sum(len(e.get('market_quotes',{})) for e in events),
-                distinct_modelled_events_with_prices=covered_count(),minimum_priced_event_target=MIN_DAILY_ENTRIES,
+                distinct_modelled_events_with_prices=covered_count(verified=True),
+                declared_model_scope_priced_events=covered_count(),
+                model_readiness_status=readiness_status,verified_ready_events=sum(v=='READY' for v in readiness.values()),
+                discovery_only_credits_today=record['discovery_only_credits_today'],
+                allocation_basis='ACTUAL_FORECASTS_THEN_UNVERIFIED_SCOPE_THEN_ONE_DISCOVERY_CREDIT',minimum_priced_event_target=MIN_DAILY_ENTRIES,
                 event_market_credits_today=record['event_market_credits_today'],reserved_extra_market_credits=EXTRA_MARKET_DAILY_CREDITS,
                 regional_corner_credits_today=record['regional_corner_credits_today'],
                 market_inventory=record['market_inventory'])

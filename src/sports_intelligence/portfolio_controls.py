@@ -37,7 +37,8 @@ def record_signal(row):
 class PaperRiskBook:
     """Single mutable budget shared by all account openers in one lab execution."""
 
-    def __init__(self, root: Path):
+    def __init__(self, root: Path, allow_new_entries: bool = True):
+        self.allow_new_entries = allow_new_entries
         self.event_exposure = defaultdict(float)
         self.total_exposure = 0.0
         self.event_legs = defaultdict(int)
@@ -74,6 +75,9 @@ class PaperRiskBook:
         self.rejections = defaultdict(int)
 
     def reserve(self, event_id: str, requested: float, signal_key: str | None = None) -> float:
+        if not self.allow_new_entries:
+            self.rejections["source_reports_stale"] += 1
+            return 0.0
         if not event_id or not math.isfinite(requested) or requested <= 0:
             self.rejections["invalid_stake"] += 1
             return 0.0
@@ -100,6 +104,7 @@ class PaperRiskBook:
 
     def summary(self) -> dict:
         return {
+            "source_freshness_allows_new_entries": self.allow_new_entries,
             "max_event_open_eur": round(INITIAL_TOTAL_BANK * MAX_EVENT_OPEN_FRACTION, 2),
             "max_total_open_eur": round(INITIAL_TOTAL_BANK * MAX_PORTFOLIO_OPEN_FRACTION, 2),
             "minimum_new_stake_eur": MIN_MEANINGFUL_STAKE_EUR,

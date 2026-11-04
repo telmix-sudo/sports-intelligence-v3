@@ -609,7 +609,11 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     before, settle_counts = build_accounts(root, finals, now)
     from .research_pipeline import read_journal, reconcile, run_research
     research_settlement_result = reconcile(root, read_journal(root), events, now)
-    risk = PaperRiskBook(root)
+    from .runtime_freshness import freshness
+    import os
+    runtime = freshness(root, now, lab_asof=now.isoformat())
+    runtime['scanner_recovery_outcome'] = os.getenv('V3_SCANNER_RECOVERY_OUTCOME','not_requested')
+    risk = PaperRiskBook(root, allow_new_entries=not runtime['needs_scanner'])
     market_research = run_research(root, events, models, now, risk, football_history=matches,
                                    previous_settlement_result=research_settlement_result,collect_team_stats=True,learning=learning)
     from .auxiliary_portfolios import open_auxiliary_markets
@@ -670,15 +674,21 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     }
     global_file=root/"reports/global_discovery_latest.json"
     global_snapshot=json.loads(global_file.read_text()) if global_file.exists() else None
+    from .validation_progress import validation_progress
+    admission_report=admission.report()
+    learning_report=learning.report((*STRATEGIES,'EXPERIMENTAL_MULTI_MARKET'))
     report = {
+        "runtime_status":runtime,
+        "pricing_readiness":market_research['pricing_readiness'],
+        "validation_progress":validation_progress(admission_report,learning_report,market_research),
         "global_discovery":global_snapshot,
         "asof_utc": now.isoformat(),
         "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
         "daily_reference": daily_reference,
         "daily_activity": daily_activity,
         "aggregate_risk": risk.summary(),
-        "admission_validation":admission.report(),
-        "historical_learning": learning.report((*STRATEGIES,'EXPERIMENTAL_MULTI_MARKET')),
+        "admission_validation":admission_report,
+        "historical_learning": learning_report,
         "market_research": market_research,
         "ledger_audit": audit_ledgers(root, now),
         "market_activity": market_activity(root, events, now),

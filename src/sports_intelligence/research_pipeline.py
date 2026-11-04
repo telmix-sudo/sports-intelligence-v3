@@ -144,8 +144,11 @@ def fit_sports(history, learning=None):
             if pred and final['outcome'] != 1:
                 outcome = 0 if final['outcome'] == 0 else 1
                 if learning is not None:
-                    from .historical_learning import event_key
-                    learning.add(pred['version'],event['sport'],'ML',day,event_key(day,event['home'],event['away']),pred['probabilities'],outcome)
+                    from .historical_learning import sample_identity
+                    try:
+                        identity=sample_identity(event['sport'],day,event['home'],event['away'],event.get('id'))
+                        learning.add(pred['version'],event['sport'],'ML',day,identity,pred['probabilities'],outcome)
+                    except ValueError:learning.invalid+=1
                 scores[event['sport']].append({'brier':brier(pred['probabilities'], outcome),
                                                'log_loss':log_loss(pred['probabilities'], outcome),
                                                'p':pred['probabilities'][0], 'outcome':outcome, 'date':str(day)})
@@ -423,6 +426,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
             stat_models.setdefault((e['sport'],metric),CountModel(metric)).update(e)
     digest = hashlib.sha256('|'.join(sorted(e['id'] for e in history)).encode()).hexdigest()
     blocks = Counter()
+    pricing_events = []
     candidates = 0
     added = 0
     state = paper_state(rows)
@@ -471,6 +475,14 @@ def run_research(root, events, football_models, now, risk, football_history=None
                 pred=m.forecast(e['home'],e['away'],spec) if m else None
             if pred:outputs[market]=dict(pred,market_spec=spec)
             else:blocks['insufficient_'+spec['metric']+'_history']+=1
+        forecasts=[{'family':p['version'],'market':m,'sample_min':p['sample_min']} for m,p in outputs.items()]
+        if e['sport'] in football_models:
+            from .strategy_lab import team_name
+            base=football_models[e['sport']].get('ELO_STANDARD')
+            minimum=min(base.played.get(team_name(e['home']),0),base.played.get(team_name(e['away']),0)) if base else 0
+            if minimum>=8:forecasts.append({'family':'ELO_STANDARD','market':'1X2','sample_min':minimum})
+        pricing_events.append({k:e[k] for k in ('id','sport','home','away','start_utc')} |
+                              {'status':'READY' if forecasts else 'INSUFFICIENT_HISTORY','forecasts':forecasts})
         for market,pred in outputs.items():
             candidates += 1
             q = e.get('quote') if market=='ML' else e.get('market_quotes',{}).get(market)
@@ -566,6 +578,7 @@ def run_research(root, events, football_models, now, risk, football_history=None
     s = [r for r in rows if r['kind']=='SETTLEMENT']
     settled_ids = {r['forecast_id'] for r in s}
     report = {'asof_utc':now.isoformat(), 'status':'OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH',
+              'pricing_readiness':{'asof_utc':now.isoformat(),'training_cutoff_exclusive_utc_date':str(now.date()),'events':pricing_events},
               'new_forecasts':added, 'new_settlements':newly_settled,
               'forecasts_total':len(f), 'zero_stake_forecasts':sum(r['stake_eur']==0 for r in f),
               'open_observations':sum(r['id'] not in settled_ids and r['stake_eur']==0 for r in f),
