@@ -579,10 +579,11 @@ def enrich_pending_statistics(root: Path, finals: dict, now: dt.datetime, enrich
 
 
 def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
-                     discover=capture_scoreboards) -> dict:
+                     discover=capture_scoreboards, clock=None) -> dict:
     if now.tzinfo is None:
         raise ValueError("now must be timezone aware")
     now = now.astimezone(UTC)
+    clock = clock or (lambda:dt.datetime.now(UTC))
     registry = ensure_registry(root, now, STRATEGIES)
     verify_prior_accounts(root, registry)
     matches, provenance = collect_openfootball(now.date(), fetcher)
@@ -590,7 +591,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     from .admission_validation import AdmissionValidation
     admission=AdmissionValidation(root,now)
     from .selection_experiment import SelectionExperiment
-    selection_experiment=SelectionExperiment(root,now,clock=lambda:dt.datetime.now(UTC))
+    selection_experiment=SelectionExperiment(root,now,clock=clock)
     learning=HistoricalLearning(root,now)
     models, historical = historical_comparison(matches,learning)
     # Includes yesterday/today/future fixtures; only completed final statuses settle.
@@ -653,7 +654,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     from .research_pipeline import paper_state
     from .research_pipeline import atomic_json
     daily_minimum=run_daily_paper_minimum(root,events,list(selection_experiment.current_forecasts.values()),
-        now,registry,risk,clock=lambda:dt.datetime.now(UTC))
+        now,registry,risk,clock=clock)
     for name,count in daily_minimum['new_entries'].items():entry_counts[name]=entry_counts.get(name,0)+count
     # Refresh summary counters after the separate daily research positions.
     current_research_rows=read_journal(root)
@@ -664,7 +665,6 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         forecasts_total=len(current_f),zero_stake_forecasts=sum(r['stake_eur']==0 for r in current_f),
         open_observations=sum(r['id'] not in current_settled and r['stake_eur']==0 for r in current_f),
         new_forecasts=market_research['new_forecasts']+daily_minimum['new_entries'].get('EXPERIMENTAL_MULTI_MARKET',0))
-    atomic_json(root/'reports/market_research_latest.json',market_research)
     after, _ = build_accounts(root, {}, now)
     # Count the TRUE number of unique events forecast on this Lisbon calendar day,
     # not duplicated strategy picks on the same match.
@@ -712,6 +712,14 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     official_verification=verify_official_results(root,now,fetcher=fetcher)
     admission_report=admission.report()
     learning_report=learning.report((*STRATEGIES,'EXPERIMENTAL_MULTI_MARKET'))
+    # Forecasts use their actual registration clocks, after analysis began. The
+    # published snapshot must include them; otherwise the balance UI correctly
+    # rejects the snapshot as containing records newer than its as-of timestamp.
+    finished=clock()
+    if finished.tzinfo is None:raise ValueError('Publication clock must be timezone aware')
+    published_at=max(now,finished.astimezone(UTC))
+    market_research['asof_utc']=published_at.isoformat()
+    atomic_json(root/'reports/market_research_latest.json',market_research)
     report = {
         "selection_experiment":selection_experiment.report(),
         "selection_audit":dict(audit_selections(root),official_verification=official_verification),
@@ -719,7 +727,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "pricing_readiness":market_research['pricing_readiness'],
         "validation_progress":validation_progress(admission_report,learning_report,market_research),
         "global_discovery":global_snapshot,
-        "asof_utc": now.isoformat(),
+        "asof_utc": published_at.isoformat(),
+        "analysis_started_utc": now.isoformat(),
         "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
         "daily_paper_minimum": daily_minimum,
         "daily_reference": daily_reference,
@@ -767,16 +776,16 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     path = root / "reports" / "strategy_lab_latest.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
-    archive = root / "reports" / "strategy_lab_runs" / (now.date().isoformat() + ".jsonl")
+    archive = root / "reports" / "strategy_lab_runs" / (published_at.date().isoformat() + ".jsonl")
     archive.parent.mkdir(exist_ok=True, parents=True)
     with archive.open("a", encoding="utf8") as sink:
-        sink.write(json.dumps({"utc": now.isoformat(), "events": len(events),
+        sink.write(json.dumps({"utc": published_at.isoformat(), "events": len(events),
                                "entries": entry_counts, "settled": settle_counts["settled_this_run"],
                                "sources_ok": coverage["sources_ok"],
                                "historical_counts": {k:v["n"] for k,v in historical.items()}},
                               ensure_ascii=False) + "\n")
     accounts_path = root / "data" / "strategy_accounts_v3.json"
-    accounts_path.write_text(json.dumps({"updated_utc": now.isoformat(), "accounts": after},
+    accounts_path.write_text(json.dumps({"updated_utc": published_at.isoformat(), "accounts": after},
                                         ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     return report
 

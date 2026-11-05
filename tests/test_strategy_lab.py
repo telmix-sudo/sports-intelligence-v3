@@ -156,10 +156,15 @@ class StrategyLabTests(unittest.TestCase):
             with patch("sports_intelligence.strategy_lab.collect_openfootball") as loader:
                 loader.return_value = ({"epl": openfootball_matches(PAYLOAD, "epl", DAY.date())},
                                        {"matches_per_league": {"epl": 2}, "sources": [], "failures": []})
-                report = run_strategy_lab(root, DAY, discover=discover)
+                finished=DAY+dt.timedelta(seconds=15)
+                report = run_strategy_lab(root, DAY, discover=discover,clock=lambda:finished)
             self.assertEqual(len(report["accounts"]), len(STRATEGIES))
             self.assertTrue((root / "reports" / "strategy_lab_latest.json").is_file())
             self.assertTrue((root / "data" / "strategy_accounts_v3.json").is_file())
+            self.assertEqual(report['analysis_started_utc'],DAY.isoformat())
+            self.assertEqual(report['asof_utc'],finished.isoformat())
+            self.assertEqual(report['market_research']['asof_utc'],finished.isoformat())
+            self.assertEqual(json.loads((root/'data/strategy_accounts_v3.json').read_text())['updated_utc'],finished.isoformat())
             self.assertEqual(report["new_paper_entries"], {})
             for val in report["accounts"].values():
                 self.assertEqual(val["bankroll_eur"], 1000.0)
