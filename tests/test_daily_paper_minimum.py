@@ -8,7 +8,7 @@ import unittest
 from sports_intelligence.custom_strategies import ALL_NAMES
 from sports_intelligence.strategy_registry import ensure_registry
 from sports_intelligence.selection_experiment import SelectionExperiment
-from sports_intelligence.daily_paper_minimum import run_daily_paper_minimum,PROFILES,EXPERIMENTAL,VERSION
+from sports_intelligence.daily_paper_minimum import run_daily_paper_minimum,PROFILES,EXPERIMENTAL,VERSION,candidate,GUARDED_PROFILE
 from sports_intelligence.portfolio_controls import PaperRiskBook,MAX_SHARED_PREDICTION_OPEN_EUR,record_signal
 from sports_intelligence.research_pipeline import read_journal,reconcile,paper_state,settlement_outcome
 from sports_intelligence.strategy_lab import build_accounts
@@ -39,6 +39,30 @@ def run(root,events,experiment,registry,now=NOW,risk=None):
 
 
 class DailyPaperMinimumTests(unittest.TestCase):
+    def test_unvalidated_gap_and_opposite_never_override_market_favourite_daily_fill(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);events,x=fixtures(root,count=1)
+            f=next(iter(x.current_forecasts.values()))
+            # Both the largest gap and the model favourite favour an outsider.
+            f.update(probabilities=[.8,.2],market_no_vig=[.3,.7],odds=[3.,1.4])
+            c=candidate(f,events[0],NOW,GUARDED_PROFILE)
+            self.assertEqual(c['policy'],'MARKET_FAVOURITE');self.assertEqual(c['i'],1)
+            self.assertEqual(c['p'],[.8,.2])  # Never rewrite the source probabilities.
+            self.assertEqual(c['trace']['arms']['VALUE_GAP']['selection_index'],0)
+            f['historical_learning']={'status':'ACTIVE','forward_validation':{'eligible':True,'n':100,'dates':13,'market_n':100,'market_dates':14}}
+            self.assertEqual(candidate(f,events[0],NOW,GUARDED_PROFILE)['i'],1)
+            f['historical_learning']['forward_validation']['dates']=14
+            self.assertEqual(candidate(f,events[0],NOW,GUARDED_PROFILE)['policy'],'MODEL_FAVOURITE')
+            self.assertEqual(candidate(f,events[0],NOW,GUARDED_PROFILE)['i'],0)
+
+    def test_registered_statistic_rule_retains_sport_and_exact_period(self):
+        from sports_intelligence.daily_paper_minimum import market_rules
+        for sport in ('nba','nhl','nfl','mlb'):
+            self.assertEqual(market_rules({'market':'STAT_EXAMPLE','sport':sport},{'period':'FULL_TIME'}),
+                             sport.upper()+'_FULL_TIME_EXPLICIT_MARKET_SPEC')
+            self.assertEqual(market_rules({'market':'ML','sport':sport},None),'FULL_GAME_INCLUDING_OVERTIME_OR_EXTRA_INNINGS')
+        self.assertEqual(market_rules({'market':'1X2','sport':'epl'},None),'REGULATION_90_MINUTES_EXPLICIT_MARKET')
+
     def test_every_wallet_reaches_five_with_genuine_nonzero_stakes_without_passing_value_gate(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);registry=ensure_registry(root,NOW,ALL_NAMES);events,x=fixtures(root)

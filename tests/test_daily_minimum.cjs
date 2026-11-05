@@ -10,3 +10,8 @@ test('Missing or partial counts cannot become a claim that the minimum was met',
  assert.match(view.describe(d),/1 \/ 3/);assert.equal(view.rows(d)[1][1],'—');assert.match(view.rows(d)[1][5],/indisponível/);
  assert.match(view.describe(null),/próximo relatório/);
 });
+test('Daily selector discloses market fallback before model validation',()=>{
+ const d={local_date:'2026-11-05',minimum_per_wallet:5,expected_wallets:1,exploratory_stake_eur:.5,selection_guard:{},wallets:{ONE:{entries:5,profile:'VALIDATED_MODEL_OR_MARKET_FAVOURITE'}}};
+ assert.equal(view.rows(d)[0][4],'Modelo validado ou favorito do mercado');
+ assert.match(view.describe(d),/Sem modelo validado, usa-se o favorito do mercado/);
+});

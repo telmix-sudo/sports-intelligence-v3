@@ -21,26 +21,44 @@ from .selection_policy import selection_trace
 
 UTC=dt.timezone.utc
 LOCAL=ZoneInfo('Europe/Lisbon')
-VERSION='DAILY-PAPER-MINIMUM-1.0'
+VERSION='DAILY-PAPER-MINIMUM-1.1'
 EXPERIMENTAL='EXPERIMENTAL_MULTI_MARKET'
-# Fixed prospectively, three wallets per research policy. These are daily-fill
-# profiles; native validated entries continue to take precedence.
-PROFILES={
-    'ELO_STANDARD':'MODEL_FAVOURITE','ELO_DYNAMIC':'VALUE_GAP',
-    'POISSON_SHRINK':'MODEL_FAVOURITE','DIXON_COLES_LOW':'VALUE_GAP',
-    'ELO_POISSON_BLEND':'MODEL_FAVOURITE','CONSENSUS_SHRUNK':'MARKET_FAVOURITE',
-    'DISAGREEMENT_VETO':'MARKET_FAVOURITE','MARKET_ANCHORED':'MARKET_FAVOURITE',
-    'FREQ_SELECTIVE_1_3':'OPPOSITE_VALUE_GAP','FREQ_BALANCED_3_5':'OPPOSITE_VALUE_GAP',
-    'FREQ_BROAD_5_10':'VALUE_GAP',EXPERIMENTAL:'OPPOSITE_VALUE_GAP'}
+# Unproven probability gaps and their opposites remain zero-stake comparisons.
+# Only a forward-validated learned model may replace the market benchmark for
+# daily fills. This never approves a value edge or a real-money position.
+GUARDED_PROFILE='VALIDATED_MODEL_OR_MARKET_FAVOURITE'
+PROFILES={name:GUARDED_PROFILE for name in (*ALL_NAMES,EXPERIMENTAL) if name not in REFERENCE_NAMES}
+
+
+def daily_selector(f):
+    """Use a learned favourite only after its frozen forward gate has passed."""
+    learning=f.get('historical_learning') or {}
+    gate=learning.get('forward_validation') or {}
+    if (learning.get('status')=='ACTIVE' and gate.get('eligible') is True
+            and all(type(gate.get(k)) is int and gate[k]>=n
+                    for k,n in (('n',100),('dates',14),('market_n',100),('market_dates',14)))):
+        return 'MODEL_FAVOURITE','LEARNED_MODEL_PASSED_FORWARD_BENCHMARKS'
+    return 'MARKET_FAVOURITE','MODEL_NOT_FORWARD_VALIDATED_USE_MARKET_BENCHMARK'
 
 
 def typed_spec(f):
+    """Retain exact line, metric and period for settlement of daily positions."""
     if f.get('market_spec'):return f['market_spec']
     fixed={'OVER_UNDER_2_5':('TOTAL',2.5),'ASIAN_HOME_MINUS_0_5':('SPREAD',-.5),'BTTS':('BTTS',None)}
     if f['market'] in fixed:
         kind,line=fixed[f['market']]
         return {'kind':kind,'metric':'goals','line':line,'team':None,'period':'FULL_TIME'}
     return None
+
+
+def market_rules(f,spec):
+    """Describe the actual sport and period rather than labelling all as football."""
+    if f['market']=='ML':return 'FULL_GAME_INCLUDING_OVERTIME_OR_EXTRA_INNINGS'
+    if f['market']=='1X2':return 'REGULATION_90_MINUTES_EXPLICIT_MARKET'
+    period=(spec or {}).get('period','FULL_TIME')
+    if f['sport'] in ('nba','nhl','nfl','mlb'):
+        return f"{f['sport'].upper()}_{period}_EXPLICIT_MARKET_SPEC"
+    return f'REGULATION_90_MINUTES_{period}_EXPLICIT_MARKET_SPEC'
 
 
 def candidate(f,event,now,policy):
@@ -60,14 +78,16 @@ def candidate(f,event,now,policy):
         if f['market'] not in ('ML','1X2') and spec is None:return None
         push=f.get('selection_trace',{}).get('push_probability',0.)
         trace=selection_trace(p,m,prices,push)
-        actual=policy if policy in trace['arms'] else 'MODEL_FAVOURITE'
+        actual,reason=daily_selector(f) if policy==GUARDED_PROFILE else (policy,'MARKET_REFERENCE_CONTROL')
+        if actual not in trace['arms']:return None
         i=trace['arms'][actual]['selection_index']
         return {'f':f,'p':p,'m':m,'prices':prices,'i':i,'policy':actual,'trace':trace,'spec':spec,
-                'signal':prediction_signal(f['event_id'],f['market'],f['family'],i)}
+                'reason':reason,'signal':prediction_signal(f['event_id'],f['market'],f['family'],i)}
     except (ValueError,KeyError,TypeError,OverflowError):return None
 
 
 def run_daily_paper_minimum(root,events,forecasts,now,registry,risk,clock=None):
+    """Fill genuine positive-stake PAPER research slots, without changing old rows."""
     from .strategy_lab import read_jsonl,save_jsonl
     from .research_pipeline import read_journal,append,paper_state
     clock=clock or (lambda:now)
@@ -112,7 +132,7 @@ def run_daily_paper_minimum(root,events,forecasts,now,registry,risk,clock=None):
                         c['signal']=prediction_signal(f['event_id'],f['market'],'MARKET_REFERENCE',c['i'])
                     candidates.append(c)
             preferred=family_for_wallet(name)
-            candidates.sort(key=lambda c:(policy(name)=='OPPOSITE_VALUE_GAP' and c['policy']!='OPPOSITE_VALUE_GAP',c['f']['family']!=preferred,
+            candidates.sort(key=lambda c:(c['f']['family']!=preferred,
                 risk.event_legs[c['f']['event_id']],risk.signal_exposure[c['signal']],
                 -c['m'][c['i']],c['f']['start_utc'],c['f']['event_id'],c['f']['market'],c['f']['family']))
             if not candidates:blocked['no_fresh_supported_forecast']+=1
@@ -134,10 +154,11 @@ def run_daily_paper_minimum(root,events,forecasts,now,registry,risk,clock=None):
                           'real_money_allowed':False,'normal_value_admission_unchanged':True}
                 row={'id':fid,'strategy':name,'event_id':f['event_id'],'sport':f['sport'],'home':f['home'],'away':f['away'],
                      'start_utc':f['start_utc'],'forecast_utc':stamp.isoformat(),'market':f['market'],'market_spec':c['spec'],
-                     'market_rules':'FULL_GAME_INCLUDING_OVERTIME_OR_EXTRA_INNINGS' if f['market']=='ML' else 'REGULATION_90_MINUTES_EXPLICIT_MARKET',
+                     'market_rules':market_rules(f,c['spec']),
                      'probabilities':c['p'],'no_vig':c['m'],'market_no_vig':c['m'],'odds':c['prices'],
                      'selection_index':i,'selection_policy':c['policy'],'daily_profile':policy(name),
-                     'selection_trace':trace,'stake_eur':stake,'status':'OPEN','model_version':f['family'],
+                     'selection_trace':trace,'selection_reason':c['reason'],
+                     'stake_eur':stake,'status':'OPEN','model_version':f['family'],
                      'model_status':'DAILY_EXPLORATORY_PAPER_NOT_VALIDATED','classification':'DAILY_EXPLORATORY_PAPER',
                      'source_forecast_id':f.get('paired_forecast_id'), 'source_snapshot_id':f['source_snapshot_id'],
                      'source_snapshot_utc':f['forecast_utc'],'shared_forecast_not_independent':name not in REFERENCE_NAMES,
@@ -162,7 +183,11 @@ def run_daily_paper_minimum(root,events,forecasts,now,registry,risk,clock=None):
     return {'policy':VERSION,'mode':'USER_REQUESTED_PAPER_DAILY_MINIMUM','local_date':str(day),
             'expected_wallets':len(states),'minimum_per_wallet':MIN_DAILY_ENTRIES,'maximum_per_wallet':MAX_DAILY_ENTRIES,
             'exploratory_stake_eur':DAILY_EXPLORATORY_STAKE_EUR,'requires_validated_edge_for_daily_fill':False,
-            'normal_value_admission_unchanged':True,'ranking':'BINARY_OPPOSITE_WHEN_REQUESTED_THEN_OWN_MODEL_THEN_LEAST_CONCENTRATION_THEN_MARKET_PROBABILITY',
+            'normal_value_admission_unchanged':True,
+            'ranking':'OWN_SOURCE_MODEL_THEN_LEAST_CONCENTRATION_THEN_MARKET_PROBABILITY',
+            'selection_guard':{'profile':GUARDED_PROFILE,'unvalidated_fallback':'MARKET_FAVOURITE',
+                               'opposite_and_value_gap_comparisons':'ZERO_STAKE_ONLY',
+                               'favourite_is_not_a_profit_guarantee':True},
             'real_money_allowed':False,'new_entries':dict(additions),
             'wallets':{name:{'before':s['before'],'entries':s['today'],'new_entries':additions[name],
                              'remaining':max(0,MIN_DAILY_ENTRIES-s['today']),'profile':policy(name),
