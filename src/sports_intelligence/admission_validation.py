@@ -98,7 +98,7 @@ class AdmissionValidation:
                 market=frozen_market(r)
                 if market is None:continue
                 family=r.get('model_version') or family_for_wallet(r['strategy'])
-                if r['market']=='1X2':family=family_for_wallet(r['strategy'])
+                if r['market']=='1X2' and not r.get('daily_paper_exploration_policy'):family=family_for_wallet(r['strategy'])
                 key='|'.join((family,r['sport'],r['market']))
                 p=normalize((r.get('historical_learning') or {}).get('base_probabilities',r['probabilities']))
                 y=r['observed_outcome']

@@ -50,3 +50,14 @@ and existing admission gates are required before any practical adoption.
 There is **no automatic stake activation** and no access to `PaperRiskBook` from
 the experiment. Historical inverse results remain hypothesis-generation data.
 The original wallets, balances, positions and frozen forecasts remain preserved.
+
+## Explicit daily PAPER minimum
+
+On 4 November 2026 the user separately authorized five nonzero PAPER entries per
+wallet before edge validation. The fixed-cohort experiment remains zero-stake,
+unchanged and never reserves funds. The observer exposes current recomputed
+inputs in memory, including after deduplication or cohort closure; a separate
+`daily_paper_minimum.py` allocator can freeze new labelled EUR 0.50 research
+positions from those current inputs. It does not rewrite a paired observation,
+use old frozen probabilities as a current forecast, or classify an unvalidated
+model as market-validated. Ordinary value entries retain their original gates.

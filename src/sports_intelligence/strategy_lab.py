@@ -649,6 +649,22 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         entry_counts["MARKET_DAILY_REFERENCE"] = entry_counts.get("MARKET_DAILY_REFERENCE",0)+daily_reference["new_entries"]
     auxiliary = open_auxiliary_markets(root, events, now, registry, risk,market_scope='moneyline',admission=admission,learning=learning)
     for name,count in auxiliary.items(): entry_counts[name]=entry_counts.get(name,0)+count
+    from .daily_paper_minimum import run_daily_paper_minimum
+    from .research_pipeline import paper_state
+    from .research_pipeline import atomic_json
+    daily_minimum=run_daily_paper_minimum(root,events,list(selection_experiment.current_forecasts.values()),
+        now,registry,risk,clock=lambda:dt.datetime.now(UTC))
+    for name,count in daily_minimum['new_entries'].items():entry_counts[name]=entry_counts.get(name,0)+count
+    # Refresh summary counters after the separate daily research positions.
+    current_research_rows=read_journal(root)
+    current_f=[r for r in current_research_rows if r['kind']=='FORECAST']
+    current_s=[r for r in current_research_rows if r['kind']=='SETTLEMENT']
+    current_settled={r['forecast_id'] for r in current_s}
+    market_research.update(experimental_account=paper_state(current_research_rows),
+        forecasts_total=len(current_f),zero_stake_forecasts=sum(r['stake_eur']==0 for r in current_f),
+        open_observations=sum(r['id'] not in current_settled and r['stake_eur']==0 for r in current_f),
+        new_forecasts=market_research['new_forecasts']+daily_minimum['new_entries'].get('EXPERIMENTAL_MULTI_MARKET',0))
+    atomic_json(root/'reports/market_research_latest.json',market_research)
     after, _ = build_accounts(root, {}, now)
     # Count the TRUE number of unique events forecast on this Lisbon calendar day,
     # not duplicated strategy picks on the same match.
@@ -687,7 +703,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "reference_entries": sum(r["strategy"] == "MARKET_DAILY_REFERENCE" for r in activity_rows),
         "unique_event_ids": unique_events_today,
         "minimum_met": all(s["target_met"] for s in daily_per_strategy.values()),
-        "caveat": "Targets are diagnostic, never overrides to fabricate price, edge or event."
+        "caveat": "User-requested daily PAPER research fills to five with EUR 0.50 positions, without claiming validated edge; prices, future kickoff and risk caps remain mandatory."
     }
     global_file=root/"reports/global_discovery_latest.json"
     global_snapshot=json.loads(global_file.read_text()) if global_file.exists() else None
@@ -705,6 +721,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "global_discovery":global_snapshot,
         "asof_utc": now.isoformat(),
         "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
+        "daily_paper_minimum": daily_minimum,
         "daily_reference": daily_reference,
         "daily_activity": daily_activity,
         "aggregate_risk": risk.summary(),
@@ -718,7 +735,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             "goal_markets": "AUTOMATED_TIMESTAMPED_QUOTES_FORECASTS_AND_SETTLEMENT",
             "holdout_caveat": "Prequential score walk-forward is not independent market-based holdout."},
         "frequency_strategies": frequency_results,
-        "daily_target_policy": "All active strategies target 5–10 qualified PAPER entries per Lisbon day; maximum 10 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",
+        "daily_target_policy": "Each account fills to five daily PAPER positions using explicitly unvalidated EUR 0.50 research entries when ordinary validated entries are insufficient. Ordinary value admission, real quote/future-event requirements and exposure caps remain unchanged. Maximum ten per account; no real bets.",
         "registered_strategies": registry,
         "policy": "Existing balances and settled records persist; only brand-new strategies start with EUR 1000.",
         "sports_tested": sorted(matches),

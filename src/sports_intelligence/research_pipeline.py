@@ -1,9 +1,10 @@
 """Live prospective multi-market experiment, immutable observations and settlements.
 
-No real execution. Existing twelve wallets are never rewritten. A separate EUR1000
-paper account is created ONLY on the first statistically eligible experimental
-trade; until then predictions run with zero stake. Admission rules are fixed in
-advance and evaluated using only results already known before today's cutoff.
+No real execution. Existing frozen records are preserved. Ordinary value entries
+require validation; a separate user-requested daily PAPER research mode can open
+labelled EUR 0.50 positions before market-edge validation. Both modes use genuine
+pre-game quotes and existing exposure limits. Historical results never create
+retroactive positions.
 """
 from __future__ import annotations
 
@@ -258,6 +259,7 @@ def _goal_outcome(market, final):
 
 
 def settlement_outcome(forecast, final):
+    if forecast['market']=='1X2':return final.get('outcome')
     if forecast['market'] in GOAL_MARKETS:
         return _goal_outcome(forecast['market'], final)
     if final['outcome'] == 1:
@@ -363,8 +365,11 @@ def validation(rows, before):
         market_log = sum(r['market_log_loss'] for _,r in pairs)/n
         bins = defaultdict(list)
         for f,r in pairs:
-            p = f['probabilities'][0]
-            bins[min(9,int(p*10))].append((p, r['outcome']==0))
+            if len(f['probabilities'])==3:
+                choice=max(range(3),key=lambda i:f['probabilities'][i])
+                p=f['probabilities'][choice];correct=r['outcome']==choice
+            else:p=f['probabilities'][0];correct=r['outcome']==0
+            bins[min(9,int(p*10))].append((p,correct))
         ece = sum(len(b)/n*abs(sum(p for p,y in b)/len(b)-sum(y for p,y in b)/len(b)) for b in bins.values())
         dates = sorted({parse_utc(f['forecast_utc']).date() for f,r in pairs})
         span = (dates[-1]-dates[0]).days+1

@@ -17,6 +17,7 @@ INITIAL_TOTAL_BANK = 12_000.0
 MAX_EVENT_OPEN_FRACTION = .003  # 36 EUR aggregate per distinct game
 MAX_PORTFOLIO_OPEN_FRACTION = .02  # 240 EUR aggregate
 MIN_MEANINGFUL_STAKE_EUR = 1.0
+DAILY_EXPLORATORY_STAKE_EUR = .5
 # One shared prediction gets the standard 0.25% risk budget of ONE initial
 # EUR1000 research wallet, even if copied into several independent ledgers.
 MAX_SHARED_PREDICTION_OPEN_EUR = 2.5
@@ -30,7 +31,7 @@ def prediction_signal(event_id,market,family,selection):
 def record_signal(row):
     from .historical_learning import family_for_wallet
     family=row.get('model_version') or family_for_wallet(row.get('strategy','UNKNOWN'))
-    if row.get('market')=='1X2':family=family_for_wallet(row.get('strategy',family))
+    if row.get('market')=='1X2' and not row.get('daily_paper_exploration_policy'):family=family_for_wallet(row.get('strategy',family))
     return prediction_signal(row['event_id'],row.get('market','UNKNOWN'),family,row.get('selection_index'))
 
 
@@ -74,7 +75,7 @@ class PaperRiskBook:
                     self.signal_exposure[record_signal(r)] += stake
         self.rejections = defaultdict(int)
 
-    def reserve(self, event_id: str, requested: float, signal_key: str | None = None) -> float:
+    def reserve(self, event_id: str, requested: float, signal_key: str | None = None, exploratory: bool = False) -> float:
         if not self.allow_new_entries:
             self.rejections["source_reports_stale"] += 1
             return 0.0
@@ -91,8 +92,9 @@ class PaperRiskBook:
         # Rounding up could exceed the remaining account/event budget. Virtual
         # stakes are whole cents and must always stay below the requested size.
         size = float(Decimal(str(max(0.0, available))).quantize(Decimal("0.01"), rounding=ROUND_DOWN))
-        if size < MIN_MEANINGFUL_STAKE_EUR:
-            if signal_key is not None and MAX_SHARED_PREDICTION_OPEN_EUR-self.signal_exposure[signal_key]<MIN_MEANINGFUL_STAKE_EUR:
+        minimum = DAILY_EXPLORATORY_STAKE_EUR if exploratory is True else MIN_MEANINGFUL_STAKE_EUR
+        if size < minimum:
+            if signal_key is not None and MAX_SHARED_PREDICTION_OPEN_EUR-self.signal_exposure[signal_key]<minimum:
                 self.rejections['shared_prediction_limit']+=1
             self.rejections["aggregate_event_or_portfolio_limit"] += 1
             return 0.0
@@ -108,6 +110,7 @@ class PaperRiskBook:
             "max_event_open_eur": round(INITIAL_TOTAL_BANK * MAX_EVENT_OPEN_FRACTION, 2),
             "max_total_open_eur": round(INITIAL_TOTAL_BANK * MAX_PORTFOLIO_OPEN_FRACTION, 2),
             "minimum_new_stake_eur": MIN_MEANINGFUL_STAKE_EUR,
+            "minimum_daily_exploratory_stake_eur": DAILY_EXPLORATORY_STAKE_EUR,
             "max_shared_prediction_open_eur":MAX_SHARED_PREDICTION_OPEN_EUR,
             "shared_prediction_open_eur":{key:round(value,2) for key,value in sorted(self.signal_exposure.items()) if value>0},
             "total_open_eur": round(self.total_exposure, 2),

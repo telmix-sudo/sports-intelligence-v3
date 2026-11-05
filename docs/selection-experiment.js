@@ -10,7 +10,7 @@ function audit(a){
 }
 function intro(t){
  if(!t)return 'A aguardar o início do teste prospetivo.';
- return 'Teste sem stake: '+t.forecasts_total+' previsões emparelhadas em '+t.distinct_events+' jogos distintos; '+t.settled_total+' avaliadas, '+t.voided_total+' anuladas e '+t.pending_total+' pendentes. Cada grupo exige pelo menos '+t.minimum_events+' jogos e '+t.minimum_dates+' datas. As carteiras não recebem estas operações. O resultado em euros simula 1 € por seleção às odds guardadas, antes de comissões e execução.';
+ return 'Teste sem stake: '+t.forecasts_total+' previsões emparelhadas em '+t.distinct_events+' jogos distintos; '+t.settled_total+' avaliadas, '+t.voided_total+' anuladas e '+t.pending_total+' pendentes. Cada grupo exige pelo menos '+t.minimum_events+' jogos e '+t.minimum_dates+' datas. Estas observações não alteram saldos; as apostas PAPER da meta diária são registadas separadamente nas carteiras. O resultado em euros simula 1 € por seleção às odds guardadas, antes de comissões e execução.';
 }
 function cohortRows(trial,sport='ALL'){
  return (trial?.streams||[]).filter(s=>sport==='ALL'||s.sport===sport).flatMap(s=>Object.entries(s.arms).map(([arm,a])=>[

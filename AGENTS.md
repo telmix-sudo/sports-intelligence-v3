@@ -24,8 +24,14 @@ positions and append-only observations. Never place a real-money bet or buy data
   select hyperparameters using the final evaluation period.
 - Historical score-only data cannot establish bookmaker returns. Keep profit,
   ROI and market advantage unavailable without verified point-in-time prices.
-- New models/sports remain observation-only until separately validated. A target
-  number of entries is not permission to invent quotes or relax risk controls.
+- Ordinary value positions require separate validation. On 4 Nov 2026 the user
+  explicitly required at least five PAPER entries per wallet even during
+  validation. The daily research fill may use labelled unvalidated EUR 0.50
+  virtual positions under daily_paper_minimum.py. From 5 Nov these fills use the
+  market favourite until a learned model passes its frozen forward benchmarks;
+  unvalidated gaps and opposite choices stay zero-stake. This is not market-edge
+  validation or real-money authorization. Never invent quotes or relax aggregate,
+  shared-signal, account exposure or timing controls.
 - Preserve bookmaker timestamps, full outcome sets and line/period identity.
   Cached prices must not receive a new quote time. Share the existing odds quota.
 - Never print or persist credentials, credential-bearing URLs or raw provider
