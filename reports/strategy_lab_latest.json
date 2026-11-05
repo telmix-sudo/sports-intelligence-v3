@@ -1,7 +1,7 @@
 {
   "selection_experiment": {
     "version": "SELECTION-PAIRED-1.0",
-    "asof_utc": "2026-11-05T15:30:36.837260+00:00",
+    "asof_utc": "2026-11-05T18:59:33.573503+00:00",
     "registered_at_utc": "2026-11-04T18:57:40.946619+00:00",
     "mode": "ZERO_STAKE_FIXED_FUTURE_COHORT",
     "automatic_stake_activation": false,
@@ -10,14 +10,16 @@
     "unit_stake_eur": 1.0,
     "minimum_events": 100,
     "minimum_dates": 14,
-    "forecasts_total": 93,
-    "distinct_events": 33,
+    "forecasts_total": 117,
+    "distinct_events": 35,
     "settled_total": 34,
     "voided_total": 0,
-    "pending_total": 59,
-    "new_forecasts": 2,
+    "pending_total": 83,
+    "new_forecasts": 24,
     "new_settlements": 0,
-    "rejections": {},
+    "rejections": {
+      "ineligible_event_or_quote": 3
+    },
     "streams": [
       {
         "stream": "SELECTION-PAIRED-1.0|a7513f68166aff985dfa4e81b31e895fbe331f8bfc5da5407de1943afed91798|MULTIMARKET-1.0.0-nba|nba|ML",
@@ -258,6 +260,94 @@
         }
       },
       {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|CONSENSUS_SHRUNK|ligue_1|1X2",
+        "family": "CONSENSUS_SHRUNK",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 1,
+        "settled": 0,
+        "voided": 0,
+        "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|CONSENSUS_SHRUNK|serie_a|1X2",
+        "family": "CONSENSUS_SHRUNK",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 2,
+        "settled": 0,
+        "voided": 0,
+        "pending": 2,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
         "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|COUNT-POISSON-1.0-corners|bundesliga|STAT_5be39236948e8dee",
         "family": "COUNT-POISSON-1.0-corners",
         "sport": "bundesliga",
@@ -462,6 +552,94 @@
         }
       },
       {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|DISAGREEMENT_VETO|ligue_1|1X2",
+        "family": "DISAGREEMENT_VETO",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 1,
+        "settled": 0,
+        "voided": 0,
+        "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|DISAGREEMENT_VETO|serie_a|1X2",
+        "family": "DISAGREEMENT_VETO",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 2,
+        "settled": 0,
+        "voided": 0,
+        "pending": 2,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
         "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|DIXON_COLES_LOW|bundesliga|1X2",
         "family": "DIXON_COLES_LOW",
         "sport": "bundesliga",
@@ -516,6 +694,94 @@
         "settled": 0,
         "voided": 0,
         "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|DIXON_COLES_LOW|ligue_1|1X2",
+        "family": "DIXON_COLES_LOW",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 1,
+        "settled": 0,
+        "voided": 0,
+        "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|DIXON_COLES_LOW|serie_a|1X2",
+        "family": "DIXON_COLES_LOW",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 2,
+        "settled": 0,
+        "voided": 0,
+        "pending": 2,
         "dates": 0,
         "cohort_locked": false,
         "remaining_events": 100,
@@ -638,6 +904,94 @@
         }
       },
       {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|ELO_DYNAMIC|ligue_1|1X2",
+        "family": "ELO_DYNAMIC",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 1,
+        "settled": 0,
+        "voided": 0,
+        "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|ELO_DYNAMIC|serie_a|1X2",
+        "family": "ELO_DYNAMIC",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 2,
+        "settled": 0,
+        "voided": 0,
+        "pending": 2,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
         "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|ELO_POISSON_BLEND|bundesliga|1X2",
         "family": "ELO_POISSON_BLEND",
         "sport": "bundesliga",
@@ -692,6 +1046,94 @@
         "settled": 0,
         "voided": 0,
         "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|ELO_POISSON_BLEND|ligue_1|1X2",
+        "family": "ELO_POISSON_BLEND",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 1,
+        "settled": 0,
+        "voided": 0,
+        "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|ELO_POISSON_BLEND|serie_a|1X2",
+        "family": "ELO_POISSON_BLEND",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 2,
+        "settled": 0,
+        "voided": 0,
+        "pending": 2,
         "dates": 0,
         "cohort_locked": false,
         "remaining_events": 100,
@@ -814,6 +1256,94 @@
         }
       },
       {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|ELO_STANDARD|ligue_1|1X2",
+        "family": "ELO_STANDARD",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 1,
+        "settled": 0,
+        "voided": 0,
+        "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|ELO_STANDARD|serie_a|1X2",
+        "family": "ELO_STANDARD",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 2,
+        "settled": 0,
+        "voided": 0,
+        "pending": 2,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
         "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|MARKET_ANCHORED|bundesliga|1X2",
         "family": "MARKET_ANCHORED",
         "sport": "bundesliga",
@@ -868,6 +1398,94 @@
         "settled": 0,
         "voided": 0,
         "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|MARKET_ANCHORED|ligue_1|1X2",
+        "family": "MARKET_ANCHORED",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 1,
+        "settled": 0,
+        "voided": 0,
+        "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|MARKET_ANCHORED|serie_a|1X2",
+        "family": "MARKET_ANCHORED",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 2,
+        "settled": 0,
+        "voided": 0,
+        "pending": 2,
         "dates": 0,
         "cohort_locked": false,
         "remaining_events": 100,
@@ -2100,47 +2718,135 @@
           "model_log_loss": null,
           "market_log_loss": null
         }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|POISSON_SHRINK|ligue_1|1X2",
+        "family": "POISSON_SHRINK",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 1,
+        "settled": 0,
+        "voided": 0,
+        "pending": 1,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
+      },
+      {
+        "stream": "SELECTION-PAIRED-1.0|d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad|POISSON_SHRINK|serie_a|1X2",
+        "family": "POISSON_SHRINK",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "model_code_sha256": "d2d1d22f514c679ba8dc04836c7bcfdf3286dacb50f31434f4373c7cfe98e0ad",
+        "forecasts": 2,
+        "settled": 0,
+        "voided": 0,
+        "pending": 2,
+        "dates": 0,
+        "cohort_locked": false,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "status": "COLLECTING",
+        "arms": {
+          "VALUE_GAP": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MODEL_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          },
+          "MARKET_FAVOURITE": {
+            "n": 0,
+            "wins": 0,
+            "unit_pnl_eur": 0.0,
+            "roi_pct": null
+          }
+        },
+        "automatic_stake_activation": false,
+        "scoring": {
+          "model_brier": null,
+          "market_brier": null,
+          "model_log_loss": null,
+          "market_log_loss": null
+        }
       }
     ],
     "latest_choices": [
       {
-        "event_id": "bundesliga:401884739",
+        "event_id": "serie_a:401874811",
         "family": "MARKET_ANCHORED",
-        "sport": "bundesliga",
-        "home": "Hamburg SV",
-        "away": "Borussia Mönchengladbach",
-        "start_utc": "2026-11-06T19:30:00+00:00",
-        "forecast_utc": "2026-11-05T02:49:53.363392+00:00",
+        "sport": "serie_a",
+        "home": "Torino",
+        "away": "Lecce",
+        "start_utc": "2026-11-07T14:00:00+00:00",
+        "forecast_utc": "2026-11-05T18:59:46.552995+00:00",
         "market": "1X2",
         "market_spec": null,
         "selection_trace": {
           "rule": "MAX_MODEL_MINUS_NO_VIG_MARKET",
           "ties": "FIRST_QUOTED_OUTCOME",
-          "selected_index": 0,
+          "selected_index": 1,
           "arms": {
             "VALUE_GAP": {
-              "selection_index": 0,
-              "model_probability": 0.4487427518346987,
-              "market_probability": 0.3950101,
-              "odds": 2.54,
-              "edge_pp": 5.373265183469872,
-              "model_expected_unit_pnl": 0.1398065896601346
+              "selection_index": 1,
+              "model_probability": 0.28025245479578303,
+              "market_probability": 0.2592226,
+              "odds": 3.85,
+              "edge_pp": 2.102985479578301,
+              "model_expected_unit_pnl": 0.07897195096376475
             },
             "MODEL_FAVOURITE": {
               "selection_index": 0,
-              "model_probability": 0.4487427518346987,
-              "market_probability": 0.3950101,
-              "odds": 2.54,
-              "edge_pp": 5.373265183469872,
-              "model_expected_unit_pnl": 0.1398065896601346
+              "model_probability": 0.4991996812687779,
+              "market_probability": 0.5267148,
+              "odds": 1.88,
+              "edge_pp": -2.7515118731222143,
+              "model_expected_unit_pnl": -0.06150459921469764
             },
             "MARKET_FAVOURITE": {
               "selection_index": 0,
-              "model_probability": 0.4487427518346987,
-              "market_probability": 0.3950101,
-              "odds": 2.54,
-              "edge_pp": 5.373265183469872,
-              "model_expected_unit_pnl": 0.1398065896601346
+              "model_probability": 0.4991996812687779,
+              "market_probability": 0.5267148,
+              "odds": 1.88,
+              "edge_pp": -2.7515118731222143,
+              "model_expected_unit_pnl": -0.06150459921469764
             }
           },
           "push_probability": 0.0,
@@ -2150,14 +2856,14 @@
         }
       },
       {
-        "event_id": "nba:401909936",
-        "family": "MULTIMARKET-1.0.0-nba",
-        "sport": "nba",
-        "home": "Phoenix Suns",
-        "away": "Orlando Magic",
-        "start_utc": "2026-11-06T02:00:00+00:00",
-        "forecast_utc": "2026-11-05T15:30:44.324201+00:00",
-        "market": "ML",
+        "event_id": "serie_a:401874974",
+        "family": "MARKET_ANCHORED",
+        "sport": "serie_a",
+        "home": "Parma",
+        "away": "Bologna",
+        "start_utc": "2026-11-07T17:00:00+00:00",
+        "forecast_utc": "2026-11-05T18:59:46.553311+00:00",
+        "market": "1X2",
         "market_spec": null,
         "selection_trace": {
           "rule": "MAX_MODEL_MINUS_NO_VIG_MARKET",
@@ -2166,94 +2872,78 @@
           "arms": {
             "VALUE_GAP": {
               "selection_index": 0,
-              "model_probability": 0.5631987178022669,
-              "market_probability": 0.5065469,
-              "odds": 1.98,
-              "edge_pp": 5.665181780226691,
-              "model_expected_unit_pnl": 0.11513346124848844
+              "model_probability": 0.28381485683097774,
+              "market_probability": 0.2131802,
+              "odds": 4.8,
+              "edge_pp": 7.063465683097775,
+              "model_expected_unit_pnl": 0.362311312788693
             },
             "MODEL_FAVOURITE": {
-              "selection_index": 0,
-              "model_probability": 0.5631987178022669,
-              "market_probability": 0.5065469,
-              "odds": 1.98,
-              "edge_pp": 5.665181780226691,
-              "model_expected_unit_pnl": 0.11513346124848844
+              "selection_index": 2,
+              "model_probability": 0.45127835334738886,
+              "market_probability": 0.5154634,
+              "odds": 1.91,
+              "edge_pp": -6.418504665261116,
+              "model_expected_unit_pnl": -0.1380583451064873
             },
             "MARKET_FAVOURITE": {
-              "selection_index": 0,
-              "model_probability": 0.5631987178022669,
-              "market_probability": 0.5065469,
-              "odds": 1.98,
-              "edge_pp": 5.665181780226691,
-              "model_expected_unit_pnl": 0.11513346124848844
-            },
-            "OPPOSITE_VALUE_GAP": {
-              "selection_index": 1,
-              "model_probability": 0.43680128219773307,
-              "market_probability": 0.4934531,
-              "odds": 2.0,
-              "edge_pp": -5.665181780226691,
-              "model_expected_unit_pnl": -0.12639743560453387
+              "selection_index": 2,
+              "model_probability": 0.45127835334738886,
+              "market_probability": 0.5154634,
+              "odds": 1.91,
+              "edge_pp": -6.418504665261116,
+              "model_expected_unit_pnl": -0.1380583451064873
             }
           },
           "push_probability": 0.0,
           "probability_basis": "FULL_OUTCOME_SET",
-          "opposite_available": true,
+          "opposite_available": false,
           "opposite_is_a_selection_policy_not_a_new_probability_model": true
         }
       },
       {
-        "event_id": "nba:401909937",
-        "family": "MULTIMARKET-1.0.0-nba",
-        "sport": "nba",
-        "home": "Golden State Warriors",
-        "away": "Miami Heat",
-        "start_utc": "2026-11-06T03:00:00+00:00",
-        "forecast_utc": "2026-11-05T15:30:44.325526+00:00",
-        "market": "ML",
+        "event_id": "ligue_1:401876405",
+        "family": "MARKET_ANCHORED",
+        "sport": "ligue_1",
+        "home": "Toulouse",
+        "away": "Strasbourg",
+        "start_utc": "2026-11-06T19:45:00+00:00",
+        "forecast_utc": "2026-11-05T18:59:46.553562+00:00",
+        "market": "1X2",
         "market_spec": null,
         "selection_trace": {
           "rule": "MAX_MODEL_MINUS_NO_VIG_MARKET",
           "ties": "FIRST_QUOTED_OUTCOME",
-          "selected_index": 1,
+          "selected_index": 2,
           "arms": {
             "VALUE_GAP": {
-              "selection_index": 1,
-              "model_probability": 0.4542880658632815,
-              "market_probability": 0.292599,
-              "odds": 3.45,
-              "edge_pp": 16.168906586328152,
-              "model_expected_unit_pnl": 0.5672938272283212
+              "selection_index": 2,
+              "model_probability": 0.3594007522071338,
+              "market_probability": 0.2836501,
+              "odds": 3.55,
+              "edge_pp": 7.575065220713379,
+              "model_expected_unit_pnl": 0.2758726703353249
             },
             "MODEL_FAVOURITE": {
               "selection_index": 0,
-              "model_probability": 0.5457119341367185,
-              "market_probability": 0.707401,
-              "odds": 1.4,
-              "edge_pp": -16.16890658632815,
-              "model_expected_unit_pnl": -0.23600329220859417
+              "model_probability": 0.3869522338103926,
+              "market_probability": 0.4644027,
+              "odds": 2.16,
+              "edge_pp": -7.745046618960738,
+              "model_expected_unit_pnl": -0.16418317496955193
             },
             "MARKET_FAVOURITE": {
               "selection_index": 0,
-              "model_probability": 0.5457119341367185,
-              "market_probability": 0.707401,
-              "odds": 1.4,
-              "edge_pp": -16.16890658632815,
-              "model_expected_unit_pnl": -0.23600329220859417
-            },
-            "OPPOSITE_VALUE_GAP": {
-              "selection_index": 0,
-              "model_probability": 0.5457119341367185,
-              "market_probability": 0.707401,
-              "odds": 1.4,
-              "edge_pp": -16.16890658632815,
-              "model_expected_unit_pnl": -0.23600329220859417
+              "model_probability": 0.3869522338103926,
+              "market_probability": 0.4644027,
+              "odds": 2.16,
+              "edge_pp": -7.745046618960738,
+              "model_expected_unit_pnl": -0.16418317496955193
             }
           },
           "push_probability": 0.0,
           "probability_basis": "FULL_OUTCOME_SET",
-          "opposite_available": true,
+          "opposite_available": false,
           "opposite_is_a_selection_policy_not_a_new_probability_model": true
         }
       }
@@ -2531,33 +3221,78 @@
     }
   },
   "runtime_status": {
-    "checked_at_utc": "2026-11-05T15:30:36.837260+00:00",
+    "checked_at_utc": "2026-11-05T18:59:33.573503+00:00",
     "maximum_age_minutes": 90,
     "components": {
       "scanner": {
         "status": "FRESH",
-        "asof_utc": "2026-11-05T15:30:03.947976+00:00",
-        "age_minutes": 0.5
+        "asof_utc": "2026-11-05T18:59:14.529585+00:00",
+        "age_minutes": 0.3
       },
       "calendar": {
         "status": "FRESH",
-        "asof_utc": "2026-11-05T15:30:03.947976+00:00",
-        "age_minutes": 0.5
+        "asof_utc": "2026-11-05T18:59:14.529585+00:00",
+        "age_minutes": 0.3
       },
       "laboratory": {
         "status": "FRESH",
-        "asof_utc": "2026-11-05T15:30:36.837260+00:00",
+        "asof_utc": "2026-11-05T18:59:33.573503+00:00",
         "age_minutes": 0.0
       }
     },
     "needs_scanner": false,
     "needs_laboratory": false,
-    "scanner_recovery_outcome": "skipped"
+    "scanner_recovery_outcome": "success"
   },
   "pricing_readiness": {
-    "asof_utc": "2026-11-05T15:30:36.837260+00:00",
+    "asof_utc": "2026-11-05T18:59:33.573503+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-05",
     "events": [
+      {
+        "id": "ligue_1:401876405",
+        "sport": "ligue_1",
+        "home": "Toulouse",
+        "away": "Strasbourg",
+        "start_utc": "2026-11-06T19:45:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "OVER_UNDER_2_5",
+            "sample_min": 54
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "BTTS",
+            "sample_min": 54
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "ASIAN_HOME_MINUS_0_5",
+            "sample_min": 54
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goal-lines",
+            "market": "STAT_da016301f271bb98",
+            "sample_min": 54
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goal-lines",
+            "market": "STAT_73b60a83f156bee9",
+            "sample_min": 54
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goal-lines",
+            "market": "STAT_60e66ba79f025235",
+            "sample_min": 54
+          },
+          {
+            "family": "ELO_STANDARD",
+            "market": "1X2",
+            "sample_min": 107
+          }
+        ]
+      },
       {
         "id": "nhl:401892648",
         "sport": "nhl",
@@ -2806,36 +3541,6 @@
         "start_utc": "2026-11-06T19:45:00+00:00",
         "status": "INSUFFICIENT_HISTORY",
         "forecasts": []
-      },
-      {
-        "id": "ligue_1:401876405",
-        "sport": "ligue_1",
-        "home": "Toulouse",
-        "away": "Strasbourg",
-        "start_utc": "2026-11-06T19:45:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "OVER_UNDER_2_5",
-            "sample_min": 54
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "BTTS",
-            "sample_min": 54
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "ASIAN_HOME_MINUS_0_5",
-            "sample_min": 54
-          },
-          {
-            "family": "ELO_STANDARD",
-            "market": "1X2",
-            "sample_min": 107
-          }
-        ]
       },
       {
         "id": "epl:401879242",
@@ -3259,6 +3964,186 @@
         "start_utc": "2026-11-07T15:15:00+00:00",
         "status": "INSUFFICIENT_HISTORY",
         "forecasts": []
+      },
+      {
+        "id": "serie_a:401874974",
+        "sport": "serie_a",
+        "home": "Parma",
+        "away": "Bologna",
+        "start_utc": "2026-11-07T17:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "OVER_UNDER_2_5",
+            "sample_min": 41
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "BTTS",
+            "sample_min": 41
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "ASIAN_HOME_MINUS_0_5",
+            "sample_min": 41
+          },
+          {
+            "family": "ELO_STANDARD",
+            "market": "1X2",
+            "sample_min": 80
+          }
+        ]
+      },
+      {
+        "id": "epl:401878757",
+        "sport": "epl",
+        "home": "Nottingham Forest",
+        "away": "Manchester City",
+        "start_utc": "2026-11-07T17:30:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "OVER_UNDER_2_5",
+            "sample_min": 79
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "BTTS",
+            "sample_min": 79
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "ASIAN_HOME_MINUS_0_5",
+            "sample_min": 79
+          },
+          {
+            "family": "ELO_STANDARD",
+            "market": "1X2",
+            "sample_min": 157
+          }
+        ]
+      },
+      {
+        "id": "la_liga:401882811",
+        "sport": "la_liga",
+        "home": "Osasuna",
+        "away": "Athletic Club",
+        "start_utc": "2026-11-07T17:30:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "OVER_UNDER_2_5",
+            "sample_min": 97
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "BTTS",
+            "sample_min": 97
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "ASIAN_HOME_MINUS_0_5",
+            "sample_min": 97
+          },
+          {
+            "family": "ELO_STANDARD",
+            "market": "1X2",
+            "sample_min": 195
+          }
+        ]
+      },
+      {
+        "id": "bundesliga:401884743",
+        "sport": "bundesliga",
+        "home": "VfB Stuttgart",
+        "away": "Werder Bremen",
+        "start_utc": "2026-11-07T17:30:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "OVER_UNDER_2_5",
+            "sample_min": 70
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "BTTS",
+            "sample_min": 70
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "ASIAN_HOME_MINUS_0_5",
+            "sample_min": 70
+          },
+          {
+            "family": "ELO_STANDARD",
+            "market": "1X2",
+            "sample_min": 140
+          }
+        ]
+      },
+      {
+        "id": "nhl:401892662",
+        "sport": "nhl",
+        "home": "Washington Capitals",
+        "away": "Florida Panthers",
+        "start_utc": "2026-11-07T17:30:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nhl",
+            "market": "ML",
+            "sample_min": 89
+          }
+        ]
+      },
+      {
+        "id": "ligue_1:401876411",
+        "sport": "ligue_1",
+        "home": "AJ Auxerre",
+        "away": "Paris FC",
+        "start_utc": "2026-11-07T18:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "OVER_UNDER_2_5",
+            "sample_min": 19
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "BTTS",
+            "sample_min": 19
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "ASIAN_HOME_MINUS_0_5",
+            "sample_min": 19
+          },
+          {
+            "family": "ELO_STANDARD",
+            "market": "1X2",
+            "sample_min": 39
+          }
+        ]
+      },
+      {
+        "id": "nhl:401892663",
+        "sport": "nhl",
+        "home": "Nashville Predators",
+        "away": "St. Louis Blues",
+        "start_utc": "2026-11-07T18:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nhl",
+            "market": "ML",
+            "sample_min": 89
+          }
+        ]
       }
     ]
   },
@@ -3305,6 +4190,25 @@
           "NEEDS_14_DISTINCT_MARKET_DATES",
           "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
           "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "history_samples": 0
+      },
+      {
+        "family": "CONSENSUS_SHRUNK",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
         ],
         "history_samples": 0
       },
@@ -3514,6 +4418,44 @@
         "history_samples": 0
       },
       {
+        "family": "DISAGREEMENT_VETO",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ],
+        "history_samples": 0
+      },
+      {
+        "family": "DISAGREEMENT_VETO",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ],
+        "history_samples": 0
+      },
+      {
         "family": "DIXON_COLES_LOW",
         "sport": "epl",
         "market": "1X2",
@@ -3556,6 +4498,25 @@
         "history_samples": 0
       },
       {
+        "family": "DIXON_COLES_LOW",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ],
+        "history_samples": 0
+      },
+      {
         "family": "ELO_DYNAMIC",
         "sport": "epl",
         "market": "1X2",
@@ -3573,6 +4534,25 @@
           "NEEDS_14_DISTINCT_MARKET_DATES",
           "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
           "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "history_samples": 0
+      },
+      {
+        "family": "ELO_DYNAMIC",
+        "sport": "ligue_1",
+        "market": "1X2",
+        "market_spec": null,
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
         ],
         "history_samples": 0
       },
@@ -3636,6 +4616,25 @@
           "NEEDS_14_DISTINCT_MARKET_DATES",
           "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
           "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "history_samples": 0
+      },
+      {
+        "family": "ELO_POISSON_BLEND",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
         ],
         "history_samples": 0
       },
@@ -3779,6 +4778,25 @@
         "history_samples": 0
       },
       {
+        "family": "MARKET_ANCHORED",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ],
+        "history_samples": 0
+      },
+      {
         "family": "MULTIMARKET-1.0.0-goal-lines",
         "sport": "ligue_1",
         "market": "STAT_2e230ad49950dc73",
@@ -3828,6 +4846,33 @@
       {
         "family": "MULTIMARKET-1.0.0-goal-lines",
         "sport": "ligue_1",
+        "market": "STAT_60e66ba79f025235",
+        "market_spec": {
+          "kind": "SPREAD",
+          "metric": "goals",
+          "line": -1.0,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "spreads"
+        },
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ],
+        "history_samples": 0
+      },
+      {
+        "family": "MULTIMARKET-1.0.0-goal-lines",
+        "sport": "ligue_1",
         "market": "STAT_6735dcb261466588",
         "market_spec": null,
         "role": "ORIGINAL",
@@ -3845,6 +4890,33 @@
           "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
           "CALIBRATION_ERROR_OVER_10PP",
           "NEEDS_100_DISTINCT_MARKET_EVENTS"
+        ],
+        "history_samples": 0
+      },
+      {
+        "family": "MULTIMARKET-1.0.0-goal-lines",
+        "sport": "ligue_1",
+        "market": "STAT_73b60a83f156bee9",
+        "market_spec": {
+          "kind": "SPREAD",
+          "metric": "goals",
+          "line": 0.0,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "spreads"
+        },
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
         ],
         "history_samples": 0
       },
@@ -3944,7 +5016,15 @@
         "family": "MULTIMARKET-1.0.0-goal-lines",
         "sport": "ligue_1",
         "market": "STAT_da016301f271bb98",
-        "market_spec": null,
+        "market_spec": {
+          "kind": "TOTAL",
+          "metric": "goals",
+          "line": 3.0,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "totals"
+        },
         "role": "ORIGINAL",
         "events": 1,
         "dates": 1,
@@ -4641,6 +5721,25 @@
           "NEEDS_14_DISTINCT_MARKET_DATES",
           "PAIRED_BRIER_EDGE_NOT_ESTABLISHED",
           "LOG_LOSS_NOT_BETTER_THAN_MARKET"
+        ],
+        "history_samples": 0
+      },
+      {
+        "family": "POISSON_SHRINK",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "role": "ORIGINAL",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
         ],
         "history_samples": 0
       },
@@ -5437,6 +6536,26 @@
         "history_samples": 1
       },
       {
+        "family": "MARKET_ANCHORED",
+        "sport": "serie_a",
+        "market": "1X2",
+        "market_spec": null,
+        "role": "CALIBRATION",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "INSUFFICIENT_HISTORY",
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ],
+        "history_samples": 0
+      },
+      {
         "family": "MULTIMARKET-1.0.0-goal-lines",
         "sport": "ligue_1",
         "market": "STAT_2e230ad49950dc73",
@@ -5479,6 +6598,34 @@
       {
         "family": "MULTIMARKET-1.0.0-goal-lines",
         "sport": "ligue_1",
+        "market": "STAT_60e66ba79f025235",
+        "market_spec": {
+          "kind": "SPREAD",
+          "metric": "goals",
+          "line": -1.0,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "spreads"
+        },
+        "role": "CALIBRATION",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "HOLDOUT_NOT_BETTER",
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ],
+        "history_samples": 1128
+      },
+      {
+        "family": "MULTIMARKET-1.0.0-goal-lines",
+        "sport": "ligue_1",
         "market": "STAT_6735dcb261466588",
         "market_spec": null,
         "role": "CALIBRATION",
@@ -5495,6 +6642,34 @@
           "NEEDS_14_DISTINCT_MARKET_DATES"
         ],
         "history_samples": 1
+      },
+      {
+        "family": "MULTIMARKET-1.0.0-goal-lines",
+        "sport": "ligue_1",
+        "market": "STAT_73b60a83f156bee9",
+        "market_spec": {
+          "kind": "SPREAD",
+          "metric": "goals",
+          "line": 0.0,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "spreads"
+        },
+        "role": "CALIBRATION",
+        "events": 0,
+        "dates": 0,
+        "required_events": 100,
+        "required_dates": 14,
+        "remaining_events": 100,
+        "remaining_dates": 14,
+        "eligible": false,
+        "blocks": [
+          "HOLDOUT_NOT_BETTER",
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ],
+        "history_samples": 1093
       },
       {
         "family": "MULTIMARKET-1.0.0-goal-lines",
@@ -5580,7 +6755,15 @@
         "family": "MULTIMARKET-1.0.0-goal-lines",
         "sport": "ligue_1",
         "market": "STAT_da016301f271bb98",
-        "market_spec": null,
+        "market_spec": {
+          "kind": "TOTAL",
+          "metric": "goals",
+          "line": 3.0,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "totals"
+        },
         "role": "CALIBRATION",
         "events": 0,
         "dates": 0,
@@ -5590,11 +6773,10 @@
         "remaining_dates": 14,
         "eligible": false,
         "blocks": [
-          "INSUFFICIENT_HISTORY",
           "NEEDS_100_DISTINCT_MARKET_EVENTS",
           "NEEDS_14_DISTINCT_MARKET_DATES"
         ],
-        "history_samples": 1
+        "history_samples": 1111
       },
       {
         "family": "MULTIMARKET-1.0.0-goal-lines",
@@ -6269,23 +7451,23 @@
     "note": "Necessary sample thresholds are not automatic approval. Distinct settled frozen future events with verified market prices only; no historical rows, wallet copies or elapsed-day substitutions."
   },
   "global_discovery": {
-    "asof_utc": "2026-11-05T15:30:03.947976+00:00",
+    "asof_utc": "2026-11-05T18:59:14.529585+00:00",
     "window_hours": 48,
     "modalities_in_catalog": 19,
     "modalities_queried": 18,
     "modalities_with_future_events": 14,
-    "modalities_with_timestamped_odds": 2,
-    "future_events": 772,
+    "modalities_with_timestamped_odds": 3,
+    "future_events": 921,
     "by_modality": {
       "american_football": {
         "catalog_sources": [
           "ESPN",
           "The Odds API"
         ],
-        "queries": 7,
+        "queries": 8,
         "query_errors": 0,
-        "future_events": 10,
-        "events_with_odds": 0,
+        "future_events": 50,
+        "events_with_odds": 1,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
@@ -6321,9 +7503,9 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 10,
+        "queries": 9,
         "query_errors": 0,
-        "future_events": 100,
+        "future_events": 134,
         "events_with_odds": 2,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -6335,7 +7517,7 @@
         ],
         "queries": 1,
         "query_errors": 0,
-        "future_events": 4,
+        "future_events": 7,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -6360,7 +7542,7 @@
         ],
         "queries": 1,
         "query_errors": 0,
-        "future_events": 19,
+        "future_events": 18,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -6398,8 +7580,8 @@
         ],
         "queries": 7,
         "query_errors": 0,
-        "future_events": 80,
-        "events_with_odds": 10,
+        "future_events": 81,
+        "events_with_odds": 11,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
@@ -6422,9 +7604,9 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 35,
+        "queries": 2,
         "query_errors": 0,
-        "future_events": 1,
+        "future_events": 7,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -6461,9 +7643,9 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 14,
+        "queries": 1,
         "query_errors": 0,
-        "future_events": 1,
+        "future_events": 4,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -6475,11 +7657,11 @@
           "The Odds API",
           "TheSportsDB free"
         ],
-        "queries": 83,
+        "queries": 129,
         "query_errors": 0,
-        "future_events": 377,
+        "future_events": 437,
         "events_with_odds": 0,
-        "events_with_model": 2,
+        "events_with_model": 3,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
       },
@@ -6502,7 +7684,7 @@
         ],
         "queries": 1,
         "query_errors": 0,
-        "future_events": 167,
+        "future_events": 170,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -6557,61 +7739,61 @@
           },
           {
             "family": "baseball",
-            "competition": "college-softball",
+            "competition": "llb",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "basketball",
-            "competition": "womens-college-basketball",
-            "events": 12,
+            "competition": "nba-development",
+            "events": 10,
             "status": "OK"
           },
           {
             "family": "field_hockey",
             "competition": "womens-college-field-hockey",
-            "events": 20,
+            "events": 19,
             "status": "OK"
           },
           {
             "family": "american_football",
-            "competition": "nfl",
-            "events": 1,
+            "competition": "college-football",
+            "events": 20,
             "status": "OK"
           },
           {
             "family": "golf",
-            "competition": "champions-tour",
+            "competition": "liv",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "ice_hockey",
-            "competition": "nhl",
-            "events": 14,
+            "competition": "mens-college-hockey",
+            "events": 31,
             "status": "OK"
           },
           {
             "family": "lacrosse",
-            "competition": "mens-college-lacrosse",
+            "competition": "pll",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "brazilian-freestyle",
+            "competition": "affliction",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "motorsport",
-            "competition": "f1",
-            "events": 6,
+            "competition": "nascar-premier",
+            "events": 0,
             "status": "OK"
           },
           {
             "family": "rugby_union",
-            "competition": "270563",
+            "competition": "180659",
             "events": 0,
             "status": "OK"
           },
@@ -6623,7 +7805,7 @@
           },
           {
             "family": "soccer",
-            "competition": "arg.copa_de_la_superliga",
+            "competition": "fra.super_cup",
             "events": 0,
             "status": "OK"
           },
@@ -6646,483 +7828,483 @@
             "status": "OK"
           },
           {
-            "family": "basketball",
-            "competition": "womens-olympics-basketball",
-            "events": 0,
+            "family": "soccer",
+            "competition": "fra.w.1",
+            "events": 5,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "budo",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "271937",
+            "family": "soccer",
+            "competition": "friendly.emirates_cup",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "arg.supercopa",
-            "events": 0,
+            "competition": "ger.2",
+            "events": 5,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "cage-warriors",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "272073",
+            "family": "soccer",
+            "competition": "ger.2.promotion.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "arg.supercopa.internacional",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "dream",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "282",
+            "competition": "ger.dfb_pokal",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "arg.trofeo_de_la_campeones",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "fng",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "283",
+            "competition": "ger.playoff.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "aus.1",
-            "events": 4,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "ifc",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "289234",
+            "competition": "ger.super_cup",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "aus.w.1",
-            "events": 4,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "ifl",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "289237",
+            "competition": "global.arnold.clark_cup",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "aut.1",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "k1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "289262",
+            "competition": "global.club_challenge",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "bel.1",
+            "competition": "global.finalissima",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "global.gulf_cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "global.pinatar_cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "global.u20.intercontinental_cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "global.w.finalissima",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "gre.1",
             "events": 2,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "ksw",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "289271",
-            "events": 0,
-            "status": "OK"
-          },
-          {
             "family": "soccer",
-            "competition": "bel.promotion.relegation",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "lfa",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "289272",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "bol.1",
+            "competition": "gua.1",
             "events": 1,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "lfc",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "289274",
-            "events": 0,
-            "status": "OK"
-          },
-          {
             "family": "soccer",
-            "competition": "bol.copa",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "m1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "289277",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "bol.ply.rel",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "mfc",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "289279",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "bra.1",
+            "competition": "hon.1",
             "events": 3,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "mvp",
+            "family": "soccer",
+            "competition": "ind.1",
+            "events": 3,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ind.2",
+            "events": 4,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ita.2",
+            "events": 7,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ita.coppa_italia",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "bra.2",
+            "competition": "ita.super_cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "jpn.1",
+            "events": 6,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "jpn.world_challenge",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ksa.1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ksa.kings.cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "mex.1",
+            "events": 3,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "mex.2",
             "events": 2,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "ofc",
+            "family": "soccer",
+            "competition": "mex.campeon",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "bra.camp.carioca",
-            "events": 0,
+            "competition": "mex.w.1",
+            "events": 9,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "other",
+            "family": "soccer",
+            "competition": "ned.1",
+            "events": 3,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ned.2",
+            "events": 8,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "ned.3.promotion.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "bra.camp.gaucho",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "pancrase",
+            "competition": "ned.cup",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "bra.camp.mineiro",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "pfl",
+            "competition": "ned.playoff.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "bra.camp.paulista",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "pride",
+            "competition": "ned.supercup",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "bra.copa_do_brazil",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "proelite",
+            "competition": "ned.w.1",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "bra.supercopa_do_brazil",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "rfa",
+            "competition": "ned.w.knvb_cup",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "caf.champions",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "rizin",
+            "competition": "nonfifa",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "caf.championship",
-            "events": 0,
+            "competition": "nor.1",
+            "events": 2,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "roc",
+            "family": "soccer",
+            "competition": "nor.1.promotion.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "caf.confed",
-            "events": 0,
+            "competition": "par.1",
+            "events": 1,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "sfl",
+            "family": "soccer",
+            "competition": "par.1.supercopa",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "caf.cosafa",
-            "events": 0,
+            "competition": "per.1",
+            "events": 2,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "shark-fights",
+            "family": "soccer",
+            "competition": "por.1",
+            "events": 3,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "por.1.promotion.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "caf.nations",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "shooto-brazil",
+            "competition": "por.taca.portugal",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "caf.nations_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "shooto-japan",
+            "competition": "rsa.1",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "caf.w.nations",
-            "events": 0,
+            "competition": "rus.1",
+            "events": 4,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "shoxc",
+            "family": "soccer",
+            "competition": "rus.1.promotion.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "campeones.cup",
-            "events": 0,
+            "competition": "sco.1",
+            "events": 3,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "strikeforce",
+            "family": "soccer",
+            "competition": "sco.1.promotion.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "can.w.nsl",
-            "events": 0,
+            "competition": "sco.2",
+            "events": 5,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "tfc",
+            "family": "soccer",
+            "competition": "sco.2.promotion.relegation",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "chi.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "tpf",
+            "competition": "sco.challenge",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "chi.1.promotion.relegation",
+            "competition": "sco.cis",
             "events": 0,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "ufc",
+            "family": "soccer",
+            "competition": "sco.tennents",
             "events": 0,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "vfc",
+            "family": "soccer",
+            "competition": "sco.tennents_qual",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "slv.1",
+            "events": 1,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "swe.1",
+            "events": 3,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "swe.1.promotion.relegation",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "tur.1",
+            "events": 5,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.champions",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.champions_qual",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.euro",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.euro.u19",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.euro_u21",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.euro_u21_qual",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.europa",
+            "events": 9,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.europa.conf",
+            "events": 9,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.europa.conf_qual",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.europa_qual",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.euroq",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.nations",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.super_cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.w.europa",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "uefa.w.nations",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "baseball",
-            "competition": "mlb",
+            "competition": "college-baseball",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "basketball",
-            "competition": "nba",
-            "events": 11,
+            "competition": "mens-college-basketball",
+            "events": 18,
             "status": "OK"
           },
           {
-            "family": "mma",
-            "competition": "bang-fighting",
+            "family": "american_football",
+            "competition": "xfl",
             "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "164205",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "chi.copa_chi",
-            "events": 1,
             "status": "OK"
           }
         ],
@@ -7132,7 +8314,7 @@
       {
         "provider": "The Odds API",
         "usage_credits": 0,
-        "requests": 81,
+        "requests": 80,
         "catalog_families": [
           "american_football",
           "australian_football",
@@ -7162,7 +8344,7 @@
           {
             "family": "american_football",
             "competition": "NCAAF",
-            "events": 7,
+            "events": 20,
             "status": "OK"
           },
           {
@@ -7174,7 +8356,7 @@
           {
             "family": "american_football",
             "competition": "NCAAF FCS",
-            "events": 1,
+            "events": 28,
             "status": "OK"
           },
           {
@@ -7210,7 +8392,7 @@
           {
             "family": "basketball",
             "competition": "Basketball Euroleague",
-            "events": 9,
+            "events": 6,
             "status": "OK"
           },
           {
@@ -7234,7 +8416,7 @@
           {
             "family": "basketball",
             "competition": "NCAAB",
-            "events": 44,
+            "events": 83,
             "status": "OK"
           },
           {
@@ -7246,13 +8428,13 @@
           {
             "family": "basketball",
             "competition": "WNCAAB",
-            "events": 5,
+            "events": 8,
             "status": "OK"
           },
           {
             "family": "boxing",
             "competition": "Boxing",
-            "events": 4,
+            "events": 7,
             "status": "OK"
           },
           {
@@ -7300,7 +8482,7 @@
           {
             "family": "ice_hockey",
             "competition": "AHL",
-            "events": 14,
+            "events": 13,
             "status": "OK"
           },
           {
@@ -7312,7 +8494,7 @@
           {
             "family": "ice_hockey",
             "competition": "NHL",
-            "events": 11,
+            "events": 14,
             "status": "OK"
           },
           {
@@ -7336,13 +8518,13 @@
           {
             "family": "mma",
             "competition": "MMA",
-            "events": 1,
+            "events": 7,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Primera División - Argentina",
-            "events": 8,
+            "events": 9,
             "status": "OK"
           },
           {
@@ -7354,13 +8536,13 @@
           {
             "family": "soccer",
             "competition": "Austrian Football Bundesliga",
-            "events": 1,
+            "events": 3,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Belgium First Div",
-            "events": 2,
+            "events": 3,
             "status": "OK"
           },
           {
@@ -7378,7 +8560,7 @@
           {
             "family": "soccer",
             "competition": "Primera División - Chile",
-            "events": 0,
+            "events": 1,
             "status": "OK"
           },
           {
@@ -7402,7 +8584,7 @@
           {
             "family": "soccer",
             "competition": "Denmark Superliga",
-            "events": 1,
+            "events": 2,
             "status": "OK"
           },
           {
@@ -7420,13 +8602,13 @@
           {
             "family": "soccer",
             "competition": "EPL",
-            "events": 4,
+            "events": 5,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "FA Cup",
-            "events": 33,
+            "events": 34,
             "status": "OK"
           },
           {
@@ -7438,7 +8620,7 @@
           {
             "family": "soccer",
             "competition": "Ligue 1 - France",
-            "events": 1,
+            "events": 2,
             "status": "OK"
           },
           {
@@ -7450,7 +8632,7 @@
           {
             "family": "soccer",
             "competition": "Bundesliga - Germany",
-            "events": 5,
+            "events": 6,
             "status": "OK"
           },
           {
@@ -7480,19 +8662,19 @@
           {
             "family": "soccer",
             "competition": "Super League - Greece",
-            "events": 1,
+            "events": 2,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Serie A - Italy",
-            "events": 3,
+            "events": 4,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Serie B - Italy",
-            "events": 5,
+            "events": 7,
             "status": "OK"
           },
           {
@@ -7510,7 +8692,7 @@
           {
             "family": "soccer",
             "competition": "League of Ireland",
-            "events": 0,
+            "events": 1,
             "status": "OK"
           },
           {
@@ -7522,31 +8704,31 @@
           {
             "family": "soccer",
             "competition": "Dutch Eredivisie",
-            "events": 2,
+            "events": 3,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Eliteserien - Norway",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "Ekstraklasa - Poland",
-            "events": 4,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "Primeira Liga - Portugal",
             "events": 2,
             "status": "OK"
           },
           {
             "family": "soccer",
-            "competition": "Premier League - Russia",
+            "competition": "Ekstraklasa - Poland",
+            "events": 5,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "Primeira Liga - Portugal",
             "events": 3,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "Premier League - Russia",
+            "events": 4,
             "status": "OK"
           },
           {
@@ -7558,25 +8740,25 @@
           {
             "family": "soccer",
             "competition": "La Liga - Spain",
-            "events": 3,
+            "events": 4,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "La Liga 2 - Spain",
-            "events": 3,
+            "events": 5,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Premiership - Scotland",
-            "events": 2,
+            "events": 3,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Allsvenskan - Sweden",
-            "events": 1,
+            "events": 3,
             "status": "OK"
           },
           {
@@ -7588,13 +8770,13 @@
           {
             "family": "soccer",
             "competition": "Swiss Superleague",
-            "events": 0,
+            "events": 2,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "Turkey Super League",
-            "events": 3,
+            "events": 5,
             "status": "OK"
           },
           {
@@ -7606,13 +8788,13 @@
           {
             "family": "soccer",
             "competition": "UEFA Europa Conference League",
-            "events": 18,
+            "events": 9,
             "status": "OK"
           },
           {
             "family": "soccer",
             "competition": "UEFA Europa League",
-            "events": 17,
+            "events": 9,
             "status": "OK"
           },
           {
@@ -8978,20 +10160,21 @@
     "odds_allocation": {
       "configured": true,
       "status": "OK",
-      "calls_this_run": 3,
+      "calls_this_run": 2,
       "errors": [],
       "cached_sports": [
         "nba",
+        "nfl",
         "nhl"
       ],
-      "quotes_matched": 12,
+      "quotes_matched": 14,
       "allocation": "UNPRICED_MODELLED_EVENTS_THEN_DIVERSITY_4_CREDITS_PER_6H_SLOT",
       "price_lookahead_hours": 48,
       "maximum_daily_credits": 16,
-      "expired_cached_quotes_removed": 41,
-      "calls_today": 8,
-      "credits_today": 12,
-      "credits_remaining": 428,
+      "expired_cached_quotes_removed": 0,
+      "calls_today": 10,
+      "credits_today": 16,
+      "credits_remaining": 424,
       "max_credits_per_day": 16,
       "priced_families_today": [
         "soccer",
@@ -8999,12 +10182,12 @@
         "american_football",
         "basketball"
       ],
-      "eligible_competitions": 53,
-      "goal_market_quotes": 0,
-      "distinct_modelled_events_with_prices": 11,
-      "declared_model_scope_priced_events": 11,
+      "eligible_competitions": 56,
+      "goal_market_quotes": 10,
+      "distinct_modelled_events_with_prices": 13,
+      "declared_model_scope_priced_events": 13,
       "model_readiness_status": "FRESH",
-      "verified_ready_events": 29,
+      "verified_ready_events": 34,
       "discovery_only_credits_today": 0,
       "allocation_basis": "ACTUAL_FORECASTS_THEN_UNVERIFIED_SCOPE_THEN_ONE_DISCOVERY_CREDIT",
       "minimum_priced_event_target": 5,
@@ -9150,33 +10333,21 @@
     },
     "modalities_with_model_forecasts": 1
   },
-  "asof_utc": "2026-11-05T15:30:36.837260+00:00",
+  "asof_utc": "2026-11-05T18:59:33.573503+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_reference": {
     "local_date": "2026-11-05",
     "target": 5,
     "max_per_day": 10,
     "opened_today": 10,
-    "new_entries": 5,
+    "new_entries": 0,
     "remaining_to_minimum": 0,
     "target_met": true,
     "reference": true,
     "not_a_value_signal": true,
     "status": "DAILY_CAP",
-    "reason": "Genuine timestamped paper selections; reference only, no demonstrated edge",
-    "eligible_events": 12,
-    "distinct_event_ids_today": [
-      "bundesliga:401884739",
-      "la_liga:401882809",
-      "nba:401909934",
-      "nhl:401892646",
-      "nhl:401892647",
-      "nhl:401892649",
-      "nhl:401892650",
-      "nhl:401892651",
-      "nhl:401892652",
-      "nhl:401892653"
-    ]
+    "reason": "Daily cap of 10 entries reached",
+    "eligible_events": 0
   },
   "daily_activity": {
     "per_strategy": {
@@ -9383,6 +10554,15 @@
         "market_log_loss": 0.9191310116526294,
         "paired_brier_difference_upper_bound": 4.948811672032994
       },
+      "CONSENSUS_SHRUNK|serie_a|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
+      },
       "COUNT-POISSON-1.0-corners|serie_a|STAT_0625f0a9fd5832ad": {
         "n_distinct_events": 1,
         "dates": 1,
@@ -9519,6 +10699,24 @@
         "market_log_loss": 1.2389833877489076,
         "paired_brier_difference_upper_bound": 2.942965604302948
       },
+      "DISAGREEMENT_VETO|ligue_1|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
+      },
+      "DISAGREEMENT_VETO|serie_a|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
+      },
       "DIXON_COLES_LOW|epl|1X2": {
         "n_distinct_events": 7,
         "dates": 4,
@@ -9551,6 +10749,15 @@
         "market_log_loss": 0.9191310116526294,
         "paired_brier_difference_upper_bound": 5.054701698409003
       },
+      "DIXON_COLES_LOW|serie_a|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
+      },
       "ELO_DYNAMIC|epl|1X2": {
         "n_distinct_events": 9,
         "dates": 4,
@@ -9566,6 +10773,15 @@
         "log_loss": 1.0488800246564671,
         "market_log_loss": 0.9421672481570662,
         "paired_brier_difference_upper_bound": 1.7129205649118386
+      },
+      "ELO_DYNAMIC|ligue_1|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
       },
       "ELO_DYNAMIC|serie_a|1X2": {
         "n_distinct_events": 1,
@@ -9615,6 +10831,15 @@
         "market_log_loss": 0.8908654609142176,
         "paired_brier_difference_upper_bound": 5.002175844444251
       },
+      "ELO_POISSON_BLEND|serie_a|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
+      },
       "ELO_STANDARD|epl|1X2": {
         "n_distinct_events": 8,
         "dates": 4,
@@ -9630,6 +10855,24 @@
         "log_loss": 1.0984355373530432,
         "market_log_loss": 0.9705558718652987,
         "paired_brier_difference_upper_bound": 1.8285342691143458
+      },
+      "ELO_STANDARD|ligue_1|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
+      },
+      "ELO_STANDARD|serie_a|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
       },
       "MARKET_ANCHORED|epl|1X2": {
         "n_distinct_events": 7,
@@ -9662,6 +10905,15 @@
         "log_loss": 0.9855295983451106,
         "market_log_loss": 0.8908654609142176,
         "paired_brier_difference_upper_bound": 4.9684274008132885
+      },
+      "MARKET_ANCHORED|serie_a|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
       },
       "MARKET_REFERENCE|ligue_1|1X2": {
         "n_distinct_events": 2,
@@ -9775,6 +11027,15 @@
         "market_log_loss": 0.2876820724517809,
         "paired_brier_difference_upper_bound": 4.964264797355147
       },
+      "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_60e66ba79f025235": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
+      },
       "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_6735dcb261466588": {
         "n_distinct_events": 1,
         "dates": 1,
@@ -9789,6 +11050,15 @@
         "log_loss": 0.25960051798956546,
         "market_log_loss": 0.3689276309924825,
         "paired_brier_difference_upper_bound": 4.809671667804608
+      },
+      "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_73b60a83f156bee9": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
       },
       "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_78cca34d2a598cc7": {
         "n_distinct_events": 1,
@@ -10072,6 +11342,15 @@
         "market_log_loss": 0.8123309671285944,
         "paired_brier_difference_upper_bound": 4.815326140244325
       },
+      "MULTIMARKET-1.0.0-goals|ligue_1|ASIAN_HOME_MINUS_0_5": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
+      },
       "MULTIMARKET-1.0.0-goals|ligue_1|OVER_UNDER_2_5": {
         "n_distinct_events": 1,
         "dates": 1,
@@ -10199,16 +11478,44 @@
         "log_loss": 1.1238126757185585,
         "market_log_loss": 1.0153322490586203,
         "paired_brier_difference_upper_bound": 3.5513964904950948
+      },
+      "POISSON_SHRINK|serie_a|1X2": {
+        "n_distinct_events": 0,
+        "dates": 0,
+        "eligible_for_paper": false,
+        "blocks": [
+          "NEEDS_100_DISTINCT_MARKET_EVENTS",
+          "NEEDS_14_DISTINCT_MARKET_DATES"
+        ]
       }
     },
     "validated_streams": 0,
     "deferred_evaluations": {
-      "MULTIMARKET-1.0.0-nba|nba|ML": 4
+      "MULTIMARKET-1.0.0-nba|nba|ML": 4,
+      "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_73b60a83f156bee9": 2,
+      "MULTIMARKET-1.0.0-goals|ligue_1|ASIAN_HOME_MINUS_0_5": 2,
+      "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_60e66ba79f025235": 2,
+      "ELO_STANDARD|serie_a|1X2": 2,
+      "ELO_STANDARD|ligue_1|1X2": 1,
+      "ELO_DYNAMIC|serie_a|1X2": 2,
+      "ELO_DYNAMIC|ligue_1|1X2": 1,
+      "POISSON_SHRINK|serie_a|1X2": 2,
+      "POISSON_SHRINK|ligue_1|1X2": 1,
+      "DIXON_COLES_LOW|serie_a|1X2": 2,
+      "DIXON_COLES_LOW|ligue_1|1X2": 1,
+      "ELO_POISSON_BLEND|serie_a|1X2": 8,
+      "ELO_POISSON_BLEND|ligue_1|1X2": 4,
+      "CONSENSUS_SHRUNK|serie_a|1X2": 2,
+      "CONSENSUS_SHRUNK|ligue_1|1X2": 1,
+      "DISAGREEMENT_VETO|serie_a|1X2": 2,
+      "DISAGREEMENT_VETO|ligue_1|1X2": 1,
+      "MARKET_ANCHORED|serie_a|1X2": 2,
+      "MARKET_ANCHORED|ligue_1|1X2": 1
     },
-    "new_zero_stake_observations": 0,
-    "observations_total": 16,
+    "new_zero_stake_observations": 24,
+    "observations_total": 40,
     "observations_settled": 0,
-    "observations_pending": 16,
+    "observations_pending": 40,
     "control_wallet": "MARKET_DAILY_REFERENCE",
     "minimum_market_events": 100,
     "minimum_market_dates": 14,
@@ -10221,65 +11528,65 @@
     "wallets": {
       "ELO_STANDARD": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34375,
+        "history_samples": 37706,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "ELO_DYNAMIC": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34377,
+        "history_samples": 37708,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "POISSON_SHRINK": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34377,
+        "history_samples": 37708,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "DIXON_COLES_LOW": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34375,
+        "history_samples": 37706,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "ELO_POISSON_BLEND": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34378,
+        "history_samples": 37709,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "CONSENSUS_SHRUNK": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34378,
+        "history_samples": 37709,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "DISAGREEMENT_VETO": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34370,
+        "history_samples": 37701,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "MARKET_ANCHORED": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 47,
+        "streams": 50,
         "active_streams": 0,
-        "history_samples": 25951,
+        "history_samples": 29282,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -10293,33 +11600,33 @@
       },
       "FREQ_SELECTIVE_1_3": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34378,
+        "history_samples": 37709,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "FREQ_BALANCED_3_5": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34378,
+        "history_samples": 37709,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "FREQ_BROAD_5_10": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 50,
+        "streams": 52,
         "active_streams": 0,
-        "history_samples": 34378,
+        "history_samples": 37709,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
       "EXPERIMENTAL_MULTI_MARKET": {
         "status": "LEARNING_IN_SHADOW",
-        "streams": 45,
+        "streams": 47,
         "active_streams": 0,
-        "history_samples": 25943,
+        "history_samples": 29274,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       }
@@ -12125,6 +13432,18 @@
           "market_dates": 0
         }
       },
+      "MARKET_ANCHORED|serie_a|1X2": {
+        "status": "INSUFFICIENT_HISTORY",
+        "n": 0,
+        "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
+        }
+      },
       "MARKET_REFERENCE|ligue_1|1X2": {
         "status": "INSUFFICIENT_HISTORY",
         "n": 2,
@@ -12209,10 +13528,120 @@
           "market_dates": 0
         }
       },
+      "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_60e66ba79f025235": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1128,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9122013034104786,
+            1.0358934298133087
+          ],
+          "strength": 0.0,
+          "temperature": 1.5
+        },
+        "holdout": {
+          "base": {
+            "n": 156,
+            "brier": 0.3666902382306736,
+            "log_loss": 0.5403233702856302
+          },
+          "candidate": {
+            "n": 156,
+            "brier": 0.3719418480997458,
+            "log_loss": 0.5523095129790478
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 644,
+            "first_date": "2021-12-01",
+            "last_date": "2024-08-24"
+          },
+          "tuning": {
+            "n": 211,
+            "first_date": "2024-08-25",
+            "last_date": "2025-05-03"
+          },
+          "calibration": {
+            "n": 117,
+            "first_date": "2025-05-04",
+            "last_date": "2025-12-14"
+          },
+          "final_evaluation": {
+            "n": 156,
+            "first_date": "2026-01-02",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "4945281ffdde018109089ad3be2ddea797d6eec4b98a7ff17c77b16477c09035",
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
+        }
+      },
       "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_6735dcb261466588": {
         "status": "INSUFFICIENT_HISTORY",
         "n": 1,
         "historical_roi": null,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
+        }
+      },
+      "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_73b60a83f156bee9": {
+        "status": "HOLDOUT_NOT_BETTER",
+        "n": 1093,
+        "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            0.9483977380078497,
+            1.0704627962302222
+          ],
+          "strength": 0.0,
+          "temperature": 0.8
+        },
+        "holdout": {
+          "base": {
+            "n": 141,
+            "brier": 0.4229667517336843,
+            "log_loss": 0.6133416107887867
+          },
+          "candidate": {
+            "n": 141,
+            "brier": 0.42563497662238414,
+            "log_loss": 0.6201121352338168
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 630,
+            "first_date": "2021-12-01",
+            "last_date": "2024-09-14"
+          },
+          "tuning": {
+            "n": 225,
+            "first_date": "2024-09-15",
+            "last_date": "2025-08-17"
+          },
+          "calibration": {
+            "n": 97,
+            "first_date": "2025-08-22",
+            "last_date": "2026-01-03"
+          },
+          "final_evaluation": {
+            "n": 141,
+            "first_date": "2026-01-04",
+            "last_date": "2026-09-20"
+          }
+        },
+        "model_sha256": "652b785d95c4b5c0d3c499265da8bf347c6e4c4d3af0ff43161596278cf69c8d",
         "forward": {
           "n": 0,
           "dates": 0,
@@ -12270,9 +13699,52 @@
         }
       },
       "MULTIMARKET-1.0.0-goal-lines|ligue_1|STAT_da016301f271bb98": {
-        "status": "INSUFFICIENT_HISTORY",
-        "n": 1,
+        "status": "SHADOW_VALIDATION",
+        "n": 1111,
         "historical_roi": null,
+        "parameters": {
+          "ratios": [
+            1.0377285583007205,
+            0.976834361702183
+          ],
+          "strength": 1.0,
+          "temperature": 1.2
+        },
+        "holdout": {
+          "base": {
+            "n": 145,
+            "brier": 0.4845576622520137,
+            "log_loss": 0.6793415286929871
+          },
+          "candidate": {
+            "n": 145,
+            "brier": 0.48230547080417935,
+            "log_loss": 0.6759442577011758
+          }
+        },
+        "splits": {
+          "training": {
+            "n": 649,
+            "first_date": "2021-12-04",
+            "last_date": "2024-09-27"
+          },
+          "tuning": {
+            "n": 212,
+            "first_date": "2024-09-28",
+            "last_date": "2025-08-17"
+          },
+          "calibration": {
+            "n": 105,
+            "first_date": "2025-08-22",
+            "last_date": "2026-01-16"
+          },
+          "final_evaluation": {
+            "n": 145,
+            "first_date": "2026-01-17",
+            "last_date": "2026-11-02"
+          }
+        },
+        "model_sha256": "8cac68178dc08524513f0c3aee20007863a0c4ec61155976be6c82834b37c430",
         "forward": {
           "n": 0,
           "dates": 0,
@@ -13621,12 +15093,57 @@
     "caveat": "Score history measures probabilities, not bookmaker profit. Chronological holdout reuse is exploratory; promotion also requires frozen prequential shadow results."
   },
   "market_research": {
-    "asof_utc": "2026-11-05T15:30:36.837260+00:00",
+    "asof_utc": "2026-11-05T18:59:33.573503+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
     "pricing_readiness": {
-      "asof_utc": "2026-11-05T15:30:36.837260+00:00",
+      "asof_utc": "2026-11-05T18:59:33.573503+00:00",
       "training_cutoff_exclusive_utc_date": "2026-11-05",
       "events": [
+        {
+          "id": "ligue_1:401876405",
+          "sport": "ligue_1",
+          "home": "Toulouse",
+          "away": "Strasbourg",
+          "start_utc": "2026-11-06T19:45:00+00:00",
+          "status": "READY",
+          "forecasts": [
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "OVER_UNDER_2_5",
+              "sample_min": 54
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "BTTS",
+              "sample_min": 54
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "ASIAN_HOME_MINUS_0_5",
+              "sample_min": 54
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goal-lines",
+              "market": "STAT_da016301f271bb98",
+              "sample_min": 54
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goal-lines",
+              "market": "STAT_73b60a83f156bee9",
+              "sample_min": 54
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goal-lines",
+              "market": "STAT_60e66ba79f025235",
+              "sample_min": 54
+            },
+            {
+              "family": "ELO_STANDARD",
+              "market": "1X2",
+              "sample_min": 107
+            }
+          ]
+        },
         {
           "id": "nhl:401892648",
           "sport": "nhl",
@@ -13875,36 +15392,6 @@
           "start_utc": "2026-11-06T19:45:00+00:00",
           "status": "INSUFFICIENT_HISTORY",
           "forecasts": []
-        },
-        {
-          "id": "ligue_1:401876405",
-          "sport": "ligue_1",
-          "home": "Toulouse",
-          "away": "Strasbourg",
-          "start_utc": "2026-11-06T19:45:00+00:00",
-          "status": "READY",
-          "forecasts": [
-            {
-              "family": "MULTIMARKET-1.0.0-goals",
-              "market": "OVER_UNDER_2_5",
-              "sample_min": 54
-            },
-            {
-              "family": "MULTIMARKET-1.0.0-goals",
-              "market": "BTTS",
-              "sample_min": 54
-            },
-            {
-              "family": "MULTIMARKET-1.0.0-goals",
-              "market": "ASIAN_HOME_MINUS_0_5",
-              "sample_min": 54
-            },
-            {
-              "family": "ELO_STANDARD",
-              "market": "1X2",
-              "sample_min": 107
-            }
-          ]
         },
         {
           "id": "epl:401879242",
@@ -14328,33 +15815,214 @@
           "start_utc": "2026-11-07T15:15:00+00:00",
           "status": "INSUFFICIENT_HISTORY",
           "forecasts": []
+        },
+        {
+          "id": "serie_a:401874974",
+          "sport": "serie_a",
+          "home": "Parma",
+          "away": "Bologna",
+          "start_utc": "2026-11-07T17:00:00+00:00",
+          "status": "READY",
+          "forecasts": [
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "OVER_UNDER_2_5",
+              "sample_min": 41
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "BTTS",
+              "sample_min": 41
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "ASIAN_HOME_MINUS_0_5",
+              "sample_min": 41
+            },
+            {
+              "family": "ELO_STANDARD",
+              "market": "1X2",
+              "sample_min": 80
+            }
+          ]
+        },
+        {
+          "id": "epl:401878757",
+          "sport": "epl",
+          "home": "Nottingham Forest",
+          "away": "Manchester City",
+          "start_utc": "2026-11-07T17:30:00+00:00",
+          "status": "READY",
+          "forecasts": [
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "OVER_UNDER_2_5",
+              "sample_min": 79
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "BTTS",
+              "sample_min": 79
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "ASIAN_HOME_MINUS_0_5",
+              "sample_min": 79
+            },
+            {
+              "family": "ELO_STANDARD",
+              "market": "1X2",
+              "sample_min": 157
+            }
+          ]
+        },
+        {
+          "id": "la_liga:401882811",
+          "sport": "la_liga",
+          "home": "Osasuna",
+          "away": "Athletic Club",
+          "start_utc": "2026-11-07T17:30:00+00:00",
+          "status": "READY",
+          "forecasts": [
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "OVER_UNDER_2_5",
+              "sample_min": 97
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "BTTS",
+              "sample_min": 97
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "ASIAN_HOME_MINUS_0_5",
+              "sample_min": 97
+            },
+            {
+              "family": "ELO_STANDARD",
+              "market": "1X2",
+              "sample_min": 195
+            }
+          ]
+        },
+        {
+          "id": "bundesliga:401884743",
+          "sport": "bundesliga",
+          "home": "VfB Stuttgart",
+          "away": "Werder Bremen",
+          "start_utc": "2026-11-07T17:30:00+00:00",
+          "status": "READY",
+          "forecasts": [
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "OVER_UNDER_2_5",
+              "sample_min": 70
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "BTTS",
+              "sample_min": 70
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "ASIAN_HOME_MINUS_0_5",
+              "sample_min": 70
+            },
+            {
+              "family": "ELO_STANDARD",
+              "market": "1X2",
+              "sample_min": 140
+            }
+          ]
+        },
+        {
+          "id": "nhl:401892662",
+          "sport": "nhl",
+          "home": "Washington Capitals",
+          "away": "Florida Panthers",
+          "start_utc": "2026-11-07T17:30:00+00:00",
+          "status": "READY",
+          "forecasts": [
+            {
+              "family": "MULTIMARKET-1.0.0-nhl",
+              "market": "ML",
+              "sample_min": 89
+            }
+          ]
+        },
+        {
+          "id": "ligue_1:401876411",
+          "sport": "ligue_1",
+          "home": "AJ Auxerre",
+          "away": "Paris FC",
+          "start_utc": "2026-11-07T18:00:00+00:00",
+          "status": "READY",
+          "forecasts": [
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "OVER_UNDER_2_5",
+              "sample_min": 19
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "BTTS",
+              "sample_min": 19
+            },
+            {
+              "family": "MULTIMARKET-1.0.0-goals",
+              "market": "ASIAN_HOME_MINUS_0_5",
+              "sample_min": 19
+            },
+            {
+              "family": "ELO_STANDARD",
+              "market": "1X2",
+              "sample_min": 39
+            }
+          ]
+        },
+        {
+          "id": "nhl:401892663",
+          "sport": "nhl",
+          "home": "Nashville Predators",
+          "away": "St. Louis Blues",
+          "start_utc": "2026-11-07T18:00:00+00:00",
+          "status": "READY",
+          "forecasts": [
+            {
+              "family": "MULTIMARKET-1.0.0-nhl",
+              "market": "ML",
+              "sample_min": 89
+            }
+          ]
         }
       ]
     },
-    "new_forecasts": 2,
+    "new_forecasts": 3,
     "new_settlements": 0,
-    "forecasts_total": 145,
-    "zero_stake_forecasts": 133,
-    "open_observations": 48,
+    "forecasts_total": 148,
+    "zero_stake_forecasts": 136,
+    "open_observations": 51,
     "settlements_total": 97,
-    "candidate_markets": 50,
+    "candidate_markets": 70,
     "closing_line_values_available": 0,
     "blocks": {
-      "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 13,
-      "NEEDS_100_DISTINCT_EVENTS": 13,
-      "NEEDS_14_DAY_FORWARD_PERIOD": 13,
-      "NEEDS_14_DISTINCT_MARKET_DATES": 13,
-      "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 13,
-      "LOG_LOSS_NOT_BETTER_THAN_MARKET": 13,
+      "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 18,
+      "NEEDS_100_DISTINCT_EVENTS": 15,
+      "NEEDS_14_DAY_FORWARD_PERIOD": 15,
+      "NEEDS_14_DISTINCT_MARKET_DATES": 15,
+      "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 15,
+      "LOG_LOSS_NOT_BETTER_THAN_MARKET": 15,
+      "CALIBRATION_ERROR_OVER_10PP": 5,
+      "CONSERVATIVE_EV_BELOW_1_PERCENT": 4,
+      "missing_timestamped_BTTS_odds": 13,
+      "NEEDS_TWO_BOOKMAKERS": 3,
       "EDGE_BELOW_4PP": 4,
-      "CONSERVATIVE_EV_BELOW_1_PERCENT": 3,
-      "missing_timestamped_ML_odds": 13,
+      "missing_timestamped_ML_odds": 15,
       "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 1,
       "NEEDS_50_HOLDOUT_FORECASTS": 1,
-      "CALIBRATION_ERROR_OVER_10PP": 3,
-      "missing_timestamped_OVER_UNDER_2_5_odds": 8,
-      "missing_timestamped_BTTS_odds": 8,
-      "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 8,
+      "missing_timestamped_OVER_UNDER_2_5_odds": 12,
+      "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 12,
       "insufficient_football_home_away_history": 8
     },
     "history": {
@@ -14363,20 +16031,20 @@
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261104&limit=300",
-          "sha256": "f38a02a1387765344ce92aaafbe98cf203b9d472b7a170755fc46e42da57264a",
-          "captured_at_utc": "2026-11-05T15:30:36.837260+00:00",
+          "sha256": "4ba425c0451c6288a279fc4bc0a64412c0d479e5a63579124de4504cb5d2ebe4",
+          "captured_at_utc": "2026-11-05T18:59:33.573503+00:00",
           "completed_games": 0
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261104&limit=300",
           "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-11-05T15:30:36.837260+00:00",
+          "captured_at_utc": "2026-11-05T18:59:33.573503+00:00",
           "completed_games": 0
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261104&limit=300",
-          "sha256": "272016fd8810fbe4be8be5cd1569442ae82550660a620c3041643d4af060a253",
-          "captured_at_utc": "2026-11-05T15:30:36.837260+00:00",
+          "sha256": "3248c06569064ffceef17332d94136c139aa0cc484c9a6c068f57ccf376cc819",
+          "captured_at_utc": "2026-11-05T18:59:33.573503+00:00",
           "completed_games": 0
         }
       ],
@@ -14713,7 +16381,59 @@
         "epl": 751
       }
     },
-    "additional_market_backtests": {},
+    "additional_market_backtests": {
+      "ligue_1|STAT_73b60a83f156bee9": {
+        "n": 1093,
+        "brier": 0.41831856143374824,
+        "log_loss": 0.6057145591817681,
+        "uniform_brier": 0.5,
+        "uniform_log_loss": 0.6931471805599453,
+        "market_brier": null,
+        "roi": null,
+        "holdout": {
+          "from": "2025-10-25",
+          "n": 197,
+          "brier": 0.4228360892069011,
+          "log_loss": 0.6115944886263838,
+          "ece": 0.0749928229206171
+        },
+        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+      },
+      "ligue_1|STAT_60e66ba79f025235": {
+        "n": 1128,
+        "brier": 0.35259073893183746,
+        "log_loss": 0.5262388944900723,
+        "uniform_brier": 0.5,
+        "uniform_log_loss": 0.6931471805599453,
+        "market_brier": null,
+        "roi": null,
+        "holdout": {
+          "from": "2025-10-17",
+          "n": 211,
+          "brier": 0.38494297473625155,
+          "log_loss": 0.5625213493507867,
+          "ece": 0.05104965296238823
+        },
+        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+      },
+      "ligue_1|STAT_da016301f271bb98": {
+        "n": 1110,
+        "brier": 0.48004739027977333,
+        "log_loss": 0.6750511661797964,
+        "uniform_brier": 0.5,
+        "uniform_log_loss": 0.6931471805599453,
+        "market_brier": null,
+        "roi": null,
+        "holdout": {
+          "from": "2025-10-25",
+          "n": 202,
+          "brier": 0.47179805191640134,
+          "log_loss": 0.6659844280048728,
+          "ece": 0.07684455596890898
+        },
+        "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+      }
+    },
     "market_catalog": {
       "requested": [
         "goals",
@@ -14724,7 +16444,37 @@
         "shots",
         "throw_ins"
       ],
-      "priced_specs": {},
+      "priced_specs": {
+        "ligue_1": {
+          "STAT_da016301f271bb98": {
+            "kind": "TOTAL",
+            "metric": "goals",
+            "line": 3.0,
+            "team": null,
+            "period": "FULL_TIME",
+            "settlement_block": null,
+            "provider_market_key": "totals"
+          },
+          "STAT_73b60a83f156bee9": {
+            "kind": "SPREAD",
+            "metric": "goals",
+            "line": 0.0,
+            "team": null,
+            "period": "FULL_TIME",
+            "settlement_block": null,
+            "provider_market_key": "spreads"
+          },
+          "STAT_60e66ba79f025235": {
+            "kind": "SPREAD",
+            "metric": "goals",
+            "line": -1.0,
+            "team": null,
+            "period": "FULL_TIME",
+            "settlement_block": null,
+            "provider_market_key": "spreads"
+          }
+        }
+      },
       "provider_limitations": {
         "offsides": "NO_CURRENT_PROVIDER_MARKET",
         "throw_ins": "NO_CURRENT_PROVIDER_MARKET",
@@ -15781,7 +17531,7 @@
     "paper_only": true
   },
   "market_activity": {
-    "asof_utc": "2026-11-05T15:30:36.837260+00:00",
+    "asof_utc": "2026-11-05T18:59:33.573503+00:00",
     "by_market": {
       "1X2": {
         "label": "Resultado 1X2",
@@ -15791,7 +17541,7 @@
         "papers_voided": 0,
         "papers_today": 2,
         "observations": 0,
-        "priced_event_count": 0,
+        "priced_event_count": 5,
         "status": "PAPER_RECORDED"
       },
       "ML": {
@@ -15813,7 +17563,7 @@
         "papers_voided": 0,
         "papers_today": 0,
         "observations": 44,
-        "priced_event_count": 0,
+        "priced_event_count": 1,
         "status": "PAPER_RECORDED"
       },
       "GOALS_HANDICAP": {
@@ -15823,7 +17573,7 @@
         "papers_settled": 0,
         "papers_voided": 0,
         "papers_today": 0,
-        "observations": 4,
+        "observations": 7,
         "priced_event_count": 0,
         "status": "OBSERVATION_ONLY"
       },
@@ -15914,7 +17664,7 @@
       "remaining_to_minimum": 5,
       "new_entries": 0,
       "eligible": 0,
-      "status": "NO_ELIGIBLE_QUOTE"
+      "status": "AWAITING_MARKET_VALIDATION"
     },
     "FREQ_BALANCED_3_5": {
       "daily_target": [
@@ -15926,7 +17676,7 @@
       "remaining_to_minimum": 5,
       "new_entries": 0,
       "eligible": 0,
-      "status": "NO_ELIGIBLE_QUOTE"
+      "status": "AWAITING_MARKET_VALIDATION"
     },
     "FREQ_BROAD_5_10": {
       "daily_target": [
@@ -15938,7 +17688,7 @@
       "remaining_to_minimum": 5,
       "new_entries": 0,
       "eligible": 0,
-      "status": "NO_ELIGIBLE_QUOTE"
+      "status": "AWAITING_MARKET_VALIDATION"
     }
   },
   "daily_target_policy": "All active strategies target 5–10 qualified PAPER entries per Lisbon day; maximum 10 per account, no forced entries or relaxed edge/EV/risk. Global distinct-event metric remains separate.",
@@ -17092,14 +18842,14 @@
     "failures": 0
   },
   "events_seen": 87,
-  "new_paper_entries": {
-    "MARKET_DAILY_REFERENCE": 5
-  },
+  "new_paper_entries": {},
   "entry_diagnostics": {
     "rejections": {
-      "missing_timestamped_odds": 128
+      "missing_timestamped_odds": 128,
+      "insufficient_history": 16,
+      "awaiting_prospective_market_validation": 24
     },
-    "new_entries": 5,
+    "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
   "newly_settled": 0,
