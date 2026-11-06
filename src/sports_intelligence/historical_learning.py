@@ -148,7 +148,7 @@ class HistoricalLearning:
                 if r.get('market')=='1X2' and not r.get('daily_paper_exploration_policy'):family=family_for_wallet(r['strategy'])
                 market,sport = r['market'],r['sport']
                 learning = r.get('historical_learning') or {}
-                base = learning.get('base_probabilities',r['probabilities'])
+                base = learning.get('base_probabilities',r['probabilities']) if learning.get('version')==VERSION else r['probabilities']
                 identity = sample_identity(sport,start.date(),r['home'],r['away'],r.get('event_id'))
                 self.add(family,sport,market,settled.date(),identity,base,r['observed_outcome'])
                 key = '|'.join((family,sport,market))
