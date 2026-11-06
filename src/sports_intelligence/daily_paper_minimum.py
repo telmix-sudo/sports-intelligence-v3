@@ -132,7 +132,7 @@ def run_daily_paper_minimum(root,events,forecasts,now,registry,risk,clock=None):
                         c['signal']=prediction_signal(f['event_id'],f['market'],'MARKET_REFERENCE',c['i'])
                     candidates.append(c)
             preferred=family_for_wallet(name)
-            candidates.sort(key=lambda c:(c['f']['family']!=preferred,
+            candidates.sort(key=lambda c:(not (c['f']['source']=='PLAYER_CONTEXT' and c['reason']=='LEARNED_MODEL_PASSED_FORWARD_BENCHMARKS'),c['f']['family']!=preferred,
                 risk.event_legs[c['f']['event_id']],risk.signal_exposure[c['signal']],
                 -c['m'][c['i']],c['f']['start_utc'],c['f']['event_id'],c['f']['market'],c['f']['family']))
             if not candidates:blocked['no_fresh_supported_forecast']+=1

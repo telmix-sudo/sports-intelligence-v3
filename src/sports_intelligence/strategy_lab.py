@@ -609,6 +609,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
                 pending[(r["sport"], parse_iso(r["start_utc"]).date())] = True
     for league,day in admission.pending():pending[(league,day)]=True
     for league,day in selection_experiment.pending():pending[(league,day)]=True
+    from .player_context import pending as pending_player_context
+    for league,day in pending_player_context(root):pending[(league,day)]=True
     finals = result_index(events)
     for (league, day) in sorted(pending):
         if not (dt.timedelta(0) <= now - dt.datetime.combine(day, dt.time(), UTC) <= dt.timedelta(days=30)):
@@ -651,6 +653,9 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     auxiliary = open_auxiliary_markets(root, events, now, registry, risk,market_scope='moneyline',admission=admission,learning=learning)
     for name,count in auxiliary.items(): entry_counts[name]=entry_counts.get(name,0)+count
     from .daily_paper_minimum import run_daily_paper_minimum
+    from .player_context import run as run_player_context
+    player_context=run_player_context(root,events,list(selection_experiment.current_forecasts.values()),
+        finals,now,selection_experiment,fetcher=fetcher,clock=clock)
     from .research_pipeline import paper_state
     from .research_pipeline import atomic_json
     daily_minimum=run_daily_paper_minimum(root,events,list(selection_experiment.current_forecasts.values()),
@@ -723,6 +728,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     report = {
         "selection_experiment":selection_experiment.report(),
         "selection_audit":dict(audit_selections(root),official_verification=official_verification),
+        "player_context":player_context,
         "runtime_status":runtime,
         "pricing_readiness":market_research['pricing_readiness'],
         "validation_progress":validation_progress(admission_report,learning_report,market_research),
