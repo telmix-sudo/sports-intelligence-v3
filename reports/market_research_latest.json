@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-07T02:50:53.242621+00:00",
+  "asof_utc": "2026-11-07T07:48:11.891114+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-07T02:50:18.077867+00:00",
+    "asof_utc": "2026-11-07T07:47:37.541849+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-07",
     "events": [
       {
@@ -715,36 +715,6 @@
             "family": "ELO_STANDARD",
             "market": "1X2",
             "sample_min": 196
-          }
-        ]
-      },
-      {
-        "id": "nba:401909294",
-        "sport": "nba",
-        "home": "Los Angeles Lakers",
-        "away": "Portland Trail Blazers",
-        "start_utc": "2026-11-07T03:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nba",
-            "market": "ML",
-            "sample_min": 93
-          }
-        ]
-      },
-      {
-        "id": "nba:401909295",
-        "sport": "nba",
-        "home": "Sacramento Kings",
-        "away": "San Antonio Spurs",
-        "start_utc": "2026-11-07T03:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nba",
-            "market": "ML",
-            "sample_min": 90
           }
         ]
       },
@@ -2098,12 +2068,12 @@
     ]
   },
   "new_forecasts": 0,
-  "new_settlements": 4,
+  "new_settlements": 10,
   "forecasts_total": 293,
   "zero_stake_forecasts": 266,
-  "open_observations": 127,
-  "settlements_total": 158,
-  "candidate_markets": 207,
+  "open_observations": 118,
+  "settlements_total": 168,
+  "candidate_markets": 205,
   "closing_line_values_available": 0,
   "blocks": {
     "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 12,
@@ -2123,8 +2093,8 @@
     "LOG_LOSS_NOT_BETTER_THAN_MARKET": 32,
     "EXPERIMENTAL_EVENT_ALREADY_TRADED": 19,
     "missing_timestamped_BTTS_odds": 32,
-    "missing_timestamped_ML_odds": 25,
     "missing_timestamped_OVER_UNDER_2_5_odds": 20,
+    "missing_timestamped_ML_odds": 23,
     "NEEDS_200_CHRONOLOGICAL_SCORE_FORECASTS": 7,
     "NEEDS_50_HOLDOUT_FORECASTS": 7
   },
@@ -2134,20 +2104,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261106&limit=300",
-        "sha256": "af7bb049bd23c78b95adaabef3dc804a18ea88eb52a1116fc39d63c87d017737",
-        "captured_at_utc": "2026-11-07T02:50:18.077867+00:00",
+        "sha256": "787414f2b15804e565da9ce31be08654a85fc9ff49c3bbe05b02c6944e472122",
+        "captured_at_utc": "2026-11-07T07:47:37.541849+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261106&limit=300",
         "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-        "captured_at_utc": "2026-11-07T02:50:18.077867+00:00",
+        "captured_at_utc": "2026-11-07T07:47:37.541849+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261106&limit=300",
-        "sha256": "536dfa2444f348b8607eb981c3e59df130b0b3e3fa544b9597d7cbe43c447cb6",
-        "captured_at_utc": "2026-11-07T02:50:18.077867+00:00",
+        "sha256": "2735012bf9ef2a7c7352a4ba0cd04a3cb14f9b2551aa2b8ab1c28e2acb6f89c6",
+        "captured_at_utc": "2026-11-07T07:47:37.541849+00:00",
         "completed_games": 0
       }
     ],
@@ -4966,11 +4936,11 @@
   "experimental_account": {
     "created": true,
     "initial_bankroll_eur": 1000,
-    "bankroll_eur": 982.785,
-    "pnl_eur": -17.215,
+    "bankroll_eur": 982.99,
+    "pnl_eur": -17.01,
     "positions": 27,
-    "open_exposure_eur": 4.0,
-    "open": 8,
+    "open_exposure_eur": 3.5,
+    "open": 7,
     "note": "Separate experimental virtual account; original twelve wallets preserved."
   },
   "settlement_errors": [],
