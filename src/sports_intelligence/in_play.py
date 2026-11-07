@@ -109,7 +109,9 @@ def probabilities(rates, state):
     """Use the same remaining-goal distribution for 1X2 and the open goals line."""
     home, away = state["score"]
     fraction = 1 - state["elapsed_seconds"] / (90 * 60)
-    ph, pa = (FootballPoisson.poisson_pmf(rate * fraction, 16) for rate in rates)
+    # A large dismissal differential can put the remaining mean above ten.
+    # Keep the discarded tail negligible even at that bound.
+    ph, pa = (FootballPoisson.poisson_pmf(rate * fraction, 32) for rate in rates)
     win_draw_loss = [0., 0., 0.]
     over = 0.
     for i, h in enumerate(ph):
