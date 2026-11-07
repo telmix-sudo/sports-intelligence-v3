@@ -31,7 +31,7 @@ MIN_EVALUATION_DATES = 14
 
 
 class InvalidSnapshot(ValueError):
-    pass
+    """The feed responded but its snapshot failed an eligibility check."""
 
 
 def count(value):
@@ -42,6 +42,7 @@ def count(value):
 
 
 def read_state(payload, event, captured):
+    """Reconcile the scoreboard with a freshly received match summary."""
     comp, teams, status = identity(payload, event, captured)
     if status.get("state") != "in" or status.get("completed") is not False or status.get("name") not in PLAYING:
         raise InvalidSnapshot("SUMMARY_NOT_IN_PLAY")
@@ -86,7 +87,7 @@ def read_state(payload, event, captured):
     play_clock = float(play["clock"]["value"])
     if (not kickoff <= heartbeat <= captured or captured - heartbeat > MAX_HEARTBEAT_AGE
         or play["period"]["number"] != period
-        or not 0 <= elapsed - play_clock <= MAX_HEARTBEAT_AGE.total_seconds()):
+        or not -60 < elapsed - play_clock <= MAX_HEARTBEAT_AGE.total_seconds()):
         raise InvalidSnapshot("STALE_OR_INCONSISTENT_HEARTBEAT")
 
     groups = payload["boxscore"]["teams"]
@@ -130,6 +131,7 @@ def probabilities(rates, state):
 
 
 def forecast(rates, state):
+    """Pair the time-and-score baseline with the fixed context adjustment."""
     # Fixed research coefficients. A shot on target is a count, not an xG estimate.
     shots = state["shots_on_target"]
     reds = state["red_cards"]
@@ -142,25 +144,42 @@ def forecast(rates, state):
 
 
 def collect(events, models, seen, cutoff, team_name, fetcher=fetch_text):
-    candidates = [
-        e for e in events if e["sport"] in FOOTBALL and e.get("live_state")
-        and e["id"] not in seen and parse_utc(e["start_utc"]).date() == cutoff
-    ]
-
-    def observe(event):
+    """Capture one eligible forecast per match within a bounded request budget."""
+    candidates, eligible, skipped = 0, [], Counter()
+    for event in events:
+        if event["sport"] not in FOOTBALL or not event.get("live_state") or event["id"] in seen:
+            continue
+        if parse_utc(event["start_utc"]).date() != cutoff:
+            continue
+        candidates += 1
         try:
+            elapsed = float(event["live_state"]["elapsed_seconds"])
+            if event.get("provider_status") not in PLAYING or not MIN_ELAPSED - 180 <= elapsed <= MAX_ELAPSED + 60:
+                skipped["OUTSIDE_CAPTURE_WINDOW"] += 1
+                continue
             model = models[event["sport"]]["POISSON_SHRINK"]
             home, away = team_name(event["home"]), team_name(event["away"])
             if min(model.played.get(home, 0), model.played.get(away, 0)) < 8:
-                return None, "INSUFFICIENT_TEAM_HISTORY"
+                skipped["INSUFFICIENT_TEAM_HISTORY"] += 1
+                continue
             event_id = event["id"].split(":", 1)[1]
             if not event_id.isascii() or not event_id.isdecimal():
                 raise InvalidSnapshot("INVALID_PROVIDER_EVENT_ID")
             url = f"{ESPN_BASE}/{SCOREBOARDS[event['sport']]}/summary?{urlencode({'event': event_id})}"
+            eligible.append((event, url, goal_rates(model, home, away)))
+        except (KeyError, TypeError, ValueError, IndexError):
+            skipped["INCOMPLETE_SCOREBOARD_OR_MODEL"] += 1
+
+    def observe(candidate):
+        """Keep provider transport failures inside the optional experiment."""
+        event, url, rates = candidate
+        try:
             raw, metadata = fetcher(url)
+        except Exception:
+            return None, "SUMMARY_FETCH_FAILED"
+        try:
             captured = parse_utc(metadata["fetched_at_utc"])
             state = read_state(json.loads(raw), event, captured)
-            rates = goal_rates(model, home, away)
             return {
                 "kind": "FORECAST", "version": VERSION, "event_id": event["id"],
                 "sport": event["sport"], "home": event["home"], "away": event["away"],
@@ -174,16 +193,19 @@ def collect(events, models, seen, cutoff, team_name, fetcher=fetch_text):
         except (OSError, AttributeError, KeyError, TypeError, IndexError, StopIteration, ValueError, OverflowError):
             return None, "SOURCE_UNAVAILABLE_OR_INCOMPLETE"
 
-    selected = sorted(candidates, key=lambda e: (e["start_utc"], e["id"]))[:MAX_SUMMARIES]
+    selected = sorted(eligible, key=lambda item: (item[0]["start_utc"], item[0]["id"]))[:MAX_SUMMARIES]
+    if len(eligible) > len(selected):
+        skipped["REQUEST_LIMIT"] += len(eligible) - len(selected)
     with ThreadPoolExecutor(max_workers=4) as pool:
         captures = list(pool.map(observe, selected))
+    skipped.update(error for _, error in captures if error)
     return [r for r, _ in captures if r], {
-        "live_candidates": len(candidates), "candidates_checked": len(selected),
-        "skipped": dict(Counter(error for _, error in captures if error)),
+        "live_candidates": candidates, "candidates_checked": len(selected), "skipped": dict(skipped),
     }
 
 
 def pending(rows):
+    """Return match dates that still need an official regulation result."""
     finished = {r["event_id"] for r in rows if r["kind"] == "RESULT"}
     return {
         (r["sport"], parse_utc(r["start_utc"]).date())
@@ -192,6 +214,7 @@ def pending(rows):
 
 
 def finish(rows, final_events, observed_at):
+    """Record new outcomes separately from the immutable forecasts."""
     finished = {r["event_id"] for r in rows if r["kind"] == "RESULT"}
     results = []
     for row in rows:
@@ -234,6 +257,7 @@ def paired_intervals(by_day):
 
 
 def reliability(predictions):
+    """Summarize the calibration of the most probable outcome in each forecast."""
     bins = defaultdict(list)
     for p, y in predictions:
         choice = max(range(len(p)), key=p.__getitem__)
@@ -244,6 +268,7 @@ def reliability(predictions):
 
 
 def report(rows, diagnostics, new_count):
+    """Compare both models on identical evaluated matches by league and market."""
     final = {r["event_id"]: r for r in rows if r["kind"] == "RESULT"}
     forecasts = [r for r in rows if r["kind"] == "FORECAST" and r["version"] == VERSION]
     groups = defaultdict(list)

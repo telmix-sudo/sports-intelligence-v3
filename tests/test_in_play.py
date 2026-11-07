@@ -1,4 +1,5 @@
 import datetime as dt
+from http.client import IncompleteRead
 import json
 import unittest
 
@@ -77,6 +78,33 @@ class InPlayTests(unittest.TestCase):
         summary["boxscore"]["teams"][1]["team"]["id"] = "12"
         with self.assertRaisesRegex(ValueError, "BOX_SCORE_TEAM_MISMATCH"):
             in_play.read_state(summary, event, NOW)
+
+    def test_event_in_the_displayed_minute_can_be_newer_than_minute_floor(self):
+        event, summary = fixture()
+        summary["keyEvents"][0]["wallclock"] = "2026-11-07T15:35:10Z"
+        summary["keyEvents"][0]["clock"]["value"] = 2110
+        self.assertEqual(in_play.read_state(summary, event, NOW)["elapsed_seconds"], 2100)
+        summary["keyEvents"][0]["clock"]["value"] = 2160
+        with self.assertRaisesRegex(ValueError, "STALE_OR_INCONSISTENT_HEARTBEAT"):
+            in_play.read_state(summary, event, NOW)
+
+    def test_skips_ineligible_matches_before_budget_and_contains_transport_errors(self):
+        event, _ = fixture()
+        old = dict(event, id="epl:0", live_state=dict(event["live_state"], elapsed_seconds=5200))
+        weak = dict(event, id="epl:1", away="Unknown team")
+        model = FootballPoisson(played={"arsenal": 8, "chelsea": 8})
+        models = {"epl": {"POISSON_SHRINK": model}}
+        requested = []
+
+        def fetcher(url):
+            requested.append(url.rsplit("=", 1)[-1])
+            raise IncompleteRead(b"")
+
+        rows, diag = in_play.collect([old, weak] * 12 + [event], models, set(), NOW.date(), str.lower, fetcher)
+        self.assertEqual(rows, [])
+        self.assertEqual(requested, ["99"])
+        self.assertEqual(diag["skipped"], {"OUTSIDE_CAPTURE_WINDOW": 12,
+                                          "INSUFFICIENT_TEAM_HISTORY": 12, "SUMMARY_FETCH_FAILED": 1})
 
     def test_one_zero_stake_capture_and_normal_full_time_only(self):
         event, summary = fixture()
