@@ -597,6 +597,13 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     # Includes yesterday/today/future fixtures; only completed final statuses settle.
     events, coverage = discover(now, sports=SCOREBOARDS,
                                 future_days=2, need_yesterday=True)
+    from . import in_play
+    in_play_path = root / in_play.JOURNAL
+    in_play_rows = read_jsonl(in_play_path)
+    in_play_new, in_play_diagnostics = in_play.collect(
+        events, models, {r["event_id"] for r in in_play_rows}, now.date(), team_name, fetcher=fetcher
+    )
+    in_play_results = {e["id"]: e for e in events if e["completed"]}
     archive_path = root / "data" / "odds_cache_v3.json"
     if archive_path.exists():
         cache = json.loads(archive_path.read_text(encoding="utf8"))
@@ -611,6 +618,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     for league,day in selection_experiment.pending():pending[(league,day)]=True
     from .player_context import pending as pending_player_context
     for league,day in pending_player_context(root):pending[(league,day)]=True
+    for league, day in in_play.pending(in_play_rows):
+        pending[(league, day)] = True
     finals = result_index(events)
     for (league, day) in sorted(pending):
         if not (dt.timedelta(0) <= now - dt.datetime.combine(day, dt.time(), UTC) <= dt.timedelta(days=30)):
@@ -620,8 +629,13 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             for record in unpack_scoreboard(result, league, now):
                 if record["completed"] and record["final"]:
                     finals[record["id"]] = record["final"]
+                    in_play_results[record["id"]] = record
         except Exception as exc:
             print("Settlement lookup failed", league, day.isoformat(), type(exc).__name__, flush=True)
+    new_in_play_results = in_play.finish(in_play_rows, in_play_results, clock())
+    if in_play_new or new_in_play_results:
+        in_play_rows.extend(in_play_new + new_in_play_results)
+        save_jsonl(in_play_path, in_play_rows)
     missing_final_ids = sorted({row["event_id"] for name in STRATEGIES for row in read_jsonl(root / "data" / "strategy_ledgers" / (name.lower() + ".jsonl")) if row.get("status") == "OPEN" and parse_iso(row["start_utc"]) <= now and row["event_id"] not in finals})
     admission.reconcile(finals)
     stat_settlement = enrich_pending_statistics(root, finals, now)
@@ -729,6 +743,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "selection_experiment":selection_experiment.report(),
         "selection_audit":dict(audit_selections(root),official_verification=official_verification),
         "player_context":player_context,
+        "in_play": in_play.report(in_play_rows, in_play_diagnostics, len(in_play_new)),
         "runtime_status":runtime,
         "pricing_readiness":market_research['pricing_readiness'],
         "validation_progress":validation_progress(admission_report,learning_report,market_research),

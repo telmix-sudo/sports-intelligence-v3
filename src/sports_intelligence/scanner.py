@@ -83,9 +83,17 @@ def unpack_scoreboard(payload: dict, sport: str, observed_at: dt.datetime) -> li
                             pass
             # Odds are relevant only for scheduled events not yet started.
             quote = extract_odds(competition, sport) if (kickoff > observed_at and match_state == "pre") else None
-            result.append({"id": event_id, "sport": sport, "home": home_name, "away": away_name,
+            event = {"id": event_id, "sport": sport, "home": home_name, "away": away_name,
                            "start_utc": kickoff.isoformat(), "status": match_state,
-                           "completed": completed, "final": final, "quote": quote})
+                           "completed": completed, "final": final, "quote": quote,
+                           "provider_status": status.get("name")}
+            if match_state == "in" and sport in {"epl", "la_liga", "bundesliga", "serie_a", "ligue_1"}:
+                event["live_state"] = {
+                    "elapsed_seconds": ev["status"].get("clock"), "period": ev["status"].get("period"),
+                    "score": [home.get("score"), away.get("score")],
+                    "team_ids": [home["team"].get("id"), away["team"].get("id")],
+                }
+            result.append(event)
         except (KeyError, ValueError, TypeError, StopIteration, IndexError):
             continue
     return result
@@ -111,9 +119,14 @@ def capture_scoreboards(now: dt.datetime, fetcher=fetch_espn, sports: dict | Non
                 report["sources_ok"] += 1
                 report["provenance"].append(metadata)
                 for event in unpack_scoreboard(payload, sport, now):
+                    if "live_state" in event:
+                        event["live_state"]["scoreboard_fetched_utc"] = metadata.get("fetched_at_utc")
+                        event["live_state"]["scoreboard_sha256"] = metadata.get("sha256")
                     # Later responses may have a more recent status.
                     previous = all_events.get(event["id"])
-                    if previous is None or (not previous["completed"] and event["completed"]):
+                    if previous is None or (not previous["completed"] and (
+                        event["completed"] or event["status"] == "in"
+                    )):
                         all_events[event["id"]] = event
             except Exception as exc:
                 report["sources_failed"] += 1
