@@ -1,6 +1,6 @@
 {
   "version": "PLAYER-CONTEXT-1.0",
-  "asof_utc": "2026-11-08T17:15:30.074841+00:00",
+  "asof_utc": "2026-11-08T19:45:39.226425+00:00",
   "source": {
     "requests": 24,
     "catalog_requests": 2,
@@ -8,7 +8,8 @@
     "parallel_requests": 4,
     "success": {
       "CONTEXT": 11,
-      "HISTORY": 11
+      "HISTORY": 10,
+      "UNUSABLE_PLAYER_BOXSCORE": 1
     },
     "failures": [],
     "source": "ESPN_PUBLIC_SUMMARY_UNVERSIONED",
@@ -17,993 +18,13 @@
   },
   "events": [
     {
-      "event_id": "la_liga:401882815",
-      "sport": "la_liga",
-      "home": "Celta Vigo",
-      "away": "Levante",
-      "start_utc": "2026-11-08T17:30:00+00:00",
-      "context_utc": "2026-11-08T17:15:29.508769+00:00",
-      "status": "NEEDS_THREE_EARLIER_PLAYER_BOXSCORES_PER_TEAM",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "85",
-          "name": "Celta Vigo",
-          "injury_report": false,
-          "players": {},
-          "starters": [
-            "144720",
-            "376147",
-            "285756",
-            "146127",
-            "298343",
-            "297829",
-            "331586",
-            "414292",
-            "92800",
-            "304592",
-            "138448"
-          ],
-          "lineup_confirmed": true
-        },
-        "away": {
-          "id": "1538",
-          "name": "Levante",
-          "injury_report": false,
-          "players": {},
-          "starters": [
-            "141438",
-            "150451",
-            "186024",
-            "409383",
-            "407397",
-            "319114",
-            "317784",
-            "362752",
-            "339195",
-            "267591",
-            "346676"
-          ],
-          "lineup_confirmed": true
-        }
-      }
-    },
-    {
-      "event_id": "la_liga:401882807",
-      "sport": "la_liga",
-      "home": "Villarreal",
-      "away": "Getafe",
-      "start_utc": "2026-11-08T17:30:00+00:00",
-      "context_utc": "2026-11-08T17:15:29.530254+00:00",
-      "status": "NEEDS_THREE_EARLIER_PLAYER_BOXSCORES_PER_TEAM",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "102",
-          "name": "Villarreal",
-          "injury_report": false,
-          "players": {},
-          "starters": [
-            "119620",
-            "337011",
-            "271129",
-            "271904",
-            "318098",
-            "255889",
-            "415438",
-            "307390",
-            "284769",
-            "300002",
-            "294039"
-          ],
-          "lineup_confirmed": true
-        },
-        "away": {
-          "id": "2922",
-          "name": "Getafe",
-          "injury_report": false,
-          "players": {},
-          "starters": [
-            "196339",
-            "181355",
-            "359826",
-            "173247",
-            "168531",
-            "284854",
-            "136673",
-            "228424",
-            "218122",
-            "357147",
-            "356080"
-          ],
-          "lineup_confirmed": true
-        }
-      }
-    },
-    {
-      "event_id": "nfl:401873040",
-      "sport": "nfl",
-      "home": "Indianapolis Colts",
-      "away": "Dallas Cowboys",
-      "start_utc": "2026-11-08T18:00:00+00:00",
-      "context_utc": "2026-11-08T07:24:47.038353+00:00",
-      "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "11",
-          "name": "Indianapolis Colts",
-          "injury_report": true,
-          "players": {
-            "4905664": {
-              "id": "4905664",
-              "name": "A.J. Haulcy",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T20:43Z"
-            },
-            "4682909": {
-              "id": "4682909",
-              "name": "Justin Walley",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T02:55Z"
-            },
-            "4892240": {
-              "id": "4892240",
-              "name": "Jalen Travis",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-06T20:38Z"
-            },
-            "3917142": {
-              "id": "3917142",
-              "name": "Akeem Davis-Gaither",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T19:29Z"
-            },
-            "4360078": {
-              "id": "4360078",
-              "name": "Alec Pierce",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-04T17:54Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "6",
-          "name": "Dallas Cowboys",
-          "injury_report": true,
-          "players": {
-            "2980097": {
-              "id": "2980097",
-              "name": "Jonathan Bullard",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-08T02:22Z"
-            },
-            "4427816": {
-              "id": "4427816",
-              "name": "Marist Liufau",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-08T02:15Z"
-            },
-            "4710067": {
-              "id": "4710067",
-              "name": "Malachi Lawrence",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-07T22:30Z"
-            },
-            "4426506": {
-              "id": "4426506",
-              "name": "Joey Porter Jr.",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-07T00:43Z"
-            },
-            "4362088": {
-              "id": "4362088",
-              "name": "DeMarvion Overshown",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-07T00:32Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "nfl:401873045",
-      "sport": "nfl",
-      "home": "Kansas City Chiefs",
-      "away": "New York Jets",
-      "start_utc": "2026-11-08T18:00:00+00:00",
-      "context_utc": "2026-11-08T10:46:40.726468+00:00",
-      "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "12",
-          "name": "Kansas City Chiefs",
-          "injury_report": true,
-          "players": {
-            "4871063": {
-              "id": "4871063",
-              "name": "Peter Woods",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T02:59Z"
-            },
-            "4372716": {
-              "id": "4372716",
-              "name": "Nikko Remigio",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-07T02:40Z"
-            },
-            "4880124": {
-              "id": "4880124",
-              "name": "Mansoor Delane",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T20:29Z"
-            },
-            "4040432": {
-              "id": "4040432",
-              "name": "L'Jarius Sneed",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-10-31T23:04Z"
-            },
-            "4591008": {
-              "id": "4591008",
-              "name": "Omarr Norman-Lott",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-10-29T01:48Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "20",
-          "name": "New York Jets",
-          "injury_report": true,
-          "players": {
-            "4837388": {
-              "id": "4837388",
-              "name": "VJ Payne",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-08T01:56Z"
-            },
-            "4570470": {
-              "id": "4570470",
-              "name": "Nahshon Wright",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T01:51Z"
-            },
-            "4362094": {
-              "id": "4362094",
-              "name": "Joseph Ossai",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T01:45Z"
-            },
-            "4683815": {
-              "id": "4683815",
-              "name": "Trevin Wallace",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T20:52Z"
-            },
-            "4569618": {
-              "id": "4569618",
-              "name": "Garrett Wilson",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T16:16Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "nfl:401873042",
-      "sport": "nfl",
-      "home": "Miami Dolphins",
-      "away": "Detroit Lions",
-      "start_utc": "2026-11-08T18:00:00+00:00",
-      "context_utc": "2026-11-08T15:15:25.359978+00:00",
-      "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "15",
-          "name": "Miami Dolphins",
-          "injury_report": true,
-          "players": {
-            "4682745": {
-              "id": "4682745",
-              "name": "Jaylen Wright",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-08T12:39Z"
-            },
-            "4259547": {
-              "id": "4259547",
-              "name": "Malik Herring",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-07T03:23Z"
-            },
-            "4685246": {
-              "id": "4685246",
-              "name": "Kaytron Allen",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-07T00:51Z"
-            },
-            "4036660": {
-              "id": "4036660",
-              "name": "Darrell Baker Jr.",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-05T00:35Z"
-            },
-            "4429160": {
-              "id": "4429160",
-              "name": "De'Von Achane",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-09-28T20:10Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "8",
-          "name": "Detroit Lions",
-          "injury_report": true,
-          "players": {
-            "4374302": {
-              "id": "4374302",
-              "name": "Amon-Ra St. Brown",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-08T11:08Z"
-            },
-            "4569465": {
-              "id": "4569465",
-              "name": "Jack Campbell",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-07T22:18Z"
-            },
-            "4361788": {
-              "id": "4361788",
-              "name": "Cade Mays",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T03:55Z"
-            },
-            "4038849": {
-              "id": "4038849",
-              "name": "DJ Wonnum",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T02:18Z"
-            },
-            "3139387": {
-              "id": "3139387",
-              "name": "D.J. Reed",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T02:12Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "nfl:401873039",
-      "sport": "nfl",
-      "home": "New Orleans Saints",
-      "away": "Cleveland Browns",
-      "start_utc": "2026-11-08T18:00:00+00:00",
-      "context_utc": "2026-11-08T17:15:29.413023+00:00",
-      "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "18",
-          "name": "New Orleans Saints",
-          "injury_report": true,
-          "players": {
-            "4361259": {
-              "id": "4361259",
-              "name": "Zach Wilson",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:35Z"
-            },
-            "4682479": {
-              "id": "4682479",
-              "name": "Mason Murphy",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:35Z"
-            },
-            "4775268": {
-              "id": "4775268",
-              "name": "Mike Reid",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:35Z"
-            },
-            "4248047": {
-              "id": "4248047",
-              "name": "John Ridgeway III",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:35Z"
-            },
-            "4566088": {
-              "id": "4566088",
-              "name": "Jaylan Ford",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:35Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "5",
-          "name": "Cleveland Browns",
-          "injury_report": true,
-          "players": {
-            "3122840": {
-              "id": "3122840",
-              "name": "Deshaun Watson",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:38Z"
-            },
-            "4431325": {
-              "id": "4431325",
-              "name": "Taylen Green",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:34Z"
-            },
-            "4242516": {
-              "id": "4242516",
-              "name": "Noah Igbinoghene",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:34Z"
-            },
-            "5150249": {
-              "id": "5150249",
-              "name": "Justin Jefferson",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:34Z"
-            },
-            "4816090": {
-              "id": "4816090",
-              "name": "Parker Brailsford",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:34Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "nfl:401873044",
-      "sport": "nfl",
-      "home": "Philadelphia Eagles",
-      "away": "New York Giants",
-      "start_utc": "2026-11-08T18:00:00+00:00",
-      "context_utc": "2026-11-08T17:15:29.546709+00:00",
-      "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "21",
-          "name": "Philadelphia Eagles",
-          "injury_report": true,
-          "players": {
-            "4428850": {
-              "id": "4428850",
-              "name": "Dontayvion Wicks",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:45Z"
-            },
-            "4241478": {
-              "id": "4241478",
-              "name": "DeVonta Smith",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:45Z"
-            },
-            "3926231": {
-              "id": "3926231",
-              "name": "Britain Covey",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:45Z"
-            },
-            "2971027": {
-              "id": "2971027",
-              "name": "Jonathan Jones",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:45Z"
-            },
-            "4685287": {
-              "id": "4685287",
-              "name": "Jihaad Campbell",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:45Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "19",
-          "name": "New York Giants",
-          "injury_report": true,
-          "players": {
-            "4590292": {
-              "id": "4590292",
-              "name": "Thomas Fidone II",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:57Z"
-            },
-            "4696981": {
-              "id": "4696981",
-              "name": "Cam Skattebo",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:40Z"
-            },
-            "5144942": {
-              "id": "5144942",
-              "name": "CJ Okoye",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:39Z"
-            },
-            "4691043": {
-              "id": "4691043",
-              "name": "Nikko Reed",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:39Z"
-            },
-            "4039243": {
-              "id": "4039243",
-              "name": "Josh Sills",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T16:39Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "nfl:401873043",
-      "sport": "nfl",
-      "home": "Washington Commanders",
-      "away": "Los Angeles Rams",
-      "start_utc": "2026-11-08T18:00:00+00:00",
-      "context_utc": "2026-11-07T10:15:27.859369+00:00",
-      "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "28",
-          "name": "Washington Commanders",
-          "injury_report": true,
-          "players": {
-            "4430560": {
-              "id": "4430560",
-              "name": "Jer'Zhan Newton",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-07T01:37Z"
-            },
-            "4567156": {
-              "id": "4567156",
-              "name": "Treylon Burks",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T21:31Z"
-            },
-            "4361577": {
-              "id": "4361577",
-              "name": "Dyami Brown",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T17:28Z"
-            },
-            "3925354": {
-              "id": "3925354",
-              "name": "Daron Payne",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-04T19:13Z"
-            },
-            "3127586": {
-              "id": "3127586",
-              "name": "Jeremy McNichols",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-04T17:09Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "14",
-          "name": "Los Angeles Rams",
-          "injury_report": true,
-          "players": {
-            "4243003": {
-              "id": "4243003",
-              "name": "Ronnie Rivers",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-07T01:50Z"
-            },
-            "4569382": {
-              "id": "4569382",
-              "name": "Jordan Whittington",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-07T01:46Z"
-            },
-            "4570037": {
-              "id": "4570037",
-              "name": "Terrance Ferguson",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-06T22:29Z"
-            },
-            "3122132": {
-              "id": "3122132",
-              "name": "Myles Garrett",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-06T21:41Z"
-            },
-            "4242557": {
-              "id": "4242557",
-              "name": "Colby Parkinson",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-06T21:35Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "nfl:401873041",
-      "sport": "nfl",
-      "home": "Carolina Panthers",
-      "away": "Denver Broncos",
-      "start_utc": "2026-11-08T18:00:00+00:00",
-      "context_utc": "2026-11-07T15:10:34.025964+00:00",
-      "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "29",
-          "name": "Carolina Panthers",
-          "injury_report": true,
-          "players": {
-            "4256062": {
-              "id": "4256062",
-              "name": "Brady Christensen",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-07T04:05Z"
-            },
-            "4362647": {
-              "id": "4362647",
-              "name": "Damien Lewis",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T04:00Z"
-            },
-            "5151083": {
-              "id": "5151083",
-              "name": "Will Lee III",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T02:20Z"
-            },
-            "4242975": {
-              "id": "4242975",
-              "name": "Jaelan Phillips",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T02:10Z"
-            },
-            "3117253": {
-              "id": "3117253",
-              "name": "Bobby Okereke",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T01:54Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "7",
-          "name": "Denver Broncos",
-          "injury_report": true,
-          "players": {
-            "4429193": {
-              "id": "4429193",
-              "name": "Kris Abrams-Draine",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T03:26Z"
-            },
-            "4066109": {
-              "id": "4066109",
-              "name": "Eyioma Uwazurike",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T01:03Z"
-            },
-            "4039059": {
-              "id": "4039059",
-              "name": "Brandon Jones",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T01:00Z"
-            },
-            "4360853": {
-              "id": "4360853",
-              "name": "Talanoa Hufanga",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-07T00:59Z"
-            },
-            "5216101": {
-              "id": "5216101",
-              "name": "Dondrea Tillman",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-06T21:44Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "nhl:401892674",
-      "sport": "nhl",
-      "home": "Boston Bruins",
-      "away": "Florida Panthers",
-      "start_utc": "2026-11-08T18:00:00+00:00",
-      "context_utc": "2026-11-08T15:15:25.375383+00:00",
-      "status": "CONTEXT_STALE",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "1",
-          "name": "Boston Bruins",
-          "injury_report": true,
-          "players": {
-            "5275337": {
-              "id": "5275337",
-              "name": "James Hagens",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-07T17:30Z"
-            },
-            "5080221": {
-              "id": "5080221",
-              "name": "Matthew Poitras",
-              "availability": "UNCERTAIN",
-              "reported_status": "day-to-day",
-              "reported_utc": "2026-11-06T14:10Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "26",
-          "name": "Florida Panthers",
-          "injury_report": true,
-          "players": {
-            "4697395": {
-              "id": "4697395",
-              "name": "Anton Lundell",
-              "availability": "UNCERTAIN",
-              "reported_status": "day-to-day",
-              "reported_utc": "2026-11-08T13:39Z"
-            },
-            "5103599": {
-              "id": "5103599",
-              "name": "Sandis Vilmanis",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T21:02Z"
-            },
-            "3852": {
-              "id": "3852",
-              "name": "Brad Marchand",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-06T16:34Z"
-            },
-            "3041970": {
-              "id": "3041970",
-              "name": "Aleksander Barkov",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-06T16:30Z"
-            },
-            "4233890": {
-              "id": "4233890",
-              "name": "Jonah Gadjovich",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-09-17T20:53Z"
-            }
-          },
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "bundesliga:401884742",
-      "sport": "bundesliga",
-      "home": "TSG Hoffenheim",
-      "away": "Schalke 04",
-      "start_utc": "2026-11-08T18:30:00+00:00",
-      "context_utc": "2026-11-08T17:15:29.360601+00:00",
-      "status": "MISSING_LINEUP_OR_AVAILABILITY_REPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "7911",
-          "name": "TSG Hoffenheim",
-          "injury_report": false,
-          "players": {},
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "133",
-          "name": "Schalke 04",
-          "injury_report": false,
-          "players": {},
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "serie_a:401875003",
-      "sport": "serie_a",
-      "home": "Fiorentina",
-      "away": "Juventus",
-      "start_utc": "2026-11-08T19:45:00+00:00",
-      "context_utc": "2026-11-08T17:15:29.469867+00:00",
-      "status": "MISSING_LINEUP_OR_AVAILABILITY_REPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "109",
-          "name": "Fiorentina",
-          "injury_report": false,
-          "players": {},
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "111",
-          "name": "Juventus",
-          "injury_report": false,
-          "players": {},
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
-      "event_id": "ligue_1:401876404",
-      "sport": "ligue_1",
-      "home": "Lens",
-      "away": "Marseille",
-      "start_utc": "2026-11-08T19:45:00+00:00",
-      "context_utc": "2026-11-08T17:15:29.353524+00:00",
-      "status": "MISSING_LINEUP_OR_AVAILABILITY_REPORT",
-      "candidate_probability": null,
-      "influences_daily_selection": false,
-      "teams": {
-        "home": {
-          "id": "175",
-          "name": "Lens",
-          "injury_report": false,
-          "players": {},
-          "starters": [],
-          "lineup_confirmed": false
-        },
-        "away": {
-          "id": "176",
-          "name": "Marseille",
-          "injury_report": false,
-          "players": {},
-          "starters": [],
-          "lineup_confirmed": false
-        }
-      }
-    },
-    {
       "event_id": "la_liga:401882816",
       "sport": "la_liga",
       "home": "Atlético Madrid",
       "away": "Barcelona",
       "start_utc": "2026-11-08T20:00:00+00:00",
-      "context_utc": "2026-11-08T15:15:25.429043+00:00",
-      "status": "CONTEXT_STALE",
+      "context_utc": "2026-11-08T19:45:38.398274+00:00",
+      "status": "NEEDS_THREE_EARLIER_PLAYER_BOXSCORES_PER_TEAM",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -1012,16 +33,40 @@
           "name": "Atlético Madrid",
           "injury_report": false,
           "players": {},
-          "starters": [],
-          "lineup_confirmed": false
+          "starters": [
+            "149622",
+            "332613",
+            "166396",
+            "257786",
+            "206474",
+            "323838",
+            "336634",
+            "297373",
+            "140791",
+            "277206",
+            "274197"
+          ],
+          "lineup_confirmed": true
         },
         "away": {
           "id": "83",
           "name": "Barcelona",
           "injury_report": false,
           "players": {},
-          "starters": [],
-          "lineup_confirmed": false
+          "starters": [
+            "297362",
+            "176399",
+            "403575",
+            "368992",
+            "312015",
+            "250465",
+            "376423",
+            "354334",
+            "268782",
+            "231050",
+            "362150"
+          ],
+          "lineup_confirmed": true
         }
       }
     },
@@ -1031,8 +76,8 @@
       "home": "Chicago Bulls",
       "away": "Philadelphia 76ers",
       "start_utc": "2026-11-08T20:30:00+00:00",
-      "context_utc": "2026-11-06T21:05:30.250167+00:00",
-      "status": "CONTEXT_STALE",
+      "context_utc": "2026-11-08T19:45:38.442574+00:00",
+      "status": "COLLECTING_PRE_GAME_TRAINING",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -1041,26 +86,26 @@
           "name": "Chicago Bulls",
           "injury_report": true,
           "players": {
+            "2595516": {
+              "id": "2595516",
+              "name": "Norman Powell",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T18:55Z"
+            },
+            "5105555": {
+              "id": "5105555",
+              "name": "Tobe Awaka",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-07T21:36Z"
+            },
             "4066650": {
               "id": "4066650",
               "name": "Zach Collins",
-              "availability": "UNCERTAIN",
-              "reported_status": "day-to-day",
-              "reported_utc": "2026-11-06T19:19Z"
-            },
-            "4278067": {
-              "id": "4278067",
-              "name": "Nic Claxton",
               "availability": "OUT",
               "reported_status": "out",
-              "reported_utc": "2026-11-06T18:21Z"
-            },
-            "4397189": {
-              "id": "4397189",
-              "name": "Jalen Smith",
-              "availability": "UNCERTAIN",
-              "reported_status": "day-to-day",
-              "reported_utc": "2026-11-05T01:35Z"
+              "reported_utc": "2026-11-07T21:24Z"
             }
           },
           "starters": [],
@@ -1071,12 +116,19 @@
           "name": "Philadelphia 76ers",
           "injury_report": true,
           "players": {
+            "3059318": {
+              "id": "3059318",
+              "name": "Joel Embiid",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-07T23:12Z"
+            },
             "5105637": {
               "id": "5105637",
               "name": "Adem Bona",
-              "availability": "UNCERTAIN",
-              "reported_status": "day-to-day",
-              "reported_utc": "2026-11-05T22:18Z"
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-07T23:07Z"
             },
             "4870562": {
               "id": "4870562",
@@ -1096,6 +148,171 @@
           "starters": [],
           "lineup_confirmed": false
         }
+      },
+      "mode": "INJURY_REPORT",
+      "features": [
+        0.07907033639143732,
+        -0.09370948012232415,
+        0.1419494380030493,
+        -0.1367372265361841,
+        -0.2,
+        0.0,
+        -0.0420271254009843,
+        0.2857142857142858
+      ],
+      "details": {
+        "home": {
+          "prior_games": 11,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.128,
+          "history_event_ids": [
+            "nba:401909926",
+            "nba:401909912",
+            "nba:401909278",
+            "nba:401909886",
+            "nba:401909870",
+            "nba:401909857",
+            "nba:401909848",
+            "nba:401909837",
+            "nba:401908943",
+            "nba:401908942",
+            "nba:401908941"
+          ],
+          "history_latest_start_utc": "2026-11-05T00:30:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T17:15:29.986316+00:00",
+          "uncertain_minutes_share": 0.016,
+          "scoring_form_change": -0.0767122366182148,
+          "unmatched_reported_players": [],
+          "unknown_out_count": 0,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.1579831932773109,
+          "uncertain_scoring_share": 0.0067226890756302525,
+          "player_results_associations": {
+            "2595516": {
+              "played_games": 10,
+              "wins_when_played": 3,
+              "games_without_recorded_minutes": 1,
+              "wins_without_recorded_minutes": 0,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "5105555": {
+              "played_games": 4,
+              "wins_when_played": 0,
+              "games_without_recorded_minutes": 7,
+              "wins_without_recorded_minutes": 3,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "4066650": {
+              "played_games": 6,
+              "wins_when_played": 0,
+              "games_without_recorded_minutes": 5,
+              "wins_without_recorded_minutes": 3,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "2595516",
+              "name": "Norman Powell",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T18:55Z",
+              "average_prior_minutes": 26.8
+            },
+            {
+              "id": "5105555",
+              "name": "Tobe Awaka",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-07T21:36Z",
+              "average_prior_minutes": 4.0
+            },
+            {
+              "id": "4066650",
+              "name": "Zach Collins",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-07T21:24Z",
+              "average_prior_minutes": 5.2
+            }
+          ]
+        },
+        "away": {
+          "prior_games": 11,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.04892966360856269,
+          "history_event_ids": [
+            "nba:401909289",
+            "nba:401909922",
+            "nba:401909912",
+            "nba:401909897",
+            "nba:401909280",
+            "nba:401909884",
+            "nba:401909866",
+            "nba:401909855",
+            "nba:401909093",
+            "nba:401909089",
+            "nba:401898407"
+          ],
+          "history_latest_start_utc": "2026-11-07T00:30:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T00:39:59.613437+00:00",
+          "uncertain_minutes_share": 0.10970948012232415,
+          "scoring_form_change": -0.0346851112172305,
+          "unmatched_reported_players": [
+            "4870562",
+            "4871141"
+          ],
+          "unknown_out_count": 2,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.016033755274261603,
+          "uncertain_scoring_share": 0.14345991561181434,
+          "player_results_associations": {
+            "3059318": {
+              "played_games": 9,
+              "wins_when_played": 7,
+              "games_without_recorded_minutes": 2,
+              "wins_without_recorded_minutes": 1,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "5105637": {
+              "played_games": 9,
+              "wins_when_played": 8,
+              "games_without_recorded_minutes": 2,
+              "wins_without_recorded_minutes": 0,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "3059318",
+              "name": "Joel Embiid",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-07T23:12Z",
+              "average_prior_minutes": 28.7
+            },
+            {
+              "id": "5105637",
+              "name": "Adem Bona",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-07T23:07Z",
+              "average_prior_minutes": 12.8
+            }
+          ]
+        }
+      },
+      "training_events": 0,
+      "base_probability": [
+        0.49106875841728914,
+        0.5089312415827109
+      ],
+      "forward_validation": {
+        "n": 0,
+        "dates": 0,
+        "eligible": false,
+        "market_n": 0,
+        "market_dates": 0
       }
     },
     {
@@ -1105,7 +322,7 @@
       "away": "Vegas Golden Knights",
       "start_utc": "2026-11-08T20:30:00+00:00",
       "context_utc": "2026-11-08T17:15:29.447856+00:00",
-      "status": "COLLECTING_PRE_GAME_TRAINING",
+      "status": "CONTEXT_STALE",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -1162,127 +379,6 @@
           "starters": [],
           "lineup_confirmed": false
         }
-      },
-      "mode": "INJURY_REPORT",
-      "features": [
-        0.045905176907199294,
-        0.0,
-        0.0,
-        0.0,
-        0.1,
-        0.0,
-        0.418766156342684,
-        -0.1428571428571429
-      ],
-      "details": {
-        "home": {
-          "prior_games": 13,
-          "confirmed_lineup": false,
-          "out_minutes_share": 0.045905176907199294,
-          "history_event_ids": [
-            "nhl:401892659",
-            "nhl:401892644",
-            "nhl:401892618",
-            "nhl:401892608",
-            "nhl:401892595",
-            "nhl:401892571",
-            "nhl:401892550",
-            "nhl:401892524",
-            "nhl:401892506",
-            "nhl:401892490",
-            "nhl:401892485",
-            "nhl:401892472",
-            "nhl:401892458"
-          ],
-          "history_latest_start_utc": "2026-11-07T00:00:00+00:00",
-          "history_latest_capture_utc": "2026-11-08T10:46:41.652456+00:00",
-          "uncertain_minutes_share": 0.0,
-          "scoring_form_change": 0.10655953807713936,
-          "unmatched_reported_players": [
-            "3654006",
-            "3069448"
-          ],
-          "unknown_out_count": 2,
-          "unknown_uncertain_count": 0,
-          "out_scoring_share": 0.0,
-          "uncertain_scoring_share": 0.0,
-          "player_results_associations": {
-            "5216882": {
-              "played_games": 8,
-              "wins_when_played": 3,
-              "games_without_recorded_minutes": 5,
-              "wins_without_recorded_minutes": 3,
-              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
-            },
-            "4894355": {
-              "played_games": 5,
-              "wins_when_played": 1,
-              "games_without_recorded_minutes": 8,
-              "wins_without_recorded_minutes": 5,
-              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
-            }
-          },
-          "players": [
-            {
-              "id": "5216882",
-              "name": "Konsta Helenius",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-02T17:29Z",
-              "average_prior_minutes": 10.013333333333332
-            },
-            {
-              "id": "4894355",
-              "name": "Justin Danforth",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-10-29T22:06Z",
-              "average_prior_minutes": 4.665
-            }
-          ]
-        },
-        "away": {
-          "prior_games": 10,
-          "confirmed_lineup": false,
-          "out_minutes_share": 0.0,
-          "history_event_ids": [
-            "nhl:401892649",
-            "nhl:401892639",
-            "nhl:401892611",
-            "nhl:401892593",
-            "nhl:401892572",
-            "nhl:401892558",
-            "nhl:401892549",
-            "nhl:401892532",
-            "nhl:401892516",
-            "nhl:401892499"
-          ],
-          "history_latest_start_utc": "2026-11-06T00:00:00+00:00",
-          "history_latest_capture_utc": "2026-11-07T01:14:58.052815+00:00",
-          "uncertain_minutes_share": 0.0,
-          "scoring_form_change": -0.31220661826554463,
-          "unmatched_reported_players": [
-            "3942638"
-          ],
-          "unknown_out_count": 1,
-          "unknown_uncertain_count": 0,
-          "out_scoring_share": 0.0,
-          "uncertain_scoring_share": 0.0,
-          "player_results_associations": {},
-          "players": []
-        }
-      },
-      "training_events": 0,
-      "base_probability": [
-        0.5170370485559533,
-        0.48296295144404666
-      ],
-      "forward_validation": {
-        "n": 0,
-        "dates": 0,
-        "eligible": false,
-        "market_n": 0,
-        "market_dates": 0
       }
     },
     {
@@ -1291,7 +387,7 @@
       "home": "Los Angeles Chargers",
       "away": "Houston Texans",
       "start_utc": "2026-11-08T21:05:00+00:00",
-      "context_utc": "2026-11-07T16:30:23.380088+00:00",
+      "context_utc": "2026-11-08T19:45:38.378652+00:00",
       "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
       "candidate_probability": null,
       "influences_daily_selection": false,
@@ -1306,7 +402,14 @@
               "name": "Denzel Perryman",
               "availability": "OUT",
               "reported_status": "injured reserve",
-              "reported_utc": "2026-11-07T03:42Z"
+              "reported_utc": "2026-11-08T19:05Z"
+            },
+            "3123076": {
+              "id": "3123076",
+              "name": "David Njoku",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-11-08T19:01Z"
             },
             "4360745": {
               "id": "4360745",
@@ -1328,13 +431,6 @@
               "availability": "UNCERTAIN",
               "reported_status": "doubtful",
               "reported_utc": "2026-11-07T01:08Z"
-            },
-            "3123076": {
-              "id": "3123076",
-              "name": "David Njoku",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-06T22:46Z"
             }
           },
           "starters": [],
@@ -1345,40 +441,40 @@
           "name": "Houston Texans",
           "injury_report": true,
           "players": {
-            "4243956": {
-              "id": "4243956",
-              "name": "Reed Blankenship",
+            "4880873": {
+              "id": "4880873",
+              "name": "Febechi Nwaiwu",
               "availability": "OUT",
               "reported_status": "out",
-              "reported_utc": "2026-11-07T01:09Z"
+              "reported_utc": "2026-11-08T19:37Z"
+            },
+            "3121595": {
+              "id": "3121595",
+              "name": "Braden Smith",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T19:37Z"
+            },
+            "4426496": {
+              "id": "4426496",
+              "name": "Cade Stover",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T19:37Z"
+            },
+            "4428656": {
+              "id": "4428656",
+              "name": "Nate Thomas",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T19:37Z"
             },
             "4035538": {
               "id": "4035538",
               "name": "David Montgomery",
               "availability": "OUT",
               "reported_status": "out",
-              "reported_utc": "2026-11-04T20:52Z"
-            },
-            "4586312": {
-              "id": "4586312",
-              "name": "Jaylin Noel",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-10-28T22:30Z"
-            },
-            "4241250": {
-              "id": "4241250",
-              "name": "Jake Hummel",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-10-21T00:04Z"
-            },
-            "4594277": {
-              "id": "4594277",
-              "name": "Jaylin Smith",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-10-07T00:29Z"
+              "reported_utc": "2026-11-08T19:37Z"
             }
           },
           "starters": [],
@@ -1392,7 +488,7 @@
       "home": "New England Patriots",
       "away": "Green Bay Packers",
       "start_utc": "2026-11-08T21:25:00+00:00",
-      "context_utc": "2026-11-07T19:38:02.821098+00:00",
+      "context_utc": "2026-11-08T19:45:38.453388+00:00",
       "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
       "candidate_probability": null,
       "influences_daily_selection": false,
@@ -1402,12 +498,33 @@
           "name": "New England Patriots",
           "injury_report": true,
           "players": {
+            "4368113": {
+              "id": "4368113",
+              "name": "Charles Woods",
+              "availability": "UNCERTAIN",
+              "reported_status": "questionable",
+              "reported_utc": "2026-11-08T19:24Z"
+            },
+            "3046439": {
+              "id": "3046439",
+              "name": "Hunter Henry",
+              "availability": "UNCERTAIN",
+              "reported_status": "questionable",
+              "reported_utc": "2026-11-08T14:22Z"
+            },
+            "15718": {
+              "id": "15718",
+              "name": "Greg Van Roten",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-11-08T03:43Z"
+            },
             "2991662": {
               "id": "2991662",
               "name": "Mack Hollins",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-06T21:08Z"
+              "availability": "UNCERTAIN",
+              "reported_status": "questionable",
+              "reported_utc": "2026-11-07T21:23Z"
             },
             "4432710": {
               "id": "4432710",
@@ -1415,27 +532,6 @@
               "availability": "OUT",
               "reported_status": "out",
               "reported_utc": "2026-11-06T18:30Z"
-            },
-            "3046439": {
-              "id": "3046439",
-              "name": "Hunter Henry",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-06T18:25Z"
-            },
-            "4047646": {
-              "id": "4047646",
-              "name": "A.J. Brown",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T17:09Z"
-            },
-            "4047941": {
-              "id": "4047941",
-              "name": "Brenden Schooler",
-              "availability": "UNCERTAIN",
-              "reported_status": "questionable",
-              "reported_utc": "2026-11-05T21:55Z"
             }
           },
           "starters": [],
@@ -1446,6 +542,13 @@
           "name": "Green Bay Packers",
           "injury_report": true,
           "players": {
+            "3149687": {
+              "id": "3149687",
+              "name": "Chris Brooks",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-11-08T01:36Z"
+            },
             "4361904": {
               "id": "4361904",
               "name": "Travis Glover",
@@ -1473,13 +576,6 @@
               "availability": "OUT",
               "reported_status": "out",
               "reported_utc": "2026-11-07T01:20Z"
-            },
-            "4360086": {
-              "id": "4360086",
-              "name": "Josh Whyle",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T01:13Z"
             }
           },
           "starters": [],
@@ -1493,7 +589,7 @@
       "home": "San Francisco 49ers",
       "away": "Las Vegas Raiders",
       "start_utc": "2026-11-08T21:25:00+00:00",
-      "context_utc": "2026-11-07T20:55:04.292151+00:00",
+      "context_utc": "2026-11-08T19:45:38.605441+00:00",
       "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
       "candidate_probability": null,
       "influences_daily_selection": false,
@@ -1503,6 +599,27 @@
           "name": "San Francisco 49ers",
           "injury_report": true,
           "players": {
+            "16737": {
+              "id": "16737",
+              "name": "Mike Evans",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T13:26Z"
+            },
+            "4240542": {
+              "id": "4240542",
+              "name": "Nate Hobbs",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-11-08T01:27Z"
+            },
+            "3895856": {
+              "id": "3895856",
+              "name": "Christian Kirk",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-11-07T21:50Z"
+            },
             "4360438": {
               "id": "4360438",
               "name": "Brandon Aiyuk",
@@ -1510,33 +627,12 @@
               "reported_status": "out",
               "reported_utc": "2026-11-07T16:58Z"
             },
-            "4240542": {
-              "id": "4240542",
-              "name": "Nate Hobbs",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-07T02:33Z"
-            },
-            "3043116": {
-              "id": "3043116",
-              "name": "Demarcus Robinson",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-06T23:54Z"
-            },
-            "16737": {
-              "id": "16737",
-              "name": "Mike Evans",
+            "3126486": {
+              "id": "3126486",
+              "name": "Deebo Samuel Sr.",
               "availability": "OUT",
               "reported_status": "out",
-              "reported_utc": "2026-11-06T22:05Z"
-            },
-            "3895856": {
-              "id": "3895856",
-              "name": "Christian Kirk",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T22:02Z"
+              "reported_utc": "2026-11-06T21:06Z"
             }
           },
           "starters": [],
@@ -1695,8 +791,8 @@
       "home": "Detroit Pistons",
       "away": "Los Angeles Lakers",
       "start_utc": "2026-11-08T23:00:00+00:00",
-      "context_utc": "2026-11-06T23:12:18.267462+00:00",
-      "status": "CONTEXT_STALE",
+      "context_utc": "2026-11-08T19:45:38.548633+00:00",
+      "status": "COLLECTING_PRE_GAME_TRAINING",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -1705,19 +801,19 @@
           "name": "Detroit Pistons",
           "injury_report": true,
           "players": {
-            "4395702": {
-              "id": "4395702",
-              "name": "Isaiah Joe",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-03T21:18Z"
-            },
             "4433621": {
               "id": "4433621",
               "name": "Jalen Duren",
               "availability": "OUT",
               "reported_status": "out",
-              "reported_utc": "2026-10-25T14:56Z"
+              "reported_utc": "2026-11-08T16:05Z"
+            },
+            "4395702": {
+              "id": "4395702",
+              "name": "Isaiah Joe",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-07T21:59Z"
             }
           },
           "starters": [],
@@ -1727,10 +823,149 @@
           "id": "13",
           "name": "Los Angeles Lakers",
           "injury_report": true,
-          "players": {},
+          "players": {
+            "3945274": {
+              "id": "3945274",
+              "name": "Luka Doncic",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T18:19Z"
+            }
+          },
           "starters": [],
           "lineup_confirmed": false
         }
+      },
+      "mode": "INJURY_REPORT",
+      "features": [
+        -0.07613544256759285,
+        0.0,
+        -0.20228913075792365,
+        0.0,
+        0.0,
+        0.0,
+        0.06631730639019362,
+        0.30357142857142866
+      ],
+      "details": {
+        "home": {
+          "prior_games": 10,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.060391503540191585,
+          "history_event_ids": [
+            "nba:401909922",
+            "nba:401909908",
+            "nba:401909279",
+            "nba:401909883",
+            "nba:401909878",
+            "nba:401909866",
+            "nba:401909847",
+            "nba:401909088",
+            "nba:401908946",
+            "nba:401914125"
+          ],
+          "history_latest_start_utc": "2026-11-05T00:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T17:15:29.811593+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": 0.010065215394507332,
+          "unmatched_reported_players": [],
+          "unknown_out_count": 0,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.09424083769633508,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "4433621": {
+              "played_games": 4,
+              "wins_when_played": 4,
+              "games_without_recorded_minutes": 6,
+              "wins_without_recorded_minutes": 4,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "4395702": {
+              "played_games": 5,
+              "wins_when_played": 5,
+              "games_without_recorded_minutes": 5,
+              "wins_without_recorded_minutes": 3,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "4433621",
+              "name": "Jalen Duren",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T16:05Z",
+              "average_prior_minutes": 7.3
+            },
+            {
+              "id": "4395702",
+              "name": "Isaiah Joe",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-07T21:59Z",
+              "average_prior_minutes": 7.2
+            }
+          ]
+        },
+        "away": {
+          "prior_games": 11,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.13652694610778443,
+          "history_event_ids": [
+            "nba:401909294",
+            "nba:401909934",
+            "nba:401909921",
+            "nba:401909906",
+            "nba:401909285",
+            "nba:401909892",
+            "nba:401909880",
+            "nba:401909861",
+            "nba:401909851",
+            "nba:401909092",
+            "nba:401898719"
+          ],
+          "history_latest_start_utc": "2026-11-07T03:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T00:39:59.491675+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": -0.05625209099568629,
+          "unmatched_reported_players": [],
+          "unknown_out_count": 0,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.2965299684542587,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "3945274": {
+              "played_games": 10,
+              "wins_when_played": 7,
+              "games_without_recorded_minutes": 1,
+              "wins_without_recorded_minutes": 1,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "3945274",
+              "name": "Luka Doncic",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T18:19Z",
+              "average_prior_minutes": 34.2
+            }
+          ]
+        }
+      },
+      "training_events": 0,
+      "base_probability": [
+        0.6552245257027064,
+        0.3447754742972936
+      ],
+      "forward_validation": {
+        "n": 0,
+        "dates": 0,
+        "eligible": false,
+        "market_n": 0,
+        "market_dates": 0
       }
     },
     {
@@ -1740,7 +975,7 @@
       "away": "Tampa Bay Lightning",
       "start_utc": "2026-11-08T23:00:00+00:00",
       "context_utc": "2026-11-08T17:15:29.601468+00:00",
-      "status": "COLLECTING_PRE_GAME_TRAINING",
+      "status": "CONTEXT_STALE",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -1797,111 +1032,6 @@
           "starters": [],
           "lineup_confirmed": false
         }
-      },
-      "mode": "INJURY_REPORT",
-      "features": [
-        0.036079739670212475,
-        0.0,
-        0.0,
-        0.0,
-        0.19999999999999998,
-        0.0,
-        0.3568365457207445,
-        0.0
-      ],
-      "details": {
-        "home": {
-          "prior_games": 11,
-          "confirmed_lineup": false,
-          "out_minutes_share": 0.036079739670212475,
-          "history_event_ids": [
-            "nhl:401892656",
-            "nhl:401892634",
-            "nhl:401892624",
-            "nhl:401892612",
-            "nhl:401892601",
-            "nhl:401892591",
-            "nhl:401891807",
-            "nhl:401892559",
-            "nhl:401892544",
-            "nhl:401892520",
-            "nhl:401892512"
-          ],
-          "history_latest_start_utc": "2026-11-06T00:00:00+00:00",
-          "history_latest_capture_utc": "2026-11-08T17:15:29.644861+00:00",
-          "uncertain_minutes_share": 0.0,
-          "scoring_form_change": 0.2503755398971339,
-          "unmatched_reported_players": [
-            "3042016",
-            "2562622",
-            "5828"
-          ],
-          "unknown_out_count": 3,
-          "unknown_uncertain_count": 0,
-          "out_scoring_share": 0.0,
-          "uncertain_scoring_share": 0.0,
-          "player_results_associations": {
-            "5080223": {
-              "played_games": 6,
-              "wins_when_played": 1,
-              "games_without_recorded_minutes": 5,
-              "wins_without_recorded_minutes": 1,
-              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
-            }
-          },
-          "players": [
-            {
-              "id": "5080223",
-              "name": "Elias Salomonsson",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-08T00:05Z",
-              "average_prior_minutes": 10.995000000000001
-            }
-          ]
-        },
-        "away": {
-          "prior_games": 10,
-          "confirmed_lineup": false,
-          "out_minutes_share": 0.0,
-          "history_event_ids": [
-            "nhl:401892650",
-            "nhl:401892635",
-            "nhl:401892616",
-            "nhl:401892601",
-            "nhl:401892575",
-            "nhl:401892565",
-            "nhl:401892549",
-            "nhl:401892521",
-            "nhl:401892509",
-            "nhl:401892479"
-          ],
-          "history_latest_start_utc": "2026-11-06T00:00:00+00:00",
-          "history_latest_capture_utc": "2026-11-08T15:15:25.490575+00:00",
-          "uncertain_minutes_share": 0.0,
-          "scoring_form_change": -0.10646100582361062,
-          "unmatched_reported_players": [
-            "3094261"
-          ],
-          "unknown_out_count": 1,
-          "unknown_uncertain_count": 0,
-          "out_scoring_share": 0.0,
-          "uncertain_scoring_share": 0.0,
-          "player_results_associations": {},
-          "players": []
-        }
-      },
-      "training_events": 0,
-      "base_probability": [
-        0.4122626219571741,
-        0.5877373780428259
-      ],
-      "forward_validation": {
-        "n": 0,
-        "dates": 0,
-        "eligible": false,
-        "market_n": 0,
-        "market_dates": 0
       }
     },
     {
@@ -1910,8 +1040,8 @@
       "home": "Minnesota Timberwolves",
       "away": "Utah Jazz",
       "start_utc": "2026-11-09T00:00:00+00:00",
-      "context_utc": "2026-11-07T01:14:57.515684+00:00",
-      "status": "CONTEXT_STALE",
+      "context_utc": "2026-11-08T19:45:38.682499+00:00",
+      "status": "COLLECTING_PRE_GAME_TRAINING",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -1920,13 +1050,6 @@
           "name": "Minnesota Timberwolves",
           "injury_report": true,
           "players": {
-            "4432847": {
-              "id": "4432847",
-              "name": "Terrence Shannon Jr.",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T18:06Z"
-            },
             "4594268": {
               "id": "4594268",
               "name": "Anthony Edwards",
@@ -1950,6 +1073,20 @@
           "name": "Utah Jazz",
           "injury_report": true,
           "players": {
+            "4433627": {
+              "id": "4433627",
+              "name": "Keyonte George",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-08T16:20Z"
+            },
+            "4066336": {
+              "id": "4066336",
+              "name": "Lauri Markkanen",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-07T23:14Z"
+            },
             "3102530": {
               "id": "3102530",
               "name": "Jusuf Nurkic",
@@ -1963,18 +1100,163 @@
               "availability": "OUT",
               "reported_status": "out",
               "reported_utc": "2026-10-27T19:25Z"
-            },
-            "4433268": {
-              "id": "4433268",
-              "name": "Trey Alexander",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-10-24T23:18Z"
             }
           },
           "starters": [],
           "lineup_confirmed": false
         }
+      },
+      "mode": "INJURY_REPORT",
+      "features": [
+        0.015111790932494075,
+        -0.24019607843137256,
+        0.05273626484630026,
+        -0.3404255319148936,
+        0.0,
+        0.0,
+        0.1062692812920889,
+        0.0
+      ],
+      "details": {
+        "home": {
+          "prior_games": 13,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.06617388243576205,
+          "history_event_ids": [
+            "nba:401909293",
+            "nba:401909930",
+            "nba:401909915",
+            "nba:401909901",
+            "nba:401909284",
+            "nba:401909888",
+            "nba:401909869",
+            "nba:401909864",
+            "nba:401909845",
+            "nba:401909091",
+            "nba:401908943",
+            "nba:401914125",
+            "nba:401914124"
+          ],
+          "history_latest_start_utc": "2026-11-07T01:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T17:15:29.811593+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": 0.0736430189914059,
+          "unmatched_reported_players": [
+            "3934673"
+          ],
+          "unknown_out_count": 1,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.1285919540229885,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "4594268": {
+              "played_games": 6,
+              "wins_when_played": 4,
+              "games_without_recorded_minutes": 7,
+              "wins_without_recorded_minutes": 4,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "4594268",
+              "name": "Anthony Edwards",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-10-29T18:33Z",
+              "average_prior_minutes": 18.8
+            }
+          ]
+        },
+        "away": {
+          "prior_games": 10,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.05106209150326798,
+          "history_event_ids": [
+            "nba:401909290",
+            "nba:401909928",
+            "nba:401909917",
+            "nba:401909896",
+            "nba:401909890",
+            "nba:401909875",
+            "nba:401909861",
+            "nba:401909849",
+            "nba:401909838",
+            "nba:401908948"
+          ],
+          "history_latest_start_utc": "2026-11-07T01:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T00:39:59.513458+00:00",
+          "uncertain_minutes_share": 0.24019607843137256,
+          "scoring_form_change": -0.032626262300682995,
+          "unmatched_reported_players": [
+            "3102530"
+          ],
+          "unknown_out_count": 1,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.07585568917668825,
+          "uncertain_scoring_share": 0.3404255319148936,
+          "player_results_associations": {
+            "4433627": {
+              "played_games": 10,
+              "wins_when_played": 2,
+              "games_without_recorded_minutes": 0,
+              "wins_without_recorded_minutes": 0,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "4066336": {
+              "played_games": 9,
+              "wins_when_played": 2,
+              "games_without_recorded_minutes": 1,
+              "wins_without_recorded_minutes": 0,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "4277961": {
+              "played_games": 5,
+              "wins_when_played": 2,
+              "games_without_recorded_minutes": 5,
+              "wins_without_recorded_minutes": 0,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "4433627",
+              "name": "Keyonte George",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-08T16:20Z",
+              "average_prior_minutes": 31.4
+            },
+            {
+              "id": "4066336",
+              "name": "Lauri Markkanen",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-07T23:14Z",
+              "average_prior_minutes": 27.4
+            },
+            {
+              "id": "4277961",
+              "name": "Jaren Jackson Jr.",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-10-27T19:25Z",
+              "average_prior_minutes": 12.5
+            }
+          ]
+        }
+      },
+      "training_events": 0,
+      "base_probability": [
+        0.7258369243324785,
+        0.2741630756675215
+      ],
+      "forward_validation": {
+        "n": 0,
+        "dates": 0,
+        "eligible": false,
+        "market_n": 0,
+        "market_dates": 0
       }
     },
     {
@@ -1983,8 +1265,8 @@
       "home": "Toronto Maple Leafs",
       "away": "New Jersey Devils",
       "start_utc": "2026-11-09T00:00:00+00:00",
-      "context_utc": "2026-11-07T02:50:51.664229+00:00",
-      "status": "CONTEXT_STALE",
+      "context_utc": "2026-11-08T19:45:38.396467+00:00",
+      "status": "COLLECTING_PRE_GAME_TRAINING",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -1993,12 +1275,12 @@
           "name": "Toronto Maple Leafs",
           "injury_report": true,
           "players": {
-            "5160": {
-              "id": "5160",
-              "name": "John Tavares",
-              "availability": "OUT",
-              "reported_status": "injured reserve",
-              "reported_utc": "2026-11-04T15:21Z"
+            "2976833": {
+              "id": "2976833",
+              "name": "Morgan Rielly",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-08T01:27Z"
             },
             "4587996": {
               "id": "4587996",
@@ -2048,6 +1330,171 @@
           "starters": [],
           "lineup_confirmed": false
         }
+      },
+      "mode": "INJURY_REPORT",
+      "features": [
+        0.06135064957142131,
+        0.0650311030360773,
+        0.15789473684210525,
+        0.0,
+        0.1,
+        0.0,
+        0.04270895906788463,
+        0.2857142857142857
+      ],
+      "details": {
+        "home": {
+          "prior_games": 11,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.06704186031053183,
+          "history_event_ids": [
+            "nhl:401892633",
+            "nhl:401892621",
+            "nhl:401892599",
+            "nhl:401892583",
+            "nhl:401892574",
+            "nhl:401892553",
+            "nhl:401892543",
+            "nhl:401892537",
+            "nhl:401892523",
+            "nhl:401892506",
+            "nhl:401892431"
+          ],
+          "history_latest_start_utc": "2026-11-04T00:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T19:45:39.064700+00:00",
+          "uncertain_minutes_share": 0.0650311030360773,
+          "scoring_form_change": 0.073300809903736,
+          "unmatched_reported_players": [
+            "3042110"
+          ],
+          "unknown_out_count": 1,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.15789473684210525,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "2976833": {
+              "played_games": 11,
+              "wins_when_played": 6,
+              "games_without_recorded_minutes": 0,
+              "wins_without_recorded_minutes": 0,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "4587996": {
+              "played_games": 8,
+              "wins_when_played": 5,
+              "games_without_recorded_minutes": 3,
+              "wins_without_recorded_minutes": 1,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "4781550": {
+              "played_games": 4,
+              "wins_when_played": 2,
+              "games_without_recorded_minutes": 7,
+              "wins_without_recorded_minutes": 4,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "4419778": {
+              "played_games": 1,
+              "wins_when_played": 1,
+              "games_without_recorded_minutes": 10,
+              "wins_without_recorded_minutes": 5,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "2976833",
+              "name": "Morgan Rielly",
+              "availability": "UNCERTAIN",
+              "reported_status": "day-to-day",
+              "reported_utc": "2026-11-08T01:27Z",
+              "average_prior_minutes": 19.566666666666666
+            },
+            {
+              "id": "4587996",
+              "name": "Kirill Marchenko",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-10-29T17:28Z",
+              "average_prior_minutes": 13.15
+            },
+            {
+              "id": "4781550",
+              "name": "Nick Blankenburg",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-10-23T15:29Z",
+              "average_prior_minutes": 5.098333333333334
+            },
+            {
+              "id": "4419778",
+              "name": "Marshall Rifai",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-10-23T02:22Z",
+              "average_prior_minutes": 1.9233333333333333
+            }
+          ]
+        },
+        "away": {
+          "prior_games": 12,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.005691210739110518,
+          "history_event_ids": [
+            "nhl:401892651",
+            "nhl:401892636",
+            "nhl:401892611",
+            "nhl:401892598",
+            "nhl:401892590",
+            "nhl:401892567",
+            "nhl:401892555",
+            "nhl:401892540",
+            "nhl:401892519",
+            "nhl:401891818",
+            "nhl:401879647",
+            "nhl:401879644"
+          ],
+          "history_latest_start_utc": "2026-11-06T00:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T15:15:25.476427+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": 0.030591850835851364,
+          "unmatched_reported_players": [],
+          "unknown_out_count": 0,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.0,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "5080212": {
+              "played_games": 1,
+              "wins_when_played": 1,
+              "games_without_recorded_minutes": 11,
+              "wins_without_recorded_minutes": 8,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "5080212",
+              "name": "Seamus Casey",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-10-02T17:31Z",
+              "average_prior_minutes": 1.905
+            }
+          ]
+        }
+      },
+      "training_events": 0,
+      "base_probability": [
+        0.4936752145667849,
+        0.5063247854332151
+      ],
+      "forward_validation": {
+        "n": 0,
+        "dates": 0,
+        "eligible": false,
+        "market_n": 0,
+        "market_dates": 0
       }
     },
     {
@@ -2056,8 +1503,8 @@
       "home": "Calgary Flames",
       "away": "Philadelphia Flyers",
       "start_utc": "2026-11-09T00:00:00+00:00",
-      "context_utc": "2026-11-07T07:48:10.660061+00:00",
-      "status": "CONTEXT_STALE",
+      "context_utc": "2026-11-08T19:45:38.540182+00:00",
+      "status": "COLLECTING_PRE_GAME_TRAINING",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -2066,12 +1513,19 @@
           "name": "Calgary Flames",
           "injury_report": true,
           "players": {
+            "4874733": {
+              "id": "4874733",
+              "name": "Brennan Othmann",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T18:04Z"
+            },
             "4378686": {
               "id": "4378686",
               "name": "Kevin Bahl",
               "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-07T00:54Z"
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-11-08T16:17Z"
             },
             "2562606": {
               "id": "2562606",
@@ -2079,13 +1533,6 @@
               "availability": "OUT",
               "reported_status": "injured reserve",
               "reported_utc": "2026-11-06T16:42Z"
-            },
-            "4874733": {
-              "id": "4874733",
-              "name": "Brennan Othmann",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T16:39Z"
             },
             "4697407": {
               "id": "4697407",
@@ -2128,6 +1575,143 @@
           "starters": [],
           "lineup_confirmed": false
         }
+      },
+      "mode": "INJURY_REPORT",
+      "features": [
+        0.0839390325184284,
+        0.0,
+        0.0,
+        0.0,
+        0.19999999999999998,
+        0.0,
+        0.10736694296626537,
+        -0.14880952380952384
+      ],
+      "details": {
+        "home": {
+          "prior_games": 11,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.08883056803522975,
+          "history_event_ids": [
+            "nhl:401892661",
+            "nhl:401892647",
+            "nhl:401892632",
+            "nhl:401892623",
+            "nhl:401892613",
+            "nhl:401892597",
+            "nhl:401892583",
+            "nhl:401892576",
+            "nhl:401892560",
+            "nhl:401892534",
+            "nhl:401892516"
+          ],
+          "history_latest_start_utc": "2026-11-07T01:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T10:46:41.471378+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": -0.042725812587176226,
+          "unmatched_reported_players": [
+            "2562606",
+            "4697407",
+            "5149191"
+          ],
+          "unknown_out_count": 3,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.0,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "4874733": {
+              "played_games": 5,
+              "wins_when_played": 4,
+              "games_without_recorded_minutes": 6,
+              "wins_without_recorded_minutes": 2,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "4378686": {
+              "played_games": 10,
+              "wins_when_played": 6,
+              "games_without_recorded_minutes": 1,
+              "wins_without_recorded_minutes": 0,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "4874733",
+              "name": "Brennan Othmann",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-08T18:04Z",
+              "average_prior_minutes": 4.55
+            },
+            {
+              "id": "4378686",
+              "name": "Kevin Bahl",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-11-08T16:17Z",
+              "average_prior_minutes": 22.076666666666664
+            }
+          ]
+        },
+        "away": {
+          "prior_games": 10,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.00489153551680136,
+          "history_event_ids": [
+            "nhl:401892653",
+            "nhl:401892638",
+            "nhl:401892626",
+            "nhl:401892596",
+            "nhl:401892585",
+            "nhl:401892566",
+            "nhl:401892550",
+            "nhl:401892536",
+            "nhl:401892526",
+            "nhl:401892492"
+          ],
+          "history_latest_start_utc": "2026-11-06T00:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T02:43:54.912576+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": -0.1500927555534416,
+          "unmatched_reported_players": [
+            "5188490"
+          ],
+          "unknown_out_count": 1,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.0,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "3041999": {
+              "played_games": 1,
+              "wins_when_played": 0,
+              "games_without_recorded_minutes": 9,
+              "wins_without_recorded_minutes": 4,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "3041999",
+              "name": "Rasmus Ristolainen",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-10-27T14:26Z",
+              "average_prior_minutes": 1.4566666666666666
+            }
+          ]
+        }
+      },
+      "training_events": 0,
+      "base_probability": [
+        0.4879762461277088,
+        0.5120237538722912
+      ],
+      "forward_validation": {
+        "n": 0,
+        "dates": 0,
+        "eligible": false,
+        "market_n": 0,
+        "market_dates": 0
       }
     },
     {
@@ -2254,8 +1838,8 @@
       "home": "Anaheim Ducks",
       "away": "Pittsburgh Penguins",
       "start_utc": "2026-11-09T01:00:00+00:00",
-      "context_utc": "2026-11-07T10:15:27.867356+00:00",
-      "status": "CONTEXT_STALE",
+      "context_utc": "2026-11-08T19:45:38.511838+00:00",
+      "status": "COLLECTING_PRE_GAME_TRAINING",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -2333,6 +1917,161 @@
           "starters": [],
           "lineup_confirmed": false
         }
+      },
+      "mode": "INJURY_REPORT",
+      "features": [
+        -0.006289035931656223,
+        0.0,
+        0.05642633228840126,
+        0.0,
+        0.0,
+        0.0,
+        0.33392284763411606,
+        -0.14880952380952378
+      ],
+      "details": {
+        "home": {
+          "prior_games": 13,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.0388345730973641,
+          "history_event_ids": [
+            "nhl:401892661",
+            "nhl:401892657",
+            "nhl:401892643",
+            "nhl:401892628",
+            "nhl:401892608",
+            "nhl:401892594",
+            "nhl:401892566",
+            "nhl:401892555",
+            "nhl:401892541",
+            "nhl:401892535",
+            "nhl:401892518",
+            "nhl:401879371",
+            "nhl:401879369"
+          ],
+          "history_latest_start_utc": "2026-11-07T01:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T19:45:39.070735+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": 0.3883774698283049,
+          "unmatched_reported_players": [
+            "3942905",
+            "5188523"
+          ],
+          "unknown_out_count": 2,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.09090909090909091,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "3648015": {
+              "played_games": 8,
+              "wins_when_played": 2,
+              "games_without_recorded_minutes": 5,
+              "wins_without_recorded_minutes": 3,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "4233668": {
+              "played_games": 2,
+              "wins_when_played": 0,
+              "games_without_recorded_minutes": 11,
+              "wins_without_recorded_minutes": 5,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "3648015",
+              "name": "A.J. Greer",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-11-02T18:46Z",
+              "average_prior_minutes": 10.036666666666667
+            },
+            {
+              "id": "4233668",
+              "name": "Ryan Poehling",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-10-13T17:19Z",
+              "average_prior_minutes": 3.25
+            }
+          ]
+        },
+        "away": {
+          "prior_games": 11,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.04512360902902032,
+          "history_event_ids": [
+            "nhl:401892654",
+            "nhl:401892639",
+            "nhl:401892620",
+            "nhl:401892602",
+            "nhl:401892570",
+            "nhl:401892556",
+            "nhl:401892538",
+            "nhl:401892532",
+            "nhl:401892517",
+            "nhl:401892496",
+            "nhl:401892475"
+          ],
+          "history_latest_start_utc": "2026-11-06T00:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T17:15:29.841197+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": 0.05445462219418884,
+          "unmatched_reported_players": [
+            "3025524",
+            "3042122"
+          ],
+          "unknown_out_count": 2,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.034482758620689655,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "5075840": {
+              "played_games": 5,
+              "wins_when_played": 3,
+              "games_without_recorded_minutes": 6,
+              "wins_without_recorded_minutes": 0,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            },
+            "2591155": {
+              "played_games": 5,
+              "wins_when_played": 1,
+              "games_without_recorded_minutes": 6,
+              "wins_without_recorded_minutes": 2,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "5075840",
+              "name": "Elmer Soderblom",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-11-02T15:52Z",
+              "average_prior_minutes": 5.588333333333333
+            },
+            {
+              "id": "2591155",
+              "name": "Bryan Rust",
+              "availability": "OUT",
+              "reported_status": "injured reserve",
+              "reported_utc": "2026-10-22T15:54Z",
+              "average_prior_minutes": 8.408333333333335
+            }
+          ]
+        }
+      },
+      "training_events": 0,
+      "base_probability": [
+        0.4855914902448238,
+        0.5144085097551763
+      ],
+      "forward_validation": {
+        "n": 0,
+        "dates": 0,
+        "eligible": false,
+        "market_n": 0,
+        "market_dates": 0
       }
     },
     {
@@ -3176,7 +2915,7 @@
       "away": "Denver Nuggets",
       "start_utc": "2026-11-10T01:30:00+00:00",
       "context_utc": "2026-11-08T17:15:29.333018+00:00",
-      "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
+      "status": "CONTEXT_STALE",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -3219,125 +2958,6 @@
           "starters": [],
           "lineup_confirmed": false
         }
-      },
-      "mode": "INJURY_REPORT",
-      "features": [
-        0.029323835628146264,
-        0.0,
-        0.0019167703036049241,
-        0.0,
-        0.0,
-        0.0,
-        -0.031107713235639434,
-        0.40773809523809523
-      ],
-      "details": {
-        "home": {
-          "prior_games": 10,
-          "confirmed_lineup": false,
-          "out_minutes_share": 0.04331528529779259,
-          "history_event_ids": [
-            "nba:401909930",
-            "nba:401909916",
-            "nba:401909902",
-            "nba:401909283",
-            "nba:401909887",
-            "nba:401909874",
-            "nba:401909856",
-            "nba:401909096",
-            "nba:401909840",
-            "nba:401908622"
-          ],
-          "history_latest_start_utc": "2026-11-05T01:30:00+00:00",
-          "history_latest_capture_utc": "2026-11-08T15:15:25.831420+00:00",
-          "uncertain_minutes_share": 0.0,
-          "scoring_form_change": -0.02014500778020678,
-          "unmatched_reported_players": [],
-          "unknown_out_count": 0,
-          "unknown_uncertain_count": 0,
-          "out_scoring_share": 0.021240441801189464,
-          "uncertain_scoring_share": 0.0,
-          "player_results_associations": {
-            "3102529": {
-              "played_games": 7,
-              "wins_when_played": 6,
-              "games_without_recorded_minutes": 3,
-              "wins_without_recorded_minutes": 2,
-              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
-            },
-            "2991235": {
-              "played_games": 1,
-              "wins_when_played": 1,
-              "games_without_recorded_minutes": 9,
-              "wins_without_recorded_minutes": 7,
-              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
-            }
-          },
-          "players": [
-            {
-              "id": "3102529",
-              "name": "Clint Capela",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-06T20:32Z",
-              "average_prior_minutes": 9.6
-            },
-            {
-              "id": "2991235",
-              "name": "Steven Adams",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-05T00:21Z",
-              "average_prior_minutes": 0.8
-            }
-          ]
-        },
-        "away": {
-          "prior_games": 11,
-          "confirmed_lineup": false,
-          "out_minutes_share": 0.013991449669646328,
-          "history_event_ids": [
-            "nba:401909938",
-            "nba:401909931",
-            "nba:401909918",
-            "nba:401909286",
-            "nba:401909889",
-            "nba:401909876",
-            "nba:401909859",
-            "nba:401909094",
-            "nba:401898719",
-            "nba:401918011",
-            "nba:401908941"
-          ],
-          "history_latest_start_utc": "2026-11-07T22:00:00+00:00",
-          "history_latest_capture_utc": "2026-11-08T17:15:29.986316+00:00",
-          "uncertain_minutes_share": 0.0,
-          "scoring_form_change": 0.010962705455432653,
-          "unmatched_reported_players": [],
-          "unknown_out_count": 0,
-          "unknown_uncertain_count": 0,
-          "out_scoring_share": 0.01932367149758454,
-          "uncertain_scoring_share": 0.0,
-          "player_results_associations": {
-            "4432181": {
-              "played_games": 2,
-              "wins_when_played": 1,
-              "games_without_recorded_minutes": 9,
-              "wins_without_recorded_minutes": 6,
-              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
-            }
-          },
-          "players": [
-            {
-              "id": "4432181",
-              "name": "Julian Strawther",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-10-17T00:52Z",
-              "average_prior_minutes": 3.6
-            }
-          ]
-        }
       }
     },
     {
@@ -3347,7 +2967,7 @@
       "away": "San Antonio Spurs",
       "start_utc": "2026-11-10T02:00:00+00:00",
       "context_utc": "2026-11-08T17:15:29.557943+00:00",
-      "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
+      "status": "CONTEXT_STALE",
       "candidate_probability": null,
       "influences_daily_selection": false,
       "teams": {
@@ -3396,99 +3016,6 @@
           },
           "starters": [],
           "lineup_confirmed": false
-        }
-      },
-      "mode": "INJURY_REPORT",
-      "features": [
-        0.05772425249169435,
-        0.0,
-        0.050983899821109124,
-        0.0,
-        -0.1,
-        0.0,
-        0.027483611694137933,
-        0.14880952380952378
-      ],
-      "details": {
-        "home": {
-          "prior_games": 10,
-          "confirmed_lineup": false,
-          "out_minutes_share": 0.05772425249169435,
-          "history_event_ids": [
-            "nba:401909936",
-            "nba:401909932",
-            "nba:401909919",
-            "nba:401909286",
-            "nba:401909873",
-            "nba:401909860",
-            "nba:401909841",
-            "nba:401908948",
-            "nba:401898722",
-            "nba:401898720"
-          ],
-          "history_latest_start_utc": "2026-11-06T02:00:00+00:00",
-          "history_latest_capture_utc": "2026-11-08T17:15:29.908898+00:00",
-          "uncertain_minutes_share": 0.0,
-          "scoring_form_change": -0.012348178137651877,
-          "unmatched_reported_players": [
-            "4701232"
-          ],
-          "unknown_out_count": 1,
-          "unknown_uncertain_count": 0,
-          "out_scoring_share": 0.050983899821109124,
-          "uncertain_scoring_share": 0.0,
-          "player_results_associations": {
-            "4278402": {
-              "played_games": 8,
-              "wins_when_played": 2,
-              "games_without_recorded_minutes": 2,
-              "wins_without_recorded_minutes": 1,
-              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
-            }
-          },
-          "players": [
-            {
-              "id": "4278402",
-              "name": "Jordan Goodwin",
-              "availability": "OUT",
-              "reported_status": "out",
-              "reported_utc": "2026-11-08T01:08Z",
-              "average_prior_minutes": 13.9
-            }
-          ]
-        },
-        "away": {
-          "prior_games": 12,
-          "confirmed_lineup": false,
-          "out_minutes_share": 0.0,
-          "history_event_ids": [
-            "nba:401909295",
-            "nba:401909933",
-            "nba:401909917",
-            "nba:401909901",
-            "nba:401909890",
-            "nba:401909879",
-            "nba:401909858",
-            "nba:401909096",
-            "nba:401909090",
-            "nba:401898843",
-            "nba:401898722",
-            "nba:401898720"
-          ],
-          "history_latest_start_utc": "2026-11-07T03:00:00+00:00",
-          "history_latest_capture_utc": "2026-11-08T17:15:29.908898+00:00",
-          "uncertain_minutes_share": 0.0,
-          "scoring_form_change": -0.03983178983178981,
-          "unmatched_reported_players": [
-            "6440",
-            "5101845"
-          ],
-          "unknown_out_count": 2,
-          "unknown_uncertain_count": 0,
-          "out_scoring_share": 0.0,
-          "uncertain_scoring_share": 0.0,
-          "player_results_associations": {},
-          "players": []
         }
       }
     },
@@ -3578,11 +3105,149 @@
       "home": "Golden State Warriors",
       "away": "New Orleans Pelicans",
       "start_utc": "2026-11-10T03:00:00+00:00",
-      "context_utc": null,
-      "status": "NO_CONTEXT_CAPTURED_YET",
+      "context_utc": "2026-11-08T19:45:38.406589+00:00",
+      "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
       "candidate_probability": null,
       "influences_daily_selection": false,
-      "teams": null
+      "teams": {
+        "home": {
+          "id": "9",
+          "name": "Golden State Warriors",
+          "injury_report": true,
+          "players": {
+            "3102531": {
+              "id": "3102531",
+              "name": "Kristaps Porzingis",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-06T21:26Z"
+            },
+            "4432171": {
+              "id": "4432171",
+              "name": "Moses Moody",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-10-16T16:14Z"
+            },
+            "6430": {
+              "id": "6430",
+              "name": "Jimmy Butler III",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-10-16T16:11Z"
+            }
+          },
+          "starters": [],
+          "lineup_confirmed": false
+        },
+        "away": {
+          "id": "3",
+          "name": "New Orleans Pelicans",
+          "injury_report": true,
+          "players": {
+            "5061589": {
+              "id": "5061589",
+              "name": "Yves Missi",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-05T20:47Z"
+            }
+          },
+          "starters": [],
+          "lineup_confirmed": false
+        }
+      },
+      "mode": "INJURY_REPORT",
+      "features": [
+        -0.023396530859217425,
+        0.0,
+        -0.021026072329688814,
+        0.0,
+        0.3,
+        0.0,
+        -0.0041237294868717855,
+        0.130952380952381
+      ],
+      "details": {
+        "home": {
+          "prior_games": 11,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.0,
+          "history_event_ids": [
+            "nba:401909937",
+            "nba:401909919",
+            "nba:401909905",
+            "nba:401909285",
+            "nba:401909888",
+            "nba:401909876",
+            "nba:401909860",
+            "nba:401909850",
+            "nba:401909092",
+            "nba:401898409",
+            "nba:401918010"
+          ],
+          "history_latest_start_utc": "2026-11-06T03:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T19:45:38.693841+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": -0.0212022326311474,
+          "unmatched_reported_players": [
+            "3102531",
+            "4432171",
+            "6430"
+          ],
+          "unknown_out_count": 3,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.0,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {},
+          "players": []
+        },
+        "away": {
+          "prior_games": 10,
+          "confirmed_lineup": false,
+          "out_minutes_share": 0.023396530859217425,
+          "history_event_ids": [
+            "nba:401909293",
+            "nba:401909928",
+            "nba:401909914",
+            "nba:401909898",
+            "nba:401909894",
+            "nba:401909889",
+            "nba:401909859",
+            "nba:401909849",
+            "nba:401909839",
+            "nba:401906509"
+          ],
+          "history_latest_start_utc": "2026-11-07T01:00:00+00:00",
+          "history_latest_capture_utc": "2026-11-08T15:15:25.592148+00:00",
+          "uncertain_minutes_share": 0.0,
+          "scoring_form_change": -0.017078503144275614,
+          "unmatched_reported_players": [],
+          "unknown_out_count": 0,
+          "unknown_uncertain_count": 0,
+          "out_scoring_share": 0.021026072329688814,
+          "uncertain_scoring_share": 0.0,
+          "player_results_associations": {
+            "5061589": {
+              "played_games": 3,
+              "wins_when_played": 1,
+              "games_without_recorded_minutes": 7,
+              "wins_without_recorded_minutes": 4,
+              "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+            }
+          },
+          "players": [
+            {
+              "id": "5061589",
+              "name": "Yves Missi",
+              "availability": "OUT",
+              "reported_status": "out",
+              "reported_utc": "2026-11-05T20:47Z",
+              "average_prior_minutes": 5.8
+            }
+          ]
+        }
+      }
     },
     {
       "event_id": "nhl:401892682",
@@ -3680,16 +3345,14 @@
     }
   ],
   "blocks": {
-    "NEEDS_THREE_EARLIER_PLAYER_BOXSCORES_PER_TEAM": 2,
-    "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT": 13,
-    "CONTEXT_STALE": 20,
-    "MISSING_LINEUP_OR_AVAILABILITY_REPORT": 3,
-    "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS": 2,
-    "NO_CONTEXT_CAPTURED_YET": 1
+    "NEEDS_THREE_EARLIER_PLAYER_BOXSCORES_PER_TEAM": 1,
+    "CONTEXT_STALE": 16,
+    "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT": 6,
+    "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS": 1
   },
-  "historical_player_boxscores": 374,
-  "observations": 16,
-  "new_observations": 2,
+  "historical_player_boxscores": 384,
+  "observations": 22,
+  "new_observations": 6,
   "settled_observations": 13,
   "fitted_streams": 0,
   "active_streams": 0,
@@ -3705,6 +3368,25 @@
   "feature_definition": "Home-minus-away: missing/uncertain prior minutes, recent scoring per minute, lineup experience and observed game-gap proxy. Separate lineup and injury streams.",
   "probability_policy": "No invented adjustment. Frozen prospective observations train a regularized offset model. Daily selection influence requires paired future improvement against original and market Brier/log loss.",
   "streams": {
+    "PLAYER-CONTEXT-1.0|883a6212449a7a2a1f5739e329052773798756365b7bb96b5178d94e3f2c0d34|8d577a95d00f1221152725f4cd861651ea5ddce33dafeaee72df68070298f052|nba|ML|INJURY_REPORT|MULTIMARKET-1.0.0-nba": {
+      "training_events": 0,
+      "forward": {
+        "n": 0,
+        "dates": 0,
+        "eligible": false,
+        "market_n": 0,
+        "market_dates": 0
+      },
+      "weights": null,
+      "scores": {
+        "base_brier": null,
+        "base_log_loss": null,
+        "market_brier": null,
+        "market_log_loss": null,
+        "candidate_brier": null,
+        "candidate_log_loss": null
+      }
+    },
     "PLAYER-CONTEXT-1.0|883a6212449a7a2a1f5739e329052773798756365b7bb96b5178d94e3f2c0d34|8d577a95d00f1221152725f4cd861651ea5ddce33dafeaee72df68070298f052|nhl|ML|INJURY_REPORT|MULTIMARKET-1.0.0-nhl": {
       "training_events": 0,
       "forward": {
