@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-08T07:24:48.410309+00:00",
+  "asof_utc": "2026-11-08T10:46:42.383737+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-08T07:24:29.436334+00:00",
+    "asof_utc": "2026-11-08T10:46:27.203575+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-08",
     "events": [
       {
@@ -230,56 +230,6 @@
         "forecasts": []
       },
       {
-        "id": "bundesliga:401884738",
-        "sport": "bundesliga",
-        "home": "FC Cologne",
-        "away": "Bayer Leverkusen",
-        "start_utc": "2026-11-08T14:30:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "OVER_UNDER_2_5",
-            "sample_min": 70
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "BTTS",
-            "sample_min": 70
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "ASIAN_HOME_MINUS_0_5",
-            "sample_min": 70
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goal-lines",
-            "market": "STAT_73b60a83f156bee9",
-            "sample_min": 70
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goal-lines",
-            "market": "STAT_3467965f94bbdcae",
-            "sample_min": 70
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goal-lines",
-            "market": "STAT_f01c300951875082",
-            "sample_min": 70
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goal-lines",
-            "market": "STAT_b69a0aef44fb922f",
-            "sample_min": 70
-          },
-          {
-            "family": "ELO_STANDARD",
-            "market": "1X2",
-            "sample_min": 140
-          }
-        ]
-      },
-      {
         "id": "serie_a:401875003",
         "sport": "serie_a",
         "home": "Fiorentina",
@@ -466,6 +416,36 @@
             "family": "ELO_STANDARD",
             "market": "1X2",
             "sample_min": 183
+          }
+        ]
+      },
+      {
+        "id": "bundesliga:401884738",
+        "sport": "bundesliga",
+        "home": "FC Cologne",
+        "away": "Bayer Leverkusen",
+        "start_utc": "2026-11-08T14:30:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "OVER_UNDER_2_5",
+            "sample_min": 70
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "BTTS",
+            "sample_min": 70
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "ASIAN_HOME_MINUS_0_5",
+            "sample_min": 70
+          },
+          {
+            "family": "ELO_STANDARD",
+            "market": "1X2",
+            "sample_min": 140
           }
         ]
       },
@@ -1390,31 +1370,31 @@
     ]
   },
   "new_forecasts": 0,
-  "new_settlements": 17,
+  "new_settlements": 0,
   "forecasts_total": 340,
   "zero_stake_forecasts": 308,
   "open_observations": 79,
   "settlements_total": 254,
-  "candidate_markets": 132,
+  "candidate_markets": 128,
   "closing_line_values_available": 0,
   "blocks": {
-    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 14,
+    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 12,
     "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 6,
     "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 6,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 40,
-    "NEEDS_100_DISTINCT_EVENTS": 25,
-    "NEEDS_14_DAY_FORWARD_PERIOD": 25,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 25,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 25,
-    "CALIBRATION_ERROR_OVER_10PP": 25,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 35,
+    "NEEDS_100_DISTINCT_EVENTS": 22,
+    "NEEDS_14_DAY_FORWARD_PERIOD": 22,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 22,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 22,
+    "CALIBRATION_ERROR_OVER_10PP": 22,
     "LOG_LOSS_NOT_BETTER_THAN_MARKET": 14,
-    "NEEDS_TWO_BOOKMAKERS": 15,
-    "EDGE_BELOW_4PP": 10,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 21,
+    "NEEDS_TWO_BOOKMAKERS": 13,
+    "EDGE_BELOW_4PP": 9,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 18,
     "missing_timestamped_BTTS_odds": 20,
     "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 20,
     "insufficient_football_home_away_history": 3,
-    "missing_timestamped_OVER_UNDER_2_5_odds": 16,
+    "missing_timestamped_OVER_UNDER_2_5_odds": 17,
     "missing_timestamped_ML_odds": 32
   },
   "history": {
@@ -1423,20 +1403,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261107&limit=300",
-        "sha256": "57fc341be392108a130330bdf7c65d6f9ef14dfdf5973d6f0c3e3aa8ed9330dc",
-        "captured_at_utc": "2026-11-08T07:24:29.436334+00:00",
+        "sha256": "da6035ed41ead1c794a5e8cf61c8d65da5df5676731d91edae2bc2f9763b17db",
+        "captured_at_utc": "2026-11-08T10:46:27.203575+00:00",
         "completed_games": 1
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261107&limit=300",
         "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-        "captured_at_utc": "2026-11-08T07:24:29.436334+00:00",
+        "captured_at_utc": "2026-11-08T10:46:27.203575+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261107&limit=300",
-        "sha256": "58adb144f2737655fff439e665954a335e95b7078b899834056696196ec57873",
-        "captured_at_utc": "2026-11-08T07:24:29.436334+00:00",
+        "sha256": "8bc4bc64632e98e62730d960005e48712e751bd9d1b6ce91a4ea83aa6dc1a6d8",
+        "captured_at_utc": "2026-11-08T10:46:27.203575+00:00",
         "completed_games": 3
       }
     ],
@@ -1961,74 +1941,6 @@
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
-    "bundesliga|STAT_73b60a83f156bee9": {
-      "n": 969,
-      "brier": 0.4042057590768359,
-      "log_loss": 0.5893904807859135,
-      "uniform_brier": 0.5,
-      "uniform_log_loss": 0.6931471805599453,
-      "market_brier": null,
-      "roi": null,
-      "holdout": {
-        "from": "2025-10-24",
-        "n": 197,
-        "brier": 0.382388624559499,
-        "log_loss": 0.564852786567393,
-        "ece": 0.04488344391014383
-      },
-      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-    },
-    "bundesliga|STAT_3467965f94bbdcae": {
-      "n": 1300,
-      "brier": 0.484159642848006,
-      "log_loss": 0.677335201761131,
-      "uniform_brier": 0.5,
-      "uniform_log_loss": 0.6931471805599453,
-      "market_brier": null,
-      "roi": null,
-      "holdout": {
-        "from": "2025-10-26",
-        "n": 256,
-        "brier": 0.49795129076953365,
-        "log_loss": 0.6906980427552105,
-        "ece": 0.09468146717676297
-      },
-      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-    },
-    "bundesliga|STAT_f01c300951875082": {
-      "n": 1099,
-      "brier": 0.2709723755745523,
-      "log_loss": 0.4290143103425193,
-      "uniform_brier": 0.5,
-      "uniform_log_loss": 0.6931471805599453,
-      "market_brier": null,
-      "roi": null,
-      "holdout": {
-        "from": "2025-11-01",
-        "n": 214,
-        "brier": 0.2532000995502026,
-        "log_loss": 0.4031286534938002,
-        "ece": 0.04916963834765383
-      },
-      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-    },
-    "bundesliga|STAT_b69a0aef44fb922f": {
-      "n": 1300,
-      "brier": 0.38457830616995675,
-      "log_loss": 0.5676857706563734,
-      "uniform_brier": 0.5,
-      "uniform_log_loss": 0.6931471805599453,
-      "market_brier": null,
-      "roi": null,
-      "holdout": {
-        "from": "2025-10-26",
-        "n": 256,
-        "brier": 0.377070210952031,
-        "log_loss": 0.5589358037202385,
-        "ece": 0.04842330821871887
-      },
-      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-    },
     "serie_a|STAT_60e66ba79f025235": {
       "n": 1305,
       "brier": 0.31002579513721623,
@@ -2387,62 +2299,6 @@
           "period": "FULL_TIME",
           "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
           "provider_market_key": "alternate_totals"
-        }
-      },
-      "bundesliga": {
-        "STAT_fe36a4fe2ed5d3e5": {
-          "kind": "SPREAD",
-          "metric": "goals",
-          "line": 0.75,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-          "provider_market_key": "spreads"
-        },
-        "STAT_de67abf76c5a82c7": {
-          "kind": "TOTAL",
-          "metric": "goals",
-          "line": 3.25,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-          "provider_market_key": "totals"
-        },
-        "STAT_73b60a83f156bee9": {
-          "kind": "SPREAD",
-          "metric": "goals",
-          "line": 0.0,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": null,
-          "provider_market_key": "spreads"
-        },
-        "STAT_3467965f94bbdcae": {
-          "kind": "TOTAL",
-          "metric": "goals",
-          "line": 3.5,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": null,
-          "provider_market_key": "totals"
-        },
-        "STAT_f01c300951875082": {
-          "kind": "SPREAD",
-          "metric": "goals",
-          "line": 1.0,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": null,
-          "provider_market_key": "spreads"
-        },
-        "STAT_b69a0aef44fb922f": {
-          "kind": "SPREAD",
-          "metric": "goals",
-          "line": 0.5,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": null,
-          "provider_market_key": "spreads"
         }
       },
       "serie_a": {
