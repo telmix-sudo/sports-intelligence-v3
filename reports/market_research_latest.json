@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-08T02:43:55.948380+00:00",
+  "asof_utc": "2026-11-08T07:24:48.410309+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-08T02:43:35.119304+00:00",
+    "asof_utc": "2026-11-08T07:24:29.436334+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-08",
     "events": [
       {
@@ -316,36 +316,6 @@
             "family": "ELO_STANDARD",
             "market": "1X2",
             "sample_min": 194
-          }
-        ]
-      },
-      {
-        "id": "nba:401909944",
-        "sport": "nba",
-        "home": "Portland Trail Blazers",
-        "away": "San Antonio Spurs",
-        "start_utc": "2026-11-08T03:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nba",
-            "market": "ML",
-            "sample_min": 94
-          }
-        ]
-      },
-      {
-        "id": "nhl:401892673",
-        "sport": "nhl",
-        "home": "Edmonton Oilers",
-        "away": "Vancouver Canucks",
-        "start_utc": "2026-11-08T03:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nhl",
-            "market": "ML",
-            "sample_min": 92
           }
         ]
       },
@@ -1386,15 +1356,45 @@
             "sample_min": 92
           }
         ]
+      },
+      {
+        "id": "nba:401909959",
+        "sport": "nba",
+        "home": "Golden State Warriors",
+        "away": "New Orleans Pelicans",
+        "start_utc": "2026-11-10T03:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nba",
+            "market": "ML",
+            "sample_min": 90
+          }
+        ]
+      },
+      {
+        "id": "nhl:401892682",
+        "sport": "nhl",
+        "home": "San Jose Sharks",
+        "away": "New York Islanders",
+        "start_utc": "2026-11-10T03:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nhl",
+            "market": "ML",
+            "sample_min": 90
+          }
+        ]
       }
     ]
   },
   "new_forecasts": 0,
-  "new_settlements": 1,
+  "new_settlements": 17,
   "forecasts_total": 340,
   "zero_stake_forecasts": 308,
-  "open_observations": 93,
-  "settlements_total": 237,
+  "open_observations": 79,
+  "settlements_total": 254,
   "candidate_markets": 132,
   "closing_line_values_available": 0,
   "blocks": {
@@ -1414,8 +1414,8 @@
     "missing_timestamped_BTTS_odds": 20,
     "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 20,
     "insufficient_football_home_away_history": 3,
-    "missing_timestamped_ML_odds": 31,
-    "missing_timestamped_OVER_UNDER_2_5_odds": 16
+    "missing_timestamped_OVER_UNDER_2_5_odds": 16,
+    "missing_timestamped_ML_odds": 32
   },
   "history": {
     "requests": 3,
@@ -1423,20 +1423,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261107&limit=300",
-        "sha256": "e155a484ceb0cd0c7a72e97325d063846cb2a702eecd06577c07c764a7c7fe38",
-        "captured_at_utc": "2026-11-08T02:43:35.119304+00:00",
+        "sha256": "57fc341be392108a130330bdf7c65d6f9ef14dfdf5973d6f0c3e3aa8ed9330dc",
+        "captured_at_utc": "2026-11-08T07:24:29.436334+00:00",
         "completed_games": 1
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261107&limit=300",
         "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-        "captured_at_utc": "2026-11-08T02:43:35.119304+00:00",
+        "captured_at_utc": "2026-11-08T07:24:29.436334+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261107&limit=300",
-        "sha256": "0018b8b61004c22c38eee9fa2ce6ca72bafa6409f198d28698e0a4e88510875a",
-        "captured_at_utc": "2026-11-08T02:43:35.119304+00:00",
+        "sha256": "58adb144f2737655fff439e665954a335e95b7078b899834056696196ec57873",
+        "captured_at_utc": "2026-11-08T07:24:29.436334+00:00",
         "completed_games": 3
       }
     ],
@@ -4558,11 +4558,11 @@
   "experimental_account": {
     "created": true,
     "initial_bankroll_eur": 1000,
-    "bankroll_eur": 982.945,
-    "pnl_eur": -17.055,
+    "bankroll_eur": 983.47,
+    "pnl_eur": -16.53,
     "positions": 32,
-    "open_exposure_eur": 5.0,
-    "open": 10,
+    "open_exposure_eur": 3.5,
+    "open": 7,
     "note": "Separate experimental virtual account; original twelve wallets preserved."
   },
   "settlement_errors": [],
