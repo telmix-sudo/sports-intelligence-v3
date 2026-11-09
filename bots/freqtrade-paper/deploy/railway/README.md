@@ -1,0 +1,12 @@
+# Testar o Freqtrade na Railway sem cartão
+
+A Railway oferece um teste para contas novas, sem cartão, até 30 dias ou até esgotar o crédito inicial. A conta Free posterior tem um crédito mensal reduzido. Não contar com execução permanente: monitorizar Usage e exportar o histórico antes de o teste acabar. Não ativar planos pagos. A Railway indica que os volumes criados no Trial são eliminados 30 dias após a expiração dos créditos.
+
+1. Em https://railway.com/login entrar com o GitHub. Se aparecer Limited Trial, verificar em https://railway.com/verify; a rede de saída pode estar limitada e impedir o acesso à Kraken.
+2. Criar um projeto vazio. Adicionar um serviço a partir do repositório `telmix-sudo/sports-intelligence-v3`, autorizando apenas este repositório se o GitHub oferecer a opção.
+3. Nas definições do serviço, selecionar a branch `freqtrade-paper-250-eur`, Root Directory `/bots/freqtrade-paper` e Railway Config File `/bots/freqtrade-paper/railway.json`. Manter uma só instância, com Serverless desativado.
+4. Antes do primeiro arranque do bot, anexar um volume em `/freqtrade/runtime` para conservar o histórico. Nas variáveis privadas do serviço, definir `PAPER_UI_PASSWORD` com uma palavra-passe única e aleatória de pelo menos 16 caracteres. O utilizador por defeito é `telmo`. Não é preciso inserir credenciais da Kraken.
+5. Aplicar as alterações. Verificar nos logs que o motor está em dry-run, chega a running e recebe dados da Kraken. Se quiseres abrir o painel no telemóvel, gerar domínio HTTPS em Networking só depois de definir a palavra-passe privada. Confirmar no painel a banca inicial de 250 €, 30 € por operação e até três posições. Reiniciar uma vez e confirmar que o volume conservou o estado. O ping inicial verifica apenas que a API respondeu.
+6. Consultar Usage após o primeiro dia. Para guardar o histórico antes de o crédito acabar, exportar uma cópia consistente de SQLite com `python scripts/backup.py` no contentor e descarregá-la por um canal privado, ou exportar as operações do painel. Os backups no próprio volume não substituem uma cópia fora da Railway.
+
+O Docker existente foi testado em Intel e ARM no GitHub. A capacidade, acesso à Kraken e persistência na Railway só ficam confirmados depois de o serviço arrancar na conta.
