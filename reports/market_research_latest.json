@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-10T10:27:52.942449+00:00",
+  "asof_utc": "2026-11-10T17:52:58.192240+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-10T10:27:35.641466+00:00",
+    "asof_utc": "2026-11-10T17:52:46.118981+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-10",
     "events": [
       {
@@ -439,6 +439,21 @@
             "sample_min": 94
           }
         ]
+      },
+      {
+        "id": "nhl:401891808",
+        "sport": "nhl",
+        "home": "Seattle Kraken",
+        "away": "Carolina Hurricanes",
+        "start_utc": "2026-11-12T17:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nhl",
+            "market": "ML",
+            "sample_min": 92
+          }
+        ]
       }
     ]
   },
@@ -448,7 +463,7 @@
   "zero_stake_forecasts": 338,
   "open_observations": 12,
   "settlements_total": 362,
-  "candidate_markets": 29,
+  "candidate_markets": 30,
   "closing_line_values_available": 0,
   "blocks": {
     "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 6,
@@ -460,7 +475,7 @@
     "CALIBRATION_ERROR_OVER_10PP": 6,
     "EDGE_BELOW_4PP": 2,
     "CONSERVATIVE_EV_BELOW_1_PERCENT": 2,
-    "missing_timestamped_ML_odds": 17
+    "missing_timestamped_ML_odds": 18
   },
   "history": {
     "requests": 3,
@@ -468,20 +483,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261109&limit=300",
-        "sha256": "4679da65ef594f392f2f39277a652fbdbdb03816547ea719bf1a30558d1eb0c0",
-        "captured_at_utc": "2026-11-10T10:27:35.641466+00:00",
+        "sha256": "031d199c4c0644a844577ce661d2d836c771bf082c2e514e3842d7ca90d35b3f",
+        "captured_at_utc": "2026-11-10T17:52:46.118981+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261109&limit=300",
         "sha256": "0df83f43ea2c22da5dfb032d3aaefb7d48ae95a7b65c2590e38ebaf9007010d5",
-        "captured_at_utc": "2026-11-10T10:27:35.641466+00:00",
+        "captured_at_utc": "2026-11-10T17:52:46.118981+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261109&limit=300",
-        "sha256": "e24487f7d0811b17714422690056a24c8297296ab8372686006e1f626bf1c9ba",
-        "captured_at_utc": "2026-11-10T10:27:35.641466+00:00",
+        "sha256": "d2684854dc5d84a4a126f7a05b83a03ea906604ad5a6fadbb19a115ce98d8333",
+        "captured_at_utc": "2026-11-10T17:52:46.118981+00:00",
         "completed_games": 0
       }
     ],
