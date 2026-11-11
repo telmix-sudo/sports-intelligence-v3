@@ -55,6 +55,30 @@ class SelectionTrialTests(unittest.TestCase):
             self.assertEqual(report['pending_total'],0)
             self.assertFalse(y.observe('MODEL',e,[.6,.4],q),'No backfill after kickoff')
 
+    def test_best_value_uses_odds_and_shortlist_expires_at_kickoff(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            x=SelectionExperiment(Path(tmp),NOW,'test-code');e=event(sport='epl')
+            q=dict(quote(market='1X2'),decimal=[2.25,3.6,2.9],no_vig=[.42,.29,.29],
+                   bookmakers=['A','B','A'],best_book_updates=[NOW.isoformat()]*3)
+            self.assertTrue(x.observe('model-a',e,[.48,.34,.18],q,sample_min=50))
+            self.assertTrue(x.observe('model-b',e,[.47,.35,.18],q,sample_min=50))
+            self.assertTrue(x.observe('few-games',event(n=2,sport='epl'),[.48,.34,.18],q,sample_min=4))
+            self.assertTrue(x.observe('no-edge',event(n=3,sport='epl'),q['no_vig'],q,sample_min=50))
+            entries=x.value_shortlist(NOW)['rows']
+            self.assertEqual(len(entries),1)
+            self.assertEqual((entries[0]['family'],entries[0]['selection_index'],entries[0]['stake_eur']),('model-b',1,0))
+            first=next(r for r in x.rows if r['kind']=='FORECAST')
+            self.assertEqual(first['arms']['VALUE_GAP'],0)
+            self.assertEqual(first['arms']['PRICE_ADJUSTED_VALUE'],1)
+            self.assertEqual(x.value_shortlist(NOW+dt.timedelta(hours=2))['candidates'],0)
+            settled=SelectionExperiment(Path(tmp),NOW+dt.timedelta(hours=3),'test-code')
+            settled.reconcile({e['id']:{'home':1,'away':1,'outcome':1}})
+            arms=next(s['arms'] for s in settled.report()['streams'] if s['family']=='model-a')
+            comparison=arms['PRICE_ADJUSTED_VALUE']['qualified_comparison']
+            self.assertEqual(comparison['n'],1)
+            self.assertAlmostEqual(comparison['roi_pct']['PRICE_ADJUSTED_VALUE'],260)
+            self.assertEqual(comparison['roi_pct']['VALUE_GAP'],-100)
+
     def test_future_quote_missing_price_and_one_house_are_rejected_without_a_policy_or_forecast(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);x=SelectionExperiment(root,NOW,'code')

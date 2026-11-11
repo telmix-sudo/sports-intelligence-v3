@@ -18,10 +18,10 @@ from .metrics import brier,log_loss
 from .selection_policy import selection_trace
 
 UTC=dt.timezone.utc
-VERSION='SELECTION-PAIRED-1.0'
+VERSION='SELECTION-PAIRED-1.1'
 JOURNAL='data/selection_experiment_v3.jsonl'
 MIN_EVENTS,MIN_DATES=100,14
-ARMS=('VALUE_GAP','OPPOSITE_VALUE_GAP','MODEL_FAVOURITE','MARKET_FAVOURITE')
+ARMS=('VALUE_GAP','OPPOSITE_VALUE_GAP','MODEL_FAVOURITE','MARKET_FAVOURITE','PRICE_ADJUSTED_VALUE')
 
 
 def model_code_digest():
@@ -107,7 +107,7 @@ class SelectionExperiment:
             times=quote['best_book_updates'];books=quote['bookmakers']
             if len(times)!=len(p) or len(books)!=len(p) or not all(isinstance(b,str) and b for b in books):raise ValueError('incomplete_quote')
             if any(not dt.timedelta(0)<=clock-parse_utc(t)<=dt.timedelta(hours=8) for t in times):raise ValueError('quote_clock')
-            trace=selection_trace(p,q,prices,push_probability)
+            trace=selection_trace(p,q,prices,push_probability,sample_min=sample_min or 0)
         except (ValueError,KeyError,TypeError,OverflowError):
             self.rejections['ineligible_event_or_quote']+=1;return False
         stream='|'.join((VERSION,self.digest,family,event['sport'],market))
@@ -177,7 +177,14 @@ class SelectionExperiment:
                 n=len(decisive);pnl=math.fsum(s['unit_pnl'][arm] for f,s in decisive)
                 arms[arm]={'n':n,'wins':sum(f['arms'][arm]==s['outcome'] for f,s in decisive),
                            'unit_pnl_eur':pnl,'roi_pct':100*pnl/n if n else None}
-                if arm=='OPPOSITE_VALUE_GAP' and complete and n>=MIN_EVENTS and dates>=MIN_DATES:
+                if arm == 'PRICE_ADJUSTED_VALUE':
+                    qualified = [(f,s) for f,s in decisive if f['selection_trace']['arms'][arm]['passes_value_screen']]
+                    arms[arm]['qualified_comparison'] = {
+                        'n': len(qualified),
+                        'roi_pct': {rule: 100 * math.fsum(s['unit_pnl'][rule] for f,s in qualified) / len(qualified)
+                                    for rule in (arm, 'VALUE_GAP', 'MARKET_FAVOURITE')} if qualified else {},
+                    }
+                if arm in ('OPPOSITE_VALUE_GAP','PRICE_ADJUSTED_VALUE') and complete and n>=MIN_EVENTS and dates>=MIN_DATES:
                     for benchmark in ('VALUE_GAP','MARKET_FAVOURITE'):
                         seed=int(hashlib.sha256((key+benchmark).encode()).hexdigest()[:16],16)
                         arms[arm]['paired_unit_difference_vs_'+benchmark]=paired_day_interval(pairs,arm,benchmark,seed)
@@ -187,13 +194,13 @@ class SelectionExperiment:
                             'forecasts':len(forecasts),'settled':len(decisive),'voided':len(pairs)-len(decisive),
                             'pending':len(forecasts)-len(pairs),'dates':dates,'cohort_locked':key in locked,
                             'remaining_events':max(0,MIN_EVENTS-len(decisive)),'remaining_dates':max(0,MIN_DATES-dates),
-                            'status':'SOURCE_VERSION_RETIRED' if first['model_code_sha256']!=self.digest and key not in locked else 'REVIEW_REQUIRED' if complete and len(decisive)>=MIN_EVENTS and dates>=MIN_DATES else
+                            'status':'SOURCE_VERSION_RETIRED' if (first['model_code_sha256']!=self.digest or first['version']!=VERSION) and key not in locked else 'REVIEW_REQUIRED' if complete and len(decisive)>=MIN_EVENTS and dates>=MIN_DATES else
                                      'COHORT_RESOLVED_INSUFFICIENT_DECISIVE_DATA' if complete else 'WAITING_RESULTS' if key in locked else 'COLLECTING',
                             'arms':arms,'automatic_stake_activation':False,
                             'scoring':{k:math.fsum(s[k] for f,s in decisive)/len(decisive) if decisive else None
                                        for k in ('model_brier','market_brier','model_log_loss','market_log_loss')}})
         forecasts=[r for r in self.rows if r['kind']=='FORECAST']
-        return {'version':VERSION,'asof_utc':self.now.isoformat(),'registered_at_utc':next((r['registered_at_utc'] for r in self.rows if r['kind']=='POLICY'),None),
+        return {'version':VERSION,'asof_utc':self.now.isoformat(),'registered_at_utc':next((r['registered_at_utc'] for r in self.rows if r['kind']=='POLICY' and r['version']==VERSION),None),
                 'mode':'ZERO_STAKE_FIXED_FUTURE_COHORT','automatic_stake_activation':False,'historical_backfill_allowed':False,
                 'current_model_code_sha256':self.digest,'unit_stake_eur':1.,'minimum_events':MIN_EVENTS,'minimum_dates':MIN_DATES,'forecasts_total':len(forecasts),
                 'distinct_events':len({r['event_id'] for r in forecasts}),'settled_total':sum(r['status']=='SETTLED' for r in settlements.values()),
@@ -201,3 +208,23 @@ class SelectionExperiment:
                 'new_forecasts':self.new_forecasts,'new_settlements':self.new_settlements,'rejections':dict(self.rejections),'streams':streams,
                 'latest_choices':[{k:f[k] for k in ('event_id','family','sport','home','away','start_utc','forecast_utc','market','market_spec','selection_trace')} for f in forecasts[-3:]],
                 'interpretation':'Selection-policy comparison, not inverted probabilities. Returns are theoretical before execution, commission and slippage. Samples across streams may share events; do not sum them as independent proof.'}
+
+    def value_shortlist(self, published_at):
+        """Rank current qualifying estimates once per event, using no portfolio funds."""
+        rows = []
+        for forecast in self.current_forecasts.values():
+            value = forecast['selection_trace']['arms']['PRICE_ADJUSTED_VALUE']
+            if not value['passes_value_screen']:
+                continue
+            expires = min(parse_utc(forecast['start_utc']), *(
+                parse_utc(t) + dt.timedelta(hours=8) for t in forecast['book_quote_updates_utc']
+            ))
+            if not parse_utc(forecast['forecast_utc']) <= published_at < expires:
+                continue
+            row = {k: forecast[k] for k in ('event_id','home','away','sport','family','market','market_spec','start_utc','forecast_utc')}
+            rows.append(dict(row, **value, valid_until_utc=expires.isoformat(), stake_eur=0))
+        rows.sort(key=lambda r: (-r['conservative_ev'], r['start_utc'], r['event_id'], r['market'], r['family']))
+        best = {}
+        for row in rows:
+            best.setdefault(row['event_id'], row)
+        return {'asof_utc': published_at.isoformat(), 'candidates': len(best), 'rows': list(best.values())[:12]}
