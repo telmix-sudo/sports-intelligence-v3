@@ -1,6 +1,6 @@
 (function(root){
 'use strict';
-const arms={VALUE_GAP:'Diferença para o mercado',OPPOSITE_VALUE_GAP:'Escolha contrária',MODEL_FAVOURITE:'Favorito do modelo',MARKET_FAVOURITE:'Favorito do mercado'};
+const arms={VALUE_GAP:'Diferença para o mercado',OPPOSITE_VALUE_GAP:'Escolha contrária',MODEL_FAVOURITE:'Favorito do modelo',MARKET_FAVOURITE:'Favorito do mercado',PRICE_ADJUSTED_VALUE:'Valor à odd disponível'};
 const statuses={SOURCE_VERSION_RETIRED:'Versão anterior; recolha encerrada',COLLECTING:'A recolher',WAITING_RESULTS:'A aguardar resultados',REVIEW_REQUIRED:'Amostra fechada; exige revisão',COHORT_RESOLVED_INSUFFICIENT_DECISIVE_DATA:'Amostra fechada; dados decisivos insuficientes'};
 const number=(v,d=2)=>Number.isFinite(v)?v.toLocaleString('pt-PT',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
 function audit(a){
@@ -27,6 +27,11 @@ function selectionName(f,i){
 }
 function choiceRows(t){return (t?.latest_choices||[]).flatMap(f=>Object.entries(f.selection_trace.arms).map(([arm,a])=>[
  f.home+' × '+f.away,f.market,arms[arm]||arm,selectionName(f,a.selection_index),number(a.model_probability*100,1)+'%',number(a.market_probability*100,1)+'%',number(a.odds)]));}
-const api={audit,intro,cohortRows,choiceRows};
+function valueRows(shortlist, now=Date.now()){
+ return (shortlist?.rows||[]).filter(f=>Date.parse(f.forecast_utc)<=now&&now<Date.parse(f.valid_until_utc)).map(f=>[
+  f.home+' × '+f.away,root.V3ValidationProgress?.market(f)||f.market,selectionName(f,f.selection_index),
+  number(f.odds),number(f.model_probability*100,1)+'%',number(100/f.odds,1)+'%',number(f.conservative_ev*100,1)+'%',f.family]);
+}
+const api={audit,intro,cohortRows,choiceRows,valueRows};
 if(typeof module==='object'&&module.exports)module.exports=api;else root.V3SelectionView=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

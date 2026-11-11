@@ -741,6 +741,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     atomic_json(root/'reports/market_research_latest.json',market_research)
     report = {
         "selection_experiment":selection_experiment.report(),
+        "value_shortlist": selection_experiment.value_shortlist(published_at),
         "selection_audit":dict(audit_selections(root),official_verification=official_verification),
         "player_context":player_context,
         "in_play": in_play.report(in_play_rows, in_play_diagnostics, len(in_play_new)),
