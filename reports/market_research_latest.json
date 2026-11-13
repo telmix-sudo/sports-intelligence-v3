@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-13T08:46:35.674182+00:00",
+  "asof_utc": "2026-11-13T16:27:59.693968+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-13T08:46:18.773046+00:00",
+    "asof_utc": "2026-11-13T16:27:48.568953+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-13",
     "events": [
       {
@@ -454,28 +454,45 @@
             "sample_min": 93
           }
         ]
+      },
+      {
+        "id": "nfl:401873053",
+        "sport": "nfl",
+        "home": "Detroit Lions",
+        "away": "New England Patriots",
+        "start_utc": "2026-11-15T14:30:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nfl",
+            "market": "ML",
+            "sample_min": 21
+          }
+        ]
       }
     ]
   },
-  "new_forecasts": 0,
+  "new_forecasts": 13,
   "new_settlements": 0,
-  "forecasts_total": 436,
-  "zero_stake_forecasts": 380,
-  "open_observations": 10,
+  "forecasts_total": 449,
+  "zero_stake_forecasts": 392,
+  "open_observations": 22,
   "settlements_total": 422,
-  "candidate_markets": 30,
+  "candidate_markets": 31,
   "closing_line_values_available": 0,
   "blocks": {
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 6,
-    "NEEDS_100_DISTINCT_EVENTS": 6,
-    "NEEDS_14_DAY_FORWARD_PERIOD": 6,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 6,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 6,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 6,
-    "CALIBRATION_ERROR_OVER_10PP": 6,
-    "EDGE_BELOW_4PP": 1,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 1,
-    "missing_timestamped_ML_odds": 20
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 18,
+    "NEEDS_100_DISTINCT_EVENTS": 18,
+    "NEEDS_14_DAY_FORWARD_PERIOD": 18,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 18,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 18,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 18,
+    "CALIBRATION_ERROR_OVER_10PP": 18,
+    "EDGE_BELOW_4PP": 8,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 9,
+    "missing_timestamped_ML_odds": 9,
+    "NEEDS_50_HOLDOUT_FORECASTS": 1,
+    "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 1
   },
   "history": {
     "requests": 3,
@@ -483,20 +500,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261112&limit=300",
-        "sha256": "6fde0798a872a87d27a25e7cce494aac08c425043f77480468b0a4dee834037d",
-        "captured_at_utc": "2026-11-13T08:46:18.773046+00:00",
+        "sha256": "995bf3cb9a57179680e7ce3af6accd85ec75f371c8152b52be01bd39a999ae1e",
+        "captured_at_utc": "2026-11-13T16:27:48.568953+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261112&limit=300",
-        "sha256": "4907c1a67436d15573a7d102e02392c508cd73388f18062f6b8b140ea3baa3aa",
-        "captured_at_utc": "2026-11-13T08:46:18.773046+00:00",
+        "sha256": "23b3df5eff97b38cb0619615a69e4dafe55339efe63bcca6edb4428f4c89e066",
+        "captured_at_utc": "2026-11-13T16:27:48.568953+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261112&limit=300",
-        "sha256": "1557c723a9ba0d7c7c51a07aa8d416b49dbad238f1f6c26ca380275e166a4858",
-        "captured_at_utc": "2026-11-13T08:46:18.773046+00:00",
+        "sha256": "33c0254f0ffec048cd4a7c94cf43469afb228fc81c30bfafcc3d508872de196c",
+        "captured_at_utc": "2026-11-13T16:27:48.568953+00:00",
         "completed_games": 1
       }
     ],
@@ -3117,9 +3134,9 @@
     "initial_bankroll_eur": 1000,
     "bankroll_eur": 983.885,
     "pnl_eur": -16.115,
-    "positions": 56,
-    "open_exposure_eur": 2.0,
-    "open": 4,
+    "positions": 57,
+    "open_exposure_eur": 2.5,
+    "open": 5,
     "note": "Separate experimental virtual account; original twelve wallets preserved."
   },
   "settlement_errors": [],
