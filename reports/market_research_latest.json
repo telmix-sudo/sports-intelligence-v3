@@ -1,25 +1,10 @@
 {
-  "asof_utc": "2026-11-14T03:19:51.166608+00:00",
+  "asof_utc": "2026-11-14T03:35:38.560106+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-14T03:19:38.932558+00:00",
+    "asof_utc": "2026-11-14T03:35:26.643283+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-14",
     "events": [
-      {
-        "id": "nba:401909304",
-        "sport": "nba",
-        "home": "LA Clippers",
-        "away": "Oklahoma City Thunder",
-        "start_utc": "2026-11-14T03:30:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nba",
-            "market": "ML",
-            "sample_min": 91
-          }
-        ]
-      },
       {
         "id": "nhl:401891809",
         "sport": "nhl",
@@ -697,67 +682,49 @@
       }
     ]
   },
-  "new_forecasts": 6,
-  "new_settlements": 2,
+  "new_forecasts": 0,
+  "new_settlements": 0,
   "forecasts_total": 468,
   "zero_stake_forecasts": 406,
   "open_observations": 34,
   "settlements_total": 424,
-  "candidate_markets": 46,
+  "candidate_markets": 45,
   "closing_line_values_available": 0,
   "blocks": {
-    "missing_timestamped_ML_odds": 20,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 25,
-    "NEEDS_100_DISTINCT_EVENTS": 25,
-    "NEEDS_14_DAY_FORWARD_PERIOD": 25,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 25,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 25,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 25,
-    "CALIBRATION_ERROR_OVER_10PP": 25,
+    "missing_timestamped_ML_odds": 19,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 20,
+    "NEEDS_100_DISTINCT_EVENTS": 20,
+    "NEEDS_14_DAY_FORWARD_PERIOD": 20,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 20,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 20,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 20,
+    "CALIBRATION_ERROR_OVER_10PP": 20,
     "EDGE_BELOW_4PP": 9,
     "CONSERVATIVE_EV_BELOW_1_PERCENT": 9,
-    "NEEDS_50_HOLDOUT_FORECASTS": 12,
-    "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 12
+    "NEEDS_50_HOLDOUT_FORECASTS": 10,
+    "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 10
   },
   "history": {
-    "requests": 6,
+    "requests": 3,
     "failures": [],
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261113&limit=300",
-        "sha256": "472c2dd6e0fddeb06617d2a7b49426595ec4d2550ad04d7643b1887afc536ae3",
-        "captured_at_utc": "2026-11-14T03:19:38.932558+00:00",
+        "sha256": "56853353b632215970183c81e2af2e50cfba812bfc683dc258d68bd056314e5c",
+        "captured_at_utc": "2026-11-14T03:35:26.643283+00:00",
         "completed_games": 0
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261112&limit=300",
-        "sha256": "6353427c5b5ba79cef3a1baf5b9d94f73a6060b688361496039b7b2b818d83eb",
-        "captured_at_utc": "2026-11-14T03:19:38.932558+00:00",
-        "completed_games": 4
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261113&limit=300",
         "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-        "captured_at_utc": "2026-11-14T03:19:38.932558+00:00",
+        "captured_at_utc": "2026-11-14T03:35:26.643283+00:00",
         "completed_games": 0
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261112&limit=300",
-        "sha256": "08aa23d0c1fcdd7eb0b2cd025186fff425897dc73a4a327bc5614bb8d00df363",
-        "captured_at_utc": "2026-11-14T03:19:38.932558+00:00",
-        "completed_games": 1
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261113&limit=300",
-        "sha256": "33cce2e3abb0287f8a6bf1f863e1dc858fdbf48d9eba806240ac00ed0ded9de5",
-        "captured_at_utc": "2026-11-14T03:19:38.932558+00:00",
+        "sha256": "2859021c2b050d6ba6332d50816fe45b1a10fec459948ec01626db63b6e3c60e",
+        "captured_at_utc": "2026-11-14T03:35:26.643283+00:00",
         "completed_games": 0
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261112&limit=300",
-        "sha256": "a6430dbe0d2d444403003855b20defeeb845eb6910a7673bc8599a224811f771",
-        "captured_at_utc": "2026-11-14T03:19:38.932558+00:00",
-        "completed_games": 11
       }
     ],
     "games_per_sport": {
