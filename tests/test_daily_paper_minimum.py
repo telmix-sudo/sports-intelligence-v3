@@ -49,6 +49,7 @@ class DailyPaperMinimumTests(unittest.TestCase):
             self.assertTrue(report['minimum_met'])
             self.assertEqual(sum(report['new_entries'].values()),65)
             self.assertEqual(PaperRiskBook(root).total_exposure,32.5)
+            self.assertEqual(report['selection_comparison']['total']['pending'],60)
             event_ids={e['id'] for e in events}
             refunded=events[0]['id']
             finals={eid:{'home':1,'away':1,'outcome':1} for eid in event_ids if eid!=refunded}

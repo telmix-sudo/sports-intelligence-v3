@@ -210,7 +210,7 @@ el('inPlayRows').replaceChildren(...(live?.streams||[]).map(r=>{
            cell(scorePair(m.benchmark_brier,m.brier)),cell(scorePair(m.benchmark_log_loss,m.log_loss)));
  return tr;
 }));
-const dailyComparison=x.daily_selection_comparison;
+const dailyComparison=x.daily_paper_minimum?.selection_comparison;
 el('dailyComparisonStatus').textContent=V3DailyMinimum.comparisonStatus(dailyComparison);
 el('dailyComparisonRows').replaceChildren(...V3DailyMinimum.comparisonRows(dailyComparison).map(values=>{
  const tr=document.createElement('tr');

@@ -666,7 +666,7 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         entry_counts["MARKET_DAILY_REFERENCE"] = entry_counts.get("MARKET_DAILY_REFERENCE",0)+daily_reference["new_entries"]
     auxiliary = open_auxiliary_markets(root, events, now, registry, risk,market_scope='moneyline',admission=admission,learning=learning)
     for name,count in auxiliary.items(): entry_counts[name]=entry_counts.get(name,0)+count
-    from .daily_paper_minimum import run_daily_paper_minimum, daily_selection_report
+    from .daily_paper_minimum import run_daily_paper_minimum
     from .player_context import run as run_player_context
     player_context=run_player_context(root,events,list(selection_experiment.current_forecasts.values()),
         finals,now,selection_experiment,fetcher=fetcher,clock=clock)
@@ -687,13 +687,9 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
     after, _ = build_accounts(root, {}, now)
     # Count the TRUE number of unique events forecast on this Lisbon calendar day,
     # not duplicated strategy picks on the same match.
-    ledger_rows = [
+    activity_rows = [
         r for strategy in STRATEGIES
         for r in read_jsonl(root / "data" / "strategy_ledgers" / (strategy.lower() + ".jsonl"))
-    ]
-    daily_selection = daily_selection_report(ledger_rows, current_f, current_s)
-    activity_rows = [
-        r for r in ledger_rows
         if parse_iso(r["forecast_utc"]).astimezone(PORTUGAL).date()
         == now.astimezone(PORTUGAL).date()
     ]
@@ -757,7 +753,6 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
         "analysis_started_utc": now.isoformat(),
         "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
         "daily_paper_minimum": daily_minimum,
-        "daily_selection_comparison": daily_selection,
         "daily_reference": daily_reference,
         "daily_activity": daily_activity,
         "aggregate_risk": risk.summary(),

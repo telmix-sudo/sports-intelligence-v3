@@ -189,6 +189,10 @@ def run_daily_paper_minimum(root,events,forecasts,now,registry,risk,clock=None):
         if not progress:break
     for name,s in states.items():
         if name!=EXPERIMENTAL and additions[name]:save_jsonl(root/'data/strategy_ledgers'/(name.lower()+'.jsonl'),s['rows'])
+    comparison = daily_selection_report(
+        (row for name, state in states.items() if name != EXPERIMENTAL for row in state['rows']),
+        exp_rows, (row for row in journal if row['kind'] == 'SETTLEMENT'),
+    )
     return {'policy':VERSION,'mode':'USER_REQUESTED_PAPER_DAILY_MINIMUM','local_date':str(day),
             'expected_wallets':len(states),'minimum_per_wallet':MIN_DAILY_ENTRIES,'maximum_per_wallet':MAX_DAILY_ENTRIES,
             'exploratory_stake_eur':DAILY_EXPLORATORY_STAKE_EUR,'requires_validated_edge_for_daily_fill':False,
@@ -198,6 +202,7 @@ def run_daily_paper_minimum(root,events,forecasts,now,registry,risk,clock=None):
                                'opposite_and_value_gap_comparisons':'ZERO_STAKE_ONLY',
                                'favourite_is_not_a_profit_guarantee':True},
             'real_money_allowed':False,'new_entries':dict(additions),
+            'selection_comparison': comparison,
             'wallets':{name:{'before':s['before'],'entries':s['today'],'new_entries':additions[name],
                              'remaining':max(0,MIN_DAILY_ENTRIES-s['today']),'profile':policy(name),
                              'exploratory_today':sum(r.get('daily_paper_exploration_policy')==VERSION and parse_utc(r['forecast_utc']).astimezone(LOCAL).date()==day for r in s['rows'])} for name,s in states.items()},
