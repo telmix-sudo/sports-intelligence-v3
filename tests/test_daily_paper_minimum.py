@@ -9,6 +9,7 @@ from sports_intelligence.custom_strategies import ALL_NAMES
 from sports_intelligence.strategy_registry import ensure_registry
 from sports_intelligence.selection_experiment import SelectionExperiment
 from sports_intelligence.daily_paper_minimum import run_daily_paper_minimum,PROFILES,EXPERIMENTAL,VERSION,candidate,GUARDED_PROFILE
+from sports_intelligence.daily_paper_minimum import daily_selection_report
 from sports_intelligence.portfolio_controls import PaperRiskBook,MAX_SHARED_PREDICTION_OPEN_EUR,record_signal
 from sports_intelligence.research_pipeline import read_journal,reconcile,paper_state,settlement_outcome
 from sports_intelligence.strategy_lab import build_accounts
@@ -39,6 +40,40 @@ def run(root,events,experiment,registry,now=NOW,risk=None):
 
 
 class DailyPaperMinimumTests(unittest.TestCase):
+    def test_frozen_daily_comparison_uses_same_stake_and_existing_settlement(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);registry=ensure_registry(root,NOW,ALL_NAMES);events,x=fixtures(root,market='1X2')
+            for forecast in x.current_forecasts.values():
+                forecast.update(probabilities=[.26,.46,.28],market_no_vig=[.39,.35,.26],odds=[2.5,2.8,3.7])
+            report=run(root,events,x,registry)
+            self.assertTrue(report['minimum_met'])
+            self.assertEqual(sum(report['new_entries'].values()),65)
+            self.assertEqual(PaperRiskBook(root).total_exposure,32.5)
+            event_ids={e['id'] for e in events}
+            refunded=events[0]['id']
+            finals={eid:{'home':1,'away':1,'outcome':1} for eid in event_ids if eid!=refunded}
+            build_accounts(root, finals, NOW+dt.timedelta(hours=3))
+            ledger=[json.loads(line) for f in (root/'data/strategy_ledgers').glob('*.jsonl')
+                    for line in f.read_text().splitlines()]
+            experimental=[r for r in read_journal(root) if r['kind']=='FORECAST' and r['stake_eur']>0]
+            first,*rest=experimental
+            results=[{'forecast_id':first['id'],'status':'VOID'}]
+            results.extend({'forecast_id':r['id'],'status':'SETTLED','outcome':1} for r in rest[:3])
+            report=daily_selection_report(ledger,experimental,results)
+            total=report['total']
+            self.assertEqual(total['registered'],60)
+            self.assertEqual(total['voided'],1)
+            self.assertGreater(total['pending'],0)
+            self.assertEqual(total['distinct_changed_games'],total['distinct_settled_games'])
+            self.assertLess(total['distinct_settled_games'],total['settled'])
+            self.assertEqual(total['market']['losses'],total['settled'])
+            self.assertEqual(total['mixed']['wins'],total['settled'])
+            self.assertEqual(total['market']['net_eur'],-.5*total['settled'])
+            self.assertAlmostEqual(total['mixed']['net_eur'],.9*total['settled'])
+            self.assertNotIn('MARKET_DAILY_REFERENCE',report['wallets'])
+            self.assertEqual(daily_selection_report(ledger,experimental,[])['wallets'][EXPERIMENTAL]['pending'],5)
+            self.assertTrue(all(r['selection_index']==0 for r in ledger if 'daily_selection_comparison' in r))
+
     def test_unvalidated_gap_and_opposite_never_override_market_favourite_daily_fill(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);events,x=fixtures(root,count=1)

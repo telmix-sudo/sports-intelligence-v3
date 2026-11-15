@@ -35,6 +35,14 @@
 <p class="muted">Mínimo diário: cinco apostas PAPER por carteira, até ao máximo de dez. As entradas normais mantêm os critérios de validação. Se faltarem entradas para chegar às cinco, o modo de pesquisa diária abre posições de 0,50 € fictícios, identificadas como não validadas. Mantêm-se odds genuínas anteriores ao jogo, pelo menos duas casas e os limites de exposição. Nos testes diários, um modelo só escolhe o seu favorito depois de passar a validação futura contra o mercado; até lá usa-se o favorito do mercado. A escolha contrária e o desvio de probabilidade continuam em comparação sem stake. Mais vitórias não garantem lucro.</p>
 <p id="dailyTarget" class="warn" role="status">A verificar a meta de hoje…</p><p id="dailyMinimumStatus" role="status">A confirmar as entradas por carteira…</p><div class="table"><table><thead><tr><th>Carteira</th><th>Entradas hoje</th><th>Mínimo</th><th>Testes diários hoje</th><th>Regra dos testes</th><th>Estado</th></tr></thead><tbody id="dailyMinimumRows"></tbody></table></div>
 </section>
+<section class="card space" id="comparacaoDiaria">
+<h2>Teste diário de acertos · mercado e modelo</h2>
+<p id="dailyComparisonStatus" role="status">A aguardar o primeiro relatório com o teste.</p>
+<p class="muted small">Para cada novo complemento diário das carteiras de modelos, a V3 regista duas escolhas com o mesmo jogo, mercado e valor fictício. Uma segue o favorito do mercado. A outra escolhe o resultado mais provável ao combinar 75% da probabilidade do mercado com 25% da do modelo. A comparação usa as odds registadas antes do jogo e o resultado oficial.</p>
+<div class="table" tabindex="0" role="region" aria-label="Comparação de acertos e saldo por carteira">
+<table><thead><tr><th scope="col" rowspan="2">Carteira</th><th scope="col" rowspan="2">Liquidadas</th><th scope="col" rowspan="2">Pendentes</th><th scope="colgroup" colspan="3">Favorito do mercado</th><th scope="colgroup" colspan="3">Mercado 75% + modelo 25%</th></tr>
+<tr><th scope="col">Vitórias</th><th scope="col">Derrotas</th><th scope="col">Líquido</th><th scope="col">Vitórias</th><th scope="col">Derrotas</th><th scope="col">Líquido</th></tr></thead><tbody id="dailyComparisonRows"></tbody></table>
+</div></section>
 <section class="card space"><h2>Atualização das fontes</h2><p id="runtimeStatus" role="status">A verificar scanner e calendário…</p><p class="muted small">Scanner e laboratório partilham a mesma quota de odds. Quando deteta atraso, o laboratório tenta recuperar a atualização. O horário depende da disponibilidade do GitHub Actions.</p></section>
 <section class="card space" id="validacao"><h2>Validação antes de novas entradas</h2><p id="admissionPolicy" class="muted" role="status">A carregar os critérios de entrada…</p><p class="muted small">A classificação como estratégia validada exige comparação favorável com odds verificadas em pelo menos 100 jogos distintos e 14 datas. O mínimo diário usa testes PAPER separados de 0,50 €, mesmo durante esta validação; essas entradas não demonstram vantagem sobre o mercado. A carteira de referência mantém o favorito do mercado como controlo e não recebe novas cópias de modelos auxiliares. As posições anteriores continuam a aguardar os resultados oficiais.</p></section>
 <section class="card space" id="progresso"><h2>Progresso de validação por modelo e mercado</h2><p class="muted small">Contam apenas jogos futuros já liquidados e comparados com odds verificadas. As 100 observações e 14 datas distintas são requisitos mínimos; Brier, Log Loss e os restantes critérios também têm de ser favoráveis. O histórico usado para aprender é apresentado separadamente na secção de aprendizagem.</p><label for="progressRole">Mostrar </label><select id="progressRole" style="background:var(--bg);color:var(--text);border:1px solid var(--border);padding:8px;border-radius:8px"><option value="ALL">Todos os modelos</option><option value="ORIGINAL">Originais</option><option value="CALIBRATION">Ajustes do histórico</option></select><p id="progressCount" class="muted" role="status"></p><div class="table" style="max-height:520px;overflow:auto" tabindex="0" role="region" aria-label="Progresso de validação"><table><thead><tr><th>Modelo</th><th>Modalidade/liga</th><th>Mercado</th><th>Tipo</th><th>Jogos futuros</th><th>Datas distintas</th><th>Em falta</th><th>Estado e bloqueios</th></tr></thead><tbody id="progressRows"><tr><td colspan="8">A aguardar o próximo relatório…</td></tr></tbody></table></div></section>
@@ -66,7 +74,7 @@
 <section class="space"><h2>Fonte e qualidade</h2><div class="card"><div id="sources" class="muted">—</div><p class="muted small">As carteiras simulam preços observados, mas não verificam a execução real em bookmaker nem oferecem garantias. Estratégias podem selecionar os mesmos jogos; por isso não somamos as carteiras como posições independentes.</p><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/docs/original_strategies.md">Metodologia, fontes científicas e próximas estratégias</a></p></div></section>
 </main><dialog id="positionsDialog" aria-labelledby="positionsTitle"><div class="dialogtop"><h2 id="positionsTitle">Posições</h2><button id="closePositions" aria-label="Fechar quadro">Fechar ×</button></div><p class="muted" id="positionsSummary"></p><div id="positionsContent"></div></dialog><footer>Sports Intelligence · Sem apostas reais · Fontes públicas e cálculos reproduzíveis</footer>
 <script src="player-context.js?v=20261106-players"></script>
-<script src="daily-minimum.js?v=20261105-min5-guard"></script>
+<script src="daily-minimum.js?v=20261115-comparison"></script>
 <script src="selection-experiment.js?v=20261111-value"></script>
 <script src="validation-progress.js?v=20261104"></script>
 <script src="balance.js?v=20261101-totals"></script>
@@ -200,6 +208,13 @@ el('inPlayRows').replaceChildren(...(live?.streams||[]).map(r=>{
  const market=r.market==='1X2'?'1X2':'Mais / menos de 2,5 golos';
  tr.append(cell(r.sport.toUpperCase()),cell(market),cell(r.evaluated+' / '+r.observed),
            cell(scorePair(m.benchmark_brier,m.brier)),cell(scorePair(m.benchmark_log_loss,m.log_loss)));
+ return tr;
+}));
+const dailyComparison=x.daily_selection_comparison;
+el('dailyComparisonStatus').textContent=V3DailyMinimum.comparisonStatus(dailyComparison);
+el('dailyComparisonRows').replaceChildren(...V3DailyMinimum.comparisonRows(dailyComparison).map(values=>{
+ const tr=document.createElement('tr');
+ for(const v of values)tr.append(cell(v));
  return tr;
 }));
 el('dailyMinimumStatus').textContent=V3DailyMinimum.describe(x.daily_paper_minimum);

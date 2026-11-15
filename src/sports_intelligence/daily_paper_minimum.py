@@ -4,7 +4,7 @@ Only fresh recomputed forecasts can enter. Existing records stay frozen. No real
 bet or paid request is made. A 50-cent exploratory floor fits the existing shared
 signal cap; ordinary positions retain their original one-euro minimum and gates.
 """
-from collections import Counter
+from collections import Counter, defaultdict
 import datetime as dt
 import hashlib
 import json
@@ -22,6 +22,8 @@ from .selection_policy import selection_trace
 UTC=dt.timezone.utc
 LOCAL=ZoneInfo('Europe/Lisbon')
 VERSION='DAILY-PAPER-MINIMUM-1.1'
+COMPARISON_VERSION = 'DAILY-MARKET-MODEL-75-25-1'
+MARKET_WEIGHT = .75
 EXPERIMENTAL='EXPERIMENTAL_MULTI_MARKET'
 # Unproven probability gaps and their opposites remain zero-stake comparisons.
 # Only a forward-validated learned model may replace the market benchmark for
@@ -172,6 +174,13 @@ def run_daily_paper_minimum(root,events,forecasts,now,registry,risk,clock=None):
                      'training_cutoff_exclusive_utc_date':f['training_cutoff_exclusive_utc_date'],
                      'model_inputs':{'sample_min':sample,'source_model':f['family'],'source_code':f['model_code_sha256']},
                      'sizing_note':'EUR 0.50 exploratory PAPER; aggregate and shared-signal caps preserved.'}
+                if name not in REFERENCE_NAMES:
+                    mixed = [MARKET_WEIGHT*m + (1-MARKET_WEIGHT)*p for m,p in zip(c['m'],c['p'])]
+                    row['daily_selection_comparison'] = {
+                        'version': COMPARISON_VERSION,
+                        'market_index': trace['arms']['MARKET_FAVOURITE']['selection_index'],
+                        'mixed_index': max(range(len(mixed)), key=mixed.__getitem__),
+                    }
                 if name==EXPERIMENTAL:
                     row['kind']='FORECAST'
                     if not append(root,row,journal):raise ValueError('Duplicate daily experimental position after reservation')
@@ -194,3 +203,41 @@ def run_daily_paper_minimum(root,events,forecasts,now,registry,risk,clock=None):
                              'exploratory_today':sum(r.get('daily_paper_exploration_policy')==VERSION and parse_utc(r['forecast_utc']).astimezone(LOCAL).date()==day for r in s['rows'])} for name,s in states.items()},
             'minimum_met':all(s['today']>=MIN_DAILY_ENTRIES for s in states.values()),'blocks':dict(blocked),
             'note':'Research positions have non-zero virtual stakes. Never invent quotes or relax freshness/exposure caps. Missing data and risk capacity are explicit blockers.'}
+
+
+def daily_selection_report(ledger_rows, experimental_forecasts, experimental_settlements):
+    """Score frozen pairs using the existing official settlements and entry stake."""
+    settlements = {r['forecast_id']: r for r in experimental_settlements}
+    groups = defaultdict(list)
+    for row in ledger_rows:
+        if (row.get('daily_selection_comparison') or {}).get('version') == COMPARISON_VERSION:
+            groups[row['strategy']].append((row, row['status'], row.get('observed_outcome')))
+    for row in experimental_forecasts:
+        if (row.get('daily_selection_comparison') or {}).get('version') == COMPARISON_VERSION:
+            result = settlements.get(row['id'], {})
+            groups[EXPERIMENTAL].append((row, result.get('status', 'OPEN'), result.get('outcome')))
+
+    def summarize(entries):
+        settled = [(row, outcome) for row, status, outcome in entries
+                   if status == 'SETTLED' and type(outcome) is int and 0 <= outcome < len(row['odds'])]
+        changed = {row['event_id'] for row, _ in settled
+                   if row['daily_selection_comparison']['market_index'] != row['daily_selection_comparison']['mixed_index']}
+        stats = {}
+        for key in ('market', 'mixed'):
+            wins, pnl = 0, []
+            for row, outcome in settled:
+                index = row['daily_selection_comparison'][key + '_index']
+                won = outcome == index
+                wins += won
+                pnl.append(round(row['stake_eur'] * (row['odds'][index] - 1) if won else -row['stake_eur'], 4))
+            stats[key] = {'wins': wins, 'losses': len(settled) - wins,
+                          'net_eur': round(math.fsum(pnl), 4) if settled else None}
+        voided = sum(status == 'VOID' for _, status, _ in entries)
+        return {'registered': len(entries), 'settled': len(settled), 'voided': voided,
+                'pending': len(entries) - len(settled) - voided,
+                'distinct_settled_games': len({row['event_id'] for row, _ in settled}),
+                'distinct_changed_games': len(changed), **stats}
+
+    return {'version': COMPARISON_VERSION, 'market_weight': MARKET_WEIGHT,
+            'total': summarize([entry for entries in groups.values() for entry in entries]),
+            'wallets': {name: summarize(entries) for name, entries in sorted(groups.items())}}
