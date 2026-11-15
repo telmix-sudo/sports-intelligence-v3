@@ -15,3 +15,15 @@ test('Daily selector discloses market fallback before model validation',()=>{
  assert.equal(view.rows(d)[0][4],'Modelo validado ou favorito do mercado');
  assert.match(view.describe(d),/Sem modelo validado, usa-se o favorito do mercado/);
 });
+test('The paired comparison displays unavailable returns until there is a result',()=>{
+ const pending={registered:1,settled:0,pending:1,voided:0,distinct_settled_games:0,distinct_changed_games:0,
+  market:{wins:0,losses:0,net_eur:null},mixed:{wins:0,losses:0,net_eur:null}};
+ assert.deepEqual(view.comparisonRows({total:pending,wallets:{}}),[['Total',0,1,'—','—','—','—','—','—']]);
+ const settled={...pending,settled:1,pending:0,distinct_settled_games:1,distinct_changed_games:1,
+  market:{wins:0,losses:1,net_eur:-.5},mixed:{wins:1,losses:0,net_eur:.9}};
+ const result={total:settled,wallets:{TEST_WALLET:settled}};
+ assert.match(view.comparisonStatus(result),/Jogos com escolhas diferentes \(1\)/);
+ assert.equal(view.comparisonRows(result)[1][0],'TEST WALLET');
+ assert.match(view.comparisonRows(result)[1][5],/-0,50/);
+ assert.match(view.comparisonRows(result)[1][8],/0,90/);
+});
