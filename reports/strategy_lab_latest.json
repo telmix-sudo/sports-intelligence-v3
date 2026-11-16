@@ -1,7 +1,7 @@
 {
   "selection_experiment": {
     "version": "SELECTION-PAIRED-1.1",
-    "asof_utc": "2026-11-16T01:24:34.201515+00:00",
+    "asof_utc": "2026-11-16T02:45:54.485474+00:00",
     "registered_at_utc": "2026-11-11T10:27:49.399561+00:00",
     "mode": "ZERO_STAKE_FIXED_FUTURE_COHORT",
     "automatic_stake_activation": false,
@@ -12,11 +12,11 @@
     "minimum_dates": 14,
     "forecasts_total": 777,
     "distinct_events": 226,
-    "settled_total": 753,
+    "settled_total": 755,
     "voided_total": 10,
-    "pending_total": 14,
-    "new_forecasts": 1,
-    "new_settlements": 6,
+    "pending_total": 12,
+    "new_forecasts": 0,
+    "new_settlements": 2,
     "rejections": {},
     "streams": [
       {
@@ -12493,60 +12493,60 @@
         "market_spec": null,
         "model_code_sha256": "73074570a00a61dae1dc6affa0774e637a5ce78bba0967aae4cf54c391e4a688",
         "forecasts": 36,
-        "settled": 31,
+        "settled": 33,
         "voided": 0,
-        "pending": 5,
-        "dates": 4,
+        "pending": 3,
+        "dates": 5,
         "cohort_locked": false,
-        "remaining_events": 69,
-        "remaining_dates": 10,
+        "remaining_events": 67,
+        "remaining_dates": 9,
         "status": "COLLECTING",
         "arms": {
           "VALUE_GAP": {
-            "n": 31,
+            "n": 33,
             "wins": 7,
-            "unit_pnl_eur": -8.879999999999999,
-            "roi_pct": -28.645161290322577
+            "unit_pnl_eur": -10.879999999999999,
+            "roi_pct": -32.96969696969697
           },
           "MODEL_FAVOURITE": {
-            "n": 31,
-            "wins": 21,
-            "unit_pnl_eur": -2.31,
-            "roi_pct": -7.451612903225806
+            "n": 33,
+            "wins": 22,
+            "unit_pnl_eur": -3.05,
+            "roi_pct": -9.242424242424242
           },
           "MARKET_FAVOURITE": {
-            "n": 31,
-            "wins": 24,
-            "unit_pnl_eur": 2.27,
-            "roi_pct": 7.32258064516129
+            "n": 33,
+            "wins": 26,
+            "unit_pnl_eur": 3.1100000000000003,
+            "roi_pct": 9.424242424242426
           },
           "OPPOSITE_VALUE_GAP": {
-            "n": 31,
-            "wins": 24,
-            "unit_pnl_eur": 4.5200000000000005,
-            "roi_pct": 14.580645161290324
+            "n": 33,
+            "wins": 26,
+            "unit_pnl_eur": 5.36,
+            "roi_pct": 16.242424242424242
           },
           "PRICE_ADJUSTED_VALUE": {
-            "n": 31,
+            "n": 33,
             "wins": 8,
-            "unit_pnl_eur": -7.08,
-            "roi_pct": -22.838709677419356,
+            "unit_pnl_eur": -9.08,
+            "roi_pct": -27.515151515151516,
             "qualified_comparison": {
-              "n": 25,
+              "n": 27,
               "roi_pct": {
-                "PRICE_ADJUSTED_VALUE": -24.2,
-                "VALUE_GAP": -24.2,
-                "MARKET_FAVOURITE": 7.24
+                "PRICE_ADJUSTED_VALUE": -29.81481481481481,
+                "VALUE_GAP": -29.81481481481481,
+                "MARKET_FAVOURITE": 9.814814814814817
               }
             }
           }
         },
         "automatic_stake_activation": false,
         "scoring": {
-          "model_brier": 0.4207606056171061,
-          "market_brier": 0.3429744542652348,
-          "model_log_loss": 0.6106436840457141,
-          "market_log_loss": 0.5217108141398363
+          "model_brier": 0.4174708175078732,
+          "market_brier": 0.3344575642206951,
+          "model_log_loss": 0.6072709439786895,
+          "market_log_loss": 0.5128524462422065
         }
       },
       {
@@ -12875,30 +12875,9 @@
     "interpretation": "Selection-policy comparison, not inverted probabilities. Returns are theoretical before execution, commission and slippage. Samples across streams may share events; do not sum them as independent proof."
   },
   "value_shortlist": {
-    "asof_utc": "2026-11-16T01:24:50.867159+00:00",
-    "candidates": 5,
+    "asof_utc": "2026-11-16T02:46:22.505427+00:00",
+    "candidates": 2,
     "rows": [
-      {
-        "event_id": "nhl:401892724",
-        "home": "Vegas Golden Knights",
-        "away": "Vancouver Canucks",
-        "sport": "nhl",
-        "family": "MULTIMARKET-1.0.0-nhl",
-        "market": "ML",
-        "market_spec": null,
-        "start_utc": "2026-11-16T02:00:00+00:00",
-        "forecast_utc": "2026-11-16T01:24:48.292222+00:00",
-        "selection_index": 1,
-        "model_probability": 0.3737919191503294,
-        "market_probability": 0.2227787,
-        "odds": 4.7,
-        "edge_pp": 15.101321915032939,
-        "model_expected_unit_pnl": 0.7568220200065481,
-        "conservative_ev": 0.510072020006548,
-        "passes_value_screen": true,
-        "valid_until_utc": "2026-11-16T02:00:00+00:00",
-        "stake_eur": 0
-      },
       {
         "event_id": "nhl:401892727",
         "home": "Utah Mammoth",
@@ -12908,7 +12887,7 @@
         "market": "ML",
         "market_spec": null,
         "start_utc": "2026-11-17T02:30:00+00:00",
-        "forecast_utc": "2026-11-16T01:24:48.297128+00:00",
+        "forecast_utc": "2026-11-16T02:46:08.000067+00:00",
         "selection_index": 1,
         "model_probability": 0.38950508478127055,
         "market_probability": 0.2585887,
@@ -12921,48 +12900,6 @@
         "stake_eur": 0
       },
       {
-        "event_id": "nba:401909993",
-        "home": "Sacramento Kings",
-        "away": "Oklahoma City Thunder",
-        "sport": "nba",
-        "family": "MULTIMARKET-1.0.0-nba",
-        "market": "ML",
-        "market_spec": null,
-        "start_utc": "2026-11-16T02:00:00+00:00",
-        "forecast_utc": "2026-11-16T01:24:48.279250+00:00",
-        "selection_index": 0,
-        "model_probability": 0.28424816545592735,
-        "market_probability": 0.2024378,
-        "odds": 5.3,
-        "edge_pp": 8.181036545592734,
-        "model_expected_unit_pnl": 0.506515276916415,
-        "conservative_ev": 0.20176527691641488,
-        "passes_value_screen": true,
-        "valid_until_utc": "2026-11-16T02:00:00+00:00",
-        "stake_eur": 0
-      },
-      {
-        "event_id": "nhl:401892725",
-        "home": "San Jose Sharks",
-        "away": "Nashville Predators",
-        "sport": "nhl",
-        "family": "MULTIMARKET-1.0.0-nhl",
-        "market": "ML",
-        "market_spec": null,
-        "start_utc": "2026-11-16T02:00:00+00:00",
-        "forecast_utc": "2026-11-16T01:24:48.293203+00:00",
-        "selection_index": 0,
-        "model_probability": 0.4819196146666426,
-        "market_probability": 0.3956808,
-        "odds": 2.54,
-        "edge_pp": 8.623881466664262,
-        "model_expected_unit_pnl": 0.2240758212532723,
-        "conservative_ev": 0.13644582125327243,
-        "passes_value_screen": true,
-        "valid_until_utc": "2026-11-16T02:00:00+00:00",
-        "stake_eur": 0
-      },
-      {
         "event_id": "nba:401909999",
         "home": "Minnesota Timberwolves",
         "away": "Portland Trail Blazers",
@@ -12971,7 +12908,7 @@
         "market": "ML",
         "market_spec": null,
         "start_utc": "2026-11-17T01:00:00+00:00",
-        "forecast_utc": "2026-11-16T01:24:48.294511+00:00",
+        "forecast_utc": "2026-11-16T02:46:07.998923+00:00",
         "selection_index": 0,
         "model_probability": 0.6092752389376386,
         "market_probability": 0.5549941,
@@ -12987,37 +12924,37 @@
   },
   "selection_audit": {
     "status": "CONSISTENT_WITH_CHECKED_FROZEN_RECORDS",
-    "arithmetic_rows_checked": 935,
-    "archived_official_result_rows_checked": 919,
+    "arithmetic_rows_checked": 936,
+    "archived_official_result_rows_checked": 920,
     "official_result_coverage_is_partial": true,
     "issues": [],
-    "independently_verified_model_events": 152,
+    "independently_verified_model_events": 153,
     "models": {
-      "positions": 775,
-      "distinct_events": 152,
-      "wins": 403,
+      "positions": 776,
+      "distinct_events": 153,
+      "wins": 404,
       "losses": 372,
-      "pnl_eur": -308.7772,
-      "priced_decisions": 775,
+      "pnl_eur": -308.6472,
+      "priced_decisions": 776,
       "non_favourite_choices": 143,
-      "expected_wins_from_market": 411.71286296140283,
-      "mean_selected_model_probability": 0.5172138247993724,
-      "mean_selected_market_probability": 0.5312424038211649
+      "expected_wins_from_market": 412.4803682614029,
+      "mean_selected_model_probability": 0.5174013778820041,
+      "mean_selected_market_probability": 0.5315468663162408
     },
     "distinct_model_market_choices": {
-      "positions": 324,
-      "distinct_events": 152,
-      "wins": 167,
+      "positions": 325,
+      "distinct_events": 153,
+      "wins": 168,
       "losses": 157,
-      "pnl_eur": -170.576,
-      "priced_decisions": 324,
+      "pnl_eur": -170.446,
+      "priced_decisions": 325,
       "non_favourite_choices": 43,
-      "expected_wins_from_market": 168.1162063394333,
-      "mean_selected_model_probability": 0.5075806526664361,
-      "mean_selected_market_probability": 0.5188771800599793
+      "expected_wins_from_market": 168.88371163943327,
+      "mean_selected_model_probability": 0.5080581122487597,
+      "mean_selected_market_probability": 0.5196421896597947
     },
-    "shared_auxiliary_positions": 692,
-    "shared_auxiliary_distinct_events": 140,
+    "shared_auxiliary_positions": 693,
+    "shared_auxiliary_distinct_events": 141,
     "native_strategy_positions": 83,
     "by_selected_odds": {
       "2_TO_3": {
@@ -13057,16 +12994,16 @@
         "mean_selected_market_probability": 0.16959954
       },
       "UNDER_2": {
-        "positions": 198,
-        "distinct_events": 125,
-        "wins": 136,
+        "positions": 199,
+        "distinct_events": 126,
+        "wins": 137,
         "losses": 62,
-        "pnl_eur": 8.645,
-        "priced_decisions": 198,
+        "pnl_eur": 8.775,
+        "priced_decisions": 199,
         "non_favourite_choices": 0,
-        "expected_wins_from_market": 119.55191333364819,
-        "mean_selected_model_probability": 0.5528066237870672,
-        "mean_selected_market_probability": 0.6037975420891323
+        "expected_wins_from_market": 120.3194186336482,
+        "mean_selected_model_probability": 0.5533591282751806,
+        "mean_selected_market_probability": 0.6046201941389356
       }
     },
     "per_wallet": {
@@ -13203,31 +13140,31 @@
         "mean_selected_market_probability": 0.623805275625
       },
       "POISSON_SHRINK": {
-        "positions": 72,
-        "distinct_events": 72,
-        "wins": 37,
+        "positions": 73,
+        "distinct_events": 73,
+        "wins": 38,
         "losses": 35,
-        "pnl_eur": -29.0946,
-        "priced_decisions": 72,
+        "pnl_eur": -28.9646,
+        "priced_decisions": 73,
         "non_favourite_choices": 14,
-        "expected_wins_from_market": 38.23771088709105,
-        "mean_selected_model_probability": 0.5215731257104705,
-        "mean_selected_market_probability": 0.5310793178762645
+        "expected_wins_from_market": 39.005216187091044,
+        "mean_selected_model_probability": 0.5235071242202124,
+        "mean_selected_market_probability": 0.5343180299601513
       }
     },
     "binary_discovery_comparison": {
-      "choices": 128,
-      "distinct_events": 122,
+      "choices": 129,
+      "distinct_events": 123,
       "arms": {
         "ORIGINAL": {
-          "wins": 81,
+          "wins": 82,
           "losses": 47,
-          "theoretical_unit_pnl_eur": -2.56
+          "theoretical_unit_pnl_eur": -2.3
         },
         "OPPOSITE": {
           "wins": 47,
-          "losses": 81,
-          "theoretical_unit_pnl_eur": -22.13
+          "losses": 82,
+          "theoretical_unit_pnl_eur": -23.13
         }
       },
       "role": "RETROSPECTIVE_HYPOTHESIS_ONLY_EXCLUDED_FROM_FUTURE_EXPERIMENT"
@@ -13248,16 +13185,16 @@
       "interpretation": "High odds imply lower expected hit rates. Market-implied expected wins are descriptive; repeated events/markets are correlated, so a naive binomial test across positions is invalid."
     },
     "official_verification": {
-      "requests_this_run": 4,
+      "requests_this_run": 1,
       "failures": [],
-      "model_events_total": 152,
-      "verified_model_events": 152,
+      "model_events_total": 153,
+      "verified_model_events": 153,
       "pending_model_events": 0
     }
   },
   "player_context": {
     "version": "PLAYER-CONTEXT-1.0",
-    "asof_utc": "2026-11-16T01:24:49.378248+00:00",
+    "asof_utc": "2026-11-16T02:46:21.183373+00:00",
     "source": {
       "requests": 24,
       "catalog_requests": 0,
@@ -13265,241 +13202,27 @@
       "parallel_requests": 4,
       "success": {
         "CONTEXT": 12,
-        "HISTORY": 12
+        "HISTORY": 11
       },
-      "failures": [],
+      "failures": [
+        {
+          "event_id": "nba:401909981",
+          "reason": "URLError"
+        }
+      ],
       "source": "ESPN_PUBLIC_SUMMARY_UNVERSIONED",
       "source_contract": "STRICT_IDENTITY_SCHEMA_AND_CLOCK_CHECKS",
       "paid_requests": 0
     },
     "events": [
       {
-        "event_id": "nba:401909993",
-        "sport": "nba",
-        "home": "Sacramento Kings",
-        "away": "Oklahoma City Thunder",
-        "start_utc": "2026-11-16T02:00:00+00:00",
-        "context_utc": "2026-11-15T17:44:46.285849+00:00",
-        "status": "CONTEXT_STALE",
-        "candidate_probability": null,
-        "influences_daily_selection": false,
-        "teams": {
-          "home": {
-            "id": "23",
-            "name": "Sacramento Kings",
-            "injury_report": true,
-            "players": {
-              "4898371": {
-                "id": "4898371",
-                "name": "Maxime Raynaud",
-                "availability": "OUT",
-                "reported_status": "out",
-                "reported_utc": "2026-11-15T01:00Z"
-              },
-              "4594327": {
-                "id": "4594327",
-                "name": "Keegan Murray",
-                "availability": "UNCERTAIN",
-                "reported_status": "day-to-day",
-                "reported_utc": "2026-11-15T01:00Z"
-              },
-              "4431679": {
-                "id": "4431679",
-                "name": "Precious Achiuwa",
-                "availability": "UNCERTAIN",
-                "reported_status": "day-to-day",
-                "reported_utc": "2026-11-15T00:57Z"
-              },
-              "3907387": {
-                "id": "3907387",
-                "name": "Ben Simmons",
-                "availability": "OUT",
-                "reported_status": "out",
-                "reported_utc": "2026-10-21T04:22Z"
-              }
-            },
-            "starters": [],
-            "lineup_confirmed": false
-          },
-          "away": {
-            "id": "25",
-            "name": "Oklahoma City Thunder",
-            "injury_report": true,
-            "players": {
-              "4432823": {
-                "id": "4432823",
-                "name": "Jaylin Williams",
-                "availability": "OUT",
-                "reported_status": "out",
-                "reported_utc": "2026-11-15T01:14Z"
-              },
-              "4900671": {
-                "id": "4900671",
-                "name": "Ajay Mitchell",
-                "availability": "UNCERTAIN",
-                "reported_status": "day-to-day",
-                "reported_utc": "2026-11-15T01:10Z"
-              },
-              "5061603": {
-                "id": "5061603",
-                "name": "Thomas Sorber",
-                "availability": "OUT",
-                "reported_status": "out",
-                "reported_utc": "2026-11-13T01:07Z"
-              },
-              "4683692": {
-                "id": "4683692",
-                "name": "Cason Wallace",
-                "availability": "OUT",
-                "reported_status": "out",
-                "reported_utc": "2026-10-31T01:16Z"
-              },
-              "4433255": {
-                "id": "4433255",
-                "name": "Chet Holmgren",
-                "availability": "OUT",
-                "reported_status": "out",
-                "reported_utc": "2026-10-31T01:02Z"
-              }
-            },
-            "starters": [],
-            "lineup_confirmed": false
-          }
-        }
-      },
-      {
-        "event_id": "nhl:401892724",
-        "sport": "nhl",
-        "home": "Vegas Golden Knights",
-        "away": "Vancouver Canucks",
-        "start_utc": "2026-11-16T02:00:00+00:00",
-        "context_utc": "2026-11-15T22:51:33.043281+00:00",
-        "status": "CONTEXT_STALE",
-        "candidate_probability": null,
-        "influences_daily_selection": false,
-        "teams": {
-          "home": {
-            "id": "37",
-            "name": "Vegas Golden Knights",
-            "injury_report": true,
-            "players": {
-              "3652964": {
-                "id": "3652964",
-                "name": "Noah Hanifin",
-                "availability": "OUT",
-                "reported_status": "out",
-                "reported_utc": "2026-11-10T20:34Z"
-              }
-            },
-            "starters": [],
-            "lineup_confirmed": false
-          },
-          "away": {
-            "id": "22",
-            "name": "Vancouver Canucks",
-            "injury_report": true,
-            "players": {
-              "3942866": {
-                "id": "3942866",
-                "name": "Guillaume Brisebois",
-                "availability": "OUT",
-                "reported_status": "injured reserve",
-                "reported_utc": "2026-11-13T22:59Z"
-              },
-              "3069342": {
-                "id": "3069342",
-                "name": "Mackenzie MacEachern",
-                "availability": "OUT",
-                "reported_status": "injured reserve",
-                "reported_utc": "2026-09-29T17:03Z"
-              },
-              "3096217": {
-                "id": "3096217",
-                "name": "Thatcher Demko",
-                "availability": "OUT",
-                "reported_status": "injured reserve",
-                "reported_utc": "2026-09-28T17:58Z"
-              }
-            },
-            "starters": [],
-            "lineup_confirmed": false
-          }
-        }
-      },
-      {
-        "event_id": "nhl:401892725",
-        "sport": "nhl",
-        "home": "San Jose Sharks",
-        "away": "Nashville Predators",
-        "start_utc": "2026-11-16T02:00:00+00:00",
-        "context_utc": "2026-11-15T22:51:33.157474+00:00",
-        "status": "CONTEXT_STALE",
-        "candidate_probability": null,
-        "influences_daily_selection": false,
-        "teams": {
-          "home": {
-            "id": "18",
-            "name": "San Jose Sharks",
-            "injury_report": true,
-            "players": {
-              "3042017": {
-                "id": "3042017",
-                "name": "Alexander Wennberg",
-                "availability": "UNCERTAIN",
-                "reported_status": "day-to-day",
-                "reported_utc": "2026-11-15T14:13Z"
-              },
-              "5216907": {
-                "id": "5216907",
-                "name": "Igor Chernyshov",
-                "availability": "OUT",
-                "reported_status": "injured reserve",
-                "reported_utc": "2026-10-28T16:49Z"
-              },
-              "5149209": {
-                "id": "5149209",
-                "name": "Quentin Musty",
-                "availability": "OUT",
-                "reported_status": "injured reserve",
-                "reported_utc": "2026-09-28T22:20Z"
-              },
-              "4329962": {
-                "id": "4329962",
-                "name": "Kyle Keyser",
-                "availability": "OUT",
-                "reported_status": "injured reserve",
-                "reported_utc": "2026-09-28T22:10Z"
-              }
-            },
-            "starters": [],
-            "lineup_confirmed": false
-          },
-          "away": {
-            "id": "27",
-            "name": "Nashville Predators",
-            "injury_report": true,
-            "players": {
-              "2967072": {
-                "id": "2967072",
-                "name": "Jonathan Marchessault",
-                "availability": "UNCERTAIN",
-                "reported_status": "day-to-day",
-                "reported_utc": "2026-11-14T14:19Z"
-              }
-            },
-            "starters": [],
-            "lineup_confirmed": false
-          }
-        }
-      },
-      {
         "event_id": "nba:401909994",
         "sport": "nba",
         "home": "Boston Celtics",
         "away": "Orlando Magic",
         "start_utc": "2026-11-17T00:00:00+00:00",
-        "context_utc": "2026-11-15T22:51:32.942075+00:00",
-        "status": "CONTEXT_STALE",
+        "context_utc": "2026-11-16T02:46:08.492382+00:00",
+        "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
         "teams": {
@@ -13548,6 +13271,120 @@
             "starters": [],
             "lineup_confirmed": false
           }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          -0.06066666666666667,
+          0.0,
+          -0.08875739644970415,
+          0.0,
+          -0.2,
+          0.0,
+          -0.05222509877714132,
+          0.2857142857142857
+        ],
+        "details": {
+          "home": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.0,
+            "history_event_ids": [
+              "nba:401909968",
+              "nba:401909961",
+              "nba:401909949",
+              "nba:401909288",
+              "nba:401909924",
+              "nba:401909916",
+              "nba:401909903",
+              "nba:401909278",
+              "nba:401909877",
+              "nba:401909870",
+              "nba:401909095",
+              "nba:401909088",
+              "nba:401898407",
+              "nba:401898405",
+              "nba:401898398"
+            ],
+            "history_latest_start_utc": "2026-11-12T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T03:19:48.926399+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": -0.02681563467384418,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.0,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {},
+            "players": []
+          },
+          "away": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.06066666666666667,
+            "history_event_ids": [
+              "nba:401909297",
+              "nba:401909973",
+              "nba:401909964",
+              "nba:401909942",
+              "nba:401909936",
+              "nba:401909911",
+              "nba:401909903",
+              "nba:401909281",
+              "nba:401909885",
+              "nba:401909863",
+              "nba:401909845",
+              "nba:401909834",
+              "nba:401898406",
+              "nba:401898403",
+              "nba:401898401"
+            ],
+            "history_latest_start_utc": "2026-11-14T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-15T15:53:08.652820+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": 0.02540946410329714,
+            "unmatched_reported_players": [
+              "4065654",
+              "5107251"
+            ],
+            "unknown_out_count": 2,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.08875739644970415,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {
+              "5214637": {
+                "played_games": 3,
+                "wins_when_played": 2,
+                "games_without_recorded_minutes": 12,
+                "wins_without_recorded_minutes": 5,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4432573": {
+                "played_games": 5,
+                "wins_when_played": 2,
+                "games_without_recorded_minutes": 10,
+                "wins_without_recorded_minutes": 5,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "5214637",
+                "name": "Noah Penda",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-14T17:33Z",
+                "average_prior_minutes": 4.3
+              },
+              {
+                "id": "4432573",
+                "name": "Paolo Banchero",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-10-24T16:47Z",
+                "average_prior_minutes": 13.9
+              }
+            ]
+          }
         }
       },
       {
@@ -13556,8 +13393,8 @@
         "home": "Cleveland Cavaliers",
         "away": "Chicago Bulls",
         "start_utc": "2026-11-17T00:00:00+00:00",
-        "context_utc": "2026-11-15T22:51:33.047268+00:00",
-        "status": "CONTEXT_STALE",
+        "context_utc": "2026-11-16T02:46:08.648176+00:00",
+        "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
         "teams": {
@@ -13635,6 +13472,196 @@
             "starters": [],
             "lineup_confirmed": false
           }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          0.06316233417682693,
+          0.0827083812591059,
+          0.02935524394428088,
+          0.04384249539210598,
+          0.1,
+          0.0,
+          -0.009498243421173558,
+          0.0
+        ],
+        "details": {
+          "home": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.19118165784832453,
+            "history_event_ids": [
+              "nba:401909298",
+              "nba:401909967",
+              "nba:401909953",
+              "nba:401909940",
+              "nba:401909289",
+              "nba:401909929",
+              "nba:401909907",
+              "nba:401909900",
+              "nba:401909893",
+              "nba:401909882",
+              "nba:401909869",
+              "nba:401909854",
+              "nba:401909093",
+              "nba:401898403",
+              "nba:401898401"
+            ],
+            "history_latest_start_utc": "2026-11-14T01:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T02:46:09.492592+00:00",
+            "uncertain_minutes_share": 0.16966490299823633,
+            "scoring_form_change": -0.06920847216136194,
+            "unmatched_reported_players": [
+              "5106268"
+            ],
+            "unknown_out_count": 1,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.17560617193240263,
+            "uncertain_scoring_share": 0.13886847905951505,
+            "player_results_associations": {
+              "4683747": {
+                "played_games": 9,
+                "wins_when_played": 5,
+                "games_without_recorded_minutes": 6,
+                "wins_without_recorded_minutes": 2,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4576087": {
+                "played_games": 13,
+                "wins_when_played": 7,
+                "games_without_recorded_minutes": 2,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4432158": {
+                "played_games": 14,
+                "wins_when_played": 7,
+                "games_without_recorded_minutes": 1,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4066757": {
+                "played_games": 10,
+                "wins_when_played": 6,
+                "games_without_recorded_minutes": 5,
+                "wins_without_recorded_minutes": 1,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "4683747",
+                "name": "Jaylon Tyson",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T22:09Z",
+                "average_prior_minutes": 20.3
+              },
+              {
+                "id": "4576087",
+                "name": "Peyton Watson",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T22:04Z",
+                "average_prior_minutes": 27.8
+              },
+              {
+                "id": "4432158",
+                "name": "Evan Mobley",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-15T21:58Z",
+                "average_prior_minutes": 31.6
+              },
+              {
+                "id": "4066757",
+                "name": "Sam Merrill",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-15T21:39Z",
+                "average_prior_minutes": 22.6
+              }
+            ]
+          },
+          "away": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.1280193236714976,
+            "history_event_ids": [
+              "nba:401909299",
+              "nba:401909969",
+              "nba:401909945",
+              "nba:401909926",
+              "nba:401909912",
+              "nba:401909278",
+              "nba:401909886",
+              "nba:401909870",
+              "nba:401909857",
+              "nba:401909848",
+              "nba:401909837",
+              "nba:401908943",
+              "nba:401908942",
+              "nba:401908941",
+              "nba:401908940"
+            ],
+            "history_latest_start_utc": "2026-11-14T01:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-15T10:58:05.323957+00:00",
+            "uncertain_minutes_share": 0.08695652173913043,
+            "scoring_form_change": -0.05971022874018839,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.14625092798812175,
+            "uncertain_scoring_share": 0.09502598366740907,
+            "player_results_associations": {
+              "5105555": {
+                "played_games": 5,
+                "wins_when_played": 0,
+                "games_without_recorded_minutes": 10,
+                "wins_without_recorded_minutes": 4,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4397189": {
+                "played_games": 14,
+                "wins_when_played": 4,
+                "games_without_recorded_minutes": 1,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "5095151": {
+                "played_games": 14,
+                "wins_when_played": 3,
+                "games_without_recorded_minutes": 1,
+                "wins_without_recorded_minutes": 1,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "5105555",
+                "name": "Tobe Awaka",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-15T21:30Z",
+                "average_prior_minutes": 6.4
+              },
+              {
+                "id": "4397189",
+                "name": "Jalen Smith",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T21:29Z",
+                "average_prior_minutes": 25.2
+              },
+              {
+                "id": "5095151",
+                "name": "Caleb Wilson",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-12T21:35Z",
+                "average_prior_minutes": 30.7
+              }
+            ]
+          }
         }
       },
       {
@@ -13643,8 +13670,8 @@
         "home": "Washington Wizards",
         "away": "Memphis Grizzlies",
         "start_utc": "2026-11-17T00:00:00+00:00",
-        "context_utc": "2026-11-15T22:51:33.132934+00:00",
-        "status": "CONTEXT_STALE",
+        "context_utc": "2026-11-16T02:46:08.700577+00:00",
+        "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
         "teams": {
@@ -13736,6 +13763,213 @@
             "starters": [],
             "lineup_confirmed": false
           }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          -0.06836050252669365,
+          -0.13190912173618177,
+          -0.13763484339816692,
+          -0.1306497175141243,
+          0.2,
+          0.0,
+          -0.0337364800397667,
+          0.29166666666666663
+        ],
+        "details": {
+          "home": {
+            "prior_games": 16,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.13170731707317074,
+            "history_event_ids": [
+              "nba:401909977",
+              "nba:401909966",
+              "nba:401909954",
+              "nba:401909941",
+              "nba:401909287",
+              "nba:401909923",
+              "nba:401909911",
+              "nba:401909277",
+              "nba:401909882",
+              "nba:401909868",
+              "nba:401909857",
+              "nba:401909846",
+              "nba:401909835",
+              "nba:401906509",
+              "nba:401901824",
+              "nba:401906510"
+            ],
+            "history_latest_start_utc": "2026-11-13T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T17:19:13.288792+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": -0.03806301754346009,
+            "unmatched_reported_players": [
+              "4997537",
+              "4606840"
+            ],
+            "unknown_out_count": 2,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.11307137129109865,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {
+              "5238230": {
+                "played_games": 15,
+                "wins_when_played": 5,
+                "games_without_recorded_minutes": 1,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4432187": {
+                "played_games": 4,
+                "wins_when_played": 1,
+                "games_without_recorded_minutes": 12,
+                "wins_without_recorded_minutes": 4,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4432907": {
+                "played_games": 7,
+                "wins_when_played": 3,
+                "games_without_recorded_minutes": 9,
+                "wins_without_recorded_minutes": 2,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "5238230",
+                "name": "Tre Johnson",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-15T22:31Z",
+                "average_prior_minutes": 23.8
+              },
+              {
+                "id": "4432187",
+                "name": "Reece Beekman",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-02T18:22Z",
+                "average_prior_minutes": 2.7
+              },
+              {
+                "id": "4432907",
+                "name": "Justin Champagnie",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-10-28T18:38Z",
+                "average_prior_minutes": 11.3
+              }
+            ]
+          },
+          "away": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.2000678195998644,
+            "history_event_ids": [
+              "nba:401909983",
+              "nba:401909300",
+              "nba:401909970",
+              "nba:401909955",
+              "nba:401909291",
+              "nba:401909927",
+              "nba:401909914",
+              "nba:401909899",
+              "nba:401909895",
+              "nba:401909875",
+              "nba:401909867",
+              "nba:401909850",
+              "nba:401909838",
+              "nba:401901822",
+              "nba:401908940"
+            ],
+            "history_latest_start_utc": "2026-11-15T01:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T01:24:49.255260+00:00",
+            "uncertain_minutes_share": 0.13190912173618177,
+            "scoring_form_change": -0.004326537503693384,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.25070621468926557,
+            "uncertain_scoring_share": 0.1306497175141243,
+            "player_results_associations": {
+              "5105550": {
+                "played_games": 13,
+                "wins_when_played": 10,
+                "games_without_recorded_minutes": 2,
+                "wins_without_recorded_minutes": 1,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4432810": {
+                "played_games": 10,
+                "wins_when_played": 7,
+                "games_without_recorded_minutes": 5,
+                "wins_without_recorded_minutes": 4,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4065733": {
+                "played_games": 13,
+                "wins_when_played": 9,
+                "games_without_recorded_minutes": 2,
+                "wins_without_recorded_minutes": 2,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4593016": {
+                "played_games": 10,
+                "wins_when_played": 8,
+                "games_without_recorded_minutes": 5,
+                "wins_without_recorded_minutes": 3,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4600663": {
+                "played_games": 12,
+                "wins_when_played": 8,
+                "games_without_recorded_minutes": 3,
+                "wins_without_recorded_minutes": 3,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "5105550",
+                "name": "GG Jackson",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-15T22:16Z",
+                "average_prior_minutes": 14.6
+              },
+              {
+                "id": "4432810",
+                "name": "Isaiah Stewart",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T22:15Z",
+                "average_prior_minutes": 18.1
+              },
+              {
+                "id": "4065733",
+                "name": "Ty Jerome",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-15T22:13Z",
+                "average_prior_minutes": 30.5
+              },
+              {
+                "id": "4593016",
+                "name": "Quinten Post",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-15T22:12Z",
+                "average_prior_minutes": 13.9
+              },
+              {
+                "id": "4600663",
+                "name": "Zach Edey",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T22:11Z",
+                "average_prior_minutes": 20.8
+              }
+            ]
+          }
         }
       },
       {
@@ -13744,8 +13978,8 @@
         "home": "Brooklyn Nets",
         "away": "Philadelphia 76ers",
         "start_utc": "2026-11-17T00:30:00+00:00",
-        "context_utc": "2026-11-15T22:51:33.225752+00:00",
-        "status": "CONTEXT_STALE",
+        "context_utc": "2026-11-16T02:46:08.726530+00:00",
+        "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
         "teams": {
@@ -13793,6 +14027,119 @@
             },
             "starters": [],
             "lineup_confirmed": false
+          }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          -0.04368600682593857,
+          -0.1068259385665529,
+          -0.014274981217129978,
+          -0.1382419233658903,
+          -0.2,
+          0.0,
+          0.07488145366709897,
+          -0.29166666666666674
+        ],
+        "details": {
+          "home": {
+            "prior_games": 14,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.0,
+            "history_event_ids": [
+              "nba:401909983",
+              "nba:401909972",
+              "nba:401909948",
+              "nba:401909939",
+              "nba:401909925",
+              "nba:401909910",
+              "nba:401909904",
+              "nba:401909279",
+              "nba:401909877",
+              "nba:401909862",
+              "nba:401909854",
+              "nba:401909836",
+              "nba:401898404",
+              "nba:401901824"
+            ],
+            "history_latest_start_utc": "2026-11-15T01:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T01:24:49.255260+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": 0.022641707648568987,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.0,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {},
+            "players": []
+          },
+          "away": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.04368600682593857,
+            "history_event_ids": [
+              "nba:401909976",
+              "nba:401909961",
+              "nba:401909945",
+              "nba:401909289",
+              "nba:401909922",
+              "nba:401909912",
+              "nba:401909897",
+              "nba:401909280",
+              "nba:401909884",
+              "nba:401909866",
+              "nba:401909855",
+              "nba:401909093",
+              "nba:401909089",
+              "nba:401898407",
+              "nba:401898398"
+            ],
+            "history_latest_start_utc": "2026-11-13T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T03:19:48.839966+00:00",
+            "uncertain_minutes_share": 0.1068259385665529,
+            "scoring_form_change": -0.05223974601852999,
+            "unmatched_reported_players": [
+              "4870562",
+              "4871141"
+            ],
+            "unknown_out_count": 2,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.014274981217129978,
+            "uncertain_scoring_share": 0.1382419233658903,
+            "player_results_associations": {
+              "3059318": {
+                "played_games": 12,
+                "wins_when_played": 9,
+                "games_without_recorded_minutes": 3,
+                "wins_without_recorded_minutes": 1,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "5105637": {
+                "played_games": 9,
+                "wins_when_played": 8,
+                "games_without_recorded_minutes": 6,
+                "wins_without_recorded_minutes": 2,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "3059318",
+                "name": "Joel Embiid",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T20:58Z",
+                "average_prior_minutes": 31.3
+              },
+              {
+                "id": "5105637",
+                "name": "Adem Bona",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-12T16:36Z",
+                "average_prior_minutes": 12.8
+              }
+            ]
           }
         }
       },
@@ -13850,13 +14197,13 @@
         "mode": "INJURY_REPORT",
         "features": [
           -0.14917514917514918,
-          0.1000997672098437,
+          0.10083752093802345,
           -0.13161875945537066,
-          0.08577405857740586,
+          0.08488612836438923,
           0.0,
           0.0,
-          0.023540746895171605,
-          -0.1398809523809524
+          0.06266776993592149,
+          -0.13988095238095236
         ],
         "details": {
           "home": {
@@ -13865,6 +14212,7 @@
             "out_minutes_share": 0.0,
             "history_event_ids": [
               "nba:401909982",
+              "nba:401909298",
               "nba:401909963",
               "nba:401909951",
               "nba:401909937",
@@ -13878,18 +14226,17 @@
               "nba:401909091",
               "nba:401898406",
               "nba:401898404",
-              "nba:401898397",
-              "nba:401898393"
+              "nba:401898397"
             ],
             "history_latest_start_utc": "2026-11-15T01:00:00+00:00",
-            "history_latest_capture_utc": "2026-11-16T01:24:49.200555+00:00",
-            "uncertain_minutes_share": 0.1000997672098437,
-            "scoring_form_change": -0.07943759525942673,
+            "history_latest_capture_utc": "2026-11-16T02:46:09.492592+00:00",
+            "uncertain_minutes_share": 0.10083752093802345,
+            "scoring_form_change": -0.04031057221867684,
             "unmatched_reported_players": [],
             "unknown_out_count": 0,
             "unknown_uncertain_count": 0,
             "out_scoring_share": 0.0,
-            "uncertain_scoring_share": 0.08577405857740586,
+            "uncertain_scoring_share": 0.08488612836438923,
             "player_results_associations": {
               "4601025": {
                 "played_games": 12,
@@ -14436,20 +14783,20 @@
         },
         "mode": "INJURY_REPORT",
         "features": [
-          0.1588616920021347,
+          0.15828807842555262,
           -0.06635911994322213,
-          -0.00012592939269223669,
+          0.005377426312005773,
           -0.0402588066139468,
           -0.2,
           0.0,
-          -0.07023771547502677,
-          -0.4136904761904763
+          -0.062434320041896973,
+          -0.41369047619047616
         ],
         "details": {
           "home": {
-            "prior_games": 17,
+            "prior_games": 16,
             "confirmed_lineup": false,
-            "out_minutes_share": 0.31038759689922485,
+            "out_minutes_share": 0.30981398332264276,
             "history_event_ids": [
               "nba:401909980",
               "nba:401909300",
@@ -14466,42 +14813,41 @@
               "nba:401909849",
               "nba:401909839",
               "nba:401906509",
-              "nba:401901825",
-              "nba:401898393"
+              "nba:401901825"
             ],
             "history_latest_start_utc": "2026-11-15T00:00:00+00:00",
             "history_latest_capture_utc": "2026-11-16T01:24:48.921902+00:00",
             "uncertain_minutes_share": 0.0,
-            "scoring_form_change": -0.093834264071048,
+            "scoring_form_change": -0.0860308686379182,
             "unmatched_reported_players": [],
             "unknown_out_count": 0,
             "unknown_uncertain_count": 0,
-            "out_scoring_share": 0.274496644295302,
+            "out_scoring_share": 0.28,
             "uncertain_scoring_share": 0.0,
             "player_results_associations": {
               "4576086": {
-                "played_games": 10,
+                "played_games": 9,
                 "wins_when_played": 5,
                 "games_without_recorded_minutes": 7,
                 "wins_without_recorded_minutes": 1,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               },
               "4683634": {
-                "played_games": 15,
+                "played_games": 14,
                 "wins_when_played": 6,
                 "games_without_recorded_minutes": 2,
                 "wins_without_recorded_minutes": 0,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               },
               "4397688": {
-                "played_games": 12,
+                "played_games": 11,
                 "wins_when_played": 5,
                 "games_without_recorded_minutes": 5,
                 "wins_without_recorded_minutes": 1,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               },
               "4431675": {
-                "played_games": 9,
+                "played_games": 8,
                 "wins_when_played": 6,
                 "games_without_recorded_minutes": 8,
                 "wins_without_recorded_minutes": 0,
@@ -14510,7 +14856,7 @@
               "3907497": {
                 "played_games": 9,
                 "wins_when_played": 1,
-                "games_without_recorded_minutes": 8,
+                "games_without_recorded_minutes": 7,
                 "wins_without_recorded_minutes": 5,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               }
@@ -14522,7 +14868,7 @@
                 "availability": "OUT",
                 "reported_status": "out",
                 "reported_utc": "2026-11-15T23:10Z",
-                "average_prior_minutes": 10.9
+                "average_prior_minutes": 8.9
               },
               {
                 "id": "4683634",
@@ -14546,7 +14892,7 @@
                 "availability": "OUT",
                 "reported_status": "out",
                 "reported_utc": "2026-11-15T22:52Z",
-                "average_prior_minutes": 14.3
+                "average_prior_minutes": 12.8
               },
               {
                 "id": "3907497",
@@ -14649,7 +14995,7 @@
         "home": "Baltimore Ravens",
         "away": "Los Angeles Chargers",
         "start_utc": "2026-11-17T01:15:00+00:00",
-        "context_utc": "2026-11-16T01:24:48.643696+00:00",
+        "context_utc": "2026-11-16T02:46:08.456002+00:00",
         "status": "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT",
         "candidate_probability": null,
         "influences_daily_selection": false,
@@ -14750,8 +15096,8 @@
         "home": "Denver Nuggets",
         "away": "Phoenix Suns",
         "start_utc": "2026-11-17T02:00:00+00:00",
-        "context_utc": "2026-11-15T17:44:46.318853+00:00",
-        "status": "CONTEXT_STALE",
+        "context_utc": "2026-11-16T02:46:08.448352+00:00",
+        "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
         "teams": {
@@ -14794,6 +15140,104 @@
             "starters": [],
             "lineup_confirmed": false
           }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          0.012968299711815564,
+          0.0,
+          0.017964071856287425,
+          0.0,
+          -0.1,
+          -0.1,
+          0.0328874543651998,
+          0.12500000000000003
+        ],
+        "details": {
+          "home": {
+            "prior_games": 14,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.012968299711815564,
+            "history_event_ids": [
+              "nba:401909980",
+              "nba:401909970",
+              "nba:401909957",
+              "nba:401909938",
+              "nba:401909931",
+              "nba:401909918",
+              "nba:401909286",
+              "nba:401909889",
+              "nba:401909876",
+              "nba:401909859",
+              "nba:401909094",
+              "nba:401898719",
+              "nba:401918011",
+              "nba:401908941"
+            ],
+            "history_latest_start_utc": "2026-11-15T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T01:24:48.921902+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": 0.001467901298432439,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.017964071856287425,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {
+              "4432181": {
+                "played_games": 2,
+                "wins_when_played": 1,
+                "games_without_recorded_minutes": 12,
+                "wins_without_recorded_minutes": 8,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "4432181",
+                "name": "Julian Strawther",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-10-17T00:52Z",
+                "average_prior_minutes": 3.6
+              }
+            ]
+          },
+          "away": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.0,
+            "history_event_ids": [
+              "nba:401909986",
+              "nba:401909979",
+              "nba:401909962",
+              "nba:401909958",
+              "nba:401909943",
+              "nba:401909936",
+              "nba:401909932",
+              "nba:401909919",
+              "nba:401909286",
+              "nba:401909873",
+              "nba:401909860",
+              "nba:401909841",
+              "nba:401908948",
+              "nba:401898722",
+              "nba:401898720"
+            ],
+            "history_latest_start_utc": "2026-11-15T21:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T01:24:49.079742+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": -0.03141955306676736,
+            "unmatched_reported_players": [
+              "4431695",
+              "4701232"
+            ],
+            "unknown_out_count": 1,
+            "unknown_uncertain_count": 1,
+            "out_scoring_share": 0.0,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {},
+            "players": []
+          }
         }
       },
       {
@@ -14802,8 +15246,8 @@
         "home": "Utah Mammoth",
         "away": "Vancouver Canucks",
         "start_utc": "2026-11-17T02:30:00+00:00",
-        "context_utc": "2026-11-15T22:51:33.102174+00:00",
-        "status": "CONTEXT_STALE",
+        "context_utc": "2026-11-16T02:46:08.803110+00:00",
+        "status": "COLLECTING_PRE_GAME_TRAINING",
         "candidate_probability": null,
         "influences_daily_selection": false,
         "teams": {
@@ -14881,6 +15325,194 @@
             "starters": [],
             "lineup_confirmed": false
           }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          0.15635568656530605,
+          0.056096110503090914,
+          0.23529411764705885,
+          0.29411764705882354,
+          -0.2,
+          0.0,
+          0.17519984071186245,
+          0.14285714285714285
+        ],
+        "details": {
+          "home": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.17939261280440574,
+            "history_event_ids": [
+              "nhl:401892704",
+              "nhl:401892693",
+              "nhl:401892666",
+              "nhl:401892648",
+              "nhl:401892633",
+              "nhl:401892626",
+              "nhl:401892602",
+              "nhl:401892592",
+              "nhl:401892575",
+              "nhl:401892562",
+              "nhl:401892538",
+              "nhl:401892531",
+              "nhl:401892515",
+              "nhl:401892500",
+              "nhl:401892472"
+            ],
+            "history_latest_start_utc": "2026-11-13T02:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T03:35:36.798835+00:00",
+            "uncertain_minutes_share": 0.056096110503090914,
+            "scoring_form_change": -0.037113307498241266,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.23529411764705885,
+            "uncertain_scoring_share": 0.29411764705882354,
+            "player_results_associations": {
+              "5080143": {
+                "played_games": 13,
+                "wins_when_played": 7,
+                "games_without_recorded_minutes": 2,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "3114770": {
+                "played_games": 14,
+                "wins_when_played": 7,
+                "games_without_recorded_minutes": 1,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "3024798": {
+                "played_games": 12,
+                "wins_when_played": 7,
+                "games_without_recorded_minutes": 3,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4874723": {
+                "played_games": 13,
+                "wins_when_played": 7,
+                "games_without_recorded_minutes": 2,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "3941974": {
+                "played_games": 4,
+                "wins_when_played": 3,
+                "games_without_recorded_minutes": 11,
+                "wins_without_recorded_minutes": 4,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "5080143",
+                "name": "Logan Cooley",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T14:13Z",
+                "average_prior_minutes": 18.708333333333336
+              },
+              {
+                "id": "3114770",
+                "name": "Nick Schmaltz",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-14T18:48Z",
+                "average_prior_minutes": 16.009999999999998
+              },
+              {
+                "id": "3024798",
+                "name": "Nate Schmidt",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-12T19:30Z",
+                "average_prior_minutes": 17.89
+              },
+              {
+                "id": "4874723",
+                "name": "Dylan Guenther",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-12T01:21Z",
+                "average_prior_minutes": 17.759999999999998
+              },
+              {
+                "id": "3941974",
+                "name": "John Marino",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-01T20:27Z",
+                "average_prior_minutes": 8.168333333333333
+              }
+            ]
+          },
+          "away": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.02303692623909969,
+            "history_event_ids": [
+              "nhl:401892706",
+              "nhl:401892673",
+              "nhl:401892656",
+              "nhl:401892643",
+              "nhl:401892621",
+              "nhl:401892610",
+              "nhl:401892594",
+              "nhl:401892581",
+              "nhl:401892563",
+              "nhl:401892548",
+              "nhl:401892521",
+              "nhl:401892510",
+              "nhl:401892495",
+              "nhl:401892483",
+              "nhl:401892470"
+            ],
+            "history_latest_start_utc": "2026-11-14T02:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-15T17:44:47.648628+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": -0.21231314821010372,
+            "unmatched_reported_players": [
+              "3069342",
+              "3096217"
+            ],
+            "unknown_out_count": 2,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.0,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {
+              "3942866": {
+                "played_games": 5,
+                "wins_when_played": 0,
+                "games_without_recorded_minutes": 10,
+                "wins_without_recorded_minutes": 1,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "3942866",
+                "name": "Guillaume Brisebois",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-13T22:59Z",
+                "average_prior_minutes": 7.546666666666667
+              }
+            ]
+          }
+        },
+        "training_events": 33,
+        "base_probability": [
+          0.6104949152187295,
+          0.38950508478127055
+        ],
+        "forward_validation": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
         }
       },
       {
@@ -14943,21 +15575,22 @@
         },
         "mode": "INJURY_REPORT",
         "features": [
-          0.0428391342435314,
+          0.04269250219584254,
           -0.06640442216223165,
-          0.10810810810810811,
+          0.10526315789473684,
           -0.125,
           -0.1,
           -0.1,
-          -0.014065282500687837,
-          0.30357142857142855
+          -0.09069871810585606,
+          0.017857142857142877
         ],
         "details": {
           "home": {
-            "prior_games": 14,
+            "prior_games": 15,
             "confirmed_lineup": false,
-            "out_minutes_share": 0.0428391342435314,
+            "out_minutes_share": 0.04269250219584254,
             "history_event_ids": [
+              "nhl:401892709",
               "nhl:401892696",
               "nhl:401892674",
               "nhl:401892654",
@@ -14973,20 +15606,20 @@
               "nhl:401892503",
               "nhl:401892469"
             ],
-            "history_latest_start_utc": "2026-11-13T00:00:00+00:00",
-            "history_latest_capture_utc": "2026-11-14T03:35:36.745963+00:00",
+            "history_latest_start_utc": "2026-11-15T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T02:46:09.314768+00:00",
             "uncertain_minutes_share": 0.0,
-            "scoring_form_change": -0.05866307504982693,
+            "scoring_form_change": -0.13529651065499515,
             "unmatched_reported_players": [],
             "unknown_out_count": 0,
             "unknown_uncertain_count": 0,
-            "out_scoring_share": 0.10810810810810811,
+            "out_scoring_share": 0.10526315789473684,
             "uncertain_scoring_share": 0.0,
             "player_results_associations": {
               "5275337": {
                 "played_games": 12,
                 "wins_when_played": 9,
-                "games_without_recorded_minutes": 2,
+                "games_without_recorded_minutes": 3,
                 "wins_without_recorded_minutes": 1,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               }
@@ -15339,20 +15972,20 @@
         },
         "mode": "INJURY_REPORT",
         "features": [
-          0.01636730026714798,
-          0.1392432192436445,
+          0.012259039743183507,
+          0.14166100786762234,
           0.0,
           0.0967741935483871,
           0.1,
           0.0,
-          0.015530014067902664,
-          -0.01785714285714285
+          0.04965952105599836,
+          -0.017857142857142905
         ],
         "details": {
           "home": {
-            "prior_games": 15,
+            "prior_games": 14,
             "confirmed_lineup": false,
-            "out_minutes_share": 0.01636730026714798,
+            "out_minutes_share": 0.012259039743183507,
             "history_event_ids": [
               "nhl:401892705",
               "nhl:401892682",
@@ -15367,13 +16000,12 @@
               "nhl:401892523",
               "nhl:401892507",
               "nhl:401892495",
-              "nhl:401892479",
-              "nhl:401892462"
+              "nhl:401892479"
             ],
             "history_latest_start_utc": "2026-11-13T03:00:00+00:00",
             "history_latest_capture_utc": "2026-11-14T03:19:48.890535+00:00",
-            "uncertain_minutes_share": 0.18529096568097095,
-            "scoring_form_change": -0.05134693241980692,
+            "uncertain_minutes_share": 0.1877087543049488,
+            "scoring_form_change": -0.01721742543171123,
             "unmatched_reported_players": [
               "4587854"
             ],
@@ -15383,29 +16015,29 @@
             "uncertain_scoring_share": 0.0967741935483871,
             "player_results_associations": {
               "2593131": {
-                "played_games": 14,
-                "wins_when_played": 6,
+                "played_games": 13,
+                "wins_when_played": 5,
                 "games_without_recorded_minutes": 1,
                 "wins_without_recorded_minutes": 1,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               },
               "3042002": {
-                "played_games": 15,
-                "wins_when_played": 7,
+                "played_games": 14,
+                "wins_when_played": 6,
                 "games_without_recorded_minutes": 0,
                 "wins_without_recorded_minutes": 0,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               },
               "4024968": {
-                "played_games": 15,
-                "wins_when_played": 7,
+                "played_games": 14,
+                "wins_when_played": 6,
                 "games_without_recorded_minutes": 0,
                 "wins_without_recorded_minutes": 0,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               },
               "5149210": {
-                "played_games": 5,
-                "wins_when_played": 3,
+                "played_games": 4,
+                "wins_when_played": 2,
                 "games_without_recorded_minutes": 10,
                 "wins_without_recorded_minutes": 4,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
@@ -15442,7 +16074,7 @@
                 "availability": "OUT",
                 "reported_status": "injured reserve",
                 "reported_utc": "2026-10-26T17:28Z",
-                "average_prior_minutes": 5.32
+                "average_prior_minutes": 3.9333333333333336
               }
             ]
           },
@@ -15565,14 +16197,14 @@
         },
         "mode": "INJURY_REPORT",
         "features": [
-          0.007835119612330736,
+          0.007981582110268795,
           0.0,
           0.06666666666666667,
           0.0,
           0.0,
           0.0,
-          0.18745190262186973,
-          0.13690476190476192
+          0.1983952899012481,
+          0.4226190476190476
         ],
         "details": {
           "home": {
@@ -15628,10 +16260,11 @@
             ]
           },
           "away": {
-            "prior_games": 15,
+            "prior_games": 16,
             "confirmed_lineup": false,
-            "out_minutes_share": 0.03717785149272774,
+            "out_minutes_share": 0.03703138899478968,
             "history_event_ids": [
+              "nhl:401892717",
               "nhl:401892702",
               "nhl:401892690",
               "nhl:401892675",
@@ -15648,10 +16281,10 @@
               "nhl:401892485",
               "nhl:401892472"
             ],
-            "history_latest_start_utc": "2026-11-13T01:00:00+00:00",
-            "history_latest_capture_utc": "2026-11-14T11:30:33.213984+00:00",
+            "history_latest_start_utc": "2026-11-15T01:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T02:46:09.150580+00:00",
             "uncertain_minutes_share": 0.0,
-            "scoring_form_change": -0.25590938939826824,
+            "scoring_form_change": -0.2668527766776466,
             "unmatched_reported_players": [
               "3069448"
             ],
@@ -15663,14 +16296,14 @@
               "5216882": {
                 "played_games": 7,
                 "wins_when_played": 3,
-                "games_without_recorded_minutes": 8,
+                "games_without_recorded_minutes": 9,
                 "wins_without_recorded_minutes": 3,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               },
               "4894355": {
                 "played_games": 4,
                 "wins_when_played": 1,
-                "games_without_recorded_minutes": 11,
+                "games_without_recorded_minutes": 12,
                 "wins_without_recorded_minutes": 5,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               }
@@ -15805,7 +16438,7 @@
           0.0,
           0.0,
           0.3402640195858343,
-          -0.2916666666666667
+          -0.29166666666666674
         ],
         "details": {
           "home": {
@@ -16010,7 +16643,7 @@
         "home": "Toronto Raptors",
         "away": "New York Knicks",
         "start_utc": "2026-11-18T00:30:00+00:00",
-        "context_utc": "2026-11-16T01:24:48.655546+00:00",
+        "context_utc": "2026-11-16T02:46:08.918994+00:00",
         "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
@@ -16056,21 +16689,22 @@
         },
         "mode": "INJURY_REPORT",
         "features": [
-          0.03007518796992481,
+          0.02951555983317292,
           0.0,
-          0.04420629604822504,
+          0.04438466711499664,
           0.0,
           0.1,
           0.1,
-          0.06319711406085804,
-          -0.14285714285714285
+          0.06594503470896207,
+          0.0
         ],
         "details": {
           "home": {
-            "prior_games": 16,
+            "prior_games": 17,
             "confirmed_lineup": false,
-            "out_minutes_share": 0.03007518796992481,
+            "out_minutes_share": 0.02951555983317292,
             "history_event_ids": [
+              "nba:401909990",
               "nba:401909976",
               "nba:401909968",
               "nba:401909955",
@@ -16088,23 +16722,23 @@
               "nba:401908944",
               "nba:401902645"
             ],
-            "history_latest_start_utc": "2026-11-13T00:00:00+00:00",
-            "history_latest_capture_utc": "2026-11-14T03:19:48.926399+00:00",
+            "history_latest_start_utc": "2026-11-15T23:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T02:46:09.211437+00:00",
             "uncertain_minutes_share": 0.0,
-            "scoring_form_change": 0.03491547829495989,
+            "scoring_form_change": 0.014789476750476593,
             "unmatched_reported_players": [
               "4432586",
               "4411057"
             ],
             "unknown_out_count": 1,
             "unknown_uncertain_count": 1,
-            "out_scoring_share": 0.04420629604822504,
+            "out_scoring_share": 0.04438466711499664,
             "uncertain_scoring_share": 0.0,
             "player_results_associations": {
               "6450": {
                 "played_games": 4,
                 "wins_when_played": 3,
-                "games_without_recorded_minutes": 12,
+                "games_without_recorded_minutes": 13,
                 "wins_without_recorded_minutes": 4,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               }
@@ -16121,10 +16755,12 @@
             ]
           },
           "away": {
-            "prior_games": 14,
+            "prior_games": 16,
             "confirmed_lineup": false,
             "out_minutes_share": 0.0,
             "history_event_ids": [
+              "nba:401909990",
+              "nba:401909296",
               "nba:401909967",
               "nba:401909960",
               "nba:401909940",
@@ -16140,10 +16776,10 @@
               "nba:401908944",
               "nba:401914124"
             ],
-            "history_latest_start_utc": "2026-11-12T00:00:00+00:00",
-            "history_latest_capture_utc": "2026-11-13T00:28:41.217357+00:00",
+            "history_latest_start_utc": "2026-11-15T23:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T02:46:09.451209+00:00",
             "uncertain_minutes_share": 0.0,
-            "scoring_form_change": -0.02828163576589815,
+            "scoring_form_change": -0.051155557958485476,
             "unmatched_reported_players": [],
             "unknown_out_count": 0,
             "unknown_uncertain_count": 0,
@@ -16160,11 +16796,210 @@
         "home": "Tampa Bay Lightning",
         "away": "Washington Capitals",
         "start_utc": "2026-11-18T00:30:00+00:00",
-        "context_utc": null,
-        "status": "NO_CONTEXT_CAPTURED_YET",
+        "context_utc": "2026-11-16T02:46:08.490834+00:00",
+        "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
-        "teams": null
+        "teams": {
+          "home": {
+            "id": "20",
+            "name": "Tampa Bay Lightning",
+            "injury_report": true,
+            "players": {
+              "3904178": {
+                "id": "3904178",
+                "name": "Erik Cernak",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T14:13Z"
+              },
+              "3941973": {
+                "id": "3941973",
+                "name": "Anthony Cirelli",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T14:13Z"
+              },
+              "3151187": {
+                "id": "3151187",
+                "name": "Brayden Point",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-10T15:30Z"
+              }
+            },
+            "starters": [],
+            "lineup_confirmed": false
+          },
+          "away": {
+            "id": "23",
+            "name": "Washington Capitals",
+            "injury_report": true,
+            "players": {
+              "4352803": {
+                "id": "4352803",
+                "name": "Rasmus Sandin",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-09T17:28Z"
+              },
+              "4392260": {
+                "id": "4392260",
+                "name": "Vincent Desharnais",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-10-23T20:39Z"
+              }
+            },
+            "starters": [],
+            "lineup_confirmed": false
+          }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          0.018589165813338707,
+          0.10452743162323999,
+          0.08695652173913045,
+          0.08695652173913045,
+          -0.1,
+          0.0,
+          -0.06722874363049525,
+          0.28571428571428575
+        ],
+        "details": {
+          "home": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.05516163618708529,
+            "history_event_ids": [
+              "nhl:401892701",
+              "nhl:401892690",
+              "nhl:401892677",
+              "nhl:401892670",
+              "nhl:401892650",
+              "nhl:401892635",
+              "nhl:401892616",
+              "nhl:401892601",
+              "nhl:401892575",
+              "nhl:401892565",
+              "nhl:401892549",
+              "nhl:401892521",
+              "nhl:401892509",
+              "nhl:401892493",
+              "nhl:401892479"
+            ],
+            "history_latest_start_utc": "2026-11-13T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T03:19:48.958934+00:00",
+            "uncertain_minutes_share": 0.10452743162323999,
+            "scoring_form_change": 0.00668781302069732,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.08695652173913045,
+            "uncertain_scoring_share": 0.08695652173913045,
+            "player_results_associations": {
+              "3904178": {
+                "played_games": 13,
+                "wins_when_played": 9,
+                "games_without_recorded_minutes": 2,
+                "wins_without_recorded_minutes": 1,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "3941973": {
+                "played_games": 14,
+                "wins_when_played": 9,
+                "games_without_recorded_minutes": 1,
+                "wins_without_recorded_minutes": 1,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "3151187": {
+                "played_games": 13,
+                "wins_when_played": 8,
+                "games_without_recorded_minutes": 2,
+                "wins_without_recorded_minutes": 2,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "3904178",
+                "name": "Erik Cernak",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T14:13Z",
+                "average_prior_minutes": 18.013333333333332
+              },
+              {
+                "id": "3941973",
+                "name": "Anthony Cirelli",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T14:13Z",
+                "average_prior_minutes": 16.433333333333334
+              },
+              {
+                "id": "3151187",
+                "name": "Brayden Point",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-10T15:30Z",
+                "average_prior_minutes": 18.178333333333335
+              }
+            ]
+          },
+          "away": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.036572470373746585,
+            "history_event_ids": [
+              "nhl:401892714",
+              "nhl:401892700",
+              "nhl:401892685",
+              "nhl:401892662",
+              "nhl:401892640",
+              "nhl:401892625",
+              "nhl:401892605",
+              "nhl:401892596",
+              "nhl:401892571",
+              "nhl:401892542",
+              "nhl:401892519",
+              "nhl:401892504",
+              "nhl:401892491",
+              "nhl:401892482",
+              "nhl:401892466"
+            ],
+            "history_latest_start_utc": "2026-11-15T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T02:46:09.443449+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": 0.07391655665119257,
+            "unmatched_reported_players": [
+              "4352803"
+            ],
+            "unknown_out_count": 1,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.0,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {
+              "4392260": {
+                "played_games": 6,
+                "wins_when_played": 3,
+                "games_without_recorded_minutes": 9,
+                "wins_without_recorded_minutes": 5,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "4392260",
+                "name": "Vincent Desharnais",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-10-23T20:39Z",
+                "average_prior_minutes": 11.701666666666666
+              }
+            ]
+          }
+        }
       },
       {
         "event_id": "nhl:401892733",
@@ -16172,11 +17007,253 @@
         "home": "Chicago Blackhawks",
         "away": "Toronto Maple Leafs",
         "start_utc": "2026-11-18T00:30:00+00:00",
-        "context_utc": null,
-        "status": "NO_CONTEXT_CAPTURED_YET",
+        "context_utc": "2026-11-16T02:46:08.595964+00:00",
+        "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
-        "teams": null
+        "teams": {
+          "home": {
+            "id": "4",
+            "name": "Chicago Blackhawks",
+            "injury_report": true,
+            "players": {
+              "3042056": {
+                "id": "3042056",
+                "name": "Tyler Bertuzzi",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T00:03Z"
+              },
+              "4565225": {
+                "id": "4565225",
+                "name": "Bowen Byram",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-03T17:31Z"
+              }
+            },
+            "starters": [],
+            "lineup_confirmed": false
+          },
+          "away": {
+            "id": "21",
+            "name": "Toronto Maple Leafs",
+            "injury_report": true,
+            "players": {
+              "2976833": {
+                "id": "2976833",
+                "name": "Morgan Rielly",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T14:13Z"
+              },
+              "2993474": {
+                "id": "2993474",
+                "name": "Colton Sissons",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-12T15:24Z"
+              },
+              "4587996": {
+                "id": "4587996",
+                "name": "Kirill Marchenko",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-10-29T17:28Z"
+              },
+              "3042110": {
+                "id": "3042110",
+                "name": "Miles Wood",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-10-29T00:11Z"
+              },
+              "4781550": {
+                "id": "4781550",
+                "name": "Nick Blankenburg",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-10-23T15:29Z"
+              }
+            },
+            "starters": [],
+            "lineup_confirmed": false
+          }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          -0.09852626941275998,
+          -0.003231151701017558,
+          -0.15384615384615385,
+          0.0,
+          -0.1,
+          0.0,
+          0.1316956944063128,
+          -0.005952380952380987
+        ],
+        "details": {
+          "home": {
+            "prior_games": 14,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.01573386457507614,
+            "history_event_ids": [
+              "nhl:401892702",
+              "nhl:401892668",
+              "nhl:401892650",
+              "nhl:401892645",
+              "nhl:401892631",
+              "nhl:401892614",
+              "nhl:401892600",
+              "nhl:401892587",
+              "nhl:401892578",
+              "nhl:401892564",
+              "nhl:401892528",
+              "nhl:401892512",
+              "nhl:401892496",
+              "nhl:401892476"
+            ],
+            "history_latest_start_utc": "2026-11-13T01:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T11:30:33.213984+00:00",
+            "uncertain_minutes_share": 0.05321456881805666,
+            "scoring_form_change": -0.17520727441393047,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.0,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {
+              "3042056": {
+                "played_games": 14,
+                "wins_when_played": 4,
+                "games_without_recorded_minutes": 0,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4565225": {
+                "played_games": 2,
+                "wins_when_played": 1,
+                "games_without_recorded_minutes": 12,
+                "wins_without_recorded_minutes": 3,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "3042056",
+                "name": "Tyler Bertuzzi",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T00:03Z",
+                "average_prior_minutes": 17.006666666666668
+              },
+              {
+                "id": "4565225",
+                "name": "Bowen Byram",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-03T17:31Z",
+                "average_prior_minutes": 5.028333333333333
+              }
+            ]
+          },
+          "away": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.11426013398783612,
+            "history_event_ids": [
+              "nhl:401892697",
+              "nhl:401892676",
+              "nhl:401892665",
+              "nhl:401892633",
+              "nhl:401892621",
+              "nhl:401892599",
+              "nhl:401892583",
+              "nhl:401892574",
+              "nhl:401892553",
+              "nhl:401892543",
+              "nhl:401892537",
+              "nhl:401892523",
+              "nhl:401892506",
+              "nhl:401892500",
+              "nhl:401892478"
+            ],
+            "history_latest_start_utc": "2026-11-13T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T11:30:33.236949+00:00",
+            "uncertain_minutes_share": 0.05644572051907422,
+            "scoring_form_change": -0.30690296882024326,
+            "unmatched_reported_players": [
+              "3042110"
+            ],
+            "unknown_out_count": 1,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.15384615384615385,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {
+              "2976833": {
+                "played_games": 13,
+                "wins_when_played": 6,
+                "games_without_recorded_minutes": 2,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "2993474": {
+                "played_games": 14,
+                "wins_when_played": 6,
+                "games_without_recorded_minutes": 1,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4587996": {
+                "played_games": 9,
+                "wins_when_played": 5,
+                "games_without_recorded_minutes": 6,
+                "wins_without_recorded_minutes": 1,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4781550": {
+                "played_games": 6,
+                "wins_when_played": 3,
+                "games_without_recorded_minutes": 9,
+                "wins_without_recorded_minutes": 3,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "2976833",
+                "name": "Morgan Rielly",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T14:13Z",
+                "average_prior_minutes": 18.28333333333333
+              },
+              {
+                "id": "2993474",
+                "name": "Colton Sissons",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-12T15:24Z",
+                "average_prior_minutes": 14.278333333333332
+              },
+              {
+                "id": "4587996",
+                "name": "Kirill Marchenko",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-10-29T17:28Z",
+                "average_prior_minutes": 14.88
+              },
+              {
+                "id": "4781550",
+                "name": "Nick Blankenburg",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-10-23T15:29Z",
+                "average_prior_minutes": 7.851666666666667
+              }
+            ]
+          }
+        }
       },
       {
         "event_id": "nba:401910003",
@@ -16266,7 +17343,7 @@
           0.0,
           0.0,
           0.09837643891116865,
-          0.1547619047619047
+          0.15476190476190482
         ],
         "details": {
           "home": {
@@ -16502,20 +17579,20 @@
         },
         "mode": "INJURY_REPORT",
         "features": [
-          0.04433185092315517,
+          0.04598809953119366,
           -0.11228813559322035,
-          0.014911058353977408,
+          0.01665791316526609,
           -0.12723214285714285,
           0.2,
           0.0,
-          -0.0281494188483129,
+          -0.01650769981152611,
           0.4285714285714286
         ],
         "details": {
           "home": {
-            "prior_games": 17,
+            "prior_games": 16,
             "confirmed_lineup": false,
-            "out_minutes_share": 0.10153524075366364,
+            "out_minutes_share": 0.10319148936170214,
             "history_event_ids": [
               "nba:401909969",
               "nba:401909958",
@@ -16532,26 +17609,25 @@
               "nba:401898843",
               "nba:401898722",
               "nba:401898721",
-              "nba:401898720",
-              "nba:401898394"
+              "nba:401898720"
             ],
             "history_latest_start_utc": "2026-11-12T01:00:00+00:00",
             "history_latest_capture_utc": "2026-11-13T00:28:41.154026+00:00",
             "uncertain_minutes_share": 0.0,
-            "scoring_form_change": 0.004707657933464393,
+            "scoring_form_change": 0.016349376970251184,
             "unmatched_reported_players": [
               "6440",
               "5101845"
             ],
             "unknown_out_count": 2,
             "unknown_uncertain_count": 0,
-            "out_scoring_share": 0.09898843930635837,
+            "out_scoring_share": 0.10073529411764705,
             "uncertain_scoring_share": 0.0,
             "player_results_associations": {
               "4066259": {
                 "played_games": 14,
                 "wins_when_played": 12,
-                "games_without_recorded_minutes": 3,
+                "games_without_recorded_minutes": 2,
                 "wins_without_recorded_minutes": 0,
                 "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
               }
@@ -16670,11 +17746,240 @@
         "home": "St. Louis Blues",
         "away": "Anaheim Ducks",
         "start_utc": "2026-11-18T01:00:00+00:00",
-        "context_utc": null,
-        "status": "NO_CONTEXT_CAPTURED_YET",
+        "context_utc": "2026-11-16T02:46:08.607445+00:00",
+        "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
-        "teams": null
+        "teams": {
+          "home": {
+            "id": "19",
+            "name": "St. Louis Blues",
+            "injury_report": true,
+            "players": {
+              "4697409": {
+                "id": "4697409",
+                "name": "Jake Neighbours",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T18:25Z"
+              },
+              "4565229": {
+                "id": "4565229",
+                "name": "Philip Broberg",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T18:21Z"
+              },
+              "5188510": {
+                "id": "5188510",
+                "name": "Aleksanteri Kaskimaki",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T03:55Z"
+              },
+              "2952729": {
+                "id": "2952729",
+                "name": "Torey Krug",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-10-13T01:42Z"
+              },
+              "4063268": {
+                "id": "4063268",
+                "name": "Dillon Dube",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-10-10T21:13Z"
+              }
+            },
+            "starters": [],
+            "lineup_confirmed": false
+          },
+          "away": {
+            "id": "25",
+            "name": "Anaheim Ducks",
+            "injury_report": true,
+            "players": {
+              "4233668": {
+                "id": "4233668",
+                "name": "Ryan Poehling",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-11T22:59Z"
+              },
+              "3648015": {
+                "id": "3648015",
+                "name": "A.J. Greer",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-02T18:46Z"
+              }
+            },
+            "starters": [],
+            "lineup_confirmed": false
+          }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          -0.04497344126697897,
+          0.1659628891695778,
+          -0.1,
+          0.20833333333333334,
+          0.2,
+          0.0,
+          -0.5274501661192683,
+          -0.13690476190476192
+        ],
+        "details": {
+          "home": {
+            "prior_games": 14,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.0,
+            "history_event_ids": [
+              "nhl:401892704",
+              "nhl:401892663",
+              "nhl:401892651",
+              "nhl:401892637",
+              "nhl:401892615",
+              "nhl:401892604",
+              "nhl:401892588",
+              "nhl:401892573",
+              "nhl:401892558",
+              "nhl:401892544",
+              "nhl:401892529",
+              "nhl:401892514",
+              "nhl:401892494",
+              "nhl:401892477"
+            ],
+            "history_latest_start_utc": "2026-11-13T02:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T03:35:36.731675+00:00",
+            "uncertain_minutes_share": 0.1659628891695778,
+            "scoring_form_change": -0.34225206515138873,
+            "unmatched_reported_players": [
+              "2952729",
+              "4063268"
+            ],
+            "unknown_out_count": 2,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.0,
+            "uncertain_scoring_share": 0.20833333333333334,
+            "player_results_associations": {
+              "4697409": {
+                "played_games": 14,
+                "wins_when_played": 7,
+                "games_without_recorded_minutes": 0,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "4565229": {
+                "played_games": 14,
+                "wins_when_played": 7,
+                "games_without_recorded_minutes": 0,
+                "wins_without_recorded_minutes": 0,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "5188510": {
+                "played_games": 8,
+                "wins_when_played": 4,
+                "games_without_recorded_minutes": 6,
+                "wins_without_recorded_minutes": 3,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "4697409",
+                "name": "Jake Neighbours",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T18:25Z",
+                "average_prior_minutes": 16.2
+              },
+              {
+                "id": "4565229",
+                "name": "Philip Broberg",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T18:21Z",
+                "average_prior_minutes": 26.44166666666667
+              },
+              {
+                "id": "5188510",
+                "name": "Aleksanteri Kaskimaki",
+                "availability": "UNCERTAIN",
+                "reported_status": "day-to-day",
+                "reported_utc": "2026-11-15T03:55Z",
+                "average_prior_minutes": 9.696666666666667
+              }
+            ]
+          },
+          "away": {
+            "prior_games": 16,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.04497344126697897,
+            "history_event_ids": [
+              "nhl:401892694",
+              "nhl:401892679",
+              "nhl:401892661",
+              "nhl:401892657",
+              "nhl:401892643",
+              "nhl:401892628",
+              "nhl:401892608",
+              "nhl:401892594",
+              "nhl:401892566",
+              "nhl:401892555",
+              "nhl:401892541",
+              "nhl:401892535",
+              "nhl:401892518",
+              "nhl:401892501",
+              "nhl:401892480",
+              "nhl:401892468"
+            ],
+            "history_latest_start_utc": "2026-11-12T03:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T11:30:33.260046+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": 0.1851981009678796,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.1,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {
+              "4233668": {
+                "played_games": 2,
+                "wins_when_played": 2,
+                "games_without_recorded_minutes": 14,
+                "wins_without_recorded_minutes": 6,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              },
+              "3648015": {
+                "played_games": 10,
+                "wins_when_played": 3,
+                "games_without_recorded_minutes": 6,
+                "wins_without_recorded_minutes": 5,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "4233668",
+                "name": "Ryan Poehling",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-11T22:59Z",
+                "average_prior_minutes": 2.915
+              },
+              {
+                "id": "3648015",
+                "name": "A.J. Greer",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-02T18:46Z",
+                "average_prior_minutes": 12.381666666666666
+              }
+            ]
+          }
+        }
       },
       {
         "event_id": "nhl:401892735",
@@ -16682,23 +17987,155 @@
         "home": "Minnesota Wild",
         "away": "Nashville Predators",
         "start_utc": "2026-11-18T01:00:00+00:00",
-        "context_utc": null,
-        "status": "NO_CONTEXT_CAPTURED_YET",
+        "context_utc": "2026-11-16T02:46:08.822939+00:00",
+        "status": "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS",
         "candidate_probability": null,
         "influences_daily_selection": false,
-        "teams": null
+        "teams": {
+          "home": {
+            "id": "30",
+            "name": "Minnesota Wild",
+            "injury_report": true,
+            "players": {
+              "4272674": {
+                "id": "4272674",
+                "name": "Filip Gustavsson",
+                "availability": "OUT",
+                "reported_status": "injured reserve",
+                "reported_utc": "2026-11-05T18:51Z"
+              }
+            },
+            "starters": [],
+            "lineup_confirmed": false
+          },
+          "away": {
+            "id": "27",
+            "name": "Nashville Predators",
+            "injury_report": true,
+            "players": {
+              "2967072": {
+                "id": "2967072",
+                "name": "Jonathan Marchessault",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-16T01:40Z"
+              }
+            },
+            "starters": [],
+            "lineup_confirmed": false
+          }
+        },
+        "mode": "INJURY_REPORT",
+        "features": [
+          -0.05011113658337237,
+          0.0,
+          -0.05405405405405406,
+          0.0,
+          0.1,
+          0.0,
+          0.0873884278833662,
+          -0.4107142857142857
+        ],
+        "details": {
+          "home": {
+            "prior_games": 17,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.0,
+            "history_event_ids": [
+              "nhl:401892709",
+              "nhl:401892697",
+              "nhl:401892670",
+              "nhl:401892660",
+              "nhl:401892638",
+              "nhl:401892625",
+              "nhl:401892607",
+              "nhl:401892592",
+              "nhl:401892581",
+              "nhl:401892577",
+              "nhl:401892560",
+              "nhl:401892546",
+              "nhl:401892533",
+              "nhl:401892514",
+              "nhl:401892497",
+              "nhl:401892487",
+              "nhl:401891805"
+            ],
+            "history_latest_start_utc": "2026-11-15T00:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-16T02:46:09.314768+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": 0.04987693277012606,
+            "unmatched_reported_players": [
+              "4272674"
+            ],
+            "unknown_out_count": 1,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.0,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {},
+            "players": []
+          },
+          "away": {
+            "prior_games": 15,
+            "confirmed_lineup": false,
+            "out_minutes_share": 0.05011113658337237,
+            "history_event_ids": [
+              "nhl:401892694",
+              "nhl:401892689",
+              "nhl:401892663",
+              "nhl:401892658",
+              "nhl:401892642",
+              "nhl:401892616",
+              "nhl:401892605",
+              "nhl:401892589",
+              "nhl:401892580",
+              "nhl:401892570",
+              "nhl:401892552",
+              "nhl:401892529",
+              "nhl:401892513",
+              "nhl:401892499",
+              "nhl:401892474"
+            ],
+            "history_latest_start_utc": "2026-11-12T03:00:00+00:00",
+            "history_latest_capture_utc": "2026-11-14T11:30:33.260046+00:00",
+            "uncertain_minutes_share": 0.0,
+            "scoring_form_change": -0.037511495113240145,
+            "unmatched_reported_players": [],
+            "unknown_out_count": 0,
+            "unknown_uncertain_count": 0,
+            "out_scoring_share": 0.05405405405405406,
+            "uncertain_scoring_share": 0.0,
+            "player_results_associations": {
+              "2967072": {
+                "played_games": 10,
+                "wins_when_played": 3,
+                "games_without_recorded_minutes": 5,
+                "wins_without_recorded_minutes": 5,
+                "role": "DESCRIPTIVE_ASSOCIATION_NOT_CAUSAL_OR_AN_AUTOMATIC_PROBABILITY_ADJUSTMENT"
+              }
+            },
+            "players": [
+              {
+                "id": "2967072",
+                "name": "Jonathan Marchessault",
+                "availability": "OUT",
+                "reported_status": "out",
+                "reported_utc": "2026-11-16T01:40Z",
+                "average_prior_minutes": 16.758333333333333
+              }
+            ]
+          }
+        }
       }
     ],
     "blocks": {
-      "CONTEXT_STALE": 10,
-      "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS": 10,
-      "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT": 1,
-      "NO_CONTEXT_CAPTURED_YET": 4
+      "NEEDS_CURRENT_BASE_MODEL_AND_VERIFIED_ODDS": 19,
+      "CONTEXT_STALE": 1,
+      "PLAYER_FORM_MODEL_NOT_IMPLEMENTED_FOR_SPORT": 1
     },
     "historical_player_boxscores": 512,
     "observations": 139,
-    "new_observations": 1,
-    "settled_observations": 127,
+    "new_observations": 0,
+    "settled_observations": 129,
     "fitted_streams": 0,
     "active_streams": 0,
     "invalid_frozen_rows": 0,
@@ -16715,6 +18152,25 @@
     "streams": {
       "PLAYER-CONTEXT-1.0|883a6212449a7a2a1f5739e329052773798756365b7bb96b5178d94e3f2c0d34|73074570a00a61dae1dc6affa0774e637a5ce78bba0967aae4cf54c391e4a688|nba|ML|INJURY_REPORT|MULTIMARKET-1.0.0-nba": {
         "training_events": 28,
+        "forward": {
+          "n": 0,
+          "dates": 0,
+          "eligible": false,
+          "market_n": 0,
+          "market_dates": 0
+        },
+        "weights": null,
+        "scores": {
+          "base_brier": null,
+          "base_log_loss": null,
+          "market_brier": null,
+          "market_log_loss": null,
+          "candidate_brier": null,
+          "candidate_log_loss": null
+        }
+      },
+      "PLAYER-CONTEXT-1.0|883a6212449a7a2a1f5739e329052773798756365b7bb96b5178d94e3f2c0d34|73074570a00a61dae1dc6affa0774e637a5ce78bba0967aae4cf54c391e4a688|nhl|ML|INJURY_REPORT|MULTIMARKET-1.0.0-nhl": {
+        "training_events": 33,
         "forward": {
           "n": 0,
           "dates": 0,
@@ -17029,22 +18485,22 @@
     }
   },
   "runtime_status": {
-    "checked_at_utc": "2026-11-16T01:24:34.201515+00:00",
+    "checked_at_utc": "2026-11-16T02:45:54.485474+00:00",
     "maximum_age_minutes": 90,
     "components": {
       "scanner": {
         "status": "FRESH",
-        "asof_utc": "2026-11-16T00:59:20.850681+00:00",
-        "age_minutes": 25.2
+        "asof_utc": "2026-11-16T02:45:19.190208+00:00",
+        "age_minutes": 0.6
       },
       "calendar": {
         "status": "FRESH",
-        "asof_utc": "2026-11-16T00:59:20.850681+00:00",
-        "age_minutes": 25.2
+        "asof_utc": "2026-11-16T02:45:19.190208+00:00",
+        "age_minutes": 0.6
       },
       "laboratory": {
         "status": "FRESH",
-        "asof_utc": "2026-11-16T01:24:34.201515+00:00",
+        "asof_utc": "2026-11-16T02:45:54.485474+00:00",
         "age_minutes": 0.0
       }
     },
@@ -17053,54 +18509,9 @@
     "scanner_recovery_outcome": "skipped"
   },
   "pricing_readiness": {
-    "asof_utc": "2026-11-16T01:24:34.201515+00:00",
+    "asof_utc": "2026-11-16T02:45:54.485474+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-16",
     "events": [
-      {
-        "id": "nba:401909993",
-        "sport": "nba",
-        "home": "Sacramento Kings",
-        "away": "Oklahoma City Thunder",
-        "start_utc": "2026-11-16T02:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nba",
-            "market": "ML",
-            "sample_min": 94
-          }
-        ]
-      },
-      {
-        "id": "nhl:401892724",
-        "sport": "nhl",
-        "home": "Vegas Golden Knights",
-        "away": "Vancouver Canucks",
-        "start_utc": "2026-11-16T02:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nhl",
-            "market": "ML",
-            "sample_min": 95
-          }
-        ]
-      },
-      {
-        "id": "nhl:401892725",
-        "sport": "nhl",
-        "home": "San Jose Sharks",
-        "away": "Nashville Predators",
-        "start_utc": "2026-11-16T02:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nhl",
-            "market": "ML",
-            "sample_min": 94
-          }
-        ]
-      },
       {
         "id": "nba:401909994",
         "sport": "nba",
@@ -17352,7 +18763,7 @@
           {
             "family": "MULTIMARKET-1.0.0-nba",
             "market": "ML",
-            "sample_min": 100
+            "sample_min": 101
           }
         ]
       },
@@ -23761,7 +25172,7 @@
           "NEEDS_100_DISTINCT_MARKET_EVENTS",
           "NEEDS_14_DISTINCT_MARKET_DATES"
         ],
-        "history_samples": 1314
+        "history_samples": 1315
       },
       {
         "family": "MULTIMARKET-1.0.0-nfl",
@@ -23905,23 +25316,23 @@
     "note": "Necessary sample thresholds are not automatic approval. Distinct settled frozen future events with verified market prices only; no historical rows, wallet copies or elapsed-day substitutions."
   },
   "global_discovery": {
-    "asof_utc": "2026-11-16T00:59:20.850681+00:00",
+    "asof_utc": "2026-11-16T02:45:19.190208+00:00",
     "window_hours": 48,
     "modalities_in_catalog": 19,
     "modalities_queried": 18,
     "modalities_with_future_events": 8,
-    "modalities_with_timestamped_odds": 2,
-    "future_events": 194,
+    "modalities_with_timestamped_odds": 3,
+    "future_events": 197,
     "by_modality": {
       "american_football": {
         "catalog_sources": [
           "ESPN",
           "The Odds API"
         ],
-        "queries": 7,
+        "queries": 6,
         "query_errors": 0,
-        "future_events": 5,
-        "events_with_odds": 0,
+        "future_events": 4,
+        "events_with_odds": 1,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
@@ -23944,7 +25355,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 7,
+        "queries": 2,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -23957,10 +25368,10 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 15,
+        "queries": 9,
         "query_errors": 0,
         "future_events": 64,
-        "events_with_odds": 10,
+        "events_with_odds": 16,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
@@ -24007,7 +25418,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 9,
+        "queries": 6,
         "query_errors": 0,
         "future_events": 1,
         "events_with_odds": 0,
@@ -24034,8 +25445,8 @@
         ],
         "queries": 9,
         "query_errors": 0,
-        "future_events": 16,
-        "events_with_odds": 1,
+        "future_events": 15,
+        "events_with_odds": 2,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
         "model_status": "EXPERIMENTAL_PARTIAL_COMPETITION_COVERAGE"
@@ -24045,7 +25456,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 2,
+        "queries": 1,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -24058,7 +25469,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 12,
+        "queries": 35,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -24071,7 +25482,7 @@
           "ESPN",
           "TheSportsDB free"
         ],
-        "queries": 6,
+        "queries": 4,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -24097,7 +25508,7 @@
           "ESPN",
           "The Odds API"
         ],
-        "queries": 8,
+        "queries": 14,
         "query_errors": 0,
         "future_events": 0,
         "events_with_odds": 0,
@@ -24111,9 +25522,9 @@
           "The Odds API",
           "TheSportsDB free"
         ],
-        "queries": 92,
+        "queries": 81,
         "query_errors": 0,
-        "future_events": 88,
+        "future_events": 93,
         "events_with_odds": 0,
         "events_with_model": 0,
         "status": "FUTURE_EVENTS_FOUND",
@@ -24193,14 +25604,14 @@
           },
           {
             "family": "baseball",
-            "competition": "lls",
+            "competition": "college-softball",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "basketball",
-            "competition": "nba-summer-california",
-            "events": 0,
+            "competition": "womens-college-basketball",
+            "events": 7,
             "status": "OK"
           },
           {
@@ -24211,43 +25622,43 @@
           },
           {
             "family": "american_football",
-            "competition": "college-football",
-            "events": 3,
+            "competition": "nfl",
+            "events": 1,
             "status": "OK"
           },
           {
             "family": "golf",
-            "competition": "pga",
+            "competition": "lpga",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "ice_hockey",
-            "competition": "olympics-womens-ice-hockey",
-            "events": 0,
+            "competition": "womens-college-hockey",
+            "events": 1,
             "status": "OK"
           },
           {
             "family": "lacrosse",
-            "competition": "womens-college-lacrosse",
+            "competition": "mens-college-lacrosse",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "banni-fight",
+            "competition": "brazilian-freestyle",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "motorsport",
-            "competition": "nascar-secondary",
+            "competition": "f1",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "rugby_union",
-            "competition": "242041",
+            "competition": "270563",
             "events": 0,
             "status": "OK"
           },
@@ -24259,505 +25670,505 @@
           },
           {
             "family": "soccer",
-            "competition": "eng.1",
+            "competition": "bel.1",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "tennis",
-            "competition": "wta",
+            "competition": "atp",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "volleyball",
-            "competition": "womens-college-volleyball",
-            "events": 15,
+            "competition": "mens-college-volleyball",
+            "events": 0,
             "status": "OK"
           },
           {
             "family": "water_polo",
-            "competition": "womens-college-water-polo",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "mexican-winter-league",
+            "competition": "mens-college-water-polo",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "basketball",
-            "competition": "nba-summer-golden-state",
+            "competition": "womens-olympics-basketball",
             "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "budo",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "271937",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bel.promotion.relegation",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "cage-warriors",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "272073",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bol.1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "dream",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "282",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bol.copa",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "fng",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "283",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bol.ply.rel",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "ifc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289234",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "ifl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289237",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.2",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "k1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289262",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.camp.carioca",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "ksw",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289271",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.camp.gaucho",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "lfa",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289272",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.camp.mineiro",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "lfc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289274",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.camp.paulista",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "m1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289277",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.copa_do_brazil",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "mfc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "rugby_union",
+            "competition": "289279",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "bra.supercopa_do_brazil",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "mvp",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.champions",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "ofc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.championship",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "other",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.confed",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "pancrase",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.cosafa",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "pfl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.nations",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "pride",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.nations_qual",
+            "events": 24,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "proelite",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "caf.w.nations",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "rfa",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "campeones.cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "rizin",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "can.w.nsl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "roc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "chi.1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "sfl",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "chi.1.promotion.relegation",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "shark-fights",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "chi.copa_chi",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "shooto-brazil",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "chi.super_cup",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "shooto-japan",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "chn.1",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "shoxc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "chn.1.promotion.relegation",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "strikeforce",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "club.friendly",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "tfc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "tpf",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "ufc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "mma",
+            "competition": "vfc",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "baseball",
+            "competition": "mlb",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "basketball",
+            "competition": "nba",
+            "events": 11,
             "status": "OK"
           },
           {
             "family": "golf",
-            "competition": "tgl",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "banzay",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "motorsport",
-            "competition": "nascar-truck",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "244293",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "esp.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "olympics-baseball",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-summer-las-vegas",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "womens-olympics-golf",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "barracao",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "267979",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "fra.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "puerto-rican-winter-league",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-summer-orlando",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "wtgl",
-            "events": 5,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "battlezone",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "268565",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ger.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "venezuelan-winter-league",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-summer-sacramento",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "bellator",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "270555",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ita.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "world-baseball-classic",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nba-summer-utah",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "benevides",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "270557",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "afc.asian.cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "nbl",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "big-fight",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "rugby_union",
-            "competition": "270559",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "afc.champions",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "wnba",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "blackout",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "afc.champions_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "bosnia",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "afc.cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "mma",
-            "competition": "boxe",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "afc.cup_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "afc.cupq",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "afc.saff.championship",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "afc.w.asian.cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "aff.championship",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "arg.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "arg.2",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "arg.3",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "arg.copa",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "arg.copa_de_la_superliga",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "arg.supercopa",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "arg.supercopa.internacional",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "arg.trofeo_de_la_campeones",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "aus.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "aus.w.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "aut.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.wchampions",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.wchampions_qual",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uefa.weuro",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uru.1",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "uru.2",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.ncaa.m.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.ncaa.w.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.nwsl",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.nwsl.cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.open",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.usl.1",
-            "events": 1,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.usl.l1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.usl.l1.cup",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "usa.w.usl.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "soccer",
-            "competition": "ven.1",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "baseball",
-            "competition": "college-baseball",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "basketball",
-            "competition": "mens-college-basketball",
-            "events": 8,
-            "status": "OK"
-          },
-          {
-            "family": "american_football",
-            "competition": "xfl",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "golf",
-            "competition": "liv",
+            "competition": "champions-tour",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "ice_hockey",
-            "competition": "mens-college-hockey",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "lacrosse",
-            "competition": "pll",
-            "events": 0,
+            "competition": "nhl",
+            "events": 11,
             "status": "OK"
           },
           {
             "family": "mma",
-            "competition": "affliction",
-            "events": 0,
-            "status": "OK"
-          },
-          {
-            "family": "motorsport",
-            "competition": "nascar-premier",
+            "competition": "bang-fighting",
             "events": 0,
             "status": "OK"
           },
           {
             "family": "rugby_union",
-            "competition": "180659",
+            "competition": "164205",
+            "events": 0,
+            "status": "OK"
+          },
+          {
+            "family": "soccer",
+            "competition": "col.1",
             "events": 0,
             "status": "OK"
           }
@@ -24768,7 +26179,7 @@
       {
         "provider": "The Odds API",
         "usage_credits": 0,
-        "requests": 80,
+        "requests": 79,
         "catalog_families": [
           "american_football",
           "australian_football",
@@ -24810,7 +26221,7 @@
           {
             "family": "american_football",
             "competition": "NFL",
-            "events": 2,
+            "events": 1,
             "status": "OK"
           },
           {
@@ -24840,7 +26251,7 @@
           {
             "family": "basketball",
             "competition": "NBA",
-            "events": 3,
+            "events": 6,
             "status": "OK"
           },
           {
@@ -24852,7 +26263,7 @@
           {
             "family": "basketball",
             "competition": "NCAAB",
-            "events": 26,
+            "events": 23,
             "status": "OK"
           },
           {
@@ -24864,7 +26275,7 @@
           {
             "family": "basketball",
             "competition": "WNCAAB",
-            "events": 1,
+            "events": 0,
             "status": "OK"
           },
           {
@@ -24936,7 +26347,7 @@
           {
             "family": "ice_hockey",
             "competition": "NHL",
-            "events": 6,
+            "events": 2,
             "status": "OK"
           },
           {
@@ -26577,7 +27988,7 @@
           "soccer",
           "motorsport"
         ],
-        "requests": 6,
+        "requests": 0,
         "queries": [
           {
             "family": "soccer",
@@ -26629,18 +28040,19 @@
     "odds_allocation": {
       "configured": true,
       "status": "OK",
-      "calls_this_run": 4,
+      "calls_this_run": 0,
       "errors": [],
       "cached_sports": [
         "basketball_ncaab",
         "nba",
+        "nfl",
         "nhl"
       ],
-      "quotes_matched": 11,
+      "quotes_matched": 19,
       "allocation": "UNPRICED_MODELLED_EVENTS_THEN_DIVERSITY_4_CREDITS_PER_6H_SLOT",
       "price_lookahead_hours": 48,
       "maximum_daily_credits": 16,
-      "expired_cached_quotes_removed": 0,
+      "expired_cached_quotes_removed": 11,
       "calls_today": 4,
       "credits_today": 4,
       "credits_remaining": 293,
@@ -26650,12 +28062,12 @@
         "ice_hockey",
         "american_football"
       ],
-      "eligible_competitions": 16,
+      "eligible_competitions": 15,
       "goal_market_quotes": 0,
-      "distinct_modelled_events_with_prices": 2,
-      "declared_model_scope_priced_events": 2,
+      "distinct_modelled_events_with_prices": 4,
+      "declared_model_scope_priced_events": 4,
       "model_readiness_status": "FRESH",
-      "verified_ready_events": 22,
+      "verified_ready_events": 26,
       "discovery_only_credits_today": 1,
       "allocation_basis": "ACTUAL_FORECASTS_THEN_UNVERIFIED_SCOPE_THEN_ONE_DISCOVERY_CREDIT",
       "minimum_priced_event_target": 5,
@@ -26849,8 +28261,8 @@
     },
     "modalities_with_model_forecasts": 0
   },
-  "asof_utc": "2026-11-16T01:24:50.867159+00:00",
-  "analysis_started_utc": "2026-11-16T01:24:34.201515+00:00",
+  "asof_utc": "2026-11-16T02:46:22.505427+00:00",
+  "analysis_started_utc": "2026-11-16T02:45:54.485474+00:00",
   "experiment": "PARALLEL_INDEPENDENT_PAPER_ACCOUNTS_V3",
   "daily_paper_minimum": {
     "policy": "DAILY-PAPER-MINIMUM-1.1",
@@ -26870,20 +28282,7 @@
       "favourite_is_not_a_profit_guarantee": true
     },
     "real_money_allowed": false,
-    "new_entries": {
-      "CONSENSUS_SHRUNK": 3,
-      "DISAGREEMENT_VETO": 2,
-      "DIXON_COLES_LOW": 2,
-      "ELO_DYNAMIC": 2,
-      "ELO_POISSON_BLEND": 2,
-      "ELO_STANDARD": 2,
-      "EXPERIMENTAL_MULTI_MARKET": 2,
-      "FREQ_BALANCED_3_5": 2,
-      "FREQ_BROAD_5_10": 2,
-      "FREQ_SELECTIVE_1_3": 2,
-      "MARKET_ANCHORED": 2,
-      "POISSON_SHRINK": 2
-    },
+    "new_entries": {},
     "selection_comparison": {
       "version": "DAILY-MARKET-MODEL-75-25-1",
       "market_weight": 0.75,
@@ -27126,65 +28525,65 @@
     },
     "wallets": {
       "ELO_STANDARD": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
       },
       "ELO_DYNAMIC": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
       },
       "POISSON_SHRINK": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
       },
       "DIXON_COLES_LOW": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
       },
       "ELO_POISSON_BLEND": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
       },
       "CONSENSUS_SHRUNK": {
-        "before": 0,
+        "before": 3,
         "entries": 3,
-        "new_entries": 3,
+        "new_entries": 0,
         "remaining": 2,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 3
       },
       "DISAGREEMENT_VETO": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
       },
       "MARKET_ANCHORED": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
@@ -27198,33 +28597,33 @@
         "exploratory_today": 0
       },
       "FREQ_SELECTIVE_1_3": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
       },
       "FREQ_BALANCED_3_5": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
       },
       "FREQ_BROAD_5_10": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
       },
       "EXPERIMENTAL_MULTI_MARKET": {
-        "before": 0,
+        "before": 2,
         "entries": 2,
-        "new_entries": 2,
+        "new_entries": 0,
         "remaining": 3,
         "profile": "VALIDATED_MODEL_OR_MARKET_FAVOURITE",
         "exploratory_today": 2
@@ -27232,7 +28631,7 @@
     },
     "minimum_met": false,
     "blocks": {
-      "shared_event_or_portfolio_limit": 95
+      "shared_event_or_portfolio_limit": 28
     },
     "note": "Research positions have non-zero virtual stakes. Never invent quotes or relax freshness/exposure caps. Missing data and risk capacity are explicit blockers."
   },
@@ -27241,23 +28640,14 @@
     "target": 5,
     "max_per_day": 10,
     "opened_today": 7,
-    "new_entries": 7,
+    "new_entries": 0,
     "remaining_to_minimum": 0,
     "target_met": true,
     "reference": true,
     "not_a_value_signal": true,
-    "status": "PARTIAL",
-    "reason": "Genuine timestamped paper selections; reference only, no demonstrated edge",
-    "eligible_events": 7,
-    "distinct_event_ids_today": [
-      "nba:401909993",
-      "nba:401909999",
-      "nfl:401873065",
-      "nhl:401892724",
-      "nhl:401892725",
-      "nhl:401892726",
-      "nhl:401892727"
-    ]
+    "status": "COMPLETED",
+    "reason": "Daily minimum met; no further eligible events",
+    "eligible_events": 0
   },
   "daily_activity": {
     "per_strategy": {
@@ -27393,7 +28783,6 @@
     "minimum_daily_exploratory_stake_eur": 0.5,
     "max_shared_prediction_open_eur": 2.5,
     "shared_prediction_open_eur": {
-      "nba:401909991|ML|MULTIMARKET-1.0.0-nba|1": 0.5,
       "nba:401909993|ML|MARKET_REFERENCE|1": 1.03,
       "nba:401909993|ML|MULTIMARKET-1.0.0-nba|1": 2.5,
       "nba:401909999|ML|MARKET_REFERENCE|0": 2.5,
@@ -27413,9 +28802,8 @@
       "nhl:401892727|ML|MARKET_REFERENCE|0": 2.5,
       "nhl:401892727|ML|MULTIMARKET-1.0.0-nhl|0": 2.5
     },
-    "total_open_eur": 38.15,
+    "total_open_eur": 37.65,
     "event_exposure_eur": {
-      "nba:401909991": 0.5,
       "nba:401909993": 3.53,
       "nba:401909999": 5.0,
       "nfl:401873064": 2.5,
@@ -27429,7 +28817,6 @@
       "nhl:401892727": 5.0
     },
     "event_position_counts": {
-      "nba:401909991": 1,
       "nba:401909993": 6,
       "nba:401909999": 6,
       "nfl:401873064": 5,
@@ -27443,8 +28830,8 @@
       "nhl:401892727": 6
     },
     "limit_rejections": {
-      "shared_prediction_limit": 95,
-      "aggregate_event_or_portfolio_limit": 95
+      "shared_prediction_limit": 28,
+      "aggregate_event_or_portfolio_limit": 28
     },
     "existing_positions_never_retroactively_changed": true
   },
@@ -29922,8 +31309,8 @@
     },
     "validated_streams": 0,
     "deferred_evaluations": {
-      "MULTIMARKET-1.0.0-nhl|nhl|ML": 4,
-      "MULTIMARKET-1.0.0-nba|nba|ML": 2
+      "MULTIMARKET-1.0.0-nba|nba|ML": 2,
+      "MULTIMARKET-1.0.0-nhl|nhl|ML": 4
     },
     "new_zero_stake_observations": 0,
     "observations_total": 208,
@@ -29943,7 +31330,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34736,
+        "history_samples": 34737,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -29951,7 +31338,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34738,
+        "history_samples": 34739,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -29959,7 +31346,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34738,
+        "history_samples": 34739,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -29967,7 +31354,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34736,
+        "history_samples": 34737,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -29975,7 +31362,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34739,
+        "history_samples": 34740,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -29983,7 +31370,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34739,
+        "history_samples": 34740,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -29991,7 +31378,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34731,
+        "history_samples": 34732,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -29999,7 +31386,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 26312,
+        "history_samples": 26313,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -30015,7 +31402,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34739,
+        "history_samples": 34740,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -30023,7 +31410,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34739,
+        "history_samples": 34740,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -30031,7 +31418,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 118,
         "active_streams": 0,
-        "history_samples": 34739,
+        "history_samples": 34740,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       },
@@ -30039,7 +31426,7 @@
         "status": "LEARNING_IN_SHADOW",
         "streams": 113,
         "active_streams": 0,
-        "history_samples": 26278,
+        "history_samples": 26279,
         "primary_is_control": false,
         "note": "Shared forecasts are counted once per event/model, not once per wallet."
       }
@@ -33848,7 +35235,7 @@
       },
       "MULTIMARKET-1.0.0-nba|nba|ML": {
         "status": "HOLDOUT_NOT_BETTER",
-        "n": 1314,
+        "n": 1315,
         "historical_roi": null,
         "parameters": {
           "ratios": [
@@ -33860,14 +35247,14 @@
         },
         "holdout": {
           "base": {
-            "n": 231,
-            "brier": 0.433944199011768,
-            "log_loss": 0.6232820176359732
+            "n": 232,
+            "brier": 0.434252585422952,
+            "log_loss": 0.6236068239474272
           },
           "candidate": {
-            "n": 231,
-            "brier": 0.45649148271812917,
-            "log_loss": 0.6488908245670452
+            "n": 232,
+            "brier": 0.4566908349349133,
+            "log_loss": 0.6490934002560832
           }
         },
         "splits": {
@@ -33887,12 +35274,12 @@
             "last_date": "2026-10-10"
           },
           "final_evaluation": {
-            "n": 231,
+            "n": 232,
             "first_date": "2026-10-11",
             "last_date": "2026-11-15"
           }
         },
-        "model_sha256": "647fb09fd53ad730a041f60c9abba7113bcf023fa1a9b71ff79772b0011b32eb",
+        "model_sha256": "5db40ef7fa404e71caf56f090280be3e7650f2e8930b6e487eb2debff88eedbd",
         "forward": {
           "n": 0,
           "dates": 0,
@@ -34272,57 +35659,12 @@
     "caveat": "Score history measures probabilities, not bookmaker profit. Chronological holdout reuse is exploratory; promotion also requires frozen prequential shadow results."
   },
   "market_research": {
-    "asof_utc": "2026-11-16T01:24:50.867159+00:00",
+    "asof_utc": "2026-11-16T02:46:22.505427+00:00",
     "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
     "pricing_readiness": {
-      "asof_utc": "2026-11-16T01:24:34.201515+00:00",
+      "asof_utc": "2026-11-16T02:45:54.485474+00:00",
       "training_cutoff_exclusive_utc_date": "2026-11-16",
       "events": [
-        {
-          "id": "nba:401909993",
-          "sport": "nba",
-          "home": "Sacramento Kings",
-          "away": "Oklahoma City Thunder",
-          "start_utc": "2026-11-16T02:00:00+00:00",
-          "status": "READY",
-          "forecasts": [
-            {
-              "family": "MULTIMARKET-1.0.0-nba",
-              "market": "ML",
-              "sample_min": 94
-            }
-          ]
-        },
-        {
-          "id": "nhl:401892724",
-          "sport": "nhl",
-          "home": "Vegas Golden Knights",
-          "away": "Vancouver Canucks",
-          "start_utc": "2026-11-16T02:00:00+00:00",
-          "status": "READY",
-          "forecasts": [
-            {
-              "family": "MULTIMARKET-1.0.0-nhl",
-              "market": "ML",
-              "sample_min": 95
-            }
-          ]
-        },
-        {
-          "id": "nhl:401892725",
-          "sport": "nhl",
-          "home": "San Jose Sharks",
-          "away": "Nashville Predators",
-          "start_utc": "2026-11-16T02:00:00+00:00",
-          "status": "READY",
-          "forecasts": [
-            {
-              "family": "MULTIMARKET-1.0.0-nhl",
-              "market": "ML",
-              "sample_min": 94
-            }
-          ]
-        },
         {
           "id": "nba:401909994",
           "sport": "nba",
@@ -34574,7 +35916,7 @@
             {
               "family": "MULTIMARKET-1.0.0-nba",
               "market": "ML",
-              "sample_min": 100
+              "sample_min": 101
             }
           ]
         },
@@ -34670,69 +36012,51 @@
         }
       ]
     },
-    "new_forecasts": 3,
-    "new_settlements": 8,
+    "new_forecasts": 0,
+    "new_settlements": 2,
     "forecasts_total": 497,
     "zero_stake_forecasts": 428,
-    "open_observations": 14,
-    "settlements_total": 479,
-    "candidate_markets": 26,
+    "open_observations": 12,
+    "settlements_total": 481,
+    "candidate_markets": 23,
     "closing_line_values_available": 0,
     "blocks": {
-      "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 6,
-      "NEEDS_100_DISTINCT_EVENTS": 6,
-      "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 6,
-      "LOG_LOSS_NOT_BETTER_THAN_MARKET": 6,
-      "CALIBRATION_ERROR_OVER_10PP": 6,
       "missing_timestamped_ML_odds": 19,
+      "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 2,
+      "NEEDS_100_DISTINCT_EVENTS": 2,
+      "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 2,
+      "LOG_LOSS_NOT_BETTER_THAN_MARKET": 2,
+      "CALIBRATION_ERROR_OVER_10PP": 2,
       "EDGE_BELOW_4PP": 1,
       "CONSERVATIVE_EV_BELOW_1_PERCENT": 2,
       "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 1,
       "NEEDS_14_DISTINCT_MARKET_DATES": 1
     },
     "history": {
-      "requests": 6,
+      "requests": 3,
       "failures": [],
       "sources": [
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261115&limit=300",
-          "sha256": "aadf45028b0914a5ed4288688e518edcb898e67df16ffad1e698da0564e2c004",
-          "captured_at_utc": "2026-11-16T01:24:34.201515+00:00",
-          "completed_games": 5
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261114&limit=300",
-          "sha256": "9e5916bf239e8517556d639e86c3b74be59b7df77da9cfa505409b768a9dd71a",
-          "captured_at_utc": "2026-11-16T01:24:34.201515+00:00",
-          "completed_games": 5
+          "sha256": "dac85cf13f746c1bfee9a20a7701158c1edfa37e2cc2ca198e0032f66f028b44",
+          "captured_at_utc": "2026-11-16T02:45:54.485474+00:00",
+          "completed_games": 6
         },
         {
           "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261115&limit=300",
-          "sha256": "625fe98dcd3a81c50b7612b9127ea0bc36d0b3592a1bfcbbe2002804129246c8",
-          "captured_at_utc": "2026-11-16T01:24:34.201515+00:00",
+          "sha256": "686f562b9d9b7cc1c3489f91cee331c5486d216586b2c93b937e7f785069dc1b",
+          "captured_at_utc": "2026-11-16T02:45:54.485474+00:00",
           "completed_games": 11
         },
         {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261114&limit=300",
-          "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-          "captured_at_utc": "2026-11-16T01:24:34.201515+00:00",
-          "completed_games": 0
-        },
-        {
           "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261115&limit=300",
-          "sha256": "4c139dd17cfbb363d52ec90b78fc90efe54769260412130d40e00429b0f25f76",
-          "captured_at_utc": "2026-11-16T01:24:34.201515+00:00",
+          "sha256": "61530b00940256267ebcdefc2c7ebe1451040c81223a69e267caeb82b23706eb",
+          "captured_at_utc": "2026-11-16T02:45:54.485474+00:00",
           "completed_games": 0
-        },
-        {
-          "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261114&limit=300",
-          "sha256": "ddd9ce3e93fcb87852b152e99d0f87c3987d4c582c8f5d0f95d62df6522b9a7f",
-          "captured_at_utc": "2026-11-16T01:24:34.201515+00:00",
-          "completed_games": 14
         }
       ],
       "games_per_sport": {
-        "nba": 1506,
+        "nba": 1507,
         "nfl": 361,
         "nhl": 1604
       },
@@ -34741,19 +36065,19 @@
     },
     "score_backtests": {
       "nba": {
-        "n": 1314,
-        "brier": 0.4391130517843885,
-        "log_loss": 0.6302816529110215,
+        "n": 1315,
+        "brier": 0.4391635284342912,
+        "log_loss": 0.6303336342258368,
         "uniform_brier": 0.5,
         "uniform_log_loss": 0.6931471805599453,
         "market_brier": null,
         "roi": null,
         "holdout": {
           "from": "2026-06-09",
-          "n": 262,
-          "brier": 0.4550195822294206,
-          "log_loss": 0.6467771608601512,
-          "ece": 0.04928840821650343
+          "n": 263,
+          "brier": 0.4552114843745804,
+          "log_loss": 0.6469743468716841,
+          "ece": 0.05101254898253181
         },
         "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
       },
@@ -37385,40 +38709,40 @@
       "independent_events": 7
     },
     "games_played_today": {
-      "n": 0,
-      "independent_events": 0,
-      "wins": 0,
+      "n": 1,
+      "independent_events": 1,
+      "wins": 1,
       "losses": 0,
-      "staked_eur": 0,
-      "pnl_eur": 0,
-      "roi_pct": null
+      "staked_eur": 0.5,
+      "pnl_eur": 0.13,
+      "roi_pct": 26.0
     },
     "settled_today": {
-      "n": 14,
-      "independent_events": 4,
-      "wins": 14,
+      "n": 15,
+      "independent_events": 5,
+      "wins": 15,
       "losses": 0,
-      "staked_eur": 7.0,
-      "pnl_eur": 2.52,
-      "roi_pct": 36.07
+      "staked_eur": 7.5,
+      "pnl_eur": 2.66,
+      "roi_pct": 35.4
     },
     "total": 994,
-    "open": 59,
-    "closed": 935,
+    "open": 58,
+    "closed": 936,
     "voided": 0,
     "all_time": {
-      "n": 935,
-      "independent_events": 212,
-      "wins": 515,
+      "n": 936,
+      "independent_events": 213,
+      "wins": 516,
       "losses": 420,
-      "staked_eur": 1166.68,
-      "pnl_eur": -274.41,
-      "roi_pct": -23.52
+      "staked_eur": 1167.18,
+      "pnl_eur": -274.28,
+      "roi_pct": -23.5
     },
     "prospective_benchmark": {
-      "n": 926,
-      "model_brier": 0.485974,
-      "market_brier": 0.434138,
+      "n": 927,
+      "model_brier": 0.485695,
+      "market_brier": 0.433786,
       "beats_market_on_sample": false,
       "note": "No market forecast invented; beware event correlation and low sample size."
     },
@@ -37460,13 +38784,13 @@
         "roi_pct": -52.58
       },
       "nba": {
-        "n": 288,
-        "independent_events": 62,
-        "wins": 167,
+        "n": 289,
+        "independent_events": 63,
+        "wins": 168,
         "losses": 121,
-        "staked_eur": 335.18,
-        "pnl_eur": -105.68,
-        "roi_pct": -31.53
+        "staked_eur": 335.68,
+        "pnl_eur": -105.55,
+        "roi_pct": -31.44
       },
       "nfl": {
         "n": 77,
@@ -37516,13 +38840,13 @@
         "roi_pct": 55.0
       },
       "ML": {
-        "n": 641,
-        "independent_events": 174,
-        "wins": 385,
+        "n": 642,
+        "independent_events": 175,
+        "wins": 386,
         "losses": 256,
-        "staked_eur": 663.02,
-        "pnl_eur": -57.56,
-        "roi_pct": -8.68
+        "staked_eur": 663.52,
+        "pnl_eur": -57.43,
+        "roi_pct": -8.66
       },
       "STAT_329a302abf4b38c7": {
         "n": 1,
@@ -37671,24 +38995,24 @@
         "roi_pct": 10.78
       },
       "POISSON_SHRINK": {
-        "n": 72,
-        "independent_events": 72,
-        "wins": 37,
+        "n": 73,
+        "independent_events": 73,
+        "wins": 38,
         "losses": 35,
-        "staked_eur": 85.25,
-        "pnl_eur": -29.09,
-        "roi_pct": -34.13
+        "staked_eur": 85.75,
+        "pnl_eur": -28.96,
+        "roi_pct": -33.78
       }
     },
     "by_odds_band": {
       "under_2": {
-        "n": 672,
-        "independent_events": 187,
-        "wins": 451,
+        "n": 673,
+        "independent_events": 188,
+        "wins": 452,
         "losses": 221,
-        "staked_eur": 570.38,
-        "pnl_eur": 30.65,
-        "roi_pct": 5.37
+        "staked_eur": 570.88,
+        "pnl_eur": 30.78,
+        "roi_pct": 5.39
       },
       "2_to_3": {
         "n": 171,
@@ -37727,7 +39051,7 @@
     "paper_only": true
   },
   "market_activity": {
-    "asof_utc": "2026-11-16T01:24:34.201515+00:00",
+    "asof_utc": "2026-11-16T02:45:54.485474+00:00",
     "by_market": {
       "1X2": {
         "label": "Resultado 1X2",
@@ -37743,12 +39067,12 @@
       "ML": {
         "label": "Vencedor (ML)",
         "papers_total": 764,
-        "papers_open": 63,
-        "papers_settled": 701,
+        "papers_open": 62,
+        "papers_settled": 702,
         "papers_voided": 0,
         "papers_today": 32,
         "observations": 236,
-        "priced_event_count": 7,
+        "priced_event_count": 4,
         "status": "PAPER_RECORDED"
       },
       "GOALS_TOTAL": {
@@ -37855,9 +39179,9 @@
         5,
         10
       ],
-      "opened_today": 0,
-      "opened_this_week": 0,
-      "remaining_to_minimum": 5,
+      "opened_today": 2,
+      "opened_this_week": 2,
+      "remaining_to_minimum": 3,
       "new_entries": 0,
       "eligible": 0,
       "status": "NO_ELIGIBLE_QUOTE"
@@ -37867,9 +39191,9 @@
         5,
         10
       ],
-      "opened_today": 0,
-      "opened_this_week": 0,
-      "remaining_to_minimum": 5,
+      "opened_today": 2,
+      "opened_this_week": 2,
+      "remaining_to_minimum": 3,
       "new_entries": 0,
       "eligible": 0,
       "status": "NO_ELIGIBLE_QUOTE"
@@ -37879,9 +39203,9 @@
         5,
         10
       ],
-      "opened_today": 0,
-      "opened_this_week": 0,
-      "remaining_to_minimum": 5,
+      "opened_today": 2,
+      "opened_this_week": 2,
+      "remaining_to_minimum": 3,
       "new_entries": 0,
       "eligible": 0,
       "status": "NO_ELIGIBLE_QUOTE"
@@ -38600,23 +39924,23 @@
     },
     "POISSON_SHRINK": {
       "bankroll_initial_eur": 1000.0,
-      "bankroll_eur": 970.9054,
-      "open_exposure_eur": 2.5,
-      "pnl_eur": -29.0946,
-      "total_staked_settled_eur": 85.25,
-      "paper_wins": 37,
+      "bankroll_eur": 971.0354,
+      "open_exposure_eur": 2.0,
+      "pnl_eur": -28.9646,
+      "total_staked_settled_eur": 85.75,
+      "paper_wins": 38,
       "paper_losses": 35,
-      "settled": 72,
+      "settled": 73,
       "voided": 0,
-      "open": 5,
-      "yield_percent": -34.1286,
-      "return_on_initial_bank_percent": -2.9095,
+      "open": 4,
+      "yield_percent": -33.778,
+      "return_on_initial_bank_percent": -2.8965,
       "max_settled_drawdown_percent": 3.0265,
-      "brier": 0.511142,
-      "log_loss": 0.785904,
-      "benchmark_n": 72,
-      "market_brier": 0.435522,
-      "market_log_loss": 0.688535,
+      "brier": 0.507256,
+      "log_loss": 0.780773,
+      "benchmark_n": 73,
+      "market_brier": 0.431037,
+      "market_log_loss": 0.682728,
       "status": "EXPERIMENTAL_PAPER_ONLY"
     },
     "DIXON_COLES_LOW": {
@@ -39038,33 +40362,21 @@
     "failures": 0
   },
   "events_seen": 68,
-  "new_paper_entries": {
-    "MARKET_DAILY_REFERENCE": 7,
-    "CONSENSUS_SHRUNK": 3,
-    "DISAGREEMENT_VETO": 2,
-    "DIXON_COLES_LOW": 2,
-    "ELO_DYNAMIC": 2,
-    "ELO_POISSON_BLEND": 2,
-    "ELO_STANDARD": 2,
-    "EXPERIMENTAL_MULTI_MARKET": 2,
-    "FREQ_BALANCED_3_5": 2,
-    "FREQ_BROAD_5_10": 2,
-    "FREQ_SELECTIVE_1_3": 2,
-    "MARKET_ANCHORED": 2,
-    "POISSON_SHRINK": 2
-  },
+  "new_paper_entries": {},
   "entry_diagnostics": {
     "rejections": {},
-    "new_entries": 32,
+    "new_entries": 0,
     "unit": "strategy-event evaluations"
   },
-  "newly_settled": 14,
+  "newly_settled": 1,
   "missing_final_event_ids": [
-    "nba:401909991",
+    "nba:401909993",
     "nfl:401873064",
     "nhl:401892721",
     "nhl:401892722",
-    "nhl:401892723"
+    "nhl:401892723",
+    "nhl:401892724",
+    "nhl:401892725"
   ],
   "statistic_settlement": {
     "lookups": 0,
