@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-19T03:32:37.214272+00:00",
+  "asof_utc": "2026-11-19T09:30:59.816298+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-19T03:32:10.576542+00:00",
+    "asof_utc": "2026-11-19T09:30:35.054436+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-19",
     "events": [
       {
@@ -577,30 +577,29 @@
     ]
   },
   "new_forecasts": 0,
-  "new_settlements": 15,
+  "new_settlements": 5,
   "forecasts_total": 589,
   "zero_stake_forecasts": 502,
-  "open_observations": 41,
-  "settlements_total": 542,
+  "open_observations": 37,
+  "settlements_total": 547,
   "candidate_markets": 54,
   "closing_line_values_available": 0,
   "blocks": {
-    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 5,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 32,
+    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 4,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 25,
     "NEEDS_100_DISTINCT_EVENTS": 16,
     "NEEDS_14_DAY_FORWARD_PERIOD": 15,
     "NEEDS_14_DISTINCT_MARKET_DATES": 16,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 23,
-    "EDGE_BELOW_4PP": 12,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 20,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 10,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 16,
+    "EDGE_BELOW_4PP": 9,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 16,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 3,
     "CALIBRATION_ERROR_OVER_10PP": 14,
     "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 2,
     "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 2,
     "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 2,
     "NEEDS_TWO_BOOKMAKERS": 11,
-    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 7,
-    "missing_timestamped_ML_odds": 13,
+    "missing_timestamped_ML_odds": 25,
     "NEEDS_50_HOLDOUT_FORECASTS": 1,
     "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 1,
     "insufficient_football_home_away_history": 1,
@@ -613,20 +612,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261118&limit=300",
-        "sha256": "b3194978af3824366dddd4f66762358ecc31273743938e771da42ad80faaf5c0",
-        "captured_at_utc": "2026-11-19T03:32:10.576542+00:00",
+        "sha256": "aba4c7904679891afe25dba190124ebf9c0f66fca5293ead08800f644ad54160",
+        "captured_at_utc": "2026-11-19T09:30:35.054436+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261118&limit=300",
         "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-        "captured_at_utc": "2026-11-19T03:32:10.576542+00:00",
+        "captured_at_utc": "2026-11-19T09:30:35.054436+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261118&limit=300",
-        "sha256": "8dc1a50c04bb6111717dbf88bb987dd44f535146668aa85a8c759c83db79201e",
-        "captured_at_utc": "2026-11-19T03:32:10.576542+00:00",
+        "sha256": "f4409ed02ba00258ff5c1d5baa7c184f0dca71df3b54463b775f91dc08fa663c",
+        "captured_at_utc": "2026-11-19T09:30:35.054436+00:00",
         "completed_games": 0
       }
     ],
@@ -1355,15 +1354,6 @@
           "kind": "TOTAL",
           "metric": "goals",
           "line": 4.25,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-          "provider_market_key": "alternate_totals"
-        },
-        "STAT_de67abf76c5a82c7": {
-          "kind": "TOTAL",
-          "metric": "goals",
-          "line": 3.25,
           "team": null,
           "period": "FULL_TIME",
           "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
@@ -3869,11 +3859,11 @@
   "experimental_account": {
     "created": true,
     "initial_bankroll_eur": 1000,
-    "bankroll_eur": 982.115,
-    "pnl_eur": -17.885,
+    "bankroll_eur": 981.615,
+    "pnl_eur": -18.385,
     "positions": 87,
-    "open_exposure_eur": 3.0,
-    "open": 6,
+    "open_exposure_eur": 2.5,
+    "open": 5,
     "note": "Separate experimental virtual account; original twelve wallets preserved."
   },
   "settlement_errors": [],
