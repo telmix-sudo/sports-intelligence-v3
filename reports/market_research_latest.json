@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-19T01:30:58.228371+00:00",
+  "asof_utc": "2026-11-19T03:32:37.214272+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-19T01:30:29.028683+00:00",
+    "asof_utc": "2026-11-19T03:32:10.576542+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-19",
     "events": [
       {
@@ -142,66 +142,6 @@
             "family": "ELO_STANDARD",
             "market": "1X2",
             "sample_min": 140
-          }
-        ]
-      },
-      {
-        "id": "nba:401910015",
-        "sport": "nba",
-        "home": "Denver Nuggets",
-        "away": "Boston Celtics",
-        "start_utc": "2026-11-19T02:30:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nba",
-            "market": "ML",
-            "sample_min": 100
-          }
-        ]
-      },
-      {
-        "id": "nba:401910017",
-        "sport": "nba",
-        "home": "Los Angeles Lakers",
-        "away": "Utah Jazz",
-        "start_utc": "2026-11-19T03:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nba",
-            "market": "ML",
-            "sample_min": 96
-          }
-        ]
-      },
-      {
-        "id": "nba:401910018",
-        "sport": "nba",
-        "home": "Sacramento Kings",
-        "away": "Phoenix Suns",
-        "start_utc": "2026-11-19T03:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nba",
-            "market": "ML",
-            "sample_min": 95
-          }
-        ]
-      },
-      {
-        "id": "nhl:401892741",
-        "sport": "nhl",
-        "home": "Utah Mammoth",
-        "away": "Colorado Avalanche",
-        "start_utc": "2026-11-19T03:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-nhl",
-            "market": "ML",
-            "sample_min": 103
           }
         ]
       },
@@ -588,34 +528,79 @@
             "sample_min": 96
           }
         ]
+      },
+      {
+        "id": "nba:401909311",
+        "sport": "nba",
+        "home": "Utah Jazz",
+        "away": "Phoenix Suns",
+        "start_utc": "2026-11-21T02:30:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nba",
+            "market": "ML",
+            "sample_min": 96
+          }
+        ]
+      },
+      {
+        "id": "nba:401909312",
+        "sport": "nba",
+        "home": "Denver Nuggets",
+        "away": "Houston Rockets",
+        "start_utc": "2026-11-21T03:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nba",
+            "market": "ML",
+            "sample_min": 100
+          }
+        ]
+      },
+      {
+        "id": "nba:401909313",
+        "sport": "nba",
+        "home": "Los Angeles Lakers",
+        "away": "Sacramento Kings",
+        "start_utc": "2026-11-21T03:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nba",
+            "market": "ML",
+            "sample_min": 95
+          }
+        ]
       }
     ]
   },
-  "new_forecasts": 8,
-  "new_settlements": 0,
+  "new_forecasts": 0,
+  "new_settlements": 15,
   "forecasts_total": 589,
   "zero_stake_forecasts": 502,
-  "open_observations": 52,
-  "settlements_total": 527,
-  "candidate_markets": 55,
+  "open_observations": 41,
+  "settlements_total": 542,
+  "candidate_markets": 54,
   "closing_line_values_available": 0,
   "blocks": {
     "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 5,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 40,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 32,
     "NEEDS_100_DISTINCT_EVENTS": 16,
     "NEEDS_14_DAY_FORWARD_PERIOD": 15,
     "NEEDS_14_DISTINCT_MARKET_DATES": 16,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 31,
-    "EDGE_BELOW_4PP": 14,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 21,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 18,
-    "CALIBRATION_ERROR_OVER_10PP": 16,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 23,
+    "EDGE_BELOW_4PP": 12,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 20,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 10,
+    "CALIBRATION_ERROR_OVER_10PP": 14,
     "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 2,
     "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 2,
     "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 2,
     "NEEDS_TWO_BOOKMAKERS": 11,
-    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 15,
-    "missing_timestamped_ML_odds": 10,
+    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 7,
+    "missing_timestamped_ML_odds": 13,
     "NEEDS_50_HOLDOUT_FORECASTS": 1,
     "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 1,
     "insufficient_football_home_away_history": 1,
@@ -623,44 +608,26 @@
     "missing_timestamped_BTTS_odds": 1
   },
   "history": {
-    "requests": 6,
+    "requests": 3,
     "failures": [],
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261118&limit=300",
-        "sha256": "b9d146ca923be8312752aeddd91ae1badf19de5175bd1e2bec03aa0eaf23b4e5",
-        "captured_at_utc": "2026-11-19T01:30:29.028683+00:00",
+        "sha256": "b3194978af3824366dddd4f66762358ecc31273743938e771da42ad80faaf5c0",
+        "captured_at_utc": "2026-11-19T03:32:10.576542+00:00",
         "completed_games": 0
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261117&limit=300",
-        "sha256": "b13c89dd9142bf944acfdb9d4f8c8e32df6ce0fdfc70ab4cc962aaa5fd5f5012",
-        "captured_at_utc": "2026-11-19T01:30:29.028683+00:00",
-        "completed_games": 5
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261118&limit=300",
         "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-        "captured_at_utc": "2026-11-19T01:30:29.028683+00:00",
-        "completed_games": 0
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261117&limit=300",
-        "sha256": "d0b7c1d790cfa9721ccd5f8d4d5bafaadb09697286709bfb74b4f200f06e9b8d",
-        "captured_at_utc": "2026-11-19T01:30:29.028683+00:00",
+        "captured_at_utc": "2026-11-19T03:32:10.576542+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261118&limit=300",
-        "sha256": "e7f2d77e1b1936613fba380803041d68336fd1d7413bae5d4f80dc38c38452a3",
-        "captured_at_utc": "2026-11-19T01:30:29.028683+00:00",
+        "sha256": "8dc1a50c04bb6111717dbf88bb987dd44f535146668aa85a8c759c83db79201e",
+        "captured_at_utc": "2026-11-19T03:32:10.576542+00:00",
         "completed_games": 0
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261117&limit=300",
-        "sha256": "7704bb55b518f8af23de4e6e90b007ed4dab74490c1158910ded974c3c250ba3",
-        "captured_at_utc": "2026-11-19T01:30:29.028683+00:00",
-        "completed_games": 11
       }
     ],
     "games_per_sport": {
@@ -3902,11 +3869,11 @@
   "experimental_account": {
     "created": true,
     "initial_bankroll_eur": 1000,
-    "bankroll_eur": 983.17,
-    "pnl_eur": -16.83,
+    "bankroll_eur": 982.115,
+    "pnl_eur": -17.885,
     "positions": 87,
-    "open_exposure_eur": 5.0,
-    "open": 10,
+    "open_exposure_eur": 3.0,
+    "open": 6,
     "note": "Separate experimental virtual account; original twelve wallets preserved."
   },
   "settlement_errors": [],
