@@ -795,6 +795,8 @@ def run_strategy_lab(root: Path, now: dt.datetime, fetcher=fetch_text,
             "Uncertainty sensitivity is not yet a calibrated statistical interval.",
         ],
     }
+    from .decision_review import write_review
+    write_review(root, published_at)
     path = root / "reports" / "strategy_lab_latest.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf8")

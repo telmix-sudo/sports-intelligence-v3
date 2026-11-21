@@ -67,6 +67,10 @@
 <article class="card"><h2>Risco agregado</h2><p id="riskOverview" class="muted" role="status">A carregar…</p></article>
 <article class="card"><h2>Liquidação e atraso</h2><p id="settlementHealth" class="muted" role="status">A carregar…</p></article>
 <article class="card"><h2>Comparação com mercado</h2><p id="marketAudit" class="muted" role="status">A carregar…</p></article></section>
+<section class="card space" id="decisionReview"><h2>Decisões distintas e resultados por finalidade</h2>
+<p data-summary aria-live="polite">A carregar os registos das carteiras…</p>
+<div class="table"><table><thead><tr><th>Origem da entrada</th><th>Abertas</th><th>Liquidadas</th><th>Resultado</th><th>ROI (%)</th></tr></thead><tbody></tbody></table></div>
+<h3>Testes prospetivos em NHL e futebol</h3><p data-forward></p></section>
 <section class="card space"><h2>Novos mercados e modalidades</h2><p id="marketResearch" class="muted" role="status">A carregar o registo prospetivo…</p><p><a href="https://github.com/telmix-sudo/sports-intelligence-v3/blob/main/reports/market_research_latest.json">Histórico, testes e motivos de rejeição por mercado</a></p><h3>Utilização efetiva por mercado</h3><p class="muted small">PAPER = aposta com valor fictício. Observações sem stake não são apostas. Os registos incluem repetições entre carteiras.</p><div class="table"><table><thead><tr><th>Mercado</th><th>PAPER abertas</th><th>PAPER liquidadas</th><th>Entradas hoje</th><th>Observações sem stake</th><th>Estado</th></tr></thead><tbody id="marketUsage"><tr><td colspan="6">A aguardar os movimentos por mercado…</td></tr></tbody></table></div></section>
 <section class="card space" id="aprendizagem"><h2>Aprendizagem com o histórico</h2><p id="learningSummary" class="muted" role="status">A aguardar avaliação cronológica…</p><p class="muted small">Os ajustes começam em observação, com as probabilidades originais guardadas. Só podem influenciar novas posições PAPER após melhorarem Brier e Log Loss na avaliação histórica e superarem o modelo original e o mercado em pelo menos 100 jogos futuros liquidados, distribuídos por 14 datas. O favorito da carteira de referência mantém-se como controlo. Jogos repetidos entre carteiras não contam como provas independentes. Sem odds antigas verificadas, o lucro histórico não é calculado.</p><div class="table"><table><thead><tr><th>Carteira</th><th>Amostras por modelo e mercado</th><th>Modelos ativos</th><th>Estado</th></tr></thead><tbody id="learningWallets"></tbody></table></div></section>
 <section class="grid space" id="wallets" aria-label="Carteiras virtuais"></section>
@@ -77,6 +81,7 @@
 <script src="daily-minimum.js?v=20261115-comparison"></script>
 <script src="selection-experiment.js?v=20261111-value"></script>
 <script src="validation-progress.js?v=20261104"></script>
+<script src="decision-review.js"></script>
 <script src="balance.js?v=20261101-totals"></script>
 <script src="paper-summary.js?v=20261103-wallet-count"></script>
 <script>
@@ -149,6 +154,7 @@ el("status").textContent="A verificar estado...";
 try{
 const {report:x,ref}=await V3Balance.fetchReport();
 balancePanel.updateReport(x,ref);
+renderDecisionReview(ref);
 try{
  const positions=V3Papers.summarize(x);
  el('openPositions').textContent=fmt(positions.open,0);
