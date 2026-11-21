@@ -1,109 +1,10 @@
 {
-  "asof_utc": "2026-11-21T16:24:16.895740+00:00",
+  "asof_utc": "2026-11-21T17:59:42.967647+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-21T16:23:55.177663+00:00",
+    "asof_utc": "2026-11-21T17:59:27.498988+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-21",
     "events": [
-      {
-        "id": "serie_a:401874967",
-        "sport": "serie_a",
-        "home": "Parma",
-        "away": "AS Roma",
-        "start_utc": "2026-11-21T17:00:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "OVER_UNDER_2_5",
-            "sample_min": 41
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "BTTS",
-            "sample_min": 41
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "ASIAN_HOME_MINUS_0_5",
-            "sample_min": 41
-          },
-          {
-            "family": "ELO_STANDARD",
-            "market": "1X2",
-            "sample_min": 80
-          }
-        ]
-      },
-      {
-        "id": "epl:401879232",
-        "sport": "epl",
-        "home": "Newcastle United",
-        "away": "Arsenal",
-        "start_utc": "2026-11-21T17:30:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "OVER_UNDER_2_5",
-            "sample_min": 98
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "BTTS",
-            "sample_min": 98
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "ASIAN_HOME_MINUS_0_5",
-            "sample_min": 98
-          },
-          {
-            "family": "ELO_STANDARD",
-            "market": "1X2",
-            "sample_min": 195
-          }
-        ]
-      },
-      {
-        "id": "la_liga:401882797",
-        "sport": "la_liga",
-        "home": "Sevilla",
-        "away": "Real Betis",
-        "start_utc": "2026-11-21T17:30:00+00:00",
-        "status": "READY",
-        "forecasts": [
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "OVER_UNDER_2_5",
-            "sample_min": 99
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "BTTS",
-            "sample_min": 99
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goals",
-            "market": "ASIAN_HOME_MINUS_0_5",
-            "sample_min": 99
-          },
-          {
-            "family": "ELO_STANDARD",
-            "market": "1X2",
-            "sample_min": 196
-          }
-        ]
-      },
-      {
-        "id": "bundesliga:401884729",
-        "sport": "bundesliga",
-        "home": "Schalke 04",
-        "away": "VfB Stuttgart",
-        "start_utc": "2026-11-21T17:30:00+00:00",
-        "status": "INSUFFICIENT_HISTORY",
-        "forecasts": []
-      },
       {
         "id": "nba:401910023",
         "sport": "nba",
@@ -1285,26 +1186,26 @@
       }
     ]
   },
-  "new_forecasts": 11,
-  "new_settlements": 46,
+  "new_forecasts": 0,
+  "new_settlements": 27,
   "forecasts_total": 749,
   "zero_stake_forecasts": 652,
-  "open_observations": 96,
-  "settlements_total": 649,
-  "candidate_markets": 100,
+  "open_observations": 69,
+  "settlements_total": 676,
+  "candidate_markets": 91,
   "closing_line_values_available": 1,
   "blocks": {
-    "missing_timestamped_OVER_UNDER_2_5_odds": 19,
-    "missing_timestamped_BTTS_odds": 19,
-    "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 19,
-    "insufficient_football_home_away_history": 7,
     "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 24,
     "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 31,
     "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 31,
     "LOG_LOSS_NOT_BETTER_THAN_MARKET": 31,
+    "missing_timestamped_OVER_UNDER_2_5_odds": 16,
+    "missing_timestamped_BTTS_odds": 16,
+    "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 16,
     "EDGE_BELOW_4PP": 10,
     "CONSERVATIVE_EV_BELOW_1_PERCENT": 10,
     "missing_timestamped_ML_odds": 8,
+    "insufficient_football_home_away_history": 6,
     "NEEDS_50_HOLDOUT_FORECASTS": 7,
     "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 7,
     "NEEDS_100_DISTINCT_EVENTS": 7,
@@ -1318,20 +1219,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261120&limit=300",
-        "sha256": "b148d40e36935e504c8f0b231383f74d3da586cd00c73e84a2b1e4cc13f2b358",
-        "captured_at_utc": "2026-11-21T16:23:55.177663+00:00",
+        "sha256": "5472381e7e24be3cfc2dd4f30db89fddc38489defaff976834fd3f9b363839dd",
+        "captured_at_utc": "2026-11-21T17:59:27.498988+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261120&limit=300",
         "sha256": "50b9c3dd9a55bf543ce5d94f0c58250eaefe529e3de9280c6664ad88d1768e05",
-        "captured_at_utc": "2026-11-21T16:23:55.177663+00:00",
+        "captured_at_utc": "2026-11-21T17:59:27.498988+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261120&limit=300",
         "sha256": "84246408531354f13cf794430f17273ca043eda9b5112d7910c8fe4a3e147de8",
-        "captured_at_utc": "2026-11-21T16:23:55.177663+00:00",
+        "captured_at_utc": "2026-11-21T17:59:27.498988+00:00",
         "completed_games": 0
       }
     ],
