@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-22T06:54:00.460303+00:00",
+  "asof_utc": "2026-11-22T10:22:36.866054+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-22T06:53:23.162798+00:00",
+    "asof_utc": "2026-11-22T10:22:02.249860+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-22",
     "events": [
       {
@@ -166,11 +166,6 @@
           {
             "family": "MULTIMARKET-1.0.0-goal-lines",
             "market": "STAT_3467965f94bbdcae",
-            "sample_min": 20
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goal-lines",
-            "market": "STAT_961be547146ff10b",
             "sample_min": 20
           },
           {
@@ -1236,17 +1231,17 @@
     ]
   },
   "new_forecasts": 0,
-  "new_settlements": 13,
+  "new_settlements": 0,
   "forecasts_total": 797,
   "zero_stake_forecasts": 695,
   "open_observations": 71,
   "settlements_total": 718,
-  "candidate_markets": 115,
+  "candidate_markets": 114,
   "closing_line_values_available": 1,
   "blocks": {
     "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 4,
     "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 4,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 44,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 43,
     "NEEDS_100_DISTINCT_EVENTS": 29,
     "NEEDS_14_DISTINCT_MARKET_DATES": 29,
     "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 30,
@@ -1269,20 +1264,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261121&limit=300",
-        "sha256": "f53b1fa95b9d59a42e055c8cac3bb06ca4607c7b6e2af9c695fbae3474a0eb31",
-        "captured_at_utc": "2026-11-22T06:53:23.162798+00:00",
+        "sha256": "28f95007f3c06dc7ba38d334b67196a9e3a8bf638e27876b46624f1cbe1f042c",
+        "captured_at_utc": "2026-11-22T10:22:02.249860+00:00",
         "completed_games": 1
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261121&limit=300",
         "sha256": "50b9c3dd9a55bf543ce5d94f0c58250eaefe529e3de9280c6664ad88d1768e05",
-        "captured_at_utc": "2026-11-22T06:53:23.162798+00:00",
+        "captured_at_utc": "2026-11-22T10:22:02.249860+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261121&limit=300",
-        "sha256": "22053619f70bd40eef02d624cdadce984cb41b8fc702519652190a7417de7cc9",
-        "captured_at_utc": "2026-11-22T06:53:23.162798+00:00",
+        "sha256": "f8e13e948ae5308e26f61090b107ae5f90ab1de7420991096cb49c75b4cbee42",
+        "captured_at_utc": "2026-11-22T10:22:02.249860+00:00",
         "completed_games": 4
       }
     ],
@@ -2079,23 +2074,6 @@
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     },
-    "ligue_1|STAT_961be547146ff10b": {
-      "n": 1426,
-      "brier": 0.31905171848647157,
-      "log_loss": 0.488591437039018,
-      "uniform_brier": 0.5,
-      "uniform_log_loss": 0.6931471805599453,
-      "market_brier": null,
-      "roi": null,
-      "holdout": {
-        "from": "2025-10-05",
-        "n": 273,
-        "brier": 0.3365967606888696,
-        "log_loss": 0.5091608495969357,
-        "ece": 0.04598877870689855
-      },
-      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-    },
     "ligue_1|STAT_952a66564a42804e": {
       "n": 1188,
       "brier": 0.15061107187887604,
@@ -2540,15 +2518,6 @@
           "period": "FULL_TIME",
           "settlement_block": null,
           "provider_market_key": "alternate_totals"
-        },
-        "STAT_961be547146ff10b": {
-          "kind": "SPREAD",
-          "metric": "goals",
-          "line": -1.5,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": null,
-          "provider_market_key": "spreads"
         },
         "STAT_952a66564a42804e": {
           "kind": "TOTAL",
