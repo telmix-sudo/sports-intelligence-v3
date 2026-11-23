@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-23T02:48:21.756174+00:00",
+  "asof_utc": "2026-11-23T08:17:13.891361+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-23T02:47:47.159280+00:00",
+    "asof_utc": "2026-11-23T08:16:40.992255+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-23",
     "events": [
       {
@@ -26,16 +26,6 @@
           {
             "family": "MULTIMARKET-1.0.0-goals",
             "market": "ASIAN_HOME_MINUS_0_5",
-            "sample_min": 97
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goal-lines",
-            "market": "STAT_73b60a83f156bee9",
-            "sample_min": 97
-          },
-          {
-            "family": "MULTIMARKET-1.0.0-goal-lines",
-            "market": "STAT_60e66ba79f025235",
             "sample_min": 97
           },
           {
@@ -538,77 +528,74 @@
             "sample_min": 105
           }
         ]
+      },
+      {
+        "id": "nba:401909316",
+        "sport": "nba",
+        "home": "Denver Nuggets",
+        "away": "Dallas Mavericks",
+        "start_utc": "2026-11-25T03:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nba",
+            "market": "ML",
+            "sample_min": 97
+          }
+        ]
       }
     ]
   },
-  "new_forecasts": 48,
-  "new_settlements": 11,
+  "new_forecasts": 0,
+  "new_settlements": 7,
   "forecasts_total": 857,
   "zero_stake_forecasts": 750,
-  "open_observations": 56,
-  "settlements_total": 794,
-  "candidate_markets": 57,
+  "open_observations": 51,
+  "settlements_total": 801,
+  "candidate_markets": 56,
   "closing_line_values_available": 1,
   "blocks": {
-    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 2,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 49,
-    "NEEDS_100_DISTINCT_EVENTS": 35,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 35,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 49,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 37,
-    "CALIBRATION_ERROR_OVER_10PP": 27,
-    "NEEDS_TWO_BOOKMAKERS": 8,
+    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 1,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 41,
+    "NEEDS_100_DISTINCT_EVENTS": 32,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 32,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 41,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 29,
+    "CALIBRATION_ERROR_OVER_10PP": 24,
+    "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 2,
     "NEEDS_14_DAY_FORWARD_PERIOD": 16,
-    "EDGE_BELOW_4PP": 19,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 32,
+    "EDGE_BELOW_4PP": 17,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 30,
     "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 3,
     "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 3,
+    "NEEDS_TWO_BOOKMAKERS": 6,
     "missing_timestamped_BTTS_odds": 1,
-    "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 1,
     "insufficient_football_home_away_history": 1,
-    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 14,
-    "missing_timestamped_ML_odds": 6,
+    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 9,
+    "missing_timestamped_ML_odds": 7,
     "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 1
   },
   "history": {
-    "requests": 6,
+    "requests": 3,
     "failures": [],
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261122&limit=300",
-        "sha256": "c93c9a8f71725f1a4d8d6e9ff94ac6bba71f24d60804899f49e0bcb7d8129731",
-        "captured_at_utc": "2026-11-23T02:47:47.159280+00:00",
+        "sha256": "e57e5bd876c66f357a02fc4da63d3133d3c740bb61d3ee20ce46a38fa7c888ab",
+        "captured_at_utc": "2026-11-23T08:16:40.992255+00:00",
         "completed_games": 2
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261121&limit=300",
-        "sha256": "faa4c68802c19717133488e08b956ba5db88cb9eba045791889a4a32cb8aee06",
-        "captured_at_utc": "2026-11-23T02:47:47.159280+00:00",
-        "completed_games": 6
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261122&limit=300",
-        "sha256": "14edd211d01067bf17d59bee123ddd5e487b26b561b11f26bc1847b6e51680a6",
-        "captured_at_utc": "2026-11-23T02:47:47.159280+00:00",
+        "sha256": "79dcd68a6f02bf680a2e883721b3676878b4547d439dd4c0a33f3764424c9b99",
+        "captured_at_utc": "2026-11-23T08:16:40.992255+00:00",
         "completed_games": 10
       },
       {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261121&limit=300",
-        "sha256": "50b9c3dd9a55bf543ce5d94f0c58250eaefe529e3de9280c6664ad88d1768e05",
-        "captured_at_utc": "2026-11-23T02:47:47.159280+00:00",
-        "completed_games": 0
-      },
-      {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261122&limit=300",
-        "sha256": "c6e2fe6b2019ccb1720681dc3fa41077f3757090fac66b7b56dfd907bfe9d4c0",
-        "captured_at_utc": "2026-11-23T02:47:47.159280+00:00",
+        "sha256": "04396fdc32368f063e43d222b70605b3e84e4946d87106ac33cc5f9cd8386d8c",
+        "captured_at_utc": "2026-11-23T08:16:40.992255+00:00",
         "completed_games": 2
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261121&limit=300",
-        "sha256": "b4a65ea9aff6d96cd90ca5b8e1f906a2123836f79e63060c92b406efc9320c0c",
-        "captured_at_utc": "2026-11-23T02:47:47.159280+00:00",
-        "completed_games": 14
       }
     ],
     "games_per_sport": {
@@ -931,7 +918,7 @@
   },
   "team_statistics_history": {
     "scoreboard_requests": 0,
-    "summary_requests": 16,
+    "summary_requests": 0,
     "events_with_statistics": 3534,
     "failures": [],
     "missing_stats": 0,
@@ -945,40 +932,6 @@
     }
   },
   "additional_market_backtests": {
-    "epl|STAT_73b60a83f156bee9": {
-      "n": 1273,
-      "brier": 0.4117549013163264,
-      "log_loss": 0.5975271993702196,
-      "uniform_brier": 0.5,
-      "uniform_log_loss": 0.6931471805599453,
-      "market_brier": null,
-      "roi": null,
-      "holdout": {
-        "from": "2025-10-04",
-        "n": 252,
-        "brier": 0.4412513300482849,
-        "log_loss": 0.6306622287042026,
-        "ece": 0.05049810424054207
-      },
-      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-    },
-    "epl|STAT_60e66ba79f025235": {
-      "n": 1337,
-      "brier": 0.35999441527121356,
-      "log_loss": 0.5379065191605922,
-      "uniform_brier": 0.5,
-      "uniform_log_loss": 0.6931471805599453,
-      "market_brier": null,
-      "roi": null,
-      "holdout": {
-        "from": "2025-10-19",
-        "n": 278,
-        "brier": 0.38007940802525464,
-        "log_loss": 0.5611745439773038,
-        "ece": 0.06845824061418172
-      },
-      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
-    },
     "epl|STAT_952a66564a42804e": {
       "n": 1424,
       "brier": 0.11209232805241562,
@@ -1468,24 +1421,6 @@
     ],
     "priced_specs": {
       "epl": {
-        "STAT_73b60a83f156bee9": {
-          "kind": "SPREAD",
-          "metric": "goals",
-          "line": 0.0,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": null,
-          "provider_market_key": "spreads"
-        },
-        "STAT_9eb1c9fd6136298a": {
-          "kind": "SPREAD",
-          "metric": "goals",
-          "line": -0.25,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-          "provider_market_key": "spreads"
-        },
         "STAT_766f1eaddafe2749": {
           "kind": "TOTAL",
           "metric": "goals",
@@ -1494,15 +1429,6 @@
           "period": "FULL_TIME",
           "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
           "provider_market_key": "alternate_totals"
-        },
-        "STAT_60e66ba79f025235": {
-          "kind": "SPREAD",
-          "metric": "goals",
-          "line": -1.0,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": null,
-          "provider_market_key": "spreads"
         },
         "STAT_952a66564a42804e": {
           "kind": "TOTAL",
@@ -4741,11 +4667,11 @@
   "experimental_account": {
     "created": true,
     "initial_bankroll_eur": 1000,
-    "bankroll_eur": 980.155,
-    "pnl_eur": -19.845,
+    "bankroll_eur": 979.155,
+    "pnl_eur": -20.845,
     "positions": 107,
-    "open_exposure_eur": 3.5,
-    "open": 7,
+    "open_exposure_eur": 2.5,
+    "open": 5,
     "note": "Separate experimental virtual account; original twelve wallets preserved."
   },
   "settlement_errors": [],
