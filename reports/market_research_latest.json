@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-23T08:17:13.891361+00:00",
+  "asof_utc": "2026-11-23T12:49:55.148055+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-23T08:16:40.992255+00:00",
+    "asof_utc": "2026-11-23T12:49:18.775694+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-23",
     "events": [
       {
@@ -196,6 +196,11 @@
           {
             "family": "MULTIMARKET-1.0.0-goal-lines",
             "market": "STAT_abc77560c94b37d7",
+            "sample_min": 40
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goal-lines",
+            "market": "STAT_73b60a83f156bee9",
             "sample_min": 40
           },
           {
@@ -546,34 +551,34 @@
       }
     ]
   },
-  "new_forecasts": 0,
-  "new_settlements": 7,
-  "forecasts_total": 857,
-  "zero_stake_forecasts": 750,
-  "open_observations": 51,
+  "new_forecasts": 2,
+  "new_settlements": 0,
+  "forecasts_total": 859,
+  "zero_stake_forecasts": 752,
+  "open_observations": 53,
   "settlements_total": 801,
-  "candidate_markets": 56,
+  "candidate_markets": 57,
   "closing_line_values_available": 1,
   "blocks": {
-    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 1,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 41,
-    "NEEDS_100_DISTINCT_EVENTS": 32,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 32,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 41,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 29,
-    "CALIBRATION_ERROR_OVER_10PP": 24,
+    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 3,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 44,
+    "NEEDS_100_DISTINCT_EVENTS": 33,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 33,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 44,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 32,
+    "CALIBRATION_ERROR_OVER_10PP": 25,
     "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 2,
     "NEEDS_14_DAY_FORWARD_PERIOD": 16,
-    "EDGE_BELOW_4PP": 17,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 30,
+    "EDGE_BELOW_4PP": 18,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 31,
     "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 3,
     "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 3,
-    "NEEDS_TWO_BOOKMAKERS": 6,
+    "NEEDS_TWO_BOOKMAKERS": 7,
     "missing_timestamped_BTTS_odds": 1,
     "insufficient_football_home_away_history": 1,
-    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 9,
-    "missing_timestamped_ML_odds": 7,
-    "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 1
+    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 11,
+    "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 1,
+    "missing_timestamped_ML_odds": 5
   },
   "history": {
     "requests": 3,
@@ -581,20 +586,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261122&limit=300",
-        "sha256": "e57e5bd876c66f357a02fc4da63d3133d3c740bb61d3ee20ce46a38fa7c888ab",
-        "captured_at_utc": "2026-11-23T08:16:40.992255+00:00",
+        "sha256": "31d8b767bc001dcde35e83cb145f3d8acc09ba984bad3fb5473aacbceefccb9b",
+        "captured_at_utc": "2026-11-23T12:49:18.775694+00:00",
         "completed_games": 2
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261122&limit=300",
-        "sha256": "79dcd68a6f02bf680a2e883721b3676878b4547d439dd4c0a33f3764424c9b99",
-        "captured_at_utc": "2026-11-23T08:16:40.992255+00:00",
+        "sha256": "896f934a9db0f41163e2cb23f91ca9010f1fcbdd40722ea79908388c3c26c0d2",
+        "captured_at_utc": "2026-11-23T12:49:18.775694+00:00",
         "completed_games": 10
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261122&limit=300",
-        "sha256": "04396fdc32368f063e43d222b70605b3e84e4946d87106ac33cc5f9cd8386d8c",
-        "captured_at_utc": "2026-11-23T08:16:40.992255+00:00",
+        "sha256": "428829218d93728070165fe16cb36eb3c603507620be3a9e02b79acc3753df91",
+        "captured_at_utc": "2026-11-23T12:49:18.775694+00:00",
         "completed_games": 2
       }
     ],
@@ -1407,6 +1412,23 @@
         "ece": 0.08961319817913241
       },
       "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
+    },
+    "la_liga|STAT_73b60a83f156bee9": {
+      "n": 1256,
+      "brier": 0.39808061133891426,
+      "log_loss": 0.5814464071696466,
+      "uniform_brier": 0.5,
+      "uniform_log_loss": 0.6931471805599453,
+      "market_brier": null,
+      "roi": null,
+      "holdout": {
+        "from": "2025-10-25",
+        "n": 257,
+        "brier": 0.39774948838514856,
+        "log_loss": 0.5793894470776136,
+        "ece": 0.0567195186697583
+      },
+      "scope": "DATE_GROUPED_FIXED_PARAMETERS_SCORE_BACKTEST_NO_HISTORICAL_ODDS"
     }
   },
   "market_catalog": {
@@ -1619,7 +1641,7 @@
           "team": null,
           "period": "FULL_TIME",
           "settlement_block": null,
-          "provider_market_key": "alternate_totals"
+          "provider_market_key": "totals"
         },
         "STAT_3467965f94bbdcae": {
           "kind": "TOTAL",
@@ -1683,6 +1705,33 @@
           "period": "FULL_TIME",
           "settlement_block": null,
           "provider_market_key": "alternate_totals"
+        },
+        "STAT_9eb1c9fd6136298a": {
+          "kind": "SPREAD",
+          "metric": "goals",
+          "line": -0.25,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
+          "provider_market_key": "spreads"
+        },
+        "STAT_766f1eaddafe2749": {
+          "kind": "TOTAL",
+          "metric": "goals",
+          "line": 2.75,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
+          "provider_market_key": "totals"
+        },
+        "STAT_73b60a83f156bee9": {
+          "kind": "SPREAD",
+          "metric": "goals",
+          "line": 0.0,
+          "team": null,
+          "period": "FULL_TIME",
+          "settlement_block": null,
+          "provider_market_key": "spreads"
         }
       }
     },
