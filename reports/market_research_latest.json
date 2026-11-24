@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-24T16:27:59.721683+00:00",
+  "asof_utc": "2026-11-24T21:14:23.837687+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-24T16:27:45.495722+00:00",
+    "asof_utc": "2026-11-24T21:14:10.445321+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-24",
     "events": [
       {
@@ -424,25 +424,44 @@
             "sample_min": 100
           }
         ]
+      },
+      {
+        "id": "nfl:401873081",
+        "sport": "nfl",
+        "home": "Detroit Lions",
+        "away": "Chicago Bears",
+        "start_utc": "2026-11-26T18:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nfl",
+            "market": "ML",
+            "sample_min": 23
+          }
+        ]
       }
     ]
   },
-  "new_forecasts": 0,
+  "new_forecasts": 15,
   "new_settlements": 0,
-  "forecasts_total": 873,
-  "zero_stake_forecasts": 761,
-  "open_observations": 9,
+  "forecasts_total": 888,
+  "zero_stake_forecasts": 776,
+  "open_observations": 24,
   "settlements_total": 860,
-  "candidate_markets": 28,
+  "candidate_markets": 29,
   "closing_line_values_available": 2,
   "blocks": {
-    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 5,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 5,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 5,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 5,
-    "EDGE_BELOW_4PP": 2,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 3,
-    "missing_timestamped_ML_odds": 19
+    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 19,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 20,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 20,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 20,
+    "EDGE_BELOW_4PP": 9,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 9,
+    "missing_timestamped_ML_odds": 5,
+    "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 1,
+    "NEEDS_100_DISTINCT_EVENTS": 1,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 1,
+    "CALIBRATION_ERROR_OVER_10PP": 1
   },
   "history": {
     "requests": 3,
@@ -451,19 +470,19 @@
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261123&limit=300",
         "sha256": "1b613b269ad88b8253580f36df23b452e1baf3940cceff2bc314cd920d1712a0",
-        "captured_at_utc": "2026-11-24T16:27:45.495722+00:00",
+        "captured_at_utc": "2026-11-24T21:14:10.445321+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261123&limit=300",
         "sha256": "0112ee6bbe5ba5a88dcfce68e73134a3f678f00a7243d8e02c4b8e9cf224e096",
-        "captured_at_utc": "2026-11-24T16:27:45.495722+00:00",
+        "captured_at_utc": "2026-11-24T21:14:10.445321+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261123&limit=300",
-        "sha256": "98ef45fcb16f5178d4cf8fc81596573bb04373e5eeb47b668b8e2dda6d38eb16",
-        "captured_at_utc": "2026-11-24T16:27:45.495722+00:00",
+        "sha256": "efd62ac96d1ca163ae1c1894d6f984d08634b1d129902ad4d6366091318b3a4c",
+        "captured_at_utc": "2026-11-24T21:14:10.445321+00:00",
         "completed_games": 0
       }
     ],
