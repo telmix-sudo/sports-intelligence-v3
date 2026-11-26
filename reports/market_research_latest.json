@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-26T08:23:49.021319+00:00",
+  "asof_utc": "2026-11-26T13:12:26.553420+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-26T08:23:14.546486+00:00",
+    "asof_utc": "2026-11-26T13:11:54.160843+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-26",
     "events": [
       {
@@ -732,39 +732,70 @@
             "sample_min": 101
           }
         ]
+      },
+      {
+        "id": "la_liga:401882796",
+        "sport": "la_liga",
+        "home": "Real Betis",
+        "away": "Rayo Vallecano",
+        "start_utc": "2026-11-28T13:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "OVER_UNDER_2_5",
+            "sample_min": 97
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "BTTS",
+            "sample_min": 97
+          },
+          {
+            "family": "MULTIMARKET-1.0.0-goals",
+            "market": "ASIAN_HOME_MINUS_0_5",
+            "sample_min": 97
+          },
+          {
+            "family": "ELO_STANDARD",
+            "market": "1X2",
+            "sample_min": 196
+          }
+        ]
       }
     ]
   },
-  "new_forecasts": 0,
-  "new_settlements": 16,
-  "forecasts_total": 955,
-  "zero_stake_forecasts": 833,
-  "open_observations": 54,
+  "new_forecasts": 7,
+  "new_settlements": 0,
+  "forecasts_total": 962,
+  "zero_stake_forecasts": 840,
+  "open_observations": 61,
   "settlements_total": 895,
-  "candidate_markets": 73,
+  "candidate_markets": 76,
   "closing_line_values_available": 2,
   "blocks": {
-    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 11,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 47,
-    "NEEDS_100_DISTINCT_EVENTS": 33,
-    "NEEDS_14_DISTINCT_MARKET_DATES": 33,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 45,
-    "CALIBRATION_ERROR_OVER_10PP": 26,
-    "EDGE_BELOW_4PP": 24,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 42,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 55,
+    "NEEDS_100_DISTINCT_EVENTS": 35,
+    "NEEDS_14_DISTINCT_MARKET_DATES": 35,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 53,
+    "CALIBRATION_ERROR_OVER_10PP": 28,
+    "EDGE_BELOW_4PP": 26,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 44,
     "EXPERIMENTAL_EVENT_ALREADY_TRADED": 35,
-    "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 3,
+    "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 4,
     "NEEDS_14_DAY_FORWARD_PERIOD": 9,
     "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 4,
     "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 4,
-    "NEEDS_TWO_BOOKMAKERS": 22,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 19,
-    "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 1,
-    "missing_timestamped_BTTS_odds": 2,
-    "missing_timestamped_ML_odds": 16,
-    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 12,
+    "NEEDS_TWO_BOOKMAKERS": 11,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 27,
+    "HOLDOUT_CALIBRATION_ERROR_OVER_15PP": 3,
+    "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 6,
+    "missing_timestamped_BTTS_odds": 3,
+    "NEEDS_50_HOLDOUT_FORECASTS": 2,
+    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 18,
     "insufficient_football_home_away_history": 2,
-    "missing_timestamped_OVER_UNDER_2_5_odds": 1
+    "missing_timestamped_OVER_UNDER_2_5_odds": 2,
+    "missing_timestamped_ML_odds": 6
   },
   "history": {
     "requests": 3,
@@ -772,20 +803,20 @@
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261125&limit=300",
-        "sha256": "2562a3a6067408211aa6f4278dc630d689eab3e3f7de4c38a08e18e0d259a9ae",
-        "captured_at_utc": "2026-11-26T08:23:14.546486+00:00",
+        "sha256": "d867d58fcc90a48151555f7fdee9882f99eeb8567a8e7ebadcc0f20def0dcdc7",
+        "captured_at_utc": "2026-11-26T13:11:54.160843+00:00",
         "completed_games": 1
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261125&limit=300",
-        "sha256": "48e8ff2ef04b2e8970b34d0cd2e8909e97aacc6f0fb2d631470c8b75a076d2cf",
-        "captured_at_utc": "2026-11-26T08:23:14.546486+00:00",
+        "sha256": "8c5f061d748a10c3f1867a9c185408db12fa98959da5d785b649bf4499ccd695",
+        "captured_at_utc": "2026-11-26T13:11:54.160843+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261125&limit=300",
-        "sha256": "f5ca40a77a17a2e706167f2144017a17cd5d55e92ebbd5ac8280c2550dc3a0ec",
-        "captured_at_utc": "2026-11-26T08:23:14.546486+00:00",
+        "sha256": "156ead1ef33911db2f1fea04338309a58a29981c37e6959aab94d8f17bed75e3",
+        "captured_at_utc": "2026-11-26T13:11:54.160843+00:00",
         "completed_games": 0
       }
     ],
@@ -1714,33 +1745,6 @@
     ],
     "priced_specs": {
       "bundesliga": {
-        "STAT_de67abf76c5a82c7": {
-          "kind": "TOTAL",
-          "metric": "goals",
-          "line": 3.25,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-          "provider_market_key": "alternate_totals"
-        },
-        "STAT_2904f94398cc8e45": {
-          "kind": "TOTAL",
-          "metric": "goals",
-          "line": 2.25,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-          "provider_market_key": "alternate_totals"
-        },
-        "STAT_766f1eaddafe2749": {
-          "kind": "TOTAL",
-          "metric": "goals",
-          "line": 2.75,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-          "provider_market_key": "alternate_totals"
-        },
         "STAT_da016301f271bb98": {
           "kind": "TOTAL",
           "metric": "goals",
@@ -1759,15 +1763,6 @@
           "settlement_block": null,
           "provider_market_key": "alternate_totals"
         },
-        "STAT_2d1014453e700026": {
-          "kind": "TOTAL",
-          "metric": "goals",
-          "line": 3.75,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
-          "provider_market_key": "alternate_totals"
-        },
         "STAT_c3bf160eebc9f0a7": {
           "kind": "TOTAL",
           "metric": "goals",
@@ -1775,15 +1770,6 @@
           "team": null,
           "period": "FULL_TIME",
           "settlement_block": null,
-          "provider_market_key": "alternate_totals"
-        },
-        "STAT_e5e0958492bf9f19": {
-          "kind": "TOTAL",
-          "metric": "goals",
-          "line": 4.25,
-          "team": null,
-          "period": "FULL_TIME",
-          "settlement_block": "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT",
           "provider_market_key": "alternate_totals"
         },
         "STAT_fedf6836cdc9327c": {
