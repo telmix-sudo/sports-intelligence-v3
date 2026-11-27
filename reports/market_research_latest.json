@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-27T02:13:19.474208+00:00",
+  "asof_utc": "2026-11-27T04:34:29.764785+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-27T02:12:50.013512+00:00",
+    "asof_utc": "2026-11-27T04:33:49.836484+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-27",
     "events": [
       {
@@ -1430,29 +1430,44 @@
             "sample_min": 100
           }
         ]
+      },
+      {
+        "id": "nhl:401892822",
+        "sport": "nhl",
+        "home": "Seattle Kraken",
+        "away": "Edmonton Oilers",
+        "start_utc": "2026-11-29T03:00:00+00:00",
+        "status": "READY",
+        "forecasts": [
+          {
+            "family": "MULTIMARKET-1.0.0-nhl",
+            "market": "ML",
+            "sample_min": 98
+          }
+        ]
       }
     ]
   },
-  "new_forecasts": 8,
-  "new_settlements": 2,
+  "new_forecasts": 0,
+  "new_settlements": 1,
   "forecasts_total": 984,
   "zero_stake_forecasts": 857,
-  "open_observations": 76,
-  "settlements_total": 899,
-  "candidate_markets": 133,
+  "open_observations": 75,
+  "settlements_total": 900,
+  "candidate_markets": 134,
   "closing_line_values_available": 2,
   "blocks": {
     "QUARTER_LINE_NEEDS_EXPLICIT_SPLIT_SETTLEMENT": 5,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 60,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 55,
     "NEEDS_100_DISTINCT_EVENTS": 46,
     "NEEDS_14_DISTINCT_MARKET_DATES": 46,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 59,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 54,
     "CALIBRATION_ERROR_OVER_10PP": 39,
     "NEEDS_TWO_BOOKMAKERS": 30,
-    "EDGE_BELOW_4PP": 26,
-    "CONSERVATIVE_EV_BELOW_1_PERCENT": 44,
+    "EDGE_BELOW_4PP": 22,
+    "CONSERVATIVE_EV_BELOW_1_PERCENT": 40,
     "EXPERIMENTAL_EVENT_ALREADY_TRADED": 33,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 24,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 19,
     "NEEDS_14_DAY_FORWARD_PERIOD": 13,
     "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 4,
     "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 4,
@@ -1460,49 +1475,31 @@
     "insufficient_football_home_away_history": 9,
     "missing_timestamped_BTTS_odds": 15,
     "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 14,
-    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 13,
+    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 8,
     "missing_timestamped_OVER_UNDER_2_5_odds": 11,
-    "missing_timestamped_ML_odds": 29
+    "missing_timestamped_ML_odds": 30
   },
   "history": {
-    "requests": 6,
+    "requests": 3,
     "failures": [],
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261126&limit=300",
-        "sha256": "8bfa7d8676f245c48819038b4c8a964c19e4269cd166d371d86077b208a29dbf",
-        "captured_at_utc": "2026-11-27T02:12:50.013512+00:00",
+        "sha256": "300727dffb2acee59213168c1994b59fd34017add6b5f79d8d6e29700a98495a",
+        "captured_at_utc": "2026-11-27T04:33:49.836484+00:00",
         "completed_games": 0
       },
       {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261125&limit=300",
-        "sha256": "94d82eefeda9b3e055bc6d29fd26edb92c9c14f812c547fa377af4a04ed7cac3",
-        "captured_at_utc": "2026-11-27T02:12:50.013512+00:00",
-        "completed_games": 9
-      },
-      {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261126&limit=300",
-        "sha256": "7ec08d2f958859c8523248f3d4fe306c3e803b466c4a47d388ace3a4f8d4dca7",
-        "captured_at_utc": "2026-11-27T02:12:50.013512+00:00",
+        "sha256": "1a40dc6fcb2b63f8d2ef840e0f4d04bf29b667f5936687133a4821bf246786d0",
+        "captured_at_utc": "2026-11-27T04:33:49.836484+00:00",
         "completed_games": 2
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261125&limit=300",
-        "sha256": "8c5f061d748a10c3f1867a9c185408db12fa98959da5d785b649bf4499ccd695",
-        "captured_at_utc": "2026-11-27T02:12:50.013512+00:00",
-        "completed_games": 1
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261126&limit=300",
         "sha256": "84246408531354f13cf794430f17273ca043eda9b5112d7910c8fe4a3e147de8",
-        "captured_at_utc": "2026-11-27T02:12:50.013512+00:00",
+        "captured_at_utc": "2026-11-27T04:33:49.836484+00:00",
         "completed_games": 0
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261125&limit=300",
-        "sha256": "2c88d5a522c3698adeeaec30414e8319286ef1a00608601638b7d98875b7cc83",
-        "captured_at_utc": "2026-11-27T02:12:50.013512+00:00",
-        "completed_games": 14
       }
     ],
     "games_per_sport": {
