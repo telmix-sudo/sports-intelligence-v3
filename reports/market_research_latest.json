@@ -1,8 +1,8 @@
 {
-  "asof_utc": "2026-11-28T02:44:04.224211+00:00",
+  "asof_utc": "2026-11-28T04:58:58.835896+00:00",
   "status": "OPERATIONAL_PROSPECTIVE_PAPER_RESEARCH",
   "pricing_readiness": {
-    "asof_utc": "2026-11-28T02:43:26.571908+00:00",
+    "asof_utc": "2026-11-28T04:58:17.505514+00:00",
     "training_cutoff_exclusive_utc_date": "2026-11-28",
     "events": [
       {
@@ -1897,22 +1897,22 @@
       }
     ]
   },
-  "new_forecasts": 60,
-  "new_settlements": 5,
+  "new_forecasts": 0,
+  "new_settlements": 11,
   "forecasts_total": 1070,
   "zero_stake_forecasts": 938,
-  "open_observations": 103,
-  "settlements_total": 962,
+  "open_observations": 92,
+  "settlements_total": 973,
   "candidate_markets": 190,
   "closing_line_values_available": 2,
   "blocks": {
     "HOLDOUT_BRIER_NOT_BETTER_THAN_UNIFORM": 7,
     "HOLDOUT_LOG_LOSS_NOT_BETTER_THAN_UNIFORM": 7,
-    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 86,
+    "NEEDS_VALIDATED_PROSPECTIVE_MARKET_COMPARISON": 81,
     "NEEDS_100_DISTINCT_EVENTS": 66,
     "NEEDS_14_DISTINCT_MARKET_DATES": 66,
-    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 79,
-    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 38,
+    "PAIRED_BRIER_EDGE_NOT_ESTABLISHED": 74,
+    "LOG_LOSS_NOT_BETTER_THAN_MARKET": 33,
     "CALIBRATION_ERROR_OVER_10PP": 57,
     "NEEDS_14_DAY_FORWARD_PERIOD": 15,
     "missing_timestamped_ASIAN_HOME_MINUS_0_5_odds": 27,
@@ -1923,48 +1923,30 @@
     "missing_timestamped_BTTS_odds": 29,
     "insufficient_football_home_away_history": 10,
     "missing_timestamped_OVER_UNDER_2_5_odds": 21,
-    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 13,
+    "PROSPECTIVE_MODEL_UNDERPERFORMS_MARKET": 8,
     "missing_timestamped_ML_odds": 27
   },
   "history": {
-    "requests": 6,
+    "requests": 3,
     "failures": [],
     "sources": [
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261127&limit=300",
-        "sha256": "b3227f019bb1bff3c7b95d2eefa27f30feaef2ce3b33c66c9e93896744bc0de0",
-        "captured_at_utc": "2026-11-28T02:43:26.571908+00:00",
-        "completed_games": 0
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261126&limit=300",
-        "sha256": "df03734ba334301e813c7c95506c7c48a3ee3a4b15ac951b199f3f3b6556c4ba",
-        "captured_at_utc": "2026-11-28T02:43:26.571908+00:00",
+        "sha256": "72eff10773771171f875147cbb56a405eb7be47022caba4334dac7a5a21304c6",
+        "captured_at_utc": "2026-11-28T04:58:17.505514+00:00",
         "completed_games": 0
       },
       {
         "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261127&limit=300",
-        "sha256": "8e70de41b3ce8871acf5493b703e16836d6ba3ae72dfd5e451886c5f1b739237",
-        "captured_at_utc": "2026-11-28T02:43:26.571908+00:00",
+        "sha256": "0712df7525e233813912491bd2d4ea702b313c53b834a8cdc06d827d28e344d9",
+        "captured_at_utc": "2026-11-28T04:58:17.505514+00:00",
         "completed_games": 1
       },
       {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261126&limit=300",
-        "sha256": "7d33ae912f226e02bb4be36d9fae29455ab55ffe4f44488deceb0a7b4ca649b0",
-        "captured_at_utc": "2026-11-28T02:43:26.571908+00:00",
-        "completed_games": 3
-      },
-      {
         "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261127&limit=300",
-        "sha256": "39001e161f068077ed1818cd9c24803de4979402c15dffc4fe93efd89702b5a0",
-        "captured_at_utc": "2026-11-28T02:43:26.571908+00:00",
+        "sha256": "55e4d6cf81ab938b578253d2b1f857ec74e4d310a7c770edec94909ccdab48a4",
+        "captured_at_utc": "2026-11-28T04:58:17.505514+00:00",
         "completed_games": 12
-      },
-      {
-        "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261126&limit=300",
-        "sha256": "84246408531354f13cf794430f17273ca043eda9b5112d7910c8fe4a3e147de8",
-        "captured_at_utc": "2026-11-28T02:43:26.571908+00:00",
-        "completed_games": 0
       }
     ],
     "games_per_sport": {
@@ -2287,7 +2269,7 @@
   },
   "team_statistics_history": {
     "scoreboard_requests": 0,
-    "summary_requests": 5,
+    "summary_requests": 0,
     "events_with_statistics": 3542,
     "failures": [],
     "missing_stats": 0,
